@@ -1,6 +1,6 @@
 <template>
     <div class="Dotmap" :class="isclasses">
-        <svg :width="width" :height="height">
+        <svg :width="width" :height="height"">
             <g v-if="dots.length">
                 <circle
                     v-for="(c, i) in dots"

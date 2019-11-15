@@ -7,6 +7,7 @@
 
 .Flex__item {
     margin-bottom: $margin-md ?if $tablet;
+    border: 2px solid red;
 }
 
 .Flex__item:last-child {
@@ -15,6 +16,10 @@
 
 .Flex--center {
     justify-content: center;
+}
+
+.Flex--center .Flex__item {
+    text-align: center ?if $tablet;
 }
 
 .Flex--debug .Flex__item {

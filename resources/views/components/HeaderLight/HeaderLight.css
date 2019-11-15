@@ -1,35 +1,33 @@
-@import "variables";
+@import 'variables';
 
 .HeaderLight {
     padding-top: $padding-md;
-    padding-bottom: $padding-md;
-    padding-bottom: $padding-xs ?if $mobile;
 }
 
-    .HeaderLight__content {
-        margin-top: $margin-xl;
-        margin-left: $margin-xl;
-        margin-left: 0 ?if $tablet;
-    }
+.HeaderLight__content {
+    margin-top: $margin-xl;
+    margin-left: $margin-xl;
+    margin-left: 0 ?if $tablet;
+}
 
-    .HeaderLight__contentItem {
-        margin-bottom: $margin-md;
-    }
+.HeaderLight__contentItem {
+    margin-bottom: $margin-md;
+}
 
-    .HeaderLight__contentItem:last-child {
-        margin-bottom: 0;
-    }
+.HeaderLight__contentItem:last-child {
+    margin-bottom: 0;
+}
 
-    .HeaderLight__meta {
-        margin-top: $margin-md;
-    }
+.HeaderLight__meta {
+    margin-top: $margin-md;
+}
 
-    .HeaderLight__meta2 {
-        margin-top: $margin-md;
-    }
+.HeaderLight__meta2 {
+    margin-top: $margin-md;
+}
 
-    .HeaderLight__title {
-        color: $gray-dark;
-        font: $font-heading-xxl;
-        font: $font-heading-xl ?if $mobile;
-    }
+.HeaderLight__title {
+    color: $gray-dark;
+    font: $font-heading-xxl;
+    font: $font-heading-xl ?if $mobile;
+}
