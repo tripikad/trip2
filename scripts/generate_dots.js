@@ -1,11 +1,15 @@
 var fs = require('fs')
-var turf = require('@turf/turf')
+var { point, polygon } = require('@turf/helpers')
+var intersect = require('@turf/intersect').default
+const turf = { point, polygon, intersect }
 var baby = require('babyparse')
 
 var countries = require(__dirname + '/data/countries.json')
 var destinations = require(__dirname + '/data/destinations_data.json')
 
-var codes = baby.parse(fs.readFileSync(__dirname + '/data/codes.csv', 'utf8'), { header: true }).data
+var codes = baby.parse(fs.readFileSync(__dirname + '/data/codes.csv', 'utf8'), {
+    header: true
+}).data
 
 // Utilities
 
@@ -19,8 +23,10 @@ function iso3to2(iso3) {
 // Mapping the 3-letter ISO code to trip.ee's Destination model id
 
 function iso3toId(iso3) {
-    var destination = destinations.find(destination => destination.code === iso3to2(iso3))
-    return destination ? destination.id : 0;
+    var destination = destinations.find(
+        destination => destination.code === iso3to2(iso3)
+    )
+    return destination ? destination.id : 0
 }
 
 // Starting dot generation
@@ -35,25 +41,25 @@ var dots = []
 // Loop over world Y-axis
 
 for (var lat = 80; lat > -80; lat -= step) {
-
     // Loop over world X-axis
 
     for (var lon = -180; lon < 180; lon += step) {
-
         // Set up a square polygon with dot coordinates in the center
 
-        var box = turf.polygon([[
-            [lon - halfStep, lat + halfStep],
-            [lon + halfStep, lat + halfStep],
-            [lon + halfStep, lat - halfStep],
-            [lon - halfStep, lat - halfStep],
-            [lon - halfStep, lat + halfStep]
-        ]])
+        var box = turf.polygon([
+            [
+                [lon - halfStep, lat + halfStep],
+                [lon + halfStep, lat + halfStep],
+                [lon + halfStep, lat - halfStep],
+                [lon - halfStep, lat - halfStep],
+                [lon - halfStep, lat + halfStep]
+            ]
+        ])
 
         // Set up the dot to be generated as a GeoJSON object
         // for easier debuggability with tools like geojson.io
 
-        var dot = turf.point([lon, lat]);
+        var dot = turf.point([lon, lat])
 
         dot.properties.countries = []
 
@@ -62,36 +68,34 @@ for (var lat = 80; lat > -80; lat -= step) {
         // the dot.properties.countries array
 
         countries.features
-            .slice(0, 3)
+            //.slice(0, 100)
             .filter(country => country.properties.name !== 'Antarctica')
             .forEach(country => {
-            
-            if (country.geometry.type === 'Polygon') {
-                var intersection = turf.intersect(
-                    box,
-                    turf.polygon(country.geometry.coordinates)
-                )
-                if (intersection !== undefined) {
-                    dot.properties.countries.push(iso3toId(country.id))
-                }
-            }
-            if (country.geometry.type === 'MultiPolygon') {
-                country.geometry.coordinates.forEach(polygon => {
+                if (country.geometry.type === 'Polygon') {
                     var intersection = turf.intersect(
                         box,
-                        turf.polygon(polygon)
+                        turf.polygon(country.geometry.coordinates)
                     )
-                    if (intersection !== undefined) {
+                    if (intersection !== null) {
                         dot.properties.countries.push(iso3toId(country.id))
                     }
-                })
-            }
-        })
+                }
+                if (country.geometry.type === 'MultiPolygon') {
+                    country.geometry.coordinates.forEach(polygon => {
+                        var intersection = turf.intersect(
+                            box,
+                            turf.polygon(polygon)
+                        )
+                        if (intersection !== null) {
+                            dot.properties.countries.push(iso3toId(country.id))
+                        }
+                    })
+                }
+            })
 
         if (dot.properties.countries.length > 0) {
             dots.push(dot)
         }
-
     }
 }
 
@@ -104,7 +108,7 @@ dots.forEach(dot => {
         'destination_ids' => [${dot.properties.countries}],
         'lat' => ${dot.geometry.coordinates[1]},
         'lon' => ${dot.geometry.coordinates[0]}
-    ],`);
+    ],`)
 })
 
 console.log('\n];\n')
