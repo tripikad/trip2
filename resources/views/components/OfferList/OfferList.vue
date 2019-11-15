@@ -16,29 +16,18 @@
             suffix="€"
         />
         <div class="OfferList__filters">
+            <form-select :options="styles" v-model="activeStyle" isclasses="FormSelect--blue" />
             <form-select
-                placeholder="Reisistiil"
-                :options="styles"
-                v-model="activeStyle"
-                isclasses="FormSelect--blue"
-            />
-            <form-select
-                placeholder="Sihkoht"
                 :options="destinations"
                 v-model="activeDestination"
                 isclasses="FormSelect--blue"
             />
-            <form-select
-                placeholder="Firma"
-                :options="companies"
-                v-model="activeCompany"
-                isclasses="FormSelect--blue"
-            />
-            <a
-                :style="{opacity: !notFiltered ? 1 : 0.25}"
-                @click="handleClearFilters"
-                class="Button Button--cyan"
-            >Kõik</a>
+            <form-select :options="companies" v-model="activeCompany" isclasses="FormSelect--blue" />
+            <a :style="{opacity: !notFiltered ? 1 : 0.25}" @click="handleClearFilters">
+                <div class="Button Button--cyan">
+                    <div class="Button__title">Kõik</div>
+                </div>
+            </a>
         </div>
         <div class="OfferList__offers">
             <OfferRow v-for="(offer, i) in filteredOfferList" :key="i" :offer="offer" />
@@ -106,24 +95,33 @@ export default {
             )
         },
         companies() {
-            return unique(this.offers.map(o => o.company)).map((name, id) => ({
-                id,
-                name
-            }))
-        },
-        destinations() {
-            return unique(this.offers.map(o => o.destination)).map(
-                (name, id) => ({
+            return [
+                { id: -1, name: 'Kõik firmad' },
+                ...unique(this.offers.map(o => o.company)).map((name, id) => ({
                     id,
                     name
-                })
-            )
+                }))
+            ]
+        },
+        destinations() {
+            return [
+                { id: -1, name: 'Kõik sihtkohad' },
+                ...unique(this.offers.map(o => o.destination)).map(
+                    (name, id) => ({
+                        id,
+                        name
+                    })
+                )
+            ]
         },
         styles() {
-            return unique(this.offers.map(o => o.style)).map((name, id) => ({
-                id,
-                name
-            }))
+            return [
+                { id: -1, name: 'Kõik reisistiilid' },
+                ...unique(this.offers.map(o => o.style)).map((name, id) => ({
+                    id,
+                    name
+                }))
+            ]
         },
         filteredOfferList() {
             return this.offers
