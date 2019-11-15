@@ -13,7 +13,7 @@
 }
 
 .Offer__topItem {
-    margin-bottom: $margin-md;
+    margin-bottom: $margin-sm;
 }
 
 .Offer__topItem:last-child {
@@ -28,6 +28,7 @@
 
 .Offer__innerWrapper {
     max-width: calc($desktop-width * 0.75);
+    width: 100% ?if $tablet;
 }
 
 .Offer__content {

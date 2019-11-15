@@ -6,9 +6,12 @@ use App\User;
 
 class ExperimentsController extends Controller
 {
-    public function index()
+  public function index() {
+  }
+
+  public function userIndex($id = 27)
     {
-        $user = User::findOrFail(12);
+        $user = User::findOrFail($id);
 
         $been = $user
             ->vars()
@@ -54,8 +57,7 @@ class ExperimentsController extends Controller
                             ->is('center')
                             ->with('dots', config('dots'))
                             ->with('cities', config('cities'))
-                            //  ->with('activecountries', $wantsToGo)
-                            //  ->with('passivecities', [510, 450])
+                            ->with('activecountries', $been)
                             ->with('passivecities', $been)
                     )
                     ->push(

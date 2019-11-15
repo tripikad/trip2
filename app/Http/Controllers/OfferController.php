@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Content;
+use App\Destination;
 
 class OfferController extends Controller
 {
@@ -50,7 +51,14 @@ class OfferController extends Controller
     public function show($id)
     {
         $offer = $this->getSheet()[$id];
-        $photos = Content::getLatestPagedItems('photo', 9);
+
+        $name = collect(explode(',', $offer->destination))->map(function($s) {
+          return trim($s);
+        })->last();
+
+        $destination = Destination::where('name', $name)->first();
+
+        $photos = $destination ? Content::getLatestPagedItems('photo', 18, $destination->id) : collect();
 
         $user = auth()->user();
         $email = $user ? $user->email : '';
@@ -221,7 +229,7 @@ class OfferController extends Controller
                             )
                     )
                     ->br()
-                    ->push(region('PhotoRow', $photos))
+                    ->pushWhen($photos->count(), region('PhotoRow', $photos->count() < 18 ? $photos->slice(0,9) : $photos))
                     ->push('<a id="book"></a>')
                     ->br()
                     ->push(

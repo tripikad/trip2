@@ -23,15 +23,5 @@ export default {
         isclasses: { default: '' },
         offer: { default: {} }
     },
-    computed: {
-        meta() {
-            return Object.entries(this.offer)
-                .filter(
-                    ([key]) =>
-                        !['title', 'image', 'price', 'route'].includes(key)
-                )
-                .map(([key, value]) => value)
-        }
-    }
 }
 </script>

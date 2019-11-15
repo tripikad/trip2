@@ -19,8 +19,7 @@
                     :cx="xScale(c.lon)"
                     :cy="yScale(c.lat)"
                     :r="radius"
-                    fill="black"
-                    opacity="0.25"
+                    :fill="$styleVars.cyan"
                 />
             </g>
             <path
@@ -156,8 +155,5 @@ export default {
             return this.projection([0, lat])[1]
         }
     },
-    mounted() {
-        console.log(this.activecities)
-    }
 }
 </script>
