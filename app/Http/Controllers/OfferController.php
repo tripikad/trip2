@@ -52,8 +52,8 @@ class OfferController extends Controller
     {
         $offer = $this->getSheet()[$id];
 
-        $name = collect(explode(',', $offer->destination))->map(function($s) {
-          return trim($s);
+        $name = collect(explode(',', $offer->destination))->map(function ($s) {
+            return trim($s);
         })->last();
 
         $destination = Destination::where('name', $name)->first();
@@ -229,7 +229,7 @@ class OfferController extends Controller
                             )
                     )
                     ->br()
-                    ->pushWhen($photos->count(), region('PhotoRow', $photos->count() < 18 ? $photos->slice(0,9) : $photos))
+                    ->pushWhen($photos->count(), region('PhotoRow', $photos->count() < 18 ? $photos->slice(0, 9) : $photos))
                     ->push('<a id="book"></a>')
                     ->br()
                     ->push(

@@ -6,10 +6,11 @@ use App\User;
 
 class ExperimentsController extends Controller
 {
-  public function index() {
-  }
+    public function index()
+    {
+    }
 
-  public function userIndex($id = 27)
+    public function userIndex($id = 27)
     {
         $user = User::findOrFail($id);
 
