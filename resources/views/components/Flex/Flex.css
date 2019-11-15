@@ -17,6 +17,10 @@
     justify-content: center;
 }
 
+.Flex--center .Flex__item {
+    text-align: center ?if $tablet;
+}
+
 .Flex--debug .Flex__item {
     border: 1px dashed $red;
 }

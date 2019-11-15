@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Content;
+use App\Destination;
 
 class OfferController extends Controller
 {
@@ -28,6 +29,7 @@ class OfferController extends Controller
                 'content',
                 collect()->push(
                     component('OfferList')
+                        ->with('height', '200vh')
                         ->with('dots', config('dots'))
                         ->with('route', route('offers.index.json'))
                 )
@@ -49,7 +51,14 @@ class OfferController extends Controller
     public function show($id)
     {
         $offer = $this->getSheet()[$id];
-        $photos = Content::getLatestPagedItems('photo', 9);
+
+        $name = collect(explode(',', $offer->destination))->map(function ($s) {
+            return trim($s);
+        })->last();
+
+        $destination = Destination::where('name', $name)->first();
+
+        $photos = $destination ? Content::getLatestPagedItems('photo', 18, $destination->id) : collect();
 
         $user = auth()->user();
         $email = $user ? $user->email : '';
@@ -80,6 +89,7 @@ class OfferController extends Controller
                     ->push(
                         component('Dotmap')
                             ->is('center')
+                            ->with('height', '300px')
                             ->with('dots', config('dots'))
                             ->with('cities', config('cities'))
                             ->with('activelines', [
@@ -219,7 +229,7 @@ class OfferController extends Controller
                             )
                     )
                     ->br()
-                    ->push(region('PhotoRow', $photos))
+                    ->pushWhen($photos->count(), region('PhotoRow', $photos->count() < 18 ? $photos->slice(0, 9) : $photos))
                     ->push('<a id="book"></a>')
                     ->br()
                     ->push(
@@ -228,6 +238,7 @@ class OfferController extends Controller
                             ->is('white')
                             ->with('title', 'Broneeri reis')
                     )
+                    ->br()
             )
             ->with(
                 'bottom',
@@ -301,116 +312,6 @@ class OfferController extends Controller
                 )
             )
             ->with('footer', region('FooterLight', ''))
-            ->render();
-    }
-
-    public function book($id)
-    {
-        $offer = $this->getSheet()[$id];
-
-        $user = auth()->user();
-        $email = $user ? $user->email : '';
-        $name = $user && $user->real_name ? $user->real_name : '';
-
-        return layout('Two')
-            ->with('head_robots', 'noindex')
-            ->with('background', component('BackgroundMap'))
-            ->with(
-                'header',
-                region(
-                    'StaticHeader',
-                    collect()
-                        ->push(
-                            component('Link')
-                                ->with('title', trans('offers.book.back'))
-                                ->with('route', route('offers.show', $id))
-                        )
-                        ->push(
-                            component('Title')
-                                ->is('large')
-                                ->with('title', trans('offers.book.title'))
-                        )
-                )
-            )
-            ->with(
-                'content',
-                collect()
-                    ->push(component('OfferRow')->with('offer', $offer))
-                    ->push(
-                        component('Form')
-                            ->with('route', route('offers.send', $id))
-                            ->with(
-                                'fields',
-                                collect()
-                                    ->push(
-                                        component('FormTextfield')
-                                            ->with('name', 'name')
-                                            ->with('title', 'Name')
-                                            ->with('value', $name)
-                                    )
-                                    ->push(
-                                        component('FormTextfield')
-                                            ->with('name', 'email')
-                                            ->with('title', 'E-mail')
-                                            ->with('value', $email)
-                                    )
-                                    ->push(
-                                        component('FormTextfield')
-                                            ->with('name', 'phone')
-                                            ->with('title', 'Phone')
-                                    )
-                                    ->push(
-                                        component('FormTextfield')
-                                            ->with('name', 'adults')
-                                            ->with('title', 'Number of adults')
-                                    )
-                                    ->push(
-                                        component('FormTextfield')
-                                            ->with('name', 'children')
-                                            ->with(
-                                                'title',
-                                                'Number of children'
-                                            )
-                                    )
-                                    ->push(
-                                        component('FormTextarea')
-                                            ->with('name', 'notes')
-                                            ->with('title', 'Notes')
-                                    )
-                                    ->push(
-                                        component('FormCheckbox')
-                                            ->with('name', 'insurance')
-                                            ->with(
-                                                'title',
-                                                'I need an insurance'
-                                            )
-                                    )
-                                    ->push(
-                                        component('FormCheckbox')
-                                            ->with('name', 'installments')
-                                            ->with(
-                                                'title',
-                                                'I want to pay by installments'
-                                            )
-                                    )
-                                    ->push(
-                                        component('FormCheckbox')
-                                            ->with('name', 'flexible')
-                                            ->with(
-                                                'title',
-                                                'I am flexible with dates (+-3 days)'
-                                            )
-                                    )
-                                    ->push(
-                                        component('FormButton')->with(
-                                            'title',
-                                            'Book an offer'
-                                        )
-                                    )
-                            )
-                    )
-            )
-            ->with('sidebar', '&nbsp;')
             ->render();
     }
 

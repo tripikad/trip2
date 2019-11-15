@@ -2,8 +2,12 @@
 
 .Dotmap {
     display: flex;
+    overflow: auto;
 }
 
+.Dotmap > svg {
+    overflow: auto;
+}
 .Dotmap--center {
     justify-content: center;
 }

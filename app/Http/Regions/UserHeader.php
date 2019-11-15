@@ -16,7 +16,8 @@ class UserHeader
                     ->with('route', route('user.show', [$user]))
             )
             ->pushWhen(
-                $loggedUser && $loggedUser->hasRoleOrOwner('superuser', $loggedUser->id),
+                $loggedUser &&
+                    $loggedUser->hasRoleOrOwner('superuser', $loggedUser->id),
                 component('Button')
                     ->is('cyan')
                     ->with('title', trans('menu.user.edit.profile'))
@@ -31,7 +32,8 @@ class UserHeader
                     ->with('route', route('message.index', [$user]))
             )
             ->pushWhen(
-                $loggedUser && $loggedUser->hasRoleOrOwner('superuser', $loggedUser->id),
+                $loggedUser &&
+                    $loggedUser->hasRoleOrOwner('superuser', $loggedUser->id),
                 component('Button')
                     ->is('cyan')
                     ->with('title', trans('menu.user.add.places'))
@@ -45,53 +47,99 @@ class UserHeader
         $wantsToGo = $user->vars()->destinationWantsToGo();
         $hasBeen = $user->vars()->destinationHaveBeen();
 
+        $hasBeenMap = $hasBeen
+            ->map(function ($f) {
+                return $f->flaggable->id;
+            })
+            ->values();
+
         return component('HeaderLight')
-            ->with('navbar', component('Navbar')
-                ->is('white')
-                ->with('search', component('NavbarSearch')->is('white'))
-                ->with('logo', component('Icon')
-                    ->with('icon', 'tripee_logo')
-                    ->with('width', 200)
-                    ->with('height', 150)
-                )
-                ->with('navbar_desktop', region('NavbarDesktop', 'white'))
-                ->with('navbar_mobile', region('NavbarMobile', 'white'))
-            )
-            ->with('content', collect()
-                ->push(region('UserHeaderImage', $user, $loggedUser))
-                ->push(component('Body')
+            ->with(
+                'navbar',
+                component('Navbar')
                     ->is('white')
-                    ->is('responsive')
-                    ->with('body', $user->vars()->description)
-                )
-                ->push(region('UserAbout', $user, $loggedUser))
-                ->pushWhen(
-                    $wantsToGo->count(),
-                    component('Meta')->is('large')->with('items', $wantsToGo
-                        ->map(function ($destination) {
-                            return component('Tag')
-                                ->is('white')
-                                ->is('large')
-                                ->with('title', $destination->flaggable->name)
-                                ->with('route', route('destination.showSlug', [$destination->flaggable->slug]));
-                        })
-                ))
-                ->push(region('UserStats', $user, $loggedUser))
-                ->pushWhen(
-                    $hasBeen->count(),
-                    component('Meta')->is('large')->with('items', $hasBeen
-                        ->map(function ($destination) {
-                            return component('Tag')
-                                ->is('white')
-                                ->is('large')
-                                ->with('title', $destination->flaggable->name)
-                                ->with('route', route('destination.showSlug', [$destination->flaggable->slug]));
-                        })
-                    ))
-                ->push(component('BlockHorizontal')->with(
-                    'content',
-                    $this->prepareActionsForUser($user, $loggedUser)
-                ))
+                    ->with('search', component('NavbarSearch')->is('white'))
+                    ->with(
+                        'logo',
+                        component('Icon')
+                            ->with('icon', 'tripee_logo')
+                            ->with('width', 200)
+                            ->with('height', 150)
+                    )
+                    ->with('navbar_desktop', region('NavbarDesktop', 'white'))
+                    ->with('navbar_mobile', region('NavbarMobile', 'white'))
+            )
+            ->with(
+                'content',
+                collect()
+                    ->push(
+                        component('Dotmap')
+                            ->with('height', '300px')
+                            ->is('center')
+                            ->with('dots', config('dots'))
+                            ->with('cities', config('cities'))
+                            ->with('activecountries', $hasBeenMap)
+                            ->with('passivecities', $hasBeenMap)
+                    )
+                    ->push(region('UserHeaderImage', $user, $loggedUser))
+                    ->push(
+                        component('Body')
+                            ->is('white')
+                            ->is('responsive')
+                            ->with('body', $user->vars()->description)
+                    )
+                    ->push(region('UserAbout', $user, $loggedUser))
+                    ->pushWhen(
+                        $wantsToGo->count(),
+                        component('Meta')
+                            ->is('large')
+                            ->with(
+                                'items',
+                                $wantsToGo->map(function ($destination) {
+                                    return component('Tag')
+                                        ->is('white')
+                                        ->with(
+                                            'title',
+                                            $destination->flaggable->name
+                                        )
+                                        ->with(
+                                            'route',
+                                            route('destination.showSlug', [
+                                                $destination->flaggable->slug
+                                            ])
+                                        );
+                                })
+                            )
+                    )
+                    ->push(region('UserStats', $user, $loggedUser))
+                    ->pushWhen(
+                        $hasBeen->count(),
+                        component('Meta')
+                            ->is('large')
+                            ->with(
+                                'items',
+                                $hasBeen->map(function ($destination) {
+                                    return component('Tag')
+                                        ->is('white')
+                                        ->with(
+                                            'title',
+                                            $destination->flaggable->name
+                                        )
+                                        ->with(
+                                            'route',
+                                            route('destination.showSlug', [
+                                                $destination->flaggable->slug
+                                            ])
+                                        );
+                                })
+                            )
+                    )
+                    ->push(
+                        component('BlockHorizontal')->with(
+                            'content',
+                            $this->prepareActionsForUser($user, $loggedUser)
+                        )
+                    )
             );
     }
 }

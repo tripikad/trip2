@@ -55,7 +55,6 @@ class UserController extends Controller
                 ])
             )
             ->with('head_image', Image::getSocial())
-            ->with('background', component('BackgroundMap'))
 
             ->with('color', 'cyan')
 

@@ -8,26 +8,24 @@ $actions = $actions ?? '';
 
 <div class="UserHeaderImage {{ $isclasses }}">
 
-    <div class="UserHeaderImage__user">
+  <div class="UserHeaderImage__user">
 
-        {!! $user !!}
+    {!! $user !!}
 
-    </div>
+  </div>
 
-    <div class="UserHeaderImage__content">
-        
-        <div class="UserHeaderImage__title">
 
-            {!! $title !!}
+  <div class="UserHeaderImage__title">
 
-        </div>
+    {!! $title !!}
 
-        <div class="UserHeaderImage__actions">
+  </div>
 
-            {!! $actions !!}
+  <div class="UserHeaderImage__actions">
 
-        </div>
+    {!! $actions !!}
 
-    </div>
+  </div>
+
 
 </div>

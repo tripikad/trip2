@@ -28,6 +28,10 @@
     background: $cyan;
 }
 
+.Button--cyan .Button__title {
+    color: $cyan-dark;
+}
+
 .Button--orange {
     background: $orange;
 }

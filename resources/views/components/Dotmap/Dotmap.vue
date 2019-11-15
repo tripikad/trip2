@@ -1,6 +1,6 @@
 <template>
     <div class="Dotmap" :class="isclasses">
-        <svg :width="width" :height="height">
+        <svg :width="width" :height="height"">
             <g v-if="dots.length">
                 <circle
                     v-for="(c, i) in dots"
@@ -19,8 +19,7 @@
                     :cx="xScale(c.lon)"
                     :cy="yScale(c.lat)"
                     :r="radius"
-                    fill="black"
-                    opacity="0.25"
+                    :fill="$styleVars.cyan"
                 />
             </g>
             <path
@@ -156,8 +155,5 @@ export default {
             return this.projection([0, lat])[1]
         }
     },
-    mounted() {
-        console.log(this.activecities)
-    }
 }
 </script>

@@ -8,8 +8,16 @@
     margin-bottom: $margin-md;
 }
 
+.Offer__top {
+    padding: 0 $margin-sm ?if $tablet;
+}
+
 .Offer__topItem {
-    margin-bottom: $margin-md;
+    margin-bottom: $margin-sm;
+}
+
+.Offer__topItem:last-child {
+    margin-bottom: 0;
 }
 
 .Offer__outerWrapper {
@@ -19,12 +27,13 @@
 }
 
 .Offer__innerWrapper {
-    width: calc($desktop-width * 0.75);
-    width: $mobile-width ?if $tablet;
+    max-width: calc($desktop-width * 0.75);
+    width: 100% ?if $tablet;
 }
 
 .Offer__content {
-    padding: $margin-md;
+    padding: $padding-md;
+    margin: $margin-sm ?if $tablet;
 }
 
 .Offer__contentItem {
