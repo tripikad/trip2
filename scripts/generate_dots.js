@@ -3,7 +3,7 @@ const intersect = require('@turf/intersect').default
 const turf = { point, polygon, intersect }
 
 const countries = require(__dirname + '/data/countries.json')
-const destinations = require(__dirname + '/data/destinations2.json')
+const destinations = require(__dirname + '/data/trip_destination_facts.json')
 
 const iso3toId = iso3 => {
     const destination = destinations.find(d => d.country_code3 === iso3)

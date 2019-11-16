@@ -1,7 +1,7 @@
 <template>
     <div class="OfferList" :class="isclasses">
         <dotmap
-            :dots="dots"
+            :destination_dots="destination_dots"
             :activecities="filteredOfferList.map(o => ({lon: parseFloat(o.longitude),lat: parseFloat(o.latitude)}))"
         />
         <form-slider-multiple
@@ -38,21 +38,11 @@
 <script>
 import { parseSheets, unique } from '../../utils/utils'
 
-/*
-->push(
-    component('Dotmap')
-        ->with('startcity', 829)
-        ->with('city', 4654)
-        ->with('country', 411)
-        ->with('countries', config('dots'))
-        ->with('cities', config('cities'))
-)
-*/
 export default {
     props: {
         isclasses: { default: '' },
         route: { default: '' },
-        dots: { default: () => [] }
+        destination_dots: { default: () => [] }
     },
     data: () => ({
         offers: [],

@@ -1,9 +1,9 @@
 <template>
     <div class="Dotmap" :class="isclasses">
-        <svg :width="width" :height="height"">
-            <g v-if="dots.length">
+        <svg :width="width" :height="height">
+            <g v-if="destination_dots.length">
                 <circle
-                    v-for="(c, i) in dots"
+                    v-for="(c, i) in destination_dots"
                     :key="i"
                     :cx="xScale(c.lon)"
                     :cy="yScale(c.lat)"
@@ -66,8 +66,8 @@ export default {
     props: {
         isclasses: { default: '' },
         width: { default: 750 },
-        dots: { default: () => [] },
-        cities: { default: () => [] },
+        destination_dots: { default: () => [] },
+        destination_facts: { default: () => [] },
         activecountries: { default: () => [] },
         passivecities: { default: () => [] },
         activecities: { default: () => [] },
@@ -92,7 +92,7 @@ export default {
             return this.width / 350
         },
         activeCountriesDots() {
-            return this.dots.filter(
+            return this.destination_dots.filter(
                 d =>
                     intersection(d.destination_ids, this.activecountries).length
             )
@@ -102,8 +102,8 @@ export default {
                 .map(c =>
                     typeof c == 'object'
                         ? c
-                        : this.cities[c]
-                        ? this.cities[c]
+                        : this.destination_facts[c]
+                        ? this.destination_facts[c]
                         : null
                 )
                 .filter(c => c)
@@ -113,8 +113,8 @@ export default {
                 .map(c =>
                     typeof c == 'object'
                         ? c
-                        : this.cities[c]
-                        ? this.cities[c]
+                        : this.destination_facts[c]
+                        ? this.destination_facts[c]
                         : null
                 )
                 .filter(c => c)
@@ -124,8 +124,8 @@ export default {
                 .map(c =>
                     typeof c == 'object'
                         ? c
-                        : this.cities[c]
-                        ? this.cities[c]
+                        : this.destination_facts[c]
+                        ? this.destination_facts[c]
                         : null
                 )
                 .filter(c => c)
@@ -154,6 +154,6 @@ export default {
         yScale(lat) {
             return this.projection([0, lat])[1]
         }
-    },
+    }
 }
 </script>

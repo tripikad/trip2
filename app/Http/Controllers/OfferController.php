@@ -30,7 +30,7 @@ class OfferController extends Controller
                 collect()->push(
                     component('OfferList')
                         ->with('height', '200vh')
-                        ->with('dots', config('dots'))
+                        ->with('destination_dots', config('destination_dots'))
                         ->with('route', route('offers.index.json'))
                 )
             )
@@ -52,13 +52,17 @@ class OfferController extends Controller
     {
         $offer = $this->getSheet()[$id];
 
-        $name = collect(explode(',', $offer->destination))->map(function ($s) {
-            return trim($s);
-        })->last();
+        $name = collect(explode(',', $offer->destination))
+            ->map(function ($s) {
+                return trim($s);
+            })
+            ->last();
 
         $destination = Destination::where('name', $name)->first();
 
-        $photos = $destination ? Content::getLatestPagedItems('photo', 18, $destination->id) : collect();
+        $photos = $destination
+            ? Content::getLatestPagedItems('photo', 18, $destination->id)
+            : collect();
 
         $user = auth()->user();
         $email = $user ? $user->email : '';
@@ -90,8 +94,15 @@ class OfferController extends Controller
                         component('Dotmap')
                             ->is('center')
                             ->with('height', '300px')
-                            ->with('dots', config('dots'))
-                            ->with('cities', config('cities'))
+                            ->with(
+                                'destination_dots',
+                                config('destination_dots')
+                            )
+                            ->with(
+                                'destination_facts',
+                                config('destination_facts')
+                            )
+
                             ->with('activelines', [
                                 829,
                                 [
@@ -229,7 +240,15 @@ class OfferController extends Controller
                             )
                     )
                     ->br()
-                    ->pushWhen($photos->count(), region('PhotoRow', $photos->count() < 18 ? $photos->slice(0, 9) : $photos))
+                    ->pushWhen(
+                        $photos->count(),
+                        region(
+                            'PhotoRow',
+                            $photos->count() < 18
+                                ? $photos->slice(0, 9)
+                                : $photos
+                        )
+                    )
                     ->push('<a id="book"></a>')
                     ->br()
                     ->push(

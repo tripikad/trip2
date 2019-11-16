@@ -46,9 +46,9 @@ class ApiController extends Controller
             ]);
     }
 
-    public function dots()
+    public function destinationDots()
     {
-        return response()->json(config('dots'));
+        return response()->json(config('destination_dots'));
     }
 
     public function airports()

@@ -76,8 +76,15 @@ class UserHeader
                         component('Dotmap')
                             ->with('height', '300px')
                             ->is('center')
-                            ->with('dots', config('dots'))
-                            ->with('cities', config('cities'))
+                            ->with(
+                                'destination_dots',
+                                config('destination_dots')
+                            )
+                            ->with(
+                                'destination_facts',
+                                config('destination_facts')
+                            )
+
                             ->with('activecountries', $hasBeenMap)
                             ->with('passivecities', $hasBeenMap)
                     )
