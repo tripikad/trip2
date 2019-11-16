@@ -8,6 +8,28 @@ class ExperimentsController extends Controller
 {
     public function index()
     {
+        $a = collect(config('destination_facts'))
+            ->map(function ($d) {
+                return ['lat' => $d['lat'], 'lon' => $d['lon']];
+            })
+            ->values();
+
+        $b = collect(config('destination_facts'))->keys();
+        //dd($a);
+        return layout('Offer')
+            ->with('color', 'blue')
+            ->with(
+                'top',
+                collect()->push(
+                    component('Dotmap')
+                        ->with('width', '1200')
+                        ->is('center')
+                        ->with('destination_dots', config('destination_dots'))
+                        ->with('destination_facts', config('destination_facts'))
+                        ->with('passivecities', $a)
+                )
+            )
+            ->render();
     }
 
     public function userIndex($id = 27)
@@ -56,8 +78,14 @@ class ExperimentsController extends Controller
                         component('Dotmap')
                             ->with('height', '300px')
                             ->is('center')
-                            ->with('dots', config('dots'))
-                            ->with('cities', config('cities'))
+                            ->with(
+                                'destination_dots',
+                                config('destination_dots')
+                            )
+                            ->with(
+                                'destination_facts',
+                                config('destination_facts')
+                            )
                             ->with('activecountries', $been)
                             ->with('passivecities', $been)
                     )

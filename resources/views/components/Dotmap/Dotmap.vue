@@ -154,6 +154,9 @@ export default {
         yScale(lat) {
             return this.projection([0, lat])[1]
         }
+    },
+    mounted() {
+        return this.passivecities
     }
 }
 </script>
