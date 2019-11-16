@@ -5,27 +5,25 @@ const turf = { point, polygon, intersect }
 var baby = require('babyparse')
 
 var countries = require(__dirname + '/data/countries.json')
-var destinations = require(__dirname + '/data/trip_destinations_data.json')
+var destinations = require(__dirname + '/data/destinations2.json')
 
-var codes = baby.parse(fs.readFileSync(__dirname + '/data/codes.csv', 'utf8'), {
-    header: true
-}).data
+// var codes = baby.parse(fs.readFileSync(__dirname + '/data/codes.csv', 'utf8'), {
+//     header: true
+// }).data
 
 // Utilities
 
 // Mapping 3-letter ISO country codes to 2-letter ISO codes
 
-function iso3to2(iso3) {
-    var code = codes.find(code => code['ISO3166-1-Alpha-3'] === iso3)
-    return code ? code['ISO3166-1-Alpha-2'] : iso3
-}
+// function iso3to2(iso3) {
+//     var code = codes.find(code => code['ISO3166-1-Alpha-3'] === iso3)
+//     return code ? code['ISO3166-1-Alpha-2'] : iso3
+// }
 
 // Mapping the 3-letter ISO code to trip.ee's Destination model id
 
 function iso3toId(iso3) {
-    var destination = destinations.find(
-        destination => destination.code === iso3to2(iso3)
-    )
+    var destination = destinations.find(d => d.country_code3 === iso3)
     return destination ? destination.id : 0
 }
 
@@ -68,7 +66,7 @@ for (var lat = 80; lat > -80; lat -= step) {
         // the dot.properties.countries array
 
         countries.features
-            //.slice(0, 100)
+            //.slice(0, 3)
             .filter(country => country.properties.name !== 'Antarctica')
             .forEach(country => {
                 if (country.geometry.type === 'Polygon') {

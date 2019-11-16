@@ -78,8 +78,6 @@ var places = destinations
         return c
     })
 
-//console.log(places)
-
 async.each(
     [...countries, ...cities, ...places],
     (city, cb) => {

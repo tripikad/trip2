@@ -20,9 +20,9 @@ else
 
   curl $1/api/destinations >./scripts/data/trip_destinations.json
 
-  curl $1/api/destinations/data >./scripts/data/trip_destinations_data.json
+  # curl $1/api/destinations/data >./scripts/data/trip_destinations_data.json
 
-  node scripts/get_geonames.js >./scripts/data/geonames_destinations.json
+  node scripts/get_geonames_destinations.js >./scripts/data/geonames_destinations.json
 
   printf "\n\e[0;32mDone\e[0;37m\n\n"
 
