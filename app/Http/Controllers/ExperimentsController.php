@@ -26,7 +26,7 @@ class ExperimentsController extends Controller
                         ->is('center')
                         ->with('destination_dots', config('destination_dots'))
                         ->with('destination_facts', config('destination_facts'))
-                        ->with('passivecities', $a)
+                        ->with('mediumdots', $a)
                 )
             )
             ->render();
@@ -86,8 +86,8 @@ class ExperimentsController extends Controller
                                 'destination_facts',
                                 config('destination_facts')
                             )
-                            ->with('activecountries', $been)
-                            ->with('passivecities', $been)
+                            ->with('areas', $been)
+                            ->with('mediumdots', $been)
                     )
                     ->push(
                         component('Flex')

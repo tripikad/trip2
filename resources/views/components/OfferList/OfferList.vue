@@ -2,7 +2,7 @@
     <div class="OfferList" :class="isclasses">
         <dotmap
             :destination_dots="destination_dots"
-            :activecities="filteredOfferList.map(o => ({lon: parseFloat(o.longitude),lat: parseFloat(o.latitude)}))"
+            :largedots="filteredOfferList.map(o => ({lon: parseFloat(o.longitude),lat: parseFloat(o.latitude)}))"
         />
         <form-slider-multiple
             isclasses="FormSliderMultiple--yellow"

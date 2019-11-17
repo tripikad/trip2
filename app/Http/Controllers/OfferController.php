@@ -103,15 +103,15 @@ class OfferController extends Controller
                                 config('destination_facts')
                             )
 
-                            ->with('activelines', [
+                            ->with('lines', [
                                 829,
                                 [
                                     'lat' => $offer->latitude,
                                     'lon' => $offer->longitude
                                 ]
                             ])
-                            ->with('passivecities', [829])
-                            ->with('activecities', [
+                            ->with('mediumdots', [829])
+                            ->with('largedots', [
                                 [
                                     'lat' => $offer->latitude,
                                     'lon' => $offer->longitude

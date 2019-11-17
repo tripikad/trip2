@@ -68,11 +68,18 @@ export default {
         width: { default: 750 },
         destination_dots: { default: () => [] },
         destination_facts: { default: () => [] },
-        activecountries: { default: () => [] },
-        passivecities: { default: () => [] },
-        activecities: { default: () => [] },
-        activelines: { default: () => [] }
+        areas: { default: () => [] },
+        mediumdots: { default: () => [] },
+        largedots: { default: () => [] },
+        lines: { default: () => [] }
     },
+    /*
+    dotareas
+    lines
+    smalldots
+    mediumdots
+    largedots
+    */
 
     computed: {
         height() {
@@ -93,12 +100,11 @@ export default {
         },
         activeCountriesDots() {
             return this.destination_dots.filter(
-                d =>
-                    intersection(d.destination_ids, this.activecountries).length
+                d => intersection(d.destination_ids, this.areas).length
             )
         },
         passiveCitiesCircles() {
-            return this.passivecities
+            return this.mediumdots
                 .map(c =>
                     typeof c == 'object'
                         ? c
@@ -109,7 +115,7 @@ export default {
                 .filter(c => c)
         },
         activeCitiesCircles() {
-            return this.activecities
+            return this.largedots
                 .map(c =>
                     typeof c == 'object'
                         ? c
@@ -120,7 +126,7 @@ export default {
                 .filter(c => c)
         },
         activeLinesCoordinates() {
-            return this.activelines
+            return this.lines
                 .map(c =>
                     typeof c == 'object'
                         ? c
@@ -156,7 +162,7 @@ export default {
         }
     },
     mounted() {
-        return this.passivecities
+        return this.mediumdots
     }
 }
 </script>

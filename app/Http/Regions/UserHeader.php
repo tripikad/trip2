@@ -85,8 +85,8 @@ class UserHeader
                                 config('destination_facts')
                             )
 
-                            ->with('activecountries', $hasBeenMap)
-                            ->with('passivecities', $hasBeenMap)
+                            ->with('areas', $hasBeenMap)
+                            ->with('mediumdots', $hasBeenMap)
                     )
                     ->push(region('UserHeaderImage', $user, $loggedUser))
                     ->push(
