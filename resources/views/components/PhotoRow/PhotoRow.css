@@ -3,6 +3,8 @@
 .PhotoRow {
     position: relative;
     background: $gray-light;
+    min-height: 11.25vw;
+    min-height: 100vw ?if $tablet;
 }
 
 .PhotoRow__row {
