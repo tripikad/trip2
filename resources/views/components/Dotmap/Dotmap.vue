@@ -8,8 +8,7 @@
                     :cx="xScale(c.lon)"
                     :cy="yScale(c.lat)"
                     :r="radius"
-                    fill="black"
-                    opacity="0.25"
+                    :fill="$styleVars[backgroundcolor] || backgroundcolor"
                 />
             </g>
             <g v-if="activeCountriesDots.length">
@@ -19,8 +18,7 @@
                     :cx="xScale(c.lon)"
                     :cy="yScale(c.lat)"
                     :r="radius"
-                    fill="white"
-                    opacity="0.65"
+                    :fill="$styleVars[dotcolor] || dotcolor"
                 />
             </g>
             <path
@@ -40,7 +38,7 @@
                     :r="radius * 2"
                     stroke="white"
                     stroke-width="2"
-                    :fill="$styleVars.blue"
+                    :fill="$styleVars[mediumdotcolor] || mediumdotcolor"
                 />
             </g>
             <g v-if="activeCitiesCircles.length">
@@ -52,7 +50,7 @@
                     :r="radius * 3"
                     stroke="white"
                     stroke-width="2"
-                    :fill="$styleVars.orange"
+                    :fill="$styleVars[largedotcolor] || largedotcolor"
                 />
             </g>
         </svg>
@@ -72,7 +70,12 @@ export default {
         areas: { default: () => [] },
         mediumdots: { default: () => [] },
         largedots: { default: () => [] },
-        lines: { default: () => [] }
+        lines: { default: () => [] },
+        backgroundcolor: { default: 'rgba(0,0,0,0.25)' },
+        dotcolor: { default: 'white' },
+        smalldotcolor: { default: 'rgba(255,255,255,0.25)' },
+        mediumdotcolor: { default: 'orange' },
+        largedotcolor: { default: 'orange' }
     },
     computed: {
         height() {

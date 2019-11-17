@@ -4,7 +4,7 @@ $items = $items ?? [];
 
 $justify = $justify ?? '';
 
-$align = $align ?? 'center';
+$align = $align ?? 'flex-start';
 
 $direction = $direction ?? 'row';
 

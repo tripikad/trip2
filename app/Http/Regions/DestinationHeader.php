@@ -89,82 +89,95 @@ class DestinationHeader
                                                     $destination
                                                 )
                                             )
-                                            ->push(
-                                                region(
-                                                    'DestinationStat',
-                                                    $destination
-                                                )
+                                            ->render()
+                                            ->implode('<br />')
+                                    )
+                                    ->push(
+                                        region('DestinationMap', $destination)
+                                    )
+                            )
+                    )
+                    ->push(
+                        component('Flex')
+                            ->with('justify', 'space-between')
+                            ->with(
+                                'items',
+                                collect()
+                                    ->pushWhen(
+                                        $destination->description,
+                                        collect()
+                                            ->pushWhen(
+                                                $destination->description,
+                                                component('Body')
+                                                    ->is('white')
+                                                    ->is('responsive')
+                                                    ->with(
+                                                        'body',
+                                                        $destination->description
+                                                    )
+                                            )
+                                            ->pushWhen(
+                                                $destination->user,
+                                                component('Flex')
+                                                    ->with('gap', 1)
+                                                    ->with(
+                                                        'items',
+                                                        collect()
+                                                            ->push(
+                                                                component(
+                                                                    'UserImage'
+                                                                )
+                                                                    ->with(
+                                                                        'route',
+                                                                        route(
+                                                                            'user.show',
+                                                                            [
+                                                                                $destination->user
+                                                                            ]
+                                                                        )
+                                                                    )
+                                                                    ->with(
+                                                                        'image',
+                                                                        $destination->user
+                                                                            ? $destination->user->imagePreset(
+                                                                                'small_square'
+                                                                            )
+                                                                            : ''
+                                                                    )
+                                                                    ->with(
+                                                                        'rank',
+                                                                        $destination->user
+                                                                            ? $destination->user->vars()
+                                                                                ->rank
+                                                                            : ''
+                                                                    )
+                                                            )
+                                                            ->push(
+                                                                component(
+                                                                    'Title'
+                                                                )
+                                                                    ->is(
+                                                                        'white'
+                                                                    )
+                                                                    ->is(
+                                                                        'smallest'
+                                                                    )
+                                                                    ->with(
+                                                                        'title',
+                                                                        $destination->user
+                                                                            ? $destination
+                                                                                ->user
+                                                                                ->name
+                                                                            : ''
+                                                                    )
+                                                            )
+                                                    )
                                             )
                                             ->render()
                                             ->implode('<br />')
                                     )
                                     ->push(
-                                        component('Dotmap')
-                                            ->with('height', '300px')
-                                            ->with(
-                                                'destination_dots',
-                                                config('destination_dots')
-                                            )
-                                            ->with(
-                                                'destination_facts',
-                                                config('destination_facts')
-                                            )
-
-                                            ->with('areas', [$destination->id])
-                                            ->with('largedots', [
-                                                $destination->vars()->facts()
-                                            ])
-                                    )
-                            )
-                    )
-                    ->pushWhen(
-                        $destination->description,
-                        component('Body')
-                            ->is('white')
-                            ->is('responsive')
-                            ->with('body', $destination->description)
-                    )
-                    ->pushWhen(
-                        $destination->user,
-                        component('Flex')
-                            ->with('gap', 1)
-                            ->with(
-                                'items',
-                                collect()
-                                    ->push(
-                                        component('UserImage')
-                                            ->with(
-                                                'route',
-                                                route('user.show', [
-                                                    $destination->user
-                                                ])
-                                            )
-                                            ->with(
-                                                'image',
-                                                $destination->user
-                                                    ? $destination->user->imagePreset(
-                                                        'small_square'
-                                                    )
-                                                    : ''
-                                            )
-                                            ->with(
-                                                'rank',
-                                                $destination->user
-                                                    ? $destination->user->vars()
-                                                        ->rank
-                                                    : ''
-                                            )
-                                    )
-                                    ->push(
-                                        component('Title')
-                                            ->is('white')
-                                            ->is('smallest')
-                                            ->with(
-                                                'title',
-                                                $destination->user
-                                                    ? $destination->user->name
-                                                    : ''
-                                            )
+                                        region('DestinationStat', $destination)
                                     )
                             )
                     )

@@ -50,15 +50,34 @@ class DestinationVars
         return $this->destination->depth == 1;
     }
 
-    public function isPlace()
+    public function isCity()
     {
-        return $this->destination->depth > 1;
+        return $this->destination->depth == 2;
     }
 
-    public function getCountry()
+    public function isPlace()
     {
-        if ($this->destination->depth > 1) {
-            return $this->destination->getAncestors()[1];
+        return $this->destination->depth > 2;
+    }
+
+    public function countries()
+    {
+        if ($this->isContinent()) {
+            return $this->destination->getImmediateDescendants();
+        }
+
+        return false;
+    }
+
+    public function country()
+    {
+        if ($this->isCity() || $this->isPlace()) {
+            return $this->destination
+                ->getAncestors()
+                ->filter(function ($d) {
+                    return $d->vars()->isCountry();
+                })
+                ->first();
         }
 
         return false;
