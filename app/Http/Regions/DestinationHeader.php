@@ -40,45 +40,133 @@ class DestinationHeader
             ->with(
                 'content',
                 collect()
-                    ->pushWhen(
-                        false,
-                        component('Dotmap')
-                            ->with('height', '300px')
-                            ->with(
-                                'destination_dots',
-                                config('destination_dots')
-                            )
-                            ->with(
-                                'destination_facts',
-                                config('destination_facts')
-                            )
-
-                            ->with('areas', [$destination->id])
-                            ->with('largedots', [$destination->vars()->facts()])
-                    )
-                    ->push(region('DestinationParents', $parents))
                     ->push(
-                        component('Title')
-                            ->is('white')
-                            ->is('large')
-                            ->with('title', $destination->name)
-                    )
-                    ->pushWhen(
-                        $user && $user->hasRole('admin'),
-                        component('MetaLink')
-                            ->is('white')
-                            ->with('title', trans('content.action.edit.title'))
+                        component('Flex')
+                            ->with('align', 'flex-start')
+                            ->with('justify', 'space-between')
                             ->with(
-                                'route',
-                                route('destination.edit', [$destination])
+                                'items',
+                                collect()
+                                    ->push(
+                                        collect()
+                                            ->push(
+                                                region(
+                                                    'DestinationParents',
+                                                    $parents
+                                                )
+                                            )
+                                            ->push(
+                                                component('Title')
+                                                    ->is('large')
+                                                    ->is('white')
+                                                    ->with(
+                                                        'title',
+                                                        $destination->name
+                                                    )
+                                            )
+                                            ->pushWhen(
+                                                $user &&
+                                                    $user->hasRole('admin'),
+                                                component('MetaLink')
+                                                    ->is('white')
+                                                    ->with(
+                                                        'title',
+                                                        trans(
+                                                            'content.action.edit.title'
+                                                        )
+                                                    )
+                                                    ->with(
+                                                        'route',
+                                                        route(
+                                                            'destination.edit',
+                                                            [$destination]
+                                                        )
+                                                    )
+                                            )
+                                            ->push(
+                                                region(
+                                                    'DestinationFacts',
+                                                    $destination
+                                                )
+                                            )
+                                            ->push(
+                                                region(
+                                                    'DestinationStat',
+                                                    $destination
+                                                )
+                                            )
+                                            ->render()
+                                            ->implode('<br />')
+                                    )
+                                    ->push(
+                                        component('Dotmap')
+                                            ->with('height', '300px')
+                                            ->with(
+                                                'destination_dots',
+                                                config('destination_dots')
+                                            )
+                                            ->with(
+                                                'destination_facts',
+                                                config('destination_facts')
+                                            )
+
+                                            ->with('areas', [$destination->id])
+                                            ->with('largedots', [
+                                                $destination->vars()->facts()
+                                            ])
+                                    )
                             )
                     )
                     ->pushWhen(
-                        $body,
+                        $destination->description,
                         component('Body')
                             ->is('white')
                             ->is('responsive')
-                            ->with('body', $body)
+                            ->with('body', $destination->description)
+                    )
+                    ->pushWhen(
+                        $destination->user,
+                        component('Flex')
+                            ->with('gap', 1)
+                            ->with(
+                                'items',
+                                collect()
+                                    ->push(
+                                        component('UserImage')
+                                            ->with(
+                                                'route',
+                                                route('user.show', [
+                                                    $destination->user
+                                                ])
+                                            )
+                                            ->with(
+                                                'image',
+                                                $destination->user
+                                                    ? $destination->user->imagePreset(
+                                                        'small_square'
+                                                    )
+                                                    : ''
+                                            )
+                                            ->with(
+                                                'rank',
+                                                $destination->user
+                                                    ? $destination->user->vars()
+                                                        ->rank
+                                                    : ''
+                                            )
+                                    )
+                                    ->push(
+                                        component('Title')
+                                            ->is('white')
+                                            ->is('smallest')
+                                            ->with(
+                                                'title',
+                                                $destination->user
+                                                    ? $destination->user->name
+                                                    : ''
+                                            )
+                                    )
+                            )
                     )
                     ->pushWhen(
                         $childrens->count(),
@@ -89,7 +177,6 @@ class DestinationHeader
                                 $childrens->map(function ($children) {
                                     return component('Tag')
                                         ->is('white')
-                                        ->is('large')
                                         ->with('title', $children->name)
                                         ->with(
                                             'route',
@@ -98,21 +185,6 @@ class DestinationHeader
                                             ])
                                         );
                                 })
-                            )
-                    )
-                    ->push(
-                        component('BlockHorizontal')
-                            ->is('between')
-                            ->is('bottom')
-                            ->with(
-                                'content',
-                                collect()
-                                    ->push(
-                                        region('DestinationFacts', $destination)
-                                    )
-                                    ->push(
-                                        region('DestinationStat', $destination)
-                                    )
                             )
                     )
             );

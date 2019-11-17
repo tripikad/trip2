@@ -156,7 +156,7 @@ class OfferController extends Controller
                                             ->is('small')
                                             ->is('center')
                                             ->is('white')
-                                            ->is('disabled')
+                                            ->is('semitransparent')
                                             ->with(
                                                 'title',
                                                 $offer->from .
@@ -178,7 +178,7 @@ class OfferController extends Controller
                                         component('Title')
                                             ->is('smallest')
                                             ->is('white')
-                                            ->is('disabled')
+                                            ->is('semitransparent')
                                             ->with('title', 'Firma')
                                     )
                                     ->pushWhen(
@@ -193,7 +193,7 @@ class OfferController extends Controller
                                         component('Title')
                                             ->is('smallest')
                                             ->is('white')
-                                            ->is('disabled')
+                                            ->is('semitransparent')
                                             ->with('title', 'Giid')
                                     )
                                     ->pushWhen(
@@ -208,7 +208,7 @@ class OfferController extends Controller
                                         component('Title')
                                             ->is('smallest')
                                             ->is('white')
-                                            ->is('disabled')
+                                            ->is('semitransparent')
                                             ->with('title', 'Grupi suurus')
                                     )
                                     ->pushWhen(

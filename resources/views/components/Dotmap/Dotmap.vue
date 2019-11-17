@@ -19,7 +19,8 @@
                     :cx="xScale(c.lon)"
                     :cy="yScale(c.lat)"
                     :r="radius"
-                    :fill="$styleVars.cyan"
+                    fill="white"
+                    opacity="0.65"
                 />
             </g>
             <path
@@ -73,14 +74,6 @@ export default {
         largedots: { default: () => [] },
         lines: { default: () => [] }
     },
-    /*
-    dotareas
-    lines
-    smalldots
-    mediumdots
-    largedots
-    */
-
     computed: {
         height() {
             return this.width / 2.5
