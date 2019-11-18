@@ -66,6 +66,7 @@ function format_body($body)
 {
     return (new Utils\BodyFormatter($body))
         //->fixLinks()
+        ->flightmap()
         ->calendar()
         ->youtube()
         ->vimeo()

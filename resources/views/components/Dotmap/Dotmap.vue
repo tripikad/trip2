@@ -27,7 +27,6 @@
                 :stroke="$styleVars[linecolor] || linecolor"
                 stroke-width="2"
                 fill="none"
-                opacity="0.7"
             />
             <g v-if="passiveCitiesCircles.length">
                 <circle

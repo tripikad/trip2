@@ -9,8 +9,18 @@ class ExperimentsController extends Controller
 {
     public function index()
     {
-        $t1 =
-            'Turkish Airlines pakub hetkel väga hea hinnaga lennupileteid otselendudele Tallinnast Istanbuli. Edasi-tagasi lennupiletid on saadaval hinnaga 187€ ning saadavus on suurepärane alates oktoobrist kuni 2020 aasta maini välja. Tõime allpool välja valiku enamjaolt 4-5 päevasteks linnapuhkusteks. Piletihinnas sisaldub nii äraantav pagas kui toitlustamine lennuki pardal.';
+        $t1 = '
+Turkish Airlines pakub hetkel väga hea hinnaga lennupileteid otselendudele Tallinnast Istanbuli. 
+
+`[&#8203;[flightmap:TLL,IST]&#8203;]`
+
+[[flightmap:TLL,IST]]
+
+Edasi-tagasi lennupiletid on saadaval hinnaga 187€ ning saadavus on suurepärane alates oktoobrist kuni 2020 aasta maini välja. 
+
+[[flightmap:TLL,HEL,JFK]]
+
+Tõime allpool välja valiku enamjaolt 4-5 päevasteks linnapuhkusteks. Piletihinnas sisaldub nii äraantav pagas kui toitlustamine lennuki pardal.';
 
         $t2 = 'Hea kvaliteedi ning hinnasuhtega hotellivalik on Istanbulis väga hea.
             Kui otsid soodsa hinnaga öömaja, siis soovitame parima ülevaate ja hinna saamiseks kasutada hotellihindade võrdlusportaali HotelsCombined.ee.';
@@ -41,10 +51,11 @@ Hello world
                 'content',
                 collect()
                     ->push(component('Body')->with('body', format_body($t1)))
-                    ->push(
+                    ->pushWhen(
+                        false,
                         component('Dotmap')
                             ->is('center')
-                            ->with('width', 600)
+                            ->with('height', '300px')
                             ->with(
                                 'destination_dots',
                                 config('destination_dots')
@@ -58,6 +69,7 @@ Hello world
                     )
                     ->push(component('Body')->with('body', format_body($t2)))
             )
+            ->with('sidebar', ['a'])
             ->render();
     }
 
