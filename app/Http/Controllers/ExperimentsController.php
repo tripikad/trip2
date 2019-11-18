@@ -10,15 +10,9 @@ class ExperimentsController extends Controller
     public function index()
     {
         $t1 = '
-Turkish Airlines pakub hetkel väga hea hinnaga lennupileteid otselendudele Tallinnast Istanbuli. 
+### flightmap:TLL,HEL,JFK,POM
 
-`[&#8203;[flightmap:TLL,IST]&#8203;]`
-
-[[flightmap:TLL,IST]]
-
-Edasi-tagasi lennupiletid on saadaval hinnaga 187€ ning saadavus on suurepärane alates oktoobrist kuni 2020 aasta maini välja. 
-
-[[flightmap:TLL,HEL,JFK]]
+[[flightmap:TLL,HEL,JFK,POM]]
 
 Tõime allpool välja valiku enamjaolt 4-5 päevasteks linnapuhkusteks. Piletihinnas sisaldub nii äraantav pagas kui toitlustamine lennuki pardal.';
 
