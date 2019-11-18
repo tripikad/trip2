@@ -1,13 +1,8 @@
 <template>
-
     <div class="Editor" :class="isclasses" v-show="show">
-                
         <div class="Editor__wrapper">
-        
             <div class="Editor__toolbar">
-
                 <div class="Editor__toolbarLeft">
-
                     <div class="Editor__tool Editor__toolLink" @click="insertLink">Link</div>
                     <div class="Editor__tool Editor__toolBold" @click="insertBold">B</div>
                     <div class="Editor__tool Editor__toolItalic" @click="insertItalic">I</div>
@@ -18,31 +13,23 @@
                     <div class="Editor__tool Editor__toolCalendar" @click="insertCalendar">Calendar</div>
                     <div class="Editor__tool Editor__toolPicker" @click="openPicker">Image</div>
                     <div class="Editor__tool Editor__toolClean" @click="cleanMarkup">✿</div>
-
                 </div>
 
                 <div class="Editor__toolbarRight">
-
                     <div class="Editor__tool Editor__toolOk" @click="show = false">OK</div>
-
                 </div>
-
             </div>
-        
-            <div class="Editor__content">
 
+            <div class="Editor__content">
                 <div class="Editor__source" ref="source"></div>
-                
+
                 <div class="Editor__target">
+                    <!--render class="Body" :body="'<div>' + preview + '</div>'" /-->
                     <div class="Body" v-html="preview"></div>
                 </div>
-
             </div>
-
         </div>
-
     </div>
-
 </template>
 
 <script>
@@ -75,25 +62,19 @@ export default {
         insertLink() {
             var link = window.prompt('Link', 'http://')
             var doc = this.editor.getDoc()
-            doc.replaceSelection(
-                '[' + doc.getSelection() + '](' + link + ')'
-            )
+            doc.replaceSelection('[' + doc.getSelection() + '](' + link + ')')
             this.editor.focus()
         },
         insertBold() {
             var doc = this.editor.getDoc()
             doc.replaceSelection(
-                '**' +
-                    this.editor.getDoc().getSelection() +
-                    '**'
+                '**' + this.editor.getDoc().getSelection() + '**'
             )
             this.editor.focus()
         },
         insertItalic() {
             var doc = this.editor.getDoc()
-            doc.replaceSelection(
-                '_' + doc.getSelection() + '_'
-            )
+            doc.replaceSelection('_' + doc.getSelection() + '_')
             this.editor.focus()
         },
         insertH3() {
@@ -169,10 +150,7 @@ export default {
             this.editor.focus()
         },
         openPicker() {
-            this.$events.$emit(
-                'imagepicker.show',
-                this.target
-            )
+            this.$events.$emit('imagepicker.show', this.target)
         },
         insertImage(id) {
             var doc = this.editor.getDoc()
@@ -212,9 +190,7 @@ export default {
         this.$events.$on('editor.show', value => {
             this.show = true
             this.value = value
-            this.editor.setValue(
-                this.value ? this.value : ''
-            )
+            this.editor.setValue(this.value ? this.value : '')
             setTimeout(() => {
                 this.editor.refresh()
                 this.editor.focus()
