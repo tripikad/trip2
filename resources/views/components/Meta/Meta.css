@@ -1,10 +1,10 @@
-@import "variables";
+@import 'variables';
 
 .Meta {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    line-height: $line-height-md;
+    line-height: $line-height-lg;
 }
 
 .Meta--center {
@@ -16,13 +16,13 @@
     display: inline-block ?if $ie;
 }
 
-    .Meta__item {
-        margin-right: $margin-xs;
-    }
+.Meta__item {
+    margin-right: $margin-xs;
+}
 
-    .Meta__item:last-child {
-        margin-right: 0;
-    }
+.Meta__item:last-child {
+    margin-right: 0;
+}
 
 .Meta--large {
     line-height: $line-height-xl;

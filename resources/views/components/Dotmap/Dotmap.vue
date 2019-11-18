@@ -24,7 +24,7 @@
             <path
                 v-if="activeLinesCoordinates.length"
                 :d="line(activeLinesCoordinates)"
-                stroke="white"
+                :stroke="$styleVars[linecolor] || linecolor"
                 stroke-width="2"
                 fill="none"
                 opacity="0.7"
@@ -36,7 +36,7 @@
                     :cx="xScale(c.lon)"
                     :cy="yScale(c.lat)"
                     :r="radius * 2"
-                    stroke="white"
+                    :stroke="$styleVars[linecolor] || linecolor"
                     stroke-width="2"
                     :fill="$styleVars[mediumdotcolor] || mediumdotcolor"
                 />
@@ -48,7 +48,7 @@
                     :cx="xScale(c.lon)"
                     :cy="yScale(c.lat)"
                     :r="radius * 3"
-                    stroke="white"
+                    :stroke="$styleVars[linecolor] || linecolor"
                     stroke-width="2"
                     :fill="$styleVars[largedotcolor] || largedotcolor"
                 />
@@ -75,7 +75,8 @@ export default {
         dotcolor: { default: 'white' },
         smalldotcolor: { default: 'rgba(255,255,255,0.25)' },
         mediumdotcolor: { default: 'orange' },
-        largedotcolor: { default: 'orange' }
+        largedotcolor: { default: 'orange' },
+        linecolor: { default: 'white' }
     },
     computed: {
         height() {

@@ -109,11 +109,13 @@ class DestinationHeader
                                             ->pushWhen(
                                                 $destination->description,
                                                 component('Body')
-                                                    ->is('white')
+                                                    ->is('yellow-dark')
                                                     ->is('responsive')
                                                     ->with(
                                                         'body',
-                                                        $destination->description
+                                                        format_body(
+                                                            $destination->description
+                                                        )
                                                     )
                                             )
                                             ->pushWhen(

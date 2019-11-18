@@ -2,32 +2,114 @@
 
 namespace App\Http\Controllers;
 
+use App\Destination;
 use App\User;
 
 class ExperimentsController extends Controller
 {
     public function index()
     {
-        $a = collect(config('destination_facts'))
-            ->map(function ($d) {
-                return ['lat' => $d['lat'], 'lon' => $d['lon']];
-            })
-            ->values();
+        $t1 =
+            'Turkish Airlines pakub hetkel väga hea hinnaga lennupileteid otselendudele Tallinnast Istanbuli. Edasi-tagasi lennupiletid on saadaval hinnaga 187€ ning saadavus on suurepärane alates oktoobrist kuni 2020 aasta maini välja. Tõime allpool välja valiku enamjaolt 4-5 päevasteks linnapuhkusteks. Piletihinnas sisaldub nii äraantav pagas kui toitlustamine lennuki pardal.';
 
-        $b = collect(config('destination_facts'))->keys();
-        //dd($a);
-        return layout('Offer')
-            ->with('color', 'blue')
+        $t2 = 'Hea kvaliteedi ning hinnasuhtega hotellivalik on Istanbulis väga hea.
+            Kui otsid soodsa hinnaga öömaja, siis soovitame parima ülevaate ja hinna saamiseks kasutada hotellihindade võrdlusportaali HotelsCombined.ee.';
+
+        $b = "
+Hello world
+
+[[flightmap:TLL,LAX]]
+        
+        ";
+
+        $a = collect(['TLL', 'JFK', 'LAX'])->map(function ($a) {
+            return collect(config('airports'))
+                ->where('iata', $a)
+                ->first();
+        });
+
+        // dd(
+        //     collect(config('airports'))
+        //         ->slice(0, 10)
+        //         ->where('iata', 'GKA')
+        //         ->first()
+        // );
+
+        return layout('Two')
+            //->with('color', 'blue')
             ->with(
-                'top',
-                collect()->push(
-                    component('Dotmap')
-                        ->with('width', '1200')
-                        ->is('center')
-                        ->with('destination_dots', config('destination_dots'))
-                        ->with('destination_facts', config('destination_facts'))
-                        ->with('mediumdots', $a)
-                )
+                'content',
+                collect()
+                    ->push(component('Body')->with('body', format_body($t1)))
+                    ->push(
+                        component('Dotmap')
+                            ->is('center')
+                            ->with('width', 600)
+                            ->with(
+                                'destination_dots',
+                                config('destination_dots')
+                            )
+                            ->with('lines', $a)
+                            ->with('mediumdots', $a->withoutLast())
+                            ->with('largedots', [$a->last()])
+                            ->with('linecolor', 'blue')
+                            ->with('mediumdotcolor', 'white')
+                            ->with('largedotcolor', 'white')
+                    )
+                    ->push(component('Body')->with('body', format_body($t2)))
+            )
+            ->render();
+    }
+
+    public function destinationIndex()
+    {
+        $ds = Destination::skip(100)
+            ->take(100)
+            ->skip(200)
+            ->get();
+        //dd($ds);
+        return layout('One')
+            //->with('color', 'blue')
+            ->with(
+                'content',
+                $ds
+                    ->map(function ($d) {
+                        $name =
+                            $d->vars()->isContinent() && $d->vars()->facts()
+                                ? ''
+                                : json_encode(
+                                    $d->vars()->facts(),
+                                    JSON_PRETTY_PRINT
+                                );
+                        return collect()
+                            ->push(
+                                component('Title')
+                                    //->is('white')
+                                    ->is('small')
+                                    ->with('title', $d->name)
+                            )
+                            ->push(
+                                component('Code')
+                                    ->is('gray')
+                                    ->with(
+                                        'code',
+                                        "
+name: {$d->name}
+parent: {$d->getAncestors()->map->name}
+{$name}
+                                              "
+                                    )
+                            );
+                        // ->push(
+                        //     component('Dotmap')
+                        //         ->with(
+                        //             'destination_dots',
+                        //             config('destination_dots')
+                        //         )
+                        //         ->with('areas', [$d->id])
+                        // );
+                    })
+                    ->flatten()
             )
             ->render();
     }

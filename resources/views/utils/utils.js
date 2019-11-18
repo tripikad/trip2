@@ -26,3 +26,9 @@ export const parseSheets = data => {
 export const random = (from, to) => {
     return from + Math.random() * (to - from)
 }
+
+export const snapToGrid = (value, gridsize) => {
+    return value % gridsize < gridsize / 2
+        ? value - (value % gridsize)
+        : value + gridsize - (value % gridsize)
+}
