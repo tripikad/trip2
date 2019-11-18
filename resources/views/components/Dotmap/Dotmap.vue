@@ -135,9 +135,6 @@ export default {
         yScale(lat) {
             return this.projection([0, lat])[1]
         }
-    },
-    mounted() {
-        console.log(this.mediumdots)
     }
 }
 </script>

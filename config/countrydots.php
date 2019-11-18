@@ -1303,16 +1303,6 @@ return [
         'lon' => 172.5
     ],
     [
-        'destination_ids' => [357],
-        'lat' => 67.5,
-        'lon' => -180
-    ],
-    [
-        'destination_ids' => [357],
-        'lat' => 67.5,
-        'lon' => -177.5
-    ],
-    [
         'destination_ids' => [403],
         'lat' => 67.5,
         'lon' => -162.5
@@ -1854,18 +1844,8 @@ return [
     ],
     [
         'destination_ids' => [357],
-        'lat' => 65,
-        'lon' => -180
-    ],
-    [
-        'destination_ids' => [357],
-        'lat' => 65,
-        'lon' => -175
-    ],
-    [
-        'destination_ids' => [357],
-        'lat' => 65,
-        'lon' => -172.5
+        'lat' => 67.5,
+        'lon' => 180
     ],
     [
         'destination_ids' => [403],
@@ -2421,6 +2401,11 @@ return [
         'destination_ids' => [357],
         'lat' => 65,
         'lon' => 177.5
+    ],
+    [
+        'destination_ids' => [357],
+        'lat' => 65,
+        'lon' => 180
     ],
     [
         'destination_ids' => [403],
@@ -12714,3 +12699,4 @@ return [
     ],
 
 ];
+

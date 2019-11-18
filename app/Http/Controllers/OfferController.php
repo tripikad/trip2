@@ -30,7 +30,7 @@ class OfferController extends Controller
                 collect()->push(
                     component('OfferList')
                         ->with('height', '200vh')
-                        ->with('destination_dots', config('destination_dots'))
+                        ->with('countrydots', config('countrydots'))
                         ->with('route', route('offers.index.json'))
                 )
             )

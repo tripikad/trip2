@@ -22,7 +22,7 @@ let dots = []
 for (let lat = 80; lat > -80; lat -= step) {
     // Loop over world X-axis
 
-    for (let lon = -180; lon < 180; lon += step) {
+    for (let lon = -180 + step * 5; lon < 180 + step * 5; lon += step) {
         // Set up a square polygon with dot coordinates in the center
 
         const box = turf.polygon([
