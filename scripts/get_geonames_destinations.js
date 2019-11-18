@@ -11,6 +11,9 @@ var destinations = require(__dirname + '/data/trip_destinations.json')
 // by the name only
 
 var manualDestinations = [
+    { id: 311, name: 'Ameerika Ühendriigid', geonameId: 6252001 },
+    { id: 322, name: 'Iirimaa', geonameId: 2963597 },
+
     { id: 383, name: 'Fääri saared', geonameId: 2622320 },
     { id: 424, name: 'Tasmaania', geonameId: 2147291 },
     { id: 432, name: 'Olümpos', geonameId: 734890 },
@@ -64,6 +67,8 @@ var countries = destinations
         return c
     })
 
+var a = destinations.filter(country => country.id == 338)
+
 var cities = destinations
     .filter(city => countries.find(country => country.id === city.parent_id))
     .map(c => {
@@ -87,11 +92,13 @@ async.each(
         // Query each destination from Geonames API by its name or Geoname ID
 
         var url = !!id
-            ? 'http://api.geonames.org/getJSON?username=kristjanjansen&geonameId=' +
+            ? 'https://secure.geonames.org/getJSON?encoding=JSON&username=kristjanjansen&geonameId=' +
               id.geonameId
-            : 'http://api.geonames.org/searchJSON?formatted=true&q=' +
-              city.name +
+            : 'https://secure.geonames.org/searchJSON?encoding=JSON&formatted=true&q=' +
+              encodeURIComponent(city.name) +
               '&maxRows=1&username=kristjanjansen&style=full&lang=et'
+
+        //console.log(url)
 
         request({ url, json: true }, (err, res, body) => {
             if (body) {
@@ -100,7 +107,7 @@ async.each(
                 citiesData.push({
                     type: city.type,
                     id: city.id,
-                    name: city.name,
+                    name: city.name.replace('Ĩ', 'Š'),
                     ...data
                 })
             }
