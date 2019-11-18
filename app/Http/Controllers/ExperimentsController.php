@@ -9,6 +9,34 @@ class ExperimentsController extends Controller
 {
     public function index()
     {
+        $d = Destination::whereName('Tallinn')->first();
+        $d2 = Destination::whereName('New York')->first();
+
+        return layout('Offer')
+            ->with('color', 'blue')
+            ->with(
+                'top',
+                collect()->push(
+                    component('Dotmap')
+                        ->is('center')
+                        ->with('width', '1000')
+                        ->with('countrydots', config('destination_dots'))
+                        ->with('lines', [
+                            $d->vars()->facts(),
+                            $d2->vars()->facts()
+                        ])
+                        ->with('smalldots', [
+                            $d->vars()->facts(),
+                            $d2->vars()->facts()
+                        ])
+                    // ->with('largedots', [$a->last()])
+                )
+            )
+            ->render();
+    }
+
+    public function flightIndex()
+    {
         $t1 = '
 ### flightmap:TLL,HEL,JFK,POM
 
@@ -16,52 +44,18 @@ class ExperimentsController extends Controller
 
 Tõime allpool välja valiku enamjaolt 4-5 päevasteks linnapuhkusteks. Piletihinnas sisaldub nii äraantav pagas kui toitlustamine lennuki pardal.';
 
-        $t2 = 'Hea kvaliteedi ning hinnasuhtega hotellivalik on Istanbulis väga hea.
-            Kui otsid soodsa hinnaga öömaja, siis soovitame parima ülevaate ja hinna saamiseks kasutada hotellihindade võrdlusportaali HotelsCombined.ee.';
-
-        $b = "
-Hello world
-
-[[flightmap:TLL,LAX]]
-        
-        ";
-
-        $a = collect(['TLL', 'JFK', 'LAX'])->map(function ($a) {
-            return collect(config('airports'))
-                ->where('iata', $a)
-                ->first();
-        });
-
-        // dd(
-        //     collect(config('airports'))
-        //         ->slice(0, 10)
-        //         ->where('iata', 'GKA')
-        //         ->first()
-        // );
+        // $a = collect(['TLL', 'JFK', 'LAX'])->map(function ($a) {
+        //     return collect(config('airports'))
+        //         ->where('iata', $a)
+        //         ->first();
+        // });
 
         return layout('Two')
-            //->with('color', 'blue')
             ->with(
                 'content',
-                collect()
-                    ->push(component('Body')->with('body', format_body($t1)))
-                    ->pushWhen(
-                        false,
-                        component('Dotmap')
-                            ->is('center')
-                            ->with('height', '300px')
-                            ->with(
-                                'destination_dots',
-                                config('destination_dots')
-                            )
-                            ->with('lines', $a)
-                            ->with('mediumdots', $a->withoutLast())
-                            ->with('largedots', [$a->last()])
-                            ->with('linecolor', 'blue')
-                            ->with('mediumdotcolor', 'white')
-                            ->with('largedotcolor', 'white')
-                    )
-                    ->push(component('Body')->with('body', format_body($t2)))
+                collect()->push(
+                    component('Body')->with('body', format_body($t1))
+                )
             )
             ->with('sidebar', ['a'])
             ->render();
@@ -162,21 +156,7 @@ parent: {$d->getAncestors()->map->name}
                                     )
                             )
                     )
-                    ->push(
-                        component('Dotmap')
-                            ->with('height', '300px')
-                            ->is('center')
-                            ->with(
-                                'destination_dots',
-                                config('destination_dots')
-                            )
-                            ->with(
-                                'destination_facts',
-                                config('destination_facts')
-                            )
-                            ->with('areas', $been)
-                            ->with('mediumdots', $been)
-                    )
+
                     ->push(
                         component('Flex')
                             ->is('center')

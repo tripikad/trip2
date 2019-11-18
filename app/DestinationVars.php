@@ -85,7 +85,7 @@ class DestinationVars
 
     public function facts()
     {
-        if ($facts = config("destination_facts.{$this->destination->id}")) {
+        if ($facts = config("facts.{$this->destination->id}")) {
             return (object) $facts;
         }
     }

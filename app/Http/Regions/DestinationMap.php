@@ -7,7 +7,6 @@ class DestinationMap
     public function render($destination)
     {
         $areas = [];
-        $mediumdots = [];
         $largedots = [];
 
         if ($destination->vars()->isContinent()) {
@@ -23,19 +22,19 @@ class DestinationMap
 
         if ($destination->vars()->isCity()) {
             $areas = [$destination->vars()->country()->id];
-            $largedots = [$destination->id];
+            $largedots = [$destination->vars()->facts()];
         }
 
         if ($destination->vars()->isPlace()) {
             $areas = [$destination->vars()->country()->id];
-            $largedots = [$destination->id];
+            $largedots = [$destination->vars()->facts()];
         }
 
         return component('Dotmap')
             ->with('height', '300px')
-            ->with('destination_dots', config('destination_dots'))
-            ->with('destination_facts', config('destination_facts'))
+            ->with('countrydots', config('countrydots'))
             ->with('areas', $areas)
-            ->with('largedots', $largedots);
+            ->with('largedots', $largedots)
+            ->with('largedotcolor', 'red');
     }
 }

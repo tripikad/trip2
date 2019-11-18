@@ -27,7 +27,7 @@ export const random = (from, to) => {
     return from + Math.random() * (to - from)
 }
 
-export const snapToGrid = (value, gridsize) => {
+export const snap = (value, gridsize = 1) => {
     return value % gridsize < gridsize / 2
         ? value - (value % gridsize)
         : value + gridsize - (value % gridsize)

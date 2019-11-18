@@ -1,9 +1,9 @@
 <template>
     <div class="Dotmap" :class="isclasses">
         <svg :width="width" :height="height">
-            <g v-if="destination_dots.length">
+            <g v-if="countrydots.length">
                 <circle
-                    v-for="(c, i) in destination_dots"
+                    v-for="(c, i) in countrydots"
                     :key="i"
                     :cx="xScale(c.lon)"
                     :cy="yScale(c.lat)"
@@ -11,9 +11,19 @@
                     :fill="$styleVars[backgroundcolor] || backgroundcolor"
                 />
             </g>
-            <g v-if="activeCountriesDots.length">
+            <g v-if="activeCountryDots.length">
                 <circle
-                    v-for="(c, i) in activeCountriesDots"
+                    v-for="(c, i) in activeCountryDots"
+                    :key="i"
+                    :cx="xScale(c.lon)"
+                    :cy="yScale(c.lat)"
+                    :r="radius"
+                    :fill="$styleVars[dotcolor] || dotcolor"
+                />
+            </g>
+            <g v-if="smalldots.length">
+                <circle
+                    v-for="(c, i) in smalldots"
                     :key="i"
                     :cx="xScale(c.lon)"
                     :cy="yScale(c.lat)"
@@ -22,30 +32,30 @@
                 />
             </g>
             <path
-                v-if="activeLinesCoordinates.length"
-                :d="line(activeLinesCoordinates)"
+                v-if="lines.length"
+                :d="line(lines)"
                 :stroke="$styleVars[linecolor] || linecolor"
                 stroke-width="2"
                 fill="none"
             />
-            <g v-if="passiveCitiesCircles.length">
+            <g v-if="mediumdots.length">
                 <circle
-                    v-for="(c, i) in passiveCitiesCircles"
+                    v-for="(d, i) in mediumdots"
                     :key="i"
-                    :cx="xScale(c.lon)"
-                    :cy="yScale(c.lat)"
+                    :cx="xScale(d.lon)"
+                    :cy="yScale(d.lat)"
                     :r="radius * 2"
                     :stroke="$styleVars[linecolor] || linecolor"
                     stroke-width="2"
                     :fill="$styleVars[mediumdotcolor] || mediumdotcolor"
                 />
             </g>
-            <g v-if="activeCitiesCircles.length">
+            <g v-if="largedots.length">
                 <circle
-                    v-for="(c, i) in activeCitiesCircles"
+                    v-for="(d, i) in largedots"
                     :key="i"
-                    :cx="xScale(c.lon)"
-                    :cy="yScale(c.lat)"
+                    :cx="xScale(d.lon)"
+                    :cy="yScale(d.lat)"
                     :r="radius * 3"
                     :stroke="$styleVars[linecolor] || linecolor"
                     stroke-width="2"
@@ -64,9 +74,9 @@ export default {
     props: {
         isclasses: { default: '' },
         width: { default: 750 },
-        destination_dots: { default: () => [] },
-        destination_facts: { default: () => [] },
+        countrydots: { default: () => [] },
         areas: { default: () => [] },
+        smalldots: { default: () => [] },
         mediumdots: { default: () => [] },
         largedots: { default: () => [] },
         lines: { default: () => [] },
@@ -94,44 +104,10 @@ export default {
         radius() {
             return this.width / 350
         },
-        activeCountriesDots() {
-            return this.destination_dots.filter(
+        activeCountryDots() {
+            return this.countrydots.filter(
                 d => intersection(d.destination_ids, this.areas).length
             )
-        },
-        passiveCitiesCircles() {
-            return this.mediumdots
-                .map(c =>
-                    typeof c == 'object'
-                        ? c
-                        : this.destination_facts[c]
-                        ? this.destination_facts[c]
-                        : null
-                )
-                .filter(c => c)
-        },
-        activeCitiesCircles() {
-            return this.largedots
-                .map(c =>
-                    typeof c == 'object'
-                        ? c
-                        : this.destination_facts[c]
-                        ? this.destination_facts[c]
-                        : null
-                )
-                .filter(c => c)
-        },
-        activeLinesCoordinates() {
-            return this.lines
-                .map(c =>
-                    typeof c == 'object'
-                        ? c
-                        : this.destination_facts[c]
-                        ? this.destination_facts[c]
-                        : null
-                )
-                .filter(c => c)
-                .map(c => [c.lon, c.lat])
         }
     },
 
@@ -144,7 +120,10 @@ export default {
                         type: 'Feature',
                         geometry: {
                             type: 'LineString',
-                            coordinates
+                            coordinates: coordinates.map(({ lon, lat }) => [
+                                lon,
+                                lat
+                            ])
                         }
                     }
                 ]
@@ -158,7 +137,7 @@ export default {
         }
     },
     mounted() {
-        return this.mediumdots
+        console.log(this.mediumdots)
     }
 }
 </script>

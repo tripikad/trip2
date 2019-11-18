@@ -47,9 +47,27 @@ class UserHeader
         $wantsToGo = $user->vars()->destinationWantsToGo();
         $hasBeen = $user->vars()->destinationHaveBeen();
 
-        $hasBeenMap = $hasBeen
+        $countryDots = $hasBeen
             ->map(function ($f) {
                 return $f->flaggable->id;
+            })
+            ->values();
+
+        $step = 2.5;
+
+        $cityDots = $hasBeen
+            ->filter(function ($f) {
+                return $f->flaggable->vars()->isCity() ||
+                    $f->flaggable->vars()->isPlace();
+            })
+            ->map(function ($f) {
+                return $f->flaggable->vars()->facts();
+            })
+            ->map(function ($f) use ($step) {
+                return [
+                    'lat' => round($f->lat / $step) * $step,
+                    'lon' => round($f->lon / $step) * $step
+                ];
             })
             ->values();
 
@@ -76,17 +94,9 @@ class UserHeader
                         component('Dotmap')
                             ->with('height', '300px')
                             ->is('center')
-                            ->with(
-                                'destination_dots',
-                                config('destination_dots')
-                            )
-                            ->with(
-                                'destination_facts',
-                                config('destination_facts')
-                            )
-
-                            ->with('areas', $hasBeenMap)
-                            ->with('mediumdots', $hasBeenMap)
+                            ->with('countrydots', config('countrydots'))
+                            ->with('areas', $countryDots)
+                            ->with('smalldots', $cityDots)
                     )
                     ->push(region('UserHeaderImage', $user, $loggedUser))
                     ->push(

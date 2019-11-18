@@ -50,7 +50,13 @@ class OfferController extends Controller
 
     public function show($id)
     {
-        $offer = $this->getSheet()[$id];
+        $offer = (object) $this->getSheet()[$id];
+
+        //dd($offer);
+
+        $name = $offer->startfrom ? $offer->startfrom : 'Tallinn';
+        $startDestination = Destination::where('name', $name)->first();
+        //dd($startDestination->vars()->facts());
 
         $name = collect(explode(',', $offer->destination))
             ->map(function ($s) {
@@ -94,23 +100,22 @@ class OfferController extends Controller
                         component('Dotmap')
                             ->is('center')
                             ->with('height', '300px')
-                            ->with(
-                                'destination_dots',
-                                config('destination_dots')
-                            )
+                            ->with('countrydots', config('countrydots'))
                             ->with(
                                 'destination_facts',
                                 config('destination_facts')
                             )
 
                             ->with('lines', [
-                                829,
+                                $startDestination->vars()->facts(),
                                 [
                                     'lat' => $offer->latitude,
                                     'lon' => $offer->longitude
                                 ]
                             ])
-                            ->with('mediumdots', [829])
+                            ->with('mediumdots', [
+                                $startDestination->vars()->facts()
+                            ])
                             ->with('largedots', [
                                 [
                                     'lat' => $offer->latitude,
