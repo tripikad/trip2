@@ -185,13 +185,16 @@ class DestinationHeader
                     )
                     ->pushWhen(
                         $childrens->count(),
-                        component('Meta')
+                        component('Flex')
+                            ->is('wrap')
+                            ->with('gap', 0.5)
                             ->is('large')
                             ->with(
                                 'items',
                                 $childrens->map(function ($children) {
                                     return component('Tag')
                                         ->is('white')
+                                        ->is('large')
                                         ->with('title', $children->name)
                                         ->with(
                                             'route',
