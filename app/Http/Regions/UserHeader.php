@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Regions;
+use App\Destination;
 
 class UserHeader
 {
@@ -43,21 +44,38 @@ class UserHeader
 
     public function render($user)
     {
+        $countryCount = 195;
+
         $loggedUser = request()->user();
         $wantsToGo = $user->vars()->destinationWantsToGo();
-        $hasBeen = $user->vars()->destinationHaveBeen();
+        $hasBeenContinents = $user
+            ->vars()
+            ->destinationHaveBeen()
+            ->filter(function ($f) {
+                return $f->flaggable->vars()->isCity() ||
+                    $f->flaggable->vars()->isPlace();
+            });
+        $hasBeenCountries = $user
+            ->vars()
+            ->destinationHaveBeen()
+            ->filter(function ($f) {
+                return $f->flaggable->vars()->isCountry();
+            });
+        $hasBeenCities = $user
+            ->vars()
+            ->destinationHaveBeen()
+            ->filter(function ($f) {
+                return $f->flaggable->vars()->isCity() ||
+                    $f->flaggable->vars()->isPlace();
+            });
 
-        $countryDots = $hasBeen
+        $countryDots = $hasBeenCountries
             ->map(function ($f) {
                 return $f->flaggable->id;
             })
             ->values();
 
-        $cityDots = $hasBeen
-            ->filter(function ($f) {
-                return $f->flaggable->vars()->isCity() ||
-                    $f->flaggable->vars()->isPlace();
-            })
+        $cityDots = $hasBeenCities
             ->map(function ($f) {
                 return $f->flaggable->vars()->facts();
             })
@@ -100,19 +118,80 @@ class UserHeader
                     )
                     ->push(region('UserHeaderImage', $user, $loggedUser))
                     ->push(
+                        component('Center')->with(
+                            'item',
+                            region('UserAbout', $user, $loggedUser)
+                        )
+                    )
+                    ->push(region('UserStats', $user, $loggedUser))
+                    ->br()
+                    ->push(
                         component('Body')
                             ->is('white')
                             ->is('responsive')
                             ->with('body', $user->vars()->description)
                     )
-                    ->push(region('UserAbout', $user, $loggedUser))
+                    ->br()
                     ->pushWhen(
                         $wantsToGo->count(),
-                        component('Meta')
-                            ->is('large')
+                        component('Flex')
+                            ->with('align', 'center')
+                            ->with('gap', 1)
                             ->with(
                                 'items',
-                                $wantsToGo->map(function ($destination) {
+                                collect()
+                                    ->push(
+                                        component('Icon')
+                                            ->is('white')
+                                            ->with('size', 'xl')
+                                            ->with('icon', 'icon-pin')
+                                    )
+                                    ->push(
+                                        component('Title')
+                                            ->is('white')
+                                            ->with(
+                                                'title',
+                                                trans(
+                                                    'user.show.stat.destination',
+                                                    [
+                                                        'country_total_count' => $countryCount,
+                                                        'country_count' => $hasBeenCountries->count(),
+                                                        'percentage' => round(
+                                                            ($hasBeenCountries->count() /
+                                                                $countryCount) *
+                                                                100
+                                                        )
+                                                    ]
+                                                )
+                                            )
+                                    )
+                            )
+                    )
+                    // ->push(
+                    //     component('Title')
+                    //         ->is('b')
+                    //         ->with(
+                    //             'title',
+                    //             trans('user.show.stat.destination', [
+                    //                 'destination_count' => $user
+                    //                     ->vars()
+                    //                     ->destinationCount(),
+                    //                 'destination_percentage' => $user
+                    //                     ->vars()
+                    //                     ->destinationCountPercentage()
+                    //             ]) . ':'
+                    //         )
+                    //         ->with('icon', 'icon-pin')
+                    // )
+                    ->pushWhen(
+                        $hasBeenCountries->count(),
+                        component('Flex')
+                            ->is('wrap')
+                            ->is('large')
+                            ->with('gap', 0.5)
+                            ->with(
+                                'items',
+                                $hasBeenCountries->map(function ($destination) {
                                     return component('Tag')
                                         ->is('white')
                                         ->is('large')
@@ -129,16 +208,36 @@ class UserHeader
                                 })
                             )
                     )
-                    ->push(region('UserStats', $user, $loggedUser))
                     ->pushWhen(
-                        $hasBeen->count(),
+                        $wantsToGo->count(),
                         component('Flex')
-                            ->is('wrap')
-                            ->is('large')
-                            ->with('gap', 0.5)
+                            ->with('align', 'center')
+                            ->with('gap', 1)
                             ->with(
                                 'items',
-                                $hasBeen->map(function ($destination) {
+                                collect()
+                                    ->push(
+                                        component('Icon')
+                                            ->is('white')
+                                            ->with('size', 'xl')
+                                            ->with('icon', 'icon-star')
+                                    )
+                                    ->push(
+                                        component('Title')
+                                            ->is('white')
+                                            ->is('small')
+                                            ->with('title', 'Tahab minna')
+                                    )
+                            )
+                    )
+                    ->pushWhen(
+                        $wantsToGo->count(),
+                        component('Flex')
+                            ->is('large')
+                            ->is('wrap')
+                            ->with(
+                                'items',
+                                $wantsToGo->map(function ($destination) {
                                     return component('Tag')
                                         ->is('white')
                                         ->is('large')

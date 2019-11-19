@@ -165,19 +165,17 @@ Tõime allpool välja valiku enamjaolt 4-5 päevasteks linnapuhkusteks. Piletihi
                     )
 
                     ->push(
-                        component('Flex')
-                            ->is('center')
-                            ->with('items', [
-                                component('UserImage')
-                                    ->with('route', route('user.show', [$user]))
-                                    ->with(
-                                        'image',
-                                        $user->imagePreset('small_square')
-                                    )
-                                    ->with('rank', $user->vars()->rank)
-                                    ->with('size', 152)
-                                    ->with('border', 7)
-                            ])
+                        component('Flex')->with('items', [
+                            component('UserImage')
+                                ->with('route', route('user.show', [$user]))
+                                ->with(
+                                    'image',
+                                    $user->imagePreset('small_square')
+                                )
+                                ->with('rank', $user->vars()->rank)
+                                ->with('size', 152)
+                                ->with('border', 7)
+                        ])
                     )
                     ->br()
                     ->push(
