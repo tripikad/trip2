@@ -114,6 +114,7 @@ class UserHeader
                                 $wantsToGo->map(function ($destination) {
                                     return component('Tag')
                                         ->is('white')
+                                        ->is('large')
                                         ->with(
                                             'title',
                                             $destination->flaggable->name
@@ -130,13 +131,16 @@ class UserHeader
                     ->push(region('UserStats', $user, $loggedUser))
                     ->pushWhen(
                         $hasBeen->count(),
-                        component('Meta')
+                        component('Flex')
+                            ->is('wrap')
                             ->is('large')
+                            ->with('gap', 0.5)
                             ->with(
                                 'items',
                                 $hasBeen->map(function ($destination) {
                                     return component('Tag')
                                         ->is('white')
+                                        ->is('large')
                                         ->with(
                                             'title',
                                             $destination->flaggable->name
