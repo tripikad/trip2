@@ -12,7 +12,10 @@ var destinations = require(__dirname + '/data/trip_destinations.json')
 
 var manualDestinations = [
     { id: 311, name: 'Ameerika Ühendriigid', geonameId: 6252001 },
+
     { id: 322, name: 'Iirimaa', geonameId: 2963597 },
+    { id: 715, name: 'Sao Tome', geonameId: 2410758 },
+    { id: 1111, name: 'Kiribati', geonameId: 4030945 },
 
     { id: 383, name: 'Fääri saared', geonameId: 2622320 },
     { id: 424, name: 'Tasmaania', geonameId: 2147291 },
@@ -56,7 +59,12 @@ var manualDestinations = [
 
 var citiesData = []
 
-var continents = destinations.filter(continent => continent.parent_id == null)
+var continents = destinations
+    .filter(continent => continent.parent_id == null)
+    .map(c => {
+        c.type = 'continent'
+        return c
+    })
 
 var countries = destinations
     .filter(country =>
@@ -84,7 +92,7 @@ var places = destinations
     })
 
 async.each(
-    [...countries, ...cities, ...places],
+    [...continents, ...countries, ...cities, ...places],
     (city, cb) => {
         var cityData = {}
         var id = manualDestinations.find(result => result.id === city.id)
@@ -92,23 +100,23 @@ async.each(
         // Query each destination from Geonames API by its name or Geoname ID
 
         var url = !!id
-            ? 'https://secure.geonames.org/getJSON?encoding=JSON&username=kristjanjansen&geonameId=' +
+            ? 'http://api.geonames.org/getJSON?username=kristjanjansen&geonameId=' +
               id.geonameId
-            : 'https://secure.geonames.org/searchJSON?encoding=JSON&formatted=true&q=' +
+            : 'http://api.geonames.org/searchJSON?formatted=true&q=' +
               encodeURIComponent(city.name) +
               '&maxRows=1&username=kristjanjansen&style=full&lang=et'
-
-        //console.log(url)
 
         request({ url, json: true }, (err, res, body) => {
             if (body) {
                 var data =
                     body.geonames && body.geonames[0] ? body.geonames[0] : body
+
                 citiesData.push({
                     type: city.type,
                     id: city.id,
                     name: city.name.replace('Ĩ', 'Š'),
-                    ...data
+                    ...data,
+                    alternateNames: []
                 })
             }
             setTimeout(cb, 1000)

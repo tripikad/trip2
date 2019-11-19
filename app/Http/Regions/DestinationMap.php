@@ -32,7 +32,6 @@ class DestinationMap
 
         return component('Dotmap')
             ->with('height', '300px')
-            ->with('countrydots', config('countrydots'))
             ->with('areas', $areas)
             ->with('largedots', $largedots)
             ->with('largedotcolor', 'red');

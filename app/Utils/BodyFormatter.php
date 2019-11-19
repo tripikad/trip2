@@ -72,11 +72,9 @@ class BodyFormatter
                             ->first();
                     });
 
-                //return $codes;
                 return component('Dotmap')
                     ->is('center')
                     ->with('height', '300px')
-                    ->with('countrydots', config('countrydots'))
                     ->with('lines', $airports)
                     ->with('mediumdots', $airports->withoutLast())
                     ->with('largedots', [$airports->last()])

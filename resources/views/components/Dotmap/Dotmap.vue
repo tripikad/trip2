@@ -1,7 +1,7 @@
 <template>
     <div class="Dotmap" :class="isclasses">
         <svg :width="width" :height="height">
-            <g v-if="countrydots.length">
+            <g>
                 <circle
                     v-for="(c, i) in countrydots"
                     :key="i"
@@ -74,7 +74,6 @@ export default {
     props: {
         isclasses: { default: '' },
         width: { default: 750 },
-        countrydots: { default: () => [] },
         areas: { default: () => [] },
         smalldots: { default: () => [] },
         mediumdots: { default: () => [] },
@@ -87,6 +86,9 @@ export default {
         largedotcolor: { default: 'orange' },
         linecolor: { default: 'white' }
     },
+    data: () => ({
+        countrydots: []
+    }),
     computed: {
         height() {
             return this.width / 2.5
@@ -135,6 +137,11 @@ export default {
         yScale(lat) {
             return this.projection([0, lat])[1]
         }
+    },
+    mounted() {
+        this.$http.get('/api/countrydots').then(res => {
+            this.countrydots = res.data
+        })
     }
 }
 </script>

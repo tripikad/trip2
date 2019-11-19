@@ -63,17 +63,31 @@ Tõime allpool välja valiku enamjaolt 4-5 päevasteks linnapuhkusteks. Piletihi
 
     public function destinationIndex()
     {
-        $ds =
+        $ds1 =
             //->take(100)
             //->skip(200)
             Destination::whereName('Hispaania')->first();
         $ds2 = Destination::whereName('Sevilla')->first();
-        //dd($ds);
+
+        $ds = Destination::get();
+
+        // dd(
+        //     $ds
+        //         ->filter(function ($d) {
+        //             return !$d->vars()->facts();
+        //         })
+        //         ->count()
+        // );
+        //       dd(collect(config('facts'))->count());
+
         return layout('One')
             //->with('color', 'blue')
             ->with(
                 'content',
-                collect([$ds, $ds2])
+                $ds
+                    ->filter(function ($d) {
+                        return !$d->vars()->facts();
+                    })
                     ->map(function ($d) {
                         $name =
                             $d->vars()->isContinent() && $d->vars()->facts()

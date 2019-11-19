@@ -94,7 +94,6 @@ class UserHeader
                         component('Dotmap')
                             ->with('height', '300px')
                             ->is('center')
-                            ->with('countrydots', config('countrydots'))
                             ->with('areas', $countryDots)
                             ->with('smalldots', $cityDots)
                     )

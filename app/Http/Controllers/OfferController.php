@@ -30,7 +30,6 @@ class OfferController extends Controller
                 collect()->push(
                     component('OfferList')
                         ->with('height', '200vh')
-                        ->with('countrydots', config('countrydots'))
                         ->with('route', route('offers.index.json'))
                 )
             )
@@ -100,7 +99,6 @@ class OfferController extends Controller
                         component('Dotmap')
                             ->is('center')
                             ->with('height', '300px')
-                            ->with('countrydots', config('countrydots'))
                             ->with(
                                 'destination_facts',
                                 config('destination_facts')
