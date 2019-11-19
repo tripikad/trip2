@@ -82,8 +82,8 @@ export default {
         backgroundcolor: { default: 'rgba(0,0,0,0.25)' },
         dotcolor: { default: 'white' },
         smalldotcolor: { default: 'white' },
-        mediumdotcolor: { default: 'red' },
-        largedotcolor: { default: 'red' },
+        mediumdotcolor: { default: 'orange' },
+        largedotcolor: { default: 'orange' },
         linecolor: { default: 'white' }
     },
     data: () => ({

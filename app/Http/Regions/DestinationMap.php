@@ -59,6 +59,7 @@ class DestinationMap
             ->with('height', '300px')
             ->with('areas', $areas)
             ->with('smalldots', $smalldots)
-            ->with('mediumdots', $largedots);
+            ->with('mediumdots', $largedots)
+            ->with('mediumdotcolor', 'red');
     }
 }
