@@ -145,15 +145,19 @@ class UserHeader
                                         component('Icon')
                                             ->is('white')
                                             ->with('size', 'xl')
-                                            ->with('icon', 'icon-pin')
+                                            ->with('icon', 'icon-star')
                                     )
                                     ->push(
                                         component('Title')
                                             ->is('white')
                                             ->with(
                                                 'title',
-                                                $hasBeenContinents->count() .
-                                                    ' külastatud maailmajagu'
+                                                trans(
+                                                    'user.show.stat.continents',
+                                                    [
+                                                        'count' => $hasBeenContinents->count()
+                                                    ]
+                                                )
                                             )
                                     )
                             )
@@ -186,7 +190,7 @@ class UserHeader
                             )
                     )
                     ->pushWhen(
-                        $wantsToGo->count(),
+                        $hasBeenCountries->count(),
                         component('Flex')
                             ->with('align', 'center')
                             ->with('gap', 1)
@@ -205,10 +209,10 @@ class UserHeader
                                             ->with(
                                                 'title',
                                                 trans(
-                                                    'user.show.stat.destination',
+                                                    'user.show.stat.countries',
                                                     [
-                                                        'country_total_count' => $countryCount,
-                                                        'country_count' => $hasBeenCountries->count(),
+                                                        'total_count' => $countryCount,
+                                                        'count' => $hasBeenCountries->count(),
                                                         'percentage' => round(
                                                             ($hasBeenCountries->count() /
                                                                 $countryCount) *
@@ -265,8 +269,9 @@ class UserHeader
                                             ->is('white')
                                             ->with(
                                                 'title',
-                                                $hasBeenCities->count() .
-                                                    ' külastatud linna ja piirkonda'
+                                                trans('user.show.stat.cities', [
+                                                    'count' => $hasBeenCities->count()
+                                                ])
                                             )
                                     )
                             )
@@ -313,10 +318,7 @@ class UserHeader
                                     ->push(
                                         component('Title')
                                             ->is('white')
-                                            ->with(
-                                                'title',
-                                                'Tahab järgmisena minna'
-                                            )
+                                            ->with('title', 'Tahab minna')
                                     )
                             )
                     )
