@@ -1,12 +1,12 @@
 <template>
     <div class="Dotmap" :class="isclasses">
         <svg :width="width" :height="height">
-            <g v-if="countrydots.length">
+            <g>
                 <circle
                     v-for="(c, i) in countrydots"
                     :key="i"
-                    :cx="xScale(c.lon)"
-                    :cy="yScale(c.lat)"
+                    :cx="xScale(c[0])"
+                    :cy="yScale(c[1])"
                     :r="radius"
                     :fill="$styleVars[backgroundcolor] || backgroundcolor"
                 />
@@ -15,8 +15,8 @@
                 <circle
                     v-for="(c, i) in activeCountryDots"
                     :key="i"
-                    :cx="xScale(c.lon)"
-                    :cy="yScale(c.lat)"
+                    :cx="xScale(c[0])"
+                    :cy="yScale(c[1])"
                     :r="radius"
                     :fill="$styleVars[dotcolor] || dotcolor"
                 />
@@ -28,7 +28,7 @@
                     :cx="xScale(c.lon)"
                     :cy="yScale(c.lat)"
                     :r="radius"
-                    :fill="$styleVars[dotcolor] || dotcolor"
+                    :fill="$styleVars[smalldotcolor] || smalldotcolor"
                 />
             </g>
             <path
@@ -74,7 +74,6 @@ export default {
     props: {
         isclasses: { default: '' },
         width: { default: 750 },
-        countrydots: { default: () => [] },
         areas: { default: () => [] },
         smalldots: { default: () => [] },
         mediumdots: { default: () => [] },
@@ -82,11 +81,14 @@ export default {
         lines: { default: () => [] },
         backgroundcolor: { default: 'rgba(0,0,0,0.25)' },
         dotcolor: { default: 'white' },
-        smalldotcolor: { default: 'rgba(255,255,255,0.25)' },
+        smalldotcolor: { default: 'white' },
         mediumdotcolor: { default: 'orange' },
         largedotcolor: { default: 'orange' },
         linecolor: { default: 'white' }
     },
+    data: () => ({
+        countrydots: []
+    }),
     computed: {
         height() {
             return this.width / 2.5
@@ -106,7 +108,7 @@ export default {
         },
         activeCountryDots() {
             return this.countrydots.filter(
-                d => intersection(d.destination_ids, this.areas).length
+                d => intersection(d[2], this.areas).length
             )
         }
     },
@@ -137,7 +139,9 @@ export default {
         }
     },
     mounted() {
-        console.log(this.mediumdots)
+        this.$http.get('/api/countrydots').then(res => {
+            this.countrydots = res.data
+        })
     }
 }
 </script>

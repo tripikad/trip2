@@ -3,10 +3,12 @@ const intersect = require('@turf/intersect').default
 const turf = { point, polygon, intersect }
 
 const countries = require(__dirname + '/data/countries.json')
-const destinations = require(__dirname + '/data/trip_facts.json')
+const facts = require(__dirname + '/data/trip_facts.json')
 
 const iso3toId = iso3 => {
-    const destination = destinations.find(d => d.country_code3 === iso3)
+    const destination = facts
+        .filter(f => f.type == 'country')
+        .find(f => f.country_code3 === iso3)
     return destination ? destination.id : 0
 }
 
@@ -22,7 +24,7 @@ let dots = []
 for (let lat = 80; lat > -80; lat -= step) {
     // Loop over world X-axis
 
-    for (let lon = -180; lon < 180; lon += step) {
+    for (let lon = -180 + step * 5; lon < 180 + step * 5; lon += step) {
         // Set up a square polygon with dot coordinates in the center
 
         const box = turf.polygon([
@@ -47,7 +49,6 @@ for (let lat = 80; lat > -80; lat -= step) {
         // the dot.properties.countries array
 
         countries.features
-            //.slice(0, 3)
             .filter(country => country.properties.name !== 'Antarctica')
             .forEach(country => {
                 if (country.geometry.type === 'Polygon') {
@@ -80,14 +81,25 @@ for (let lat = 80; lat > -80; lat -= step) {
 
 // Generate the PHP array output
 
-console.log('<?php\n\nreturn [\n')
+console.log('<?php return [')
 
-dots.forEach(dot => {
-    console.log(`    [
-        'destination_ids' => [${dot.properties.countries}],
-        'lat' => ${dot.geometry.coordinates[1]},
-        'lon' => ${dot.geometry.coordinates[0]}
-    ],`)
-})
+// dots.forEach(dot => {
+//     console.log(`    [
+//         'destination_ids' => [${dot.properties.countries}],
+//         'lat' => ${dot.geometry.coordinates[1]},
+//         'lon' => ${dot.geometry.coordinates[0]}
+//     ],`)
+// })
 
-console.log('\n];\n')
+console.log(
+    dots
+        .map(
+            dot =>
+                `[${dot.geometry.coordinates[0]},${
+                    dot.geometry.coordinates[1]
+                },[${dot.properties.countries}]],`
+        )
+        .join('')
+)
+
+console.log('];')

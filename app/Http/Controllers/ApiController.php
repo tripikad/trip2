@@ -9,7 +9,13 @@ class ApiController extends Controller
 {
     public function destinations()
     {
-        return Destination::select('id', 'parent_id', 'name')->get();
+        $data = Destination::select('id', 'parent_id', 'name')->get();
+        return response()->json(
+            $data,
+            200,
+            [],
+            JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT
+        );
     }
 
     // Exposes our destinations metadata via API
@@ -46,9 +52,9 @@ class ApiController extends Controller
             ]);
     }
 
-    public function destinationDots()
+    public function countrydots()
     {
-        return response()->json(config('destination_dots'));
+        return response()->json(config('countrydots'));
     }
 
     public function airports()

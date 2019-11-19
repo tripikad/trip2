@@ -63,13 +63,12 @@ Tõime allpool välja valiku enamjaolt 4-5 päevasteks linnapuhkusteks. Piletihi
 
     public function destinationIndex()
     {
-        $ds = Destination::skip(100)
-            ->take(100)
-            ->skip(200)
+        $ds = Destination::skip(50)
+            ->take(50)
             ->get();
-        //dd($ds);
-        return layout('One')
-            //->with('color', 'blue')
+
+        return layout('Offer')
+            ->with('color', 'blue')
             ->with(
                 'content',
                 $ds
@@ -81,6 +80,16 @@ Tõime allpool välja valiku enamjaolt 4-5 päevasteks linnapuhkusteks. Piletihi
                                     $d->vars()->facts(),
                                     JSON_PRETTY_PRINT
                                 );
+
+                        $small = $d->vars()->facts()
+                            ? [
+                                [
+                                    'lat' => snap($d->vars()->facts()->lat),
+                                    'lon' => snap($d->vars()->facts()->lon)
+                                ]
+                            ]
+                            : false;
+
                         return collect()
                             ->push(
                                 component('Title')
@@ -88,26 +97,24 @@ Tõime allpool välja valiku enamjaolt 4-5 päevasteks linnapuhkusteks. Piletihi
                                     ->is('small')
                                     ->with('title', $d->name)
                             )
+                            //                             ->push(
+                            //                                 component('Code')
+                            //                                     ->is('gray')
+                            //                                     ->with(
+                            //                                         'code',
+                            //                                         "
+                            // id:   {$d->id}
+                            // name: {$d->name}
+                            // parent: {$d->getAncestors()->map->name}
+                            // { $name }
+                            //                                               "
+                            //                                     )
+                            //                             );
                             ->push(
-                                component('Code')
-                                    ->is('gray')
-                                    ->with(
-                                        'code',
-                                        "
-name: {$d->name}
-parent: {$d->getAncestors()->map->name}
-{$name}
-                                              "
-                                    )
+                                component('Dotmap')
+                                    ->with('areas', [$d->id])
+                                    ->with('smalldots', $small)
                             );
-                        // ->push(
-                        //     component('Dotmap')
-                        //         ->with(
-                        //             'destination_dots',
-                        //             config('destination_dots')
-                        //         )
-                        //         ->with('areas', [$d->id])
-                        // );
                     })
                     ->flatten()
             )

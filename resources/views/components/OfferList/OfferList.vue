@@ -1,7 +1,6 @@
 <template>
     <div class="OfferList" :class="isclasses">
         <dotmap
-            :destination_dots="destination_dots"
             :largedots="filteredOfferList.map(o => ({lon: parseFloat(o.longitude),lat: parseFloat(o.latitude)}))"
         />
         <form-slider-multiple
@@ -41,8 +40,7 @@ import { parseSheets, unique } from '../../utils/utils'
 export default {
     props: {
         isclasses: { default: '' },
-        route: { default: '' },
-        destination_dots: { default: () => [] }
+        route: { default: '' }
     },
     data: () => ({
         offers: [],

@@ -401,8 +401,13 @@ Route::get('experiments', 'ExperimentsController@index')->name(
     'experiments.index'
 );
 
+Route::get(
+    'experiments/destinations',
+    'ExperimentsController@destinationIndex'
+)->name('experiments.destination.index');
+
 Route::get('experiments/user/{id?}', 'ExperimentsController@userIndex')->name(
-  'experiments.user.index'
+    'experiments.user.index'
 );
 
 Route::post('experiments/store', 'ExperimentsController@store')->name(

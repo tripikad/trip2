@@ -24,8 +24,8 @@
                 <div class="Editor__source" ref="source"></div>
 
                 <div class="Editor__target">
-                    <!--render class="Body" :body="'<div>' + preview + '</div>'" /-->
-                    <div class="Body" v-html="preview"></div>
+                    <render class="Body" :body="'<div>' + preview + '</div>'" />
+                    <!--div class="Body" v-html="preview"></div-->
                 </div>
             </div>
         </div>

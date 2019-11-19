@@ -11,6 +11,12 @@ var destinations = require(__dirname + '/data/trip_destinations.json')
 // by the name only
 
 var manualDestinations = [
+    { id: 311, name: 'Ameerika Ühendriigid', geonameId: 6252001 },
+
+    { id: 322, name: 'Iirimaa', geonameId: 2963597 },
+    { id: 715, name: 'Sao Tome', geonameId: 2410758 },
+    { id: 1111, name: 'Kiribati', geonameId: 4030945 },
+
     { id: 383, name: 'Fääri saared', geonameId: 2622320 },
     { id: 424, name: 'Tasmaania', geonameId: 2147291 },
     { id: 432, name: 'Olümpos', geonameId: 734890 },
@@ -53,7 +59,12 @@ var manualDestinations = [
 
 var citiesData = []
 
-var continents = destinations.filter(continent => continent.parent_id == null)
+var continents = destinations
+    .filter(continent => continent.parent_id == null)
+    .map(c => {
+        c.type = 'continent'
+        return c
+    })
 
 var countries = destinations
     .filter(country =>
@@ -63,6 +74,8 @@ var countries = destinations
         c.type = 'country'
         return c
     })
+
+var a = destinations.filter(country => country.id == 338)
 
 var cities = destinations
     .filter(city => countries.find(country => country.id === city.parent_id))
@@ -79,7 +92,7 @@ var places = destinations
     })
 
 async.each(
-    [...countries, ...cities, ...places],
+    [...continents, ...countries, ...cities, ...places],
     (city, cb) => {
         var cityData = {}
         var id = manualDestinations.find(result => result.id === city.id)
@@ -90,18 +103,20 @@ async.each(
             ? 'http://api.geonames.org/getJSON?username=kristjanjansen&geonameId=' +
               id.geonameId
             : 'http://api.geonames.org/searchJSON?formatted=true&q=' +
-              city.name +
+              encodeURIComponent(city.name) +
               '&maxRows=1&username=kristjanjansen&style=full&lang=et'
 
         request({ url, json: true }, (err, res, body) => {
             if (body) {
                 var data =
                     body.geonames && body.geonames[0] ? body.geonames[0] : body
+
                 citiesData.push({
                     type: city.type,
                     id: city.id,
-                    name: city.name,
-                    ...data
+                    name: city.name.replace('Ĩ', 'Š'),
+                    ...data,
+                    alternateNames: []
                 })
             }
             setTimeout(cb, 1000)
