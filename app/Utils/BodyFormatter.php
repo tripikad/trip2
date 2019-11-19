@@ -72,15 +72,17 @@ class BodyFormatter
                             ->first();
                     });
 
+                //return $codes;
                 return component('Dotmap')
                     ->is('center')
                     ->with('height', '300px')
+                    ->with('dots', config('dots'))
                     ->with('lines', $airports)
                     ->with('mediumdots', $airports->withoutLast())
                     ->with('largedots', [$airports->last()])
                     ->with('linecolor', 'blue')
                     ->with('mediumdotcolor', 'white')
-                    ->with('largedotcolor', 'white');
+                    ->with('largedotcolor', 'cyan-light');
             },
             $this->body
         );
