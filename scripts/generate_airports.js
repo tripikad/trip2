@@ -93,18 +93,15 @@ airports = airports
         }
     })
 
-//console.log(JSON.stringify(airports, null, 2))
+console.log('<?php return [')
 
-console.log('<?php\n\nreturn [\n')
+console.log(
+    airports
+        .map(
+            airport =>
+                `['iata' => '${airport.iata}','city' => '${airport.city}','lat' => ${airport.lat},'lon' => ${airport.lon}],`
+        )
+        .join('')
+)
 
-airports.forEach(airport => {
-    console.log(`    [
-        'iata' => '${airport.iata}',
-        'city' => '${airport.city}',
-        'country' => '${airport.country}',
-        'lat' => ${airport.lat},
-        'lon' => ${airport.lon}
-    ],`)
-})
-
-console.log('\n];\n')
+console.log('];\n')
