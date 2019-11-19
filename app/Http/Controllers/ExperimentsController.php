@@ -63,16 +63,17 @@ Tõime allpool välja valiku enamjaolt 4-5 päevasteks linnapuhkusteks. Piletihi
 
     public function destinationIndex()
     {
-        $ds = Destination::skip(100)
-            ->take(100)
-            ->skip(200)
-            ->get();
+        $ds =
+            //->take(100)
+            //->skip(200)
+            Destination::whereName('Hispaania')->first();
+        $ds2 = Destination::whereName('Sevilla')->first();
         //dd($ds);
         return layout('One')
             //->with('color', 'blue')
             ->with(
                 'content',
-                $ds
+                collect([$ds, $ds2])
                     ->map(function ($d) {
                         $name =
                             $d->vars()->isContinent() && $d->vars()->facts()
@@ -94,9 +95,10 @@ Tõime allpool välja valiku enamjaolt 4-5 päevasteks linnapuhkusteks. Piletihi
                                     ->with(
                                         'code',
                                         "
+id:   {$d->id}
 name: {$d->name}
 parent: {$d->getAncestors()->map->name}
-{$name}
+{ $name }
                                               "
                                     )
                             );

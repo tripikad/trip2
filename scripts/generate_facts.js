@@ -32,6 +32,7 @@ const countryData = destinations
         return {
             id: data.id,
             english_name: data.name,
+            type: data.type,
             timezone:
                 data.timezone && data.timezone.gmtOffset
                     ? data.timezone.gmtOffset
@@ -67,6 +68,7 @@ const cityData = destinations
         const dialcode = dialcodes.filter(c => c.countryCode == data.code)[0]
         return {
             id: data.id,
+            type: data.type,
             english_name: data.name,
             timezone:
                 data.timezone && data.timezone.gmtOffset
@@ -100,6 +102,7 @@ const placeData = destinations
         const dialcode = dialcodes.filter(c => c.countryCode == data.code)[0]
         return {
             id: data.id,
+            type: data.type,
             english_name: data.name,
             timezone:
                 data.timezone && data.timezone.gmtOffset
@@ -137,6 +140,7 @@ if (process.argv[2] == '--json') {
 
     _.sortBy([...countryData, ...cityData, ...placeData], 'id').forEach(d => {
         console.log(`    ${d.id} => [
+        'type' => '${d.type}',
         'english_name' => '${d.english_name.replace(`'`, '')}',
         'timezone' => ${d.timezone},
         'country_code2' => '${d.country_code2}',

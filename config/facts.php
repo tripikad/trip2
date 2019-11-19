@@ -3,6 +3,7 @@
 return [
 
     46 => [
+        'type' => 'city',
         'english_name' => 'Sevilla',
         'timezone' => 1,
         'country_code2' => 'ES',
@@ -17,6 +18,7 @@ return [
         'calling_code' => '+93'
     ],
     164 => [
+        'type' => 'country',
         'english_name' => 'Mali',
         'timezone' => false,
         'country_code2' => 'ML',
@@ -31,6 +33,7 @@ return [
         'calling_code' => '+93'
     ],
     279 => [
+        'type' => 'city',
         'english_name' => 'Sydney',
         'timezone' => 11,
         'country_code2' => 'AU',
@@ -45,6 +48,7 @@ return [
         'calling_code' => '+93'
     ],
     283 => [
+        'type' => 'city',
         'english_name' => 'Ibiza',
         'timezone' => 1,
         'country_code2' => 'ES',
@@ -59,6 +63,7 @@ return [
         'calling_code' => '+93'
     ],
     292 => [
+        'type' => 'city',
         'english_name' => 'Amsterdam',
         'timezone' => 1,
         'country_code2' => 'NL',
@@ -73,6 +78,7 @@ return [
         'calling_code' => '+93'
     ],
     305 => [
+        'type' => 'country',
         'english_name' => 'Portugal',
         'timezone' => false,
         'country_code2' => 'PT',
@@ -87,6 +93,7 @@ return [
         'calling_code' => '+93'
     ],
     306 => [
+        'type' => 'country',
         'english_name' => 'Kreeka',
         'timezone' => 2,
         'country_code2' => 'GR',
@@ -101,6 +108,7 @@ return [
         'calling_code' => '+93'
     ],
     307 => [
+        'type' => 'country',
         'english_name' => 'Madagaskar',
         'timezone' => 3,
         'country_code2' => 'MG',
@@ -115,6 +123,7 @@ return [
         'calling_code' => '+93'
     ],
     308 => [
+        'type' => 'country',
         'english_name' => 'Tunis',
         'timezone' => 1,
         'country_code2' => 'TN',
@@ -129,6 +138,7 @@ return [
         'calling_code' => '+93'
     ],
     309 => [
+        'type' => 'country',
         'english_name' => 'Mauritius',
         'timezone' => 4,
         'country_code2' => 'MU',
@@ -143,6 +153,7 @@ return [
         'calling_code' => '+93'
     ],
     310 => [
+        'type' => 'country',
         'english_name' => 'India',
         'timezone' => 5.5,
         'country_code2' => 'IN',
@@ -157,6 +168,7 @@ return [
         'calling_code' => '+93'
     ],
     311 => [
+        'type' => 'country',
         'english_name' => 'United States',
         'timezone' => false,
         'country_code2' => 'US',
@@ -171,6 +183,7 @@ return [
         'calling_code' => '+93'
     ],
     312 => [
+        'type' => 'country',
         'english_name' => 'Türgi',
         'timezone' => 3,
         'country_code2' => 'TR',
@@ -185,6 +198,7 @@ return [
         'calling_code' => '+93'
     ],
     313 => [
+        'type' => 'country',
         'english_name' => 'Keenia',
         'timezone' => 3,
         'country_code2' => 'KE',
@@ -199,6 +213,7 @@ return [
         'calling_code' => '+93'
     ],
     314 => [
+        'type' => 'country',
         'english_name' => 'Hiina',
         'timezone' => false,
         'country_code2' => 'CN',
@@ -213,6 +228,7 @@ return [
         'calling_code' => '+93'
     ],
     315 => [
+        'type' => 'country',
         'english_name' => 'Santo Domingo',
         'timezone' => -4,
         'country_code2' => 'DO',
@@ -227,6 +243,7 @@ return [
         'calling_code' => '+93'
     ],
     316 => [
+        'type' => 'country',
         'english_name' => 'Cooki saared',
         'timezone' => -10,
         'country_code2' => 'CK',
@@ -241,6 +258,7 @@ return [
         'calling_code' => '+93'
     ],
     317 => [
+        'type' => 'country',
         'english_name' => 'Belgia',
         'timezone' => 1,
         'country_code2' => 'BE',
@@ -255,6 +273,7 @@ return [
         'calling_code' => '+93'
     ],
     318 => [
+        'type' => 'country',
         'english_name' => 'Hispaania',
         'timezone' => false,
         'country_code2' => 'ES',
@@ -269,6 +288,7 @@ return [
         'calling_code' => '+93'
     ],
     319 => [
+        'type' => 'country',
         'english_name' => 'Prantsusmaa',
         'timezone' => 1,
         'country_code2' => 'FR',
@@ -283,6 +303,7 @@ return [
         'calling_code' => '+93'
     ],
     320 => [
+        'type' => 'country',
         'english_name' => 'Soome',
         'timezone' => 2,
         'country_code2' => 'FI',
@@ -297,6 +318,7 @@ return [
         'calling_code' => '+93'
     ],
     321 => [
+        'type' => 'country',
         'english_name' => 'Madalmaad',
         'timezone' => 1,
         'country_code2' => 'NL',
@@ -311,6 +333,7 @@ return [
         'calling_code' => '+93'
     ],
     322 => [
+        'type' => 'country',
         'english_name' => 'Ireland',
         'timezone' => false,
         'country_code2' => 'IE',
@@ -325,6 +348,7 @@ return [
         'calling_code' => '+93'
     ],
     323 => [
+        'type' => 'country',
         'english_name' => 'Maroko',
         'timezone' => 1,
         'country_code2' => 'MA',
@@ -339,6 +363,7 @@ return [
         'calling_code' => '+93'
     ],
     324 => [
+        'type' => 'country',
         'english_name' => 'Singapore',
         'timezone' => 8,
         'country_code2' => 'SG',
@@ -353,6 +378,7 @@ return [
         'calling_code' => '+93'
     ],
     325 => [
+        'type' => 'country',
         'english_name' => 'Malaisia',
         'timezone' => false,
         'country_code2' => 'MY',
@@ -367,6 +393,7 @@ return [
         'calling_code' => '+93'
     ],
     326 => [
+        'type' => 'country',
         'english_name' => 'Saksamaa',
         'timezone' => false,
         'country_code2' => 'DE',
@@ -381,6 +408,7 @@ return [
         'calling_code' => '+93'
     ],
     327 => [
+        'type' => 'country',
         'english_name' => 'Rootsi',
         'timezone' => 1,
         'country_code2' => 'SE',
@@ -395,6 +423,7 @@ return [
         'calling_code' => '+93'
     ],
     328 => [
+        'type' => 'country',
         'english_name' => 'Pakistan',
         'timezone' => 5,
         'country_code2' => 'PK',
@@ -409,6 +438,7 @@ return [
         'calling_code' => '+93'
     ],
     329 => [
+        'type' => 'country',
         'english_name' => 'Lõuna-Aafrika',
         'timezone' => 2,
         'country_code2' => 'ZA',
@@ -423,6 +453,7 @@ return [
         'calling_code' => '+93'
     ],
     330 => [
+        'type' => 'country',
         'english_name' => 'Iraan',
         'timezone' => 3.5,
         'country_code2' => 'IR',
@@ -437,6 +468,7 @@ return [
         'calling_code' => '+93'
     ],
     331 => [
+        'type' => 'country',
         'english_name' => 'Iisrael',
         'timezone' => 2,
         'country_code2' => 'IL',
@@ -451,6 +483,7 @@ return [
         'calling_code' => '+93'
     ],
     332 => [
+        'type' => 'country',
         'english_name' => 'Norra',
         'timezone' => 1,
         'country_code2' => 'NO',
@@ -465,6 +498,7 @@ return [
         'calling_code' => '+93'
     ],
     333 => [
+        'type' => 'country',
         'english_name' => 'Jaapan',
         'timezone' => 9,
         'country_code2' => 'JP',
@@ -479,6 +513,7 @@ return [
         'calling_code' => '+93'
     ],
     334 => [
+        'type' => 'country',
         'english_name' => 'Nepaal',
         'timezone' => 5.75,
         'country_code2' => 'NP',
@@ -493,6 +528,7 @@ return [
         'calling_code' => '+93'
     ],
     335 => [
+        'type' => 'country',
         'english_name' => 'Tai',
         'timezone' => 7,
         'country_code2' => 'TH',
@@ -507,6 +543,7 @@ return [
         'calling_code' => '+93'
     ],
     336 => [
+        'type' => 'country',
         'english_name' => 'Vietnam',
         'timezone' => 7,
         'country_code2' => 'VN',
@@ -521,6 +558,7 @@ return [
         'calling_code' => '+93'
     ],
     337 => [
+        'type' => 'country',
         'english_name' => 'Tanzania',
         'timezone' => 3,
         'country_code2' => 'TZ',
@@ -535,6 +573,7 @@ return [
         'calling_code' => '+93'
     ],
     338 => [
+        'type' => 'country',
         'english_name' => 'Ĩveits',
         'timezone' => 1,
         'country_code2' => 'CH',
@@ -549,6 +588,7 @@ return [
         'calling_code' => '+93'
     ],
     339 => [
+        'type' => 'country',
         'english_name' => 'Uus Meremaa',
         'timezone' => false,
         'country_code2' => 'NZ',
@@ -563,6 +603,7 @@ return [
         'calling_code' => '+93'
     ],
     340 => [
+        'type' => 'country',
         'english_name' => 'Taani',
         'timezone' => 1,
         'country_code2' => 'DK',
@@ -577,6 +618,7 @@ return [
         'calling_code' => '+93'
     ],
     341 => [
+        'type' => 'country',
         'english_name' => 'Itaalia',
         'timezone' => 1,
         'country_code2' => 'IT',
@@ -591,6 +633,7 @@ return [
         'calling_code' => '+93'
     ],
     342 => [
+        'type' => 'country',
         'english_name' => 'Indoneesia',
         'timezone' => false,
         'country_code2' => 'ID',
@@ -605,6 +648,7 @@ return [
         'calling_code' => '+93'
     ],
     343 => [
+        'type' => 'country',
         'english_name' => 'Jordan',
         'timezone' => 2,
         'country_code2' => 'JO',
@@ -619,6 +663,7 @@ return [
         'calling_code' => '+93'
     ],
     344 => [
+        'type' => 'country',
         'english_name' => 'Seiiellid',
         'timezone' => 4,
         'country_code2' => 'SC',
@@ -633,6 +678,7 @@ return [
         'calling_code' => '+93'
     ],
     345 => [
+        'type' => 'country',
         'english_name' => 'Laose DRV',
         'timezone' => 7,
         'country_code2' => 'LA',
@@ -647,6 +693,7 @@ return [
         'calling_code' => '+93'
     ],
     346 => [
+        'type' => 'country',
         'english_name' => 'KambodĪa',
         'timezone' => 7,
         'country_code2' => 'KH',
@@ -661,6 +708,7 @@ return [
         'calling_code' => '+93'
     ],
     348 => [
+        'type' => 'country',
         'english_name' => 'Argentiina',
         'timezone' => false,
         'country_code2' => 'AR',
@@ -675,6 +723,7 @@ return [
         'calling_code' => '+93'
     ],
     349 => [
+        'type' => 'country',
         'english_name' => 'Peruu',
         'timezone' => -5,
         'country_code2' => 'PE',
@@ -689,6 +738,7 @@ return [
         'calling_code' => '+93'
     ],
     350 => [
+        'type' => 'country',
         'english_name' => 'Monaco',
         'timezone' => 1,
         'country_code2' => 'MC',
@@ -703,6 +753,7 @@ return [
         'calling_code' => '+93'
     ],
     351 => [
+        'type' => 'country',
         'english_name' => 'Poola',
         'timezone' => 1,
         'country_code2' => 'PL',
@@ -717,6 +768,7 @@ return [
         'calling_code' => '+93'
     ],
     352 => [
+        'type' => 'country',
         'english_name' => 'Austraalia',
         'timezone' => false,
         'country_code2' => 'AU',
@@ -731,6 +783,7 @@ return [
         'calling_code' => '+93'
     ],
     353 => [
+        'type' => 'country',
         'english_name' => 'Paraguay',
         'timezone' => -3,
         'country_code2' => 'PY',
@@ -745,6 +798,7 @@ return [
         'calling_code' => '+93'
     ],
     354 => [
+        'type' => 'country',
         'english_name' => 'Läti',
         'timezone' => 2,
         'country_code2' => 'LV',
@@ -759,6 +813,7 @@ return [
         'calling_code' => '+93'
     ],
     355 => [
+        'type' => 'country',
         'english_name' => 'Filipiinid',
         'timezone' => 8,
         'country_code2' => 'PH',
@@ -773,6 +828,7 @@ return [
         'calling_code' => '+93'
     ],
     356 => [
+        'type' => 'country',
         'english_name' => 'Guatemala',
         'timezone' => -6,
         'country_code2' => 'GT',
@@ -787,6 +843,7 @@ return [
         'calling_code' => '+93'
     ],
     357 => [
+        'type' => 'country',
         'english_name' => 'Venemaa',
         'timezone' => false,
         'country_code2' => 'RU',
@@ -801,6 +858,7 @@ return [
         'calling_code' => '+93'
     ],
     358 => [
+        'type' => 'country',
         'english_name' => 'Küprus',
         'timezone' => false,
         'country_code2' => 'CY',
@@ -815,6 +873,7 @@ return [
         'calling_code' => '+93'
     ],
     359 => [
+        'type' => 'country',
         'english_name' => 'Ghana',
         'timezone' => false,
         'country_code2' => 'GH',
@@ -829,6 +888,7 @@ return [
         'calling_code' => '+93'
     ],
     360 => [
+        'type' => 'country',
         'english_name' => 'Slovakkia',
         'timezone' => 1,
         'country_code2' => 'SK',
@@ -843,6 +903,7 @@ return [
         'calling_code' => '+93'
     ],
     361 => [
+        'type' => 'country',
         'english_name' => 'Hong Kong',
         'timezone' => 8,
         'country_code2' => 'HK',
@@ -857,6 +918,7 @@ return [
         'calling_code' => '+93'
     ],
     362 => [
+        'type' => 'country',
         'english_name' => 'Boliivia',
         'timezone' => -4,
         'country_code2' => 'BO',
@@ -871,6 +933,7 @@ return [
         'calling_code' => '+93'
     ],
     363 => [
+        'type' => 'country',
         'english_name' => 'Brasiilia',
         'timezone' => false,
         'country_code2' => 'BR',
@@ -885,6 +948,7 @@ return [
         'calling_code' => '+93'
     ],
     364 => [
+        'type' => 'country',
         'english_name' => 'Malta saar',
         'timezone' => 1,
         'country_code2' => 'MT',
@@ -899,6 +963,7 @@ return [
         'calling_code' => '+93'
     ],
     365 => [
+        'type' => 'country',
         'english_name' => 'Bulgaaria',
         'timezone' => 2,
         'country_code2' => 'BG',
@@ -913,6 +978,7 @@ return [
         'calling_code' => '+93'
     ],
     366 => [
+        'type' => 'country',
         'english_name' => 'Bangladesh',
         'timezone' => 6,
         'country_code2' => 'BD',
@@ -927,6 +993,7 @@ return [
         'calling_code' => '+93'
     ],
     367 => [
+        'type' => 'country',
         'english_name' => 'Jamaica',
         'timezone' => -5,
         'country_code2' => 'JM',
@@ -941,6 +1008,7 @@ return [
         'calling_code' => '+93'
     ],
     368 => [
+        'type' => 'country',
         'english_name' => 'Austria',
         'timezone' => 1,
         'country_code2' => 'AT',
@@ -955,6 +1023,7 @@ return [
         'calling_code' => '+93'
     ],
     369 => [
+        'type' => 'country',
         'english_name' => 'Leedu',
         'timezone' => 2,
         'country_code2' => 'LT',
@@ -969,6 +1038,7 @@ return [
         'calling_code' => '+93'
     ],
     370 => [
+        'type' => 'country',
         'english_name' => 'Süüria',
         'timezone' => 2,
         'country_code2' => 'SY',
@@ -983,6 +1053,7 @@ return [
         'calling_code' => '+93'
     ],
     371 => [
+        'type' => 'country',
         'english_name' => 'Egiptus',
         'timezone' => 2,
         'country_code2' => 'EG',
@@ -997,6 +1068,7 @@ return [
         'calling_code' => '+93'
     ],
     372 => [
+        'type' => 'country',
         'english_name' => 'Ungari',
         'timezone' => 1,
         'country_code2' => 'HU',
@@ -1011,6 +1083,7 @@ return [
         'calling_code' => '+93'
     ],
     373 => [
+        'type' => 'country',
         'english_name' => 'Rumeenia',
         'timezone' => 2,
         'country_code2' => 'RO',
@@ -1025,6 +1098,7 @@ return [
         'calling_code' => '+93'
     ],
     374 => [
+        'type' => 'country',
         'english_name' => 'Mehhiko',
         'timezone' => false,
         'country_code2' => 'MX',
@@ -1039,6 +1113,7 @@ return [
         'calling_code' => '+93'
     ],
     375 => [
+        'type' => 'country',
         'english_name' => 'Tiiili',
         'timezone' => false,
         'country_code2' => 'CL',
@@ -1053,6 +1128,7 @@ return [
         'calling_code' => '+93'
     ],
     376 => [
+        'type' => 'country',
         'english_name' => 'FidĪi',
         'timezone' => 12,
         'country_code2' => 'FJ',
@@ -1067,6 +1143,7 @@ return [
         'calling_code' => '+93'
     ],
     377 => [
+        'type' => 'country',
         'english_name' => 'Ecuador',
         'timezone' => false,
         'country_code2' => 'EC',
@@ -1081,6 +1158,7 @@ return [
         'calling_code' => '+93'
     ],
     378 => [
+        'type' => 'country',
         'english_name' => 'Sloveenia',
         'timezone' => 1,
         'country_code2' => 'SI',
@@ -1095,6 +1173,7 @@ return [
         'calling_code' => '+93'
     ],
     379 => [
+        'type' => 'country',
         'english_name' => 'Tonga',
         'timezone' => 13,
         'country_code2' => 'TO',
@@ -1109,6 +1188,7 @@ return [
         'calling_code' => '+93'
     ],
     380 => [
+        'type' => 'country',
         'english_name' => 'Island',
         'timezone' => false,
         'country_code2' => 'IS',
@@ -1123,6 +1203,7 @@ return [
         'calling_code' => '+93'
     ],
     381 => [
+        'type' => 'country',
         'english_name' => 'Andorra',
         'timezone' => 1,
         'country_code2' => 'AD',
@@ -1137,6 +1218,7 @@ return [
         'calling_code' => '+93'
     ],
     382 => [
+        'type' => 'country',
         'english_name' => 'Albaania',
         'timezone' => 1,
         'country_code2' => 'AL',
@@ -1151,6 +1233,7 @@ return [
         'calling_code' => '+93'
     ],
     383 => [
+        'type' => 'city',
         'english_name' => 'Faroe Islands',
         'timezone' => false,
         'country_code2' => 'FO',
@@ -1165,6 +1248,7 @@ return [
         'calling_code' => '+93'
     ],
     384 => [
+        'type' => 'country',
         'english_name' => 'Uganda',
         'timezone' => 3,
         'country_code2' => 'UG',
@@ -1179,6 +1263,7 @@ return [
         'calling_code' => '+93'
     ],
     385 => [
+        'type' => 'country',
         'english_name' => 'Bahrein',
         'timezone' => 3,
         'country_code2' => 'BH',
@@ -1193,6 +1278,7 @@ return [
         'calling_code' => '+93'
     ],
     386 => [
+        'type' => 'country',
         'english_name' => 'Sri Lanka',
         'timezone' => 5.5,
         'country_code2' => 'LK',
@@ -1207,6 +1293,7 @@ return [
         'calling_code' => '+93'
     ],
     387 => [
+        'type' => 'country',
         'english_name' => 'Ukraina',
         'timezone' => false,
         'country_code2' => 'UA',
@@ -1221,6 +1308,7 @@ return [
         'calling_code' => '+93'
     ],
     388 => [
+        'type' => 'country',
         'english_name' => 'Serbia',
         'timezone' => 1,
         'country_code2' => 'RS',
@@ -1235,6 +1323,7 @@ return [
         'calling_code' => '+93'
     ],
     389 => [
+        'type' => 'country',
         'english_name' => 'Saalomoni Saared',
         'timezone' => 11,
         'country_code2' => 'SB',
@@ -1249,6 +1338,7 @@ return [
         'calling_code' => '+93'
     ],
     390 => [
+        'type' => 'country',
         'english_name' => 'Aruba',
         'timezone' => -4,
         'country_code2' => 'AW',
@@ -1263,6 +1353,7 @@ return [
         'calling_code' => '+93'
     ],
     391 => [
+        'type' => 'country',
         'english_name' => 'Vatican City',
         'timezone' => 1,
         'country_code2' => 'VA',
@@ -1277,6 +1368,7 @@ return [
         'calling_code' => '+93'
     ],
     392 => [
+        'type' => 'country',
         'english_name' => 'Valgevene',
         'timezone' => 3,
         'country_code2' => 'BY',
@@ -1291,6 +1383,7 @@ return [
         'calling_code' => '+93'
     ],
     393 => [
+        'type' => 'country',
         'english_name' => 'Bosnia ja Herzegovina',
         'timezone' => 1,
         'country_code2' => 'BA',
@@ -1305,6 +1398,7 @@ return [
         'calling_code' => '+93'
     ],
     394 => [
+        'type' => 'country',
         'english_name' => 'TadĪikistan',
         'timezone' => 5,
         'country_code2' => 'TJ',
@@ -1319,6 +1413,7 @@ return [
         'calling_code' => '+93'
     ],
     395 => [
+        'type' => 'country',
         'english_name' => 'Türkmenistan',
         'timezone' => 5,
         'country_code2' => 'TM',
@@ -1333,6 +1428,7 @@ return [
         'calling_code' => '+93'
     ],
     396 => [
+        'type' => 'country',
         'english_name' => 'Araabia Ühendemiraadid',
         'timezone' => 4,
         'country_code2' => 'AE',
@@ -1347,6 +1443,7 @@ return [
         'calling_code' => '+93'
     ],
     397 => [
+        'type' => 'country',
         'english_name' => 'Moldova',
         'timezone' => 2,
         'country_code2' => 'MD',
@@ -1361,6 +1458,7 @@ return [
         'calling_code' => '+93'
     ],
     398 => [
+        'type' => 'country',
         'english_name' => 'Panama',
         'timezone' => -5,
         'country_code2' => 'PA',
@@ -1375,6 +1473,7 @@ return [
         'calling_code' => '+93'
     ],
     399 => [
+        'type' => 'country',
         'english_name' => 'Las Palmas de Gran Canaria',
         'timezone' => false,
         'country_code2' => 'ES',
@@ -1389,6 +1488,7 @@ return [
         'calling_code' => '+93'
     ],
     400 => [
+        'type' => 'country',
         'english_name' => 'Columbia',
         'timezone' => -5,
         'country_code2' => 'CO',
@@ -1403,6 +1503,7 @@ return [
         'calling_code' => '+93'
     ],
     401 => [
+        'type' => 'country',
         'english_name' => 'Gröönimaa',
         'timezone' => false,
         'country_code2' => 'GL',
@@ -1417,6 +1518,7 @@ return [
         'calling_code' => '+93'
     ],
     403 => [
+        'type' => 'country',
         'english_name' => 'Hawaii osariik',
         'timezone' => -10,
         'country_code2' => 'US',
@@ -1431,6 +1533,7 @@ return [
         'calling_code' => '+93'
     ],
     404 => [
+        'type' => 'country',
         'english_name' => 'Kuuba',
         'timezone' => -5,
         'country_code2' => 'CU',
@@ -1445,6 +1548,7 @@ return [
         'calling_code' => '+93'
     ],
     405 => [
+        'type' => 'country',
         'english_name' => 'Botswana',
         'timezone' => 2,
         'country_code2' => 'BW',
@@ -1459,6 +1563,7 @@ return [
         'calling_code' => '+93'
     ],
     406 => [
+        'type' => 'country',
         'english_name' => 'Puerto Rico',
         'timezone' => -4,
         'country_code2' => 'PR',
@@ -1473,6 +1578,7 @@ return [
         'calling_code' => '+93'
     ],
     407 => [
+        'type' => 'country',
         'english_name' => 'AserbaidĪaan',
         'timezone' => 4,
         'country_code2' => 'AZ',
@@ -1487,6 +1593,7 @@ return [
         'calling_code' => '+93'
     ],
     408 => [
+        'type' => 'country',
         'english_name' => 'Costa Rica',
         'timezone' => -6,
         'country_code2' => 'CR',
@@ -1501,6 +1608,7 @@ return [
         'calling_code' => '+93'
     ],
     409 => [
+        'type' => 'country',
         'english_name' => 'Kanada',
         'timezone' => false,
         'country_code2' => 'CA',
@@ -1515,6 +1623,7 @@ return [
         'calling_code' => '+93'
     ],
     410 => [
+        'type' => 'country',
         'english_name' => 'Těehhi',
         'timezone' => 1,
         'country_code2' => 'CZ',
@@ -1529,6 +1638,7 @@ return [
         'calling_code' => '+93'
     ],
     411 => [
+        'type' => 'country',
         'english_name' => 'Birma',
         'timezone' => 6.5,
         'country_code2' => 'MM',
@@ -1543,6 +1653,7 @@ return [
         'calling_code' => '+93'
     ],
     412 => [
+        'type' => 'country',
         'english_name' => 'Burkina Faso',
         'timezone' => false,
         'country_code2' => 'BF',
@@ -1557,6 +1668,7 @@ return [
         'calling_code' => '+93'
     ],
     413 => [
+        'type' => 'country',
         'english_name' => 'Brunei',
         'timezone' => 8,
         'country_code2' => 'BN',
@@ -1571,6 +1683,7 @@ return [
         'calling_code' => '+93'
     ],
     414 => [
+        'type' => 'country',
         'english_name' => 'Jeemen',
         'timezone' => 3,
         'country_code2' => 'YE',
@@ -1585,6 +1698,7 @@ return [
         'calling_code' => '+93'
     ],
     415 => [
+        'type' => 'country',
         'english_name' => 'Gambia',
         'timezone' => false,
         'country_code2' => 'GM',
@@ -1599,6 +1713,7 @@ return [
         'calling_code' => '+93'
     ],
     416 => [
+        'type' => 'country',
         'english_name' => 'Omaan',
         'timezone' => 4,
         'country_code2' => 'OM',
@@ -1613,6 +1728,7 @@ return [
         'calling_code' => '+93'
     ],
     424 => [
+        'type' => 'city',
         'english_name' => 'Tasmania',
         'timezone' => 11,
         'country_code2' => 'AU',
@@ -1627,6 +1743,7 @@ return [
         'calling_code' => '+93'
     ],
     425 => [
+        'type' => 'city',
         'english_name' => 'Sicily',
         'timezone' => 1,
         'country_code2' => 'IT',
@@ -1641,6 +1758,7 @@ return [
         'calling_code' => '+93'
     ],
     426 => [
+        'type' => 'city',
         'english_name' => 'Berliin',
         'timezone' => 1,
         'country_code2' => 'DE',
@@ -1655,6 +1773,7 @@ return [
         'calling_code' => '+93'
     ],
     427 => [
+        'type' => 'city',
         'english_name' => 'Lõuna-Alpid',
         'timezone' => 13,
         'country_code2' => 'NZ',
@@ -1669,6 +1788,7 @@ return [
         'calling_code' => '+93'
     ],
     428 => [
+        'type' => 'city',
         'english_name' => 'Pariis',
         'timezone' => 1,
         'country_code2' => 'FR',
@@ -1683,6 +1803,7 @@ return [
         'calling_code' => '+93'
     ],
     429 => [
+        'type' => 'city',
         'english_name' => 'Angkor Wat',
         'timezone' => 7,
         'country_code2' => 'KH',
@@ -1697,6 +1818,7 @@ return [
         'calling_code' => '+93'
     ],
     430 => [
+        'type' => 'city',
         'english_name' => 'Ateena',
         'timezone' => 2,
         'country_code2' => 'GR',
@@ -1711,6 +1833,7 @@ return [
         'calling_code' => '+93'
     ],
     431 => [
+        'type' => 'city',
         'english_name' => 'Kérkyra saar',
         'timezone' => 2,
         'country_code2' => 'GR',
@@ -1725,6 +1848,7 @@ return [
         'calling_code' => '+93'
     ],
     432 => [
+        'type' => 'city',
         'english_name' => 'Mount Olympus',
         'timezone' => 2,
         'country_code2' => 'GR',
@@ -1739,6 +1863,7 @@ return [
         'calling_code' => '+93'
     ],
     433 => [
+        'type' => 'city',
         'english_name' => 'Meteora',
         'timezone' => 2,
         'country_code2' => 'GR',
@@ -1753,6 +1878,7 @@ return [
         'calling_code' => '+93'
     ],
     434 => [
+        'type' => 'city',
         'english_name' => 'Crete',
         'timezone' => 2,
         'country_code2' => 'GR',
@@ -1767,6 +1893,7 @@ return [
         'calling_code' => '+93'
     ],
     435 => [
+        'type' => 'city',
         'english_name' => 'Mílos',
         'timezone' => 2,
         'country_code2' => 'GR',
@@ -1781,6 +1908,7 @@ return [
         'calling_code' => '+93'
     ],
     436 => [
+        'type' => 'city',
         'english_name' => 'Lissabon',
         'timezone' => false,
         'country_code2' => 'PT',
@@ -1795,6 +1923,7 @@ return [
         'calling_code' => '+93'
     ],
     437 => [
+        'type' => 'city',
         'english_name' => 'Madeira',
         'timezone' => false,
         'country_code2' => 'PT',
@@ -1809,6 +1938,7 @@ return [
         'calling_code' => '+93'
     ],
     438 => [
+        'type' => 'city',
         'english_name' => 'Santa Cruz de Tenerife',
         'timezone' => false,
         'country_code2' => 'ES',
@@ -1823,6 +1953,7 @@ return [
         'calling_code' => '+93'
     ],
     439 => [
+        'type' => 'city',
         'english_name' => 'Peñón de Vélez de la Gomera',
         'timezone' => 1,
         'country_code2' => 'ES',
@@ -1837,6 +1968,7 @@ return [
         'calling_code' => '+93'
     ],
     440 => [
+        'type' => 'city',
         'english_name' => 'Hierro',
         'timezone' => false,
         'country_code2' => 'ES',
@@ -1851,6 +1983,7 @@ return [
         'calling_code' => '+93'
     ],
     441 => [
+        'type' => 'city',
         'english_name' => 'Las Palmas de Gran Canaria',
         'timezone' => false,
         'country_code2' => 'ES',
@@ -1865,6 +1998,7 @@ return [
         'calling_code' => '+93'
     ],
     442 => [
+        'type' => 'city',
         'english_name' => 'Bangkok',
         'timezone' => 7,
         'country_code2' => 'TH',
@@ -1879,6 +2013,7 @@ return [
         'calling_code' => '+93'
     ],
     443 => [
+        'type' => 'city',
         'english_name' => 'Phuket',
         'timezone' => 7,
         'country_code2' => 'TH',
@@ -1893,6 +2028,7 @@ return [
         'calling_code' => '+93'
     ],
     444 => [
+        'type' => 'city',
         'english_name' => 'Moskva',
         'timezone' => 3,
         'country_code2' => 'RU',
@@ -1907,6 +2043,7 @@ return [
         'calling_code' => '+93'
     ],
     446 => [
+        'type' => 'city',
         'english_name' => 'Kamchatka Peninsula',
         'timezone' => 12,
         'country_code2' => 'RU',
@@ -1921,6 +2058,7 @@ return [
         'calling_code' => '+93'
     ],
     447 => [
+        'type' => 'city',
         'english_name' => 'Lapland',
         'timezone' => 2,
         'country_code2' => 'FI',
@@ -1935,6 +2073,7 @@ return [
         'calling_code' => '+93'
     ],
     448 => [
+        'type' => 'city',
         'english_name' => 'Helsingi',
         'timezone' => 2,
         'country_code2' => 'FI',
@@ -1949,6 +2088,7 @@ return [
         'calling_code' => '+93'
     ],
     449 => [
+        'type' => 'city',
         'english_name' => 'Ahvenamaa',
         'timezone' => 2,
         'country_code2' => 'AX',
@@ -1963,6 +2103,7 @@ return [
         'calling_code' => '+93'
     ],
     450 => [
+        'type' => 'city',
         'english_name' => 'Las Vegas',
         'timezone' => -8,
         'country_code2' => 'US',
@@ -1977,6 +2118,7 @@ return [
         'calling_code' => '+93'
     ],
     451 => [
+        'type' => 'city',
         'english_name' => 'New York',
         'timezone' => -5,
         'country_code2' => 'US',
@@ -1991,6 +2133,7 @@ return [
         'calling_code' => '+93'
     ],
     452 => [
+        'type' => 'city',
         'english_name' => 'Florida',
         'timezone' => -5,
         'country_code2' => 'US',
@@ -2005,6 +2148,7 @@ return [
         'calling_code' => '+93'
     ],
     453 => [
+        'type' => 'city',
         'english_name' => 'Seattle',
         'timezone' => -8,
         'country_code2' => 'US',
@@ -2019,6 +2163,7 @@ return [
         'calling_code' => '+93'
     ],
     454 => [
+        'type' => 'city',
         'english_name' => 'Palma',
         'timezone' => 1,
         'country_code2' => 'ES',
@@ -2033,6 +2178,7 @@ return [
         'calling_code' => '+93'
     ],
     455 => [
+        'type' => 'place',
         'english_name' => 'Barcelona',
         'timezone' => 1,
         'country_code2' => 'ES',
@@ -2047,6 +2193,7 @@ return [
         'calling_code' => '+93'
     ],
     457 => [
+        'type' => 'city',
         'english_name' => 'Madrid',
         'timezone' => 1,
         'country_code2' => 'ES',
@@ -2061,6 +2208,7 @@ return [
         'calling_code' => '+93'
     ],
     458 => [
+        'type' => 'place',
         'english_name' => 'Málaga Airport',
         'timezone' => 1,
         'country_code2' => 'ES',
@@ -2075,6 +2223,7 @@ return [
         'calling_code' => '+93'
     ],
     459 => [
+        'type' => 'city',
         'english_name' => 'London',
         'timezone' => false,
         'country_code2' => 'GB',
@@ -2089,6 +2238,7 @@ return [
         'calling_code' => '+93'
     ],
     460 => [
+        'type' => 'city',
         'english_name' => 'Scotland',
         'timezone' => false,
         'country_code2' => 'GB',
@@ -2103,6 +2253,7 @@ return [
         'calling_code' => '+93'
     ],
     461 => [
+        'type' => 'city',
         'english_name' => 'Stockholm',
         'timezone' => 1,
         'country_code2' => 'SE',
@@ -2117,6 +2268,7 @@ return [
         'calling_code' => '+93'
     ],
     462 => [
+        'type' => 'city',
         'english_name' => 'Ojamaa',
         'timezone' => 1,
         'country_code2' => 'SE',
@@ -2131,6 +2283,7 @@ return [
         'calling_code' => '+93'
     ],
     463 => [
+        'type' => 'city',
         'english_name' => 'Ruinas Machupicchu',
         'timezone' => -5,
         'country_code2' => 'PE',
@@ -2145,6 +2298,7 @@ return [
         'calling_code' => '+93'
     ],
     464 => [
+        'type' => 'city',
         'english_name' => 'Lago Titicaca',
         'timezone' => -4,
         'country_code2' => 'BO',
@@ -2159,6 +2313,7 @@ return [
         'calling_code' => '+93'
     ],
     465 => [
+        'type' => 'city',
         'english_name' => 'Goa osariik',
         'timezone' => 5.5,
         'country_code2' => 'IN',
@@ -2173,6 +2328,7 @@ return [
         'calling_code' => '+93'
     ],
     466 => [
+        'type' => 'country',
         'english_name' => 'San Marino',
         'timezone' => 1,
         'country_code2' => 'SM',
@@ -2187,6 +2343,7 @@ return [
         'calling_code' => '+93'
     ],
     467 => [
+        'type' => 'city',
         'english_name' => 'Pompei',
         'timezone' => 1,
         'country_code2' => 'IT',
@@ -2201,6 +2358,7 @@ return [
         'calling_code' => '+93'
     ],
     468 => [
+        'type' => 'city',
         'english_name' => 'Capri',
         'timezone' => 1,
         'country_code2' => 'IT',
@@ -2215,6 +2373,7 @@ return [
         'calling_code' => '+93'
     ],
     469 => [
+        'type' => 'city',
         'english_name' => 'Istanbul',
         'timezone' => 3,
         'country_code2' => 'TR',
@@ -2229,6 +2388,7 @@ return [
         'calling_code' => '+93'
     ],
     470 => [
+        'type' => 'place',
         'english_name' => 'Nice',
         'timezone' => 1,
         'country_code2' => 'FR',
@@ -2243,6 +2403,7 @@ return [
         'calling_code' => '+93'
     ],
     471 => [
+        'type' => 'country',
         'english_name' => 'Jugoslaavia',
         'timezone' => false,
         'country_code2' => 'false',
@@ -2257,6 +2418,7 @@ return [
         'calling_code' => '+93'
     ],
     494 => [
+        'type' => 'city',
         'english_name' => 'Sofia',
         'timezone' => 2,
         'country_code2' => 'BG',
@@ -2271,6 +2433,7 @@ return [
         'calling_code' => '+93'
     ],
     495 => [
+        'type' => 'country',
         'english_name' => 'Provincia de Galápagos',
         'timezone' => -6,
         'country_code2' => 'EC',
@@ -2285,6 +2448,7 @@ return [
         'calling_code' => '+93'
     ],
     496 => [
+        'type' => 'city',
         'english_name' => 'Sydney',
         'timezone' => 11,
         'country_code2' => 'AU',
@@ -2299,6 +2463,7 @@ return [
         'calling_code' => '+93'
     ],
     497 => [
+        'type' => 'city',
         'english_name' => 'Lyon',
         'timezone' => 1,
         'country_code2' => 'FR',
@@ -2313,6 +2478,7 @@ return [
         'calling_code' => '+93'
     ],
     498 => [
+        'type' => 'city',
         'english_name' => 'City of Brussels',
         'timezone' => 1,
         'country_code2' => 'BE',
@@ -2327,6 +2493,7 @@ return [
         'calling_code' => '+93'
     ],
     499 => [
+        'type' => 'city',
         'english_name' => 'Billings',
         'timezone' => -7,
         'country_code2' => 'US',
@@ -2341,6 +2508,7 @@ return [
         'calling_code' => '+93'
     ],
     500 => [
+        'type' => 'city',
         'english_name' => 'Praha',
         'timezone' => 1,
         'country_code2' => 'CZ',
@@ -2355,6 +2523,7 @@ return [
         'calling_code' => '+93'
     ],
     501 => [
+        'type' => 'city',
         'english_name' => 'Rio de Janeiro',
         'timezone' => -2,
         'country_code2' => 'BR',
@@ -2369,6 +2538,7 @@ return [
         'calling_code' => '+93'
     ],
     502 => [
+        'type' => 'city',
         'english_name' => 'Dublin',
         'timezone' => false,
         'country_code2' => 'IE',
@@ -2383,6 +2553,7 @@ return [
         'calling_code' => '+93'
     ],
     503 => [
+        'type' => 'city',
         'english_name' => 'Rooma',
         'timezone' => 1,
         'country_code2' => 'IT',
@@ -2397,6 +2568,7 @@ return [
         'calling_code' => '+93'
     ],
     504 => [
+        'type' => 'city',
         'english_name' => 'Kopenhaagen',
         'timezone' => 1,
         'country_code2' => 'DK',
@@ -2411,6 +2583,7 @@ return [
         'calling_code' => '+93'
     ],
     505 => [
+        'type' => 'city',
         'english_name' => 'Bukarest',
         'timezone' => 2,
         'country_code2' => 'RO',
@@ -2425,6 +2598,7 @@ return [
         'calling_code' => '+93'
     ],
     506 => [
+        'type' => 'place',
         'english_name' => 'Chamonix-Mont-Blanc',
         'timezone' => 1,
         'country_code2' => 'FR',
@@ -2439,6 +2613,7 @@ return [
         'calling_code' => '+93'
     ],
     507 => [
+        'type' => 'place',
         'english_name' => 'San Francisco',
         'timezone' => -8,
         'country_code2' => 'US',
@@ -2453,6 +2628,7 @@ return [
         'calling_code' => '+93'
     ],
     508 => [
+        'type' => 'city',
         'english_name' => 'Surmaorg',
         'timezone' => -8,
         'country_code2' => 'US',
@@ -2467,6 +2643,7 @@ return [
         'calling_code' => '+93'
     ],
     509 => [
+        'type' => 'city',
         'english_name' => 'Foz do Iguaçu',
         'timezone' => -2,
         'country_code2' => 'BR',
@@ -2481,6 +2658,7 @@ return [
         'calling_code' => '+93'
     ],
     510 => [
+        'type' => 'city',
         'english_name' => 'Öland',
         'timezone' => 1,
         'country_code2' => 'SE',
@@ -2495,6 +2673,7 @@ return [
         'calling_code' => '+93'
     ],
     511 => [
+        'type' => 'country',
         'english_name' => 'Honduras',
         'timezone' => -6,
         'country_code2' => 'HN',
@@ -2509,6 +2688,7 @@ return [
         'calling_code' => '+93'
     ],
     512 => [
+        'type' => 'country',
         'english_name' => 'El Salvador',
         'timezone' => -6,
         'country_code2' => 'SV',
@@ -2523,6 +2703,7 @@ return [
         'calling_code' => '+93'
     ],
     519 => [
+        'type' => 'city',
         'english_name' => 'Viin',
         'timezone' => 1,
         'country_code2' => 'AT',
@@ -2537,6 +2718,7 @@ return [
         'calling_code' => '+93'
     ],
     520 => [
+        'type' => 'country',
         'english_name' => 'Côte d’Ivoire',
         'timezone' => false,
         'country_code2' => 'CI',
@@ -2551,6 +2733,7 @@ return [
         'calling_code' => '+93'
     ],
     523 => [
+        'type' => 'city',
         'english_name' => 'Budapest',
         'timezone' => 1,
         'country_code2' => 'HU',
@@ -2565,6 +2748,7 @@ return [
         'calling_code' => '+93'
     ],
     524 => [
+        'type' => 'city',
         'english_name' => 'Rhodos',
         'timezone' => 2,
         'country_code2' => 'GR',
@@ -2579,6 +2763,7 @@ return [
         'calling_code' => '+93'
     ],
     525 => [
+        'type' => 'city',
         'english_name' => 'Bali',
         'timezone' => 8,
         'country_code2' => 'ID',
@@ -2593,6 +2778,7 @@ return [
         'calling_code' => '+93'
     ],
     526 => [
+        'type' => 'city',
         'english_name' => 'Chicago',
         'timezone' => -6,
         'country_code2' => 'US',
@@ -2607,6 +2793,7 @@ return [
         'calling_code' => '+93'
     ],
     531 => [
+        'type' => 'city',
         'english_name' => 'Tōkyō',
         'timezone' => 9,
         'country_code2' => 'JP',
@@ -2621,6 +2808,7 @@ return [
         'calling_code' => '+93'
     ],
     532 => [
+        'type' => 'city',
         'english_name' => 'Riia',
         'timezone' => 2,
         'country_code2' => 'LV',
@@ -2635,6 +2823,7 @@ return [
         'calling_code' => '+93'
     ],
     537 => [
+        'type' => 'city',
         'english_name' => 'Lofoten',
         'timezone' => 1,
         'country_code2' => 'NO',
@@ -2649,6 +2838,7 @@ return [
         'calling_code' => '+93'
     ],
     543 => [
+        'type' => 'city',
         'english_name' => 'Tahiti',
         'timezone' => -10,
         'country_code2' => 'PF',
@@ -2663,6 +2853,7 @@ return [
         'calling_code' => '+93'
     ],
     546 => [
+        'type' => 'city',
         'english_name' => 'Corse',
         'timezone' => 1,
         'country_code2' => 'FR',
@@ -2677,6 +2868,7 @@ return [
         'calling_code' => '+93'
     ],
     551 => [
+        'type' => 'city',
         'english_name' => 'Tulemaa saared',
         'timezone' => -3,
         'country_code2' => 'CL',
@@ -2691,6 +2883,7 @@ return [
         'calling_code' => '+93'
     ],
     553 => [
+        'type' => 'city',
         'english_name' => 'San Sebastián Municipio',
         'timezone' => -4,
         'country_code2' => 'PR',
@@ -2705,6 +2898,7 @@ return [
         'calling_code' => '+93'
     ],
     554 => [
+        'type' => 'city',
         'english_name' => 'Sardiinia',
         'timezone' => 1,
         'country_code2' => 'IT',
@@ -2719,6 +2913,7 @@ return [
         'calling_code' => '+93'
     ],
     558 => [
+        'type' => 'city',
         'english_name' => 'Sikkim',
         'timezone' => 5.5,
         'country_code2' => 'IN',
@@ -2733,6 +2928,7 @@ return [
         'calling_code' => '+93'
     ],
     566 => [
+        'type' => 'city',
         'english_name' => 'Phnom Penh',
         'timezone' => 7,
         'country_code2' => 'KH',
@@ -2747,6 +2943,7 @@ return [
         'calling_code' => '+93'
     ],
     567 => [
+        'type' => 'country',
         'english_name' => 'Eesti',
         'timezone' => 2,
         'country_code2' => 'EE',
@@ -2761,6 +2958,7 @@ return [
         'calling_code' => '+93'
     ],
     571 => [
+        'type' => 'city',
         'english_name' => 'Lanzarote Airport',
         'timezone' => false,
         'country_code2' => 'ES',
@@ -2775,6 +2973,7 @@ return [
         'calling_code' => '+93'
     ],
     572 => [
+        'type' => 'country',
         'english_name' => 'Ühendkuningriik',
         'timezone' => false,
         'country_code2' => 'GB',
@@ -2789,6 +2988,7 @@ return [
         'calling_code' => '+93'
     ],
     573 => [
+        'type' => 'city',
         'english_name' => 'Himalayas',
         'timezone' => 5.75,
         'country_code2' => 'false',
@@ -2803,6 +3003,7 @@ return [
         'calling_code' => '+93'
     ],
     575 => [
+        'type' => 'country',
         'english_name' => 'Namiibia',
         'timezone' => 2,
         'country_code2' => 'NA',
@@ -2817,6 +3018,7 @@ return [
         'calling_code' => '+93'
     ],
     576 => [
+        'type' => 'country',
         'english_name' => 'Mongoolia',
         'timezone' => false,
         'country_code2' => 'MN',
@@ -2831,6 +3033,7 @@ return [
         'calling_code' => '+93'
     ],
     577 => [
+        'type' => 'country',
         'english_name' => 'Maldiivid',
         'timezone' => 5,
         'country_code2' => 'MV',
@@ -2845,6 +3048,7 @@ return [
         'calling_code' => '+93'
     ],
     578 => [
+        'type' => 'city',
         'english_name' => 'Fuerteventura Airport',
         'timezone' => false,
         'country_code2' => 'ES',
@@ -2859,6 +3063,7 @@ return [
         'calling_code' => '+93'
     ],
     579 => [
+        'type' => 'country',
         'english_name' => 'Horvaatia',
         'timezone' => 1,
         'country_code2' => 'HR',
@@ -2873,6 +3078,7 @@ return [
         'calling_code' => '+93'
     ],
     580 => [
+        'type' => 'city',
         'english_name' => 'Mykonos',
         'timezone' => 2,
         'country_code2' => 'GR',
@@ -2887,6 +3093,7 @@ return [
         'calling_code' => '+93'
     ],
     581 => [
+        'type' => 'city',
         'english_name' => 'Zanzibar',
         'timezone' => 3,
         'country_code2' => 'TZ',
@@ -2901,6 +3108,7 @@ return [
         'calling_code' => '+93'
     ],
     582 => [
+        'type' => 'city',
         'english_name' => 'Sahara',
         'timezone' => false,
         'country_code2' => 'false',
@@ -2915,6 +3123,7 @@ return [
         'calling_code' => '+93'
     ],
     585 => [
+        'type' => 'city',
         'english_name' => 'Borneo',
         'timezone' => 8,
         'country_code2' => 'ID',
@@ -2929,6 +3138,7 @@ return [
         'calling_code' => '+93'
     ],
     599 => [
+        'type' => 'country',
         'english_name' => 'Kasahstan',
         'timezone' => false,
         'country_code2' => 'KZ',
@@ -2943,6 +3153,7 @@ return [
         'calling_code' => '+93'
     ],
     622 => [
+        'type' => 'city',
         'english_name' => 'Niagara Falls',
         'timezone' => -5,
         'country_code2' => 'US',
@@ -2957,6 +3168,7 @@ return [
         'calling_code' => '+93'
     ],
     626 => [
+        'type' => 'country',
         'english_name' => 'Prantsuse Polüneesia',
         'timezone' => false,
         'country_code2' => 'PF',
@@ -2971,6 +3183,7 @@ return [
         'calling_code' => '+93'
     ],
     635 => [
+        'type' => 'country',
         'english_name' => 'Zimbabwe',
         'timezone' => 2,
         'country_code2' => 'ZW',
@@ -2985,6 +3198,7 @@ return [
         'calling_code' => '+93'
     ],
     644 => [
+        'type' => 'country',
         'english_name' => 'Taiwan',
         'timezone' => 8,
         'country_code2' => 'TW',
@@ -2999,6 +3213,7 @@ return [
         'calling_code' => '+93'
     ],
     655 => [
+        'type' => 'country',
         'english_name' => 'Togo',
         'timezone' => false,
         'country_code2' => 'TG',
@@ -3013,6 +3228,7 @@ return [
         'calling_code' => '+93'
     ],
     668 => [
+        'type' => 'country',
         'english_name' => 'Venetsueela',
         'timezone' => -4,
         'country_code2' => 'VE',
@@ -3027,6 +3243,7 @@ return [
         'calling_code' => '+93'
     ],
     671 => [
+        'type' => 'country',
         'english_name' => 'Belize',
         'timezone' => -6,
         'country_code2' => 'BZ',
@@ -3041,6 +3258,7 @@ return [
         'calling_code' => '+93'
     ],
     674 => [
+        'type' => 'country',
         'english_name' => 'Barbados',
         'timezone' => -4,
         'country_code2' => 'BB',
@@ -3055,6 +3273,7 @@ return [
         'calling_code' => '+93'
     ],
     680 => [
+        'type' => 'country',
         'english_name' => 'Senegal',
         'timezone' => false,
         'country_code2' => 'SN',
@@ -3069,6 +3288,7 @@ return [
         'calling_code' => '+93'
     ],
     682 => [
+        'type' => 'place',
         'english_name' => 'Florence',
         'timezone' => 1,
         'country_code2' => 'IT',
@@ -3083,6 +3303,7 @@ return [
         'calling_code' => '+93'
     ],
     685 => [
+        'type' => 'country',
         'english_name' => 'Hollandi Antillid',
         'timezone' => false,
         'country_code2' => 'false',
@@ -3097,6 +3318,7 @@ return [
         'calling_code' => '+93'
     ],
     700 => [
+        'type' => 'country',
         'english_name' => 'Lõuna Korea',
         'timezone' => 9,
         'country_code2' => 'KR',
@@ -3111,6 +3333,7 @@ return [
         'calling_code' => '+93'
     ],
     701 => [
+        'type' => 'country',
         'english_name' => 'Põhja-Korea',
         'timezone' => 9,
         'country_code2' => 'KP',
@@ -3125,6 +3348,7 @@ return [
         'calling_code' => '+93'
     ],
     705 => [
+        'type' => 'country',
         'english_name' => 'Iraak',
         'timezone' => 3,
         'country_code2' => 'IQ',
@@ -3139,6 +3363,7 @@ return [
         'calling_code' => '+93'
     ],
     708 => [
+        'type' => 'country',
         'english_name' => 'Nikaraagua',
         'timezone' => -6,
         'country_code2' => 'NI',
@@ -3153,6 +3378,7 @@ return [
         'calling_code' => '+93'
     ],
     709 => [
+        'type' => 'country',
         'english_name' => 'Prantsuse Guajaana',
         'timezone' => -3,
         'country_code2' => 'GF',
@@ -3167,6 +3393,7 @@ return [
         'calling_code' => '+93'
     ],
     710 => [
+        'type' => 'country',
         'english_name' => 'Suriname',
         'timezone' => -3,
         'country_code2' => 'SR',
@@ -3181,6 +3408,7 @@ return [
         'calling_code' => '+93'
     ],
     711 => [
+        'type' => 'country',
         'english_name' => 'Trinidad ja Tobago',
         'timezone' => -4,
         'country_code2' => 'TT',
@@ -3195,6 +3423,7 @@ return [
         'calling_code' => '+93'
     ],
     714 => [
+        'type' => 'country',
         'english_name' => 'Zambia',
         'timezone' => 2,
         'country_code2' => 'ZM',
@@ -3209,6 +3438,7 @@ return [
         'calling_code' => '+93'
     ],
     715 => [
+        'type' => 'country',
         'english_name' => 'São Tomé ja Principe',
         'timezone' => false,
         'country_code2' => 'ST',
@@ -3223,6 +3453,7 @@ return [
         'calling_code' => '+93'
     ],
     719 => [
+        'type' => 'country',
         'english_name' => 'Guyana',
         'timezone' => -4,
         'country_code2' => 'GY',
@@ -3237,6 +3468,7 @@ return [
         'calling_code' => '+93'
     ],
     723 => [
+        'type' => 'country',
         'english_name' => 'Armeenia',
         'timezone' => 4,
         'country_code2' => 'AM',
@@ -3251,6 +3483,7 @@ return [
         'calling_code' => '+93'
     ],
     724 => [
+        'type' => 'country',
         'english_name' => 'Mosambiik',
         'timezone' => 2,
         'country_code2' => 'MZ',
@@ -3265,6 +3498,7 @@ return [
         'calling_code' => '+93'
     ],
     725 => [
+        'type' => 'country',
         'english_name' => 'Afganistan',
         'timezone' => 4.5,
         'country_code2' => 'AF',
@@ -3279,6 +3513,7 @@ return [
         'calling_code' => '+93'
     ],
     726 => [
+        'type' => 'country',
         'english_name' => 'Kirgiisi',
         'timezone' => 6,
         'country_code2' => 'KG',
@@ -3293,6 +3528,7 @@ return [
         'calling_code' => '+93'
     ],
     740 => [
+        'type' => 'country',
         'english_name' => 'Usbekistan',
         'timezone' => false,
         'country_code2' => 'UZ',
@@ -3307,6 +3543,7 @@ return [
         'calling_code' => '+93'
     ],
     741 => [
+        'type' => 'country',
         'english_name' => 'Gruusia',
         'timezone' => 4,
         'country_code2' => 'GE',
@@ -3321,6 +3558,7 @@ return [
         'calling_code' => '+93'
     ],
     742 => [
+        'type' => 'country',
         'english_name' => 'Luksemburg',
         'timezone' => 1,
         'country_code2' => 'LU',
@@ -3335,6 +3573,7 @@ return [
         'calling_code' => '+93'
     ],
     744 => [
+        'type' => 'country',
         'english_name' => 'Guinea-Bissau',
         'timezone' => false,
         'country_code2' => 'GW',
@@ -3349,6 +3588,7 @@ return [
         'calling_code' => '+93'
     ],
     746 => [
+        'type' => 'country',
         'english_name' => 'Haiiti',
         'timezone' => -5,
         'country_code2' => 'HT',
@@ -3363,6 +3603,7 @@ return [
         'calling_code' => '+93'
     ],
     747 => [
+        'type' => 'country',
         'english_name' => 'Nigeeria',
         'timezone' => 1,
         'country_code2' => 'NG',
@@ -3377,6 +3618,7 @@ return [
         'calling_code' => '+93'
     ],
     753 => [
+        'type' => 'country',
         'english_name' => 'Guadeloupe',
         'timezone' => -4,
         'country_code2' => 'GP',
@@ -3391,6 +3633,7 @@ return [
         'calling_code' => '+93'
     ],
     754 => [
+        'type' => 'country',
         'english_name' => 'Réunion',
         'timezone' => 4,
         'country_code2' => 'RE',
@@ -3405,6 +3648,7 @@ return [
         'calling_code' => '+93'
     ],
     755 => [
+        'type' => 'place',
         'english_name' => 'Los Angeles',
         'timezone' => -8,
         'country_code2' => 'US',
@@ -3419,6 +3663,7 @@ return [
         'calling_code' => '+93'
     ],
     756 => [
+        'type' => 'country',
         'english_name' => 'Liibüa',
         'timezone' => 2,
         'country_code2' => 'LY',
@@ -3433,6 +3678,7 @@ return [
         'calling_code' => '+93'
     ],
     757 => [
+        'type' => 'country',
         'english_name' => 'Alžeeria',
         'timezone' => 1,
         'country_code2' => 'DZ',
@@ -3447,6 +3693,7 @@ return [
         'calling_code' => '+93'
     ],
     758 => [
+        'type' => 'country',
         'english_name' => 'Martinique',
         'timezone' => -4,
         'country_code2' => 'MQ',
@@ -3461,6 +3708,7 @@ return [
         'calling_code' => '+93'
     ],
     761 => [
+        'type' => 'country',
         'english_name' => 'Liibanon',
         'timezone' => 2,
         'country_code2' => 'LB',
@@ -3475,6 +3723,7 @@ return [
         'calling_code' => '+93'
     ],
     762 => [
+        'type' => 'country',
         'english_name' => 'Papua Uus Guinea',
         'timezone' => false,
         'country_code2' => 'PG',
@@ -3489,6 +3738,7 @@ return [
         'calling_code' => '+93'
     ],
     765 => [
+        'type' => 'country',
         'english_name' => 'Makedoonia',
         'timezone' => 1,
         'country_code2' => 'MK',
@@ -3503,6 +3753,7 @@ return [
         'calling_code' => '+93'
     ],
     774 => [
+        'type' => 'country',
         'english_name' => 'Sudaan',
         'timezone' => 2,
         'country_code2' => 'SD',
@@ -3517,6 +3768,7 @@ return [
         'calling_code' => '+93'
     ],
     777 => [
+        'type' => 'city',
         'english_name' => 'Ash-Shāriqah emiraat',
         'timezone' => 4,
         'country_code2' => 'AE',
@@ -3531,6 +3783,7 @@ return [
         'calling_code' => '+93'
     ],
     778 => [
+        'type' => 'city',
         'english_name' => 'Ajman City',
         'timezone' => 4,
         'country_code2' => 'AE',
@@ -3545,6 +3798,7 @@ return [
         'calling_code' => '+93'
     ],
     779 => [
+        'type' => 'city',
         'english_name' => 'Al-Fujayrah emiraat',
         'timezone' => 4,
         'country_code2' => 'AE',
@@ -3559,6 +3813,7 @@ return [
         'calling_code' => '+93'
     ],
     780 => [
+        'type' => 'city',
         'english_name' => 'Umm Al Quwain City',
         'timezone' => 4,
         'country_code2' => 'AE',
@@ -3573,6 +3828,7 @@ return [
         'calling_code' => '+93'
     ],
     781 => [
+        'type' => 'city',
         'english_name' => 'Ras Al Khaimah City',
         'timezone' => 4,
         'country_code2' => 'AE',
@@ -3587,6 +3843,7 @@ return [
         'calling_code' => '+93'
     ],
     784 => [
+        'type' => 'country',
         'english_name' => 'Saudi Araabia',
         'timezone' => 3,
         'country_code2' => 'SA',
@@ -3601,6 +3858,7 @@ return [
         'calling_code' => '+93'
     ],
     791 => [
+        'type' => 'country',
         'english_name' => 'Katar',
         'timezone' => 3,
         'country_code2' => 'QA',
@@ -3615,6 +3873,7 @@ return [
         'calling_code' => '+93'
     ],
     792 => [
+        'type' => 'country',
         'english_name' => 'Kuveit',
         'timezone' => 3,
         'country_code2' => 'KW',
@@ -3629,6 +3888,7 @@ return [
         'calling_code' => '+93'
     ],
     794 => [
+        'type' => 'country',
         'english_name' => 'Mauritaania',
         'timezone' => false,
         'country_code2' => 'MR',
@@ -3643,6 +3903,7 @@ return [
         'calling_code' => '+93'
     ],
     795 => [
+        'type' => 'country',
         'english_name' => 'Niger',
         'timezone' => 1,
         'country_code2' => 'NE',
@@ -3657,6 +3918,7 @@ return [
         'calling_code' => '+93'
     ],
     796 => [
+        'type' => 'country',
         'english_name' => 'Tiaad',
         'timezone' => 1,
         'country_code2' => 'TD',
@@ -3671,6 +3933,7 @@ return [
         'calling_code' => '+93'
     ],
     797 => [
+        'type' => 'country',
         'english_name' => 'Eritrea',
         'timezone' => 3,
         'country_code2' => 'ER',
@@ -3685,6 +3948,7 @@ return [
         'calling_code' => '+93'
     ],
     798 => [
+        'type' => 'country',
         'english_name' => 'Guinea',
         'timezone' => false,
         'country_code2' => 'GN',
@@ -3699,6 +3963,7 @@ return [
         'calling_code' => '+93'
     ],
     800 => [
+        'type' => 'country',
         'english_name' => 'Sierra Leone',
         'timezone' => false,
         'country_code2' => 'SL',
@@ -3713,6 +3978,7 @@ return [
         'calling_code' => '+93'
     ],
     801 => [
+        'type' => 'country',
         'english_name' => 'Libeeria',
         'timezone' => false,
         'country_code2' => 'LR',
@@ -3727,6 +3993,7 @@ return [
         'calling_code' => '+93'
     ],
     802 => [
+        'type' => 'country',
         'english_name' => 'Benin',
         'timezone' => 1,
         'country_code2' => 'BJ',
@@ -3741,6 +4008,7 @@ return [
         'calling_code' => '+93'
     ],
     803 => [
+        'type' => 'country',
         'english_name' => 'Kamerun',
         'timezone' => 1,
         'country_code2' => 'CM',
@@ -3755,6 +4023,7 @@ return [
         'calling_code' => '+93'
     ],
     804 => [
+        'type' => 'country',
         'english_name' => 'Ekvatoriaal-Guinea',
         'timezone' => 1,
         'country_code2' => 'GQ',
@@ -3769,6 +4038,7 @@ return [
         'calling_code' => '+93'
     ],
     805 => [
+        'type' => 'country',
         'english_name' => 'Kesk Aafrika Vabariik',
         'timezone' => 1,
         'country_code2' => 'CF',
@@ -3783,6 +4053,7 @@ return [
         'calling_code' => '+93'
     ],
     806 => [
+        'type' => 'country',
         'english_name' => 'Etioopia',
         'timezone' => 3,
         'country_code2' => 'ET',
@@ -3797,6 +4068,7 @@ return [
         'calling_code' => '+93'
     ],
     807 => [
+        'type' => 'country',
         'english_name' => 'Djibouti',
         'timezone' => 3,
         'country_code2' => 'DJ',
@@ -3811,6 +4083,7 @@ return [
         'calling_code' => '+93'
     ],
     808 => [
+        'type' => 'country',
         'english_name' => 'Somaalia',
         'timezone' => 3,
         'country_code2' => 'SO',
@@ -3825,6 +4098,7 @@ return [
         'calling_code' => '+93'
     ],
     809 => [
+        'type' => 'country',
         'english_name' => 'Gabon',
         'timezone' => 1,
         'country_code2' => 'GA',
@@ -3839,6 +4113,7 @@ return [
         'calling_code' => '+93'
     ],
     810 => [
+        'type' => 'country',
         'english_name' => 'Kongo-Brazzaville',
         'timezone' => 1,
         'country_code2' => 'CG',
@@ -3853,6 +4128,7 @@ return [
         'calling_code' => '+93'
     ],
     811 => [
+        'type' => 'country',
         'english_name' => 'Kongo-Kinshasa',
         'timezone' => false,
         'country_code2' => 'CD',
@@ -3867,6 +4143,7 @@ return [
         'calling_code' => '+93'
     ],
     812 => [
+        'type' => 'country',
         'english_name' => 'Rwanda',
         'timezone' => 2,
         'country_code2' => 'RW',
@@ -3881,6 +4158,7 @@ return [
         'calling_code' => '+93'
     ],
     813 => [
+        'type' => 'country',
         'english_name' => 'Angola',
         'timezone' => 1,
         'country_code2' => 'AO',
@@ -3895,6 +4173,7 @@ return [
         'calling_code' => '+93'
     ],
     814 => [
+        'type' => 'country',
         'english_name' => 'Malawi',
         'timezone' => 2,
         'country_code2' => 'MW',
@@ -3909,6 +4188,7 @@ return [
         'calling_code' => '+93'
     ],
     816 => [
+        'type' => 'country',
         'english_name' => 'Comoros',
         'timezone' => 3,
         'country_code2' => 'KM',
@@ -3923,6 +4203,7 @@ return [
         'calling_code' => '+93'
     ],
     817 => [
+        'type' => 'country',
         'english_name' => 'Lesotho',
         'timezone' => 2,
         'country_code2' => 'LS',
@@ -3937,6 +4218,7 @@ return [
         'calling_code' => '+93'
     ],
     818 => [
+        'type' => 'country',
         'english_name' => 'Svaasimaa',
         'timezone' => 2,
         'country_code2' => 'SZ',
@@ -3951,6 +4233,7 @@ return [
         'calling_code' => '+93'
     ],
     820 => [
+        'type' => 'country',
         'english_name' => 'Roheneemesaared',
         'timezone' => -1,
         'country_code2' => 'CV',
@@ -3965,6 +4248,7 @@ return [
         'calling_code' => '+93'
     ],
     823 => [
+        'type' => 'city',
         'english_name' => 'Krimm',
         'timezone' => 1,
         'country_code2' => 'DE',
@@ -3979,6 +4263,7 @@ return [
         'calling_code' => '+93'
     ],
     827 => [
+        'type' => 'country',
         'english_name' => 'Montenegro',
         'timezone' => 1,
         'country_code2' => 'ME',
@@ -3993,6 +4278,7 @@ return [
         'calling_code' => '+93'
     ],
     828 => [
+        'type' => 'country',
         'english_name' => 'Bhutan',
         'timezone' => 6,
         'country_code2' => 'BT',
@@ -4007,6 +4293,7 @@ return [
         'calling_code' => '+93'
     ],
     829 => [
+        'type' => 'city',
         'english_name' => 'Tallinn',
         'timezone' => 2,
         'country_code2' => 'EE',
@@ -4021,6 +4308,7 @@ return [
         'calling_code' => '+93'
     ],
     849 => [
+        'type' => 'city',
         'english_name' => 'São Paulo',
         'timezone' => -2,
         'country_code2' => 'BR',
@@ -4035,6 +4323,7 @@ return [
         'calling_code' => '+93'
     ],
     852 => [
+        'type' => 'city',
         'english_name' => 'Sulawesi',
         'timezone' => 8,
         'country_code2' => 'ID',
@@ -4049,6 +4338,7 @@ return [
         'calling_code' => '+93'
     ],
     856 => [
+        'type' => 'country',
         'english_name' => 'Macau',
         'timezone' => 8,
         'country_code2' => 'MO',
@@ -4063,6 +4353,7 @@ return [
         'calling_code' => '+93'
     ],
     864 => [
+        'type' => 'city',
         'english_name' => 'London',
         'timezone' => false,
         'country_code2' => 'GB',
@@ -4077,6 +4368,7 @@ return [
         'calling_code' => '+93'
     ],
     882 => [
+        'type' => 'country',
         'english_name' => 'Bahama',
         'timezone' => -5,
         'country_code2' => 'BS',
@@ -4091,6 +4383,7 @@ return [
         'calling_code' => '+93'
     ],
     885 => [
+        'type' => 'country',
         'english_name' => 'Kaimanisaared',
         'timezone' => -5,
         'country_code2' => 'KY',
@@ -4105,6 +4398,7 @@ return [
         'calling_code' => '+93'
     ],
     908 => [
+        'type' => 'country',
         'english_name' => 'Belau',
         'timezone' => 9,
         'country_code2' => 'PW',
@@ -4119,6 +4413,7 @@ return [
         'calling_code' => '+93'
     ],
     931 => [
+        'type' => 'country',
         'english_name' => 'Nauru',
         'timezone' => 12,
         'country_code2' => 'NR',
@@ -4133,6 +4428,7 @@ return [
         'calling_code' => '+93'
     ],
     955 => [
+        'type' => 'country',
         'english_name' => 'Bermuda',
         'timezone' => -4,
         'country_code2' => 'BM',
@@ -4147,6 +4443,7 @@ return [
         'calling_code' => '+93'
     ],
     969 => [
+        'type' => 'country',
         'english_name' => 'Jõulusaar',
         'timezone' => 7,
         'country_code2' => 'CX',
@@ -4161,6 +4458,7 @@ return [
         'calling_code' => '+93'
     ],
     985 => [
+        'type' => 'city',
         'english_name' => 'Delhi',
         'timezone' => 5.5,
         'country_code2' => 'IN',
@@ -4175,6 +4473,7 @@ return [
         'calling_code' => '+93'
     ],
     1000 => [
+        'type' => 'country',
         'english_name' => 'Turks ja Caicos',
         'timezone' => -5,
         'country_code2' => 'TC',
@@ -4189,6 +4488,7 @@ return [
         'calling_code' => '+93'
     ],
     1013 => [
+        'type' => 'country',
         'english_name' => 'Samoa',
         'timezone' => 14,
         'country_code2' => 'WS',
@@ -4203,6 +4503,7 @@ return [
         'calling_code' => '+93'
     ],
     1063 => [
+        'type' => 'place',
         'english_name' => 'Miami',
         'timezone' => -5,
         'country_code2' => 'US',
@@ -4217,6 +4518,7 @@ return [
         'calling_code' => '+93'
     ],
     1075 => [
+        'type' => 'country',
         'english_name' => 'Sint Maarten',
         'timezone' => -4,
         'country_code2' => 'SX',
@@ -4231,6 +4533,7 @@ return [
         'calling_code' => '+93'
     ],
     1111 => [
+        'type' => 'country',
         'english_name' => 'Kiribati',
         'timezone' => false,
         'country_code2' => 'KI',
@@ -4245,6 +4548,7 @@ return [
         'calling_code' => '+93'
     ],
     1112 => [
+        'type' => 'country',
         'english_name' => 'Tuvalu',
         'timezone' => 12,
         'country_code2' => 'TV',
@@ -4259,6 +4563,7 @@ return [
         'calling_code' => '+93'
     ],
     1138 => [
+        'type' => 'place',
         'english_name' => 'Pisa',
         'timezone' => 1,
         'country_code2' => 'IT',
@@ -4273,6 +4578,7 @@ return [
         'calling_code' => '+93'
     ],
     1144 => [
+        'type' => 'country',
         'english_name' => 'Liechtenstein',
         'timezone' => 1,
         'country_code2' => 'LI',
@@ -4287,6 +4593,7 @@ return [
         'calling_code' => '+93'
     ],
     1161 => [
+        'type' => 'city',
         'english_name' => 'Dhahab',
         'timezone' => 2,
         'country_code2' => 'EG',
@@ -4301,6 +4608,7 @@ return [
         'calling_code' => '+93'
     ],
     1214 => [
+        'type' => 'country',
         'english_name' => 'Uruguay',
         'timezone' => -3,
         'country_code2' => 'UY',
@@ -4315,6 +4623,7 @@ return [
         'calling_code' => '+93'
     ],
     1300 => [
+        'type' => 'city',
         'english_name' => 'Bavaria',
         'timezone' => 1,
         'country_code2' => 'DE',
@@ -4329,6 +4638,7 @@ return [
         'calling_code' => '+93'
     ],
     1372 => [
+        'type' => 'country',
         'english_name' => 'Ida Timor',
         'timezone' => 9,
         'country_code2' => 'TL',
@@ -4343,6 +4653,7 @@ return [
         'calling_code' => '+93'
     ],
     1398 => [
+        'type' => 'country',
         'english_name' => 'Kookosesaared',
         'timezone' => false,
         'country_code2' => 'false',
@@ -4357,6 +4668,7 @@ return [
         'calling_code' => '+93'
     ],
     1405 => [
+        'type' => 'city',
         'english_name' => 'Genf',
         'timezone' => 1,
         'country_code2' => 'CH',
@@ -4371,6 +4683,7 @@ return [
         'calling_code' => '+93'
     ],
     1474 => [
+        'type' => 'country',
         'english_name' => 'USA Neitsisaared',
         'timezone' => -4,
         'country_code2' => 'VI',
@@ -4385,6 +4698,7 @@ return [
         'calling_code' => '+93'
     ],
     1498 => [
+        'type' => 'place',
         'english_name' => 'Genova',
         'timezone' => 1,
         'country_code2' => 'IT',
@@ -4399,6 +4713,7 @@ return [
         'calling_code' => '+93'
     ],
     1503 => [
+        'type' => 'country',
         'english_name' => 'Republic of Kosovo',
         'timezone' => 1,
         'country_code2' => 'XK',
@@ -4413,6 +4728,7 @@ return [
         'calling_code' => '+93'
     ],
     1528 => [
+        'type' => 'place',
         'english_name' => 'Cannes',
         'timezone' => 1,
         'country_code2' => 'FR',
@@ -4427,6 +4743,7 @@ return [
         'calling_code' => '+93'
     ],
     1706 => [
+        'type' => 'country',
         'english_name' => 'Microneesia',
         'timezone' => false,
         'country_code2' => 'FM',
@@ -4441,6 +4758,7 @@ return [
         'calling_code' => '+93'
     ],
     1716 => [
+        'type' => 'place',
         'english_name' => 'Málaga',
         'timezone' => 1,
         'country_code2' => 'ES',
@@ -4455,6 +4773,7 @@ return [
         'calling_code' => '+93'
     ],
     1725 => [
+        'type' => 'country',
         'english_name' => 'Dominica',
         'timezone' => -4,
         'country_code2' => 'DM',
@@ -4469,6 +4788,7 @@ return [
         'calling_code' => '+93'
     ],
     1727 => [
+        'type' => 'country',
         'english_name' => 'Grenada',
         'timezone' => -4,
         'country_code2' => 'GD',
@@ -4483,6 +4803,7 @@ return [
         'calling_code' => '+93'
     ],
     2096 => [
+        'type' => 'country',
         'english_name' => 'Uus-Kaledoonia',
         'timezone' => 11,
         'country_code2' => 'NC',
@@ -4497,6 +4818,7 @@ return [
         'calling_code' => '+93'
     ],
     2262 => [
+        'type' => 'place',
         'english_name' => 'Edinburgh',
         'timezone' => false,
         'country_code2' => 'GB',
@@ -4511,6 +4833,7 @@ return [
         'calling_code' => '+93'
     ],
     2321 => [
+        'type' => 'country',
         'english_name' => 'Saint Kitts ja Nevis',
         'timezone' => -4,
         'country_code2' => 'KN',
@@ -4525,6 +4848,7 @@ return [
         'calling_code' => '+93'
     ],
     2371 => [
+        'type' => 'place',
         'english_name' => 'Gold Coast',
         'timezone' => 10,
         'country_code2' => 'AU',
@@ -4539,6 +4863,7 @@ return [
         'calling_code' => '+93'
     ],
     2395 => [
+        'type' => 'country',
         'english_name' => 'Gibraltar',
         'timezone' => 1,
         'country_code2' => 'GI',
@@ -4553,6 +4878,7 @@ return [
         'calling_code' => '+93'
     ],
     2421 => [
+        'type' => 'place',
         'english_name' => 'Aeroport de Girona - Costa Brava',
         'timezone' => 1,
         'country_code2' => 'ES',
@@ -4567,6 +4893,7 @@ return [
         'calling_code' => '+93'
     ],
     2468 => [
+        'type' => 'country',
         'english_name' => 'Saint Lucia',
         'timezone' => -4,
         'country_code2' => 'LC',
@@ -4581,6 +4908,7 @@ return [
         'calling_code' => '+93'
     ],
     2518 => [
+        'type' => 'country',
         'english_name' => 'Lääne-Sahara',
         'timezone' => 1,
         'country_code2' => 'EH',
@@ -4595,6 +4923,7 @@ return [
         'calling_code' => '+93'
     ],
     2594 => [
+        'type' => 'city',
         'english_name' => 'Normandie',
         'timezone' => 1,
         'country_code2' => 'FR',
@@ -4609,6 +4938,7 @@ return [
         'calling_code' => '+93'
     ],
     2719 => [
+        'type' => 'place',
         'english_name' => 'Albufeira',
         'timezone' => false,
         'country_code2' => 'PT',
@@ -4623,6 +4953,7 @@ return [
         'calling_code' => '+93'
     ],
     2935 => [
+        'type' => 'country',
         'english_name' => 'Montserrat',
         'timezone' => -4,
         'country_code2' => 'MS',
@@ -4637,6 +4968,7 @@ return [
         'calling_code' => '+93'
     ],
     3003 => [
+        'type' => 'country',
         'english_name' => 'Antigua ja Barbuda',
         'timezone' => -4,
         'country_code2' => 'AG',
@@ -4651,6 +4983,7 @@ return [
         'calling_code' => '+93'
     ],
     3201 => [
+        'type' => 'country',
         'english_name' => 'Falklandi saared',
         'timezone' => -3,
         'country_code2' => 'FK',
@@ -4665,6 +4998,7 @@ return [
         'calling_code' => '+93'
     ],
     3308 => [
+        'type' => 'place',
         'english_name' => 'Marseille',
         'timezone' => 1,
         'country_code2' => 'FR',
@@ -4679,6 +5013,7 @@ return [
         'calling_code' => '+93'
     ],
     3902 => [
+        'type' => 'country',
         'english_name' => 'Briti Neitsisaared',
         'timezone' => -4,
         'country_code2' => 'VG',
@@ -4693,6 +5028,7 @@ return [
         'calling_code' => '+93'
     ],
     4097 => [
+        'type' => 'country',
         'english_name' => 'Burundi',
         'timezone' => 2,
         'country_code2' => 'BI',
@@ -4707,6 +5043,7 @@ return [
         'calling_code' => '+93'
     ],
     4260 => [
+        'type' => 'country',
         'english_name' => 'Vanuatu',
         'timezone' => 11,
         'country_code2' => 'VU',
@@ -4721,6 +5058,7 @@ return [
         'calling_code' => '+93'
     ],
     4299 => [
+        'type' => 'country',
         'english_name' => 'Guam',
         'timezone' => 10,
         'country_code2' => 'GU',
@@ -4735,6 +5073,7 @@ return [
         'calling_code' => '+93'
     ],
     4301 => [
+        'type' => 'country',
         'english_name' => 'Mayotte',
         'timezone' => 3,
         'country_code2' => 'YT',
@@ -4749,6 +5088,7 @@ return [
         'calling_code' => '+93'
     ],
     4302 => [
+        'type' => 'country',
         'english_name' => 'Saint Pierre ja Miquelon',
         'timezone' => -3,
         'country_code2' => 'PM',
@@ -4763,6 +5103,7 @@ return [
         'calling_code' => '+93'
     ],
     4303 => [
+        'type' => 'country',
         'english_name' => 'Anguilla',
         'timezone' => -4,
         'country_code2' => 'AI',
@@ -4777,6 +5118,7 @@ return [
         'calling_code' => '+93'
     ],
     4304 => [
+        'type' => 'country',
         'english_name' => 'Saint Vincent ja Grenadines',
         'timezone' => -4,
         'country_code2' => 'VC',
@@ -4791,6 +5133,7 @@ return [
         'calling_code' => '+93'
     ],
     4305 => [
+        'type' => 'country',
         'english_name' => 'Ameerika Samoa',
         'timezone' => -11,
         'country_code2' => 'AS',
@@ -4805,6 +5148,7 @@ return [
         'calling_code' => '+93'
     ],
     4306 => [
+        'type' => 'country',
         'english_name' => 'Marshalli Saared',
         'timezone' => false,
         'country_code2' => 'MH',
@@ -4819,6 +5163,7 @@ return [
         'calling_code' => '+93'
     ],
     4307 => [
+        'type' => 'country',
         'english_name' => 'Norfolk',
         'timezone' => 11,
         'country_code2' => 'NF',
@@ -4833,6 +5178,7 @@ return [
         'calling_code' => '+93'
     ],
     4308 => [
+        'type' => 'country',
         'english_name' => 'Pitcairn',
         'timezone' => -8,
         'country_code2' => 'PN',
@@ -4847,6 +5193,7 @@ return [
         'calling_code' => '+93'
     ],
     4309 => [
+        'type' => 'country',
         'english_name' => 'Põhja-Mariaanid',
         'timezone' => 10,
         'country_code2' => 'MP',
@@ -4861,6 +5208,7 @@ return [
         'calling_code' => '+93'
     ],
     4315 => [
+        'type' => 'country',
         'english_name' => 'Somaalimaa',
         'timezone' => false,
         'country_code2' => 'false',
@@ -4875,6 +5223,7 @@ return [
         'calling_code' => '+93'
     ],
     4344 => [
+        'type' => 'city',
         'english_name' => 'Costa del Sol',
         'timezone' => 1,
         'country_code2' => 'ES',
@@ -4889,6 +5238,7 @@ return [
         'calling_code' => '+93'
     ],
     4345 => [
+        'type' => 'city',
         'english_name' => 'Krki saar',
         'timezone' => 1,
         'country_code2' => 'HR',
@@ -4903,6 +5253,7 @@ return [
         'calling_code' => '+93'
     ],
     4347 => [
+        'type' => 'city',
         'english_name' => 'Newcastle',
         'timezone' => 11,
         'country_code2' => 'AU',
@@ -4917,6 +5268,7 @@ return [
         'calling_code' => '+93'
     ],
     4349 => [
+        'type' => 'city',
         'english_name' => 'Marquesas Islands',
         'timezone' => false,
         'country_code2' => 'PF',
@@ -4931,6 +5283,7 @@ return [
         'calling_code' => '+93'
     ],
     4353 => [
+        'type' => 'city',
         'english_name' => 'Java',
         'timezone' => 7,
         'country_code2' => 'ID',
@@ -4945,6 +5298,7 @@ return [
         'calling_code' => '+93'
     ],
     4354 => [
+        'type' => 'city',
         'english_name' => 'Cappadocia (Roman province)',
         'timezone' => 3,
         'country_code2' => 'TR',
@@ -4959,6 +5313,7 @@ return [
         'calling_code' => '+93'
     ],
     4355 => [
+        'type' => 'city',
         'english_name' => 'Mombasa',
         'timezone' => 3,
         'country_code2' => 'KE',
@@ -4973,6 +5328,7 @@ return [
         'calling_code' => '+93'
     ],
     4356 => [
+        'type' => 'city',
         'english_name' => 'Nairobi',
         'timezone' => 3,
         'country_code2' => 'KE',
@@ -4987,6 +5343,7 @@ return [
         'calling_code' => '+93'
     ],
     4358 => [
+        'type' => 'city',
         'english_name' => 'Tangier',
         'timezone' => 1,
         'country_code2' => 'MA',
@@ -5001,6 +5358,7 @@ return [
         'calling_code' => '+93'
     ],
     4363 => [
+        'type' => 'city',
         'english_name' => 'Havanna',
         'timezone' => -5,
         'country_code2' => 'CU',
@@ -5015,6 +5373,7 @@ return [
         'calling_code' => '+93'
     ],
     4366 => [
+        'type' => 'city',
         'english_name' => 'Wellington',
         'timezone' => 13,
         'country_code2' => 'NZ',
@@ -5029,6 +5388,7 @@ return [
         'calling_code' => '+93'
     ],
     4601 => [
+        'type' => 'city',
         'english_name' => 'Tirana',
         'timezone' => 1,
         'country_code2' => 'AL',
@@ -5043,6 +5403,7 @@ return [
         'calling_code' => '+93'
     ],
     4602 => [
+        'type' => 'city',
         'english_name' => 'Jerevan',
         'timezone' => 4,
         'country_code2' => 'AM',
@@ -5057,6 +5418,7 @@ return [
         'calling_code' => '+93'
     ],
     4607 => [
+        'type' => 'city',
         'english_name' => 'Khuthaisi',
         'timezone' => 4,
         'country_code2' => 'GE',
@@ -5071,6 +5433,7 @@ return [
         'calling_code' => '+93'
     ],
     4619 => [
+        'type' => 'city',
         'english_name' => 'Kraków',
         'timezone' => 1,
         'country_code2' => 'PL',
@@ -5085,6 +5448,7 @@ return [
         'calling_code' => '+93'
     ],
     4620 => [
+        'type' => 'place',
         'english_name' => 'Distrito de Faro',
         'timezone' => false,
         'country_code2' => 'PT',
@@ -5099,6 +5463,7 @@ return [
         'calling_code' => '+93'
     ],
     4621 => [
+        'type' => 'city',
         'english_name' => 'Gothenburg',
         'timezone' => 1,
         'country_code2' => 'SE',
@@ -5113,6 +5478,7 @@ return [
         'calling_code' => '+93'
     ],
     4622 => [
+        'type' => 'city',
         'english_name' => 'Belgrad',
         'timezone' => 1,
         'country_code2' => 'RS',
@@ -5127,6 +5493,7 @@ return [
         'calling_code' => '+93'
     ],
     4623 => [
+        'type' => 'city',
         'english_name' => 'Bratislava',
         'timezone' => 1,
         'country_code2' => 'SK',
@@ -5141,6 +5508,7 @@ return [
         'calling_code' => '+93'
     ],
     4628 => [
+        'type' => 'city',
         'english_name' => 'Kabul',
         'timezone' => 4.5,
         'country_code2' => 'AF',
@@ -5155,6 +5523,7 @@ return [
         'calling_code' => '+93'
     ],
     4634 => [
+        'type' => 'city',
         'english_name' => 'Bohol',
         'timezone' => 8,
         'country_code2' => 'PH',
@@ -5169,6 +5538,7 @@ return [
         'calling_code' => '+93'
     ],
     4635 => [
+        'type' => 'city',
         'english_name' => 'Province of Palawan',
         'timezone' => 8,
         'country_code2' => 'PH',
@@ -5183,6 +5553,7 @@ return [
         'calling_code' => '+93'
     ],
     4638 => [
+        'type' => 'country',
         'english_name' => 'Chennai',
         'timezone' => 5.5,
         'country_code2' => 'IN',
@@ -5197,6 +5568,7 @@ return [
         'calling_code' => '+93'
     ],
     4645 => [
+        'type' => 'city',
         'english_name' => 'Sihanoukville',
         'timezone' => 7,
         'country_code2' => 'KH',
@@ -5211,6 +5583,7 @@ return [
         'calling_code' => '+93'
     ],
     4648 => [
+        'type' => 'city',
         'english_name' => 'Viangchan',
         'timezone' => 7,
         'country_code2' => 'LA',
@@ -5225,6 +5598,7 @@ return [
         'calling_code' => '+93'
     ],
     4649 => [
+        'type' => 'city',
         'english_name' => 'Luang Prabang',
         'timezone' => 7,
         'country_code2' => 'LA',
@@ -5239,6 +5613,7 @@ return [
         'calling_code' => '+93'
     ],
     4651 => [
+        'type' => 'city',
         'english_name' => 'Sŏul',
         'timezone' => 9,
         'country_code2' => 'KR',
@@ -5253,6 +5628,7 @@ return [
         'calling_code' => '+93'
     ],
     4652 => [
+        'type' => 'city',
         'english_name' => 'Male',
         'timezone' => 5,
         'country_code2' => 'MV',
@@ -5267,6 +5643,7 @@ return [
         'calling_code' => '+93'
     ],
     4653 => [
+        'type' => 'city',
         'english_name' => 'Ulaanbaatar',
         'timezone' => 8,
         'country_code2' => 'MN',
@@ -5281,6 +5658,7 @@ return [
         'calling_code' => '+93'
     ],
     4654 => [
+        'type' => 'city',
         'english_name' => 'Yangon',
         'timezone' => 6.5,
         'country_code2' => 'MM',
@@ -5295,6 +5673,7 @@ return [
         'calling_code' => '+93'
     ],
     4656 => [
+        'type' => 'city',
         'english_name' => 'Katmandu',
         'timezone' => 5.75,
         'country_code2' => 'NP',
@@ -5309,6 +5688,7 @@ return [
         'calling_code' => '+93'
     ],
     4663 => [
+        'type' => 'city',
         'english_name' => 'Pidurutalagala',
         'timezone' => 5.5,
         'country_code2' => 'LK',
@@ -5323,6 +5703,7 @@ return [
         'calling_code' => '+93'
     ],
     4665 => [
+        'type' => 'city',
         'english_name' => 'Chiang Mai',
         'timezone' => 7,
         'country_code2' => 'TH',
@@ -5337,6 +5718,7 @@ return [
         'calling_code' => '+93'
     ],
     4666 => [
+        'type' => 'city',
         'english_name' => 'Koh Phangan',
         'timezone' => 7,
         'country_code2' => 'TH',
@@ -5351,6 +5733,7 @@ return [
         'calling_code' => '+93'
     ],
     4667 => [
+        'type' => 'city',
         'english_name' => 'Ko Tao',
         'timezone' => 7,
         'country_code2' => 'TH',
@@ -5365,6 +5748,7 @@ return [
         'calling_code' => '+93'
     ],
     4668 => [
+        'type' => 'city',
         'english_name' => 'Ko Lanta',
         'timezone' => 7,
         'country_code2' => 'TH',
@@ -5379,6 +5763,7 @@ return [
         'calling_code' => '+93'
     ],
     4670 => [
+        'type' => 'city',
         'english_name' => 'Chiang Rai',
         'timezone' => 7,
         'country_code2' => 'TH',
@@ -5393,6 +5778,7 @@ return [
         'calling_code' => '+93'
     ],
     4671 => [
+        'type' => 'city',
         'english_name' => 'Baicheng',
         'timezone' => 8,
         'country_code2' => 'CN',
@@ -5407,6 +5793,7 @@ return [
         'calling_code' => '+93'
     ],
     4672 => [
+        'type' => 'city',
         'english_name' => 'Ko Phi Phi Don',
         'timezone' => 7,
         'country_code2' => 'TH',
@@ -5421,6 +5808,7 @@ return [
         'calling_code' => '+93'
     ],
     4676 => [
+        'type' => 'city',
         'english_name' => 'Taipei',
         'timezone' => 8,
         'country_code2' => 'TW',
@@ -5435,6 +5823,7 @@ return [
         'calling_code' => '+93'
     ],
     4678 => [
+        'type' => 'city',
         'english_name' => 'Toshkent',
         'timezone' => 5,
         'country_code2' => 'UZ',
@@ -5449,6 +5838,7 @@ return [
         'calling_code' => '+93'
     ],
     4679 => [
+        'type' => 'city',
         'english_name' => 'Hanoi',
         'timezone' => 7,
         'country_code2' => 'VN',
@@ -5463,6 +5853,7 @@ return [
         'calling_code' => '+93'
     ],
     4680 => [
+        'type' => 'city',
         'english_name' => 'Ho Chi Minh City',
         'timezone' => 7,
         'country_code2' => 'VN',
@@ -5477,6 +5868,7 @@ return [
         'calling_code' => '+93'
     ],
     4681 => [
+        'type' => 'city',
         'english_name' => 'Hội An',
         'timezone' => 7,
         'country_code2' => 'VN',
@@ -5491,6 +5883,7 @@ return [
         'calling_code' => '+93'
     ],
     4682 => [
+        'type' => 'city',
         'english_name' => 'Phu Quoc International Airport',
         'timezone' => 7,
         'country_code2' => 'VN',
@@ -5505,6 +5898,7 @@ return [
         'calling_code' => '+93'
     ],
     4683 => [
+        'type' => 'city',
         'english_name' => 'La Paz',
         'timezone' => -4,
         'country_code2' => 'BO',
@@ -5519,6 +5913,7 @@ return [
         'calling_code' => '+93'
     ],
     4684 => [
+        'type' => 'city',
         'english_name' => 'El Salvador',
         'timezone' => -6,
         'country_code2' => 'SV',
@@ -5533,6 +5928,7 @@ return [
         'calling_code' => '+93'
     ],
     4685 => [
+        'type' => 'city',
         'english_name' => 'Asunción',
         'timezone' => -3,
         'country_code2' => 'PY',
@@ -5547,6 +5943,7 @@ return [
         'calling_code' => '+93'
     ],
     4686 => [
+        'type' => 'city',
         'english_name' => 'Santiago',
         'timezone' => -3,
         'country_code2' => 'CL',
@@ -5561,6 +5958,7 @@ return [
         'calling_code' => '+93'
     ],
     4687 => [
+        'type' => 'city',
         'english_name' => 'Addis Abeba',
         'timezone' => 3,
         'country_code2' => 'ET',
@@ -5575,6 +5973,7 @@ return [
         'calling_code' => '+93'
     ],
     4688 => [
+        'type' => 'city',
         'english_name' => 'Kampala',
         'timezone' => 3,
         'country_code2' => 'UG',
@@ -5589,6 +5988,7 @@ return [
         'calling_code' => '+93'
     ],
     4689 => [
+        'type' => 'city',
         'english_name' => 'Johannesburg',
         'timezone' => 2,
         'country_code2' => 'ZA',
@@ -5603,6 +6003,7 @@ return [
         'calling_code' => '+93'
     ],
     4690 => [
+        'type' => 'city',
         'english_name' => 'Kaplinn',
         'timezone' => 2,
         'country_code2' => 'ZA',
@@ -5617,6 +6018,7 @@ return [
         'calling_code' => '+93'
     ],
     4691 => [
+        'type' => 'city',
         'english_name' => 'Windhoek',
         'timezone' => 2,
         'country_code2' => 'NA',
@@ -5631,6 +6033,7 @@ return [
         'calling_code' => '+93'
     ],
     4692 => [
+        'type' => 'city',
         'english_name' => 'Lusaka',
         'timezone' => 2,
         'country_code2' => 'ZM',
@@ -5645,6 +6048,7 @@ return [
         'calling_code' => '+93'
     ],
     4693 => [
+        'type' => 'city',
         'english_name' => 'Kigali',
         'timezone' => 2,
         'country_code2' => 'RW',
@@ -5659,6 +6063,7 @@ return [
         'calling_code' => '+93'
     ],
     4694 => [
+        'type' => 'city',
         'english_name' => 'Accra',
         'timezone' => false,
         'country_code2' => 'GH',
@@ -5673,6 +6078,7 @@ return [
         'calling_code' => '+93'
     ],
     4696 => [
+        'type' => 'city',
         'english_name' => '‘Ammān',
         'timezone' => 2,
         'country_code2' => 'JO',
@@ -5687,6 +6093,7 @@ return [
         'calling_code' => '+93'
     ],
     4697 => [
+        'type' => 'city',
         'english_name' => 'Tel Aviv',
         'timezone' => 2,
         'country_code2' => 'IL',
@@ -5701,6 +6108,7 @@ return [
         'calling_code' => '+93'
     ],
     4698 => [
+        'type' => 'city',
         'english_name' => 'Eilat',
         'timezone' => 2,
         'country_code2' => 'IL',
@@ -5715,6 +6123,7 @@ return [
         'calling_code' => '+93'
     ],
     4699 => [
+        'type' => 'city',
         'english_name' => 'Teheran',
         'timezone' => 3.5,
         'country_code2' => 'IR',
@@ -5729,6 +6138,7 @@ return [
         'calling_code' => '+93'
     ],
     4700 => [
+        'type' => 'city',
         'english_name' => 'Dar es Salaam',
         'timezone' => 3,
         'country_code2' => 'TZ',
@@ -5743,6 +6153,7 @@ return [
         'calling_code' => '+93'
     ],
     4701 => [
+        'type' => 'city',
         'english_name' => 'Douala',
         'timezone' => 1,
         'country_code2' => 'CM',
@@ -5757,6 +6168,7 @@ return [
         'calling_code' => '+93'
     ],
     4702 => [
+        'type' => 'city',
         'english_name' => 'Yaoundé',
         'timezone' => 1,
         'country_code2' => 'CM',
@@ -5771,6 +6183,7 @@ return [
         'calling_code' => '+93'
     ],
     4703 => [
+        'type' => 'city',
         'english_name' => 'Dakar',
         'timezone' => false,
         'country_code2' => 'SN',
@@ -5785,6 +6198,7 @@ return [
         'calling_code' => '+93'
     ],
     4704 => [
+        'type' => 'city',
         'english_name' => 'Maputo',
         'timezone' => 2,
         'country_code2' => 'MZ',
@@ -5799,6 +6213,7 @@ return [
         'calling_code' => '+93'
     ],
     4705 => [
+        'type' => 'city',
         'english_name' => 'Kinshasa',
         'timezone' => 1,
         'country_code2' => 'CD',
@@ -5813,6 +6228,7 @@ return [
         'calling_code' => '+93'
     ],
     4706 => [
+        'type' => 'city',
         'english_name' => 'Harare',
         'timezone' => 2,
         'country_code2' => 'ZW',
@@ -5827,6 +6243,7 @@ return [
         'calling_code' => '+93'
     ],
     4711 => [
+        'type' => 'city',
         'english_name' => 'Tunis',
         'timezone' => 1,
         'country_code2' => 'TN',
@@ -5841,6 +6258,7 @@ return [
         'calling_code' => '+93'
     ],
     4716 => [
+        'type' => 'country',
         'english_name' => 'Lõuna-Sudaan',
         'timezone' => 3,
         'country_code2' => 'SS',
@@ -5855,6 +6273,7 @@ return [
         'calling_code' => '+93'
     ],
     4721 => [
+        'type' => 'city',
         'english_name' => 'Hainan Dao',
         'timezone' => 8,
         'country_code2' => 'CN',
@@ -5869,6 +6288,7 @@ return [
         'calling_code' => '+93'
     ],
     4722 => [
+        'type' => 'city',
         'english_name' => 'Paphos',
         'timezone' => 2,
         'country_code2' => 'CY',
@@ -5883,6 +6303,7 @@ return [
         'calling_code' => '+93'
     ],
     4723 => [
+        'type' => 'city',
         'english_name' => 'Bari',
         'timezone' => 1,
         'country_code2' => 'IT',
@@ -5897,6 +6318,7 @@ return [
         'calling_code' => '+93'
     ],
     4724 => [
+        'type' => 'city',
         'english_name' => 'Krabi',
         'timezone' => 7,
         'country_code2' => 'TH',
@@ -5911,6 +6333,7 @@ return [
         'calling_code' => '+93'
     ],
     4725 => [
+        'type' => 'city',
         'english_name' => 'Menorca Airport',
         'timezone' => 1,
         'country_code2' => 'ES',
@@ -5925,6 +6348,7 @@ return [
         'calling_code' => '+93'
     ],
     4726 => [
+        'type' => 'city',
         'english_name' => 'Bilbao',
         'timezone' => 1,
         'country_code2' => 'ES',
@@ -5939,6 +6363,7 @@ return [
         'calling_code' => '+93'
     ],
     4727 => [
+        'type' => 'city',
         'english_name' => 'Bologna',
         'timezone' => 1,
         'country_code2' => 'IT',
@@ -5953,6 +6378,7 @@ return [
         'calling_code' => '+93'
     ],
     4728 => [
+        'type' => 'city',
         'english_name' => 'Burgas',
         'timezone' => 2,
         'country_code2' => 'BG',
