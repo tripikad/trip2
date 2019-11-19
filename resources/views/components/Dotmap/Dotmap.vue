@@ -1,57 +1,65 @@
 <template>
     <div class="Dotmap" :class="isclasses">
-        <svg :width="width" :height="height"">
-            <g v-if="dots.length">
+        <svg :width="width" :height="height">
+            <g>
                 <circle
-                    v-for="(c, i) in dots"
+                    v-for="(c, i) in countrydots"
                     :key="i"
-                    :cx="xScale(c.lon)"
-                    :cy="yScale(c.lat)"
+                    :cx="xScale(c[0])"
+                    :cy="yScale(c[1])"
                     :r="radius"
-                    fill="black"
-                    opacity="0.25"
+                    :fill="$styleVars[backgroundcolor] || backgroundcolor"
                 />
             </g>
-            <g v-if="activeCountriesDots.length">
+            <g v-if="activeCountryDots.length">
                 <circle
-                    v-for="(c, i) in activeCountriesDots"
+                    v-for="(c, i) in activeCountryDots"
+                    :key="i"
+                    :cx="xScale(c[0])"
+                    :cy="yScale(c[1])"
+                    :r="radius"
+                    :fill="$styleVars[dotcolor] || dotcolor"
+                />
+            </g>
+            <g v-if="smalldots.length">
+                <circle
+                    v-for="(c, i) in smalldots"
                     :key="i"
                     :cx="xScale(c.lon)"
                     :cy="yScale(c.lat)"
                     :r="radius"
-                    :fill="$styleVars.cyan"
+                    :fill="$styleVars[smalldotcolor] || smalldotcolor"
                 />
             </g>
             <path
-                v-if="activeLinesCoordinates.length"
-                :d="line(activeLinesCoordinates)"
-                stroke="white"
+                v-if="lines.length"
+                :d="line(lines)"
+                :stroke="$styleVars[linecolor] || linecolor"
                 stroke-width="2"
                 fill="none"
-                opacity="0.7"
             />
-            <g v-if="passiveCitiesCircles.length">
+            <g v-if="mediumdots.length">
                 <circle
-                    v-for="(c, i) in passiveCitiesCircles"
+                    v-for="(d, i) in mediumdots"
                     :key="i"
-                    :cx="xScale(c.lon)"
-                    :cy="yScale(c.lat)"
+                    :cx="xScale(d.lon)"
+                    :cy="yScale(d.lat)"
                     :r="radius * 2"
-                    stroke="white"
+                    :stroke="$styleVars[linecolor] || linecolor"
                     stroke-width="2"
-                    :fill="$styleVars.blue"
+                    :fill="$styleVars[mediumdotcolor] || mediumdotcolor"
                 />
             </g>
-            <g v-if="activeCitiesCircles.length">
+            <g v-if="largedots.length">
                 <circle
-                    v-for="(c, i) in activeCitiesCircles"
+                    v-for="(d, i) in largedots"
                     :key="i"
-                    :cx="xScale(c.lon)"
-                    :cy="yScale(c.lat)"
+                    :cx="xScale(d.lon)"
+                    :cy="yScale(d.lat)"
                     :r="radius * 3"
-                    stroke="white"
+                    :stroke="$styleVars[linecolor] || linecolor"
                     stroke-width="2"
-                    :fill="$styleVars.orange"
+                    :fill="$styleVars[largedotcolor] || largedotcolor"
                 />
             </g>
         </svg>
@@ -66,14 +74,21 @@ export default {
     props: {
         isclasses: { default: '' },
         width: { default: 750 },
-        dots: { default: () => [] },
-        cities: { default: () => [] },
-        activecountries: { default: () => [] },
-        passivecities: { default: () => [] },
-        activecities: { default: () => [] },
-        activelines: { default: () => [] }
+        areas: { default: () => [] },
+        smalldots: { default: () => [] },
+        mediumdots: { default: () => [] },
+        largedots: { default: () => [] },
+        lines: { default: () => [] },
+        backgroundcolor: { default: 'rgba(0,0,0,0.25)' },
+        dotcolor: { default: 'white' },
+        smalldotcolor: { default: 'white' },
+        mediumdotcolor: { default: 'orange' },
+        largedotcolor: { default: 'orange' },
+        linecolor: { default: 'white' }
     },
-
+    data: () => ({
+        countrydots: []
+    }),
     computed: {
         height() {
             return this.width / 2.5
@@ -91,45 +106,10 @@ export default {
         radius() {
             return this.width / 350
         },
-        activeCountriesDots() {
-            return this.dots.filter(
-                d =>
-                    intersection(d.destination_ids, this.activecountries).length
+        activeCountryDots() {
+            return this.countrydots.filter(
+                d => intersection(d[2], this.areas).length
             )
-        },
-        passiveCitiesCircles() {
-            return this.passivecities
-                .map(c =>
-                    typeof c == 'object'
-                        ? c
-                        : this.cities[c]
-                        ? this.cities[c]
-                        : null
-                )
-                .filter(c => c)
-        },
-        activeCitiesCircles() {
-            return this.activecities
-                .map(c =>
-                    typeof c == 'object'
-                        ? c
-                        : this.cities[c]
-                        ? this.cities[c]
-                        : null
-                )
-                .filter(c => c)
-        },
-        activeLinesCoordinates() {
-            return this.activelines
-                .map(c =>
-                    typeof c == 'object'
-                        ? c
-                        : this.cities[c]
-                        ? this.cities[c]
-                        : null
-                )
-                .filter(c => c)
-                .map(c => [c.lon, c.lat])
         }
     },
 
@@ -142,7 +122,10 @@ export default {
                         type: 'Feature',
                         geometry: {
                             type: 'LineString',
-                            coordinates
+                            coordinates: coordinates.map(({ lon, lat }) => [
+                                lon,
+                                lat
+                            ])
                         }
                     }
                 ]
@@ -155,5 +138,10 @@ export default {
             return this.projection([0, lat])[1]
         }
     },
+    mounted() {
+        this.$http.get('/api/countrydots').then(res => {
+            this.countrydots = res.data
+        })
+    }
 }
 </script>

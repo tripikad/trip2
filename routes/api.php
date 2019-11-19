@@ -6,6 +6,6 @@ Route::get('destinations/data', 'ApiController@destinationsData');
 
 Route::get('flights', 'ApiController@flights');
 
-Route::get('dots', 'ApiController@dots');
+Route::get('countrydots', 'ApiController@countrydots');
 
 Route::get('airports', 'ApiController@airports');

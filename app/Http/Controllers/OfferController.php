@@ -30,7 +30,6 @@ class OfferController extends Controller
                 collect()->push(
                     component('OfferList')
                         ->with('height', '200vh')
-                        ->with('dots', config('dots'))
                         ->with('route', route('offers.index.json'))
                 )
             )
@@ -50,15 +49,25 @@ class OfferController extends Controller
 
     public function show($id)
     {
-        $offer = $this->getSheet()[$id];
+        $offer = (object) $this->getSheet()[$id];
 
-        $name = collect(explode(',', $offer->destination))->map(function ($s) {
-            return trim($s);
-        })->last();
+        //dd($offer);
+
+        $name = $offer->startfrom ? $offer->startfrom : 'Tallinn';
+        $startDestination = Destination::where('name', $name)->first();
+        //dd($startDestination->vars()->facts());
+
+        $name = collect(explode(',', $offer->destination))
+            ->map(function ($s) {
+                return trim($s);
+            })
+            ->last();
 
         $destination = Destination::where('name', $name)->first();
 
-        $photos = $destination ? Content::getLatestPagedItems('photo', 18, $destination->id) : collect();
+        $photos = $destination
+            ? Content::getLatestPagedItems('photo', 18, $destination->id)
+            : collect();
 
         $user = auth()->user();
         $email = $user ? $user->email : '';
@@ -90,17 +99,22 @@ class OfferController extends Controller
                         component('Dotmap')
                             ->is('center')
                             ->with('height', '300px')
-                            ->with('dots', config('dots'))
-                            ->with('cities', config('cities'))
-                            ->with('activelines', [
-                                829,
+                            ->with(
+                                'destination_facts',
+                                config('destination_facts')
+                            )
+
+                            ->with('lines', [
+                                $startDestination->vars()->facts(),
                                 [
                                     'lat' => $offer->latitude,
                                     'lon' => $offer->longitude
                                 ]
                             ])
-                            ->with('passivecities', [829])
-                            ->with('activecities', [
+                            ->with('mediumdots', [
+                                $startDestination->vars()->facts()
+                            ])
+                            ->with('largedots', [
                                 [
                                     'lat' => $offer->latitude,
                                     'lon' => $offer->longitude
@@ -145,7 +159,7 @@ class OfferController extends Controller
                                             ->is('small')
                                             ->is('center')
                                             ->is('white')
-                                            ->is('disabled')
+                                            ->is('semitransparent')
                                             ->with(
                                                 'title',
                                                 $offer->from .
@@ -167,7 +181,7 @@ class OfferController extends Controller
                                         component('Title')
                                             ->is('smallest')
                                             ->is('white')
-                                            ->is('disabled')
+                                            ->is('semitransparent')
                                             ->with('title', 'Firma')
                                     )
                                     ->pushWhen(
@@ -182,7 +196,7 @@ class OfferController extends Controller
                                         component('Title')
                                             ->is('smallest')
                                             ->is('white')
-                                            ->is('disabled')
+                                            ->is('semitransparent')
                                             ->with('title', 'Giid')
                                     )
                                     ->pushWhen(
@@ -197,7 +211,7 @@ class OfferController extends Controller
                                         component('Title')
                                             ->is('smallest')
                                             ->is('white')
-                                            ->is('disabled')
+                                            ->is('semitransparent')
                                             ->with('title', 'Grupi suurus')
                                     )
                                     ->pushWhen(
@@ -229,7 +243,15 @@ class OfferController extends Controller
                             )
                     )
                     ->br()
-                    ->pushWhen($photos->count(), region('PhotoRow', $photos->count() < 18 ? $photos->slice(0, 9) : $photos))
+                    ->pushWhen(
+                        $photos->count(),
+                        region(
+                            'PhotoRow',
+                            $photos->count() < 18
+                                ? $photos->slice(0, 9)
+                                : $photos
+                        )
+                    )
                     ->push('<a id="book"></a>')
                     ->br()
                     ->push(

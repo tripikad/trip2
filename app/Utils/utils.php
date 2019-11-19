@@ -66,6 +66,7 @@ function format_body($body)
 {
     return (new Utils\BodyFormatter($body))
         //->fixLinks()
+        ->flightmap()
         ->calendar()
         ->youtube()
         ->vimeo()
@@ -145,4 +146,9 @@ function style_vars()
     $json = Storage::disk('root')->get('resources/views/styles/variables.json');
 
     return json_decode($json);
+}
+
+function snap($value, $step = 2.5)
+{
+    return round($value / $step) * $step;
 }

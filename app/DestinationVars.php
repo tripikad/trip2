@@ -22,9 +22,7 @@ class DestinationVars
 
         $message = '%s does not respond to the "%s" property or method.';
 
-        throw new Exception(
-            sprintf($message, static::class, $property)
-        );
+        throw new Exception(sprintf($message, static::class, $property));
     }
 
     public function name()
@@ -40,10 +38,6 @@ class DestinationVars
     public function description()
     {
         return format_body($this->destination->description);
-
-        /*$key = "destination.show.description.{$this->destination->id}";
-
-        return Lang::has($key) ? trans($key) : null;*/
     }
 
     public function isContinent()
@@ -56,15 +50,34 @@ class DestinationVars
         return $this->destination->depth == 1;
     }
 
-    public function isPlace()
+    public function isCity()
     {
-        return $this->destination->depth > 1;
+        return $this->destination->depth == 2;
     }
 
-    public function getCountry()
+    public function isPlace()
     {
-        if ($this->destination->depth > 1) {
-            return $this->destination->getAncestors()[1];
+        return $this->destination->depth > 2;
+    }
+
+    public function countries()
+    {
+        if ($this->isContinent()) {
+            return $this->destination->getImmediateDescendants();
+        }
+
+        return false;
+    }
+
+    public function country()
+    {
+        if ($this->isCity() || $this->isPlace()) {
+            return $this->destination
+                ->getAncestors()
+                ->filter(function ($d) {
+                    return $d->vars()->isCountry();
+                })
+                ->first();
         }
 
         return false;
@@ -72,11 +85,7 @@ class DestinationVars
 
     public function facts()
     {
-        if ($this->isCountry() && $facts = config("destinations.{$this->destination->id}")) {
-            return (object) $facts;
-        }
-
-        if ($this->isPlace() && $facts = config("destinations.{$this->getCountry()->id}")) {
+        if ($facts = config("facts.{$this->destination->id}")) {
             return (object) $facts;
         }
     }
@@ -85,7 +94,8 @@ class DestinationVars
     {
         if ($facts = $this->facts()) {
             if ($facts->area > 1000) {
-                return number_format(round($facts->area, -3), 0, ',', ' ').' km²';
+                return number_format(round($facts->area, -3), 0, ',', ' ') .
+                    ' km²';
             } else {
                 return $facts->area;
             }
@@ -102,14 +112,14 @@ class DestinationVars
     public function callingCode()
     {
         if ($facts = $this->facts()) {
-            return '+'.$facts->callingCode;
+            return '+' . $facts->calling_code;
         }
     }
 
     public function currencyCode()
     {
         if ($facts = $this->facts()) {
-            return $facts->currencyCode;
+            return $facts->currency_code;
         }
     }
 

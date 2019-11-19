@@ -2,12 +2,123 @@
 
 namespace App\Http\Controllers;
 
+use App\Destination;
 use App\User;
 
 class ExperimentsController extends Controller
 {
     public function index()
     {
+        $d = Destination::whereName('Tallinn')->first();
+        $d2 = Destination::whereName('New York')->first();
+
+        return layout('Offer')
+            ->with('color', 'blue')
+            ->with(
+                'top',
+                collect()->push(
+                    component('Dotmap')
+                        ->is('center')
+                        ->with('width', '1000')
+                        ->with('countrydots', config('destination_dots'))
+                        ->with('lines', [
+                            $d->vars()->facts(),
+                            $d2->vars()->facts()
+                        ])
+                        ->with('smalldots', [
+                            $d->vars()->facts(),
+                            $d2->vars()->facts()
+                        ])
+                    // ->with('largedots', [$a->last()])
+                )
+            )
+            ->render();
+    }
+
+    public function flightIndex()
+    {
+        $t1 = '
+### flightmap:TLL,HEL,JFK,POM
+
+[[flightmap:TLL,HEL,JFK,POM]]
+
+Tõime allpool välja valiku enamjaolt 4-5 päevasteks linnapuhkusteks. Piletihinnas sisaldub nii äraantav pagas kui toitlustamine lennuki pardal.';
+
+        // $a = collect(['TLL', 'JFK', 'LAX'])->map(function ($a) {
+        //     return collect(config('airports'))
+        //         ->where('iata', $a)
+        //         ->first();
+        // });
+
+        return layout('Two')
+            ->with(
+                'content',
+                collect()->push(
+                    component('Body')->with('body', format_body($t1))
+                )
+            )
+            ->with('sidebar', ['a'])
+            ->render();
+    }
+
+    public function destinationIndex()
+    {
+        $ds = Destination::skip(50)
+            ->take(50)
+            ->get();
+
+        return layout('Offer')
+            ->with('color', 'blue')
+            ->with(
+                'content',
+                $ds
+                    ->map(function ($d) {
+                        $name =
+                            $d->vars()->isContinent() && $d->vars()->facts()
+                                ? ''
+                                : json_encode(
+                                    $d->vars()->facts(),
+                                    JSON_PRETTY_PRINT
+                                );
+
+                        $small = $d->vars()->facts()
+                            ? [
+                                [
+                                    'lat' => snap($d->vars()->facts()->lat),
+                                    'lon' => snap($d->vars()->facts()->lon)
+                                ]
+                            ]
+                            : false;
+
+                        return collect()
+                            ->push(
+                                component('Title')
+                                    //->is('white')
+                                    ->is('small')
+                                    ->with('title', $d->name)
+                            )
+                            //                             ->push(
+                            //                                 component('Code')
+                            //                                     ->is('gray')
+                            //                                     ->with(
+                            //                                         'code',
+                            //                                         "
+                            // id:   {$d->id}
+                            // name: {$d->name}
+                            // parent: {$d->getAncestors()->map->name}
+                            // { $name }
+                            //                                               "
+                            //                                     )
+                            //                             );
+                            ->push(
+                                component('Dotmap')
+                                    ->with('areas', [$d->id])
+                                    ->with('smalldots', $small)
+                            );
+                    })
+                    ->flatten()
+            )
+            ->render();
     }
 
     public function userIndex($id = 27)
@@ -52,15 +163,7 @@ class ExperimentsController extends Controller
                                     )
                             )
                     )
-                    ->push(
-                        component('Dotmap')
-                            ->with('height', '300px')
-                            ->is('center')
-                            ->with('dots', config('dots'))
-                            ->with('cities', config('cities'))
-                            ->with('activecountries', $been)
-                            ->with('passivecities', $been)
-                    )
+
                     ->push(
                         component('Flex')
                             ->is('center')

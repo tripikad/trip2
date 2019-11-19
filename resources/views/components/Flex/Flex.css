@@ -13,6 +13,14 @@
     margin-bottom: 0;
 }
 
+.Flex--wrap {
+    flex-wrap: wrap;
+}
+
+.Flex--large .Flex__item {
+    margin-bottom: $margin-xs;
+}
+
 .Flex--center {
     justify-content: center;
 }

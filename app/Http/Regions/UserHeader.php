@@ -47,9 +47,25 @@ class UserHeader
         $wantsToGo = $user->vars()->destinationWantsToGo();
         $hasBeen = $user->vars()->destinationHaveBeen();
 
-        $hasBeenMap = $hasBeen
+        $countryDots = $hasBeen
             ->map(function ($f) {
                 return $f->flaggable->id;
+            })
+            ->values();
+
+        $cityDots = $hasBeen
+            ->filter(function ($f) {
+                return $f->flaggable->vars()->isCity() ||
+                    $f->flaggable->vars()->isPlace();
+            })
+            ->map(function ($f) {
+                return $f->flaggable->vars()->facts();
+            })
+            ->map(function ($f) {
+                return [
+                    'lat' => snap($f->lat),
+                    'lon' => snap($f->lon)
+                ];
             })
             ->values();
 
@@ -76,10 +92,8 @@ class UserHeader
                         component('Dotmap')
                             ->with('height', '300px')
                             ->is('center')
-                            ->with('dots', config('dots'))
-                            ->with('cities', config('cities'))
-                            ->with('activecountries', $hasBeenMap)
-                            ->with('passivecities', $hasBeenMap)
+                            ->with('areas', $countryDots)
+                            ->with('smalldots', $cityDots)
                     )
                     ->push(region('UserHeaderImage', $user, $loggedUser))
                     ->push(
@@ -98,6 +112,7 @@ class UserHeader
                                 $wantsToGo->map(function ($destination) {
                                     return component('Tag')
                                         ->is('white')
+                                        ->is('large')
                                         ->with(
                                             'title',
                                             $destination->flaggable->name
@@ -114,13 +129,16 @@ class UserHeader
                     ->push(region('UserStats', $user, $loggedUser))
                     ->pushWhen(
                         $hasBeen->count(),
-                        component('Meta')
+                        component('Flex')
+                            ->is('wrap')
                             ->is('large')
+                            ->with('gap', 0.5)
                             ->with(
                                 'items',
                                 $hasBeen->map(function ($destination) {
                                     return component('Tag')
                                         ->is('white')
+                                        ->is('large')
                                         ->with(
                                             'title',
                                             $destination->flaggable->name

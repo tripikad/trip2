@@ -49,6 +49,14 @@ a .Title__title:hover {
     color: $red-hover;
 }
 
+.Title--yellow-dark .Title__title {
+    color: $yellow-dark;
+}
+
+.Title--yellow-dark a .Title__title:hover {
+    color: $yellow-hover;
+}
+
 .Title--gray .Title__title {
     color: $gray;
 }
@@ -73,6 +81,6 @@ a .Title__title:hover {
     text-align: center;
 }
 
-.Title--disabled .Title__title {
+.Title--semitransparent .Title__title {
     opacity: 0.5;
 }
