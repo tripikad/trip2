@@ -52,9 +52,9 @@ class ApiController extends Controller
             ]);
     }
 
-    public function destinationDots()
+    public function countrydots()
     {
-        return response()->json(config('destination_dots'));
+        return response()->json(config('countrydots'));
     }
 
     public function airports()

@@ -5,8 +5,8 @@
                 <circle
                     v-for="(c, i) in countrydots"
                     :key="i"
-                    :cx="xScale(c.lon)"
-                    :cy="yScale(c.lat)"
+                    :cx="xScale(c[0])"
+                    :cy="yScale(c[1])"
                     :r="radius"
                     :fill="$styleVars[backgroundcolor] || backgroundcolor"
                 />
@@ -15,8 +15,8 @@
                 <circle
                     v-for="(c, i) in activeCountryDots"
                     :key="i"
-                    :cx="xScale(c.lon)"
-                    :cy="yScale(c.lat)"
+                    :cx="xScale(c[0])"
+                    :cy="yScale(c[1])"
                     :r="radius"
                     :fill="$styleVars[dotcolor] || dotcolor"
                 />
@@ -106,7 +106,7 @@ export default {
         },
         activeCountryDots() {
             return this.countrydots.filter(
-                d => intersection(d.destination_ids, this.areas).length
+                d => intersection(d[2], this.areas).length
             )
         }
     },

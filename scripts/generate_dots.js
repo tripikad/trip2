@@ -81,14 +81,25 @@ for (let lat = 80; lat > -80; lat -= step) {
 
 // Generate the PHP array output
 
-console.log('<?php\n\nreturn [\n')
+console.log('<?php return [')
 
-dots.forEach(dot => {
-    console.log(`    [
-        'destination_ids' => [${dot.properties.countries}],
-        'lat' => ${dot.geometry.coordinates[1]},
-        'lon' => ${dot.geometry.coordinates[0]}
-    ],`)
-})
+// dots.forEach(dot => {
+//     console.log(`    [
+//         'destination_ids' => [${dot.properties.countries}],
+//         'lat' => ${dot.geometry.coordinates[1]},
+//         'lon' => ${dot.geometry.coordinates[0]}
+//     ],`)
+// })
 
-console.log('\n];\n')
+console.log(
+    dots
+        .map(
+            dot =>
+                `[${dot.geometry.coordinates[0]},${
+                    dot.geometry.coordinates[1]
+                },[${dot.properties.countries}]],`
+        )
+        .join('')
+)
+
+console.log('];')
