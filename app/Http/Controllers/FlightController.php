@@ -135,12 +135,13 @@ class FlightController extends Controller
                         ->merge($flight->destinations->map(function ($destination) {
                             return component('Tag')
                                 ->is('orange')
+                                ->is('filled')
                                 ->with('title', $destination->name)
                                 ->with('route', route('destination.showSlug', [$destination->slug]));
                         }))
                         ->pushWhen($loggedUser && $loggedUser->hasRole('admin', $flight->user->id),
-                            component('MetaLink')
-                                ->is('white')
+                            component('Tag')
+                                ->is('black')
                                 ->with('title', trans('content.action.edit.title'))
                                 ->with('route', route('flight.edit', [$flight]))
                         )
@@ -151,8 +152,8 @@ class FlightController extends Controller
                                 ))
                                 ->with('fields', collect()
                                     ->push(component('FormLink')
-                                        ->is('white')
-                                        ->with(
+                                    ->is('white')
+                                    ->with(
                                             'title',
                                             trans("content.action.status.$flight->status.title")
                                         )

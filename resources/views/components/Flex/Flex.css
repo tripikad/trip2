@@ -5,6 +5,10 @@
     display: block ?if $tablet;
 }
 
+.Flex {
+    flex-direction: column;
+}
+
 .Flex__item {
     margin-bottom: $margin-md ?if $tablet;
 }
@@ -19,10 +23,6 @@
 
 .Flex--large .Flex__item {
     margin-bottom: $margin-xs;
-}
-
-.Flex--center {
-    justify-content: center;
 }
 
 .Flex--center .Flex__item {

@@ -31,6 +31,8 @@ a .Title__title:hover {
 .Title--large .Title__title {
     font: $font-heading-xxl;
     font: $font-heading-xl ?if $tablet;
+    line-height: $line-height-md;
+    line-height: $line-height-lg ?if $tablet;
 }
 
 .Title--white .Title__title {
@@ -83,4 +85,8 @@ a .Title__title:hover {
 
 .Title--semitransparent .Title__title {
     opacity: 0.5;
+}
+
+.Title--high .Title__title {
+    margin-top: $margin-xxl;
 }
