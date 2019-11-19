@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Regions;
+
 use App\Destination;
 
 class UserHeader
