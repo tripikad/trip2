@@ -1,4 +1,4 @@
-@import "variables";
+@import 'variables';
 
 .FormLink {
     background: none;
@@ -6,7 +6,6 @@
     color: $gray;
     cursor: pointer;
     font: $font-text-sm;
-    padding-top: $padding-xs;
 }
 
 .FormLink {

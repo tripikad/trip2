@@ -10,6 +10,7 @@
     justify-content: center;
     padding: $padding-sm $padding-lg;
     text-align: center;
+    transition: $transition-md;
 }
 
 .Button:hover {

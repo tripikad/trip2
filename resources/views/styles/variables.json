@@ -55,6 +55,9 @@
     "gray-dark": "hsl(204, 6%, 45%)",
     "gray-dark-hover": "hsl(204, 6%, 30%)",
 
+    "gray-darker": "hsl(204, 6%, 25%)",
+    "gray-darker-hover": "hsl(204, 6%, 20%)",
+
     "black": "hsl(0,0%,0%)",
 
     "padding-xxxs": "calc($spacer / 4)",
@@ -105,5 +108,7 @@
     "font-heading-xxl": "$font-weight-bold $font-size-xxxl / $line-height-xs $font-family, sans-serif",
     "font-heading-xxxl": "$font-weight-bold $font-size-xxxxl / $line-height-xs $font-family, sans-serif",
     "font-code-sm": "$font-weight-normal $font-size-sm / $line-height-md $font-family-code, monospace",
-    "font-code-md": "$font-weight-normal $font-size-md / $line-height-md $font-family-code, monospace"
+    "font-code-md": "$font-weight-normal $font-size-md / $line-height-md $font-family-code, monospace",
+
+    "transition-md": "all 0.2s"
 }

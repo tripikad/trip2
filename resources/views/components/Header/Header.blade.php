@@ -8,9 +8,10 @@ $content = $content ?? [];
 
 <div class="Header {{ $isclasses }}" 
     style="background-image: linear-gradient(
-      rgba(0, 0, 0, 0.4),
+      rgba(0, 0, 0, 0.3),
       rgba(0, 0, 0, 0.1),
-      rgba(0, 0, 0, 0.2)
+      rgba(0, 0, 0, 0.2),
+      rgba(0, 0, 0, 0.5)
     ), url({{ $background }});
 ">
     <div class="container">
