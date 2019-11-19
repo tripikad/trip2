@@ -61,10 +61,13 @@ class UserHeader
             ->map(function ($f) {
                 return $f->flaggable->vars()->facts();
             })
-            ->map(function ($f) {
+            ->filter(function ($f) {
+                return $f;
+            })
+            ->map(function ($d) {
                 return [
-                    'lat' => snap($f->lat),
-                    'lon' => snap($f->lon)
+                    'lat' => snap($d->lat),
+                    'lon' => snap($d->lon)
                 ];
             })
             ->values();
