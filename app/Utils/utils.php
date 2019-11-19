@@ -12,9 +12,10 @@ function mail_component($component, $data = [])
 
     $view->flushFinderCache();
 
-    $contents = $view->replaceNamespace(
-        'mail', resource_path('views/vendor/mail/html')
-    )->make($component, $data)->render();
+    $contents = $view
+        ->replaceNamespace('mail', resource_path('views/vendor/mail/html'))
+        ->make($component, $data)
+        ->render();
 
     return $contents;
 }
@@ -25,7 +26,19 @@ function full_text_safe($string)
 
     $string = str_replace(
         ['-', '+', '%', '(', ')', '*', '@', '<', '>', '~', '"'],
-        ['_minus_', '_plus_', '_percent_', '_bracket_o_', '_bracket_c_', '_multiply_', '_at_', '_a_bracket_l_', '_a_bracket_r_', '_about_', '_quote_'],
+        [
+            '_minus_',
+            '_plus_',
+            '_percent_',
+            '_bracket_o_',
+            '_bracket_c_',
+            '_multiply_',
+            '_at_',
+            '_a_bracket_l_',
+            '_a_bracket_r_',
+            '_about_',
+            '_quote_'
+        ],
         $string
     );
 
@@ -41,7 +54,7 @@ function region($region, ...$arguments)
 {
     $class = "\App\Http\Regions\\$region";
 
-    return (new $class)->render(...$arguments);
+    return (new $class())->render(...$arguments);
 }
 
 function layout($layout)
@@ -53,6 +66,7 @@ function format_body($body)
 {
     return (new Utils\BodyFormatter($body))
         //->fixLinks()
+        ->flightmap()
         ->calendar()
         ->youtube()
         ->vimeo()
@@ -77,10 +91,10 @@ function format_description($body)
 function format_date($date)
 {
     if ($date->isToday()) {
-        return trans('utils.date.today').' '.$date->format('H:i');
+        return trans('utils.date.today') . ' ' . $date->format('H:i');
     }
     if ($date->isYesterday()) {
-        return trans('utils.date.yesterday').' '.$date->format('H:i');
+        return trans('utils.date.yesterday') . ' ' . $date->format('H:i');
     }
     if ($date->year == Carbon::now()->year) {
         return Date::parse($date)->format('j. M H:i');
@@ -101,7 +115,7 @@ function format_smtp_header(array $data)
 
 function backToAnchor($anchor)
 {
-    return Redirect::to(URL::previous().$anchor);
+    return Redirect::to(URL::previous() . $anchor);
 }
 
 function dist($type)
@@ -110,21 +124,31 @@ function dist($type)
     if (is_file($path)) {
         $manifest = json_decode(file_get_contents($path), true);
     } else {
-        $manifest = ["js" => "main.js","css" => "main.css", "svg" => "main.svg"];
+        $manifest = [
+            'js' => 'main.js',
+            'css' => 'main.css',
+            'svg' => 'main.svg'
+        ];
     }
-    return '/dist/'.(is_array($manifest[$type]) ? $manifest[$type][0] : $manifest[$type]);
+    return '/dist/' .
+        (is_array($manifest[$type]) ? $manifest[$type][0] : $manifest[$type]);
 }
 
 function format_link($route, $title, $blank = false)
 {
     $target = $blank ? 'target="_blank"' : '';
 
-    return '<a href="'.$route.'" '.$target.'>'.$title.'</a>';
+    return '<a href="' . $route . '" ' . $target . '>' . $title . '</a>';
 }
 
-function styleVars()
+function style_vars()
 {
     $json = Storage::disk('root')->get('resources/views/styles/variables.json');
 
     return json_decode($json);
+}
+
+function snap($value, $step = 2.5)
+{
+    return round($value / $step) * $step;
 }

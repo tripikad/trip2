@@ -29,7 +29,11 @@ class BodyFormatter
         if (preg_match_all($linksPattern, $this->body, $matches)) {
             foreach ($matches[0] as $match) {
                 $this->body = preg_replace('/https?:\/\//', '', $this->body);
-                $this->body = str_replace($match, 'http://'.$match, $this->body);
+                $this->body = str_replace(
+                    $match,
+                    'http://' . $match,
+                    $this->body
+                );
             }
         }
 
@@ -38,9 +42,73 @@ class BodyFormatter
 
     public function externalLinks()
     {
-        if ($filteredBody = preg_replace('/(<a href="(http|https):(?!\/\/(?:www\.)?trip\.ee)[^"]+")>/is', '\\1 target="_blank">', $this->body)) {
+        if (
+            $filteredBody = preg_replace(
+                '/(<a href="(http|https):(?!\/\/(?:www\.)?trip\.ee)[^"]+")>/is',
+                '\\1 target="_blank">',
+                $this->body
+            )
+        ) {
             $this->body = $filteredBody;
         }
+
+        return $this;
+    }
+
+    public function flightmap()
+    {
+        $flightmapPattern = '/\[\[flightmap:(.*)\]\]/';
+
+        $this->body = preg_replace_callback(
+            $flightmapPattern,
+            function ($matches) {
+                $airports = collect(
+                    explode(
+                        '-',
+                        str_replace(
+                            [';', ',', ' ', '  '],
+                            '-',
+                            strtoupper($matches[1])
+                        )
+                    )
+                )
+                    ->map(function ($a) {
+                        return trim($a);
+                    })
+                    ->map(function ($a) {
+                        return collect(config('airports'))
+                            ->where('iata', $a)
+                            ->first();
+                    });
+
+                //return $codes;
+                return component('Dotmap')
+                    ->is('center')
+                    ->with('height', '300px')
+                    ->with('dots', config('dots'))
+                    ->with('lines', $airports)
+                    ->with('mediumdots', $airports->withoutLast())
+                    ->with('largedots', [$airports->last()])
+                    ->with('linecolor', 'blue')
+                    ->with('mediumdotcolor', 'white')
+                    ->with('largedotcolor', 'cyan-light');
+            },
+            $this->body
+        );
+        // if (preg_match_all($flightmapPattern, $this->body, $matches)) {
+        //     dd($matches);
+        //     $const airports
+        //     foreach ($matches[1] as $match) {
+        //         dump($match);
+        //         // if ($image = Image::find($match)) {
+        //         //     $this->body = str_replace(
+        //         //         "[[$image->id]]",
+        //         //         '<img src="' . $image->preset('large') . '" />',
+        //         //         $this->body
+        //         //     );
+        //         // }
+        //     }
+        // }
 
         return $this;
     }
@@ -54,7 +122,7 @@ class BodyFormatter
                 if ($image = Image::find($match)) {
                     $this->body = str_replace(
                         "[[$image->id]]",
-                        '<img src="'.$image->preset('large').'" />',
+                        '<img src="' . $image->preset('large') . '" />',
                         $this->body
                     );
                 }
@@ -72,14 +140,18 @@ class BodyFormatter
             foreach ($matches[0] as $match) {
                 $cleanedMatch = str_replace(['[[', ']]'], '', $match);
                 $cleanedMatch = preg_replace_callback(
-                    "/-\s+(.+)/",
+                    '/-\s+(.+)/',
                     function ($matches) {
-                        return "- '".format_body($matches[1])."'";
+                        return "- '" . format_body($matches[1]) . "'";
                     },
                     $cleanedMatch
                 );
 
-                $cleanedMatch = preg_replace('/^[ \t]*[\r\n]+/m', '', $cleanedMatch);
+                $cleanedMatch = preg_replace(
+                    '/^[ \t]*[\r\n]+/m',
+                    '',
+                    $cleanedMatch
+                );
 
                 if ($months = Yaml::parse($cleanedMatch)) {
                     $this->body = str_replace(
@@ -98,12 +170,16 @@ class BodyFormatter
 
     public function youtube()
     {
-        $pattern = "/\s*[a-zA-Z\/\/:\.]*youtu(be.com\/watch\?v=|.be\/)([a-zA-Z0-9\-_]+)([a-zA-Z0-9\/\*\-\_\?\&\;\%\=\.]*)/i";
+        $pattern =
+            '/\s*[a-zA-Z\/\/:\.]*youtu(be.com\/watch\?v=|.be\/)([a-zA-Z0-9\-_]+)([a-zA-Z0-9\/\*\-\_\?\&\;\%\=\.]*)/i';
 
-        $this->body = preg_replace_callback($pattern, function ($matches) {
-            return component('Youtube')->with('id', $matches[2]);
-        },
-        $this->body);
+        $this->body = preg_replace_callback(
+            $pattern,
+            function ($matches) {
+                return component('Youtube')->with('id', $matches[2]);
+            },
+            $this->body
+        );
 
         return $this;
     }
@@ -112,12 +188,16 @@ class BodyFormatter
     {
         // From https://github.com/regexhq/vimeo-regex
 
-        $pattern = "/(http|https)?:\/\/(www\.)?vimeo.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|)(\d+)(?:|\/\?)/i";
+        $pattern =
+            '/(http|https)?:\/\/(www\.)?vimeo.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|)(\d+)(?:|\/\?)/i';
 
-        $this->body = preg_replace_callback($pattern, function ($matches) {
-            return component('Vimeo')->with('id', $matches[4]);
-        },
-        $this->body);
+        $this->body = preg_replace_callback(
+            $pattern,
+            function ($matches) {
+                return component('Vimeo')->with('id', $matches[4]);
+            },
+            $this->body
+        );
 
         return $this;
     }
@@ -125,7 +205,7 @@ class BodyFormatter
     public function plain()
     {
         $this->body = strip_tags($this->body);
-        $this->body = str_replace(["\n", "\t", "\r"], ' ', ($this->body));
+        $this->body = str_replace(["\n", "\t", "\r"], ' ', $this->body);
 
         return $this;
     }

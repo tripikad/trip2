@@ -121,20 +121,16 @@ php artisan dusk
 
 ## Frontend development
 
-### Commands
+### NPM commands
+
+First make sure `FULL_BASE_URL` refers to local development URL.
 
 ```sh
-npm run dev # Unminified and fast dev build
-npm run build # Minified and slow production build
+npm run dev # runs watch + live
 npm run watch # Unminified and fast dev build, recompiling on file change
-```
-
-### Live reload
-
-First make sure `FULL_BASE_URL` refers to local development URL. Then run
-
-```sh
-./scripts/bs.sh
+npm run live # Live reload in browser
+npm run devbuild # Unminified and fast dev build
+npm run build # Minified and slow production build
 ```
 
 ### Build process
@@ -287,7 +283,7 @@ Variables are located in `/resources/views/styles/variables.json` and `/resource
 Variables in `/resources/views/styles/variables.json` can be used in Blade templates:
 
 ```blade
-{{ styleVars()->spacer }}
+{{ style_vars()->spacer }}
 ```
 
 #### Style variables in Vue
@@ -295,7 +291,7 @@ Variables in `/resources/views/styles/variables.json` can be used in Blade templ
 Variables in `/resources/views/styles/variables.json` can be used in Vue templates:
 
 ```js
-this.$styleVars.spacer
+this.$style_vars.spacer
 ```
 
 #### Fonts
@@ -385,4 +381,4 @@ layout('One')->cached(false);
 
 #### Making a layout
 
-At the time of writing there is no helper command to create a layout.
+At the time of writing there is no helper command to create a layout .

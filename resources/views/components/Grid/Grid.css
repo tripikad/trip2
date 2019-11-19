@@ -1,34 +1,18 @@
-@import "variables";
+@import 'variables';
 
-    .Grid__row {
-        display: flex;
-        display: block ?if $tablet;
-    }
+.Grid {
+    display: grid;
+    display: block ?if $tablet;
+}
 
-    .Grid--gap1 .Grid__row {
-        margin-bottom: $margin-sm;
-    }
+.Grid__item {
+    margin-bottom: $margin-md ?if $tablet;
+}
 
-    .Grid--gap2 .Grid__row {
-        margin-bottom: $margin-md;
-    }
+.Grid__item:last-child {
+    margin-bottom: 0;
+}
 
-    .Grid--gap1 .Grid__row:last-child,
-    .Grid--gap2 .Grid__row:last-child {
-        margin-bottom: 0;
-    }
-
-    .Grid--gap1 .Grid__item {
-        margin-right: $margin-sm;
-        margin-right: 0 ?if $tablet;
-    }
-
-    .Grid--gap2 .Grid__item {
-        margin-right: $margin-md;
-        margin-right: 0 ?if $tablet;
-    }
-
-    .Grid--gap1 .Grid__item:last-child,
-    .Grid--gap2 .Grid__item:last-child {
-        margin-right: 0;
-    }
+.Grid--debug .Grid__item {
+    border: 1px dashed $red;
+}

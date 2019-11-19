@@ -397,15 +397,39 @@ Route::post('utils/format', 'UtilsController@format')->name('utils.format');
 
 // Experiments and style guides
 
-Route::get('experiments', 'ExperimentsController@index');
+Route::get('experiments', 'ExperimentsController@index')->name(
+    'experiments.index'
+);
+
+Route::get(
+    'experiments/destinations',
+    'ExperimentsController@destinationIndex'
+)->name('experiments.destination.index');
+
+Route::get('experiments/user/{id?}', 'ExperimentsController@userIndex')->name(
+    'experiments.user.index'
+);
 
 Route::post('experiments/store', 'ExperimentsController@store')->name(
     'experiments.store'
 );
 
-Route::get('styles', 'StyleController@index');
+Route::get('experiments/styles', 'ExperimentsStylesController@index')->name(
+    'experiments.styles.index'
+);
 
-Route::get('components', 'ComponentController@index')->name('components');
+Route::get('experiments/icons', 'ExperimentsIconsController@index')->name(
+    'experiments.icons.index'
+);
+
+Route::get('experiments/grid', 'ExperimentsGridController@index')->name(
+    'experiments.grid.index'
+);
+
+Route::get(
+    'experiments/components',
+    'ExperimentsComponentsController@index'
+)->name('experiments.components.index');
 
 // Registration
 
@@ -545,8 +569,6 @@ Route::get('offers/json', 'OfferController@indexJson')->name(
 );
 
 Route::get('offers/{id}', 'OfferController@show')->name('offers.show');
-
-Route::get('offers/{id}/book', 'OfferController@book')->name('offers.book');
 
 Route::post('offers/{id}/send', 'OfferController@send')->name('offers.send');
 

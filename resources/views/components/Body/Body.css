@@ -1,4 +1,4 @@
-@import "variables";
+@import 'variables';
 
 .Body {
     font: $font-text-md;
@@ -170,4 +170,9 @@
 .Body--gray,
 .Body--gray * {
     color: $gray;
+}
+
+.Body--yellow-dark,
+.Body--yellow-dark * {
+    color: $yellow-dark;
 }

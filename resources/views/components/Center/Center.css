@@ -1,0 +1,6 @@
+@import 'variables';
+
+.Center {
+    display: flex;
+    justify-content: center;
+}

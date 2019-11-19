@@ -30,10 +30,11 @@
     "red-dark": "hsl(0, 56%, 54%)",
     "red-darker": "hsl(0, 53%, 45%)",
 
+    "yellow-light": "hsl(45, 100%, 68%)",
     "yellow": "hsl(45, 100%, 48%)",
     "yellow-hover": "hsl(45, 100%, 38%)",
 
-    "yellow-dark": "hsl(35, 100%, 42%)",
+    "yellow-dark": "hsl(35, 100%, 32%)",
 
     "pink-light": "hsl(7, 100%, 96%)",
     "pink": "hsl(7, 72%, 89%)",
@@ -53,6 +54,9 @@
 
     "gray-dark": "hsl(204, 6%, 45%)",
     "gray-dark-hover": "hsl(204, 6%, 30%)",
+
+    "gray-darker": "hsl(204, 6%, 25%)",
+    "gray-darker-hover": "hsl(204, 6%, 20%)",
 
     "black": "hsl(0,0%,0%)",
 
@@ -104,5 +108,7 @@
     "font-heading-xxl": "$font-weight-bold $font-size-xxxl / $line-height-xs $font-family, sans-serif",
     "font-heading-xxxl": "$font-weight-bold $font-size-xxxxl / $line-height-xs $font-family, sans-serif",
     "font-code-sm": "$font-weight-normal $font-size-sm / $line-height-md $font-family-code, monospace",
-    "font-code-md": "$font-weight-normal $font-size-md / $line-height-md $font-family-code, monospace"
+    "font-code-md": "$font-weight-normal $font-size-md / $line-height-md $font-family-code, monospace",
+
+    "transition-md": "all 0.2s"
 }

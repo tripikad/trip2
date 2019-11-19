@@ -2,6 +2,8 @@
 
 namespace App\Http\Regions;
 
+use App\Destination;
+
 class UserHeader
 {
     private function prepareActionsForUser($user, $loggedUser)
@@ -16,7 +18,8 @@ class UserHeader
                     ->with('route', route('user.show', [$user]))
             )
             ->pushWhen(
-                $loggedUser && $loggedUser->hasRoleOrOwner('superuser', $loggedUser->id),
+                $loggedUser &&
+                    $loggedUser->hasRoleOrOwner('superuser', $loggedUser->id),
                 component('Button')
                     ->is('cyan')
                     ->with('title', trans('menu.user.edit.profile'))
@@ -31,7 +34,8 @@ class UserHeader
                     ->with('route', route('message.index', [$user]))
             )
             ->pushWhen(
-                $loggedUser && $loggedUser->hasRoleOrOwner('superuser', $loggedUser->id),
+                $loggedUser &&
+                    $loggedUser->hasRoleOrOwner('superuser', $loggedUser->id),
                 component('Button')
                     ->is('cyan')
                     ->with('title', trans('menu.user.add.places'))
@@ -41,57 +45,315 @@ class UserHeader
 
     public function render($user)
     {
+        $countryCount = 195;
+
         $loggedUser = request()->user();
         $wantsToGo = $user->vars()->destinationWantsToGo();
-        $hasBeen = $user->vars()->destinationHaveBeen();
+        $hasBeenContinents = $user
+            ->vars()
+            ->destinationHaveBeen()
+            ->filter(function ($f) {
+                return $f->flaggable->vars()->isContinent();
+            });
+        $hasBeenCountries = $user
+            ->vars()
+            ->destinationHaveBeen()
+            ->filter(function ($f) {
+                return $f->flaggable->vars()->isCountry();
+            });
+        $hasBeenCities = $user
+            ->vars()
+            ->destinationHaveBeen()
+            ->filter(function ($f) {
+                return $f->flaggable->vars()->isCity() ||
+                    $f->flaggable->vars()->isPlace();
+            });
+
+        $countryDots = $hasBeenCountries
+            ->map(function ($f) {
+                return $f->flaggable->id;
+            })
+            ->values();
+
+        $cityDots = $hasBeenCities
+            ->map(function ($f) {
+                return $f->flaggable->vars()->facts();
+            })
+            ->filter(function ($f) {
+                return $f;
+            })
+            ->map(function ($d) {
+                return [
+                    'lat' => snap($d->lat),
+                    'lon' => snap($d->lon)
+                ];
+            })
+            ->values();
 
         return component('HeaderLight')
-            ->with('navbar', component('Navbar')
-                ->is('white')
-                ->with('search', component('NavbarSearch')->is('white'))
-                ->with('logo', component('Icon')
-                    ->with('icon', 'tripee_logo')
-                    ->with('width', 200)
-                    ->with('height', 150)
-                )
-                ->with('navbar_desktop', region('NavbarDesktop', 'white'))
-                ->with('navbar_mobile', region('NavbarMobile', 'white'))
-            )
-            ->with('content', collect()
-                ->push(region('UserHeaderImage', $user, $loggedUser))
-                ->push(component('Body')
+            ->with(
+                'navbar',
+                component('Navbar')
                     ->is('white')
-                    ->is('responsive')
-                    ->with('body', $user->vars()->description)
-                )
-                ->push(region('UserAbout', $user, $loggedUser))
-                ->pushWhen(
-                    $wantsToGo->count(),
-                    component('Meta')->is('large')->with('items', $wantsToGo
-                        ->map(function ($destination) {
-                            return component('Tag')
-                                ->is('white')
-                                ->is('large')
-                                ->with('title', $destination->flaggable->name)
-                                ->with('route', route('destination.showSlug', [$destination->flaggable->slug]));
-                        })
-                ))
-                ->push(region('UserStats', $user, $loggedUser))
-                ->pushWhen(
-                    $hasBeen->count(),
-                    component('Meta')->is('large')->with('items', $hasBeen
-                        ->map(function ($destination) {
-                            return component('Tag')
-                                ->is('white')
-                                ->is('large')
-                                ->with('title', $destination->flaggable->name)
-                                ->with('route', route('destination.showSlug', [$destination->flaggable->slug]));
-                        })
-                    ))
-                ->push(component('BlockHorizontal')->with(
-                    'content',
-                    $this->prepareActionsForUser($user, $loggedUser)
-                ))
+                    ->with('search', component('NavbarSearch')->is('white'))
+                    ->with(
+                        'logo',
+                        component('Icon')
+                            ->with('icon', 'tripee_logo')
+                            ->with('width', 200)
+                            ->with('height', 150)
+                    )
+                    ->with('navbar_desktop', region('NavbarDesktop', 'white'))
+                    ->with('navbar_mobile', region('NavbarMobile', 'white'))
+            )
+            ->with(
+                'content',
+                collect()
+                    ->push(
+                        component('Dotmap')
+                            ->with('height', '300px')
+                            ->is('center')
+                            ->with('areas', $countryDots)
+                            ->with('smalldots', $cityDots)
+                    )
+                    ->push(region('UserHeaderImage', $user, $loggedUser))
+                    ->push(
+                        component('Center')->with(
+                            'item',
+                            region('UserAbout', $user, $loggedUser)
+                        )
+                    )
+                    ->br()
+                    ->push(region('UserStats', $user, $loggedUser))
+                    ->br()
+                    ->push(
+                        component('Body')
+                            ->is('white')
+                            ->is('responsive')
+                            ->with('body', $user->vars()->description)
+                    )
+                    ->pushWhen($wantsToGo->count(), '&nbsp;')
+                    ->pushWhen(
+                        $hasBeenContinents->count(),
+                        component('Flex')
+                            ->with('align', 'center')
+                            ->with('gap', 1)
+                            ->with(
+                                'items',
+                                collect()
+                                    ->push(
+                                        component('Icon')
+                                            ->is('white')
+                                            ->with('size', 'xl')
+                                            ->with('icon', 'icon-pin')
+                                    )
+                                    ->push(
+                                        component('Title')
+                                            ->is('white')
+                                            ->with(
+                                                'title',
+                                                $hasBeenContinents->count() .
+                                                    ' külastatud maailmajagu'
+                                            )
+                                    )
+                            )
+                    )
+                    ->pushWhen(
+                        $hasBeenContinents->count(),
+                        component('Flex')
+                            ->is('large')
+                            ->is('wrap')
+                            ->with('gap', 0.5)
+                            ->with(
+                                'items',
+                                $hasBeenContinents->map(function (
+                                    $destination
+                                ) {
+                                    return component('Tag')
+                                        ->is('white')
+                                        ->is('large')
+                                        ->with(
+                                            'title',
+                                            $destination->flaggable->name
+                                        )
+                                        ->with(
+                                            'route',
+                                            route('destination.showSlug', [
+                                                $destination->flaggable->slug
+                                            ])
+                                        );
+                                })
+                            )
+                    )
+                    ->pushWhen(
+                        $wantsToGo->count(),
+                        component('Flex')
+                            ->with('align', 'center')
+                            ->with('gap', 1)
+                            ->with(
+                                'items',
+                                collect()
+                                    ->push(
+                                        component('Icon')
+                                            ->is('white')
+                                            ->with('size', 'xl')
+                                            ->with('icon', 'icon-pin')
+                                    )
+                                    ->push(
+                                        component('Title')
+                                            ->is('white')
+                                            ->with(
+                                                'title',
+                                                trans(
+                                                    'user.show.stat.destination',
+                                                    [
+                                                        'country_total_count' => $countryCount,
+                                                        'country_count' => $hasBeenCountries->count(),
+                                                        'percentage' => round(
+                                                            ($hasBeenCountries->count() /
+                                                                $countryCount) *
+                                                                100
+                                                        )
+                                                    ]
+                                                )
+                                            )
+                                    )
+                            )
+                    )
+
+                    ->pushWhen(
+                        $hasBeenCountries->count(),
+                        component('Flex')
+                            ->is('wrap')
+                            ->is('large')
+                            ->with('gap', 0.5)
+                            ->with(
+                                'items',
+                                $hasBeenCountries->map(function ($destination) {
+                                    return component('Tag')
+                                        ->is('white')
+                                        ->is('large')
+                                        ->with(
+                                            'title',
+                                            $destination->flaggable->name
+                                        )
+                                        ->with(
+                                            'route',
+                                            route('destination.showSlug', [
+                                                $destination->flaggable->slug
+                                            ])
+                                        );
+                                })
+                            )
+                    )
+                    ->pushWhen(
+                        $hasBeenCities->count(),
+                        component('Flex')
+                            ->with('align', 'center')
+                            ->with('gap', 1)
+                            ->with(
+                                'items',
+                                collect()
+                                    ->push(
+                                        component('Icon')
+                                            ->is('white')
+                                            ->with('size', 'xl')
+                                            ->with('icon', 'icon-pin')
+                                    )
+                                    ->push(
+                                        component('Title')
+                                            ->is('white')
+                                            ->with(
+                                                'title',
+                                                $hasBeenCities->count() .
+                                                    ' külastatud linna ja piirkonda'
+                                            )
+                                    )
+                            )
+                    )
+                    ->pushWhen(
+                        $hasBeenCities->count(),
+                        component('Flex')
+                            ->is('wrap')
+                            ->is('large')
+                            ->with('gap', 0.5)
+                            ->with(
+                                'items',
+                                $hasBeenCities->map(function ($destination) {
+                                    return component('Tag')
+                                        ->is('white')
+                                        ->is('large')
+                                        ->with(
+                                            'title',
+                                            $destination->flaggable->name
+                                        )
+                                        ->with(
+                                            'route',
+                                            route('destination.showSlug', [
+                                                $destination->flaggable->slug
+                                            ])
+                                        );
+                                })
+                            )
+                    )
+                    ->pushWhen(
+                        $wantsToGo->count(),
+                        component('Flex')
+                            ->with('align', 'center')
+                            ->with('gap', 1)
+                            ->with(
+                                'items',
+                                collect()
+                                    ->push(
+                                        component('Icon')
+                                            ->is('white')
+                                            ->with('size', 'xl')
+                                            ->with('icon', 'icon-star')
+                                    )
+                                    ->push(
+                                        component('Title')
+                                            ->is('white')
+                                            ->with(
+                                                'title',
+                                                'Tahab järgmisena minna'
+                                            )
+                                    )
+                            )
+                    )
+                    ->pushWhen(
+                        $wantsToGo->count(),
+                        component('Flex')
+                            ->is('large')
+                            ->is('wrap')
+                            ->with('gap', 0.5)
+                            ->with(
+                                'items',
+                                $wantsToGo->map(function ($destination) {
+                                    return component('Tag')
+                                        ->is('white')
+                                        ->is('large')
+                                        ->with(
+                                            'title',
+                                            $destination->flaggable->name
+                                        )
+                                        ->with(
+                                            'route',
+                                            route('destination.showSlug', [
+                                                $destination->flaggable->slug
+                                            ])
+                                        );
+                                })
+                            )
+                    )
+
+                    ->push(
+                        component('Flex')
+                            ->with('justify', 'center')
+                            ->with(
+                                'items',
+                                $this->prepareActionsForUser($user, $loggedUser)
+                            )
+                    )
             );
     }
 }

@@ -1,4 +1,4 @@
-@import "variables";
+@import 'variables';
 
 .Tag {
     align-items: center;
@@ -8,28 +8,41 @@
     font: $font-text-xs;
     line-height: $line-height-xs;
     justify-content: center;
-    padding: calc($spacer / 4) calc($spacer / 2) calc($spacer / 8) calc($spacer / 2);
+    padding: calc($spacer / 4) calc($spacer / 2);
+    transition: $transition-md;
 }
 
-    .Tag__title {
-        color: $gray;
-        white-space: nowrap;
-    }
+.Tag__title {
+    color: $gray;
+    white-space: nowrap;
+}
 
-    .Tag__title:hover {
-        color: $gray-hover;
-    }
+.Tag__title:hover {
+    color: $gray-hover;
+}
 
 .Tag--orange {
     border: 1px solid $orange;
+}
+
+.Tag--orange.Tag--filled {
+    background: $orange;
 }
 
 .Tag--orange .Tag__title {
     color: $orange;
 }
 
+.Tag--orange.Tag--filled .Tag__title {
+    color: $white;
+}
+
 .Tag--orange .Tag__title:hover {
     color: $orange-hover;
+}
+
+.Tag--orange.Tag--filled .Tag__title:hover {
+    color: $white;
 }
 
 .Tag--red {
@@ -42,6 +55,20 @@
 }
 
 .Tag--red .Tag__title {
+    color: $white;
+}
+
+.Tag--black {
+    background: $black;
+    border: 1px solid $black;
+    opacity: $opacity-lg;
+}
+
+.Tag--black:hover {
+    opacity: 1;
+}
+
+.Tag--black .Tag__title {
     color: $white;
 }
 
@@ -60,6 +87,7 @@
 }
 
 .Tag--large {
-    padding: $padding-xs $padding-sm;
+    font: $font-text-md;
+    padding: $padding-xxs $padding-sm;
     border-radius: $border-radius-xl;
 }

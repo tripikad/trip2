@@ -1,4 +1,4 @@
-@import "variables";
+@import 'variables';
 
 .Button {
     align-items: center;
@@ -10,52 +10,65 @@
     justify-content: center;
     padding: $padding-sm $padding-lg;
     text-align: center;
+    transition: $transition-md;
 }
 
 .Button:hover {
     background: $green-hover;
 }
 
-    .Button__icon {
-        margin-right: $margin-xs;
-    }
+.Button__icon {
+    margin-right: $margin-xs;
+}
 
-    .Button__title {
-        color: $white;
-    }
+.Button__title {
+    color: $white;
+}
 
-    .Button--cyan {
-        background: $cyan;
-    }
+.Button--cyan {
+    background: $cyan;
+}
 
-    .Button--cyan:hover {
-        background: $cyan-hover;
-    }
+.Button--cyan .Button__title {
+    color: $cyan-dark;
+}
 
-    .Button--gray {
-        background: $gray-light;
-    }
+.Button--orange {
+    background: $orange;
+}
 
-    .Button--gray:hover {
-        background: $gray-light-hover;
-    }
+.Button--orange:hover {
+    background: $orange-hover;
+}
 
-    .Button--facebook {
-        background: $facebook;
-    }
+.Button--cyan:hover {
+    background: $cyan-hover;
+}
 
-    .Button--twitter {
-        background: $twitter;
-    }
+.Button--gray {
+    background: $gray-light;
+}
 
-    .Button--transparent {
-        background: rgba(0, 0, 0, 0.2);
-        border: $border-white-md;
-    }
+.Button--gray:hover {
+    background: $gray-light-hover;
+}
 
-    .Button--transparent:hover {
-        background: rgba(0, 0, 0, 0.3);
-    }
+.Button--facebook {
+    background: $facebook;
+}
+
+.Button--twitter {
+    background: $twitter;
+}
+
+.Button--transparent {
+    background: rgba(0, 0, 0, 0.2);
+    border: $border-white-md;
+}
+
+.Button--transparent:hover {
+    background: rgba(0, 0, 0, 0.3);
+}
 
 .Button--narrow {
     display: inline-flex;
@@ -66,4 +79,3 @@
     font: $font-heading-md;
     padding: calc($padding-sm * 1.25) $padding-lg;
 }
-

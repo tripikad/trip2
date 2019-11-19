@@ -1,0 +1,14 @@
+@import 'variables';
+
+.Fade-enter-active {
+    transition: all 0.3s ease-in;
+}
+
+.Fade-leave-active {
+    transition: all 0.3s ease-out;
+}
+
+.Fade-enter,
+.Fade-leave-to {
+    opacity: 0;
+}

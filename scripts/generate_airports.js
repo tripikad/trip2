@@ -39,8 +39,23 @@ var fs = require('fs')
 var baby = require('babyparse')
 var _ = require('lodash')
 
-var routes = baby.parse(fs.readFileSync(__dirname + '/data/routes.csv').toString(), { header: false }).data
-var airports = baby.parse(fs.readFileSync(__dirname + '/data/airports.csv').toString(), { header: false }).data
+var routes = baby.parse(
+    fs.readFileSync(__dirname + '/data/routes.csv').toString(),
+    { header: false }
+).data
+var airports = baby.parse(
+    fs.readFileSync(__dirname + '/data/airports.csv').toString(),
+    { header: false }
+).data
+
+const makeFloat = str => {
+    const f = parseFloat(str)
+    return Number.isNaN(f) ? str : f
+}
+
+const cleanName = name => {
+    return name.split('/')[1].replace('_', ' ')
+}
 
 // We find all the unique airport codes that exist in the routes database
 // so we can get only the airports there is a airline traffic
@@ -59,26 +74,34 @@ airportKeys = _.uniq(airportKeys)
 
 airports = airports
     .filter(airport => {
-        return airport[6] // Lat
-            && airport[7] // Lon
-            && airportKeys.indexOf(airport[4]) !== -1 // Airport IATA code
+        return (
+            airport[6] && // Lat
+            airport[7] && // Lon
+            airportKeys.indexOf(airport[4]) !== -1
+        ) // Airport IATA code
     })
     .map(airport => {
         return {
             iata: airport[4],
-            lat: airport[6],
-            lon: airport[7]
+            city:
+                airport[11] && !String(airport[11]).includes('\\')
+                    ? cleanName(airport[11]).replace("'", '')
+                    : airport[2].replace("'", ''),
+            country: airport[3].replace("'", ''),
+            lat: makeFloat(airport[6]),
+            lon: makeFloat(airport[7])
         }
     })
 
-console.log('<?php\n\nreturn [\n')
+console.log('<?php return [')
 
-airports.forEach(airport => {
-    console.log(`    [
-        'iata' => '${airport.iata}',
-        'lat' => '${airport.lat}',
-        'lon' => '${airport.lon}',
-    ],`);
-})
+console.log(
+    airports
+        .map(
+            airport =>
+                `['iata' => '${airport.iata}','city' => '${airport.city}','lat' => ${airport.lat},'lon' => ${airport.lon}],`
+        )
+        .join('')
+)
 
-console.log('\n];\n')
+console.log('];\n')

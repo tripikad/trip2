@@ -1,4 +1,4 @@
-@import "variables";
+@import 'variables';
 
 .Header {
     background-position: center center;
@@ -9,21 +9,24 @@
     padding-bottom: $padding-sm ?if $mobile;
 }
 
-    .Header__content {
-        margin-top: $margin-xl;
-        margin-top: $margin-lg ?if $mobile;
-        margin-left: $margin-xl;
-        margin-left: 0 ?if $tablet;
-    }
+.Header__content {
+    margin-top: $margin-xl;
+    margin-top: $margin-lg ?if $tablet;
+    margin-left: $margin-xl;
+    margin-left: 0px ?if $tablet;
+    margin-right: calc($spacer * 10);
+    margin-right: 0 ?if $tablet;
+}
 
-    .Header__contentItem {
-        margin-bottom: $margin-md;
-    }
+.Header__contentItem {
+    margin-bottom: $margin-md;
+}
 
-    .Header__contentItem:last-child {
-        margin-bottom: 0;
-    }
+.Header__contentItem:last-child {
+    margin-bottom: 0;
+}
 
 .Header--high .Header__content {
-     margin-top: $margin-xxxl;
+    margin-top: $margin-xxxl;
+    margin-top: $margin-xl ?if $tablet;
 }

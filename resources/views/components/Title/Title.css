@@ -1,4 +1,4 @@
-@import "variables";
+@import 'variables';
 
 .Title__title {
     font: $font-heading-xl;
@@ -24,9 +24,15 @@ a .Title__title:hover {
     font-weight: $font-weight-bold;
 }
 
+.Title--smallest .Title__title {
+    font: $font-heading-sm;
+}
+
 .Title--large .Title__title {
     font: $font-heading-xxl;
     font: $font-heading-xl ?if $tablet;
+    line-height: $line-height-md;
+    line-height: $line-height-lg ?if $tablet;
 }
 
 .Title--white .Title__title {
@@ -43,6 +49,14 @@ a .Title__title:hover {
 
 .Title--red a .Title__title:hover {
     color: $red-hover;
+}
+
+.Title--yellow-dark .Title__title {
+    color: $yellow-dark;
+}
+
+.Title--yellow-dark a .Title__title:hover {
+    color: $yellow-hover;
 }
 
 .Title--gray .Title__title {
@@ -67,4 +81,12 @@ a .Title__title:hover {
 
 .Title--center .Title__title {
     text-align: center;
+}
+
+.Title--semitransparent .Title__title {
+    opacity: 0.5;
+}
+
+.Title--high .Title__title {
+    margin-top: $margin-xxl;
 }

@@ -1,0 +1,34 @@
+@import 'variables';
+
+.Flex {
+    display: flex;
+    display: block ?if $tablet;
+}
+
+.Flex {
+    flex-direction: column;
+}
+
+.Flex__item {
+    margin-bottom: $margin-md ?if $tablet;
+}
+
+.Flex__item:last-child {
+    margin-bottom: 0;
+}
+
+.Flex--wrap {
+    flex-wrap: wrap;
+}
+
+.Flex--large .Flex__item {
+    margin-bottom: $margin-xs;
+}
+
+.Flex--center .Flex__item {
+    text-align: center ?if $tablet;
+}
+
+.Flex--debug .Flex__item {
+    border: 1px dashed $red;
+}
