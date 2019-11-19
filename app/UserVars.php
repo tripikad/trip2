@@ -21,9 +21,7 @@ class UserVars
 
         $message = '%s does not respond to the "%s" property or method.';
 
-        throw new Exception(
-            sprintf($message, static::class, $property)
-        );
+        throw new Exception(sprintf($message, static::class, $property));
     }
 
     public function name()
@@ -43,36 +41,42 @@ class UserVars
 
     public function flagCount($flagType)
     {
-        $contentLikesCount = $this->user->contents()->whereHas('flags', function ($query) use ($flagType) {
-            $query->where('flag_type', $flagType);
-        })->count();
+        $contentLikesCount = $this->user
+            ->contents()
+            ->whereHas('flags', function ($query) use ($flagType) {
+                $query->where('flag_type', $flagType);
+            })
+            ->count();
 
-        $commentLikesCount = $this->user->comments()->whereHas('flags', function ($query) use ($flagType) {
-            $query->where('flag_type', $flagType);
-        })->count();
+        $commentLikesCount = $this->user
+            ->comments()
+            ->whereHas('flags', function ($query) use ($flagType) {
+                $query->where('flag_type', $flagType);
+            })
+            ->count();
 
         return $contentLikesCount + $commentLikesCount;
     }
 
     public function contentCount()
     {
-        return $this->user->contents()
+        return $this->user
+            ->contents()
             ->whereStatus(1)
             ->count();
     }
 
     public function commentCount()
     {
-        return $this->user->comments()
+        return $this->user
+            ->comments()
             ->whereStatus(1)
-        ->count();
+            ->count();
     }
 
     public function destinationHaveBeen()
     {
-        return $this
-            ->user
-            ->flags
+        return $this->user->flags
             ->where('flag_type', 'havebeen')
             ->filter(function ($flag) {
                 return $flag->flaggable;
@@ -81,29 +85,11 @@ class UserVars
 
     public function destinationWantsToGo()
     {
-        return $this
-            ->user
-            ->flags
+        return $this->user->flags
             ->where('flag_type', 'wantstogo')
             ->filter(function ($flag) {
                 return $flag->flaggable;
             });
-    }
-
-    public function destinationCount()
-    {
-        return $this->user->destinationHaveBeen()->count();
-    }
-
-    public function destinationCountPercentage()
-    {
-        $destinationsCount = Destination::count();
-
-        if ($this->destinationCount() > 0 && $destinationsCount > 0) {
-            return round(($this->user->destinationHaveBeen()->count() * 100) / $destinationsCount, 1);
-        }
-
-        return 0;
     }
 
     public function likes()

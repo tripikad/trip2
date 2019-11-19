@@ -52,8 +52,7 @@ class UserHeader
             ->vars()
             ->destinationHaveBeen()
             ->filter(function ($f) {
-                return $f->flaggable->vars()->isCity() ||
-                    $f->flaggable->vars()->isPlace();
+                return $f->flaggable->vars()->isContinent();
             });
         $hasBeenCountries = $user
             ->vars()
@@ -123,6 +122,7 @@ class UserHeader
                             region('UserAbout', $user, $loggedUser)
                         )
                     )
+                    ->br()
                     ->push(region('UserStats', $user, $loggedUser))
                     ->br()
                     ->push(
@@ -131,7 +131,59 @@ class UserHeader
                             ->is('responsive')
                             ->with('body', $user->vars()->description)
                     )
-                    ->br()
+                    ->pushWhen($wantsToGo->count(), '&nbsp;')
+                    ->pushWhen(
+                        $hasBeenContinents->count(),
+                        component('Flex')
+                            ->with('align', 'center')
+                            ->with('gap', 1)
+                            ->with(
+                                'items',
+                                collect()
+                                    ->push(
+                                        component('Icon')
+                                            ->is('white')
+                                            ->with('size', 'xl')
+                                            ->with('icon', 'icon-pin')
+                                    )
+                                    ->push(
+                                        component('Title')
+                                            ->is('white')
+                                            ->with(
+                                                'title',
+                                                $hasBeenContinents->count() .
+                                                    ' külastatud maailmajagu'
+                                            )
+                                    )
+                            )
+                    )
+                    ->pushWhen(
+                        $hasBeenContinents->count(),
+                        component('Flex')
+                            ->is('large')
+                            ->is('wrap')
+                            ->with('gap', 0.5)
+                            ->with(
+                                'items',
+                                $hasBeenContinents->map(function (
+                                    $destination
+                                ) {
+                                    return component('Tag')
+                                        ->is('white')
+                                        ->is('large')
+                                        ->with(
+                                            'title',
+                                            $destination->flaggable->name
+                                        )
+                                        ->with(
+                                            'route',
+                                            route('destination.showSlug', [
+                                                $destination->flaggable->slug
+                                            ])
+                                        );
+                                })
+                            )
+                    )
                     ->pushWhen(
                         $wantsToGo->count(),
                         component('Flex')
@@ -167,22 +219,7 @@ class UserHeader
                                     )
                             )
                     )
-                    // ->push(
-                    //     component('Title')
-                    //         ->is('b')
-                    //         ->with(
-                    //             'title',
-                    //             trans('user.show.stat.destination', [
-                    //                 'destination_count' => $user
-                    //                     ->vars()
-                    //                     ->destinationCount(),
-                    //                 'destination_percentage' => $user
-                    //                     ->vars()
-                    //                     ->destinationCountPercentage()
-                    //             ]) . ':'
-                    //         )
-                    //         ->with('icon', 'icon-pin')
-                    // )
+
                     ->pushWhen(
                         $hasBeenCountries->count(),
                         component('Flex')
@@ -192,6 +229,56 @@ class UserHeader
                             ->with(
                                 'items',
                                 $hasBeenCountries->map(function ($destination) {
+                                    return component('Tag')
+                                        ->is('white')
+                                        ->is('large')
+                                        ->with(
+                                            'title',
+                                            $destination->flaggable->name
+                                        )
+                                        ->with(
+                                            'route',
+                                            route('destination.showSlug', [
+                                                $destination->flaggable->slug
+                                            ])
+                                        );
+                                })
+                            )
+                    )
+                    ->pushWhen(
+                        $hasBeenCities->count(),
+                        component('Flex')
+                            ->with('align', 'center')
+                            ->with('gap', 1)
+                            ->with(
+                                'items',
+                                collect()
+                                    ->push(
+                                        component('Icon')
+                                            ->is('white')
+                                            ->with('size', 'xl')
+                                            ->with('icon', 'icon-pin')
+                                    )
+                                    ->push(
+                                        component('Title')
+                                            ->is('white')
+                                            ->with(
+                                                'title',
+                                                $hasBeenCities->count() .
+                                                    ' külastatud linna ja piirkonda'
+                                            )
+                                    )
+                            )
+                    )
+                    ->pushWhen(
+                        $hasBeenCities->count(),
+                        component('Flex')
+                            ->is('wrap')
+                            ->is('large')
+                            ->with('gap', 0.5)
+                            ->with(
+                                'items',
+                                $hasBeenCities->map(function ($destination) {
                                     return component('Tag')
                                         ->is('white')
                                         ->is('large')
@@ -225,8 +312,10 @@ class UserHeader
                                     ->push(
                                         component('Title')
                                             ->is('white')
-                                            ->is('small')
-                                            ->with('title', 'Tahab minna')
+                                            ->with(
+                                                'title',
+                                                'Tahab järgmisena minna'
+                                            )
                                     )
                             )
                     )
@@ -235,6 +324,7 @@ class UserHeader
                         component('Flex')
                             ->is('large')
                             ->is('wrap')
+                            ->with('gap', 0.5)
                             ->with(
                                 'items',
                                 $wantsToGo->map(function ($destination) {
@@ -254,11 +344,14 @@ class UserHeader
                                 })
                             )
                     )
+
                     ->push(
-                        component('BlockHorizontal')->with(
-                            'content',
-                            $this->prepareActionsForUser($user, $loggedUser)
-                        )
+                        component('Flex')
+                            ->with('justify', 'center')
+                            ->with(
+                                'items',
+                                $this->prepareActionsForUser($user, $loggedUser)
+                            )
                     )
             );
     }

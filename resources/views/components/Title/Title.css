@@ -86,3 +86,7 @@ a .Title__title:hover {
 .Title--semitransparent .Title__title {
     opacity: 0.5;
 }
+
+.Title--high .Title__title {
+    margin-top: $margin-xxl;
+}
