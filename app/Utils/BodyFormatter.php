@@ -62,7 +62,16 @@ class BodyFormatter
         $this->body = preg_replace_callback(
             $flightmapPattern,
             function ($matches) {
-                $airports = collect(explode(',', $matches[1]))
+                $airports = collect(
+                    explode(
+                        '-',
+                        str_replace(
+                            [';', ',', ' ', '  '],
+                            '-',
+                            strtoupper($matches[1])
+                        )
+                    )
+                )
                     ->map(function ($a) {
                         return trim($a);
                     })
