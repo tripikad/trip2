@@ -63,31 +63,15 @@ Tõime allpool välja valiku enamjaolt 4-5 päevasteks linnapuhkusteks. Piletihi
 
     public function destinationIndex()
     {
-        $ds1 =
-            //->take(100)
-            //->skip(200)
-            Destination::whereName('Hispaania')->first();
-        $ds2 = Destination::whereName('Sevilla')->first();
+        $ds = Destination::skip(50)
+            ->take(50)
+            ->get();
 
-        $ds = Destination::get();
-
-        // dd(
-        //     $ds
-        //         ->filter(function ($d) {
-        //             return !$d->vars()->facts();
-        //         })
-        //         ->count()
-        // );
-        //       dd(collect(config('facts'))->count());
-
-        return layout('One')
-            //->with('color', 'blue')
+        return layout('Offer')
+            ->with('color', 'blue')
             ->with(
                 'content',
                 $ds
-                    ->filter(function ($d) {
-                        return !$d->vars()->facts();
-                    })
                     ->map(function ($d) {
                         $name =
                             $d->vars()->isContinent() && $d->vars()->facts()
@@ -96,6 +80,16 @@ Tõime allpool välja valiku enamjaolt 4-5 päevasteks linnapuhkusteks. Piletihi
                                     $d->vars()->facts(),
                                     JSON_PRETTY_PRINT
                                 );
+
+                        $small = $d->vars()->facts()
+                            ? [
+                                [
+                                    'lat' => snap($d->vars()->facts()->lat),
+                                    'lon' => snap($d->vars()->facts()->lon)
+                                ]
+                            ]
+                            : false;
+
                         return collect()
                             ->push(
                                 component('Title')
@@ -103,27 +97,24 @@ Tõime allpool välja valiku enamjaolt 4-5 päevasteks linnapuhkusteks. Piletihi
                                     ->is('small')
                                     ->with('title', $d->name)
                             )
+                            //                             ->push(
+                            //                                 component('Code')
+                            //                                     ->is('gray')
+                            //                                     ->with(
+                            //                                         'code',
+                            //                                         "
+                            // id:   {$d->id}
+                            // name: {$d->name}
+                            // parent: {$d->getAncestors()->map->name}
+                            // { $name }
+                            //                                               "
+                            //                                     )
+                            //                             );
                             ->push(
-                                component('Code')
-                                    ->is('gray')
-                                    ->with(
-                                        'code',
-                                        "
-id:   {$d->id}
-name: {$d->name}
-parent: {$d->getAncestors()->map->name}
-{ $name }
-                                              "
-                                    )
+                                component('Dotmap')
+                                    ->with('areas', [$d->id])
+                                    ->with('smalldots', $small)
                             );
-                        // ->push(
-                        //     component('Dotmap')
-                        //         ->with(
-                        //             'destination_dots',
-                        //             config('destination_dots')
-                        //         )
-                        //         ->with('areas', [$d->id])
-                        // );
                     })
                     ->flatten()
             )

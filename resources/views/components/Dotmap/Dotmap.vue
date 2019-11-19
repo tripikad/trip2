@@ -28,7 +28,7 @@
                     :cx="xScale(c.lon)"
                     :cy="yScale(c.lat)"
                     :r="radius"
-                    :fill="$styleVars[dotcolor] || dotcolor"
+                    :fill="$styleVars[smalldotcolor] || smalldotcolor"
                 />
             </g>
             <path
@@ -81,9 +81,9 @@ export default {
         lines: { default: () => [] },
         backgroundcolor: { default: 'rgba(0,0,0,0.25)' },
         dotcolor: { default: 'white' },
-        smalldotcolor: { default: 'rgba(255,255,255,0.25)' },
-        mediumdotcolor: { default: 'orange' },
-        largedotcolor: { default: 'orange' },
+        smalldotcolor: { default: 'white' },
+        mediumdotcolor: { default: 'red' },
+        largedotcolor: { default: 'red' },
         linecolor: { default: 'white' }
     },
     data: () => ({

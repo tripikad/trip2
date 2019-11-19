@@ -8,6 +8,7 @@ class DestinationMap
     {
         $areas = [];
         $largedots = [];
+        $smalldots = [];
 
         if ($destination->vars()->isContinent()) {
             $areas = $destination
@@ -18,22 +19,46 @@ class DestinationMap
 
         if ($destination->vars()->isCountry()) {
             $areas = [$destination->id];
+            if ($destination->vars()->facts()->lat) {
+                $smalldots = [
+                    [
+                        'lat' => snap($destination->vars()->facts()->lat),
+                        'lon' => snap($destination->vars()->facts()->lon)
+                    ]
+                ];
+            }
         }
 
         if ($destination->vars()->isCity()) {
             $areas = [$destination->vars()->country()->id];
-            $largedots = [$destination->vars()->facts()];
+            if ($destination->vars()->facts()->lat) {
+                $smalldots = [
+                    [
+                        'lat' => snap($destination->vars()->facts()->lat),
+                        'lon' => snap($destination->vars()->facts()->lon)
+                    ]
+                ];
+                $largedots = [$destination->vars()->facts()];
+            }
         }
 
         if ($destination->vars()->isPlace()) {
             $areas = [$destination->vars()->country()->id];
-            $largedots = [$destination->vars()->facts()];
+            if ($destination->vars()->facts()->lat) {
+                $smalldots = [
+                    [
+                        'lat' => snap($destination->vars()->facts()->lat),
+                        'lon' => snap($destination->vars()->facts()->lon)
+                    ]
+                ];
+                $largedots = [$destination->vars()->facts()];
+            }
         }
 
         return component('Dotmap')
             ->with('height', '300px')
             ->with('areas', $areas)
-            ->with('largedots', $largedots)
-            ->with('largedotcolor', 'red');
+            ->with('smalldots', $smalldots)
+            ->with('mediumdots', $largedots);
     }
 }

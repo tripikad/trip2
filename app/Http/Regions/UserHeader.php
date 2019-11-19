@@ -53,8 +53,6 @@ class UserHeader
             })
             ->values();
 
-        $step = 2.5;
-
         $cityDots = $hasBeen
             ->filter(function ($f) {
                 return $f->flaggable->vars()->isCity() ||
@@ -63,10 +61,10 @@ class UserHeader
             ->map(function ($f) {
                 return $f->flaggable->vars()->facts();
             })
-            ->map(function ($f) use ($step) {
+            ->map(function ($f) {
                 return [
-                    'lat' => round($f->lat / $step) * $step,
-                    'lon' => round($f->lon / $step) * $step
+                    'lat' => snap($f->lat),
+                    'lon' => snap($f->lon)
                 ];
             })
             ->values();
