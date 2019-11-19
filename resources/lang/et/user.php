@@ -7,11 +7,12 @@ return [
     'show.stat.dislikes' => ':dislikes_count mittemeeldimist',
     'show.stat.content' => ':content_count postitust',
     'show.stat.comment' => ':comment_count kommentaari',
-    'show.stat.destination' =>
-        ':country_count külastatud riiki, :percentage% maailma :country_total_countst riigist',
+    'show.stat.continents' => ':count külastatud kontinenti',
+    'show.stat.countries' =>
+        ':count külastatud riiki, :percentage% maailma :total_countst riigist',
+    'show.stat.cities' => ':count külastatud linna või piirkonda',
     'show.about.joined' => ', liitus Tripiga :created_at',
     'show.about.admin' => ' ja toimetuse liige',
-    'show.about.wanttogo' => '. Tahab minna:',
 
     // V1
 
