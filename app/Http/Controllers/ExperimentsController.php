@@ -9,27 +9,34 @@ class ExperimentsController extends Controller
 {
     public function index()
     {
-        $d = Destination::whereName('Tallinn')->first();
-        $d2 = Destination::whereName('New York')->first();
+        $d = Destination::select('id')->get();
+        $d2 = Destination::countries()
+            ->get()
+            ->map(function ($d) {
+                return $d
+                    ->getAncestorsAndSelf()
+                    ->pluck('name')
+                    ->implode(' → ');
+            })
+            ->toJson(JSON_PRETTY_PRINT);
+        dd(Destination::countries()->count());
+        $areas = $d->pluck('id');
+        $dots = $d
+            ->map(function ($d) {
+                return $d->vars()->snappedCoordinates();
+            })
+            ->filter()
+            ->values();
 
         return layout('Offer')
-            ->with('color', 'blue')
+            ->with('color', 'yellow')
             ->with(
                 'top',
                 collect()->push(
                     component('Dotmap')
                         ->is('center')
-                        ->with('width', '1000')
-                        ->with('countrydots', config('destination_dots'))
-                        ->with('lines', [
-                            $d->vars()->facts(),
-                            $d2->vars()->facts()
-                        ])
-                        ->with('smalldots', [
-                            $d->vars()->facts(),
-                            $d2->vars()->facts()
-                        ])
-                    // ->with('largedots', [$a->last()])
+                        ->with('areas', $areas)
+                        ->with('smalldots', $dots)
                 )
             )
             ->render();
@@ -74,7 +81,7 @@ Tõime allpool välja valiku enamjaolt 4-5 päevasteks linnapuhkusteks. Piletihi
                 $ds
                     ->map(function ($d) {
                         $name =
-                            $d->vars()->isContinent() && $d->vars()->facts()
+                            $d->isContinent() && $d->vars()->facts()
                                 ? ''
                                 : json_encode(
                                     $d->vars()->facts(),

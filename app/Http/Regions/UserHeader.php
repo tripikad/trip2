@@ -48,47 +48,38 @@ class UserHeader
         $countryCount = 195;
 
         $loggedUser = request()->user();
-        $wantsToGo = $user->vars()->destinationWantsToGo();
+
         $hasBeenContinents = $user
             ->vars()
             ->destinationHaveBeen()
-            ->filter(function ($f) {
-                return $f->flaggable->vars()->isContinent();
+            ->map->flaggable->filter(function ($d) {
+                return $d->isContinent();
             });
+
         $hasBeenCountries = $user
             ->vars()
             ->destinationHaveBeen()
-            ->filter(function ($f) {
-                return $f->flaggable->vars()->isCountry();
+            ->map->flaggable->filter(function ($d) {
+                return $d->isCountry();
             });
+
+        $countryDots = $hasBeenCountries->pluck('id')->values();
+
         $hasBeenCities = $user
             ->vars()
             ->destinationHaveBeen()
-            ->filter(function ($f) {
-                return $f->flaggable->vars()->isCity() ||
-                    $f->flaggable->vars()->isPlace();
+            ->map->flaggable->filter(function ($d) {
+                return $d->isCity();
             });
 
-        $countryDots = $hasBeenCountries
-            ->map(function ($f) {
-                return $f->flaggable->id;
+        $cityDots = $hasBeenCities
+            ->map(function ($d) {
+                return $d->vars()->snappedCoordinates();
             })
+            ->filter()
             ->values();
 
-        $cityDots = $hasBeenCities
-            ->map(function ($f) {
-                return $f->flaggable->vars()->facts();
-            })
-            ->filter(function ($f) {
-                return $f;
-            })
-            ->map(function ($d) {
-                return [
-                    'lat' => snap($d->lat),
-                    'lon' => snap($d->lon)
-                ];
-            })
-            ->values();
+        $wantsToGo = $user->vars()->destinationWantsToGo()->map->flaggable;
 
         return component('HeaderLight')
             ->with(
@@ -176,14 +167,11 @@ class UserHeader
                                     return component('Tag')
                                         ->is('white')
                                         ->is('large')
-                                        ->with(
-                                            'title',
-                                            $destination->flaggable->name
-                                        )
+                                        ->with('title', $destination->name)
                                         ->with(
                                             'route',
                                             route('destination.showSlug', [
-                                                $destination->flaggable->slug
+                                                $destination->slug
                                             ])
                                         );
                                 })
@@ -237,14 +225,11 @@ class UserHeader
                                     return component('Tag')
                                         ->is('white')
                                         ->is('large')
-                                        ->with(
-                                            'title',
-                                            $destination->flaggable->name
-                                        )
+                                        ->with('title', $destination->name)
                                         ->with(
                                             'route',
                                             route('destination.showSlug', [
-                                                $destination->flaggable->slug
+                                                $destination->slug
                                             ])
                                         );
                                 })
@@ -288,14 +273,11 @@ class UserHeader
                                     return component('Tag')
                                         ->is('white')
                                         ->is('large')
-                                        ->with(
-                                            'title',
-                                            $destination->flaggable->name
-                                        )
+                                        ->with('title', $destination->name)
                                         ->with(
                                             'route',
                                             route('destination.showSlug', [
-                                                $destination->flaggable->slug
+                                                $destination->slug
                                             ])
                                         );
                                 })
@@ -334,14 +316,11 @@ class UserHeader
                                     return component('Tag')
                                         ->is('white')
                                         ->is('large')
-                                        ->with(
-                                            'title',
-                                            $destination->flaggable->name
-                                        )
+                                        ->with('title', $destination->name)
                                         ->with(
                                             'route',
                                             route('destination.showSlug', [
-                                                $destination->flaggable->slug
+                                                $destination->slug
                                             ])
                                         );
                                 })

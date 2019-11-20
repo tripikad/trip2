@@ -1,4 +1,4 @@
-@import "variables";
+@import 'variables';
 
 .FrontpageSearch {
     display: flex;
@@ -8,9 +8,9 @@
     font-family: $font-family, $font-family-code;
 }
 
-    .FrontpageSearch * {
-        transition: all 0.15s linear;
-    }
+.FrontpageSearch * {
+    transition: all 0.15s linear;
+}
 
 .FrontpageSearch__search {
     width: 100%;
@@ -22,39 +22,45 @@
     outline: 0;
     -webkit-appearance: none;
     font: $font-heading-md;
-    padding: 5px 40px $padding-xxs 50px;
+    padding: 5px 20px $padding-xxs 50px;
+    padding: 5px 15px $padding-xxs 15px ?if $mobile;
     color: $black;
     border: 0;
     width: 100%;
     height: 50px;
 }
 
-    .FrontpageSearch:hover .FrontpageSearch__input,
-    .FrontpageSearch__input:focus {
-        background: $white;
-    }
+.FrontpageSearch:hover .FrontpageSearch__input,
+.FrontpageSearch__input:focus {
+    background: $white;
+}
 
-    .FrontpageSearch ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
-        color: $gray-dark;
-    }
+.FrontpageSearch ::-webkit-input-placeholder {
+    /* WebKit, Blink, Edge */
+    color: $gray-dark;
+}
 
-    .FrontpageSearch :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-        color: $gray-dark;
-        opacity:  1;
-    }
+.FrontpageSearch :-moz-placeholder {
+    /* Mozilla Firefox 4 to 18 */
+    color: $gray-dark;
+    opacity: 1;
+}
 
-    .FrontpageSearch ::-moz-placeholder { /* Mozilla Firefox 19+ */
-        color: $gray-dark;
-        opacity: 1;
-    }
+.FrontpageSearch ::-moz-placeholder {
+    /* Mozilla Firefox 19+ */
+    color: $gray-dark;
+    opacity: 1;
+}
 
-    .FrontpageSearch :-ms-input-placeholder { /* Internet Explorer 10-11 */
-        color: $gray-dark;
-    }
+.FrontpageSearch :-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: $gray-dark;
+}
 
-    .FrontpageSearch ::-ms-input-placeholder { /* Microsoft Edge */
-        color: $gray-dark;
-    }
+.FrontpageSearch ::-ms-input-placeholder {
+    /* Microsoft Edge */
+    color: $gray-dark;
+}
 
 .FrontpageSearch__icon {
     display: none ?if $mobile;
@@ -66,15 +72,15 @@
     cursor: pointer;
 }
 
-    .FrontpageSearch__icon svg {
-        fill: $red;
-    }
+.FrontpageSearch__icon svg {
+    fill: $red;
+}
 
-    .FrontpageSearch__input:hover + .FrontpageSearch__icon svg,
-    .FrontpageSearch__input:focus + .FrontpageSearch__icon svg,
-    .FrontpageSearch__icon:hover svg {
-        fill: $red-hover;
-    }
+.FrontpageSearch__input:hover + .FrontpageSearch__icon svg,
+.FrontpageSearch__input:focus + .FrontpageSearch__icon svg,
+.FrontpageSearch__icon:hover svg {
+    fill: $red-hover;
+}
 
 .FrontpageSearch__loading {
     position: absolute;
@@ -84,31 +90,31 @@
     height: 48px;
 }
 
-    .FrontpageSearch__loading::before,
-    .FrontpageSearch__loading::after {
-        position: absolute;
-        content: "";
-        top: 50%;
-        left: 50%;
-        margin: -8px 0 0 -8px;
-        width: 16px;
-        height: 16px;
-        border-radius: 100%;
-        border-color: $green-dark transparent transparent;
-        border-style: solid;
-        border-width: 2px;
-        box-shadow: 0 0 0 1px transparent;
-    }
+.FrontpageSearch__loading::before,
+.FrontpageSearch__loading::after {
+    position: absolute;
+    content: '';
+    top: 50%;
+    left: 50%;
+    margin: -8px 0 0 -8px;
+    width: 16px;
+    height: 16px;
+    border-radius: 100%;
+    border-color: $green-dark transparent transparent;
+    border-style: solid;
+    border-width: 2px;
+    box-shadow: 0 0 0 1px transparent;
+}
 
-    .FrontpageSearch__loading::before {
-        animation: spinning 2.4s cubic-bezier(.41,.26,.2,.62);
-        animation-iteration-count: infinite;
-    }
+.FrontpageSearch__loading::before {
+    animation: spinning 2.4s cubic-bezier(0.41, 0.26, 0.2, 0.62);
+    animation-iteration-count: infinite;
+}
 
-    .FrontpageSearch__loading::after {
-        animation: spinning 2.4s cubic-bezier(.51,.09,.21,.8);
-        animation-iteration-count: infinite;
-    }
+.FrontpageSearch__loading::after {
+    animation: spinning 2.4s cubic-bezier(0.51, 0.09, 0.21, 0.8);
+    animation-iteration-count: infinite;
+}
 
 .FrontpageSearch__results {
     width: 100%;
@@ -118,5 +124,5 @@
     height: auto;
     left: 0;
     z-index: 2;
-    box-shadow: 0 18px 48px rgba(14,18,23,.2);
+    box-shadow: 0 18px 48px rgba(14, 18, 23, 0.2);
 }

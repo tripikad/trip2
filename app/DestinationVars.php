@@ -40,34 +40,18 @@ class DestinationVars
         return format_body($this->destination->description);
     }
 
-    public function isContinent()
-    {
-        return $this->destination->depth == 0;
-    }
-
-    public function isCountry()
-    {
-        return $this->destination->depth == 1;
-    }
-
-    public function isCity()
-    {
-        return $this->destination->depth == 2;
-    }
-
-    public function isPlace()
-    {
-        return $this->destination->depth > 2;
-    }
+    // @TODO2 Refactor this
 
     public function countries()
     {
-        if ($this->isContinent()) {
+        if ($this->destination->isContinent()) {
             return $this->destination->getImmediateDescendants();
         }
 
         return false;
     }
+
+    // @TODO2 Refactor this
 
     public function country()
     {
@@ -75,7 +59,7 @@ class DestinationVars
             return $this->destination
                 ->getAncestors()
                 ->filter(function ($d) {
-                    return $d->vars()->isCountry();
+                    return $d->isCountry();
                 })
                 ->first();
         }
@@ -88,6 +72,25 @@ class DestinationVars
         if ($facts = config("facts.{$this->destination->id}")) {
             return (object) $facts;
         }
+    }
+
+    public function coordinates()
+    {
+        if ($this->facts() && $this->facts()->lat && $this->facts()->lon) {
+            return ['lat' => $this->facts()->lat, 'lon' => $this->facts()->lon];
+        }
+        return null;
+    }
+
+    public function snappedCoordinates()
+    {
+        if ($this->facts() && $this->facts()->lat && $this->facts()->lon) {
+            return [
+                'lat' => snap($this->facts()->lat, 2.5),
+                'lon' => snap($this->facts()->lon, 2.5)
+            ];
+        }
+        return null;
     }
 
     public function area()
