@@ -44,7 +44,7 @@ class ExperimentsController extends Controller
         //     ->orWhere->places()
         //     ->pluck('id');
 
-        $dots = Destination::cities()
+        $dots = Destination::citiesOrPlaces()
             ->get()
             ->map(function ($d) {
                 return $d->vars()->snappedCoordinates();
