@@ -6,6 +6,11 @@
     color: $gray;
     cursor: pointer;
     font: $font-text-sm;
+    padding: 0 $padding-xs;
+    border-radius: $border-radius-lg;
+    transition: $transition-md;
+    /* @TODO2 Remove this */
+    margin-left: -7px;
 }
 
 .FormLink {
@@ -22,4 +27,13 @@
 
 .FormLink--white:hover {
     color: $white-hover;
+}
+
+.FormLink--green {
+    color: $green;
+}
+
+.FormLink--green:hover {
+    color: $white;
+    background: $green;
 }

@@ -1,5 +1,13 @@
 @import 'variables';
 
+.MetaLink {
+    transition: $transition-md;
+    padding: 0 $padding-xs;
+    border-radius: $border-radius-lg;
+    /* @TODO2 Remove this */
+    margin-left: -7px;
+}
+
 .MetaLink__title {
     font: $font-text-sm;
     color: $gray;
@@ -31,4 +39,16 @@ a .MetaLink__title:hover {
 
 .MetaLink--cyan a .MetaLink__title:hover {
     color: $cyan-hover;
+}
+
+.MetaLink--green .MetaLink__title {
+    color: $green;
+}
+
+.MetaLink--green:hover {
+    background: $green;
+}
+
+.MetaLink--green .MetaLink__title:hover {
+    color: $white;
 }

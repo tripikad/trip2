@@ -121,7 +121,10 @@ class UserHeader
                         component('Body')
                             ->is('white')
                             ->is('responsive')
-                            ->with('body', $user->vars()->description)
+                            ->with(
+                                'body',
+                                format_body($user->vars()->description)
+                            )
                     )
                     ->pushWhen($wantsToGo->count(), '&nbsp;')
                     ->pushWhen(

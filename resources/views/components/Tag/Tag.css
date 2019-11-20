@@ -25,10 +25,6 @@
     border: 1px solid $orange;
 }
 
-.Tag--orange.Tag--filled {
-    background: $orange;
-}
-
 .Tag--orange .Tag__title {
     color: $orange;
 }
@@ -58,17 +54,17 @@
     color: $white;
 }
 
-.Tag--black {
-    background: $black;
-    border: 1px solid $black;
-    opacity: $opacity-lg;
+.Tag--green {
+    border: 1px solid $green;
+    background: $green;
 }
 
-.Tag--black:hover {
-    opacity: 1;
+.Tag--green:hover {
+    border: 1px solid $green-hover;
+    background: $green-hover;
 }
 
-.Tag--black .Tag__title {
+.Tag--green .Tag__title {
     color: $white;
 }
 

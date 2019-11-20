@@ -1,9 +1,10 @@
-@import "variables";
+@import 'variables';
 
-    .Form__field {
-        margin-bottom: $margin-md;
-    }
+.Form__field {
+    margin-bottom: $margin-md;
+    line-height: 1em;
+}
 
-    .Form__field:last-child {
-        margin-bottom: 0;
-    }
+.Form__field:last-child {
+    margin-bottom: 0;
+}

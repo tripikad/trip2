@@ -114,7 +114,7 @@ class DestinationVars
 
     public function callingCode()
     {
-        if ($facts = $this->facts()) {
+        if (!$this->destination->isContinent() && ($facts = $this->facts())) {
             return '+' . $facts->calling_code;
         }
     }

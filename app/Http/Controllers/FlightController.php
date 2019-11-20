@@ -135,13 +135,12 @@ class FlightController extends Controller
                         ->merge($flight->destinations->map(function ($destination) {
                             return component('Tag')
                                 ->is('orange')
-                                ->is('filled')
                                 ->with('title', $destination->name)
                                 ->with('route', route('destination.showSlug', [$destination->slug]));
                         }))
                         ->pushWhen($loggedUser && $loggedUser->hasRole('admin', $flight->user->id),
                             component('Tag')
-                                ->is('black')
+                                ->is('green')
                                 ->with('title', trans('content.action.edit.title'))
                                 ->with('route', route('flight.edit', [$flight]))
                         )

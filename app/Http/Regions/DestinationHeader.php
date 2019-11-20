@@ -67,8 +67,8 @@ class DestinationHeader
                                             ->pushWhen(
                                                 $user &&
                                                     $user->hasRole('admin'),
-                                                component('MetaLink')
-                                                    ->is('white')
+                                                component('Tag')
+                                                    ->is('green')
                                                     ->with(
                                                         'title',
                                                         trans(
