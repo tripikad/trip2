@@ -37,6 +37,11 @@ class DestinationFacts
                             trans('destination.show.about.population'),
                             $destination->vars()->population()
                         )
+                        ->putWhen(
+                            $destination->vars()->timezone(),
+                            trans('destination.show.about.timezone'),
+                            $destination->vars()->timezone()
+                        )
                 )
             )
             ->render()

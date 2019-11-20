@@ -19,6 +19,7 @@
 
 .Flex--wrap {
     flex-wrap: wrap;
+    display: flex;
 }
 
 .Flex--large .Flex__item {

@@ -14,7 +14,7 @@ class DestinationHeaderParents
                         ->is('large')
                         ->is('white')
                         ->with('title', '‹ &nbsp; Sihtkohad')
-                        ->with('route', route('experiments.index'))
+                        ->with('route', route('destination.index'))
                 )
                 ->merge(
                     $parents->map(function ($parent) {

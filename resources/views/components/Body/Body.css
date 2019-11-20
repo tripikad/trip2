@@ -172,7 +172,13 @@
     color: $gray;
 }
 
-.Body--yellow-dark,
-.Body--yellow-dark * {
-    color: $yellow-dark;
+.Body--semitransparent,
+.Body--semitransparent * {
+    opacity: $opacity-lg;
+    color: $black;
+}
+
+.Body--narrow {
+    padding-right: $margin-xxxl;
+    padding-right: 0 ?if $tablet;
 }

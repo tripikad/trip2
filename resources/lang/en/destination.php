@@ -1,6 +1,10 @@
 <?php
 
 return [
+    'show.children.continent' => ':count country|:count countries',
+    'show.children.country' => ':count city or region|:count cities or regions',
+    'show.children.city' => ':count place|:count places',
+
     'show.stat.havebeen' => ':count have been here',
     'show.stat.wantstogo' => ':count want to go here',
 
@@ -19,6 +23,10 @@ return [
     'show.popular.title.short' => 'Popular destinations',
     'show.popular.title' => 'Popular destinations in :destination',
     'show.news.title' => 'News',
+
+    // @TODO2 Add more form Estonian translations
+
+    'show.about.timezone' => 'Timezone',
 
     'show.description.1' => 'Europe',
     'show.description.2' => 'Asia',

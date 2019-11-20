@@ -22,11 +22,11 @@
 }
 
 .Tag--orange {
-    border: 1px solid $orange;
+    border: 1px solid $orange-dark;
 }
 
 .Tag--orange .Tag__title {
-    color: $orange;
+    color: $orange-dark;
 }
 
 .Tag--orange.Tag--filled .Tag__title {
@@ -34,7 +34,7 @@
 }
 
 .Tag--orange .Tag__title:hover {
-    color: $orange-hover;
+    color: $orange-dark-hover;
 }
 
 .Tag--orange.Tag--filled .Tag__title:hover {

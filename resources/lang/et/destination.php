@@ -1,6 +1,11 @@
 <?php
 
 return [
+    'show.children.continent' => ':count riik|:count riiki',
+    'show.children.country' =>
+        ':count linn või piirkond|:count linna või piirkonda',
+    'show.children.city' => ':count koht|:count kohta',
+
     'show.stat.havebeen' => ':count on siin käinud',
     'show.stat.wantstogo' => ':count tahab siia minna',
 
@@ -11,6 +16,7 @@ return [
     'show.about.currency' => 'Valuuta',
     'show.about.currencyCode' => 'Valuuta',
     'show.about.callingCode' => 'Suunakood',
+    'show.about.timezone' => 'Ajavöönd',
 
     'show.good.offer' => 'Head pakkumised',
     'show.link.view.all' => 'Veel &rsaquo;',

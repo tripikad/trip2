@@ -75,6 +75,14 @@ class AppServiceProvider extends ServiceProvider
             return $this;
         });
 
+        Collection::macro('mergeWhen', function ($condition, $items) {
+            if ($condition) {
+                $this->merge($items);
+            }
+
+            return $this;
+        });
+
         Collection::macro('br', function ($count = 1) {
             return $this->merge(collect(array_fill(0, $count, '<br />')));
             return $this;

@@ -126,6 +126,21 @@ class DestinationVars
         }
     }
 
+    public function timezone()
+    {
+        if ($facts = $this->facts()) {
+            if ($facts->timezone && $facts->timezone > 0) {
+                return 'GMT + ' . $facts->timezone;
+            }
+            if ($facts->timezone && $facts->timezone == 0) {
+                return 'GMT';
+            }
+            if ($facts->timezone && $facts->timezone < 0) {
+                return 'GMT ' . $facts->timezone;
+            }
+        }
+    }
+
     public function usersHaveBeen()
     {
         return $this->destination->flags->where('flag_type', 'havebeen');

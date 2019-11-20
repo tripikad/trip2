@@ -9,95 +9,61 @@ class ExperimentsController extends Controller
 {
     public function index()
     {
-        // $d2 = Destination::countries()
-        //     ->get()
-        //     ->map(function ($d) {
-        //         return $d
-        //             ->getAncestorsAndSelf()
-        //             ->pluck('name')
-        //             ->implode(' → ');
-        //     })
-        //     ->toJson(JSON_PRETTY_PRINT);
-        // //dd(Destination::countries()->count());
+        $user = request()->user();
 
-        //$continents = Destination::continents()->get();
-        $continents = collect([
-            'Põhja-Ameerika',
-            'Euroopa',
-            'Aasia',
-            'Kesk-Ameerika',
-            'Lähis-Ida',
-            'Austraalia ja Okeaania',
-            'Lõuna-Ameerika',
-            'Aafrika',
-            'Antarktika'
-        ])->map(function ($name) {
-            return Destination::continents()
-                ->whereName($name)
-                ->first();
-        });
-
-        $d = Destination::select('id')->get();
-
-        // $areas = $d
-        //     ->cities()
-        //     ->orWhere->places()
-        //     ->pluck('id');
-
-        $dots = Destination::citiesOrPlaces()
+        $continents = Destination::countries()
             ->get()
-            ->map(function ($d) {
-                return $d->vars()->snappedCoordinates();
-            })
-            ->filter()
-            ->values();
+            ->sortBy('name');
+
+        $c = $continents->map(function ($d) use ($user) {
+            return collect()
+                ->br()
+                ->push(
+                    component('Title')
+                        ->is('white')
+                        ->with('title', $d->name)
+                        ->with(
+                            'route',
+                            route('destination.showSlug', [$d->slug])
+                        )
+                )
+                ->pushWhen(
+                    $user && $user->hasRole('admin'),
+                    component('Button')
+                        ->is('small')
+                        ->is('narrow')
+                        ->with('title', trans('content.action.edit.title'))
+                        ->with('route', route('destination.edit', [$d]))
+                )
+                ->pushWhen(
+                    $d->user,
+                    component('Title')
+                        ->is('semitransparent')
+                        ->is('smaller')
+                        ->with('title', $d->user ? $d->user->name . ':' : '')
+                )
+                ->push(
+                    component('Body')
+                        ->is('semitransparent')
+                        ->is('responsive')
+                        ->with('body', format_body($d->description))
+                );
+        });
 
         return layout('Offer')
             ->with('color', 'yellow')
             ->with('header', region('OfferHeader'))
             ->with(
-                'top',
+                'content',
                 collect()
                     ->push(
                         component('Title')
                             ->is('white')
                             ->is('large')
-                            ->is('center')
                             ->with('title', 'Sihtkohad')
                     )
-                    ->br()
-                    ->push(
-                        component('Dotmap')
-                            ->is('center')
-                            //->with('areas', $areas)
-                            ->with('smalldots', $dots)
-                    )
-            )
-            ->with(
-                'content',
-                collect()->push(
-                    component('Grid')
-                        ->with('cols', 3)
-                        ->with('gap', 3)
-                        ->with('widths', '5fr 3fr 3fr')
-                        ->with(
-                            'items',
-                            $continents->map(function ($d) {
-                                return component('Title')
-                                    ->is('white')
-                                    ->with(
-                                        'title',
-                                        str_replace('ja Okeaania', '', $d->name)
-                                    )
-                                    ->with(
-                                        'route',
-                                        route('destination.showSlug', [
-                                            $d->slug
-                                        ])
-                                    );
-                            })
-                        )
-                )
+                    ->merge($c)
+                    ->flatten()
             )
             ->with('footer', region('FooterLight', ''))
             ->render();

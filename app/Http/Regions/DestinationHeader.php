@@ -60,12 +60,12 @@ class DestinationHeader
                                     )
                             )
                     )
-                    ->push(region('DestinationStat', $destination))
                     ->pushWhen(
                         $destination->description,
                         component('Body')
-                            ->is('yellow-dark')
+                            ->is('semitransparent')
                             ->is('responsive')
+                            ->is('narrow')
                             ->with(
                                 'body',
                                 format_body($destination->description)
@@ -74,6 +74,15 @@ class DestinationHeader
                     ->pushWhen(
                         $destination->user,
                         region('UserRow', $destination->user)
+                    )
+                    ->br()
+                    ->pushWhen(
+                        $childrens->count(),
+                        region(
+                            'DestinationChildrenTitle',
+                            $destination,
+                            $childrens
+                        )
                     )
                     ->pushWhen(
                         $childrens->count(),
@@ -95,6 +104,19 @@ class DestinationHeader
                                             ])
                                         );
                                 })
+                            )
+                    )
+                    ->br()
+                    ->push(region('DestinationStat', $destination))
+                    ->pushWhen(
+                        $user && $user->hasRole('admin'),
+                        component('Button')
+                            ->is('small')
+                            ->is('narrow')
+                            ->with('title', trans('content.action.edit.title'))
+                            ->with(
+                                'route',
+                                route('destination.edit', [$destination])
                             )
                     )
             );
