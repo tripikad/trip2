@@ -60,91 +60,20 @@ class DestinationHeader
                                     )
                             )
                     )
-                    ->push(
-                        component('Flex')
-                            ->with('justify', 'space-between')
+                    ->push(region('DestinationStat', $destination))
+                    ->pushWhen(
+                        $destination->description,
+                        component('Body')
+                            ->is('yellow-dark')
+                            ->is('responsive')
                             ->with(
-                                'items',
-                                collect()
-                                    ->pushWhen(
-                                        $destination->description,
-                                        collect()
-                                            ->pushWhen(
-                                                $destination->description,
-                                                component('Body')
-                                                    ->is('yellow-dark')
-                                                    ->is('responsive')
-                                                    ->with(
-                                                        'body',
-                                                        format_body(
-                                                            $destination->description
-                                                        )
-                                                    )
-                                            )
-                                            ->pushWhen(
-                                                $destination->user,
-                                                component('Flex')
-                                                    ->with('gap', 1)
-                                                    ->with(
-                                                        'items',
-                                                        collect()
-                                                            ->push(
-                                                                component(
-                                                                    'UserImage'
-                                                                )
-                                                                    ->with(
-                                                                        'route',
-                                                                        route(
-                                                                            'user.show',
-                                                                            [
-                                                                                $destination->user
-                                                                            ]
-                                                                        )
-                                                                    )
-                                                                    ->with(
-                                                                        'image',
-                                                                        $destination->user
-                                                                            ? $destination->user->imagePreset(
-                                                                                'small_square'
-                                                                            )
-                                                                            : ''
-                                                                    )
-                                                                    ->with(
-                                                                        'rank',
-                                                                        $destination->user
-                                                                            ? $destination->user->vars()
-                                                                                ->rank
-                                                                            : ''
-                                                                    )
-                                                            )
-                                                            ->push(
-                                                                component(
-                                                                    'Title'
-                                                                )
-                                                                    ->is(
-                                                                        'white'
-                                                                    )
-                                                                    ->is(
-                                                                        'smallest'
-                                                                    )
-                                                                    ->with(
-                                                                        'title',
-                                                                        $destination->user
-                                                                            ? $destination
-                                                                                ->user
-                                                                                ->name
-                                                                            : ''
-                                                                    )
-                                                            )
-                                                    )
-                                            )
-                                            ->render()
-                                            ->implode('<br />')
-                                    )
-                                    ->push(
-                                        region('DestinationStat', $destination)
-                                    )
+                                'body',
+                                format_body($destination->description)
                             )
+                    )
+                    ->pushWhen(
+                        $destination->user,
+                        region('UserRow', $destination->user)
                     )
                     ->pushWhen(
                         $childrens->count(),

@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'show.stat.havebeen' => ':count have been here',
+    'show.stat.wantstogo' => ':count want to go here',
 
     'show.good.offer' => 'Good offers',
     'show.link.view.all' => 'View all offers &rsaquo;',
@@ -26,6 +28,5 @@ return [
     'show.description.6' => 'Central America',
     'show.description.7' => 'South America',
     'show.description.8' => 'Australia and Oceania',
-    'show.description.819' => 'Antarctica',
-
+    'show.description.819' => 'Antarctica'
 ];
