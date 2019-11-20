@@ -89,7 +89,7 @@ class Comment
                                     'fields',
                                     collect()->push(
                                         component('FormLink')
-                                            ->is('green')
+                                            ->is('pink')
                                             ->with(
                                                 'title',
                                                 trans(

@@ -3,7 +3,7 @@
 .MetaLink {
     transition: $transition-md;
     padding: 0 $padding-xs;
-    border-radius: $border-radius-lg;
+    border-radius: $border-radius-md;
     /* @TODO2 Remove this */
     margin-left: -7px;
 }

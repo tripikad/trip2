@@ -139,7 +139,7 @@ class FlightController extends Controller
                                 ->with('route', route('destination.showSlug', [$destination->slug]));
                         }))
                         ->pushWhen($loggedUser && $loggedUser->hasRole('admin', $flight->user->id),
-                            component('Tag')
+                            component('MetaLink')
                                 ->is('green')
                                 ->with('title', trans('content.action.edit.title'))
                                 ->with('route', route('flight.edit', [$flight]))
@@ -151,7 +151,7 @@ class FlightController extends Controller
                                 ))
                                 ->with('fields', collect()
                                     ->push(component('FormLink')
-                                    ->is('white')
+                                    ->is('pink')
                                     ->with(
                                             'title',
                                             trans("content.action.status.$flight->status.title")

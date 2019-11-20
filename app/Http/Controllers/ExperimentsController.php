@@ -9,19 +9,43 @@ class ExperimentsController extends Controller
 {
     public function index()
     {
+        // $d2 = Destination::countries()
+        //     ->get()
+        //     ->map(function ($d) {
+        //         return $d
+        //             ->getAncestorsAndSelf()
+        //             ->pluck('name')
+        //             ->implode(' → ');
+        //     })
+        //     ->toJson(JSON_PRETTY_PRINT);
+        // //dd(Destination::countries()->count());
+
+        //$continents = Destination::continents()->get();
+        $continents = collect([
+            'Põhja-Ameerika',
+            'Euroopa',
+            'Aasia',
+            'Kesk-Ameerika',
+            'Lähis-Ida',
+            'Austraalia ja Okeaania',
+            'Lõuna-Ameerika',
+            'Aafrika',
+            'Antarktika'
+        ])->map(function ($name) {
+            return Destination::continents()
+                ->whereName($name)
+                ->first();
+        });
+
         $d = Destination::select('id')->get();
-        $d2 = Destination::countries()
+
+        // $areas = $d
+        //     ->cities()
+        //     ->orWhere->places()
+        //     ->pluck('id');
+
+        $dots = Destination::cities()
             ->get()
-            ->map(function ($d) {
-                return $d
-                    ->getAncestorsAndSelf()
-                    ->pluck('name')
-                    ->implode(' → ');
-            })
-            ->toJson(JSON_PRETTY_PRINT);
-        dd(Destination::countries()->count());
-        $areas = $d->pluck('id');
-        $dots = $d
             ->map(function ($d) {
                 return $d->vars()->snappedCoordinates();
             })
@@ -30,15 +54,52 @@ class ExperimentsController extends Controller
 
         return layout('Offer')
             ->with('color', 'yellow')
+            ->with('header', region('OfferHeader'))
             ->with(
                 'top',
+                collect()
+                    ->push(
+                        component('Title')
+                            ->is('white')
+                            ->is('large')
+                            ->is('center')
+                            ->with('title', 'Sihtkohad')
+                    )
+                    ->br()
+                    ->push(
+                        component('Dotmap')
+                            ->is('center')
+                            //->with('areas', $areas)
+                            ->with('smalldots', $dots)
+                    )
+            )
+            ->with(
+                'content',
                 collect()->push(
-                    component('Dotmap')
-                        ->is('center')
-                        ->with('areas', $areas)
-                        ->with('smalldots', $dots)
+                    component('Grid')
+                        ->with('cols', 3)
+                        ->with('gap', 3)
+                        ->with('widths', '5fr 3fr 3fr')
+                        ->with(
+                            'items',
+                            $continents->map(function ($d) {
+                                return component('Title')
+                                    ->is('white')
+                                    ->with(
+                                        'title',
+                                        str_replace('ja Okeaania', '', $d->name)
+                                    )
+                                    ->with(
+                                        'route',
+                                        route('destination.showSlug', [
+                                            $d->slug
+                                        ])
+                                    );
+                            })
+                        )
                 )
             )
+            ->with('footer', region('FooterLight', ''))
             ->render();
     }
 

@@ -68,6 +68,11 @@ class Destination extends Baum\Node
         return $query->where('depth', 3);
     }
 
+    public function scopeCitiesOrPlaces($query)
+    {
+        return $query->whereIn('depth', [2, 3]);
+    }
+
     public function isContinent()
     {
         return $this->depth == 0;

@@ -55,7 +55,7 @@ class DestinationVars
 
     public function country()
     {
-        if ($this->isCity() || $this->isPlace()) {
+        if ($this->destination->isCity() || $this->destination->isPlace()) {
             return $this->destination
                 ->getAncestors()
                 ->filter(function ($d) {

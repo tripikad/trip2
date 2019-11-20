@@ -40,6 +40,7 @@ class DestinationHeader
             ->with(
                 'content',
                 collect()
+                    ->push(region('DestinationHeaderParents', $parents))
                     ->push(
                         component('Flex')
                             ->with('align', 'flex-start')
@@ -49,12 +50,6 @@ class DestinationHeader
                                 collect()
                                     ->push(
                                         collect()
-                                            ->push(
-                                                region(
-                                                    'DestinationParents',
-                                                    $parents
-                                                )
-                                            )
                                             ->push(
                                                 component('Title')
                                                     ->is('large')
@@ -67,8 +62,9 @@ class DestinationHeader
                                             ->pushWhen(
                                                 $user &&
                                                     $user->hasRole('admin'),
-                                                component('Tag')
-                                                    ->is('green')
+                                                component('Button')
+                                                    ->is('small')
+                                                    ->is('narrow')
                                                     ->with(
                                                         'title',
                                                         trans(
