@@ -38,7 +38,7 @@
 }
 
 .FormLink--pink {
-    color: $pink;
+    color: $pink-dark;
 }
 
 .FormLink--pink:hover {
