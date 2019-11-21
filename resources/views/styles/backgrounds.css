@@ -16,6 +16,14 @@
     background-color: $yellow;
 }
 
+.background-orange-dark {
+    background-color: $red-dark;
+}
+
+.background-orange {
+    background-color: $orange;
+}
+
 .background-blue {
     background-color: $blue;
 }

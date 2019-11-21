@@ -17,9 +17,10 @@
     "green": "hsl(105, 52%, 58%)",
     "green-hover": "hsl(105, 52%, 48%)",
 
+    "orange-light": "hsl(29, 100%, 82%)",
     "orange": "hsl(29, 100%, 62%)",
     "orange-hover": "hsl(29, 100%, 52%)",
-    "orange-dark": "hsl(21, 100%, 43%)",
+    "orange-dark": "hsl(29, 100%, 48%)",
 
     "purple": "hsl(245, 51%, 68%)",
     "purple-dark": "hsl(245, 49%, 52%)",

@@ -82,18 +82,14 @@ class OfferController extends Controller
                 'top',
                 collect()
                     ->push(
-                        component('Flex')
-                            ->is('center')
-                            ->with(
-                                'items',
-                                collect()->push(
-                                    component('Link')
-                                        ->is('white')
-                                        ->is('semitransparent')
-                                        ->with('title', 'Kõik reisipakkumised')
-                                        ->with('route', route('offers.index'))
-                                )
-                            )
+                        component('Center')->with(
+                            'item',
+                            component('Link')
+                                ->is('white')
+                                ->is('semitransparent')
+                                ->with('title', 'Kõik reisipakkumised')
+                                ->with('route', route('offers.index'))
+                        )
                     )
                     ->push(
                         component('Dotmap')
@@ -122,17 +118,13 @@ class OfferController extends Controller
                             ])
                     )
                     ->push(
-                        component('Flex')
-                            ->is('center')
-                            ->with(
-                                'items',
-                                collect()->push(
-                                    component('Tag')
-                                        ->is('white')
-                                        ->is('large')
-                                        ->with('title', $offer->style)
-                                )
-                            )
+                        component('Center')->with(
+                            'item',
+                            component('Tag')
+                                ->is('white')
+                                ->is('large')
+                                ->with('title', $offer->style)
+                        )
                     )
                     ->push(
                         component('Title')
@@ -143,7 +135,7 @@ class OfferController extends Controller
                     )
                     ->push(
                         component('Flex')
-                            ->is('center')
+                            ->with('justify', 'center')
                             ->with(
                                 'items',
                                 collect()
@@ -169,9 +161,10 @@ class OfferController extends Controller
                                     )
                             )
                     )
+                    ->br()
                     ->push(
                         component('Flex')
-                            ->is('center')
+                            ->with('justify', 'center')
                             ->with('gap', 'sm')
                             ->with(
                                 'items',
@@ -223,24 +216,20 @@ class OfferController extends Controller
                                     )
                             )
                     )
+                    ->br()
                     ->push(
-                        component('Flex')
-                            ->is('center')
-                            ->with(
-                                'items',
-                                collect()->push(
-                                    component('Button')
-                                        ->is('orange')
-                                        ->is('center')
-                                        ->is('large')
-                                        ->with('title', 'Broneeri reis')
-                                        ->with(
-                                            'route',
-                                            route('offers.show', [$id]) .
-                                                '#book'
-                                        )
+                        component('Center')->with(
+                            'item',
+                            component('Button')
+                                ->is('orange')
+                                ->is('center')
+                                ->is('large')
+                                ->with('title', 'Broneeri reis')
+                                ->with(
+                                    'route',
+                                    route('offers.show', [$id]) . '#book'
                                 )
-                            )
+                        )
                     )
                     ->br()
                     ->pushWhen(

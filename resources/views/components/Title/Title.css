@@ -2,7 +2,7 @@
 
 .Title__title {
     font: $font-heading-xl;
-    font: $font-heading-lg ?if $mobile;
+    font: $font-heading-lg ?if $tablet;
     color: $gray-dark;
 }
 
@@ -51,14 +51,6 @@ a .Title__title:hover {
     color: $red-hover;
 }
 
-.Title--yellow-dark .Title__title {
-    color: $yellow-dark;
-}
-
-.Title--yellow-dark a .Title__title:hover {
-    color: $yellow-hover;
-}
-
 .Title--gray .Title__title {
     color: $gray;
 }
@@ -75,6 +67,14 @@ a .Title__title:hover {
     color: $blue-hover;
 }
 
+.Title--orange .Title__title {
+    color: $orange;
+}
+
+.Title--orange a .Title__title:hover {
+    color: $orange-hover;
+}
+
 .Title--shadow .Title__title {
     text-shadow: $text-shadow-md;
 }
@@ -84,9 +84,13 @@ a .Title__title:hover {
 }
 
 .Title--semitransparent .Title__title {
-    opacity: 0.5;
+    opacity: $opacity-md;
+    color: $black;
 }
 
 .Title--high .Title__title {
     margin-top: $margin-xxl;
+}
+a .Title__title:hover {
+    opacity: $opacity-lg;
 }

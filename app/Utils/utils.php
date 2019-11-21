@@ -148,7 +148,7 @@ function style_vars()
     return json_decode($json);
 }
 
-function snap($value, $step = 2.5)
+function snap($value, $step = 1)
 {
     return round($value / $step) * $step;
 }

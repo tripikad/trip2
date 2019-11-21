@@ -29,6 +29,10 @@ class FooterLight
                 'title' => trans('menu.footer.photos'),
                 'route' => route('photo.index')
             ])
+            ->push([
+                'title' => trans('menu.footer.destinations'),
+                'route' => route('destination.index')
+            ])
             ->map(function ($item) {
                 return (object) $item;
             });

@@ -10,48 +10,33 @@ class DestinationMap
         $largedots = [];
         $smalldots = [];
 
-        if ($destination->vars()->isContinent()) {
+        if ($destination->isContinent()) {
             $areas = $destination
                 ->vars()
                 ->countries()
                 ->pluck('id');
         }
 
-        if ($destination->vars()->isCountry()) {
+        if ($destination->isCountry()) {
             $areas = [$destination->id];
-            if ($destination->vars()->facts()->lat) {
-                $smalldots = [
-                    [
-                        'lat' => snap($destination->vars()->facts()->lat),
-                        'lon' => snap($destination->vars()->facts()->lon)
-                    ]
-                ];
+            if ($coordinates = $destination->vars()->snappedCoordinates()) {
+                $smalldots = [$coordinates];
             }
         }
 
-        if ($destination->vars()->isCity()) {
+        if ($destination->isCity()) {
             $areas = [$destination->vars()->country()->id];
-            if ($destination->vars()->facts()->lat) {
-                $smalldots = [
-                    [
-                        'lat' => snap($destination->vars()->facts()->lat),
-                        'lon' => snap($destination->vars()->facts()->lon)
-                    ]
-                ];
-                $largedots = [$destination->vars()->facts()];
+            if ($coordinates = $destination->vars()->snappedCoordinates()) {
+                $smalldots = [$coordinates];
+                $largedots = [$destination->vars()->coordinates()];
             }
         }
 
-        if ($destination->vars()->isPlace()) {
+        if ($destination->isPlace()) {
             $areas = [$destination->vars()->country()->id];
-            if ($destination->vars()->facts()->lat) {
-                $smalldots = [
-                    [
-                        'lat' => snap($destination->vars()->facts()->lat),
-                        'lon' => snap($destination->vars()->facts()->lon)
-                    ]
-                ];
-                $largedots = [$destination->vars()->facts()];
+            if ($coordinates = $destination->vars()->snappedCoordinates()) {
+                $smalldots = [$coordinates];
+                $largedots = [$destination->vars()->coordinates()];
             }
         }
 
@@ -59,7 +44,7 @@ class DestinationMap
             ->with('height', '300px')
             ->with('areas', $areas)
             ->with('smalldots', $smalldots)
-            ->with('mediumdots', $largedots)
-            ->with('mediumdotcolor', 'red');
+            ->with('largedots', $largedots)
+            ->with('largedotcolor', 'red');
     }
 }

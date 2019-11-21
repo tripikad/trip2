@@ -22,15 +22,11 @@
 }
 
 .Tag--orange {
-    border: 1px solid $orange;
-}
-
-.Tag--orange.Tag--filled {
-    background: $orange;
+    border: 1px solid $orange-dark;
 }
 
 .Tag--orange .Tag__title {
-    color: $orange;
+    color: $orange-dark;
 }
 
 .Tag--orange.Tag--filled .Tag__title {
@@ -38,7 +34,7 @@
 }
 
 .Tag--orange .Tag__title:hover {
-    color: $orange-hover;
+    color: $orange-dark-hover;
 }
 
 .Tag--orange.Tag--filled .Tag__title:hover {
@@ -58,17 +54,17 @@
     color: $white;
 }
 
-.Tag--black {
-    background: $black;
-    border: 1px solid $black;
-    opacity: $opacity-lg;
+.Tag--green {
+    border: 1px solid $green;
+    background: $green;
 }
 
-.Tag--black:hover {
-    opacity: 1;
+.Tag--green:hover {
+    border: 1px solid $green-hover;
+    background: $green-hover;
 }
 
-.Tag--black .Tag__title {
+.Tag--green .Tag__title {
     color: $white;
 }
 

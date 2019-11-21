@@ -1,6 +1,12 @@
 <?php
 
 return [
+    'show.children.continent' => ':count country|:count countries',
+    'show.children.country' => ':count city or region|:count cities or regions',
+    'show.children.city' => ':count place|:count places',
+
+    'show.stat.havebeen' => ':count have been here',
+    'show.stat.wantstogo' => ':count want to go here',
 
     'show.good.offer' => 'Good offers',
     'show.link.view.all' => 'View all offers &rsaquo;',
@@ -18,6 +24,10 @@ return [
     'show.popular.title' => 'Popular destinations in :destination',
     'show.news.title' => 'News',
 
+    // @TODO2 Add more form Estonian translations
+
+    'show.about.timezone' => 'Timezone',
+
     'show.description.1' => 'Europe',
     'show.description.2' => 'Asia',
     'show.description.3' => 'Middle East',
@@ -26,6 +36,5 @@ return [
     'show.description.6' => 'Central America',
     'show.description.7' => 'South America',
     'show.description.8' => 'Australia and Oceania',
-    'show.description.819' => 'Antarctica',
-
+    'show.description.819' => 'Antarctica'
 ];

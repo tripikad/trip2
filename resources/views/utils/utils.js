@@ -32,3 +32,18 @@ export const snap = (value, gridsize = 1) => {
         ? value - (value % gridsize)
         : value + gridsize - (value % gridsize)
 }
+
+export const debounce = (fn, time) => {
+    let timeout
+    return function() {
+        const functionCall = () => fn.apply(this, arguments)
+        clearTimeout(timeout)
+        timeout = setTimeout(functionCall, time)
+    }
+}
+
+export const getCssVariable = (value, el = document.body) =>
+    getComputedStyle(el).getPropertyValue(value)
+
+export const setCssVariable = (key, value, el = document.body.style) =>
+    el.setProperty(key, value)

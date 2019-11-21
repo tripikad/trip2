@@ -14,10 +14,12 @@ class DestinationStat
                         ->with('icon', 'icon-pin')
                         ->with(
                             'title',
-                            $destination
-                                ->vars()
-                                ->usersWantsToGo()
-                                ->count()
+                            trans('destination.show.stat.havebeen', [
+                                'count' => $destination
+                                    ->vars()
+                                    ->usersHaveBeen()
+                                    ->count()
+                            ])
                         )
                 )
                 ->push(
@@ -25,10 +27,12 @@ class DestinationStat
                         ->with('icon', 'icon-star')
                         ->with(
                             'title',
-                            $destination
-                                ->vars()
-                                ->usersHaveBeen()
-                                ->count()
+                            trans('destination.show.stat.wantstogo', [
+                                'count' => $destination
+                                    ->vars()
+                                    ->usersWantsToGo()
+                                    ->count()
+                            ])
                         )
                 )
         );

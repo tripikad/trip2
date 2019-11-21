@@ -11,23 +11,27 @@ class Footer
         return collect()
             ->push([
                 'title' => trans('menu.footer.flights'),
-                'route' => route('flight.index'),
+                'route' => route('flight.index')
             ])
             ->push([
                 'title' => trans('menu.footer.travelmates'),
-                'route' => route('travelmate.index'),
+                'route' => route('travelmate.index')
             ])
             ->push([
                 'title' => trans('menu.footer.news'),
-                'route' => route('news.index'),
+                'route' => route('news.index')
             ])
             ->push([
                 'title' => trans('menu.footer.blogs'),
-                'route' => route('blog.index'),
+                'route' => route('blog.index')
             ])
             ->push([
                 'title' => trans('menu.footer.photos'),
-                'route' => route('photo.index'),
+                'route' => route('photo.index')
+            ])
+            ->push([
+                'title' => trans('menu.footer.destinations'),
+                'route' => route('destination.index')
             ])
             ->map(function ($item) {
                 return (object) $item;
@@ -39,15 +43,15 @@ class Footer
         return collect()
             ->push([
                 'title' => trans('menu.footer2.forum'),
-                'route' => route('forum.index'),
+                'route' => route('forum.index')
             ])
             ->push([
                 'title' => trans('menu.footer2.buysell'),
-                'route' => route('buysell.index'),
+                'route' => route('buysell.index')
             ])
             ->push([
                 'title' => trans('menu.footer2.expat'),
-                'route' => route('expat.index'),
+                'route' => route('expat.index')
             ])
             ->map(function ($item) {
                 return (object) $item;
@@ -61,36 +65,35 @@ class Footer
         return collect()
             ->push([
                 'title' => trans('menu.footer3.about'),
-                'route' => route('static.show', 'tripist'),
+                'route' => route('static.show', 'tripist')
             ])
             ->push([
                 'title' => trans('menu.footer3.contact'),
-                'route' => route('static.show', 'kontakt'),
+                'route' => route('static.show', 'kontakt')
             ])
             ->push([
                 'title' => trans('menu.footer3.eula'),
-                'route' => route('static.show', 'kasutustingimused'),
+                'route' => route('static.show', 'kasutustingimused')
             ])
             ->push([
                 'title' => trans('menu.footer3.privacy'),
-                'route' => route('static.show', 'privaatsustingimused'),
+                'route' => route('static.show', 'privaatsustingimused')
             ])
             ->push([
                 'title' => trans('menu.footer3.advertising'),
-                'route' => route('static.show', 'reklaam'),
+                'route' => route('static.show', 'reklaam')
             ])
-            ->pushWhen(! $loggedUser, [
+            ->pushWhen(!$loggedUser, [
                 'title' => trans('menu.auth.login'),
-                'route' => route('login.form'),
+                'route' => route('login.form')
             ])
-            ->pushWhen(! $loggedUser, [
+            ->pushWhen(!$loggedUser, [
                 'title' => trans('menu.auth.register'),
-                'route' => route('register.form'),
+                'route' => route('register.form')
             ])
             ->pushWhen($loggedUser, [
                 'title' => trans('menu.auth.logout'),
-                'route' => 'https://facebook.com/tripeeee',
-
+                'route' => 'https://facebook.com/tripeeee'
             ])
             ->map(function ($item) {
                 return (object) $item;
@@ -103,26 +106,34 @@ class Footer
             ->push([
                 'title' => trans('menu.footer-social.facebook'),
                 'route' => 'https://facebook.com/tripeeee',
-                'icon' => component('Icon')->is('white')->with('icon', 'icon-facebook'),
-                'target' => '_blank',
+                'icon' => component('Icon')
+                    ->is('white')
+                    ->with('icon', 'icon-facebook'),
+                'target' => '_blank'
             ])
             ->push([
                 'title' => trans('menu.footer-social.twitter'),
                 'route' => 'https://twitter.com/trip_ee',
-                'icon' => component('Icon')->is('white')->with('icon', 'icon-twitter'),
-                'target' => '_blank',
+                'icon' => component('Icon')
+                    ->is('white')
+                    ->with('icon', 'icon-twitter'),
+                'target' => '_blank'
             ])
             ->push([
                 'title' => trans('menu.footer-social.flightfeed'),
                 'route' => '/lendude_sooduspakkumised/rss',
-                'icon' => component('Icon')->is('white')->with('icon', 'icon-rss'),
-                'target' => '',
+                'icon' => component('Icon')
+                    ->is('white')
+                    ->with('icon', 'icon-rss'),
+                'target' => ''
             ])
             ->push([
                 'title' => trans('menu.footer-social.newsfeed'),
                 'route' => '/index.atom',
-                'icon' => component('Icon')->is('white')->with('icon', 'icon-rss'),
-                'target' => '',
+                'icon' => component('Icon')
+                    ->is('white')
+                    ->with('icon', 'icon-rss'),
+                'target' => ''
             ])
             ->map(function ($item) {
                 return (object) $item;
@@ -147,10 +158,13 @@ class Footer
                 'col1' => $this->prepareCol1Links(),
                 'col2' => $this->prepareCol2Links(),
                 'col3' => $this->prepareCol3Links(),
-                'social' => $this->prepareSocialLinks(),
+                'social' => $this->prepareSocialLinks()
             ])
-            ->with('licence', trans('site.footer.copyright', [
-                'current_year' => Carbon::now()->year,
-            ]));
+            ->with(
+                'licence',
+                trans('site.footer.copyright', [
+                    'current_year' => Carbon::now()->year
+                ])
+            );
     }
 }

@@ -1,16 +1,16 @@
-@import "variables";
+@import 'variables';
 
 .Block__title {
     margin-bottom: $margin-md;
 }
 
-    .Block__contentItem {
-        margin-bottom: $margin-sm;
-    }
+.Block__contentItem {
+    margin-bottom: $margin-md;
+}
 
-    .Block__contentItem:last-child {
-        margin-bottom: 0;
-    }
+.Block__contentItem:last-child {
+    margin-bottom: 0;
+}
 
 .Block--gray {
     background: $gray-lighter;

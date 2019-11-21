@@ -134,14 +134,14 @@ class FlightController extends Controller
                         )
                         ->merge($flight->destinations->map(function ($destination) {
                             return component('Tag')
-                                ->is('orange')
-                                ->is('filled')
+                                ->is('white')
                                 ->with('title', $destination->name)
                                 ->with('route', route('destination.showSlug', [$destination->slug]));
                         }))
                         ->pushWhen($loggedUser && $loggedUser->hasRole('admin', $flight->user->id),
-                            component('Tag')
-                                ->is('black')
+                            component('MetaLink')
+                                ->is('green')
+                                ->is('filled')
                                 ->with('title', trans('content.action.edit.title'))
                                 ->with('route', route('flight.edit', [$flight]))
                         )
@@ -152,7 +152,8 @@ class FlightController extends Controller
                                 ))
                                 ->with('fields', collect()
                                     ->push(component('FormLink')
-                                    ->is('white')
+                                    ->is('pink')
+                                    ->is('filled')
                                     ->with(
                                             'title',
                                             trans("content.action.status.$flight->status.title")
@@ -222,7 +223,7 @@ class FlightController extends Controller
 
             ->with('content', collect()
                 ->push(component('Title')
-                    ->with('title', trans('content.flight.create.title').' (beta)')
+                    ->with('title', trans('content.flight.create.title'))
                 )
                 ->push(component('Form')
                     ->with('route', route('flight.store'))
@@ -323,7 +324,7 @@ class FlightController extends Controller
 
             ->with('content', collect()
                 ->push(component('Title')
-                    ->with('title', trans('content.flight.edit.title').' (beta)')
+                    ->with('title', trans('content.flight.edit.title'))
                 )
                 ->push(component('Form')
                     ->with('route', route('flight.update', [$flight]))
