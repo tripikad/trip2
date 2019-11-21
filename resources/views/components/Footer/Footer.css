@@ -60,7 +60,8 @@
 }
 
 .Footer__licence {
-    color: $gray-light;
+    color: $white;
+    opacity: $opacity-md;
     font: $font-text-md;
     height: $height-md;
     margin-top: $margin-lg;

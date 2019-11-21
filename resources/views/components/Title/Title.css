@@ -2,7 +2,7 @@
 
 .Title__title {
     font: $font-heading-xl;
-    font: $font-heading-lg ?if $mobile;
+    font: $font-heading-lg ?if $tablet;
     color: $gray-dark;
 }
 

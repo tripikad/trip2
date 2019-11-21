@@ -7,29 +7,24 @@ use App\User;
 
 class ExperimentsController extends Controller
 {
-    public function index()
+    // public function index2()
+    // {
+    //     return layout('Offer')
+    //         ->with(
+    //             'content',
+    //             collect()
+    //                 ->push('<div style="background: red">aa</div>')
+    //                 ->push(component('Dotmap')->with('height', '300px'))
+    //         )
+    //         ->render();
+    // }
+
+    public function list($d, $user)
     {
-        return layout('Offer')
-            ->with(
-                'content',
-                collect()
-                    ->push('<div style="background: red">aa</div>')
-                    ->push(component('Dotmap')->with('height', '300px'))
-            )
-            ->render();
-    }
-
-    public function index2()
-    {
-        $user = request()->user();
-
-        $continents = Destination::countries()
-            ->get()
-            ->sortBy('name');
-
-        $c = $continents->map(function ($d) use ($user) {
+        return $d->map(function ($d) use ($user) {
             return collect()
-                ->br()
+                ->br(2)
+                ->push(region('DestinationParents', $d->getAncestors()))
                 ->push(
                     component('Title')
                         ->is('white')
@@ -61,6 +56,63 @@ class ExperimentsController extends Controller
                         ->with('body', format_body($d->description))
                 );
         });
+    }
+
+    public function index()
+    {
+        $user = request()->user();
+
+        $continents = Destination::continents()
+            ->get()
+            ->sortBy('name');
+
+        $countries = Destination::countries()
+            ->get()
+            ->sortBy('name');
+
+        $cities = Destination::cities()
+            ->get()
+            ->sortBy('name');
+
+        $places = Destination::places()
+            ->get()
+            ->sortBy('name');
+
+        // $c = $continents->map(function ($d) use ($user) {
+        //     return collect()
+        //         ->br(2)
+        //         ->push(region('DestinationParents', $d->getAncestors()))
+        //         ->push(
+        //             component('Title')
+        //                 ->is('white')
+        //                 ->with('title', $d->name)
+        //                 ->with(
+        //                     'route',
+        //                     route('destination.showSlug', [$d->slug])
+        //                 )
+        //         )
+        //         ->pushWhen(
+        //             $user && $user->hasRole('admin'),
+        //             component('Button')
+        //                 ->is('small')
+        //                 ->is('narrow')
+        //                 ->with('title', trans('content.action.edit.title'))
+        //                 ->with('route', route('destination.edit', [$d]))
+        //         )
+        //         ->pushWhen(
+        //             $d->user,
+        //             component('Title')
+        //                 ->is('semitransparent')
+        //                 ->is('smaller')
+        //                 ->with('title', $d->user ? $d->user->name . ':' : '')
+        //         )
+        //         ->push(
+        //             component('Body')
+        //                 ->is('semitransparent')
+        //                 ->is('responsive')
+        //                 ->with('body', format_body($d->description))
+        //         );
+        // });
 
         return layout('Offer')
             ->with('color', 'yellow')
@@ -72,9 +124,33 @@ class ExperimentsController extends Controller
                         component('Title')
                             ->is('white')
                             ->is('large')
-                            ->with('title', 'Sihtkohad')
+                            ->with('title', 'Maailmajaod')
                     )
-                    ->merge($c)
+                    ->merge($this->list($continents, $user))
+                    ->br(2)
+                    ->push(
+                        component('Title')
+                            ->is('white')
+                            ->is('large')
+                            ->with('title', 'Riigid')
+                    )
+                    ->merge($this->list($countries, $user))
+                    ->br(2)
+                    ->push(
+                        component('Title')
+                            ->is('white')
+                            ->is('large')
+                            ->with('title', 'Linnad')
+                    )
+                    ->merge($this->list($cities, $user))
+                    ->br(2)
+                    ->push(
+                        component('Title')
+                            ->is('white')
+                            ->is('large')
+                            ->with('title', 'Kohad')
+                    )
+                    ->merge($this->list($places, $user))
                     ->flatten()
             )
             ->with('footer', region('FooterLight', ''))

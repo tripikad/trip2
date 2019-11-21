@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     'header.v1' => 'Vana Trip',
     'header.v2' => 'Testi uut Trippi',
 
@@ -28,6 +27,7 @@ return [
     'footer.travelmates' => 'Reisikaaslased',
     'footer.blogs' => 'Reisiblogid',
     'footer.photos' => 'Reisipildid',
+    'footer.destinations' => 'Sihtkohad',
 
     'footer2.forum' => 'Foorum',
     'footer2.expat' => 'Elu välismaal',
@@ -67,6 +67,5 @@ return [
     'admin.content' => 'Peidetud sisu',
     'admin.sponsored' => 'Sponsorite artiklid',
     'admin.newsletter' => 'Uudiskirjad',
-    'admin.static' => 'Muuda - :title',
-
+    'admin.static' => 'Muuda - :title'
 ];
