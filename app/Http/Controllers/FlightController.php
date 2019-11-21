@@ -123,7 +123,6 @@ class FlightController extends Controller
                 ->push(component('Title')
                     ->is('white')
                     ->is('large')
-                    ->is('responsive')
                     ->is('shadow')
                     ->with('title', $flight->vars()->title)
                 )
