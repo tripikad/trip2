@@ -75,6 +75,11 @@
     display: flex ?if $mobile;
 }
 
+.Button--small {
+    font: $font-text-sm;
+    padding: 0 $padding-xs;
+}
+
 .Button--large {
     font: $font-heading-md;
     padding: calc($padding-sm * 1.25) $padding-lg;

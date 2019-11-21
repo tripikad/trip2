@@ -7,31 +7,153 @@ use App\User;
 
 class ExperimentsController extends Controller
 {
+    // public function index2()
+    // {
+    //     return layout('Offer')
+    //         ->with(
+    //             'content',
+    //             collect()
+    //                 ->push('<div style="background: red">aa</div>')
+    //                 ->push(component('Dotmap')->with('height', '300px'))
+    //         )
+    //         ->render();
+    // }
+
+    public function list($d, $user)
+    {
+        return $d->map(function ($d) use ($user) {
+            return collect()
+                ->br(2)
+                ->push(region('DestinationParents', $d->getAncestors()))
+                ->push(
+                    component('Title')
+                        ->is('white')
+                        ->with('title', $d->name)
+                        ->with(
+                            'route',
+                            route('destination.showSlug', [$d->slug])
+                        )
+                )
+                ->pushWhen(
+                    $user && $user->hasRole('admin'),
+                    component('Button')
+                        ->is('small')
+                        ->is('narrow')
+                        ->with('title', trans('content.action.edit.title'))
+                        ->with('route', route('destination.edit', [$d]))
+                )
+                ->pushWhen(
+                    $d->user,
+                    component('Title')
+                        ->is('semitransparent')
+                        ->is('smaller')
+                        ->with('title', $d->user ? $d->user->name . ':' : '')
+                )
+                ->push(
+                    component('Body')
+                        ->is('semitransparent')
+                        ->is('responsive')
+                        ->with('body', format_body($d->description))
+                );
+        });
+    }
+
     public function index()
     {
-        $d = Destination::whereName('Tallinn')->first();
-        $d2 = Destination::whereName('New York')->first();
+        $user = request()->user();
+
+        $continents = Destination::continents()
+            ->get()
+            ->sortBy('name');
+
+        $countries = Destination::countries()
+            ->get()
+            ->sortBy('name');
+
+        $cities = Destination::cities()
+            ->get()
+            ->sortBy('name');
+
+        $places = Destination::places()
+            ->get()
+            ->sortBy('name');
+
+        // $c = $continents->map(function ($d) use ($user) {
+        //     return collect()
+        //         ->br(2)
+        //         ->push(region('DestinationParents', $d->getAncestors()))
+        //         ->push(
+        //             component('Title')
+        //                 ->is('white')
+        //                 ->with('title', $d->name)
+        //                 ->with(
+        //                     'route',
+        //                     route('destination.showSlug', [$d->slug])
+        //                 )
+        //         )
+        //         ->pushWhen(
+        //             $user && $user->hasRole('admin'),
+        //             component('Button')
+        //                 ->is('small')
+        //                 ->is('narrow')
+        //                 ->with('title', trans('content.action.edit.title'))
+        //                 ->with('route', route('destination.edit', [$d]))
+        //         )
+        //         ->pushWhen(
+        //             $d->user,
+        //             component('Title')
+        //                 ->is('semitransparent')
+        //                 ->is('smaller')
+        //                 ->with('title', $d->user ? $d->user->name . ':' : '')
+        //         )
+        //         ->push(
+        //             component('Body')
+        //                 ->is('semitransparent')
+        //                 ->is('responsive')
+        //                 ->with('body', format_body($d->description))
+        //         );
+        // });
 
         return layout('Offer')
-            ->with('color', 'blue')
+            ->with('color', 'yellow')
+            ->with('header', region('OfferHeader'))
             ->with(
-                'top',
-                collect()->push(
-                    component('Dotmap')
-                        ->is('center')
-                        ->with('width', '1000')
-                        ->with('countrydots', config('destination_dots'))
-                        ->with('lines', [
-                            $d->vars()->facts(),
-                            $d2->vars()->facts()
-                        ])
-                        ->with('smalldots', [
-                            $d->vars()->facts(),
-                            $d2->vars()->facts()
-                        ])
-                    // ->with('largedots', [$a->last()])
-                )
+                'content',
+                collect()
+                    ->push(
+                        component('Title')
+                            ->is('white')
+                            ->is('large')
+                            ->with('title', 'Maailmajaod')
+                    )
+                    ->merge($this->list($continents, $user))
+                    ->br(2)
+                    ->push(
+                        component('Title')
+                            ->is('white')
+                            ->is('large')
+                            ->with('title', 'Riigid')
+                    )
+                    ->merge($this->list($countries, $user))
+                    ->br(2)
+                    ->push(
+                        component('Title')
+                            ->is('white')
+                            ->is('large')
+                            ->with('title', 'Linnad')
+                    )
+                    ->merge($this->list($cities, $user))
+                    ->br(2)
+                    ->push(
+                        component('Title')
+                            ->is('white')
+                            ->is('large')
+                            ->with('title', 'Kohad')
+                    )
+                    ->merge($this->list($places, $user))
+                    ->flatten()
             )
+            ->with('footer', region('FooterLight', ''))
             ->render();
     }
 
@@ -74,7 +196,7 @@ Tõime allpool välja valiku enamjaolt 4-5 päevasteks linnapuhkusteks. Piletihi
                 $ds
                     ->map(function ($d) {
                         $name =
-                            $d->vars()->isContinent() && $d->vars()->facts()
+                            $d->isContinent() && $d->vars()->facts()
                                 ? ''
                                 : json_encode(
                                     $d->vars()->facts(),

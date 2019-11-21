@@ -6,6 +6,10 @@
     color: $gray;
     cursor: pointer;
     font: $font-text-sm;
+    padding: 0 $padding-xs;
+    border-radius: $border-radius-md;
+    cursor: pointer;
+    transition: $transition-md;
 }
 
 .FormLink {
@@ -22,4 +26,30 @@
 
 .FormLink--white:hover {
     color: $white-hover;
+}
+
+.FormLink--green {
+    color: $green;
+}
+
+.FormLink--green:hover {
+    color: $white;
+    background: $green;
+}
+
+.FormLink--pink {
+    color: $pink-dark;
+}
+
+.FormLink--pink:hover {
+    background: $pink;
+}
+
+.FormLink--pink.FormLink--filled {
+    color: $pink-dark;
+    background: $pink;
+}
+
+.FormLink--pink.FormLink--filled:hover {
+    background: $pink-hover;
 }

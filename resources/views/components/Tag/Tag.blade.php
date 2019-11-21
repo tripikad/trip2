@@ -15,7 +15,7 @@ $route = $route ?? '';
 
         <div class="Tag__title">
 
-            {{ $title }}
+            {!! $title !!}
 
         </div>
 

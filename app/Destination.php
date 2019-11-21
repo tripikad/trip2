@@ -36,13 +36,60 @@ class Destination extends Baum\Node
     {
         return [
             'slug' => [
-                'source' => 'name',
-            ],
+                'source' => 'name'
+            ]
         ];
     }
 
     public function vars()
     {
         return new DestinationVars($this);
+    }
+
+    // Destinations API
+
+    public function scopeContinents($query)
+    {
+        return $query->where('depth', 0);
+    }
+
+    public function scopeCountries($query)
+    {
+        return $query->where('depth', 1);
+    }
+
+    public function scopeCities($query)
+    {
+        return $query->where('depth', 2);
+    }
+
+    public function scopePlaces($query)
+    {
+        return $query->where('depth', 3);
+    }
+
+    public function scopeCitiesOrPlaces($query)
+    {
+        return $query->whereIn('depth', [2, 3]);
+    }
+
+    public function isContinent()
+    {
+        return $this->depth == 0;
+    }
+
+    public function isCountry()
+    {
+        return $this->depth == 1;
+    }
+
+    public function isCity()
+    {
+        return $this->depth == 2;
+    }
+
+    public function isPlace()
+    {
+        return $this->depth > 2;
     }
 }

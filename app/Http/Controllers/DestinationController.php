@@ -9,6 +9,86 @@ use Illuminate\Http\Request;
 
 class DestinationController extends Controller
 {
+    public function index()
+    {
+        $continents = collect([
+            'Põhja-Ameerika',
+            'Euroopa',
+            'Aasia',
+            'Kesk-Ameerika',
+            'Lähis-Ida',
+            'Austraalia ja Okeaania',
+            'Lõuna-Ameerika',
+            'Aafrika',
+            'Antarktika'
+        ])->map(function ($name) {
+            return Destination::continents()
+                ->whereName($name)
+                ->first();
+        });
+
+        $areas = Destination::countries()->pluck('id');
+
+        $dots = Destination::citiesOrPlaces()
+            ->get()
+            ->map(function ($d) {
+                return $d->vars()->snappedCoordinates();
+            })
+            ->filter()
+            ->values();
+
+        return layout('Offer')
+            ->with('color', 'yellow')
+            ->with('header', region('OfferHeader'))
+            ->with(
+                'top',
+                collect()
+                    ->push(
+                        component('Title')
+                            ->is('white')
+                            ->is('large')
+                            ->is('center')
+                            ->with('title', 'Sihtkohad')
+                    )
+                    ->br()
+                    ->push(
+                        component('Dotmap')
+                            ->with('height', '300px')
+                            ->is('center')
+                            ->with('areas', $areas)
+                            ->with('smalldots', $dots)
+                    )
+            )
+            ->with(
+                'content',
+                collect()->push(
+                    component('Grid')
+                        ->with('cols', 3)
+                        ->with('gap', 3)
+                        ->with('widths', '5fr 3fr 3fr')
+                        ->with(
+                            'items',
+                            $continents->map(function ($d) {
+                                return component('Title')
+                                    ->is('white')
+                                    ->with(
+                                        'title',
+                                        str_replace('ja Okeaania', '', $d->name)
+                                    )
+                                    ->with(
+                                        'route',
+                                        route('destination.showSlug', [
+                                            $d->slug
+                                        ])
+                                    );
+                            })
+                        )
+                )
+            )
+            ->with('footer', region('FooterLight', ''))
+            ->render();
+    }
+
     public function show($id)
     {
         $destination = Destination::findOrFail($id);

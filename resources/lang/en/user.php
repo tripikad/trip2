@@ -7,9 +7,10 @@ return [
     'show.stat.dislikes' => ':dislikes_count dislikes',
     'show.stat.content' => ':content_count posts',
     'show.stat.comment' => ':comment_count comments',
-    'show.stat.destination' =>
-        ':destination_count (:destination_percentage%) visited destinations',
-
+    'show.stat.continents' => ':count visited continents',
+    'show.stat.countries' =>
+        ':count visited countries, :percentage% from :total_count',
+    'show.stat.places' => ':count visited cities or regions',
     'show.about.joined' => ', joined Trip :created_at',
     'show.about.admin' => ' and forum moderator',
     'show.about.wanttogo' => '. Wants to go to:',

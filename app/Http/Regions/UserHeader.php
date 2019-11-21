@@ -48,47 +48,38 @@ class UserHeader
         $countryCount = 195;
 
         $loggedUser = request()->user();
-        $wantsToGo = $user->vars()->destinationWantsToGo();
+
         $hasBeenContinents = $user
             ->vars()
             ->destinationHaveBeen()
-            ->filter(function ($f) {
-                return $f->flaggable->vars()->isContinent();
+            ->map->flaggable->filter(function ($d) {
+                return $d->isContinent();
             });
+
         $hasBeenCountries = $user
             ->vars()
             ->destinationHaveBeen()
-            ->filter(function ($f) {
-                return $f->flaggable->vars()->isCountry();
+            ->map->flaggable->filter(function ($d) {
+                return $d->isCountry();
             });
+
+        $countryDots = $hasBeenCountries->pluck('id')->values();
+
         $hasBeenCities = $user
             ->vars()
             ->destinationHaveBeen()
-            ->filter(function ($f) {
-                return $f->flaggable->vars()->isCity() ||
-                    $f->flaggable->vars()->isPlace();
+            ->map->flaggable->filter(function ($d) {
+                return $d->isCity();
             });
 
-        $countryDots = $hasBeenCountries
-            ->map(function ($f) {
-                return $f->flaggable->id;
+        $cityDots = $hasBeenCities
+            ->map(function ($d) {
+                return $d->vars()->snappedCoordinates();
             })
+            ->filter()
             ->values();
 
-        $cityDots = $hasBeenCities
-            ->map(function ($f) {
-                return $f->flaggable->vars()->facts();
-            })
-            ->filter(function ($f) {
-                return $f;
-            })
-            ->map(function ($d) {
-                return [
-                    'lat' => snap($d->lat),
-                    'lon' => snap($d->lon)
-                ];
-            })
-            ->values();
+        $wantsToGo = $user->vars()->destinationWantsToGo()->map->flaggable;
 
         return component('HeaderLight')
             ->with(
@@ -130,7 +121,10 @@ class UserHeader
                         component('Body')
                             ->is('white')
                             ->is('responsive')
-                            ->with('body', $user->vars()->description)
+                            ->with(
+                                'body',
+                                format_body($user->vars()->description)
+                            )
                     )
                     ->pushWhen($wantsToGo->count(), '&nbsp;')
                     ->pushWhen(
@@ -145,15 +139,19 @@ class UserHeader
                                         component('Icon')
                                             ->is('white')
                                             ->with('size', 'xl')
-                                            ->with('icon', 'icon-pin')
+                                            ->with('icon', 'icon-star')
                                     )
                                     ->push(
                                         component('Title')
                                             ->is('white')
                                             ->with(
                                                 'title',
-                                                $hasBeenContinents->count() .
-                                                    ' külastatud maailmajagu'
+                                                trans(
+                                                    'user.show.stat.continents',
+                                                    [
+                                                        'count' => $hasBeenContinents->count()
+                                                    ]
+                                                )
                                             )
                                     )
                             )
@@ -172,21 +170,18 @@ class UserHeader
                                     return component('Tag')
                                         ->is('white')
                                         ->is('large')
-                                        ->with(
-                                            'title',
-                                            $destination->flaggable->name
-                                        )
+                                        ->with('title', $destination->name)
                                         ->with(
                                             'route',
                                             route('destination.showSlug', [
-                                                $destination->flaggable->slug
+                                                $destination->slug
                                             ])
                                         );
                                 })
                             )
                     )
                     ->pushWhen(
-                        $wantsToGo->count(),
+                        $hasBeenCountries->count(),
                         component('Flex')
                             ->with('align', 'center')
                             ->with('gap', 1)
@@ -205,10 +200,10 @@ class UserHeader
                                             ->with(
                                                 'title',
                                                 trans(
-                                                    'user.show.stat.destination',
+                                                    'user.show.stat.countries',
                                                     [
-                                                        'country_total_count' => $countryCount,
-                                                        'country_count' => $hasBeenCountries->count(),
+                                                        'total_count' => $countryCount,
+                                                        'count' => $hasBeenCountries->count(),
                                                         'percentage' => round(
                                                             ($hasBeenCountries->count() /
                                                                 $countryCount) *
@@ -233,14 +228,11 @@ class UserHeader
                                     return component('Tag')
                                         ->is('white')
                                         ->is('large')
-                                        ->with(
-                                            'title',
-                                            $destination->flaggable->name
-                                        )
+                                        ->with('title', $destination->name)
                                         ->with(
                                             'route',
                                             route('destination.showSlug', [
-                                                $destination->flaggable->slug
+                                                $destination->slug
                                             ])
                                         );
                                 })
@@ -265,8 +257,9 @@ class UserHeader
                                             ->is('white')
                                             ->with(
                                                 'title',
-                                                $hasBeenCities->count() .
-                                                    ' külastatud linna ja piirkonda'
+                                                trans('user.show.stat.cities', [
+                                                    'count' => $hasBeenCities->count()
+                                                ])
                                             )
                                     )
                             )
@@ -283,14 +276,11 @@ class UserHeader
                                     return component('Tag')
                                         ->is('white')
                                         ->is('large')
-                                        ->with(
-                                            'title',
-                                            $destination->flaggable->name
-                                        )
+                                        ->with('title', $destination->name)
                                         ->with(
                                             'route',
                                             route('destination.showSlug', [
-                                                $destination->flaggable->slug
+                                                $destination->slug
                                             ])
                                         );
                                 })
@@ -313,10 +303,7 @@ class UserHeader
                                     ->push(
                                         component('Title')
                                             ->is('white')
-                                            ->with(
-                                                'title',
-                                                'Tahab järgmisena minna'
-                                            )
+                                            ->with('title', 'Tahab minna')
                                     )
                             )
                     )
@@ -332,14 +319,11 @@ class UserHeader
                                     return component('Tag')
                                         ->is('white')
                                         ->is('large')
-                                        ->with(
-                                            'title',
-                                            $destination->flaggable->name
-                                        )
+                                        ->with('title', $destination->name)
                                         ->with(
                                             'route',
                                             route('destination.showSlug', [
-                                                $destination->flaggable->slug
+                                                $destination->slug
                                             ])
                                         );
                                 })

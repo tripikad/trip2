@@ -340,6 +340,9 @@ Route::get('sihtkoht/{slug}', 'DestinationController@showSlug')->name(
     'destination.showSlug'
 );
 
+Route::get('sihtkohad', 'DestinationController@index')->name(
+    'destination.index'
+);
 // Search
 
 Route::get('search', 'SearchController@search')->name('search.results');

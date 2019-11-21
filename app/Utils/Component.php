@@ -93,8 +93,11 @@ class Component
 
         if ($this->with->has('height')) {
             return '<div style="min-height:' .
+                'var(--' .
+                $vueComponent .
+                '--height, ' .
                 $this->with->get('height') .
-                '">' .
+                ')">' .
                 $component .
                 '</div>';
         }
