@@ -9,6 +9,18 @@ class ExperimentsController extends Controller
 {
     public function index()
     {
+        return layout('Offer')
+            ->with(
+                'content',
+                collect()
+                    ->push('<div style="background: red">aa</div>')
+                    ->push(component('Dotmap')->with('height', '300px'))
+            )
+            ->render();
+    }
+
+    public function index2()
+    {
         $user = request()->user();
 
         $continents = Destination::countries()

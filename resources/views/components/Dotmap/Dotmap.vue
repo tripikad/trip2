@@ -1,6 +1,6 @@
 <template>
     <div class="Dotmap" :class="isclasses">
-        <svg :width="width" :height="height">
+        <svg :width="currentWidth" :height="currentHeight">
             <g>
                 <circle
                     v-for="(c, i) in countrydots"
@@ -56,7 +56,7 @@
                     :key="i"
                     :cx="xScale(d.lon)"
                     :cy="yScale(d.lat)"
-                    :r="radius * 3"
+                    :r="largeRadius"
                     :stroke="$styleVars[linecolor] || linecolor"
                     stroke-width="2"
                     :fill="$styleVars[largedotcolor] || largedotcolor"
@@ -68,12 +68,13 @@
 
 <script>
 import { geoEquirectangular, geoPath } from 'd3-geo'
-import { intersection } from '../../utils/utils'
+import { intersection, debounce, setCssVariable } from '../../utils/utils'
 
 export default {
     props: {
         isclasses: { default: '' },
-        width: { default: 750 },
+        width: { default: 700 },
+        height: { default: 'auto' },
         areas: { default: () => [] },
         smalldots: { default: () => [] },
         mediumdots: { default: () => [] },
@@ -86,25 +87,39 @@ export default {
         largedotcolor: { default: 'orange' },
         linecolor: { default: 'white' }
     },
-    data: () => ({
-        countrydots: []
-    }),
+    data: function() {
+        return {
+            countrydots: [],
+            currentWidth: this.width,
+            tabletBreakpoint: 700,
+            mobileWidth: 350
+        }
+    },
     computed: {
-        height() {
-            return this.width / 2.5
+        currentHeight() {
+            return this.currentWidth / 2
         },
         projection() {
-            const yOffset = -0.2
+            const xOffset = 0.1
+            const yOffset = 0.2
             return geoEquirectangular()
-                .scale(this.width / 6.75)
-                .translate([this.width / 2, this.height / (2 + yOffset)])
+                .scale(this.currentWidth / 8)
+                .translate([
+                    this.currentWidth / 2 - this.currentWidth * xOffset,
+                    this.currentHeight / (2 - yOffset)
+                ])
                 .precision(0.1)
         },
         geopath() {
             return geoPath().projection(projection)
         },
         radius() {
-            return this.width / 350
+            return this.currentWidth / 350
+        },
+        largeRadius() {
+            return this.currentWidth < this.tabletBreakpoint
+                ? 7
+                : this.radius * 3
         },
         activeCountryDots() {
             return this.countrydots.filter(
@@ -136,12 +151,31 @@ export default {
         },
         yScale(lat) {
             return this.projection([0, lat])[1]
-        }
+        },
+        setSize() {
+            if (window.innerWidth > this.tabletBreakpoint) {
+                this.currentWidth = this.width
+                setCssVariable('--Dotmap--height', this.height)
+            } else {
+                this.currentWidth = this.mobileWidth
+                setCssVariable('--Dotmap--height', 'auto')
+            }
+        },
+        onResize: debounce(function() {
+            this.setSize()
+        }, 200)
     },
     mounted() {
+        this.setSize()
         this.$http.get('/api/countrydots').then(res => {
             this.countrydots = res.data
         })
+    },
+    created() {
+        window.addEventListener('resize', this.onResize)
+    },
+    destroyed() {
+        window.removeEventListener('resize', this.onResize)
     }
 }
 </script>

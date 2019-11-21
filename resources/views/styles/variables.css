@@ -249,22 +249,14 @@ $tablet-width: 48em; /* was 56em; */
 $desktop-width: 62em;
 $largedesktop-width: 74em;
 
-$mobile: media
-    (
-        max-width: $mobile-width
-    );
-$tablet: media
-    (
-        max-width: $tablet-width
-    );
-$desktop: media
-    (
-        max-width: $desktop-width
-    );
-$largedesktop: media
-    (
-        max-width: $largedesktop-width
-    );
+/* prettier-ignore */
+$mobile: media (max-width: $mobile-width);
+/* prettier-ignore */
+$tablet: media (max-width: $tablet-width);
+/* prettier-ignore */
+$desktop: media (max-width: $desktop-width);
+/* prettier-ignore */
+$largedesktop: media (max-width: $largedesktop-width);
 
 /* Opacities */
 $opacity-xxs: 0.05;
