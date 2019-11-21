@@ -92,7 +92,7 @@ export default {
             countrydots: [],
             currentWidth: this.width,
             tabletBreakpoint: 700,
-            mobileWidth: 350
+            mobileWidth: 370
         }
     },
     computed: {
@@ -100,7 +100,7 @@ export default {
             return this.currentWidth / 2
         },
         projection() {
-            const xOffset = 0.1
+            const xOffset = 0.08
             const yOffset = 0.2
             return geoEquirectangular()
                 .scale(this.currentWidth / 8)

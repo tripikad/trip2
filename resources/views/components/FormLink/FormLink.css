@@ -8,9 +8,8 @@
     font: $font-text-sm;
     padding: 0 $padding-xs;
     border-radius: $border-radius-md;
+    cursor: pointer;
     transition: $transition-md;
-    /* @TODO2 Remove this */
-    margin-left: -7px;
 }
 
 .FormLink {
@@ -44,4 +43,13 @@
 
 .FormLink--pink:hover {
     background: $pink;
+}
+
+.FormLink--pink.FormLink--filled {
+    color: $white;
+    background: $pink-dark;
+}
+
+.FormLink--pink.FormLink--filled:hover {
+    background: $pink-hover;
 }

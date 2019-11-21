@@ -30,7 +30,7 @@ a .Title__title:hover {
 
 .Title--large .Title__title {
     font: $font-heading-xxl;
-    font: $font-heading-xl ?if $tablet;
+    font: $font-code-md ?if $mobile;
     line-height: $line-height-md;
     line-height: $line-height-lg ?if $tablet;
 }

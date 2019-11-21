@@ -250,9 +250,18 @@ $desktop-width: 62em;
 $largedesktop-width: 74em;
 
 /* prettier-ignore */
+/*$mobile: media (max-width: $mobile-width);*/
+/* prettier-ignore */
+/*$tablet: media (max-width: $tablet-width);*/
+/* prettier-ignore */
+/*$desktop: media (max-width: $desktop-width);*/
+/* prettier-ignore */
+/*$largedesktop: media (max-width: $largedesktop-width);*/
+
+/* prettier-ignore */
 $mobile: media (max-width: $mobile-width);
 /* prettier-ignore */
-$tablet: media (max-width: $tablet-width);
+$tablet: media (max-width: 600px);
 /* prettier-ignore */
 $desktop: media (max-width: $desktop-width);
 /* prettier-ignore */

@@ -45,6 +45,6 @@ class DestinationMap
             ->with('areas', $areas)
             ->with('smalldots', $smalldots)
             ->with('largedots', $largedots)
-            ->with('largedotcolor', 'yellow');
+            ->with('largedotcolor', 'red');
     }
 }
