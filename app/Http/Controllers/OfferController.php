@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Content;
 use App\Destination;
+use App\Mail\OfferBooking;
 
 class OfferController extends Controller
 {
@@ -21,7 +22,7 @@ class OfferController extends Controller
                             ->is('large')
                             ->is('white')
                             ->is('center')
-                            ->with('title', trans('offers.index.title'))
+                            ->with('title', trans('offer.index.title'))
                     )
                 )
             )
@@ -30,7 +31,7 @@ class OfferController extends Controller
                 collect()->push(
                     component('OfferList')
                         ->with('height', '200vh')
-                        ->with('route', route('offers.index.json'))
+                        ->with('route', route('offer.index.json'))
                 )
             )
             ->with('footer', region('FooterLight', ''))
@@ -40,7 +41,7 @@ class OfferController extends Controller
     public function indexJson()
     {
         $data = $this->getSheet()->map(function ($item, $index) {
-            $item->route = route('offers.show', $index);
+            $item->route = route('offer.show', $index);
             return $item;
         });
 
@@ -88,7 +89,7 @@ class OfferController extends Controller
                                 ->is('white')
                                 ->is('semitransparent')
                                 ->with('title', 'Kõik reisipakkumised')
-                                ->with('route', route('offers.index'))
+                                ->with('route', route('offer.index'))
                         )
                     )
                     ->push(
@@ -227,7 +228,7 @@ class OfferController extends Controller
                                 ->with('title', 'Broneeri reis')
                                 ->with(
                                     'route',
-                                    route('offers.show', [$id]) . '#book'
+                                    route('offer.show', [$id]) . '#book'
                                 )
                         )
                     )
@@ -255,7 +256,7 @@ class OfferController extends Controller
                 'bottom',
                 collect()->push(
                     component('Form')
-                        ->with('route', route('offers.send', $id))
+                        ->with('route', route('offer.book', $id))
                         ->with(
                             'fields',
                             collect()
@@ -326,11 +327,44 @@ class OfferController extends Controller
             ->render();
     }
 
-    public function send($id)
+    public function book($id)
     {
-        return redirect()
-            ->route('offers.index')
-            ->with('info', 'The booking was sent');
+        //dd(request()->all());
+
+        $user = auth()->user();
+
+        $offer = (object) $this->getSheet()[$id];
+        $offer->id = $id;
+
+        // dd(request()->all());
+
+        $booking = (object) request()->only(
+            'name',
+            'email',
+            'phone',
+            'adults',
+            'children',
+            'notes'
+        );
+
+        $booking->id = 1;
+
+        $booking->insurance = request()->get('insurance') == 'on';
+        $booking->installments = request()->get('installments') == 'on';
+        $booking->flexible = request()->get('flexible') == 'on';
+
+        return new OfferBooking($offer, $booking);
+
+        // return redirect()
+        //     ->route('offer.index')
+        //     ->with('info', 'The booking was sent');
+
+        // $follower_emails = $comment->content->followersEmails()->forget(Auth::user()->id)->toArray();
+        // if ($follower_emails) {
+        //     foreach ($follower_emails as $follower_id => &$follower_email) {
+        //         Mail::to($follower_email)->queue(new NewCommentFollow($follower_id, $comment));
+        //     }
+        // }
     }
 
     private function getSheet()

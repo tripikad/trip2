@@ -16,13 +16,10 @@ class OfferBooking extends Mailable implements ShouldQueue
 
     public $booking;
 
-    public $user;
-
-    public function __construct(/* Offer */ $offer, $booking, User $user)
+    public function __construct(/* Offer */ $offer, $booking)
     {
         $this->offer = $offer;
         $this->booking = $booking;
-        $this->user = $user;
     }
 
     public function build()
@@ -32,18 +29,17 @@ class OfferBooking extends Mailable implements ShouldQueue
                 'title' => $this->offer->title,
                 'name' => $this->booking->name
             ])
-        )->markdown('email.booking', [
+        )->markdown('email.offer.booking', [
             'offer' => $this->offer,
             'booking' => $this->booking,
-            'user' => $this->user
+            'offer_route' => route('offer.show', $this->offer->id)
         ]);
 
         $header = [
             'category' => ['offer_booking'],
             'unique_args' => [
                 'offer_id' => (string) $this->offer->id,
-                'booking_id' => $this->booking->id,
-                'user_id' => $this->user->id
+                'booking_id' => (string) $this->booking->id
             ]
         ];
 

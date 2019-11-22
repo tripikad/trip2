@@ -12,7 +12,7 @@ class OffersTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             $browser
                 ->visit('/offers')
-                ->assertSourceHas(trans('offers.index.title'));
+                ->assertSourceHas(trans('offer.index.title'));
         });
     }
 
