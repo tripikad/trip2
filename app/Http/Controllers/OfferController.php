@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Content;
+use App\Offer;
 use App\Destination;
 use App\Mail\OfferBooking;
+
+use Mail;
 
 class OfferController extends Controller
 {
@@ -40,9 +43,9 @@ class OfferController extends Controller
 
     public function indexJson()
     {
-        $sheet_id = '1TLEDlvDC_06gy75IhNAyXaUjt-9oOT2XOqW2LEpycHE';
+        $offers = (new Offer())->get();
 
-        $data = google_sheet($sheet_id)->map(function ($item, $index) {
+        $data = $offers->map(function ($item, $index) {
             $item->route = route('offer.show', $index);
             return $item;
         });
@@ -52,15 +55,10 @@ class OfferController extends Controller
 
     public function show($id)
     {
-        $sheet_id = '1TLEDlvDC_06gy75IhNAyXaUjt-9oOT2XOqW2LEpycHE';
-
-        $offer = (object) google_sheet($sheet_id)[$id];
-
-        //dd($offer);
+        $offer = (new Offer())->find($id);
 
         $name = $offer->startfrom ? $offer->startfrom : 'Tallinn';
         $startDestination = Destination::where('name', $name)->first();
-        //dd($startDestination->vars()->facts());
 
         $name = collect(explode(',', $offer->destination))
             ->map(function ($s) {
@@ -333,14 +331,9 @@ class OfferController extends Controller
 
     public function book($id)
     {
-        //dd(request()->all());
-
         $user = auth()->user();
 
-        $offer = (object) $this->getSheet()[$id];
-        $offer->id = $id;
-
-        // dd(request()->all());
+        $offer = (new Offer())->find($id);
 
         $booking = (object) request()->only(
             'name',
@@ -359,54 +352,11 @@ class OfferController extends Controller
 
         return new OfferBooking($offer, $booking);
 
+        // Mail::to($offer->companyemail)->queue(
+        //     new OfferBooking($offer, $booking)
+        // );
         // return redirect()
         //     ->route('offer.index')
         //     ->with('info', 'The booking was sent');
-
-        // $follower_emails = $comment->content->followersEmails()->forget(Auth::user()->id)->toArray();
-        // if ($follower_emails) {
-        //     foreach ($follower_emails as $follower_id => &$follower_email) {
-        //         Mail::to($follower_email)->queue(new NewCommentFollow($follower_id, $comment));
-        //     }
-        // }
     }
-
-    // private function getSheet()
-    // {
-    //     $id = '1TLEDlvDC_06gy75IhNAyXaUjt-9oOT2XOqW2LEpycHE';
-
-    //     $url =
-    //         'https://spreadsheets.google.com/feeds/list/' .
-    //         $id .
-    //         '/od6/public/values?alt=json';
-
-    //     //return Cache::remember('sheet', 0, function () use ($url) {
-    //     return $this->parseSheet(json_decode(file_get_contents($url)));
-    //     //});
-    // }
-
-    // private function parseSheet($data)
-    // {
-    //     return collect($data->feed->entry)->map(function ($entry) {
-    //         return (object) collect($entry)
-    //             ->keys()
-    //             ->map(function ($field) use ($entry) {
-    //                 if (starts_with($field, 'gsx$')) {
-    //                     return [
-    //                         str_replace('gsx$', '', $field),
-    //                         $entry->{$field}->{'$t'}
-    //                     ];
-    //                 } else {
-    //                     return false;
-    //                 }
-    //             })
-    //             ->filter(function ($field) {
-    //                 return $field;
-    //             })
-    //             ->reduce(function ($carry, $field) {
-    //                 return $carry->put($field[0], $field[1]);
-    //             }, collect())
-    //             ->toArray();
-    //     });
-    // }
 }

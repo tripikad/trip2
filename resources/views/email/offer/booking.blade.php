@@ -6,29 +6,32 @@
 
 <br>
 
-Booking ID: **{{ $booking->id }}**
+Booking ID: {{ $booking->id }}
 
-Name: **{{ $booking->name }}**
+Name: {{ $booking->name }}
 
 E-mail: <a href="mailto:{{ $booking->email }}">{{ $booking->email }}</a>
 
 Phone: <a href="tel:{{ $booking->phone }}">{{ $booking->phone }}</a>
 
-Adults: **{{ $booking->adults }}**
+Adults: {{ $booking->adults }}
 
-Children: **{{ $booking->children }}**
+Children: {{ $booking->children }}
 
-Needs insurance: **{{ $booking->insurance ? '✔ Yes' : 'No' }}**
+Needs insurance: {{ $booking->insurance ? '✔ Yes' : 'No' }}
 
-Paying installments: **{{ $booking->installments ? '✔ Yes' : 'No' }}**
+Paying installments: {{ $booking->installments ? '✔ Yes' : 'No' }}
 
-Flexible dates: **{{ $booking->flexible ? '✔ Yes' : 'No' }}**
+Flexible dates: {{ $booking->flexible ? '✔ Yes' : 'No' }}
 
 <br>
+
+@if ($booking->notes)
 
 **Notes:**
 
 {{ $booking->notes }}
 
+@endif
 
 @endcomponent
