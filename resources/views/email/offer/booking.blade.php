@@ -1,34 +1,34 @@
 @component('mail::message')
 
-# Booking for [{{ $offer->title }}]({{ $offer_route }}) {{ $offer->price }}
+# {{  trans('offer.book.email.title') }} [{{ $offer->title }}]({{ $offer_route }}) {{ $offer->price }}
 
-### {{ $offer->from }} → {{ $offer->to }}, {{ $offer->duration }}
+{{ $offer->from }} → {{ $offer->to }}, {{ $offer->duration }}
 
 <br>
 
-Booking ID: {{ $booking->id }}
+{{ trans('offer.book.email.id') }}: {{ $booking->id }}
 
-Name: {{ $booking->name }}
+{{ trans('offer.book.email.name') }}: {{ $booking->name }}
 
-E-mail: <a href="mailto:{{ $booking->email }}">{{ $booking->email }}</a>
+{{ trans('offer.book.email.email') }}: <a href="mailto:{{ $booking->email }}">{{ $booking->email }}</a>
 
-Phone: <a href="tel:{{ $booking->phone }}">{{ $booking->phone }}</a>
+{{ trans('offer.book.email.phone') }}: <a href="tel:{{ $booking->phone }}">{{ $booking->phone }}</a>
 
-Adults: {{ $booking->adults }}
+{{ trans('offer.book.email.adults') }}: {{ $booking->adults }}
 
-Children: {{ $booking->children }}
+{{ trans('offer.book.email.children') }}: {{ $booking->children }}
 
-Needs insurance: {{ $booking->insurance ? '✔ Yes' : 'No' }}
+{{ trans('offer.book.email.insurance') }}: {{ $booking->insurance ? trans('offer.book.email.yes') : trans('offer.book.email.no') }}
 
-Paying installments: {{ $booking->installments ? '✔ Yes' : 'No' }}
+{{ trans('offer.book.email.installments') }}: {{ $booking->installments ? trans('offer.book.email.yes') : trans('offer.book.email.no') }}
 
-Flexible dates: {{ $booking->flexible ? '✔ Yes' : 'No' }}
+{{ trans('offer.book.email.flexible') }}: {{ $booking->flexible ? trans('offer.book.email.yes') : trans('offer.book.email.no') }}
 
 <br>
 
 @if ($booking->notes)
 
-**Notes:**
+**{{ trans('offer.book.email.notes') }}:**
 
 {{ $booking->notes }}
 

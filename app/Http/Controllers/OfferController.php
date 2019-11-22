@@ -265,46 +265,67 @@ class OfferController extends Controller
                                 ->push(
                                     component('FormTextfield')
                                         ->with('name', 'name')
-                                        ->with('title', 'Name')
+                                        ->with(
+                                            'title',
+                                            trans('offer.book.name')
+                                        )
                                         ->with('value', $name)
                                 )
                                 ->push(
                                     component('FormTextfield')
                                         ->with('name', 'email')
-                                        ->with('title', 'E-mail')
+                                        ->with(
+                                            'title',
+                                            trans('offer.book.email')
+                                        )
                                         ->with('value', $email)
                                 )
                                 ->push(
                                     component('FormTextfield')
                                         ->with('name', 'phone')
-                                        ->with('title', 'Phone')
+                                        ->with(
+                                            'title',
+                                            trans('offer.book.phone')
+                                        )
                                 )
                                 ->push(
                                     component('FormTextfield')
                                         ->with('name', 'adults')
-                                        ->with('title', 'Number of adults')
+                                        ->with(
+                                            'title',
+                                            trans('offer.book.adults')
+                                        )
                                 )
                                 ->push(
                                     component('FormTextfield')
                                         ->with('name', 'children')
-                                        ->with('title', 'Number of children')
+                                        ->with(
+                                            'title',
+                                            trans('offer.book.children')
+                                        )
                                 )
                                 ->push(
                                     component('FormTextarea')
                                         ->with('name', 'notes')
-                                        ->with('title', 'Notes')
+                                        ->with(
+                                            'title',
+                                            trans('offer.book.notes')
+                                        )
                                 )
                                 ->push(
                                     component('FormCheckbox')
                                         ->with('name', 'insurance')
-                                        ->with('title', 'I need an insurance')
+                                        ->with(
+                                            'title',
+                                            trans('offer.book.insurance')
+                                        )
                                 )
                                 ->push(
                                     component('FormCheckbox')
                                         ->with('name', 'installments')
                                         ->with(
                                             'title',
-                                            'I want to pay by installments'
+                                            trans('offer.book.installments')
                                         )
                                 )
                                 ->push(
@@ -312,7 +333,7 @@ class OfferController extends Controller
                                         ->with('name', 'flexible')
                                         ->with(
                                             'title',
-                                            'I am flexible with dates (+-3 days)'
+                                            trans('offer.book.flexible')
                                         )
                                 )
                                 ->push(
@@ -320,7 +341,10 @@ class OfferController extends Controller
                                         ->is('orange')
                                         ->is('wide')
                                         ->is('large')
-                                        ->with('title', 'Book an offer')
+                                        ->with(
+                                            'title',
+                                            trans('offer.book.submit')
+                                        )
                                 )
                         )
                 )
