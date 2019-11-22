@@ -40,7 +40,9 @@ class OfferController extends Controller
 
     public function indexJson()
     {
-        $data = $this->getSheet()->map(function ($item, $index) {
+        $sheet_id = '1TLEDlvDC_06gy75IhNAyXaUjt-9oOT2XOqW2LEpycHE';
+
+        $data = google_sheet($sheet_id)->map(function ($item, $index) {
             $item->route = route('offer.show', $index);
             return $item;
         });
@@ -50,7 +52,9 @@ class OfferController extends Controller
 
     public function show($id)
     {
-        $offer = (object) $this->getSheet()[$id];
+        $sheet_id = '1TLEDlvDC_06gy75IhNAyXaUjt-9oOT2XOqW2LEpycHE';
+
+        $offer = (object) google_sheet($sheet_id)[$id];
 
         //dd($offer);
 
@@ -367,42 +371,42 @@ class OfferController extends Controller
         // }
     }
 
-    private function getSheet()
-    {
-        $id = '1TLEDlvDC_06gy75IhNAyXaUjt-9oOT2XOqW2LEpycHE';
+    // private function getSheet()
+    // {
+    //     $id = '1TLEDlvDC_06gy75IhNAyXaUjt-9oOT2XOqW2LEpycHE';
 
-        $url =
-            'https://spreadsheets.google.com/feeds/list/' .
-            $id .
-            '/od6/public/values?alt=json';
+    //     $url =
+    //         'https://spreadsheets.google.com/feeds/list/' .
+    //         $id .
+    //         '/od6/public/values?alt=json';
 
-        //return Cache::remember('sheet', 0, function () use ($url) {
-        return $this->parseSheet(json_decode(file_get_contents($url)));
-        //});
-    }
+    //     //return Cache::remember('sheet', 0, function () use ($url) {
+    //     return $this->parseSheet(json_decode(file_get_contents($url)));
+    //     //});
+    // }
 
-    private function parseSheet($data)
-    {
-        return collect($data->feed->entry)->map(function ($entry) {
-            return (object) collect($entry)
-                ->keys()
-                ->map(function ($field) use ($entry) {
-                    if (starts_with($field, 'gsx$')) {
-                        return [
-                            str_replace('gsx$', '', $field),
-                            $entry->{$field}->{'$t'}
-                        ];
-                    } else {
-                        return false;
-                    }
-                })
-                ->filter(function ($field) {
-                    return $field;
-                })
-                ->reduce(function ($carry, $field) {
-                    return $carry->put($field[0], $field[1]);
-                }, collect())
-                ->toArray();
-        });
-    }
+    // private function parseSheet($data)
+    // {
+    //     return collect($data->feed->entry)->map(function ($entry) {
+    //         return (object) collect($entry)
+    //             ->keys()
+    //             ->map(function ($field) use ($entry) {
+    //                 if (starts_with($field, 'gsx$')) {
+    //                     return [
+    //                         str_replace('gsx$', '', $field),
+    //                         $entry->{$field}->{'$t'}
+    //                     ];
+    //                 } else {
+    //                     return false;
+    //                 }
+    //             })
+    //             ->filter(function ($field) {
+    //                 return $field;
+    //             })
+    //             ->reduce(function ($carry, $field) {
+    //                 return $carry->put($field[0], $field[1]);
+    //             }, collect())
+    //             ->toArray();
+    //     });
+    // }
 }
