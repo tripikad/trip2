@@ -374,13 +374,14 @@ class OfferController extends Controller
         $booking->installments = request()->get('installments') == 'on';
         $booking->flexible = request()->get('flexible') == 'on';
 
-        return new OfferBooking($offer, $booking);
+        //return new OfferBooking($offer, $booking);
 
-        // Mail::to($offer->companyemail)->queue(
-        //     new OfferBooking($offer, $booking)
-        // );
-        // return redirect()
-        //     ->route('offer.index')
-        //     ->with('info', 'The booking was sent');
+        Mail::to($offer->companyemail)->queue(
+            new OfferBooking($offer, $booking)
+        );
+
+        return redirect()
+            ->route('offer.index')
+            ->with('info', 'The booking was sent');
     }
 }

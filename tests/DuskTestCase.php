@@ -32,7 +32,7 @@ abstract class DuskTestCase extends BaseTestCase
         $options = (new ChromeOptions())->addArguments([
             '--disable-gpu',
             '--headless',
-            '--window-size=1280,1280'
+            '--window-size=1200,1200'
         ]);
 
         return RemoteWebDriver::create(

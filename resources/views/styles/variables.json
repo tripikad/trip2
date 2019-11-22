@@ -44,20 +44,20 @@
     "white": "hsl(0, 0%, 100%)",
     "white-hover": "hsla(0, 0%, 100%, 0.9)",
 
-    "gray-lighter": "hsl(204, 6%, 97%)",
-    "gray-lighter-hover": "hsl(204, 6%, 72%)",
+    "gray-lighter": "hsl(204, 6%, 95%)",
+    "gray-lighter-hover": "hsl(204, 6%, 75%)",
 
     "gray-light": "hsl(204, 6%, 88%)",
-    "gray-light-hover": "hsl(204, 6%, 72%)",
+    "gray-light-hover": "hsl(204, 6%, 78%)",
 
-    "gray": "hsl(204, 6%, 55%)",
-    "gray-hover": "hsl(204, 6%, 40%)",
+    "gray": "hsl(204, 6%, 45%)",
+    "gray-hover": "hsl(204, 6%, 35%)",
 
-    "gray-dark": "hsl(204, 6%, 45%)",
-    "gray-dark-hover": "hsl(204, 6%, 30%)",
+    "gray-dark": "hsl(204, 6%, 35%)",
+    "gray-dark-hover": "hsl(204, 6%, 25%)",
 
     "gray-darker": "hsl(204, 6%, 25%)",
-    "gray-darker-hover": "hsl(204, 6%, 20%)",
+    "gray-darker-hover": "hsl(204, 6%, 15%)",
 
     "black": "hsl(0,0%,0%)",
 

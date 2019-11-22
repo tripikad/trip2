@@ -76,7 +76,7 @@ $font-weight-bold: bold;
 $line-height-xs: 100%;
 $line-height-sm: 120%;
 $line-height-md: 130%;
-$line-height-lg: 150%;
+$line-height-lg: 170%; /* Was 150 */
 $line-height-xl: 200%;
 $line-height-xxl: 220%;
 /* prettier-ignore */
