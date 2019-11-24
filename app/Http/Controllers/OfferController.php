@@ -9,6 +9,7 @@ use App\Mail\OfferBooking;
 
 use Log;
 use Mail;
+use stdClass;
 
 class OfferController extends Controller
 {
@@ -429,43 +430,55 @@ class OfferController extends Controller
                     ->with('widths', '3fr 1fr 2fr 2fr')
                     ->with(
                       'items',
-                      collect()
-                        ->push(
-                          component('FormTextfield')
-                            ->with(
-                              'title',
-                              trans('offer.edit.hotel.name.title')
+                      collect(array_fill(0, 5, null))
+                        ->map(function ($value, $key) {
+                          return collect()
+                            ->push(
+                              component('FormTextfield')
+                                ->with(
+                                  'title',
+                                  $key == 0
+                                    ? trans('offer.edit.hotel.name.title')
+                                    : ''
+                                )
+                                ->with('name', 'hotel_name[]')
+                                ->with('value', old('hotel_name'))
                             )
-                            ->with('name', 'hotel_name[]')
-                            ->with('value', old('hotel_name'))
-                        )
-                        ->push(
-                          component('FormTextfield')
-                            ->with(
-                              'title',
-                              trans('offer.edit.hotel.rating.title')
+                            ->push(
+                              component('FormTextfield')
+                                ->with(
+                                  'title',
+                                  $key == 0
+                                    ? trans('offer.edit.hotel.rating.title')
+                                    : ''
+                                )
+                                ->with('name', 'hotel_rating[]')
+                                ->with('options', old('hotel_rating'))
                             )
-                            ->with('name', 'hotel_rating[]')
-                            ->with('options', old('hotel_rating'))
-                        )
-                        ->push(
-                          component('FormTextfield')
-                            ->with(
-                              'title',
-                              trans('offer.edit.hotel.type.title')
+                            ->push(
+                              component('FormTextfield')
+                                ->with(
+                                  'title',
+                                  $key == 0
+                                    ? trans('offer.edit.hotel.type.title')
+                                    : ''
+                                )
+                                ->with('name', 'hotel_type[]')
+                                ->with('options', old('hotel_type'))
                             )
-                            ->with('name', 'hotel_type[]')
-                            ->with('options', old('hotel_type'))
-                        )
-                        ->push(
-                          component('FormTextfield')
-                            ->with(
-                              'title',
-                              trans('offer.edit.hotel.price.title')
-                            )
-                            ->with('name', 'hotel_price[]')
-                            ->with('options', old('hotel_price'))
-                        )
+                            ->push(
+                              component('FormTextfield')
+                                ->with(
+                                  'title',
+                                  $key == 0
+                                    ? trans('offer.edit.hotel.price.title')
+                                    : ''
+                                )
+                                ->with('name', 'hotel_price[]')
+                                ->with('options', old('hotel_price'))
+                            );
+                        })
+                        ->flatten()
                     )
                 )
                 ->push(
@@ -482,7 +495,27 @@ class OfferController extends Controller
 
   public function store()
   {
-    dd(request()->all());
+    $all = collect(request()->only('hotel_name', 'hotel_rating'));
+
+    //$d = $all->transpose();
+
+    $a = $all->transpose()->map(function ($h) {
+      return collect(
+        collect(['name', 'rating'])
+          ->zip($h)
+          ->reduce(function ($assoc, $item) {
+            [$key, $value] = $item;
+            $assoc[$key] = $value;
+            return $assoc;
+          })
+      );
+    });
+
+    dd($a->first());
+
+    //$a = collect(['name', 'rating'])->zip($all->hotel_name);
+
+    //return json_encode($all->transpose, JSON_PRETTY_PRINT);
 
     $loggedUser = request()->user();
 
