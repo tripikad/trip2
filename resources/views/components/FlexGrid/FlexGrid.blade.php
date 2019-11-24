@@ -1,10 +1,9 @@
 @php
 
 $items = $items ?? [];
-$cols = $cols ?? 3;
+$cols = $cols ?? 2;
 $gapclass = isset($gap) ? 'Grid--gap'.$gap : '';
 $widths = isset($widths) ? preg_split('/\s+/', preg_replace('/[^0-9\s]/','',$widths)) : array_fill(0, $cols, 1);
-
 $spacer = style_vars()->spacer;
 
 $gap_map = ['sm' => 1, 'md' => 2, 'lg' => 3];

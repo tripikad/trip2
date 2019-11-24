@@ -47,8 +47,8 @@
     "gray-lighter": "hsl(204, 6%, 95%)",
     "gray-lighter-hover": "hsl(204, 6%, 75%)",
 
-    "gray-light": "hsl(204, 6%, 88%)",
-    "gray-light-hover": "hsl(204, 6%, 78%)",
+    "gray-light": "hsl(204, 6%, 83%)",
+    "gray-light-hover": "hsl(204, 6%, 73%)",
 
     "gray": "hsl(204, 6%, 45%)",
     "gray-hover": "hsl(204, 6%, 35%)",

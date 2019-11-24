@@ -565,15 +565,21 @@ Route::get('lendude_sooduspakkumised/rss', [
 
 // Offers
 
-Route::get('offers', 'OfferController@index')->name('offer.index');
+Route::get('offer', 'OfferController@index')->name('offer.index');
 
-Route::get('offers/json', 'OfferController@indexJson')->name(
-    'offer.index.json'
-);
+Route::get('offer/json', 'OfferController@indexJson')->name('offer.index.json');
 
-Route::get('offers/{id}', 'OfferController@show')->name('offer.show');
+Route::get('offer/{id}', 'OfferController@show')->name('offer.show');
 
-Route::post('offers/{id}/book', 'OfferController@book')->name('offer.book');
+Route::post('offer/{id}/book', 'OfferController@book')->name('offer.book');
+
+Route::get('offer/create', 'OfferController@create')
+    ->name('offer.create')
+    ->middleware('role:admin');
+
+Route::post('offer/store', 'OfferController@store')
+    ->name('offer.store')
+    ->middleware('role:admin');
 
 // Legacy user paths
 

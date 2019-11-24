@@ -2,27 +2,41 @@
 
 namespace App;
 
-class Offer
+use Illuminate\Database\Eloquent\Model;
+
+class Offer extends Model
 {
-    protected $id;
-    protected $offers;
+    protected $fillable = [
+        'user_id',
+        'title',
+        'body',
+        'status',
+        'price',
+        'data',
+        'start_destination',
+        'end_destination',
+        'start_at',
+        'end_at'
+    ];
 
-    public function __construct()
+    protected $dates = ['start_at', 'end_at', 'created_at', 'updated_at'];
+
+    protected $casts = [
+        'data' => 'array'
+    ];
+
+    public function user()
     {
-        $sheet_id = '1TLEDlvDC_06gy75IhNAyXaUjt-9oOT2XOqW2LEpycHE';
-        $this->offers = google_sheet($sheet_id);
+        return $this->belongsTo('App\User');
     }
 
-    public function get()
+    public function startDestination()
     {
-        return $this->offers;
+        return $this->belongsTo('App\Destination', 'start_destination_id');
     }
 
-    public function find($id)
+    public function endDestination()
     {
-        $offer = (object) $this->offers[$id];
-        $offer->id = $id;
-
-        return $offer;
+        return $this->belongsTo('App\Destination', 'end_destination_id');
     }
 }

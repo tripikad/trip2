@@ -11,7 +11,9 @@ use Illuminate\Notifications\Notifiable as Notifiable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
-class User extends Model implements AuthenticatableContract, CanResetPasswordContract
+class User extends Model implements
+    AuthenticatableContract,
+    CanResetPasswordContract
 {
     use Authenticatable, CanResetPassword, Notifiable;
 
@@ -37,7 +39,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         'birthyear',
         'description',
         'notify_message',
-        'notify_follow',
+        'notify_follow'
     ];
 
     protected $hidden = ['password', 'remember_token'];
@@ -90,16 +92,23 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->morphToMany('App\Image', 'imageable');
     }
 
+    public function offers()
+    {
+        return $this->hasMany('App\Offer');
+    }
+
     public function update_active_at($force = false, $return = false)
     {
-        $last_online = Cache::get('uio-'.$this->id, '0000-00-00 00:00:00');
+        $last_online = Cache::get('uio-' . $this->id, '0000-00-00 00:00:00');
 
         if ($last_online == '0000-00-00 00:00:00' || $force) {
-            $expires_at = Carbon::now()->addMinutes($this->update_active_at_minutes);
+            $expires_at = Carbon::now()->addMinutes(
+                $this->update_active_at_minutes
+            );
 
             // uio - user is online :)
             $now = Carbon::now();
-            Cache::put('uio-'.$this->id, $now, $expires_at);
+            Cache::put('uio-' . $this->id, $now, $expires_at);
             $this->active_at = $now;
             $this->save();
         }
@@ -150,7 +159,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             ->sortByDesc('created_at')
             ->unique('user_id_from')
             ->transform(function ($item) {
-                $item->attributes['user_id_with'] = $item->attributes['user_id_from'];
+                $item->attributes['user_id_with'] =
+                    $item->attributes['user_id_from'];
 
                 return $item;
             });
@@ -159,18 +169,26 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             ->whereNotIn('user_id_to', $received->pluck('user_id_from')->all())
             ->get()
             ->transform(function ($item) {
-                $item->attributes['user_id_with'] = $item->attributes['user_id_to'];
+                $item->attributes['user_id_with'] =
+                    $item->attributes['user_id_to'];
 
                 return $item;
             });
 
-        return $received->merge($sentWithoutReply)->sortByDesc('created_at')->all();
+        return $received
+            ->merge($sentWithoutReply)
+            ->sortByDesc('created_at')
+            ->all();
     }
 
     public function messagesWith($user_id_with)
     {
-        $sent = $this->hasMany('App\Message', 'user_id_from')->where('user_id_to', $user_id_with)->get();
-        $received = $this->hasMany('App\Message', 'user_id_to')->where('user_id_from', $user_id_with)->get();
+        $sent = $this->hasMany('App\Message', 'user_id_from')
+            ->where('user_id_to', $user_id_with)
+            ->get();
+        $received = $this->hasMany('App\Message', 'user_id_to')
+            ->where('user_id_from', $user_id_with)
+            ->get();
 
         return $sent->merge($received)->sortBy('created_at');
     }
@@ -189,7 +207,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         $roleMap = [
             'regular' => ['regular', 'admin', 'superuser'],
             'admin' => ['admin', 'superuser'],
-            'superuser' => ['superuser'],
+            'superuser' => ['superuser']
         ];
 
         return in_array($this->role, $roleMap[$role]);
@@ -217,7 +235,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public function updateRanking()
     {
-        $contents = $this->contents()->whereNotIn('type', ['buysell', 'internal'])->count();
+        $contents = $this->contents()
+            ->whereNotIn('type', ['buysell', 'internal'])
+            ->count();
         $comments = $this->comments()->count();
         $posts = $comments + $contents;
         $have_been = $this->destinationHaveBeen()->count();
