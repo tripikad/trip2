@@ -27,7 +27,7 @@ class OfferController extends Controller
                             ->is('large')
                             ->is('white')
                             ->is('center')
-                            ->with('title', trans('offer.index.title'))
+                            ->with('title', trans('offer.index'))
                     )
                 )
             )
@@ -305,14 +305,9 @@ class OfferController extends Controller
             ->render();
     }
 
-    public function create()
+    public function create($type = 'adventure')
     {
-        // $destinations = Destination::select('id', 'name')
-        //     ->orderBy('name', 'asc')
-        //     ->get();
-        // $topics = Topic::select('id', 'name')
-        //     ->orderBy('name', 'asc')
-        //     ->get();
+        $isAdventure = $type == 'adventure';
 
         $destinations = Destination::select('id', 'name')
             ->orderBy('name', 'asc')
@@ -329,7 +324,7 @@ class OfferController extends Controller
                     collect()->push(
                         component('Title')
                             ->is('white')
-                            ->with('title', trans('offer.create.title'))
+                            ->with('title', trans($isAdventure ? 'offer.create.adventure' : 'offer.create.package'))
                     )
                 )
             )
@@ -343,7 +338,7 @@ class OfferController extends Controller
                             collect()
                                 ->push(
                                     component('FormTextfield')
-                                        ->with('title', trans('offer.edit.title.title'))
+                                        ->with('title', trans('offer.edit.title'))
                                         ->with('name', 'title')
                                         ->with('value', old('title'))
                                 )
@@ -355,7 +350,8 @@ class OfferController extends Controller
                                             collect()
                                                 ->push(
                                                     component('FormSelect')
-                                                        ->with('title', trans('offer.edit.start_destination.title'))
+                                                        ->with('height', 12)
+                                                        ->with('title', trans('offer.edit.start_destination'))
                                                         ->with('name', 'start_destination')
                                                         ->with('options', $destinations)
 
@@ -363,7 +359,7 @@ class OfferController extends Controller
                                                 )
                                                 ->push(
                                                     component('FormSelect')
-                                                        ->with('title', trans('offer.edit.end_destination.title'))
+                                                        ->with('title', trans('offer.edit.end_destination'))
                                                         ->with('name', 'end_destination')
                                                         ->with('options', $destinations)
                                                 )
@@ -377,91 +373,115 @@ class OfferController extends Controller
                                             collect()
                                                 ->push(
                                                     component('FormTextfield')
-                                                        ->with('title', trans('offer.edit.start_at.title'))
+                                                        ->with('title', trans('offer.edit.start_at'))
                                                         ->with('name', 'start_at')
 
                                                         ->with('value', $startDestination->id)
                                                 )
                                                 ->push(
                                                     component('FormTextfield')
-                                                        ->with('title', trans('offer.edit.end_at.title'))
+                                                        ->with('title', trans('offer.edit.end_at'))
                                                         ->with('name', 'end_at')
                                                         ->with('options', $destinations)
                                                 )
                                         )
                                 )
                                 ->push(
-                                    component('FormTextarea')
-                                        ->with('title', trans('offer.edit.description.title'))
-                                        ->with('name', 'description')
-                                        ->with('value', old('description'))
+                                    component('FlexGrid')
+                                        ->with('gap', $isAdventure ? 1 : 0)
+                                        ->with('widths', '3fr 1fr')
+                                        ->with(
+                                            'items',
+                                            collect()
+                                                ->push(
+                                                    component($isAdventure ? 'FormTextfield' : 'FormHidden')
+                                                        ->with('title', trans('offer.edit.guide'))
+                                                        ->with('name', 'guide')
+
+                                                        ->with('value', old('guide'))
+                                                )
+                                                ->push(
+                                                    component($isAdventure ? 'FormTextfield' : 'FormHidden')
+                                                        ->with('title', trans('offer.edit.size'))
+                                                        ->with('name', 'size')
+
+                                                        ->with('value', old('guide'))
+                                                )
+                                        )
+                                )
+                                ->push(
+                                    component($isAdventure ? 'FormTextarea' : 'FormHidden')
+                                        ->with('title', trans('offer.edit.accommodation'))
+                                        ->with('name', 'accommodation')
+                                        ->with('value', old('accommodation'))
+                                        ->with('rows', 4)
+                                )
+                                ->push(
+                                    component($isAdventure ? 'FormTextarea' : 'FormHidden')
+                                        ->with('title', trans('offer.edit.included'))
+                                        ->with('name', 'included')
+                                        ->with('value', old('included'))
                                         ->with('rows', 4)
                                 )
                                 ->push(
                                     component('FormCheckbox')
                                         ->with('name', 'flights')
-                                        ->with('title', trans('offer.edit.flights.title'))
+                                        ->with('title', trans('offer.edit.flights'))
+                                )
+                                ->push(
+                                    component($isAdventure ? 'FormTextarea' : 'FormHidden')
+                                        ->with('title', trans('offer.edit.extras'))
+                                        ->with('name', 'extras')
+                                        ->with('value', old('extras'))
+                                        ->with('rows', 4)
                                 )
                                 ->push(
                                     component('FormCheckbox')
                                         ->with('name', 'transfer')
-                                        ->with('title', trans('offer.edit.transfer.title'))
-                                )
-                                ->push(
-                                    component('Title')
-                                        ->is('small')
-                                        ->with('title', trans('offer.edit.hotels'))
+                                        ->with('title', trans('offer.edit.transfer'))
                                 )
                                 ->push(
                                     component('FlexGrid')
-                                        ->with('gap', 1)
+                                        ->with('gap', $isAdventure ? 0 : 1)
                                         ->with('cols', 4)
                                         ->with('widths', '3fr 1fr 2fr 2fr')
                                         ->with(
                                             'items',
                                             collect(array_fill(0, 5, null))
-                                                ->map(function ($value, $key) {
+                                                ->map(function ($value, $key) use ($isAdventure) {
                                                     return collect()
                                                         ->push(
-                                                            component('FormTextfield')
+                                                            component(!$isAdventure ? 'FormTextfield' : 'FormHidden')
                                                                 ->with(
                                                                     'title',
-                                                                    $key == 0
-                                                                        ? trans('offer.edit.hotel.name.title')
-                                                                        : ''
+                                                                    $key == 0 ? trans('offer.edit.hotel.name') : ''
                                                                 )
                                                                 ->with('name', 'hotel_name[]')
                                                                 ->with('value', old('hotel_name'))
                                                         )
                                                         ->push(
-                                                            component('FormTextfield')
+                                                            component(!$isAdventure ? 'FormTextfield' : 'FormHidden')
                                                                 ->with(
                                                                     'title',
-                                                                    $key == 0
-                                                                        ? trans('offer.edit.hotel.rating.title')
-                                                                        : ''
+                                                                    $key == 0 ? trans('offer.edit.hotel.rating') : ''
                                                                 )
                                                                 ->with('name', 'hotel_rating[]')
                                                                 ->with('options', old('hotel_rating'))
                                                         )
                                                         ->push(
-                                                            component('FormTextfield')
+                                                            component(!$isAdventure ? 'FormTextfield' : 'FormHidden')
                                                                 ->with(
                                                                     'title',
-                                                                    $key == 0
-                                                                        ? trans('offer.edit.hotel.type.title')
-                                                                        : ''
+                                                                    $key == 0 ? trans('offer.edit.hotel.type') : ''
                                                                 )
                                                                 ->with('name', 'hotel_type[]')
                                                                 ->with('options', old('hotel_type'))
                                                         )
                                                         ->push(
-                                                            component('FormTextfield')
+                                                            component(!$isAdventure ? 'FormTextfield' : 'FormHidden')
                                                                 ->with(
                                                                     'title',
-                                                                    $key == 0
-                                                                        ? trans('offer.edit.hotel.price.title')
-                                                                        : ''
+                                                                    $key == 0 ? trans('offer.edit.hotel.price') : ''
                                                                 )
                                                                 ->with('name', 'hotel_price[]')
                                                                 ->with('options', old('hotel_price'))
@@ -470,7 +490,14 @@ class OfferController extends Controller
                                                 ->flatten()
                                         )
                                 )
-                                ->push(component('FormButton')->with('title', trans('offer.create.submit.title')))
+                                ->push(
+                                    component('FormTextarea')
+                                        ->with('title', trans('offer.edit.description'))
+                                        ->with('name', 'description')
+                                        ->with('value', old('description'))
+                                        ->with('rows', 4)
+                                )
+                                ->push(component('FormButton')->with('title', trans('offer.create.submit')))
                         )
                 )
             )
@@ -500,9 +527,18 @@ class OfferController extends Controller
 
         $offer = $loggedUser->offers()->create([
             'title' => request()->get('title'),
-            'start_destination_id' => request()->get('start_destination'),
-            'end_destination_id' => request()->get('end_destination'),
+
+            // 'start_destination_id' => request()->get('start_destination'),
+            // 'end_destination_id' => request()->get('end_destination'),
+            //'start_at' => request()->get('start_at'),
+            //'end_at' => request()->get('end_at'),
+
             'data' => [
+                'guide' => request()->get('guide'),
+                'size' => request()->get('size'),
+                'accommodation' => request()->get('accommodation'),
+                'included' => request()->get('included'),
+                'extras' => request()->get('extras'),
                 'description' => request()->get('description'),
                 'flights' => $flights,
                 'transfer' => $transfer,
@@ -518,7 +554,7 @@ class OfferController extends Controller
         ]);
 
         return redirect()
-            ->route('offer.create')
+            ->route('offer.index')
             ->with(
                 'info',
                 trans('offer.store.info', [
