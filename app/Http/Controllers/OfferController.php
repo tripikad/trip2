@@ -493,17 +493,17 @@ class OfferController extends Controller
         $hotels = collect(request()->only('hotel_name', 'hotel_rating', 'hotel_type', 'hotel_price'))
             ->transpose()
             ->map(function ($h) {
-                return collect(['name', 'rating', 'type', 'price'])
+                return (object) collect(['name', 'rating', 'type', 'price'])
                     ->zip($h)
                     ->fromPairs();
             });
 
         $offer = $loggedUser->offers()->create([
-            'title' => request()->title,
-            'start_destination_id' => request()->start_destination,
-            'end_destination_id' => request()->end_destination,
+            'title' => request()->get('title'),
+            'start_destination_id' => request()->get('start_destination'),
+            'end_destination_id' => request()->get('end_destination'),
             'data' => [
-                'description' => request()->description,
+                'description' => request()->get('description'),
                 'flights' => $flights,
                 'transfer' => $transfer,
                 'hotels' => $hotels
