@@ -97,13 +97,13 @@ class AppServiceProvider extends ServiceProvider
       return new static($items);
     });
 
-    // Collection::macro('fromPairs', function () {
-    //   return $this->reduce(function ($assoc, array $item) {
-    //     [$key, $value] = $item;
-    //     $assoc[$key] = $value;
-    //     return $assoc;
-    //   });
-    // });
+    Collection::macro('fromPairs', function () {
+      return $this->reduce(function ($assoc, $item) {
+        [$key, $value] = $item;
+        $assoc[$key] = $value;
+        return $assoc;
+      });
+    });
   }
 
   protected function google_analytics_track($auth)

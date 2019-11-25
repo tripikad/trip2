@@ -22,7 +22,7 @@ class Offer extends Model
     protected $dates = ['start_at', 'end_at', 'created_at', 'updated_at'];
 
     protected $casts = [
-        'data' => 'array'
+        'data' => 'object'
     ];
 
     public function user()
