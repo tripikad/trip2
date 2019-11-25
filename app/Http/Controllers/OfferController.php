@@ -544,7 +544,7 @@ class OfferController extends Controller
                 'transfer' => $transfer,
                 'hotels' => $hotels
             ],
-            'status' => 0
+            'status' => 1
         ]);
 
         Log::info('New offer added', [
