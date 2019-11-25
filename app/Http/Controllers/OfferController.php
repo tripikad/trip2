@@ -45,32 +45,21 @@ class OfferController extends Controller
 
     public function indexJson()
     {
-        $offers = (new Offer())->get();
-
-        $data = $offers->map(function ($item, $index) {
-            $item->route = route('offer.show', $index);
-            return $item;
-        });
+        $data = Offer::public()
+            ->get()
+            ->map(function ($offer) {
+                $offer->route = route('offer.show', $offer);
+                return $offer;
+            });
 
         return response()->json($data);
     }
 
     public function show($id)
     {
-        $offer = (new Offer())->find($id);
+        $offer = Offer::find($id);
 
-        $name = $offer->startfrom ? $offer->startfrom : 'Tallinn';
-        $startDestination = Destination::where('name', $name)->first();
-
-        $name = collect(explode(',', $offer->destination))
-            ->map(function ($s) {
-                return trim($s);
-            })
-            ->last();
-
-        $destination = Destination::where('name', $name)->first();
-
-        $photos = $destination ? Content::getLatestPagedItems('photo', 18, $destination->id) : collect();
+        $photos = Content::getLatestPagedItems('photo', 9, $offer->endDestination->id);
 
         $user = auth()->user();
         $email = $user ? $user->email : '';
@@ -101,19 +90,11 @@ class OfferController extends Controller
                             ->with('destination_facts', config('destination_facts'))
 
                             ->with('lines', [
-                                $startDestination->vars()->facts(),
-                                [
-                                    'lat' => $offer->latitude,
-                                    'lon' => $offer->longitude
-                                ]
+                                $offer->startDestination->vars()->coordinates(),
+                                $offer->endDestination->vars()->coordinates()
                             ])
-                            ->with('mediumdots', [$startDestination->vars()->facts()])
-                            ->with('largedots', [
-                                [
-                                    'lat' => $offer->latitude,
-                                    'lon' => $offer->longitude
-                                ]
-                            ])
+                            ->with('mediumdots', [$offer->startDestination->vars()->coordinates()])
+                            ->with('largedots', [$offer->endDestination->vars()->coordinates()])
                     )
                     ->push(
                         component('Center')->with(
@@ -121,7 +102,7 @@ class OfferController extends Controller
                             component('Tag')
                                 ->is('white')
                                 ->is('large')
-                                ->with('title', $offer->style)
+                                ->with('title', 'TODO: Style')
                         )
                     )
                     ->push(
@@ -129,7 +110,7 @@ class OfferController extends Controller
                             ->is('large')
                             ->is('white')
                             ->is('center')
-                            ->with('title', $offer->title . ' ' . $offer->price)
+                            ->with('title', $offer->title . ' ' . $offer->price . '€')
                     )
                     ->push(
                         component('Flex')
@@ -142,7 +123,7 @@ class OfferController extends Controller
                                             ->is('small')
                                             ->is('center')
                                             ->is('white')
-                                            ->with('title', $offer->duration)
+                                            ->with('title', 'TODO: duration')
                                     )
                                     ->push(
                                         component('Title')
@@ -150,7 +131,7 @@ class OfferController extends Controller
                                             ->is('center')
                                             ->is('white')
                                             ->is('semitransparent')
-                                            ->with('title', $offer->from . ' → ' . $offer->to)
+                                            ->with('title', 'TODO: from → TODO: to')
                                     )
                             )
                     )
@@ -162,23 +143,21 @@ class OfferController extends Controller
                             ->with(
                                 'items',
                                 collect()
-                                    ->pushWhen(
-                                        $offer->company !== '',
+                                    ->push(
                                         component('Title')
                                             ->is('smallest')
                                             ->is('white')
                                             ->is('semitransparent')
                                             ->with('title', 'Firma')
                                     )
-                                    ->pushWhen(
-                                        $offer->company !== '',
+                                    ->push(
                                         component('Title')
                                             ->is('smallest')
                                             ->is('white')
-                                            ->with('title', $offer->company)
+                                            ->with('title', 'TODO: company')
                                     )
                                     ->pushWhen(
-                                        $offer->guide !== '',
+                                        $offer->data->guide !== '',
                                         component('Title')
                                             ->is('smallest')
                                             ->is('white')
@@ -186,14 +165,14 @@ class OfferController extends Controller
                                             ->with('title', 'Giid')
                                     )
                                     ->pushWhen(
-                                        $offer->guide !== '',
+                                        $offer->data->guide !== '',
                                         component('Title')
                                             ->is('smallest')
                                             ->is('white')
-                                            ->with('title', $offer->guide)
+                                            ->with('title', $offer->data->guide)
                                     )
                                     ->pushWhen(
-                                        $offer->people !== '',
+                                        $offer->data->size !== '',
                                         component('Title')
                                             ->is('smallest')
                                             ->is('white')
@@ -201,11 +180,11 @@ class OfferController extends Controller
                                             ->with('title', 'Grupi suurus')
                                     )
                                     ->pushWhen(
-                                        $offer->people !== '',
+                                        $offer->data->size !== '',
                                         component('Title')
                                             ->is('smallest')
                                             ->is('white')
-                                            ->with('title', $offer->people)
+                                            ->with('title', $offer->data->size)
                                     )
                             )
                     )

@@ -4,6 +4,8 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use App\Offer;
+use App\Destination;
+use Carbon\Carbon;
 
 class OfferImport extends Command
 {
@@ -21,13 +23,26 @@ class OfferImport extends Command
         $sheet_id = '1TLEDlvDC_06gy75IhNAyXaUjt-9oOT2XOqW2LEpycHE';
         $offers = google_sheet($sheet_id);
 
+        $startDestination = Destination::where('name', 'Tallinn')->first();
+
         $this->info("\nImporting content\n");
 
-        $offers->each(function ($o) {
+        $offers->each(function ($o) use ($startDestination) {
             $this->line($o->title);
+
+            $endDestination = Destination::where('name', $o->destination)->first();
+
             $data = [
                 'user_id' => 12,
                 'title' => $o->title,
+                'price' => $o->price,
+                'start_at' => Carbon::now()->addMonth(),
+                'end_at' => Carbon::now()
+                    ->addMonth()
+                    ->addWeek(),
+                'start_destination_id' => $startDestination->id,
+                'end_destination_id' => $endDestination->id,
+
                 'data' => [
                     'guide' => $o->guide,
                     'size' => $o->people,
@@ -44,7 +59,7 @@ class OfferImport extends Command
                         ]
                     ]
                 ],
-                'status' => 0
+                'status' => 1
             ];
 
             if ($offer = Offer::find($o->id)) {

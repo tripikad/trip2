@@ -19,6 +19,17 @@ class CreateOffersTable extends Migration
                 ->integer('user_id')
                 ->unsigned()
                 ->index();
+
+            $table
+                ->integer('start_destination_id')
+                ->unsigned()
+                ->index();
+
+            $table
+                ->integer('end_destination_id')
+                ->unsigned()
+                ->index();
+
             $table->string('title')->nullable();
             $table
                 ->tinyInteger('status')
