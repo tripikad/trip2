@@ -4,7 +4,7 @@
         <div class="OfferRow__content">
             <div class="OfferRow__title">
                 {{ offer.title }} al.
-                <span class="OfferRow__price">{{ offer.price }}€</span>
+                <span class="OfferRow__price">{{ offer.price }}</span>
             </div>
             <div class="OfferRow__meta">
                 <tag :title="offer.end_destination.name" isclasses="Tag--white" />

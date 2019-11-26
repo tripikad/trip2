@@ -51,6 +51,11 @@ class Offer extends Model
         return $query->where('status', 1);
     }
 
+    public function getPriceAttribute($value)
+    {
+        return $this->attributes['price'] = $value . '€';
+    }
+
     public function getUserNameAttribute()
     {
         return $this->user->name;
