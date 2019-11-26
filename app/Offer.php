@@ -15,8 +15,8 @@ class Offer extends Model
         'status',
         'price',
         'data',
-        'start_destination',
-        'end_destination',
+        'start_destination_id',
+        'end_destination_id',
         'start_at',
         'end_at'
     ];
@@ -27,7 +27,7 @@ class Offer extends Model
         'data' => 'object'
     ];
 
-    protected $appends = ['start_at_formatted', 'end_at_formatted', 'duration_formatted'];
+    protected $appends = ['start_at_formatted', 'end_at_formatted', 'duration_formatted', 'coordinates'];
 
     protected $hidden = ['created_at', 'updated_at'];
 
@@ -56,11 +56,6 @@ class Offer extends Model
         return $this->user->name;
     }
 
-    public function getEndDestinationNameAttribute()
-    {
-        return $this->end_destination ? $this->end_destination->name : '';
-    }
-
     public function getDurationFormattedAttribute()
     {
         return Date::parse($this->end_at)->diffForHumans($this->start_at, true);
@@ -74,5 +69,10 @@ class Offer extends Model
     public function getEndAtFormattedAttribute()
     {
         return Date::parse($this->end_at)->format('j. M Y');
+    }
+
+    public function getCoordinatesAttribute()
+    {
+        return $this->endDestination->vars()->coordinates();
     }
 }

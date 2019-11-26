@@ -506,10 +506,10 @@ Route::get('offer/{id}', 'OfferController@show')->name('offer.show');
 
 Route::post('offer/{id}/book', 'OfferController@book')->name('offer.book');
 
-Route::get('offer/create/{type}', 'OfferController@create')
+Route::get('offer/create/{style}', 'OfferController@create')
     ->name('offer.create')
     ->middleware('role:admin')
-    ->where('type', '(adventure|package)');
+    ->where('style', '(' . collect(config('offer.styles'))->implode('|') . ')');
 
 Route::post('offer/store', 'OfferController@store')
     ->name('offer.store')

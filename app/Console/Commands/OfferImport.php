@@ -35,6 +35,7 @@ class OfferImport extends Command
             $data = [
                 'user_id' => 12,
                 'title' => $o->title,
+                'style' => $o->style,
                 'price' => $o->price,
                 'start_at' => Carbon::now()->addMonth(),
                 'end_at' => Carbon::now()
