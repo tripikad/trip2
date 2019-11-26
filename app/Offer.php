@@ -3,7 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Carbon\Carbon;
+use Jenssegers\Date\Date;
+
 class Offer extends Model
 {
     protected $fillable = [
@@ -23,12 +24,10 @@ class Offer extends Model
     protected $dates = ['start_at', 'end_at', 'created_at', 'updated_at'];
 
     protected $casts = [
-        'data' => 'object',
-        'start_at' => 'date:d.m.Y',
-        'end_at' => 'date:d.m.Y'
+        'data' => 'object'
     ];
 
-    protected $appends = ['duration'];
+    protected $appends = ['start_at_formatted', 'end_at_formatted', 'duration_formatted'];
 
     protected $hidden = ['created_at', 'updated_at'];
 
@@ -52,8 +51,28 @@ class Offer extends Model
         return $query->where('status', 1);
     }
 
-    public function getDurationAttribute()
+    public function getUserNameAttribute()
     {
-        return $this->end_at->diffForHumans($this->start_at, true);
+        return $this->user->name;
+    }
+
+    public function getEndDestinationNameAttribute()
+    {
+        return $this->end_destination ? $this->end_destination->name : '';
+    }
+
+    public function getDurationFormattedAttribute()
+    {
+        return Date::parse($this->end_at)->diffForHumans($this->start_at, true);
+    }
+
+    public function getStartAtFormattedAttribute()
+    {
+        return Date::parse($this->start_at)->format('j. M Y');
+    }
+
+    public function getEndAtFormattedAttribute()
+    {
+        return Date::parse($this->end_at)->format('j. M Y');
     }
 }

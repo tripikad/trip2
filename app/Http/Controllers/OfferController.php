@@ -46,9 +46,16 @@ class OfferController extends Controller
     public function indexJson()
     {
         $data = Offer::public()
+            ->with(['user:id,name', 'endDestination:id,name'])
             ->get()
             ->map(function ($offer) {
                 $offer->route = route('offer.show', $offer);
+                $image = $offer->endDestination
+                    ->content()
+                    ->whereType('photo')
+                    ->whereStatus(1)
+                    ->first();
+                $offer->image = $image ? $image->imagePreset('small_square') : '';
                 return $offer;
             });
 
@@ -123,7 +130,7 @@ class OfferController extends Controller
                                             ->is('small')
                                             ->is('center')
                                             ->is('white')
-                                            ->with('title', 'TODO: duration')
+                                            ->with('title', $offer->duration_formatted)
                                     )
                                     ->push(
                                         component('Title')
@@ -131,7 +138,10 @@ class OfferController extends Controller
                                             ->is('center')
                                             ->is('white')
                                             ->is('semitransparent')
-                                            ->with('title', 'TODO: from → TODO: to')
+                                            ->with(
+                                                'title',
+                                                $offer->start_at_formatted . ' → ' . $offer->end_at_formatted
+                                            )
                                     )
                             )
                     )
@@ -154,7 +164,7 @@ class OfferController extends Controller
                                         component('Title')
                                             ->is('smallest')
                                             ->is('white')
-                                            ->with('title', 'TODO: company')
+                                            ->with('title', $offer->user->name)
                                     )
                                     ->pushWhen(
                                         $offer->data->guide !== '',
