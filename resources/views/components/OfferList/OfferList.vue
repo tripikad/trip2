@@ -1,8 +1,6 @@
 <template>
     <div class="OfferList" :class="isclasses">
-        <dotmap
-            :largedots="filteredOfferList.map(o => ({lon: parseFloat(o.longitude),lat: parseFloat(o.latitude)}))"
-        />
+        <dotmap :largedots="filteredOfferList.map(o => o.coordinates)" />
         <form-slider-multiple
             isclasses="FormSliderMultiple--yellow"
             :value="activePriceFrom"
@@ -81,7 +79,7 @@ export default {
         companies() {
             return [
                 { id: -1, name: 'Kõik firmad' },
-                ...unique(this.offers.map(o => o.company)).map((name, id) => ({
+                ...unique(this.offers.map(o => o.user.name)).map((name, id) => ({
                     id,
                     name
                 }))
@@ -90,7 +88,7 @@ export default {
         destinations() {
             return [
                 { id: -1, name: 'Kõik sihtkohad' },
-                ...unique(this.offers.map(o => o.destination)).map((name, id) => ({
+                ...unique(this.offers.map(o => o.end_destination.name)).map((name, id) => ({
                     id,
                     name
                 }))
@@ -109,13 +107,13 @@ export default {
             return this.offers
                 .filter(o => {
                     if (this.activeCompany > -1) {
-                        return o.company == this.getById(this.companies, this.activeCompany, 'name')
+                        return o.user.name == this.getById(this.companies, this.activeCompany, 'name')
                     }
                     return true
                 })
                 .filter(o => {
                     if (this.activeDestination > -1) {
-                        return o.destination == this.getById(this.destinations, this.activeDestination, 'name')
+                        return o.end_destination.name == this.getById(this.destinations, this.activeDestination, 'name')
                     }
                     return true
                 })

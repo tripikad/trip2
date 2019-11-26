@@ -6,7 +6,7 @@ var SpriteLoaderPlugin = require('svg-sprite-loader/plugin')
 const { VueLoaderPlugin } = require('vue-loader')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
-const StatsWriterPlugin = require("webpack-stats-plugin").StatsWriterPlugin; // eslint-disable-line
+const StatsWriterPlugin = require('webpack-stats-plugin').StatsWriterPlugin // eslint-disable-line
 
 module.exports = {
     entry: {
@@ -47,8 +47,7 @@ module.exports = {
                         loader: 'svg-sprite-loader',
                         options: {
                             extract: true,
-                            spriteFilename:
-                                '[chunkname].svg'
+                            spriteFilename: '[chunkname].svg'
                         }
                     },
                     'svgo-loader'
@@ -74,23 +73,12 @@ module.exports = {
             transform(data, opts) {
                 const assets = data.assetsByChunkName
                 const manifest = {
-                    js: assets.main.find(
-                        asset =>
-                            path.extname(asset) === '.js'
-                    ),
-                    css: assets.main.find(
-                        asset =>
-                            path.extname(asset) === '.css'
-                    ),
+                    js: assets.main.find(asset => path.extname(asset) === '.js'),
+                    css: assets.main.find(asset => path.extname(asset) === '.css'),
                     svg: 'main.svg'
                 }
-                fs.writeFileSync(
-                    path.join(
-                        __dirname,
-                        'public/manifest.json'
-                    ),
-                    JSON.stringify(manifest)
-                )
+                fs.writeFileSync(path.join(__dirname, 'public/manifest.json'), JSON.stringify(manifest))
+
                 return ''
             }
         })
