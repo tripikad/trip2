@@ -126,7 +126,7 @@ class OfferController extends Controller
                             component('Tag')
                                 ->is('white')
                                 ->is('large')
-                                ->with('title', 'TODO: Style')
+                                ->with('title', $offer->style_formatted)
                         )
                     )
                     ->push(

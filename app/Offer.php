@@ -27,7 +27,13 @@ class Offer extends Model
         'data' => 'object'
     ];
 
-    protected $appends = ['start_at_formatted', 'end_at_formatted', 'duration_formatted', 'coordinates'];
+    protected $appends = [
+        'style_formatted',
+        'start_at_formatted',
+        'end_at_formatted',
+        'duration_formatted',
+        'coordinates'
+    ];
 
     protected $hidden = ['created_at', 'updated_at'];
 
@@ -54,6 +60,14 @@ class Offer extends Model
     public function getPriceAttribute($value)
     {
         return $this->attributes['price'] = $value . '€';
+    }
+
+    public function getStyleFormattedAttribute()
+    {
+        if ($style = trans("offer.style.$this->style")) {
+            return $style;
+        }
+        return $this->style;
     }
 
     public function getUserNameAttribute()

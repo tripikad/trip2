@@ -33,7 +33,7 @@ class OfferImport extends Command
             $endDestination = Destination::where('name', $o->destination)->first();
 
             $data = [
-                'user_id' => 12,
+                'user_id' => 7288983, // andresk
                 'title' => $o->title,
                 'style' => $o->style,
                 'price' => $o->price,
@@ -63,7 +63,7 @@ class OfferImport extends Command
                 'status' => 1
             ];
 
-            if ($offer = Offer::find($o->id)) {
+            if ($offer = Offer::findOrFail($o->id)) {
                 $offer->update($data);
             } else {
                 Offer::create(
