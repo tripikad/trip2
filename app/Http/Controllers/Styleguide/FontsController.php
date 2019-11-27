@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Styleguide;
 
-use App\Content;
-use Illuminate\Support\Facades\Storage;
+use App\Http\Controllers\Controller;
 
-class ExperimentsFontsController extends Controller
+class FontsController extends Controller
 {
     public function index()
     {
@@ -14,7 +13,7 @@ class ExperimentsFontsController extends Controller
             ->with(
                 'content',
                 collect()
-                    ->push(region('ExperimentalMenu'))
+                    ->push(region('StyleguideMenu'))
                     ->push(component('Title')->with('title', 'Fonts'))
                     ->merge($this->fonts())
             )

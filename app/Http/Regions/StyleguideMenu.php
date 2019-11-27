@@ -2,32 +2,36 @@
 
 namespace App\Http\Regions;
 
-class ExperimentalMenu
+class StyleguideMenu
 {
     public function render()
     {
         return component('Flex')->with(
             'items',
             collect([
-                ['title' => 'Grid', 'route' => 'experiments.grid.index'],
                 [
-                    'title' => 'Components',
-                    'route' => 'experiments.components.index'
-                ],
-                [
-                    'title' => 'Component preview',
-                    'route' => 'experiments.components.index',
-                    'preview' => true
-                ],
-                ['title' => 'Icons', 'route' => 'experiments.icons.index'],
-                [
-                    'title' => 'Fonts',
-                    'route' => 'experiments.fonts.index'
+                    'title' => 'Styleguide',
+                    'route' => 'styleguide.index'
                 ],
                 [
                     'title' => 'Colors',
-                    'route' => 'experiments.colors.index'
-                ]
+                    'route' => 'styleguide.colors.index'
+                ],
+                [
+                    'title' => 'Components',
+                    'route' => 'styleguide.components.index'
+                ],
+                [
+                    'title' => 'Component preview',
+                    'route' => 'styleguide.components.index',
+                    'preview' => true
+                ],
+                [
+                    'title' => 'Fonts',
+                    'route' => 'styleguide.fonts.index'
+                ],
+                ['title' => 'Grid', 'route' => 'styleguide.grid.index'],
+                ['title' => 'Icons', 'route' => 'styleguide.icons.index']
             ])->map(function ($link) {
                 return component('Title')
                     ->is('blue')

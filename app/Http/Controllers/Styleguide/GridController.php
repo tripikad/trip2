@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Styleguide;
 
+use App\Http\Controllers\Controller;
 use App\Content;
-use Illuminate\Support\Facades\Storage;
 
-class ExperimentsGridController extends Controller
+class GridController extends Controller
 {
     public function index()
     {
@@ -16,7 +16,7 @@ class ExperimentsGridController extends Controller
             ->with(
                 'content',
                 collect()
-                    ->push(region('ExperimentalMenu'))
+                    ->push(region('StyleguideMenu'))
                     ->push(component('Title')->with('title', 'Grids'))
                     ->push(
                         component('Title')
