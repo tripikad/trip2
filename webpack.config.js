@@ -6,7 +6,47 @@ var SpriteLoaderPlugin = require('svg-sprite-loader/plugin')
 const { VueLoaderPlugin } = require('vue-loader')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
-const StatsWriterPlugin = require("webpack-stats-plugin").StatsWriterPlugin; // eslint-disable-line
+
+const vars = require('./resources/views/styles/variables.json')
+
+const WriteFilesPlugin = class WriteFiles {
+    apply(compiler) {
+        compiler.hooks.emit.tapAsync('WriteFiles', (compilation, callback) => {
+            const manifest = {}
+            compilation.chunks.forEach((chunk, i) => {
+                chunk.files.forEach(asset => {
+                    if (path.extname(asset) === '.js') {
+                        manifest.js = asset
+                    }
+                    if (path.extname(asset) === '.css') {
+                        manifest.css = asset
+                    }
+                    if (path.extname(asset) === '.svg') {
+                        manifest.svg = asset
+                    }
+                })
+            })
+            fs.writeFileSync(
+                path.join(__dirname, 'public/manifest.json'),
+                JSON.stringify(manifest)
+            )
+            const stylevars = `<?php
+
+return [
+${Object.entries(vars)
+    .map(([key, value]) => `      '${key}' => '${value.replace(/'/g, '"')}'`)
+    .join(',\n')}
+];
+`
+            fs.writeFileSync(
+                path.join(__dirname, 'config/stylevars.php'),
+                stylevars
+            )
+
+            callback()
+        })
+    }
+}
 
 module.exports = {
     entry: {
@@ -47,8 +87,7 @@ module.exports = {
                         loader: 'svg-sprite-loader',
                         options: {
                             extract: true,
-                            spriteFilename:
-                                '[chunkname].svg'
+                            spriteFilename: '[chunkname].svg'
                         }
                     },
                     'svgo-loader'
@@ -70,30 +109,26 @@ module.exports = {
             filename: '[name].[contenthash:6].css'
         }),
         new SpriteLoaderPlugin(),
-        new StatsWriterPlugin({
-            transform(data, opts) {
-                const assets = data.assetsByChunkName
-                const manifest = {
-                    js: assets.main.find(
-                        asset =>
-                            path.extname(asset) === '.js'
-                    ),
-                    css: assets.main.find(
-                        asset =>
-                            path.extname(asset) === '.css'
-                    ),
-                    svg: 'main.svg'
-                }
-                fs.writeFileSync(
-                    path.join(
-                        __dirname,
-                        'public/manifest.json'
-                    ),
-                    JSON.stringify(manifest)
-                )
-                return ''
-            }
-        })
+        new WriteFilesPlugin()
+        // new StatsWriterPlugin({
+        //     transform(data, opts) {
+        //         const assets = data.assetsByChunkName
+        //         const manifest = {
+        //             js: assets.main.find(
+        //                 asset => path.extname(asset) === '.js'
+        //             ),
+        //             css: assets.main.find(
+        //                 asset => path.extname(asset) === '.css'
+        //             ),
+        //             svg: 'main.svg'
+        //         }
+        //         fs.writeFileSync(
+        //             path.join(__dirname, 'public/manifest.json'),
+        //             JSON.stringify(manifest)
+        //         )
+        //         return ''
+        //     }
+        // })
     ],
     resolve: {
         alias: {

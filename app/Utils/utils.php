@@ -143,9 +143,7 @@ function format_link($route, $title, $blank = false)
 
 function style_vars()
 {
-    $json = Storage::disk('root')->get('resources/views/styles/variables.json');
-
-    return json_decode($json);
+    return (object) config('stylevars');
 }
 
 function snap($value, $step = 1)
