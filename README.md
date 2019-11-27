@@ -281,7 +281,7 @@ For CSS, the variables are automatically available:
 
 #### Style variables in PHP
 
-Variables in `/resources/views/styles/styles.js` are exported to `'config/styles.php` during fontent build time and can can be used in PHP files and Blade templates using `styles()` helper:
+Variables in `/resources/views/styles/styles.js` are exported to `config/styles.php` during fontent build time and can can be used in PHP files and Blade templates using `styles()` helper:
 
 ```blade
 <div style="height: {{ styles('spacer') }}">
@@ -291,8 +291,8 @@ Variables in `/resources/views/styles/styles.js` are exported to `'config/styles
 
 Variables in `/resources/views/styles/variables.json` can be used in Vue templates like this:
 
-```js
-$styles.spacer
+```vue
+<div :style="{ height: $styles.spacer }">
 ```
 
 and in methods like this

@@ -417,8 +417,12 @@ Route::post('experiments/store', 'ExperimentsController@store')->name(
     'experiments.store'
 );
 
-Route::get('experiments/styles', 'ExperimentsStylesController@index')->name(
-    'experiments.styles.index'
+Route::get('experiments/colors', 'ExperimentsColorsController@index')->name(
+    'experiments.colors.index'
+);
+
+Route::get('experiments/fonts', 'ExperimentsFontsController@index')->name(
+    'experiments.fonts.index'
 );
 
 Route::get('experiments/icons', 'ExperimentsIconsController@index')->name(

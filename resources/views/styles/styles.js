@@ -101,25 +101,25 @@ const fonts = {
     /* prettier-ignore */
     'font-text-xs': `${fontWeights['font-weight-normal']} ${fontSizes['font-size-xs']} / ${lineHeights['line-height-lg']} ${fontFamilies['font-family']}, sans-serif`,
     /* prettier-ignore */
-    'font-text-sm': `${fontWeights['font-weight-normal']} ${fontSizes['font-size-sm']} /  ${lineHeights['line-height-lg']} ${fontFamilies['font-family']}, sans-serif`,
+    'font-text-sm': `${fontWeights['font-weight-normal']} ${fontSizes['font-size-sm']} / ${lineHeights['line-height-lg']} ${fontFamilies['font-family']}, sans-serif`,
     /* prettier-ignore */
-    'font-text-md': `${fontWeights['font-weight-normal']} ${fontSizes['font-size-md']} /  ${lineHeights['line-height-lg']} ${fontFamilies['font-family']}, sans-serif`,
+    'font-text-md': `${fontWeights['font-weight-normal']} ${fontSizes['font-size-md']} / ${lineHeights['line-height-lg']} ${fontFamilies['font-family']}, sans-serif`,
     /* prettier-ignore */
-    'font-text-lg': `${fontWeights['font-weight-normal']} ${fontSizes['font-size-lg']} /  ${lineHeights['line-height-lg']} ${fontFamilies['font-family']}, sans-serif`,
+    'font-text-lg': `${fontWeights['font-weight-normal']} ${fontSizes['font-size-lg']} / ${lineHeights['line-height-lg']} ${fontFamilies['font-family']}, sans-serif`,
     /* prettier-ignore */
     'font-heading-xs': `${fontWeights['font-weight-semibold']} ${fontSizes['font-size-sm']} / ${lineHeights['line-height-lg']} ${fontFamilies['font-family']}, sans-serif`,
     /* prettier-ignore */
-    'font-heading-sm': `${fontWeights['font-weight-semibold']} ${fontSizes['font-size-md']} /  ${lineHeights['line-height-lg']} ${fontFamilies['font-family']}, sans-serif`,
+    'font-heading-sm': `${fontWeights['font-weight-semibold']} ${fontSizes['font-size-md']} / ${lineHeights['line-height-lg']} ${fontFamilies['font-family']}, sans-serif`,
     /* prettier-ignore */
-    'font-heading-md': `${fontWeights['font-weight-semibold']} ${fontSizes['font-size-lg']} /  ${lineHeights['line-height-lg']}${fontFamilies['font-family']}, sans-serif`,
+    'font-heading-md': `${fontWeights['font-weight-semibold']} ${fontSizes['font-size-lg']} / ${lineHeights['line-height-lg']} ${fontFamilies['font-family']}, sans-serif`,
     /* prettier-ignore */
     'font-heading-lg': `${fontWeights['font-weight-semibold']} ${fontSizes['font-size-xl']} / ${lineHeights['line-height-md']} ${fontFamilies['font-family']}, sans-serif`,
     /* prettier-ignore */
-    'font-heading-xl': `${fontWeights['font-weight-bold']} ${fontSizes['font-size-xxl']} /  ${lineHeights['line-height-sm']} ${fontFamilies['font-family']}, sans-serif`,
+    'font-heading-xl': `${fontWeights['font-weight-bold']} ${fontSizes['font-size-xxl']} / ${lineHeights['line-height-sm']} ${fontFamilies['font-family']}, sans-serif`,
     /* prettier-ignore */
-    'font-heading-xxl': `${fontWeights['font-weight-bold']} ${fontSizes['font-size-xxxl']} /  ${lineHeights['line-height-xs']} ${fontFamilies['font-family']}, sans-serif`,
+    'font-heading-xxl': `${fontWeights['font-weight-bold']} ${fontSizes['font-size-xxxl']} / ${lineHeights['line-height-xs']} ${fontFamilies['font-family']}, sans-serif`,
     /* prettier-ignore */
-    'font-heading-xxxl': `${fontWeights['font-weight-bold']} ${fontSizes['font-size-xxxxl']} /  ${lineHeights['line-height-xs']}${fontFamilies['font-family']}, sans-serif`,
+    'font-heading-xxxl': `${fontWeights['font-weight-bold']} ${fontSizes['font-size-xxxxl']} / ${lineHeights['line-height-xs']} ${fontFamilies['font-family']}, sans-serif`,
     /* prettier-ignore */
     'font-code-sm': `${fontWeights['font-weight-normal']} ${fontSizes['font-size-sm']} / ${lineHeights['line-height-md']} ${fontFamilies['font-family-code']}, monospace`,
     /* prettier-ignore */

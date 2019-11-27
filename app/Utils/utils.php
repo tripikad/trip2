@@ -141,9 +141,12 @@ function format_link($route, $title, $blank = false)
     return '<a href="' . $route . '" ' . $target . '>' . $title . '</a>';
 }
 
-function styles($value)
+function styles($value = null)
 {
-    if ($stylevar = config('styles' . $value)) {
+    if ($value == null) {
+        return config('styles');
+    }
+    if ($value && ($stylevar = config("styles.$value"))) {
         return $stylevar;
     }
     return 0;

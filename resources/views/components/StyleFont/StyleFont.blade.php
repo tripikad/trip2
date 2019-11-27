@@ -18,8 +18,6 @@ $value = $value ?? '';
 
     <div class="StyleFont__title">
 
-        {{ $key }}:
-        <br>
         {{ $value }}
 
     </div>

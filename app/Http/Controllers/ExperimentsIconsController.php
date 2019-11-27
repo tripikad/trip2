@@ -57,7 +57,7 @@ class ExperimentsIconsController extends Controller
                             )
                     )
                     ->merge(
-                        collect(['sm', 'md', 'lg', 'xl', ''])->map(function (
+                        collect(['sm', 'md', 'lg', 'xl'])->map(function (
                             $size
                         ) use ($file) {
                             return '<div class="StyleIcon">' .

@@ -7,8 +7,6 @@ const { VueLoaderPlugin } = require('vue-loader')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 
-const styles = require('./resources/views/styles/styles')
-
 const WriteFilesPlugin = class WriteFiles {
     apply(compiler) {
         compiler.hooks.emit.tapAsync('WriteFiles', (compilation, callback) => {
@@ -33,7 +31,7 @@ const WriteFilesPlugin = class WriteFiles {
             const stylesOutput = `<?php
 
 return [
-${Object.entries(styles)
+${Object.entries(require('./resources/views/styles/styles'))
     .map(
         ([key, value]) =>
             `      '${key}' => '${String(value).replace(/'/g, '"')}'`
@@ -113,25 +111,6 @@ module.exports = {
         }),
         new SpriteLoaderPlugin(),
         new WriteFilesPlugin()
-        // new StatsWriterPlugin({
-        //     transform(data, opts) {
-        //         const assets = data.assetsByChunkName
-        //         const manifest = {
-        //             js: assets.main.find(
-        //                 asset => path.extname(asset) === '.js'
-        //             ),
-        //             css: assets.main.find(
-        //                 asset => path.extname(asset) === '.css'
-        //             ),
-        //             svg: 'main.svg'
-        //         }
-        //         fs.writeFileSync(
-        //             path.join(__dirname, 'public/manifest.json'),
-        //             JSON.stringify(manifest)
-        //         )
-        //         return ''
-        //     }
-        // })
     ],
     resolve: {
         alias: {
