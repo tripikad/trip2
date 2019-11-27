@@ -8,7 +8,7 @@ $align = $align ?? 'flex-start';
 
 $direction = $direction ?? 'row';
 
-$spacer = style_vars('spacer');
+$spacer = styles('spacer');
 
 $gap_map = ['sm' => 1, 'md' => 2, 'lg' => 3];
 

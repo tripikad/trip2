@@ -63,7 +63,7 @@ class ExperimentsStylesController extends Controller
 
     public function colors()
     {
-        return collect(style_vars())
+        return collect(styles())
             ->filter(function ($value, $key) {
                 return !ends_with($key, '-hover') && starts_with($value, 'hsl');
             })
@@ -76,7 +76,7 @@ class ExperimentsStylesController extends Controller
 
     public function colors2()
     {
-        $colors = collect(style_vars())
+        $colors = collect(styles())
             ->filter(function ($value, $key) {
                 return !ends_with($key, '-hover') && starts_with($value, 'hsl');
             })
@@ -94,9 +94,9 @@ class ExperimentsStylesController extends Controller
 
     public function spacings()
     {
-        $spacer = style_vars()->spacer;
+        $spacer = styles()->spacer;
 
-        return collect(style_vars())
+        return collect(styles())
             ->filter(function ($value, $key) {
                 return starts_with($key, 'padding-');
             })
@@ -109,9 +109,9 @@ class ExperimentsStylesController extends Controller
 
     public function widths()
     {
-        $spacer = style_vars()->spacer;
+        $spacer = styles()->spacer;
 
-        return collect(style_vars())
+        return collect(styles())
             ->filter(function ($value, $key) {
                 return starts_with($key, 'width-');
             })
@@ -124,23 +124,23 @@ class ExperimentsStylesController extends Controller
 
     public function fonts()
     {
-        $fontSizeXs = style_vars()->{'font-size-xs'};
-        $fontSizeSm = style_vars()->{'font-size-sm'};
-        $fontSizeMd = style_vars()->{'font-size-md'};
-        $fontSizeLg = style_vars()->{'font-size-lg'};
-        $fontSizeXl = style_vars()->{'font-size-xl'};
-        $fontSizeXxl = style_vars()->{'font-size-xxl'};
-        $fontSizeXxxl = style_vars()->{'font-size-xxxl'};
-        $fontSizeXxxxl = style_vars()->{'font-size-xxxxl'};
+        $fontSizeXs = styles()->{'font-size-xs'};
+        $fontSizeSm = styles()->{'font-size-sm'};
+        $fontSizeMd = styles()->{'font-size-md'};
+        $fontSizeLg = styles()->{'font-size-lg'};
+        $fontSizeXl = styles()->{'font-size-xl'};
+        $fontSizeXxl = styles()->{'font-size-xxl'};
+        $fontSizeXxxl = styles()->{'font-size-xxxl'};
+        $fontSizeXxxxl = styles()->{'font-size-xxxxl'};
 
-        $lineHeightXs = style_vars()->{'line-height-xs'};
-        $lineHeightSm = style_vars()->{'line-height-sm'};
-        $lineHeightMd = style_vars()->{'line-height-md'};
-        $lineHeightLg = style_vars()->{'line-height-lg'};
-        $lineHeightXl = style_vars()->{'line-height-xl'};
-        $lineHeightXXl = style_vars()->{'line-height-xxl'};
+        $lineHeightXs = styles()->{'line-height-xs'};
+        $lineHeightSm = styles()->{'line-height-sm'};
+        $lineHeightMd = styles()->{'line-height-md'};
+        $lineHeightLg = styles()->{'line-height-lg'};
+        $lineHeightXl = styles()->{'line-height-xl'};
+        $lineHeightXXl = styles()->{'line-height-xxl'};
 
-        return collect(style_vars())
+        return collect(styles())
             ->filter(function ($value, $key) {
                 return starts_with($key, [
                     'font-text',

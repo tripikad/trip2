@@ -7,7 +7,7 @@ const { VueLoaderPlugin } = require('vue-loader')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 
-const vars = require('./resources/views/styles/stylevars.js')
+const styles = require('./resources/views/styles/styles')
 
 const WriteFilesPlugin = class WriteFiles {
     apply(compiler) {
@@ -30,10 +30,10 @@ const WriteFilesPlugin = class WriteFiles {
                 path.join(__dirname, 'public/manifest.json'),
                 JSON.stringify(manifest)
             )
-            const stylevars = `<?php
+            const stylesOutput = `<?php
 
 return [
-${Object.entries(vars)
+${Object.entries(styles)
     .map(
         ([key, value]) =>
             `      '${key}' => '${String(value).replace(/'/g, '"')}'`
@@ -42,8 +42,8 @@ ${Object.entries(vars)
 ];
 `
             fs.writeFileSync(
-                path.join(__dirname, 'config/stylevars.php'),
-                stylevars
+                path.join(__dirname, 'config/styles.php'),
+                stylesOutput
             )
 
             callback()
