@@ -54,10 +54,6 @@ $gray-hover: hsl(204, 6%, 40%);
 $gray-dark: hsl(204, 6%, 45%);
 $gray-dark-hover: hsl(204, 6%, 30%);
 
-*/
-
-/* Fonts */
-
 $font-family: 'Sailec';
 $font-family-code: 'Cousine';
 
@@ -79,36 +75,37 @@ $line-height-md: 130%;
 $line-height-lg: 150%;
 $line-height-xl: 200%;
 $line-height-xxl: 220%;
-/* prettier-ignore */
-$font-text-xs: $font-weight-normal $font-size-xs / $line-height-lg $font-family, sans-serif;
-/* prettier-ignore */
-$font-text-sm: $font-weight-normal $font-size-sm / $line-height-lg $font-family, sans-serif;
-/* prettier-ignore */
-$font-text-md: $font-weight-normal $font-size-md / $line-height-lg $font-family, sans-serif;
-/* prettier-ignore */
-$font-text-lg: $font-weight-normal $font-size-lg / $line-height-lg $font-family, sans-serif;
-/* prettier-ignore */
-$font-heading-xs: $font-weight-semibold $font-size-sm / $line-height-lg $font-family, sans-serif;
-/* prettier-ignore */
-$font-heading-sm: $font-weight-semibold $font-size-md / $line-height-lg $font-family, sans-serif;
-/* prettier-ignore */
-$font-heading-md: $font-weight-semibold $font-size-lg / $line-height-lg $font-family, sans-serif;
-/* prettier-ignore */
-$font-heading-lg: $font-weight-semibold $font-size-xl / $line-height-md $font-family, sans-serif;
-/* prettier-ignore */
-$font-heading-xl: $font-weight-bold $font-size-xxl / $line-height-sm $font-family, sans-serif;
-/* prettier-ignore */
-$font-heading-xxl: $font-weight-bold $font-size-xxxl / $line-height-xs $font-family, sans-serif;
-/* prettier-ignore */
-$font-heading-xxxl: $font-weight-bold $font-size-xxxxl / $line-height-xs $font-family, sans-serif;
-/* prettier-ignore */
-$font-code-sm: $font-weight-normal $font-size-sm / $line-height-md $font-family-code, monospace;
-/* prettier-ignore */
-$font-code-md: $font-weight-normal $font-size-md / $line-height-md $font-family-code, monospace;
 
-/* Spacing */
+*/
 
-/* $spacer is defined in variables.json */
+/* prettier-ignore */
+/* $font-text-xs: $font-weight-normal $font-size-xs / $line-height-lg $font-family, sans-serif;*/
+/* prettier-ignore */
+/* $font-text-sm: $font-weight-normal $font-size-sm / $line-height-lg $font-family, sans-serif;*/
+/* prettier-ignore */
+/* $font-text-md: $font-weight-normal $font-size-md / $line-height-lg $font-family, sans-serif;*/
+/* prettier-ignore */
+/* $font-text-lg: $font-weight-normal $font-size-lg / $line-height-lg $font-family, sans-serif;*/
+/* prettier-ignore */
+/* $font-heading-xs: $font-weight-semibold $font-size-sm / $line-height-lg $font-family, sans-serif;*/
+/* prettier-ignore */
+/* $font-heading-sm: $font-weight-semibold $font-size-md / $line-height-lg $font-family, sans-serif;*/
+/* prettier-ignore */
+/* $font-heading-md: $font-weight-semibold $font-size-lg / $line-height-lg $font-family, sans-serif;*/
+/* prettier-ignore */
+/* $font-heading-lg: $font-weight-semibold $font-size-xl / $line-height-md $font-family, sans-serif;*/
+/* prettier-ignore */
+/* $font-heading-xl: $font-weight-bold $font-size-xxl / $line-height-sm $font-family, sans-serif;*/
+/* prettier-ignore */
+/* $font-heading-xxl: $font-weight-bold $font-size-xxxl / $line-height-xs $font-family, sans-serif;*/
+/* prettier-ignore */
+/* $font-heading-xxxl: $font-weight-bold $font-size-xxxxl / $line-height-xs $font-family, sans-serif;*/
+/* prettier-ignore */
+/* $font-code-sm: $font-weight-normal $font-size-sm / $line-height-md $font-family-code, monospace;*/
+/* prettier-ignore */
+/* $font-code-md: $font-weight-normal $font-size-md / $line-height-md $font-family-code, monospace;*/
+
+/*
 
 $padding-xxxs: calc($spacer / 4);
 $padding-xxs: calc($spacer / 3);
@@ -207,7 +204,6 @@ $height-xxl: $width-xxl;
 $height-xxxl: $width-xxxl;
 $height-xxxxl: $width-xxxxl;
 
-/* Borders */
 $border-gray-sm: 1px solid $gray-light;
 $border-gray-md: 2px solid $gray-light;
 $border-green-md: 2px solid $green;
@@ -215,41 +211,36 @@ $border-white-md: 2px solid $white;
 
 $border-gray-lg: 4px solid $gray-light;
 
-/* Dashed dotted */
 $border-dotted-gray-md: 2px dotted $gray-light;
 
-/* Border radiuses */
 $border-radius-md: 3px;
 $border-radius-lg: $spacer;
 $border-radius-xl: calc($spacer * 1.5);
 $border-radius-xxl: calc($spacer * 100);
 
-/* Text shadows */
-
 $text-shadow-md: 0 1px 0 rgba(0, 0, 0, 0.3);
-
-/* Box shadows */
 
 $box-shadow-left: 0 0 $padding-md 0 rgba(0, 0, 0, 0.1);
 $box-shadow-bottom: 0 0 $padding-md 0 rgba(0, 0, 0, 0.1);
 
-/* Media queries */
 $mobile-width: 22em;
 $mobile-large-width: 32em;
-$tablet-width: 48em; /* was 56em; */
+$tablet-width: 48em; 
 $desktop-width: 62em;
 $largedesktop-width: 74em;
+*/
 
 /* prettier-ignore */
-$mobile: media (max-width: $mobile-width);
+/* $mobile: media (max-width: $mobile-width);*/
 /* prettier-ignore */
-$tablet: media (max-width: $tablet-width);
+/* $tablet: media (max-width: $tablet-width);*/
 /* prettier-ignore */
-$desktop: media (max-width: $desktop-width);
+/* $desktop: media (max-width: $desktop-width);*/
 /* prettier-ignore */
-$largedesktop: media (max-width: $largedesktop-width);
+/* $largedesktop: media (max-width: $largedesktop-width);*/
 
-/* Opacities */
+/*
+
 $opacity-xxs: 0.05;
 $opacity-xs: 0.1;
 $opacity-sm: 0.3;
@@ -257,11 +248,10 @@ $opacity-md: 0.5;
 $opacity-lg: 0.7;
 $opacity-xl: 0.9;
 
-/* Social Media Colors */
 $facebook: #3b5998;
 $twitter: #00aced;
 $google: #dd4b39;
 
-/* Legacy browsers (IE10+) */
-
 $ie: media (-ms-high-contrast: none), (-ms-high-contrast: active);
+
+*/

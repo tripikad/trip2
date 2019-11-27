@@ -7,7 +7,7 @@ const { VueLoaderPlugin } = require('vue-loader')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 
-const vars = require('./resources/views/styles/variables.json')
+const vars = require('./resources/views/styles/stylevars.js')
 
 const WriteFilesPlugin = class WriteFiles {
     apply(compiler) {
@@ -34,7 +34,10 @@ const WriteFilesPlugin = class WriteFiles {
 
 return [
 ${Object.entries(vars)
-    .map(([key, value]) => `      '${key}' => '${value.replace(/'/g, '"')}'`)
+    .map(
+        ([key, value]) =>
+            `      '${key}' => '${String(value).replace(/'/g, '"')}'`
+    )
     .join(',\n')}
 ];
 `
