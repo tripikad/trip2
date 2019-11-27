@@ -11,13 +11,21 @@ class StyleguideController extends Controller
         return layout('Two')
             ->with(
                 'content',
-                collect()
-                    ->push(region('StyleguideMenu'))
-                    ->push(
-                        component('Title')
-                            ->is('large')
-                            ->with('title', 'Styleguide')
-                    )
+                collect(config('styleguide'))->map(function ($link, $key) {
+                    return component('Title')
+                        ->is($key > 0 ? 'blue' : '')
+                        ->is($key > 0 ? 'small' : '')
+                        ->with('title', $link['title'])
+                        ->with(
+                            'route',
+                            route(
+                                $link['route'],
+                                array_key_exists('preview', $link)
+                                    ? ['preview']
+                                    : null
+                            )
+                        );
+                })
             )
 
             ->render();
