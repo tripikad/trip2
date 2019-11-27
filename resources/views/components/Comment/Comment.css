@@ -1,5 +1,3 @@
-@import "variables";
-
 .Comment {
     display: flex;
     border: $border-gray-md;

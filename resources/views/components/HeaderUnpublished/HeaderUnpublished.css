@@ -1,5 +1,3 @@
-@import "variables";
-
 .HeaderUnpublished {
     background: $pink;
     padding: calc($spacer * 1.5);

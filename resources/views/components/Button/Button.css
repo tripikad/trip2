@@ -1,5 +1,3 @@
-@import 'variables';
-
 .Button {
     align-items: center;
     background: $green;

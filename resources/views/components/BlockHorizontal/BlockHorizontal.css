@@ -1,5 +1,3 @@
-@import "variables";
-
 .BlockHorizontal {
     display: flex;
     display: block ?if $mobile;

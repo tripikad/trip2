@@ -1,5 +1,3 @@
-@import "variables";
-
 .TravelmateCard {
 	display: flex;
     margin-right: $margin-md;

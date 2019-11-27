@@ -1,5 +1,3 @@
-@import "variables";
-
 .PromoBar {
     background: $blue;
     padding: $padding-sm;

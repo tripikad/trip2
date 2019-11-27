@@ -1,5 +1,3 @@
-@import "variables";
-
 .Alert {
     background: $white;
     border-radius: $border-radius-md;

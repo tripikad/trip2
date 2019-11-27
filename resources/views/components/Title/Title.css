@@ -1,5 +1,3 @@
-@import 'variables';
-
 .Title__title {
     font: $font-heading-xl;
     font: $font-heading-lg ?if $tablet;

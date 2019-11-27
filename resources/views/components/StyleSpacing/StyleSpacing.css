@@ -1,5 +1,3 @@
-@import "variables";
-
 .StyleSpacing {
     display: flex;
     min-height: calc($spacer * 10);

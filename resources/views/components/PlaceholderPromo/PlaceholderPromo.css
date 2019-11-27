@@ -1,5 +1,3 @@
-@import "variables";
-
 .PlaceholderPromo {
     height: $height-xl;
     opacity: $opacity-lg;

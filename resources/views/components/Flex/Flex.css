@@ -1,5 +1,3 @@
-@import 'variables';
-
 .Flex {
     display: flex;
     display: block ?if $tablet;

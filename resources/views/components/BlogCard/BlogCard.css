@@ -1,5 +1,3 @@
-@import "variables";
-
 .BlogCard {
 	padding: 0 $padding-lg;
 	display: flex;

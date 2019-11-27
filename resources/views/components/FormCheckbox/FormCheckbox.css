@@ -1,5 +1,3 @@
-@import "variables";
-
 .FormCheckbox__label {
     color: $gray;
     font: $font-heading-sm;

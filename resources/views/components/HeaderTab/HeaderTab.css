@@ -1,5 +1,3 @@
-@import "variables";
-
 .HeaderTab {
     color: $white;
     padding: calc($spacer * 1.5);
