@@ -6,7 +6,7 @@ $rows = round(collect($items)->count() / $cols, PHP_ROUND_HALF_DOWN);
 $widths = $widths ?? 'repeat('. $cols .', 1fr)';
 $heights = $heights ?? 'repeat('. $rows .', auto)';
 
-$spacer = style_vars()->spacer;
+$spacer = style_vars('spacer');
 
 $gap_map = ['sm' => 1, 'md' => 2, 'lg' => 3];
 

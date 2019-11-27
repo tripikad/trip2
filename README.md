@@ -283,7 +283,7 @@ Variables are located in `/resources/views/styles/variables.json` and `/resource
 Variables in `/resources/views/styles/variables.json` can be used in Blade templates:
 
 ```blade
-{{ style_vars()->spacer }}
+{{ style_vars('spacer') }}
 ```
 
 #### Style variables in Vue
