@@ -88,7 +88,7 @@ export default {
         destinations() {
             return [
                 { id: -1, name: 'Kõik sihtkohad' },
-                ...unique(this.offers.map(o => o.end_destination.name)).map((name, id) => ({
+                ...unique(this.offers.map(o => o.end_destinations[0].name)).map((name, id) => ({
                     id,
                     name
                 }))
@@ -113,7 +113,10 @@ export default {
                 })
                 .filter(o => {
                     if (this.activeDestination > -1) {
-                        return o.end_destination.name == this.getById(this.destinations, this.activeDestination, 'name')
+                        return (
+                            o.end_destinations[0].name ==
+                            this.getById(this.destinations, this.activeDestination, 'name')
+                        )
                     }
                     return true
                 })

@@ -7,7 +7,12 @@
                 <span class="OfferRow__price">{{ offer.price }}</span>
             </div>
             <div class="OfferRow__meta">
-                <tag :title="offer.end_destination.name" isclasses="Tag--white" />
+                <tag
+                    v-for="(destination,i) in offer.end_destinations"
+                    :key="i"
+                    :title="destination.name"
+                    isclasses="Tag--white"
+                />
                 <div class="OfferRow__metaPrimary">{{ offer.duration_formatted }}</div>
                 <div
                     class="OfferRow__metaSecondary"

@@ -63,11 +63,12 @@ class OfferController extends Controller
     {
         $data = Offer::public()
             ->latest()
-            ->with(['user:id,name', 'endDestination:id,name'])
+            ->with(['user:id,name', 'startDestinations', 'endDestinations'])
             ->get()
             ->map(function ($offer) {
                 $offer->route = route('offer.show', $offer);
-                $image = $offer->endDestination
+                $image = $offer->endDestinations
+                    ->first()
                     ->content()
                     ->whereType('photo')
                     ->whereStatus(1)
@@ -547,8 +548,6 @@ class OfferController extends Controller
             'price' => request()->get('price'),
             'title' => request()->get('title'),
             'style' => request()->get('style'),
-            // 'start_destination_id' => request()->get('start_destination'),
-            // 'end_destination_id' => request()->get('end_destination'),
             'start_at' => Carbon::now()->addMonths(2),
             'end_at' => Carbon::now()->addMonths(3),
 
@@ -566,13 +565,17 @@ class OfferController extends Controller
             'status' => 1
         ]);
 
-        // $offer->destinations()->attach(request()->get('start_destination'), ['type' => 'start']);
+        $offer->startDestinations()->attach(
+            collect([request()->get('start_destination')])->mapWithKeys(function ($key) {
+                return [$key => ['type' => 'start']];
+            })
+        );
 
-        // $offer->destinations()->attach(
-        //     collect(request()->get('end_destinations'))->mapWithKeys(function ($key) {
-        //         return [$key => ['type' => 'end']];
-        //     })
-        // );
+        $offer->endDestinations()->attach(
+            collect(request()->get('end_destinations'))->mapWithKeys(function ($key) {
+                return [$key => ['type' => 'end']];
+            })
+        );
 
         Log::info('New offer added', [
             'user' => $offer->user->name,

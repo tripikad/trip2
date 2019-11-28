@@ -7,19 +7,7 @@ use Jenssegers\Date\Date;
 
 class Offer extends Model
 {
-    protected $fillable = [
-        'id',
-        'user_id',
-        'title',
-        'body',
-        'status',
-        'price',
-        'data',
-        'start_destination_id',
-        'end_destination_id',
-        'start_at',
-        'end_at'
-    ];
+    protected $fillable = ['id', 'user_id', 'title', 'body', 'status', 'price', 'data', 'start_at', 'end_at'];
 
     protected $dates = ['start_at', 'end_at', 'created_at', 'updated_at'];
 
@@ -47,14 +35,15 @@ class Offer extends Model
         return $this->hasMany('App\Booking');
     }
 
-    public function destinations()
+    public function startDestinations()
     {
-        return $this->belongsToMany('App\Destination', 'offer_destination');
+        return $this->belongsToMany('App\Destination', 'offer_destination')->wherePivot('type', 'start');
     }
 
-    /*
-    ->wherePivot('approved', 1);
-    */
+    public function endDestinations()
+    {
+        return $this->belongsToMany('App\Destination', 'offer_destination')->wherePivot('type', 'end');
+    }
 
     public function scopePublic($query)
     {
@@ -96,6 +85,9 @@ class Offer extends Model
 
     public function getCoordinatesAttribute()
     {
-        return $this->endDestination->vars()->coordinates();
+        return $this->endDestinations
+            ->first()
+            ->vars()
+            ->coordinates();
     }
 }

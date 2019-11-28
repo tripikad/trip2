@@ -27,6 +27,7 @@ class OfferImport extends Command
         $offers = google_sheet($sheet_id);
 
         $startDestination = Destination::where('name', 'Tallinn')->first();
+        $moreDestination = Destination::where('name', 'Barcelona')->first();
 
         $this->info("\nImporting content\n");
 
@@ -34,7 +35,7 @@ class OfferImport extends Command
         DB::table('bookings')->truncate();
         DB::table('offer_destination')->truncate();
 
-        $offers->each(function ($o) use ($startDestination) {
+        $offers->each(function ($o) use ($startDestination, $moreDestination) {
             $this->line($o->title);
 
             $endDestination = Destination::where('name', $o->destination)->first();
@@ -76,10 +77,14 @@ class OfferImport extends Command
                     ->toArray()
             );
 
-            $offer->destinations()->attach($startDestination->id, ['type' => 'start']);
+            $offer->startDestinations()->attach(
+                collect([$startDestination->id])->mapWithKeys(function ($key) {
+                    return [$key => ['type' => 'start']];
+                })
+            );
 
-            $offer->destinations()->attach(
-                collect([$endDestination->id])->mapWithKeys(function ($key) {
+            $offer->endDestinations()->attach(
+                collect([$endDestination->id, $moreDestination->id])->mapWithKeys(function ($key) {
                     return [$key => ['type' => 'end']];
                 })
             );
