@@ -89,4 +89,3 @@ return [
       'font-code-md' => '$font-weight-normal $font-size-md / $line-height-md $font-family-code, monospace',
       'transition-md' => 'all 0.2s'
 ];
-
