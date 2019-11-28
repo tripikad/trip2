@@ -7,11 +7,13 @@
                 <span class="OfferRow__price">{{ offer.price }}</span>
             </div>
             <div class="OfferRow__meta">
-                <tag :title="offer.style" isclasses="Tag--white" />
-                <div class="OfferRow__metaPrimary">{{ offer.duration }}</div>
-                <div class="OfferRow__metaSecondary">{{ offer.from }} → {{ offer.to }}</div>
-                <div v-if="offer.company" class="OfferRow__metaPrimary">{{ offer.company }}</div>
-                <div v-if="offer.guide" class="OfferRow__metaSecondary">{{ offer.guide }}</div>
+                <tag :title="offer.end_destination.name" isclasses="Tag--white" />
+                <div class="OfferRow__metaPrimary">{{ offer.duration_formatted }}</div>
+                <div
+                    class="OfferRow__metaSecondary"
+                >{{ offer.start_at_formatted }} → {{ offer.end_at_formatted }}</div>
+                <div v-if="offer.user.name" class="OfferRow__metaPrimary">{{ offer.user.name }}</div>
+                <div v-if="offer.data.guide" class="OfferRow__metaSecondary">{{ offer.data.guide }}</div>
             </div>
         </div>
     </a>
@@ -22,6 +24,6 @@ export default {
     props: {
         isclasses: { default: '' },
         offer: { default: {} }
-    },
+    }
 }
 </script>

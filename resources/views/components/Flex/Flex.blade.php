@@ -17,7 +17,7 @@ $gap_string = 'calc('. $gap_map[$gap] .' * '. $spacer .')';
 } else if (isset($gap) && !is_string($gap)) {
 $gap_string = 'calc('. $gap .' * '. $spacer .')';
 } else {
-$gap_string = 'calc('. $gap_map['md'] .' * '. $spacer .')';
+$gap_string = 'calc('. $gap_map['sm'] .' * '. $spacer .')';
 }
 
 @endphp
