@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Mail;
 
 use App\Offer;
-use App\Mail\OfferBooking;
+use App\Mail\CreateBooking;
 
 class BookingController extends Controller
 {
@@ -15,27 +15,30 @@ class BookingController extends Controller
 
         $offer = Offer::find($id);
 
-        // $booking = request()->only('name', 'email', 'phone', 'adults', 'children', 'notes');
-
-        // $booking['insurance'] = request()->get('insurance') == 'on';
-        // $booking['installments'] = request()->get('installments') == 'on';
-        // $booking['flexible'] = request()->get('flexible') == 'on';
+        // Rules
+        // name: required?
+        // email: email
 
         $bookingData = [
-            'name' => request()->name,
             'user_id' => $user ? $user->id : null,
             'data' => [
+                'name' => request()->name,
                 'email' => request()->email,
                 'phone' => request()->phone,
-                'adults' => request()->adult,
+                'adults' => request()->adults,
                 'children' => request()->children,
-                'notes' => request()->notes
+                'notes' => request()->notes,
+                'insurance' => request()->insurance == 'on',
+                'installments' => request()->installments == 'on',
+                'flexible' => request()->flexible == 'on'
             ]
         ];
 
         $booking = $offer->bookings()->create($bookingData);
 
-        Mail::to($offer->companyemail)->queue(new OfferBooking($offer, (object) $booking));
+        // return new CreateBooking($offer, $booking);
+
+        Mail::to($booking->data->email)->queue(new CreateBooking($offer, $booking));
 
         return redirect()
             ->route('offer.index')

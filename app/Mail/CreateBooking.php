@@ -2,13 +2,15 @@
 
 namespace App\Mail;
 
-use App\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class OfferBooking extends Mailable implements ShouldQueue
+use App\Offer;
+use App\Booking;
+
+class CreateBooking extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
@@ -16,7 +18,7 @@ class OfferBooking extends Mailable implements ShouldQueue
 
     public $booking;
 
-    public function __construct(/* Offer */ $offer, $booking)
+    public function __construct(Offer $offer, Booking $booking)
     {
         $this->offer = $offer;
         $this->booking = $booking;
@@ -24,19 +26,20 @@ class OfferBooking extends Mailable implements ShouldQueue
 
     public function build()
     {
+        dd($this->booking->data);
         $this->subject(
             trans('offer.book.email.subject', [
                 'title' => $this->offer->title,
-                'name' => $this->booking->name
+                'name' => $this->booking->data->name
             ])
-        )->markdown('email.offer.booking', [
+        )->markdown('email.booking.create', [
             'offer' => $this->offer,
             'booking' => $this->booking,
             'offer_route' => route('offer.show', $this->offer->id)
         ]);
 
         $header = [
-            'category' => ['offer_booking'],
+            'category' => ['booking'],
             'unique_args' => [
                 'offer_id' => (string) $this->offer->id,
                 'booking_id' => (string) $this->booking->id
@@ -44,9 +47,7 @@ class OfferBooking extends Mailable implements ShouldQueue
         ];
 
         $this->withSwiftMessage(function ($message) use ($header) {
-            $message
-                ->getHeaders()
-                ->addTextHeader('X-SMTPAPI', format_smtp_header($header));
+            $message->getHeaders()->addTextHeader('X-SMTPAPI', format_smtp_header($header));
         });
     }
 }
