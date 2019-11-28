@@ -42,15 +42,19 @@ class Offer extends Model
         return $this->belongsTo('App\User');
     }
 
-    public function startDestination()
+    public function bookings()
     {
-        return $this->belongsTo('App\Destination', 'start_destination_id');
+        return $this->hasMany('App\Booking');
     }
 
-    public function endDestination()
+    public function destinations()
     {
-        return $this->belongsTo('App\Destination', 'end_destination_id');
+        return $this->belongsToMany('App\Destination', 'offer_destination');
     }
+
+    /*
+    ->wherePivot('approved', 1);
+    */
 
     public function scopePublic($query)
     {

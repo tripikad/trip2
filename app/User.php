@@ -11,9 +11,7 @@ use Illuminate\Notifications\Notifiable as Notifiable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
-class User extends Model implements
-    AuthenticatableContract,
-    CanResetPasswordContract
+class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
     use Authenticatable, CanResetPassword, Notifiable;
 
@@ -97,14 +95,17 @@ class User extends Model implements
         return $this->hasMany('App\Offer');
     }
 
+    public function bookings()
+    {
+        return $this->hasMany('App\Booking');
+    }
+
     public function update_active_at($force = false, $return = false)
     {
         $last_online = Cache::get('uio-' . $this->id, '0000-00-00 00:00:00');
 
         if ($last_online == '0000-00-00 00:00:00' || $force) {
-            $expires_at = Carbon::now()->addMinutes(
-                $this->update_active_at_minutes
-            );
+            $expires_at = Carbon::now()->addMinutes($this->update_active_at_minutes);
 
             // uio - user is online :)
             $now = Carbon::now();
@@ -159,8 +160,7 @@ class User extends Model implements
             ->sortByDesc('created_at')
             ->unique('user_id_from')
             ->transform(function ($item) {
-                $item->attributes['user_id_with'] =
-                    $item->attributes['user_id_from'];
+                $item->attributes['user_id_with'] = $item->attributes['user_id_from'];
 
                 return $item;
             });
@@ -169,8 +169,7 @@ class User extends Model implements
             ->whereNotIn('user_id_to', $received->pluck('user_id_from')->all())
             ->get()
             ->transform(function ($item) {
-                $item->attributes['user_id_with'] =
-                    $item->attributes['user_id_to'];
+                $item->attributes['user_id_with'] = $item->attributes['user_id_to'];
 
                 return $item;
             });

@@ -134,7 +134,7 @@ class OfferController extends Controller
                             ->is('large')
                             ->is('white')
                             ->is('center')
-                            ->with('title', $offer->title . ' ' . $offer->price . '€')
+                            ->with('title', $offer->title . ' ' . $offer->price)
                     )
                     ->push(
                         component('Flex')
@@ -375,9 +375,9 @@ class OfferController extends Controller
                                                     ->with('value', $startDestination->id)
                                             )
                                             ->push(
-                                                component('FormSelect')
+                                                component('FormSelectMultiple')
                                                     ->with('title', trans('offer.edit.end_destination'))
-                                                    ->with('name', 'end_destination')
+                                                    ->with('name', 'end_destinations[]')
                                                     ->with('options', $destinations)
                                             )
                                     )
@@ -525,9 +525,9 @@ class OfferController extends Controller
         $loggedUser = request()->user();
 
         $rules = [
-            'title' => 'required',
-            'start_destination' => 'required',
-            'end_destination' => 'required'
+            'title' => 'required'
+            // 'start_destination' => 'required',
+            // 'end_destinations' => 'required'
         ];
 
         $this->validate(request(), $rules);
@@ -547,8 +547,8 @@ class OfferController extends Controller
             'price' => request()->get('price'),
             'title' => request()->get('title'),
             'style' => request()->get('style'),
-            'start_destination_id' => request()->get('start_destination'),
-            'end_destination_id' => request()->get('end_destination'),
+            // 'start_destination_id' => request()->get('start_destination'),
+            // 'end_destination_id' => request()->get('end_destination'),
             'start_at' => Carbon::now()->addMonths(2),
             'end_at' => Carbon::now()->addMonths(3),
 
@@ -565,6 +565,14 @@ class OfferController extends Controller
             ],
             'status' => 1
         ]);
+
+        // $offer->destinations()->attach(request()->get('start_destination'), ['type' => 'start']);
+
+        // $offer->destinations()->attach(
+        //     collect(request()->get('end_destinations'))->mapWithKeys(function ($key) {
+        //         return [$key => ['type' => 'end']];
+        //     })
+        // );
 
         Log::info('New offer added', [
             'user' => $offer->user->name,

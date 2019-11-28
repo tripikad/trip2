@@ -3,9 +3,12 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use App\Offer;
-use App\Destination;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
+
+use App\Offer;
+use App\Booking;
+use App\Destination;
 
 class OfferImport extends Command
 {
@@ -27,6 +30,10 @@ class OfferImport extends Command
 
         $this->info("\nImporting content\n");
 
+        DB::table('offers')->truncate();
+        DB::table('bookings')->truncate();
+        DB::table('offer_destination')->truncate();
+
         $offers->each(function ($o) use ($startDestination) {
             $this->line($o->title);
 
@@ -41,8 +48,8 @@ class OfferImport extends Command
                 'end_at' => Carbon::now()
                     ->addMonth()
                     ->addWeek(),
-                'start_destination_id' => $startDestination->id,
-                'end_destination_id' => $endDestination->id,
+                // 'start_destination_id' => $startDestination->id,
+                // 'end_destination_id' => $endDestination->id,
 
                 'data' => [
                     'guide' => $o->guide,
@@ -63,15 +70,19 @@ class OfferImport extends Command
                 'status' => 1
             ];
 
-            if ($offer = Offer::findOrFail($o->id)) {
-                $offer->update($data);
-            } else {
-                Offer::create(
-                    collect($data)
-                        ->put('id', $o->id)
-                        ->toArray()
-                );
-            }
+            $offer = Offer::create(
+                collect($data)
+                    ->put('id', $o->id)
+                    ->toArray()
+            );
+
+            $offer->destinations()->attach($startDestination->id, ['type' => 'start']);
+
+            $offer->destinations()->attach(
+                collect([$endDestination->id])->mapWithKeys(function ($key) {
+                    return [$key => ['type' => 'end']];
+                })
+            );
         });
     }
 }
