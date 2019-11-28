@@ -84,7 +84,7 @@ class OfferController extends Controller
     {
         $offer = Offer::find($id);
 
-        $photos = Content::getLatestPagedItems('photo', 9, $offer->endDestination->id);
+        $photos = Content::getLatestPagedItems('photo', 9, $offer->endDestinations->first()->id);
 
         $user = auth()->user();
         $email = $user ? $user->email : '';
@@ -115,11 +115,27 @@ class OfferController extends Controller
                             ->with('destination_facts', config('destination_facts'))
 
                             ->with('lines', [
-                                $offer->startDestination->vars()->coordinates(),
-                                $offer->endDestination->vars()->coordinates()
+                                $offer->startDestinations
+                                    ->first()
+                                    ->vars()
+                                    ->coordinates(),
+                                $offer->endDestinations
+                                    ->first()
+                                    ->vars()
+                                    ->coordinates()
                             ])
-                            ->with('mediumdots', [$offer->startDestination->vars()->coordinates()])
-                            ->with('largedots', [$offer->endDestination->vars()->coordinates()])
+                            ->with('mediumdots', [
+                                $offer->startDestinations
+                                    ->first()
+                                    ->vars()
+                                    ->coordinates()
+                            ])
+                            ->with('largedots', [
+                                $offer->endDestinations
+                                    ->first()
+                                    ->vars()
+                                    ->coordinates()
+                            ])
                     )
                     ->push(
                         component('Center')->with(
