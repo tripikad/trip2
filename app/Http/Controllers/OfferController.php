@@ -82,7 +82,7 @@ class OfferController extends Controller
 
     public function show($id)
     {
-        $offer = Offer::find($id);
+        $offer = Offer::findOrFail($id);
 
         $photos = Content::getLatestPagedItems('photo', 9, $offer->endDestinations->first()->id);
 
@@ -263,7 +263,7 @@ class OfferController extends Controller
                 'bottom',
                 collect()->push(
                     component('Form')
-                        ->with('route', route('offer.book', $id))
+                        ->with('route', route('booking.create', $id))
                         ->with(
                             'fields',
                             collect()

@@ -504,8 +504,6 @@ Route::get('offer/json', 'OfferController@indexJson')->name('offer.index.json');
 
 Route::get('offer/{id}', 'OfferController@show')->name('offer.show');
 
-Route::post('offer/{id}/book', 'OfferController@book')->name('offer.book');
-
 Route::get('offer/create/{style}', 'OfferController@create')
     ->name('offer.create')
     ->middleware('role:admin')
@@ -514,6 +512,10 @@ Route::get('offer/create/{style}', 'OfferController@create')
 Route::post('offer/store', 'OfferController@store')
     ->name('offer.store')
     ->middleware('role:admin');
+
+// Bookings
+
+Route::post('booking/{id}', 'BookingController@create')->name('booking.create');
 
 // Legacy user paths
 

@@ -16,7 +16,7 @@ class CreateBookingsTable extends Migration
         Schema::create('bookings', function (Blueprint $table) {
             $table->increments('id');
             $table
-                ->integer('booking_id')
+                ->integer('offer_id')
                 ->unsigned()
                 ->index();
             $table
