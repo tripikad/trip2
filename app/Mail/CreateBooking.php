@@ -26,7 +26,6 @@ class CreateBooking extends Mailable implements ShouldQueue
 
     public function build()
     {
-        dd($this->booking->data);
         $this->subject(
             trans('offer.book.email.subject', [
                 'title' => $this->offer->title,

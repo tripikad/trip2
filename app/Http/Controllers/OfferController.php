@@ -473,7 +473,7 @@ class OfferController extends Controller
                                         ->with('title', trans('offer.edit.transfer'))
                                 )
                                 ->push(
-                                    component('Flex')
+                                    component('FlexGrid')
                                         ->with('gap', !$isPackage ? 0 : 1)
                                         ->with('cols', 4)
                                         ->with('widths', '3fr 1fr 2fr 2fr')

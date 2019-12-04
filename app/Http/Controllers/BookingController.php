@@ -15,9 +15,12 @@ class BookingController extends Controller
 
         $offer = Offer::find($id);
 
-        // Rules
-        // name: required?
-        // email: email
+        $rules = [
+            'name' => 'required',
+            'email' => 'email'
+        ];
+
+        $this->validate(request(), $rules);
 
         $bookingData = [
             'user_id' => $user ? $user->id : null,
