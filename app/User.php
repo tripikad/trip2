@@ -37,7 +37,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         'birthyear',
         'description',
         'notify_message',
-        'notify_follow'
+        'notify_follow',
+        'company'
     ];
 
     protected $hidden = ['password', 'remember_token'];
@@ -215,6 +216,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function hasRoleOrOwner($role, $ownable_user_id)
     {
         return $this->hasRole($role) || $ownable_user_id == $this->id;
+    }
+
+    public function isCompany()
+    {
+        return $this->company;
     }
 
     public function destinationHaveBeen()

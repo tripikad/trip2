@@ -4,10 +4,9 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\DB;
 
 use App\Offer;
-use App\Booking;
+use App\User;
 use App\Destination;
 
 class OfferImport extends Command
@@ -31,17 +30,16 @@ class OfferImport extends Command
 
         $this->info("\nImporting content\n");
 
-        DB::table('offers')->truncate();
-        DB::table('bookings')->truncate();
-        DB::table('offer_destination')->truncate();
-
         $offers->each(function ($o) use ($startDestination, $moreDestination) {
             $this->line($o->title);
 
             $endDestination = Destination::where('name', $o->destination)->first();
 
+            $user = User::findOrFail($o->userid);
+            $user->update(['company' => true]);
+
             $data = [
-                'user_id' => 7288983, // andresk
+                'user_id' => $o->userid,
                 'title' => $o->title,
                 'style' => $o->style,
                 'price' => $o->price,
@@ -49,8 +47,6 @@ class OfferImport extends Command
                 'end_at' => Carbon::now()
                     ->addMonth()
                     ->addWeek(),
-                // 'start_destination_id' => $startDestination->id,
-                // 'end_destination_id' => $endDestination->id,
 
                 'data' => [
                     'guide' => $o->guide,
