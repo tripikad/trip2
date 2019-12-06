@@ -14,15 +14,8 @@ class DuskServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Browser::macro('scrollToId', function ($id = null) {
-            $this->script("document.getElementById('$id').scrollIntoView();");
-
-            return $this;
-        });
-
-        Browser::macro('scrollToDusk', function ($title = null) {
-            $this->script("document.querySelectorAll('[dusk=" . slug($title) . "]')[0].scrollIntoView();");
-
+        Browser::macro('scrollToBottom', function ($title = null) {
+            $this->script('window.scrollTo(0, 9999999)');
             return $this;
         });
     }
