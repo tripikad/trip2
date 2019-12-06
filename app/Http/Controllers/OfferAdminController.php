@@ -13,6 +13,41 @@ use Log;
 
 class OfferAdminController extends Controller
 {
+    public function index()
+    {
+        $offers = Offer::latest()
+            ->with(['user:id,name', 'startDestinations', 'endDestinations'])
+            ->take(100)
+            ->get();
+
+        return layout('Offer')
+            ->with('head_robots', 'noindex')
+            ->with('title', 'Offer')
+            ->with('color', 'blue')
+            ->with('header', region('OfferHeader'))
+            ->with(
+                'content',
+                collect()
+                    ->push(
+                        component('Title')
+                            ->is('large')
+                            ->is('white')
+                            ->with('title', trans('offer.admin.index.title'))
+                    )
+                    ->push(region('OfferAdminButtons'))
+                    ->br()
+                    ->merge(
+                        $offers->map(function ($offer) {
+                            return component('OfferRow')
+                                ->is($offer->status ? '' : 'unpublished')
+                                ->with('offer', $offer);
+                        })
+                    )
+            )
+            ->with('footer', region('FooterLight', ''))
+            ->render();
+    }
+
     public function companyIndex()
     {
         $loggedUser = request()->user();
@@ -42,7 +77,7 @@ class OfferAdminController extends Controller
                     ->merge(
                         $offers->map(function ($offer) {
                             return component('OfferRow')
-                                ->is(!$offer->public ? 'unpublished' : '')
+                                ->is($offer->status ? '' : 'unpublished')
                                 ->with('offer', $offer);
                         })
                     )
@@ -72,7 +107,7 @@ class OfferAdminController extends Controller
                             ->is('white')
                             ->is('large')
                             ->is('center')
-                            ->with('title', trans('offer.admin.header.title'))
+                            ->with('title', trans('offer.admin.company.index.title'))
                     )
                 )
             )
@@ -297,7 +332,7 @@ class OfferAdminController extends Controller
             'title' => 'required',
             'start_destinations' => 'required',
             'end_destinations' => 'required',
-            'price' => request()->type !== 'package' ? 'required' : ''
+            'price' => request()->style !== 'package' ? 'required' : ''
         ];
 
         $this->validate(request(), $rules);

@@ -506,6 +506,10 @@ Route::get('offer/{id}', 'OfferController@show')->name('offer.show');
 
 // Offers admin
 
+Route::get('offer/admin', 'OfferAdminController@index')
+    ->name('offer.admin.index')
+    ->middleware('role:superuser');
+
 Route::get('offer/admin/company', 'OfferAdminController@companyIndex')
     ->name('offer.admin.company.index')
     ->middleware('company');

@@ -42,13 +42,13 @@ class OfferImport extends Command
                 'user_id' => $o->userid,
                 'title' => $o->title,
                 'style' => $o->style,
-                'price' => $o->price,
                 'start_at' => Carbon::now()->addMonth(),
                 'end_at' => Carbon::now()
                     ->addMonth()
                     ->addWeek(),
 
                 'data' => [
+                    'price' => $o->style == 'package' ? '' : $o->price,
                     'guide' => $o->guide,
                     'size' => $o->people,
                     'accommodation' => '',
@@ -60,11 +60,13 @@ class OfferImport extends Command
                     'hotels' => [
                         [
                             'name' => $o->hotel,
-                            'type' => $o->hoteltype
+                            'type' => $o->hoteltype,
+                            'rating' => 5,
+                            'price' => $o->style == 'package' ? '1000' : ''
                         ]
                     ]
                 ],
-                'status' => 1
+                'status' => $o->status
             ];
 
             $offer = Offer::create(

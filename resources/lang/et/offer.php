@@ -30,7 +30,6 @@ return [
     'book.email.flexible' => 'Olen kuupäevade osas paindlik (± 3 päeva)',
     'book.email.yes' => '✔ Jah',
     'book.email.no' => 'Ei',
-    'admin.header.title' => 'Reisipakkumised',
     'admin.index.title' => 'Kõik reisipakkumised',
     'admin.company.index.title' => 'Minu reisipakkumised',
     'admin.create.style.adventure' => 'Lisa seiklusreis',

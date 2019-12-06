@@ -10,6 +10,61 @@ use App\Offer;
 
 class OffersAdminTest extends DuskTestCase
 {
+    public function test_unlogged_users_can_not_access_offer_admin()
+    {
+        $this->browse(function (Browser $browser) {
+            $browser
+                ->visit('/offer/admin')
+                ->assertSourceHas('Pead esmalt sisse logima')
+                ->assertSourceMissing('Kõik reisipakkumised')
+                ->assertSourceMissing('Lisa seiklusreis')
+                ->visit('/offer/admin/company')
+                ->assertSourceHas('Pead esmalt sisse logima')
+                ->assertSourceMissing('Minu reisipakkumised')
+                ->assertSourceMissing('Lisa seiklusreis');
+        });
+    }
+
+    public function test_regular_users_can_not_access_offer_admin()
+    {
+        $regular_user = factory(User::class)->create();
+
+        $this->browse(function (Browser $browser) use ($regular_user) {
+            $browser
+                ->loginAs($regular_user)
+                ->visit('/offer/admin')
+                ->assertSourceHas('Õigused puuduvad')
+                ->assertSourceMissing('Kõik reisipakkumised')
+                ->assertSourceMissing('Lisa seiklusreis')
+                ->visit('/offer/admin/company')
+                ->assertSourceHas('Õigused puuduvad')
+                ->assertSourceMissing('Minu reisipakkumised')
+                ->assertSourceMissing('Lisa seiklusreis');
+        });
+
+        $regular_user->delete();
+    }
+
+    public function test_admin_users_can_not_access_offer_admin()
+    {
+        $admin_user = factory(User::class)->create(['role' => 'admin']);
+
+        $this->browse(function (Browser $browser) use ($admin_user) {
+            $browser
+                ->loginAs($admin_user)
+                ->visit('/offer/admin')
+                ->assertSourceHas('Õigused puuduvad')
+                ->assertSourceMissing('Kõik reisipakkumised')
+                ->assertSourceMissing('Lisa seiklusreis')
+                ->visit('/offer/admin/company')
+                ->assertSourceHas('Õigused puuduvad')
+                ->assertSourceMissing('Minu reisipakkumised')
+                ->assertSourceMissing('Lisa seiklusreis');
+        });
+
+        $admin_user->delete();
+    }
+
     public function test_company_can_not_add_offer_without_required_fields()
     {
         $company = factory(User::class)->create(['company' => true]);

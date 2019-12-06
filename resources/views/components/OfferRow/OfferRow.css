@@ -6,7 +6,7 @@
 }
 
 .OfferRow:hover {
-    opacity: $opacity-lg;
+    opacity: $opacity-xl;
 }
 
 .OfferRow__image {
@@ -49,13 +49,13 @@
 .OfferRow__metaSecondary {
     color: $white;
     font: $font-text-md;
-    opacity: 0.5;
+    opacity: $opacity-md;
 }
 
 .OfferRow--unpublished {
-    opacity: 0.5;
+    opacity: $opacity-sm;
 }
 
 .OfferRow--unpublished:hover {
-    opacity: 0.6;
+    opacity: $opacity-md;
 }
