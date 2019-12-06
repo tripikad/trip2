@@ -16,12 +16,10 @@ class CreateOffersTable extends Migration
         Schema::create('offers', function (Blueprint $table) {
             $table->increments('id');
             $table->string('style', 20)->index();
-
             $table
                 ->integer('user_id')
                 ->unsigned()
                 ->index();
-
             $table
                 ->integer('start_destination_id')
                 ->unsigned()
