@@ -7,12 +7,13 @@ use Jenssegers\Date\Date;
 
 class Offer extends Model
 {
-    protected $fillable = ['id', 'user_id', 'title', 'body', 'status', 'price', 'data', 'start_at', 'end_at'];
+    protected $fillable = ['id', 'status', 'style', 'user_id', 'title', 'body', 'data', 'start_at', 'end_at'];
 
     protected $dates = ['start_at', 'end_at', 'created_at', 'updated_at'];
 
     protected $casts = [
-        'data' => 'object'
+        'data' => 'object',
+        'status' => 'boolean'
     ];
 
     protected $appends = [

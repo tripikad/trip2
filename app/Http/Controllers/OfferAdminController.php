@@ -102,7 +102,7 @@ class OfferAdminController extends Controller
                                     component('FormCheckbox')
                                         ->with('name', 'status')
                                         ->with('title', trans('offer.admin.edit.status'))
-                                        ->with('value', old('value'))
+                                        ->with('value', old('status'))
                                 )
                                 ->push(
                                     component('FlexGrid')
@@ -317,7 +317,7 @@ class OfferAdminController extends Controller
             });
 
         $offer = $loggedUser->offers()->create([
-            'status' => 1,
+            'status' => $status,
             'title' => request()->get('title'),
             'style' => request()->get('style'),
             'start_at' => Carbon::now()->addMonths(2),

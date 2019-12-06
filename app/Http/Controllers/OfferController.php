@@ -53,7 +53,7 @@ class OfferController extends Controller
 
     public function show($id)
     {
-        $offer = Offer::findOrFail($id);
+        $offer = Offer::public()->findOrFail($id);
 
         $photos = Content::getLatestPagedItems('photo', 9, $offer->endDestinations->first()->id);
 
