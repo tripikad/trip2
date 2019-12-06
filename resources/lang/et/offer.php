@@ -30,11 +30,9 @@ return [
     'book.email.flexible' => 'Olen kuupäevade osas paindlik (± 3 päeva)',
     'book.email.yes' => '✔ Jah',
     'book.email.no' => 'Ei',
-    'style.adventure' => 'Seiklusreis',
-    'style.ski' => 'Suusareis',
-    'style.cruise' => 'Kruiisireis',
-    'style.bus' => 'Bussireis',
-    'style.package' => 'Paketireis',
+    'admin.header.title' => 'Reisipakkumised',
+    'admin.index.title' => 'Kõik reisipakkumised',
+    'admin.company.index.title' => 'Minu reisipakkumised',
     'admin.create.style.adventure' => 'Lisa seiklusreis',
     'admin.create.style.ski' => 'Lisa suusareis',
     'admin.create.style.cruise' => 'Lisa kruiisireis',
@@ -60,5 +58,10 @@ return [
     'admin.edit.hotel.name' => 'Hotelli nimi',
     'admin.edit.hotel.rating' => 'Reiting',
     'admin.edit.hotel.type' => 'Majutusliik',
-    'admin.edit.hotel.price' => 'Hotelli hind'
+    'admin.edit.hotel.price' => 'Hotelli hind',
+    'style.adventure' => 'Seiklusreis',
+    'style.ski' => 'Suusareis',
+    'style.cruise' => 'Kruiisireis',
+    'style.bus' => 'Bussireis',
+    'style.package' => 'Paketireis'
 ];

@@ -66,6 +66,7 @@ return [
     'honeytime' => 'Midagi läks valesti, proovi mõne sekundi pärast uuesti',
     'attributes' => [
         'title' => 'Pealkiri',
+        'start_destinations' => 'Reisi alguskoht',
         'end_destinations' => 'Reisi sihtkohad',
         'price' => 'Hind'
     ]
