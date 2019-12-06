@@ -78,3 +78,11 @@
 .FormSelect--blue .multiselect__select:before {
     border-color: $white transparent transparent !important;
 }
+
+.FormSelect--error .multiselect__tags {
+    border: 2px solid $red !important;
+}
+
+.FormSelect--error .FormSelect__label {
+    color: $red;
+}

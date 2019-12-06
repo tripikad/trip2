@@ -9,8 +9,7 @@ $disabled = $disabled ?? false;
 
 @endphp
 
-<div class="FormTextfield {{ $isclasses }}">
-
+<div class="FormTextfield {{ $isclasses }} {{ $errors->first($name) ? 'FormTextfield--error' : ''}}">
     @if ($title)
 
         <label for="{{ $name }}" class="FormTextfield__label">{{ $title }}</label>
@@ -25,8 +24,9 @@ $disabled = $disabled ?? false;
         size="{{ $size }}"
         value="{{ $value }}"
         placeholder="{{ $placeholder }}"
+        dusk="{{ slug($title) }}"
         @if($disabled)
-        disabled
+          disabled
         @endif
     >
 

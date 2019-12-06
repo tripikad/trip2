@@ -19,5 +19,11 @@ class DuskServiceProvider extends ServiceProvider
 
             return $this;
         });
+
+        Browser::macro('scrollToDusk', function ($title = null) {
+            $this->script("document.querySelectorAll('[dusk=" . slug($title) . "]')[0].scrollIntoView();");
+
+            return $this;
+        });
     }
 }

@@ -26,26 +26,19 @@ class CreateOffersTable extends Migration
                 ->integer('start_destination_id')
                 ->unsigned()
                 ->index();
-
             $table
                 ->integer('end_destination_id')
                 ->unsigned()
                 ->index();
-
             $table->string('title')->nullable();
             $table
                 ->tinyInteger('status')
                 ->unsigned()
-                ->required(); /* ->index() ? */
-
-            $table->mediumInteger('price')->nullable();
-
+                ->required();
             $table->json('data')->nullable();
-
             $table->dateTime('start_at')->nullable();
             $table->dateTime('end_at')->nullable();
             $table->timestamps();
-
             $table
                 ->foreign('user_id')
                 ->references('id')

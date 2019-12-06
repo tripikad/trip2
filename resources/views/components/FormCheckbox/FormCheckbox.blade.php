@@ -13,6 +13,7 @@
         type="checkbox"
         @if ($value) checked @endif
         class="FormCheckbox__checkbox" 
+        dusk="{{ slug($title) }}"
     >
 
     <label for="{{ $name }}" class="FormCheckbox__label">{{ $title }}</label>

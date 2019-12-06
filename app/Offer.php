@@ -16,11 +16,13 @@ class Offer extends Model
     ];
 
     protected $appends = [
+        'price',
         'style_formatted',
         'start_at_formatted',
         'end_at_formatted',
         'duration_formatted',
-        'coordinates'
+        'coordinates',
+        'image'
     ];
 
     protected $hidden = ['created_at', 'updated_at'];
@@ -52,7 +54,10 @@ class Offer extends Model
 
     public function getPriceAttribute($value)
     {
-        return $this->attributes['price'] = $value . '€';
+        if ($this->style == 'package') {
+            return $this->data->hotels[0]->price . '€';
+        }
+        return $this->data->price . '€';
     }
 
     public function getStyleFormattedAttribute()
@@ -89,5 +94,17 @@ class Offer extends Model
             ->first()
             ->vars()
             ->coordinates();
+    }
+    public function getImageAttribute()
+    {
+        $image = $this->endDestinations
+            ->first()
+            ->content()
+            ->latest()
+            ->whereType('photo')
+            ->whereStatus(1)
+            ->first();
+
+        return $image ? $image->imagePreset('small_square') : '';
     }
 }

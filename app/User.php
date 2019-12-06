@@ -45,6 +45,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     protected $dates = ['created_at', 'updated_at', 'active_at'];
 
+    protected $casts = [
+        'company' => 'boolean'
+    ];
+
     /**
      * @var int in minutes
      */

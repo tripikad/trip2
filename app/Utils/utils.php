@@ -5,6 +5,7 @@ use Carbon\Carbon;
 use Jenssegers\Date\Date;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Redirect;
+use Cocur\Slugify\Slugify;
 
 function mail_component($component, $data = [])
 {
@@ -130,8 +131,7 @@ function dist($type)
             'svg' => 'main.svg'
         ];
     }
-    return '/dist/' .
-        (is_array($manifest[$type]) ? $manifest[$type][0] : $manifest[$type]);
+    return '/dist/' . (is_array($manifest[$type]) ? $manifest[$type][0] : $manifest[$type]);
 }
 
 function format_link($route, $title, $blank = false)
@@ -155,10 +155,7 @@ function snap($value, $step = 1)
 
 function google_sheet($id)
 {
-    $url =
-        'https://spreadsheets.google.com/feeds/list/' .
-        $id .
-        '/od6/public/values?alt=json';
+    $url = 'https://spreadsheets.google.com/feeds/list/' . $id . '/od6/public/values?alt=json';
 
     $data = json_decode(file_get_contents($url));
 
@@ -167,10 +164,7 @@ function google_sheet($id)
             ->keys()
             ->map(function ($field) use ($entry) {
                 if (starts_with($field, 'gsx$')) {
-                    return [
-                        str_replace('gsx$', '', $field),
-                        $entry->{$field}->{'$t'}
-                    ];
+                    return [str_replace('gsx$', '', $field), $entry->{$field}->{'$t'}];
                 } else {
                     return false;
                 }
@@ -183,4 +177,15 @@ function google_sheet($id)
             }, collect())
             ->toArray();
     });
+}
+
+function slug($title)
+{
+    $slugify = new Slugify();
+    return $slugify->slugify($title);
+}
+
+function dusk($title)
+{
+    return '@' . slug($title);
 }

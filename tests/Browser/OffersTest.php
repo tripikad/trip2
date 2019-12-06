@@ -10,18 +10,14 @@ class OffersTest extends DuskTestCase
     public function test_everybody_can_see_offers_page()
     {
         $this->browse(function (Browser $browser) {
-            $browser
-                ->visit('/offers')
-                ->assertSourceHas(trans('offer.index.title'));
+            $browser->visit('/offer')->assertSourceHas(trans('offer.index.title'));
         });
     }
 
     public function test_robots_can_not_index_offers_page()
     {
         $this->browse(function (Browser $browser) {
-            $browser
-                ->visit('/offers')
-                ->assertSourceHas('meta name="robots" content="noindex"');
+            $browser->visit('/offer')->assertSourceHas('meta name="robots" content="noindex"');
         });
     }
 }

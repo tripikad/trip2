@@ -504,14 +504,20 @@ Route::get('offer/json', 'OfferController@indexJson')->name('offer.index.json');
 
 Route::get('offer/{id}', 'OfferController@show')->name('offer.show');
 
-Route::get('offer/create/{style}', 'OfferController@create')
-    ->name('offer.create')
-    ->middleware('role:admin')
+// Offers admin
+
+Route::get('offer/admin/company', 'OfferAdminController@companyIndex')
+    ->name('offer.admin.company.index')
+    ->middleware('company');
+
+Route::get('offer/admin/create/{style}', 'OfferAdminController@create')
+    ->name('offer.admin.create')
+    ->middleware('company')
     ->where('style', '(' . collect(config('offer.styles'))->implode('|') . ')');
 
-Route::post('offer/store', 'OfferController@store')
-    ->name('offer.store')
-    ->middleware('role:admin');
+Route::post('offer/admin/store', 'OfferAdminController@store')
+    ->name('offer.admin.store')
+    ->middleware('company');
 
 // Bookings
 
