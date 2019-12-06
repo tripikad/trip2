@@ -170,7 +170,7 @@ class OffersAdminTest extends DuskTestCase
                 ->assertPathIs('/offer/admin/company')
                 ->assertSourceHas('Montaña alta para gringo')
                 ->assertSourceHas('3000€')
-                ->assertSourceHas('Latinoamerica');
+                ->assertSourceHas('Universo');
         });
 
         $offer = Offer::whereTitle('Montaña alta para gringo')->first();
