@@ -62,4 +62,8 @@ jobs:
         DB_PASSWORD2: password
         DB_PORT2: ${{ job.services.mysql.ports[3306] }}
         FULL_BASE_URL: http://127.0.0.1:8000
- 
+    - uses: actions/upload-artifact@v1
+        if: failure()
+        with:
+          name: screenshots
+          path: tests/Browser/screenshots/
