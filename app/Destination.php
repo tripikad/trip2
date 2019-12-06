@@ -17,11 +17,6 @@ class Destination extends Baum\Node
         return $this->belongsToMany('App\Content');
     }
 
-    // public function offers()
-    // {
-    //     return $this->belongsToMany('App\Offer', 'offer_destination');
-    // }
-
     public function content_flights()
     {
         return $this->content()->where('type', 'flight');

@@ -62,6 +62,10 @@ class NavbarDesktop
                 'title' => trans('menu.offer.admin.company.index'),
                 'route' => route('offer.admin.company.index')
             ])
+            ->pushWhen($user && $user->hasRole('superuser'), [
+                'title' => trans('menu.offer.admin.index'),
+                'route' => route('offer.admin.index')
+            ])
             ->pushWhen($user, [
                 'title' => trans('menu.auth.logout'),
                 'route' => route('login.logout')
