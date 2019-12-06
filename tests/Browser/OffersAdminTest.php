@@ -7,6 +7,7 @@ use Laravel\Dusk\Browser;
 
 use App\User;
 use App\Offer;
+use App\Destination;
 
 class OffersAdminTest extends DuskTestCase
 {
@@ -91,6 +92,9 @@ class OffersAdminTest extends DuskTestCase
     {
         $company = factory(User::class)->create(['company' => true]);
 
+        $destination1 = factory(Destination::class)->create(['name' => 'Tierra']);
+        $destination2 = factory(Destination::class)->create(['name' => 'Sol']);
+
         $this->browse(function (Browser $browser) use ($company) {
             $browser
                 ->loginAs($company)
@@ -100,9 +104,9 @@ class OffersAdminTest extends DuskTestCase
                 ->click(dusk('Pakkumine on avalikustatud'))
                 ->type(dusk('Pealkiri'), 'Playa Bonita para Mamacita')
                 ->click(dusk('Reisi alguskoht'))
-                ->keys(dusk('Reisi alguskoht'), 'Helsingi', '{enter}')
+                ->keys(dusk('Reisi alguskoht'), 'Tierra', '{enter}')
                 ->click(dusk('Reisi sihtkohad'))
-                ->keys(dusk('Reisi sihtkohad'), 'Mexico City', '{enter}')
+                ->keys(dusk('Reisi sihtkohad'), 'Sol', '{enter}')
                 ->click(dusk('Transfeer hinna sees'))
                 ->type(dusk('Hotelli nimi 1'), 'Hotel El Dorado')
                 ->type(dusk('Hotelli hind 1'), '2000')
@@ -112,7 +116,7 @@ class OffersAdminTest extends DuskTestCase
                 ->assertPathIs('/offer/admin/company')
                 ->assertSourceHas('Playa Bonita para Mamacita')
                 ->assertSourceHas('2000€')
-                ->assertSourceHas('Mexico City');
+                ->assertSourceHas('Sol');
         });
 
         // Assert users can see the offer without being logged in
@@ -132,6 +136,8 @@ class OffersAdminTest extends DuskTestCase
 
         // Cleanup
 
+        $destination1->delete();
+        $destination2->delete();
         $offer->delete();
         $company->delete();
 
@@ -143,6 +149,9 @@ class OffersAdminTest extends DuskTestCase
     {
         $company = factory(User::class)->create(['company' => true]);
 
+        $destination1 = factory(Destination::class)->create(['name' => 'Sol']);
+        $destination2 = factory(Destination::class)->create(['name' => 'Universo']);
+
         $this->browse(function (Browser $browser) use ($company) {
             $browser
                 ->loginAs($company)
@@ -152,19 +161,16 @@ class OffersAdminTest extends DuskTestCase
                 ->type(dusk('Pealkiri'), 'Montaña alta para gringo')
                 ->type(dusk('Hind'), '3000')
                 ->click(dusk('Reisi alguskoht'))
-                ->keys(dusk('Reisi alguskoht'), 'Stockholm', '{enter}')
+                ->keys(dusk('Reisi alguskoht'), 'Sol', '{enter}')
                 ->click(dusk('Reisi sihtkohad'))
-                ->keys(dusk('Reisi sihtkohad'), 'Peruu', '{enter}')
-                ->click(dusk('Reisi sihtkohad'))
-                ->keys(dusk('Reisi sihtkohad'), 'Boliivia', '{enter}')
+                ->keys(dusk('Reisi sihtkohad'), 'Universo', '{enter}')
                 ->scrollToBottom()
                 ->pause(3000)
                 ->click(dusk('Lisa seiklusreis'))
                 ->assertPathIs('/offer/admin/company')
                 ->assertSourceHas('Montaña alta para gringo')
                 ->assertSourceHas('3000€')
-                ->assertSourceHas('Peruu')
-                ->assertSourceHas('Boliivia');
+                ->assertSourceHas('Latinoamerica');
         });
 
         $offer = Offer::whereTitle('Montaña alta para gringo')->first();
@@ -193,6 +199,8 @@ class OffersAdminTest extends DuskTestCase
 
         // Cleanup
 
+        $destination1->delete();
+        $destination2->delete();
         $offer->delete();
         $company->delete();
         $other_company->delete();
