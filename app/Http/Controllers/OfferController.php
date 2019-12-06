@@ -204,25 +204,13 @@ class OfferController extends Controller
                             )
                     )
                     ->br()
-                    ->push(
-                        component('Center')->with(
-                            'item',
-                            component('Button')
-                                ->is('orange')
-                                ->is('center')
-                                ->is('large')
-                                ->with('title', 'Broneeri reis')
-                                ->with('route', route('offer.show', [$id]) . '#book')
-                        )
-                    )
-                    ->br()
                     ->pushWhen(
                         $photos->count(),
                         region('PhotoRow', $photos->count() < 18 ? $photos->slice(0, 9) : $photos)
                     )
-                    ->push('<a id="book"></a>')
                     ->br()
-                    ->push(
+                    ->pushWhen(
+                        $user && $user->hasRole('superuser'),
                         component('Title')
                             ->is('center')
                             ->is('white')
@@ -232,7 +220,8 @@ class OfferController extends Controller
             )
             ->with(
                 'bottom',
-                collect()->push(
+                collect()->pushWhen(
+                    $user && $user->hasRole('superuser'),
                     component('Form')
                         ->with('route', route('booking.create', $id))
                         ->with(

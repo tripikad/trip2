@@ -54,8 +54,9 @@
 
 .OfferRow--unpublished {
     opacity: $opacity-sm;
+    cursor: default;
 }
 
 .OfferRow--unpublished:hover {
-    opacity: $opacity-md;
+    opacity: $opacity-sm;
 }

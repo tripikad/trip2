@@ -525,7 +525,9 @@ Route::post('offer/admin/store', 'OfferAdminController@store')
 
 // Bookings
 
-Route::post('booking/{id}', 'BookingController@create')->name('booking.create');
+Route::post('booking/{id}', 'BookingController@create')
+    ->middleware('role:superuser')
+    ->name('booking.create');
 
 // Legacy user paths
 

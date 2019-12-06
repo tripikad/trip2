@@ -67,5 +67,7 @@ return [
     'admin.content' => 'Peidetud sisu',
     'admin.sponsored' => 'Sponsorite artiklid',
     'admin.newsletter' => 'Uudiskirjad',
-    'admin.static' => 'Muuda - :title'
+    'admin.static' => 'Muuda - :title',
+
+    'offer.admin.company.index' => 'Reisipakkumiste lisamine'
 ];

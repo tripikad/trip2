@@ -122,11 +122,12 @@ class OffersAdminTest extends DuskTestCase
         $this->browse(function (Browser $browser) use ($company, $offer) {
             $browser
                 ->logout()
-                ->visit("/offer/$offer->id")
-                ->assertSourceHas('Playa Bonita para Mamacita')
+                ->visit('/offer')
+                ->pause(500)
+                ->click(dusk('Playa Bonita para Mamacita'))
+                ->assertPathIs("/offer/$offer->id")
                 ->assertSourceHas('2000€')
-                ->assertSourceHas('Paketireis')
-                ->logout();
+                ->assertSourceHas('Paketireis');
         });
 
         // Cleanup
@@ -167,6 +168,9 @@ class OffersAdminTest extends DuskTestCase
         });
 
         $offer = Offer::whereTitle('Montaña alta para gringo')->first();
+
+        // Assert company does not not see it's own unpublished content
+        // @TODO2 Give ability to preview
 
         $this->browse(function (Browser $browser) use ($company, $offer) {
             $browser

@@ -1,5 +1,5 @@
 <template>
-    <a :href="offer.route" class="OfferRow" :class="isclasses">
+    <a :href="route" class="OfferRow" :class="isclasses" :dusk="slugTitle">
         <img class="OfferRow__image" :src="offer.image || './photos/image_blank.png'" />
         <div class="OfferRow__content">
             <div class="OfferRow__title">
@@ -25,10 +25,18 @@
 </template>
 
 <script>
+import { slug } from '../../utils/utils'
+
 export default {
     props: {
         isclasses: { default: '' },
-        offer: { default: {} }
+        offer: { default: {} },
+        route: { default: '' }
+    },
+    computed: {
+        slugTitle() {
+            return this.offer.title ? slug(this.offer.title) : ''
+        }
     }
 }
 </script>

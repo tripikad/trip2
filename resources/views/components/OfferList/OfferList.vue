@@ -27,7 +27,12 @@
             </a>
         </div>
         <div class="OfferList__offers">
-            <OfferRow v-for="(offer, i) in filteredOfferList" :key="i" :offer="offer" />
+            <OfferRow
+                v-for="(offer, i) in filteredOfferList"
+                :key="i"
+                :offer="offer"
+                :route="offer.route"
+            />
         </div>
     </div>
 </template>

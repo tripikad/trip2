@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     'header.v1' => 'Old Trip.ee',
     'header.v2' => 'New Trip.ee',
 
@@ -66,4 +65,5 @@ return [
     'admin.content' => 'Unpublished content',
     'admin.sponsored' => 'Sponsored articles',
 
+    'offer.admin.company.index' => 'Add new offer'
 ];

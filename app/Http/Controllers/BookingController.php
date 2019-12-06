@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use LVR\Phone\Phone;
 use Mail;
 
 use App\Offer;
+
 use App\Mail\CreateBooking;
 
 class BookingController extends Controller
@@ -13,10 +15,10 @@ class BookingController extends Controller
     {
         $user = auth()->user();
 
-        $offer = Offer::find($id);
+        $offer = Offer::findOrFail($id);
 
         $rules = [
-            'name' => 'required',
+            'phone' => ['required', new Phone()],
             'email' => 'email'
         ];
 
@@ -41,7 +43,7 @@ class BookingController extends Controller
 
         // return new CreateBooking($offer, $booking);
 
-        Mail::to($booking->data->email)->queue(new CreateBooking($offer, $booking));
+        Mail::to($offer->user->email)->queue(new CreateBooking($offer, $booking));
 
         return redirect()
             ->route('offer.index')

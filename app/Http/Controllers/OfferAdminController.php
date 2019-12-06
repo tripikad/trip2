@@ -7,7 +7,6 @@ use Carbon\Carbon;
 use App\Content;
 use App\Offer;
 use App\Destination;
-use App\Mail\OfferBooking;
 
 use Log;
 
@@ -39,8 +38,9 @@ class OfferAdminController extends Controller
                     ->merge(
                         $offers->map(function ($offer) {
                             return component('OfferRow')
-                                ->is($offer->status ? '' : 'unpublished')
-                                ->with('offer', $offer);
+                                ->is($offer->status == 1 ? '' : 'unpublished')
+                                ->with('offer', $offer)
+                                ->with('route', $offer->status == 1 ? route('offer.show', [$offer]) : '');
                         })
                     )
             )
