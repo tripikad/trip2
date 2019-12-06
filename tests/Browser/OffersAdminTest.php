@@ -20,7 +20,7 @@ class OffersAdminTest extends DuskTestCase
                 ->assertSourceMissing('Lisa seiklusreis')
                 ->visit('/offer/admin/company')
                 ->assertSourceHas('Pead esmalt sisse logima')
-                ->assertSourceMissing('Minu reisipakkumised')
+                ->assertSourceMissing('Reisipakkumiste lisamine')
                 ->assertSourceMissing('Lisa seiklusreis');
         });
     }
@@ -73,7 +73,7 @@ class OffersAdminTest extends DuskTestCase
             $browser
                 ->loginAs($company)
                 ->visit('/offer/admin/company')
-                ->assertSourceHas('Minu reisipakkumised')
+                ->assertSourceHas('Reisipakkumiste lisamine')
                 ->click(dusk('Lisa paketireis'))
                 ->assertPathIs('/offer/admin/create/package')
                 ->scrollToDusk('Lisa paketireis')
@@ -95,7 +95,7 @@ class OffersAdminTest extends DuskTestCase
             $browser
                 ->loginAs($company)
                 ->visit('/offer/admin/company')
-                ->assertSourceHas('Minu reisipakkumised')
+                ->assertSourceHas('Reisipakkumiste lisamine')
                 ->click(dusk('Lisa paketireis'))
                 ->check(dusk('Pakkumine on avalikustatud'))
                 ->type(dusk('Pealkiri'), 'Playa Bonita para Mamacita')
@@ -147,7 +147,7 @@ class OffersAdminTest extends DuskTestCase
             $browser
                 ->loginAs($company)
                 ->visit('/offer/admin/company')
-                ->assertSourceHas('Minu reisipakkumised')
+                ->assertSourceHas('Reisipakkumiste lisamine')
                 ->click(dusk('Lisa seiklusreis'))
                 ->type(dusk('Pealkiri'), 'Montaña alta para gringo')
                 ->type(dusk('Hind'), '3000')
@@ -158,7 +158,7 @@ class OffersAdminTest extends DuskTestCase
                 ->click(dusk('Reisi sihtkohad'))
                 ->keys(dusk('Reisi sihtkohad'), 'Boliivia', '{enter}')
                 ->scrollToDusk('Lisa seiklusreis')
-                ->pause(500)
+                ->pause(1000)
                 ->click(dusk('Lisa seiklusreis'))
                 ->assertPathIs('/offer/admin/company')
                 ->assertSourceHas('Montaña alta para gringo')

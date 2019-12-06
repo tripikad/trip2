@@ -23,7 +23,9 @@ class BookingTest extends BrowserKitTestCase
         $company = factory(User::class)->create(['company' => true]);
         $offer = factory(Offer::class)->create(['user_id' => $company->id]);
 
-        $this->visit("/offer/$offer->id")->dontSee('Broneeri reis');
+        $this->visit("/offer/$offer->id")
+            ->dontSee('Broneeri reis')
+            ->dontSee('Telefon');
 
         Mail::assertNotQueued(CreateBooking::class);
     }
@@ -38,6 +40,7 @@ class BookingTest extends BrowserKitTestCase
 
         $this->actingAs($superuser)
             ->visit("/offer/$offer->id")
+            ->see('Broneeri reis')
             ->type('Ramon Alcazar', 'name')
             ->type('ramon@alcazar.es', 'email')
             ->type('+12345678', 'phone')
