@@ -54,7 +54,9 @@ class OfferAdminController extends Controller
                     ->br()
                     ->merge(
                         $offers->map(function ($offer) {
-                            return component('OfferRow')->with('offer', $offer);
+                            return component('OfferRow')
+                                ->is(!$offer->public ? 'unpublished' : '')
+                                ->with('offer', $offer);
                         })
                     )
             )

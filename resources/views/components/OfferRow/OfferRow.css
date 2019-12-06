@@ -51,3 +51,11 @@
     font: $font-text-md;
     opacity: 0.5;
 }
+
+.OfferRow--unpublished {
+    opacity: 0.5;
+}
+
+.OfferRow--unpublished:hover {
+    opacity: 0.6;
+}
