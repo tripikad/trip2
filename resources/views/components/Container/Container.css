@@ -1,5 +1,5 @@
 .Container--wide {
-    margin: 0 auto;
-    max-width: $desktop-width;
-    width: 100%;
+  margin: 0 auto;
+  max-width: $desktop-width;
+  width: 100%;
 }

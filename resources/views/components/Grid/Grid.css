@@ -1,16 +1,16 @@
 .Grid {
-    display: grid;
-    display: block ?if $tablet;
+  display: grid;
+  display: block ?if $tablet;
 }
 
 .Grid__item {
-    margin-bottom: $margin-md ?if $tablet;
+  margin-bottom: $margin-md ?if $tablet;
 }
 
 .Grid__item:last-child {
-    margin-bottom: 0;
+  margin-bottom: 0;
 }
 
 .Grid--debug .Grid__item {
-    border: 1px dashed $red;
+  border: 1px dashed $red;
 }

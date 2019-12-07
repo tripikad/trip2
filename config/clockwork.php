@@ -1,8 +1,7 @@
 <?php
 
 return [
-
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Enable Clockwork
     |--------------------------------------------------------------------------
@@ -16,9 +15,9 @@ return [
     |
     */
 
-    'enable' => env('CLOCKWORK_ENABLE', null),
+  'enable' => env('CLOCKWORK_ENABLE', null),
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Enable web UI
     |--------------------------------------------------------------------------
@@ -29,11 +28,11 @@ return [
     |
     */
 
-    'web' => env('CLOCKWORK_WEB', false),
+  'web' => env('CLOCKWORK_WEB', false),
 
-    'web_dark_theme' => env('CLOCKWORK_WEB_DARK_THEME', false),
+  'web_dark_theme' => env('CLOCKWORK_WEB_DARK_THEME', false),
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Enable data collection, when Clockwork is disabled
     |--------------------------------------------------------------------------
@@ -44,9 +43,9 @@ return [
     |
     */
 
-    'collect_data_always' => env('CLOCKWORK_COLLECT_DATA_ALWAYS', false),
+  'collect_data_always' => env('CLOCKWORK_COLLECT_DATA_ALWAYS', false),
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Metadata storage
     |--------------------------------------------------------------------------
@@ -62,14 +61,14 @@ return [
     |
     */
 
-    'storage' => env('CLOCKWORK_STORAGE', 'files'),
+  'storage' => env('CLOCKWORK_STORAGE', 'files'),
 
-    'storage_files_path' => env('CLOCKWORK_STORAGE_FILES_PATH', storage_path('clockwork')),
+  'storage_files_path' => env('CLOCKWORK_STORAGE_FILES_PATH', storage_path('clockwork')),
 
-    'storage_sql_database' => env('CLOCKWORK_STORAGE_SQL_DATABASE', storage_path('clockwork.sqlite')),
-    'storage_sql_table'    => env('CLOCKWORK_STORAGE_SQL_TABLE', 'clockwork'),
+  'storage_sql_database' => env('CLOCKWORK_STORAGE_SQL_DATABASE', storage_path('clockwork.sqlite')),
+  'storage_sql_table' => env('CLOCKWORK_STORAGE_SQL_TABLE', 'clockwork'),
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Metadata expiration
     |--------------------------------------------------------------------------
@@ -81,9 +80,9 @@ return [
     |
     */
 
-    'storage_expiration' => env('CLOCKWORK_STORAGE_EXPIRATION', 60 * 24 * 7),
+  'storage_expiration' => env('CLOCKWORK_STORAGE_EXPIRATION', 60 * 24 * 7),
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Authentication
     |--------------------------------------------------------------------------
@@ -98,11 +97,11 @@ return [
     |
     */
 
-    'authentication' => env('CLOCKWORK_AUTHENTICATION', false),
+  'authentication' => env('CLOCKWORK_AUTHENTICATION', false),
 
-    'authentication_password' => env('CLOCKWORK_AUTHENTICATION_PASSWORD', 'VerySecretPassword'),
+  'authentication_password' => env('CLOCKWORK_AUTHENTICATION_PASSWORD', 'VerySecretPassword'),
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Filter collected data
     |--------------------------------------------------------------------------
@@ -112,13 +111,13 @@ return [
     |
     */
 
-    'filter' => [
-        'cacheQueries', // collecting cache queries in cache-heavy might have a negative performance impact and use a lot of disk space
-        'routes', // collecting routes data on every request might use a lot of disk space
-        'viewsData', // collecting views data, including all variables passed to the view on every request might use a lot of disk space
-    ],
+  'filter' => [
+    'cacheQueries', // collecting cache queries in cache-heavy might have a negative performance impact and use a lot of disk space
+    'routes', // collecting routes data on every request might use a lot of disk space
+    'viewsData' // collecting views data, including all variables passed to the view on every request might use a lot of disk space
+  ],
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Disable data collection for certain URIs
     |--------------------------------------------------------------------------
@@ -128,12 +127,12 @@ return [
     |
     */
 
-    'filter_uris' => [
-        '/__clockwork/.*', // disable collecting data for clockwork-web assets
-        '/horizon/.*', // disable collecting data for Laravel Horizon requests
-    ],
+  'filter_uris' => [
+    '/__clockwork/.*', // disable collecting data for clockwork-web assets
+    '/horizon/.*' // disable collecting data for Laravel Horizon requests
+  ],
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Enable collecting of stack traces
     |--------------------------------------------------------------------------
@@ -148,9 +147,9 @@ return [
     |
     */
 
-    'collect_stack_traces' => env('CLOCKWORK_COLLECT_STACK_TRACES', true),
+  'collect_stack_traces' => env('CLOCKWORK_COLLECT_STACK_TRACES', true),
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Ignored events
     |--------------------------------------------------------------------------
@@ -161,10 +160,9 @@ return [
     |
     */
 
-    'ignored_events' => [
-    ],
+  'ignored_events' => [],
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Register helpers
     |--------------------------------------------------------------------------
@@ -174,9 +172,9 @@ return [
     |
     */
 
-    'register_helpers' => env('CLOCKWORK_REGISTER_HELPERS', true),
+  'register_helpers' => env('CLOCKWORK_REGISTER_HELPERS', true),
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Send Headers for AJAX request
     |--------------------------------------------------------------------------
@@ -188,11 +186,11 @@ return [
     |
     */
 
-    'headers' => [
-        // 'Accept' => 'application/vnd.com.whatever.v1+json',
-    ],
+  'headers' => [
+    // 'Accept' => 'application/vnd.com.whatever.v1+json',
+  ],
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Server-Timing
     |--------------------------------------------------------------------------
@@ -207,6 +205,5 @@ return [
     |
     */
 
-    'server_timing' => env('CLOCKWORK_SERVER_TIMING', 10),
-
+  'server_timing' => env('CLOCKWORK_SERVER_TIMING', 10)
 ];

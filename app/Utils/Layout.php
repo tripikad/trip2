@@ -4,40 +4,37 @@ namespace App\Utils;
 
 class Layout
 {
-    protected $name;
-    protected $with;
-    protected $cached;
+  protected $name;
+  protected $with;
+  protected $cached;
 
-    public function __construct($layout)
-    {
-        $this->layout = $layout;
-        $this->with = collect();
-        $this->cached = true;
-    }
+  public function __construct($layout)
+  {
+    $this->layout = $layout;
+    $this->with = collect();
+    $this->cached = true;
+  }
 
-    public function with($key, $value)
-    {
-        $this->with->put($key, $value);
+  public function with($key, $value)
+  {
+    $this->with->put($key, $value);
 
-        return $this;
-    }
+    return $this;
+  }
 
-    public function cached($condition)
-    {
-        $this->cached = $condition;
+  public function cached($condition)
+  {
+    $this->cached = $condition;
 
-        return $this;
-    }
+    return $this;
+  }
 
-    public function render()
-    {
-        $response = response()->view("layouts.$this->layout.$this->layout", $this->with);
+  public function render()
+  {
+    $response = response()->view("layouts.$this->layout.$this->layout", $this->with);
 
-        return $this->cached
-            ? $response->header(
-                'Cache-Control',
-                'public, s-maxage='.config('cache.headers.default')
-            )
-            : $response;
-    }
+    return $this->cached
+      ? $response->header('Cache-Control', 'public, s-maxage=' . config('cache.headers.default'))
+      : $response;
+  }
 }

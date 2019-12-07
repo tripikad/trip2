@@ -1,41 +1,41 @@
 .Comment {
-    display: flex;
-    border: $border-gray-md;
-    border-radius: $border-radius-md;
-    padding: $padding-md;
-    padding: $padding-sm ?if $mobile;
+  display: flex;
+  border: $border-gray-md;
+  border-radius: $border-radius-md;
+  padding: $padding-md;
+  padding: $padding-sm ?if $mobile;
 }
 
-    .Comment__left {
-        padding-right: $padding-sm;
-        display: none ?if $mobile;
-        margin-left: calc($spacer * -3.5);
-        margin-top: calc($spacer * -0.75);
-    }
+.Comment__left {
+  padding-right: $padding-sm;
+  display: none ?if $mobile;
+  margin-left: calc($spacer * -3.5);
+  margin-top: calc($spacer * -0.75);
+}
 
-    .Comment__meta {
-        margin-bottom: $margin-sm;
-    }
+.Comment__meta {
+  margin-bottom: $margin-sm;
+}
 
 .Comment--pink {
-    background: $pink-light;
+  background: $pink-light;
 }
 
 .Comment--inset {
-    margin-left: $margin-xxl;
-    margin-left: 0 ?if $mobile;
+  margin-left: $margin-xxl;
+  margin-left: 0 ?if $mobile;
 }
 
 .Comment__right {
-    width: 100%;
+  width: 100%;
 }
 
 .Comment__body img {
-    width: auto;
-    height: auto;
-    max-width: 100%;
+  width: auto;
+  height: auto;
+  max-width: 100%;
 }
 
 .Comment__body p {
-    margin-bottom: $spacer;
+  margin-bottom: $spacer;
 }

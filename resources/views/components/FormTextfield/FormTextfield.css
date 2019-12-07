@@ -1,41 +1,41 @@
 .FormTextfield__label {
-    color: $gray;
-    display: block;
-    font: $font-heading-sm;
-    line-height: $line-height-md;
-    margin-bottom: $margin-sm;
+  color: $gray;
+  display: block;
+  font: $font-heading-sm;
+  line-height: $line-height-md;
+  margin-bottom: $margin-sm;
 }
 
 .FormTextfield__input {
-    border-radius: $border-radius-md;
-    border: $border-gray-md;
-    color: $gray-dark;
-    font: $font-text-md;
-    padding: $padding-sm;
-    width: 100%;
+  border-radius: $border-radius-md;
+  border: $border-gray-md;
+  color: $gray-dark;
+  font: $font-text-md;
+  padding: $padding-sm;
+  width: 100%;
 }
 
 .FormTextfield__input::placeholder {
-    color: $gray-light;
+  color: $gray-light;
 }
 
 .FormTextfield--large .FormTextfield__input {
-    font: $font-heading-md;
-    padding: $padding-sm;
+  font: $font-heading-md;
+  padding: $padding-sm;
 }
 
 .FormTextfield[disabled] {
-    opacity: $opacity-md;
+  opacity: $opacity-md;
 }
 
 .FormTextfield--hidden {
-    display: none;
+  display: none;
 }
 
 .FormTextfield--error .FormTextfield__label {
-    color: $red;
+  color: $red;
 }
 
 .FormTextfield--error .FormTextfield__input {
-    border-color: $red;
+  border-color: $red;
 }

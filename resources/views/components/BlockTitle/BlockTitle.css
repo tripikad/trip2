@@ -1,34 +1,34 @@
 .BlockTitle {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
-    .BlockTitle__title {
-        color: $green;
-        font: $font-heading-xs;
-        text-transform: uppercase;
-    }
+.BlockTitle__title {
+  color: $green;
+  font: $font-heading-xs;
+  text-transform: uppercase;
+}
 
-    a .BlockTitle__title:hover {
-        color: $green-hover;
-    }
+a .BlockTitle__title:hover {
+  color: $green-hover;
+}
 
-    .BlockTitle__link {
-        margin-left: $margin-xs;
-    }
+.BlockTitle__link {
+  margin-left: $margin-xs;
+}
 
 .BlockTitle--yellow .BlockTitle__title {
-    color: $yellow;
+  color: $yellow;
 }
 
 .BlockTitle--yellow a .BlockTitle__title:hover {
-    color: $yellow-hover;
+  color: $yellow-hover;
 }
 
 .BlockTitle--cyan .BlockTitle__title {
-    color: $cyan;
+  color: $cyan;
 }
 
 .BlockTitle--cyan a .BlockTitle__title:hover {
-    color: $cyan-hover;
+  color: $cyan-hover;
 }

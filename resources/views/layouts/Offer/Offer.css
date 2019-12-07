@@ -1,49 +1,49 @@
 .Offer__header {
-    position: relative;
+  position: relative;
 }
 
 .Offer__headerItem {
-    margin-bottom: $margin-md;
+  margin-bottom: $margin-md;
 }
 
 .Offer__top {
-    padding: 0 $margin-sm ?if $tablet;
+  padding: 0 $margin-sm ?if $tablet;
 }
 
 .Offer__topItem {
-    margin-bottom: $margin-sm;
+  margin-bottom: $margin-sm;
 }
 
 .Offer__topItem:last-child {
-    margin-bottom: 0;
+  margin-bottom: 0;
 }
 
 .Offer__outerWrapper {
-    display: flex;
-    justify-content: center;
-    position: relative;
+  display: flex;
+  justify-content: center;
+  position: relative;
 }
 
 .Offer__innerWrapper {
-    max-width: calc($desktop-width * 0.75);
-    width: 100% ?if $tablet;
+  max-width: calc($desktop-width * 0.75);
+  width: 100% ?if $tablet;
 }
 
 .Offer__content {
-    padding: $padding-md;
-    margin: $margin-sm ?if $tablet;
+  padding: $padding-md;
+  margin: $margin-sm ?if $tablet;
 }
 
 .Offer__contentItem {
-    margin-bottom: $margin-md;
+  margin-bottom: $margin-md;
 }
 
 .Offer__contentItem:last-child {
-    margin-bottom: 0;
+  margin-bottom: 0;
 }
 
 .Offer__bottom {
-    background: $white;
-    padding: $padding-md;
-    padding: $padding-sm 0 ?if $mobile;
+  background: $white;
+  padding: $padding-md;
+  padding: $padding-sm 0 ?if $mobile;
 }

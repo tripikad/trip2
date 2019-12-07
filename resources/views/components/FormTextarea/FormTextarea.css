@@ -1,34 +1,34 @@
 .FormTextarea__label {
-    color: $gray;
-    display: block;
-    font: $font-heading-sm;
-    line-height: $line-height-md;
-    margin-bottom: $margin-sm;
+  color: $gray;
+  display: block;
+  font: $font-heading-sm;
+  line-height: $line-height-md;
+  margin-bottom: $margin-sm;
 }
 
 .FormTextarea__textarea {
-    border-radius: $border-radius-md;
-    border: $border-gray-md;
-    font: $font-text-md;
-    padding: $padding-sm;
-    width: 100%;
-    color: $gray-dark;
+  border-radius: $border-radius-md;
+  border: $border-gray-md;
+  font: $font-text-md;
+  padding: $padding-sm;
+  width: 100%;
+  color: $gray-dark;
 }
 
 .FormTextarea__textarea::placeholder {
-    color: $gray-light;
+  color: $gray-light;
 }
 
 .FormTextarea--borderless .FormTextarea__textarea {
-    border: none;
+  border: none;
 }
 
 .FormTextarea__textarea[readonly] {
-    background: $gray-lighter;
-    color: $gray;
-    opacity: $opacity-md;
+  background: $gray-lighter;
+  color: $gray;
+  opacity: $opacity-md;
 }
 
 .FormTextarea--hidden {
-    display: none;
+  display: none;
 }

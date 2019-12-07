@@ -4,21 +4,18 @@ namespace App\Http\Regions;
 
 class FrontpageFlight
 {
-    public function render($flights)
-    {
-        return component('Grid')->with('items', $flights
-            ->map(function ($flight, $index) {
-                $destination = $flight->destinations->first();
+  public function render($flights)
+  {
+    return component('Grid')->with(
+      'items',
+      $flights->map(function ($flight, $index) {
+        $destination = $flight->destinations->first();
 
-                if ($destination) {
-                    return region(
-                            'DestinationBar',
-                            $destination,
-                            ['purple', 'yellow', 'red'][$index]
-                        )
-                        .region('FlightCard', $flight);
-                }
-            })
-        );
-    }
+        if ($destination) {
+          return region('DestinationBar', $destination, ['purple', 'yellow', 'red'][$index]) .
+            region('FlightCard', $flight);
+        }
+      })
+    );
+  }
 }

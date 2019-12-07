@@ -10,8 +10,7 @@
  */
 
 return [
-
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Automatic Blade Optimizations
     |--------------------------------------------------------------------------
@@ -26,9 +25,9 @@ return [
     |
     */
 
-    'blade' => true,
+  'blade' => true,
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Force Blade Optimizations
     |--------------------------------------------------------------------------
@@ -44,9 +43,9 @@ return [
     |
     */
 
-    'force' => false,
+  'force' => false,
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Ignore Blade Files
     |--------------------------------------------------------------------------
@@ -54,10 +53,5 @@ return [
     | Here you can specify paths, which you don't want to minify.
     |
     */
-    'ignore' => [
-        'resources/views/email',
-        'resources/views/vendor/mail',
-        'resources/views/vendor/notifications',
-    ],
-
+  'ignore' => ['resources/views/email', 'resources/views/vendor/mail', 'resources/views/vendor/notifications']
 ];

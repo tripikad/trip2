@@ -1,88 +1,86 @@
 .NewsletterComposer {
-    width: 100%;
-    margin-bottom: $margin-md;
+  width: 100%;
+  margin-bottom: $margin-md;
 }
 
 .NewsletterComposer__cheatsheet {
-    width: 100%;
-    padding: $spacer;
-    background: $gray-light;
-    color: $white;
-    margin-bottom: $margin-md;
+  width: 100%;
+  padding: $spacer;
+  background: $gray-light;
+  color: $white;
+  margin-bottom: $margin-md;
 }
 
 .NewsletterComposer__cheatsheet .Body b {
-    color: $black;
+  color: $black;
 }
 
 .NewsletterComposer__item {
-    width: 100%;
-    display: flex;
-    padding: $spacer;
-    justify-content: space-between;
-    margin-bottom: $margin-md;
+  width: 100%;
+  display: flex;
+  padding: $spacer;
+  justify-content: space-between;
+  margin-bottom: $margin-md;
 }
 
 .NewsletterComposer__item:nth-child(even) {
-    background: $gray-lighter;
+  background: $gray-lighter;
 }
 
 .NewsletterComposer__item:nth-child(odd) {
-    background: $gray-light;
+  background: $gray-light;
 }
 
 .NewsletterComposer__item .FormTextarea__textarea {
-    height: 52px;
+  height: 52px;
 }
 
 .NewsletterComposer__item-left {
-    padding-right: $spacer;
-    width: 100%;
+  padding-right: $spacer;
+  width: 100%;
 }
 
 .NewsletterComposer__item-right {
-    min-width: 80px;
+  min-width: 80px;
 }
 
 .NewsletterComposer__visible {
-    display: flex;
-    width: 100%;
+  display: flex;
+  width: 100%;
 }
 
-.NewsletterComposer__visibleLeft
-{
-    flex: 1;
+.NewsletterComposer__visibleLeft {
+  flex: 1;
 }
 
-.NewsletterComposer__visibleRight
-{
-    flex: 1;
+.NewsletterComposer__visibleRight {
+  flex: 1;
 }
 .NewsletterComposer__button {
-    width: 100%;
-    color: $white;
-    height: 52px;
-    text-align: center;
-    margin: 0;
-    border: 0;
-    outline: 0;
-    font-size: $font-size-xl;
-    cursor: pointer;
+  width: 100%;
+  color: $white;
+  height: 52px;
+  text-align: center;
+  margin: 0;
+  border: 0;
+  outline: 0;
+  font-size: $font-size-xl;
+  cursor: pointer;
 }
 
 .NewsletterComposer__button-clone {
-    background: $green-dark;
-    margin-bottom: $padding-xxs;
+  background: $green-dark;
+  margin-bottom: $padding-xxs;
 }
 
 .NewsletterComposer__button-clone:hover {
-    background: $green-hover;
+  background: $green-hover;
 }
 
 .NewsletterComposer__button-remove {
-    background: $red-dark;
+  background: $red-dark;
 }
 
 .NewsletterComposer__button-remove:hover {
-    background: $red-hover;
+  background: $red-hover;
 }

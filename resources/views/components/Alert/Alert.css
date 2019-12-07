@@ -1,29 +1,29 @@
 .Alert {
-    background: $white;
-    border-radius: $border-radius-md;
-    border: $border-green-md;
-    bottom: $margin-lg;
-    bottom: $margin-sm ?if $mobile;
-    display: flex;
-    justify-content: space-between;
-    left: $margin-lg;
-    left: $margin-sm ?if $mobile;
-    padding: $padding-sm;
-    position: fixed;
-    right: $margin-sm ?if $mobile;
-    width: calc($spacer * 30);
-    width: inherit ?if $mobile;
+  background: $white;
+  border-radius: $border-radius-md;
+  border: $border-green-md;
+  bottom: $margin-lg;
+  bottom: $margin-sm ?if $mobile;
+  display: flex;
+  justify-content: space-between;
+  left: $margin-lg;
+  left: $margin-sm ?if $mobile;
+  padding: $padding-sm;
+  position: fixed;
+  right: $margin-sm ?if $mobile;
+  width: calc($spacer * 30);
+  width: inherit ?if $mobile;
 }
 
-    .Alert__title {
-        color: $gray-dark;
-        font: $font-text-md;
-    }
+.Alert__title {
+  color: $gray-dark;
+  font: $font-text-md;
+}
 
-    .Alert__closeIcon {
-        margin-left: $margin-xs;
-    }
+.Alert__closeIcon {
+  margin-left: $margin-xs;
+}
 
-    .Alert__closeIcon svg {
-        fill: $gray-dark;
-    }
+.Alert__closeIcon svg {
+  fill: $gray-dark;
+}

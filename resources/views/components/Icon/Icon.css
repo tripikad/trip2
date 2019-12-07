@@ -1,15 +1,15 @@
 .Icon--gray {
-    fill: $gray-light;
+  fill: $gray-light;
 }
 
 .Icon--darkGray {
-    fill: $gray-dark;
+  fill: $gray-dark;
 }
 
 .Icon--white {
-    fill: $white;
+  fill: $white;
 }
 
 .Icon--blue {
-    fill: $blue;
+  fill: $blue;
 }

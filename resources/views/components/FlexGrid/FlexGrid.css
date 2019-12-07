@@ -1,16 +1,16 @@
 .FlexGrid__row {
-    display: flex;
-    display: block ?if $tablet;
+  display: flex;
+  display: block ?if $tablet;
 }
 
 .FlexGrid__item {
-    margin-bottom: $margin-md ?if $tablet;
+  margin-bottom: $margin-md ?if $tablet;
 }
 
 .FlexGrid__item:last-child {
-    margin-bottom: 0;
+  margin-bottom: 0;
 }
 
 .FlexGrid--debug .FlexGrid__item {
-    border: 1px dashed $red;
+  border: 1px dashed $red;
 }

@@ -10,81 +10,81 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class AuthTest extends BrowserKitTestCase
 {
-    use DatabaseTransactions;
+  use DatabaseTransactions;
 
-    public function test_user_can_register_confirm_and_login()
-    {
-        $user = 'test_user_'.date('Ymd');
+  public function test_user_can_register_confirm_and_login()
+  {
+    $user = 'test_user_' . date('Ymd');
 
-        Honeypot::disable();
+    Honeypot::disable();
 
-        // User can register
+    // User can register
 
-        $this->visit('/')
-            ->see(trans('menu.auth.register'))
-            ->click(trans('menu.auth.register'))
-            ->type($user, 'name')
-            ->type('user@example.com', 'email')
-            ->type('password', 'password')
-            ->type('password', 'password_confirmation')
-            ->press(trans('auth.register.submit.title'))
-            ->seePageIs('/login')
-            //->see(trans('auth.register.sent.info')) // FIXME
-            ->seeInDatabase('users', ['name' => $user, 'verified' => 0]);
+    $this->visit('/')
+      ->see(trans('menu.auth.register'))
+      ->click(trans('menu.auth.register'))
+      ->type($user, 'name')
+      ->type('user@example.com', 'email')
+      ->type('password', 'password')
+      ->type('password', 'password_confirmation')
+      ->press(trans('auth.register.submit.title'))
+      ->seePageIs('/login')
+      //->see(trans('auth.register.sent.info')) // FIXME
+      ->seeInDatabase('users', ['name' => $user, 'verified' => 0]);
 
-        // User with unconfirmed account can not login
+    // User with unconfirmed account can not login
 
-        $this->visit('/')
-            ->click(trans('menu.auth.login'))
-            ->type($user, 'name')
-            ->type('password', 'password')
-            ->press(trans('auth.login.submit.title'))
-            ->seePageIs('/login');
-        //->see(trans('auth.login.failed.info')); // FIXME
+    $this->visit('/')
+      ->click(trans('menu.auth.login'))
+      ->type($user, 'name')
+      ->type('password', 'password')
+      ->press(trans('auth.login.submit.title'))
+      ->seePageIs('/login');
+    //->see(trans('auth.login.failed.info')); // FIXME
 
-        // User can confirm its account
+    // User can confirm its account
 
-        $this->visit($this->getVerificationLink($user))
-            ->seeInDatabase('users', [
-                'name' => $user,
-                'verified' => 1,
-                'registration_token' => null,
-            ])
-            ->seePageIs('login');
-        //->see(trans('auth.register.confirmed.info')); // FIXME
+    $this->visit($this->getVerificationLink($user))
+      ->seeInDatabase('users', [
+        'name' => $user,
+        'verified' => 1,
+        'registration_token' => null
+      ])
+      ->seePageIs('login');
+    //->see(trans('auth.register.confirmed.info')); // FIXME
 
-        // User can log in after confirmation
+    // User can log in after confirmation
 
-        $this->visit('/')
-            ->click(trans('menu.auth.login'))
-            ->type($user, 'name')
-            ->type('password', 'password')
-            ->press(trans('auth.login.submit.title'))
-            ->seePageIs('/');
-    }
+    $this->visit('/')
+      ->click(trans('menu.auth.login'))
+      ->type($user, 'name')
+      ->type('password', 'password')
+      ->press(trans('auth.login.submit.title'))
+      ->seePageIs('/');
+  }
 
-    public function test_registrered_user_can_reset_password()
-    {
-        $user = factory(User::class)->create();
+  public function test_registrered_user_can_reset_password()
+  {
+    $user = factory(User::class)->create();
 
-        // User can request new password
+    // User can request new password
 
-        Honeypot::disable();
+    Honeypot::disable();
 
-        $this->visit('/')
-            ->click(trans('menu.auth.login'))
-            ->click(trans('auth.reset.apply.title.link'))
-            ->type($user->email, 'email')
-            ->press(trans('auth.reset.apply.submit.title'))
-            ->seePageIs('/reset/apply')
-            //->see(trans('passwords.sent')) // FIXME
-            ->seeInDatabase('password_resets', ['email' => $user->email]);
+    $this->visit('/')
+      ->click(trans('menu.auth.login'))
+      ->click(trans('auth.reset.apply.title.link'))
+      ->type($user->email, 'email')
+      ->press(trans('auth.reset.apply.submit.title'))
+      ->seePageIs('/reset/apply')
+      //->see(trans('passwords.sent')) // FIXME
+      ->seeInDatabase('password_resets', ['email' => $user->email]);
 
-        // FIXME: Laravel 5.4 changed reset token behaviour so it can not be
-        // easily tested
+    // FIXME: Laravel 5.4 changed reset token behaviour so it can not be
+    // easily tested
 
-        // User can confirm new password
-        /*
+    // User can confirm new password
+    /*
         $token = $this->getResetToken($user->email);
         $password = str_random(10);
 
@@ -102,37 +102,36 @@ class AuthTest extends BrowserKitTestCase
             ->visit('/user/'.$user->id)
             ->seeLink(trans('menu.user.edit.profile'), 'user/'.$user->id.'/edit');
             */
-    }
+  }
 
-    public function test_nonregistered_user_can_not_reset_password()
-    {
-        Honeypot::disable();
+  public function test_nonregistered_user_can_not_reset_password()
+  {
+    Honeypot::disable();
 
-        $this->visit('/')
-            ->click(trans('menu.auth.login'))
-            ->click(trans('auth.reset.apply.title.link'))
-            ->type('manny@calavera.com', 'email')
-            ->press(trans('auth.reset.apply.submit.title'))
-            ->seePageIs('/reset/apply');
-        //->see(trans('passwords.user')); // FIXME
-    }
+    $this->visit('/')
+      ->click(trans('menu.auth.login'))
+      ->click(trans('auth.reset.apply.title.link'))
+      ->type('manny@calavera.com', 'email')
+      ->press(trans('auth.reset.apply.submit.title'))
+      ->seePageIs('/reset/apply');
+    //->see(trans('passwords.user')); // FIXME
+  }
 
-    public function getVerificationLink($name)
-    {
-        $token = User::whereName($name)->first()->registration_token;
+  public function getVerificationLink($name)
+  {
+    $token = User::whereName($name)->first()->registration_token;
 
-        return '/register/confirm/'.$token;
-    }
+    return '/register/confirm/' . $token;
+  }
 
-    public function getResetToken($email)
-    {
-        $token = DB::table('password_resets')
-            ->whereEmail($email)
-            ->orderBy('created_at', 'desc')
-            ->take(1)
-            ->first()
-            ->token;
+  public function getResetToken($email)
+  {
+    $token = DB::table('password_resets')
+      ->whereEmail($email)
+      ->orderBy('created_at', 'desc')
+      ->take(1)
+      ->first()->token;
 
-        return $token;
-    }
+    return $token;
+  }
 }

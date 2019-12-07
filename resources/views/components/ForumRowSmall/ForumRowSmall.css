@@ -1,13 +1,13 @@
 .ForumRowSmall {
-	display: flex;
+  display: flex;
 }
 
-    .ForumRowSmall__user {
-        margin-right: $margin-sm;
-    }
+.ForumRowSmall__user {
+  margin-right: $margin-sm;
+}
 
-    .ForumRowSmall__title {
-        color: $gray-dark;
-        font: $font-heading-md;
-        margin-bottom: $margin-xs;
-    }
+.ForumRowSmall__title {
+  color: $gray-dark;
+  font: $font-heading-md;
+  margin-bottom: $margin-xs;
+}

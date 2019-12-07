@@ -1,43 +1,43 @@
 export const intersection = (arr1, arr2) => arr1.filter(n => arr2.includes(n))
 
 export const chunk = (arr, length) =>
-    Array.from({
-        length: Math.ceil(arr.length / length)
-    }).map((_, n) => arr.slice(n * length, n * length + length))
+  Array.from({
+    length: Math.ceil(arr.length / length)
+  }).map((_, n) => arr.slice(n * length, n * length + length))
 
 export const unique = arr => [...new Set(arr)]
 
 export const parseSheets = data => {
-    return data.feed.entry.map(entry => {
-        return Object.keys(entry)
-            .map(field => {
-                if (field.startsWith('gsx$')) {
-                    return [field.split('$')[1], entry[field].$t]
-                }
-            })
-            .filter(field => field)
-            .reduce((field, item) => {
-                field[item[0]] = item[1]
-                return field
-            }, {})
-    })
+  return data.feed.entry.map(entry => {
+    return Object.keys(entry)
+      .map(field => {
+        if (field.startsWith('gsx$')) {
+          return [field.split('$')[1], entry[field].$t]
+        }
+      })
+      .filter(field => field)
+      .reduce((field, item) => {
+        field[item[0]] = item[1]
+        return field
+      }, {})
+  })
 }
 
 export const random = (from, to) => {
-    return from + Math.random() * (to - from)
+  return from + Math.random() * (to - from)
 }
 
 export const snap = (value, gridsize = 1) => {
-    return value % gridsize < gridsize / 2 ? value - (value % gridsize) : value + gridsize - (value % gridsize)
+  return value % gridsize < gridsize / 2 ? value - (value % gridsize) : value + gridsize - (value % gridsize)
 }
 
 export const debounce = (fn, time) => {
-    let timeout
-    return function() {
-        const functionCall = () => fn.apply(this, arguments)
-        clearTimeout(timeout)
-        timeout = setTimeout(functionCall, time)
-    }
+  let timeout
+  return function() {
+    const functionCall = () => fn.apply(this, arguments)
+    clearTimeout(timeout)
+    timeout = setTimeout(functionCall, time)
+  }
 }
 
 export const getCssVariable = (value, el = document.body) => getComputedStyle(el).getPropertyValue(value)
@@ -45,50 +45,50 @@ export const getCssVariable = (value, el = document.body) => getComputedStyle(el
 export const setCssVariable = (key, value, el = document.body.style) => el.setProperty(key, value)
 
 export const slug = text => {
-    text = text
-        .toString()
-        .toLowerCase()
-        .trim()
+  text = text
+    .toString()
+    .toLowerCase()
+    .trim()
 
-    const sets = [
-        { to: 'a', from: '[ÀÁÂÃÄÅÆĀĂĄẠẢẤẦẨẪẬẮẰẲẴẶ]' },
-        { to: 'c', from: '[ÇĆĈČ]' },
-        { to: 'd', from: '[ÐĎĐÞ]' },
-        { to: 'e', from: '[ÈÉÊËĒĔĖĘĚẸẺẼẾỀỂỄỆ]' },
-        { to: 'g', from: '[ĜĞĢǴ]' },
-        { to: 'h', from: '[ĤḦ]' },
-        { to: 'i', from: '[ÌÍÎÏĨĪĮİỈỊ]' },
-        { to: 'j', from: '[Ĵ]' },
-        { to: 'ij', from: '[Ĳ]' },
-        { to: 'k', from: '[Ķ]' },
-        { to: 'l', from: '[ĹĻĽŁ]' },
-        { to: 'm', from: '[Ḿ]' },
-        { to: 'n', from: '[ÑŃŅŇ]' },
-        { to: 'o', from: '[ÒÓÔÕÖØŌŎŐỌỎỐỒỔỖỘỚỜỞỠỢǪǬƠ]' },
-        { to: 'oe', from: '[Œ]' },
-        { to: 'p', from: '[ṕ]' },
-        { to: 'r', from: '[ŔŖŘ]' },
-        { to: 's', from: '[ßŚŜŞŠ]' },
-        { to: 't', from: '[ŢŤ]' },
-        { to: 'u', from: '[ÙÚÛÜŨŪŬŮŰŲỤỦỨỪỬỮỰƯ]' },
-        { to: 'w', from: '[ẂŴẀẄ]' },
-        { to: 'x', from: '[ẍ]' },
-        { to: 'y', from: '[ÝŶŸỲỴỶỸ]' },
-        { to: 'z', from: '[ŹŻŽ]' },
-        { to: '-', from: "[·/_,:;']" }
-    ]
+  const sets = [
+    { to: 'a', from: '[ÀÁÂÃÄÅÆĀĂĄẠẢẤẦẨẪẬẮẰẲẴẶ]' },
+    { to: 'c', from: '[ÇĆĈČ]' },
+    { to: 'd', from: '[ÐĎĐÞ]' },
+    { to: 'e', from: '[ÈÉÊËĒĔĖĘĚẸẺẼẾỀỂỄỆ]' },
+    { to: 'g', from: '[ĜĞĢǴ]' },
+    { to: 'h', from: '[ĤḦ]' },
+    { to: 'i', from: '[ÌÍÎÏĨĪĮİỈỊ]' },
+    { to: 'j', from: '[Ĵ]' },
+    { to: 'ij', from: '[Ĳ]' },
+    { to: 'k', from: '[Ķ]' },
+    { to: 'l', from: '[ĹĻĽŁ]' },
+    { to: 'm', from: '[Ḿ]' },
+    { to: 'n', from: '[ÑŃŅŇ]' },
+    { to: 'o', from: '[ÒÓÔÕÖØŌŎŐỌỎỐỒỔỖỘỚỜỞỠỢǪǬƠ]' },
+    { to: 'oe', from: '[Œ]' },
+    { to: 'p', from: '[ṕ]' },
+    { to: 'r', from: '[ŔŖŘ]' },
+    { to: 's', from: '[ßŚŜŞŠ]' },
+    { to: 't', from: '[ŢŤ]' },
+    { to: 'u', from: '[ÙÚÛÜŨŪŬŮŰŲỤỦỨỪỬỮỰƯ]' },
+    { to: 'w', from: '[ẂŴẀẄ]' },
+    { to: 'x', from: '[ẍ]' },
+    { to: 'y', from: '[ÝŶŸỲỴỶỸ]' },
+    { to: 'z', from: '[ŹŻŽ]' },
+    { to: '-', from: "[·/_,:;']" }
+  ]
 
-    sets.forEach(set => {
-        text = text.replace(new RegExp(set.from, 'gi'), set.to)
-    })
+  sets.forEach(set => {
+    text = text.replace(new RegExp(set.from, 'gi'), set.to)
+  })
 
-    return text
-        .toString()
-        .toLowerCase()
-        .replace(/\s+/g, '-')
-        .replace(/&/g, '-and-')
-        .replace(/[^\w\-]+/g, '')
-        .replace(/\--+/g, '-')
-        .replace(/^-+/, '')
-        .replace(/-+$/, '')
+  return text
+    .toString()
+    .toLowerCase()
+    .replace(/\s+/g, '-')
+    .replace(/&/g, '-and-')
+    .replace(/[^\w\-]+/g, '')
+    .replace(/\--+/g, '-')
+    .replace(/^-+/, '')
+    .replace(/-+$/, '')
 }

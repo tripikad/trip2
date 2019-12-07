@@ -1,24 +1,16 @@
 <template>
+  <div v-show="open" class="PromoBar" :class="isclasses">
+    <div class="PromoBar__titleWrapper">
+      <div class="PromoBar__title">
+        {{ title }}
+      </div>
 
-    <div v-show="open" class="PromoBar" :class="isclasses">
+      <a class="PromoBar__route" :href="route">
+        {{ route_title }}
+      </a>
+    </div>
 
-        <div class="PromoBar__titleWrapper">
-            
-            <div class="PromoBar__title">
-
-                {{ title }}
-
-            </div>
-
-            <a class="PromoBar__route" :href="route">
-              
-                {{ route_title }}
-            
-            </a>
-
-        </div>
-
-        <!--div
+    <!--div
             class="PromoBar__closeIcon"
             @click="close"
         >
@@ -31,43 +23,41 @@
             </component>
 
         </div-->
-
-    </div>
-
+  </div>
 </template>
 
 <script>
 import Icon from '../Icon/Icon.vue'
 
 export default {
-    components: { Icon },
+  components: { Icon },
 
-    props: {
-        isclasses: { default: '' },
-        title: { default: '' },
-        route_title: { default: '' },
-        route: { default: '' }
-    },
+  props: {
+    isclasses: { default: '' },
+    title: { default: '' },
+    route_title: { default: '' },
+    route: { default: '' }
+  },
 
-    data() {
-        return {
-            open: true
-        }
-    },
-
-    methods: {
-        close() {
-            this.open = false
-            this.$cookie.set('malta-stip-closed', true, {
-                expires: '3M'
-            })
-        }
-    },
-
-    mounted() {
-        // if (this.$cookie.get('malta-stip-closed')) {
-        //    this.open = false
-        // }
+  data() {
+    return {
+      open: true
     }
+  },
+
+  methods: {
+    close() {
+      this.open = false
+      this.$cookie.set('malta-stip-closed', true, {
+        expires: '3M'
+      })
+    }
+  },
+
+  mounted() {
+    // if (this.$cookie.get('malta-stip-closed')) {
+    //    this.open = false
+    // }
+  }
 }
 </script>

@@ -1,28 +1,28 @@
-    .ForumPost__content {
-        display: flex;
-    }
+.ForumPost__content {
+  display: flex;
+}
 
-    .ForumPost__title {
-        color: $gray-dark;
-        font: $font-heading-xl;
-        margin-bottom: $margin-sm;
-    }
+.ForumPost__title {
+  color: $gray-dark;
+  font: $font-heading-xl;
+  margin-bottom: $margin-sm;
+}
 
-    .ForumPost__left {
-        padding-right: $padding-md;
-        display: none ?if $mobile;
-    }
+.ForumPost__left {
+  padding-right: $padding-md;
+  display: none ?if $mobile;
+}
 
-    .ForumPost__meta {
-        margin-bottom: $margin-md;
-    }
+.ForumPost__meta {
+  margin-bottom: $margin-md;
+}
 
-    .ForumPost__body .Body img {
-        width: auto;
-        height: auto;
-        max-width: 100%;
-    }
+.ForumPost__body .Body img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+}
 
-    .ForumPost__body .Body p {
-        margin-bottom: $spacer;
-    }
+.ForumPost__body .Body p {
+  margin-bottom: $spacer;
+}

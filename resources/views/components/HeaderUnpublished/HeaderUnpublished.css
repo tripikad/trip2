@@ -1,9 +1,9 @@
 .HeaderUnpublished {
-    background: $pink;
-    padding: calc($spacer * 1.5);
+  background: $pink;
+  padding: calc($spacer * 1.5);
 }
 
-    .HeaderUnpublished__title {
-        color: $pink-dark;
-        font: $font-heading-sm;
-    }
+.HeaderUnpublished__title {
+  color: $pink-dark;
+  font: $font-heading-sm;
+}

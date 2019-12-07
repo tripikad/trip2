@@ -1,5 +1,5 @@
 .Paginator__button--active {
-    background: $green;
-    color: $white;
-    cursor: not-allowed;
+  background: $green;
+  color: $white;
+  cursor: not-allowed;
 }

@@ -7,21 +7,21 @@ use Response;
 
 class UtilsController extends Controller
 {
-    public function format()
-    {
-        $body = Request::input('body');
+  public function format()
+  {
+    $body = Request::input('body');
 
-        return Response::json([
-            'body' => format_body($body),
-        ]);
-    }
+    return Response::json([
+      'body' => format_body($body)
+    ]);
+  }
 
-    public function filter()
-    {
-        return redirect()->route(Request::get('type'), [
-            'destination' => Request::get('destination'),
-            'topic' => Request::get('topic'),
-            'page' => Request::get('page'),
-        ]);
-    }
+  public function filter()
+  {
+    return redirect()->route(Request::get('type'), [
+      'destination' => Request::get('destination'),
+      'topic' => Request::get('topic'),
+      'page' => Request::get('page')
+    ]);
+  }
 }

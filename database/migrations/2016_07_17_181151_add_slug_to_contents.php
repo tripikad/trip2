@@ -7,38 +7,42 @@ use Cviebrock\EloquentSluggable\Services\SlugService;
 
 class AddSlugToContents extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
-    {
-        Schema::table('contents', function (Blueprint $table) {
-            $table->string('slug');
-        });
+  /**
+   * Run the migrations.
+   *
+   * @return void
+   */
+  public function up()
+  {
+    Schema::table('contents', function (Blueprint $table) {
+      $table->string('slug');
+    });
 
-        Content::chunk(200, function ($contents) {
-            /** @var Content $content */
-            foreach ($contents as $content) {
-                $content->timestamps = false;
-                $slug = SlugService::createSlug(Content::class, 'slug', $content->title);
-                $content->update(['slug' => $slug]);
-            }
-        });
+    Content::chunk(200, function ($contents) {
+      /** @var Content $content */
+      foreach ($contents as $content) {
+        $content->timestamps = false;
+        $slug = SlugService::createSlug(Content::class, 'slug', $content->title);
+        $content->update(['slug' => $slug]);
+      }
+    });
 
-        Schema::table('contents', function (Blueprint $table) {
-            $table->string('slug')->nullable(false)->unique()->change();
-        });
-    }
+    Schema::table('contents', function (Blueprint $table) {
+      $table
+        ->string('slug')
+        ->nullable(false)
+        ->unique()
+        ->change();
+    });
+  }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        //
-    }
+  /**
+   * Reverse the migrations.
+   *
+   * @return void
+   */
+  public function down()
+  {
+    //
+  }
 }
