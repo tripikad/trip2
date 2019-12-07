@@ -1,7 +1,5 @@
 <template>
-
     <div v-show="false" v-html="svg"></div>
-
 </template>
 
 <script>

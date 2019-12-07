@@ -1,6 +1,7 @@
 /* Base */
 
-body, body *:not(html):not(style):not(br):not(tr):not(code) {
+body,
+body *:not(html):not(style):not(br):not(tr):not(code) {
     font-family: Avenir, Helvetica, sans-serif;
     box-sizing: border-box;
 }
@@ -40,7 +41,7 @@ a img {
 /* Typography */
 
 h1 {
-    color: #2F3133;
+    color: #2f3133;
     font-size: 20px;
     font-weight: bold;
     margin-top: 0;
@@ -57,7 +58,7 @@ h2 {
 }
 
 h3 {
-    color: #2F3133;
+    color: #2f3133;
     font-size: 16px;
     font-weight: bold;
     margin-top: 0;
@@ -65,7 +66,7 @@ h3 {
 }
 
 p {
-    color: #74787E;
+    color: #74787e;
     font-size: 16px;
     line-height: 1.5em;
     margin-top: 0;
@@ -123,9 +124,9 @@ img {
 /* Body */
 
 .body {
-    background-color: #FFFFFF;
-    border-bottom: 1px solid #EDEFF2;
-    border-top: 1px solid #EDEFF2;
+    background-color: #ffffff;
+    border-bottom: 1px solid #edeff2;
+    border-top: 1px solid #edeff2;
     margin: 0;
     padding: 0;
     width: 100%;
@@ -135,7 +136,7 @@ img {
 }
 
 .inner-body {
-    background-color: #FFFFFF;
+    background-color: #ffffff;
     margin: 0 auto;
     padding: 0;
     width: 570px;
@@ -145,7 +146,7 @@ img {
 }
 
 .inner-body-newsletter {
-    background-color: #FFFFFF;
+    background-color: #ffffff;
     margin: 0 auto;
     padding: 0;
     width: 600px;
@@ -165,7 +166,7 @@ img {
 /* Subcopy */
 
 .subcopy {
-    border-top: 1px solid #EDEFF2;
+    border-top: 1px solid #edeff2;
     margin-top: 25px;
     padding-top: 25px;
 }
@@ -187,7 +188,7 @@ img {
 }
 
 .footer p {
-    color: #AEAEAE;
+    color: #aeaeae;
     font-size: 12px;
     text-align: center;
 }
@@ -203,12 +204,12 @@ img {
 }
 
 .table th {
-    border-bottom: 1px solid #EDEFF2;
+    border-bottom: 1px solid #edeff2;
     padding-bottom: 8px;
 }
 
 .table td {
-    color: #74787E;
+    color: #74787e;
     font-size: 15px;
     line-height: 18px;
     padding: 10px 0;
@@ -241,7 +242,6 @@ img.user_image {
 /* Flight */
 
 .flight-wrapper {
-
 }
 
 .flight_image {
@@ -315,7 +315,7 @@ a.user {
 .button {
     border-radius: 3px;
     box-shadow: 0 2px 3px rgba(0, 0, 0, 0.16);
-    color: #FFF;
+    color: #fff;
     display: inline-block;
     text-decoration: none;
     -webkit-text-size-adjust: none;
@@ -354,7 +354,7 @@ a.user {
 }
 
 .panel-content {
-    background-color: #EDEFF2;
+    background-color: #edeff2;
     padding: 16px;
 }
 
@@ -370,8 +370,8 @@ a.user {
 /* Promotions */
 
 .promotion {
-    background-color: #FFFFFF;
-    border: 2px dashed #9BA2AB;
+    background-color: #ffffff;
+    border: 2px dashed #9ba2ab;
     margin: 0;
     margin-bottom: 25px;
     margin-top: 25px;

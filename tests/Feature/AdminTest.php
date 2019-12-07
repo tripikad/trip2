@@ -16,13 +16,12 @@ class AdminTest extends BrowserKitTestCase
     {
         $user1 = factory(User::class)->create([
             'verified' => 'true',
-            'role' => 'regular',
+            'role' => 'regular'
         ]);
 
         // Unlogged user
 
-        $this->visit('/')
-            ->dontSee(trans('menu.auth.admin'));
+        $this->visit('/')->dontSee(trans('menu.auth.admin'));
 
         // Regular user
 
@@ -33,7 +32,6 @@ class AdminTest extends BrowserKitTestCase
 
     public function test_unlogged_or_regular_user_can_not_see_images()
     {
-
         // Unlogged user
 
         $response = $this->call('GET', 'admin/image');
@@ -43,11 +41,10 @@ class AdminTest extends BrowserKitTestCase
 
         $user1 = factory(User::class)->create([
             'verified' => 'true',
-            'role' => 'regular',
+            'role' => 'regular'
         ]);
 
-        $response = $this->actingAs($user1)
-            ->call('GET', 'admin/image');
+        $response = $this->actingAs($user1)->call('GET', 'admin/image');
         $this->assertEquals(401, $response->status());
     }
 
@@ -55,7 +52,7 @@ class AdminTest extends BrowserKitTestCase
     {
         $user1 = factory(User::class)->create([
             'verified' => 'true',
-            'role' => 'admin',
+            'role' => 'admin'
         ]);
 
         $this->actingAs($user1)
@@ -72,7 +69,7 @@ class AdminTest extends BrowserKitTestCase
 
         $this->actingAs($user1)
             ->visit('admin/image')
-            ->attach(storage_path().'/tests/test.jpg', 'image')
+            ->attach(storage_path() . '/tests/test.jpg', 'image')
             ->press(trans('admin.image.create.submit.title'))
             ->seePageIs('admin/image');
 
@@ -80,14 +77,14 @@ class AdminTest extends BrowserKitTestCase
 
         // Check original file exists
 
-        $filepath = config('imagepresets.original.path').$filename;
+        $filepath = config('imagepresets.original.path') . $filename;
         $this->assertTrue(file_exists($filepath));
         unlink($filepath);
 
         // See thumbnails exist
 
         foreach (['large', 'medium', 'small', 'small_square', 'xsmall_square'] as $preset) {
-            $filepath = config("imagepresets.presets.$preset.path").$filename;
+            $filepath = config("imagepresets.presets.$preset.path") . $filename;
             $this->assertTrue(file_exists($filepath));
             unlink($filepath);
         }
@@ -95,7 +92,6 @@ class AdminTest extends BrowserKitTestCase
 
     public function test_unlogged_or_regular_user_can_not_see_unpublished_content()
     {
-
         // Unlogged user
 
         $response = $this->call('GET', 'admin/content');
@@ -105,11 +101,10 @@ class AdminTest extends BrowserKitTestCase
 
         $user1 = factory(User::class)->create([
             'verified' => 'true',
-            'role' => 'regular',
+            'role' => 'regular'
         ]);
 
-        $response = $this->actingAs($user1)
-            ->call('GET', 'admin/content');
+        $response = $this->actingAs($user1)->call('GET', 'admin/content');
         $this->assertEquals(401, $response->status());
     }
 
@@ -117,19 +112,19 @@ class AdminTest extends BrowserKitTestCase
     {
         $user1 = factory(User::class)->create([
             'verified' => 'true',
-            'role' => 'admin',
+            'role' => 'admin'
         ]);
 
         $user2 = factory(User::class)->create([
             'verified' => 'true',
-            'role' => 'admin',
+            'role' => 'admin'
         ]);
 
         $content1 = factory(Content::class)->create([
             'user_id' => $user2->id,
             'title' => 'Hello unpublished',
             'type' => 'forum',
-            'status' => 0,
+            'status' => 0
         ]);
 
         $this->actingAs($user1)
@@ -140,7 +135,7 @@ class AdminTest extends BrowserKitTestCase
             ->see(trans('admin.content.index.title'))
             ->seeLink('Hello unpublished')
             ->click('Hello unpublished')
-            ->seePageIs(config('sluggable.contentTypeMapping')[$content1->type].'/'.$content1->slug)
+            ->seePageIs(config('sluggable.contentTypeMapping')[$content1->type] . '/' . $content1->slug)
             ->see('Hello unpublished');
     }
 
@@ -155,11 +150,10 @@ class AdminTest extends BrowserKitTestCase
 
         $user1 = factory(User::class)->create([
             'verified' => 'true',
-            'role' => 'regular',
+            'role' => 'regular'
         ]);
 
-        $response = $this->actingAs($user1)
-            ->call('GET', 'internal');
+        $response = $this->actingAs($user1)->call('GET', 'internal');
         $this->assertEquals(401, $response->status());
     }
 
@@ -167,18 +161,18 @@ class AdminTest extends BrowserKitTestCase
     {
         $user1 = factory(User::class)->create([
             'verified' => 'true',
-            'role' => 'admin',
+            'role' => 'admin'
         ]);
 
         $user2 = factory(User::class)->create([
             'verified' => 'true',
-            'role' => 'admin',
+            'role' => 'admin'
         ]);
 
         $content1 = factory(Content::class)->create([
             'user_id' => $user2->id,
             'title' => 'Hello internal',
-            'type' => 'internal',
+            'type' => 'internal'
         ]);
 
         $this->actingAs($user1)

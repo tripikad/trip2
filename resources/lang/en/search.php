@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     'tab.forum' => 'Forum posts',
     'tab.destination' => 'Destinations',
     'tab.user' => 'Users',
@@ -10,6 +9,5 @@ return [
     'tab.flight' => 'Flightoffers',
 
     'results.noresults' => 'No results found',
-    'results.all' => 'All results',
-
+    'results.all' => 'All results'
 ];

@@ -29,7 +29,7 @@ class ShortnewsTest extends BrowserKitTestCase
                 'title' => 'Hello shortnews title',
                 'body' => 'Hello shortnews body',
                 'type' => 'shortnews',
-                'status' => 0,
+                'status' => 0
             ]);
 
         $content = Content::whereTitle('Hello shortnews title')->first();
@@ -51,7 +51,7 @@ class ShortnewsTest extends BrowserKitTestCase
                 'title' => 'Hola shortnews titulo',
                 'body' => 'Hola shortnews cuerpo',
                 'type' => 'shortnews',
-                'status' => 0,
+                'status' => 0
             ]);
     }
 
@@ -61,11 +61,11 @@ class ShortnewsTest extends BrowserKitTestCase
         $regular_user_viewing_shortnews = factory(User::class)->create();
 
         $this->actingAs($admin_user_creating_shortnews)
-                ->visit('uudised')
-                ->click(trans('content.news.create.title'))
-                ->type('Hello shortnews title', 'title')
-                ->type('Hello shortnews body', 'body')
-                ->press(trans('content.create.submit.title'));
+            ->visit('uudised')
+            ->click(trans('content.news.create.title'))
+            ->type('Hello shortnews title', 'title')
+            ->type('Hello shortnews body', 'body')
+            ->press(trans('content.create.submit.title'));
 
         $content = Content::whereTitle('Hello shortnews title')->first();
 
@@ -83,11 +83,11 @@ class ShortnewsTest extends BrowserKitTestCase
         $admin_user_creating_shortnews = factory(User::class)->create(['role' => 'admin']);
 
         $this->actingAs($admin_user_creating_shortnews)
-                ->visit('uudised')
-                ->click(trans('content.news.create.title'))
-                ->type('Hello shortnews title', 'title')
-                ->type('Hello shortnews body', 'body')
-                ->press(trans('content.create.submit.title'));
+            ->visit('uudised')
+            ->click(trans('content.news.create.title'))
+            ->type('Hello shortnews title', 'title')
+            ->type('Hello shortnews body', 'body')
+            ->press(trans('content.create.submit.title'));
 
         $content = Content::whereTitle('Hello shortnews title')->first();
 

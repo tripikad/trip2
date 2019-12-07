@@ -26,7 +26,7 @@ class NewsletterLetterContentsSeeder extends Seeder
                     'visible_from' => null,
                     'visible_to' => null,
                     'updated_at' => Carbon::now(),
-                    'created_at' => Carbon::now(),
+                    'created_at' => Carbon::now()
                 ];
 
                 $content[] = [
@@ -36,7 +36,7 @@ class NewsletterLetterContentsSeeder extends Seeder
                     'visible_from' => null,
                     'visible_to' => null,
                     'updated_at' => Carbon::now(),
-                    'created_at' => Carbon::now(),
+                    'created_at' => Carbon::now()
                 ];
             } elseif ($newsletter_type->type == 'flight_general') {
                 $content[] = [
@@ -46,7 +46,7 @@ class NewsletterLetterContentsSeeder extends Seeder
                     'visible_from' => null,
                     'visible_to' => null,
                     'updated_at' => Carbon::now(),
-                    'created_at' => Carbon::now(),
+                    'created_at' => Carbon::now()
                 ];
 
                 $content[] = [
@@ -56,7 +56,7 @@ class NewsletterLetterContentsSeeder extends Seeder
                     'visible_from' => null,
                     'visible_to' => null,
                     'updated_at' => Carbon::now(),
-                    'created_at' => Carbon::now(),
+                    'created_at' => Carbon::now()
                 ];
             } elseif ($newsletter_type->type == 'weekly') {
                 $content[] = [
@@ -66,7 +66,7 @@ class NewsletterLetterContentsSeeder extends Seeder
                     'visible_from' => null,
                     'visible_to' => null,
                     'updated_at' => Carbon::now(),
-                    'created_at' => Carbon::now(),
+                    'created_at' => Carbon::now()
                 ];
 
                 $content[] = [
@@ -76,7 +76,7 @@ class NewsletterLetterContentsSeeder extends Seeder
                     'visible_from' => null,
                     'visible_to' => null,
                     'updated_at' => Carbon::now(),
-                    'created_at' => Carbon::now(),
+                    'created_at' => Carbon::now()
                 ];
 
                 $content[] = [
@@ -86,7 +86,7 @@ class NewsletterLetterContentsSeeder extends Seeder
                     'visible_from' => null,
                     'visible_to' => null,
                     'updated_at' => Carbon::now(),
-                    'created_at' => Carbon::now(),
+                    'created_at' => Carbon::now()
                 ];
 
                 $content[] = [
@@ -96,7 +96,7 @@ class NewsletterLetterContentsSeeder extends Seeder
                     'visible_from' => null,
                     'visible_to' => null,
                     'updated_at' => Carbon::now(),
-                    'created_at' => Carbon::now(),
+                    'created_at' => Carbon::now()
                 ];
 
                 $content[] = [
@@ -106,7 +106,7 @@ class NewsletterLetterContentsSeeder extends Seeder
                     'visible_from' => null,
                     'visible_to' => null,
                     'updated_at' => Carbon::now(),
-                    'created_at' => Carbon::now(),
+                    'created_at' => Carbon::now()
                 ];
 
                 $content[] = [
@@ -116,7 +116,7 @@ class NewsletterLetterContentsSeeder extends Seeder
                     'visible_from' => null,
                     'visible_to' => null,
                     'updated_at' => Carbon::now(),
-                    'created_at' => Carbon::now(),
+                    'created_at' => Carbon::now()
                 ];
 
                 $content[] = [
@@ -126,7 +126,7 @@ class NewsletterLetterContentsSeeder extends Seeder
                     'visible_from' => null,
                     'visible_to' => null,
                     'updated_at' => Carbon::now(),
-                    'created_at' => Carbon::now(),
+                    'created_at' => Carbon::now()
                 ];
 
                 $content[] = [
@@ -136,7 +136,7 @@ class NewsletterLetterContentsSeeder extends Seeder
                     'visible_from' => null,
                     'visible_to' => null,
                     'updated_at' => Carbon::now(),
-                    'created_at' => Carbon::now(),
+                    'created_at' => Carbon::now()
                 ];
 
                 $content[] = [
@@ -146,7 +146,7 @@ class NewsletterLetterContentsSeeder extends Seeder
                     'visible_from' => null,
                     'visible_to' => null,
                     'updated_at' => Carbon::now(),
-                    'created_at' => Carbon::now(),
+                    'created_at' => Carbon::now()
                 ];
 
                 $content[] = [
@@ -156,7 +156,7 @@ class NewsletterLetterContentsSeeder extends Seeder
                     'visible_from' => null,
                     'visible_to' => null,
                     'updated_at' => Carbon::now(),
-                    'created_at' => Carbon::now(),
+                    'created_at' => Carbon::now()
                 ];
             } elseif ($newsletter_type->type == 'long_time_ago') {
                 $content[] = [
@@ -166,7 +166,7 @@ class NewsletterLetterContentsSeeder extends Seeder
                     'visible_from' => null,
                     'visible_to' => null,
                     'updated_at' => Carbon::now(),
-                    'created_at' => Carbon::now(),
+                    'created_at' => Carbon::now()
                 ];
 
                 $content[] = [
@@ -176,7 +176,7 @@ class NewsletterLetterContentsSeeder extends Seeder
                     'visible_from' => null,
                     'visible_to' => null,
                     'updated_at' => Carbon::now(),
-                    'created_at' => Carbon::now(),
+                    'created_at' => Carbon::now()
                 ];
 
                 $content[] = [
@@ -186,7 +186,7 @@ class NewsletterLetterContentsSeeder extends Seeder
                     'visible_from' => null,
                     'visible_to' => null,
                     'updated_at' => Carbon::now(),
-                    'created_at' => Carbon::now(),
+                    'created_at' => Carbon::now()
                 ];
 
                 $content[] = [
@@ -196,7 +196,7 @@ class NewsletterLetterContentsSeeder extends Seeder
                     'visible_from' => null,
                     'visible_to' => null,
                     'updated_at' => Carbon::now(),
-                    'created_at' => Carbon::now(),
+                    'created_at' => Carbon::now()
                 ];
 
                 $content[] = [
@@ -206,7 +206,7 @@ class NewsletterLetterContentsSeeder extends Seeder
                     'visible_from' => null,
                     'visible_to' => null,
                     'updated_at' => Carbon::now(),
-                    'created_at' => Carbon::now(),
+                    'created_at' => Carbon::now()
                 ];
 
                 $content[] = [
@@ -216,7 +216,7 @@ class NewsletterLetterContentsSeeder extends Seeder
                     'visible_from' => null,
                     'visible_to' => null,
                     'updated_at' => Carbon::now(),
-                    'created_at' => Carbon::now(),
+                    'created_at' => Carbon::now()
                 ];
 
                 $content[] = [
@@ -226,7 +226,7 @@ class NewsletterLetterContentsSeeder extends Seeder
                     'visible_from' => null,
                     'visible_to' => null,
                     'updated_at' => Carbon::now(),
-                    'created_at' => Carbon::now(),
+                    'created_at' => Carbon::now()
                 ];
 
                 $content[] = [
@@ -236,7 +236,7 @@ class NewsletterLetterContentsSeeder extends Seeder
                     'visible_from' => null,
                     'visible_to' => null,
                     'updated_at' => Carbon::now(),
-                    'created_at' => Carbon::now(),
+                    'created_at' => Carbon::now()
                 ];
             }
         }

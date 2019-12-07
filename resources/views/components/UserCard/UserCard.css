@@ -1,21 +1,21 @@
 .UserCard {
-	display: flex;
-	background: $cyan;
-	padding: $padding-sm;
+    display: flex;
+    background: $cyan;
+    padding: $padding-sm;
 }
 
-	.UserCard__right {
-		margin-left: $margin-sm;
-	}
+.UserCard__right {
+    margin-left: $margin-sm;
+}
 
-    .UserCard__name {
-    	color: $white;
-    	font: $font-heading-md;
-    	margin-top: $margin-sm;
-    }
+.UserCard__name {
+    color: $white;
+    font: $font-heading-md;
+    margin-top: $margin-sm;
+}
 
-    .UserCard__meta {
-    	color: $gray-light;
-    	font: $font-heading-xs;
-    	margin-top: $margin-sm;
-    }
+.UserCard__meta {
+    color: $gray-light;
+    font: $font-heading-xs;
+    margin-top: $margin-sm;
+}

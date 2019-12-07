@@ -1,16 +1,7 @@
 <template>
-
-    <svg
-        class="Icon"
-        :class="isclasses"
-        :width="sizeMap.width"
-        :height="sizeMap.height"
-    >
-
+    <svg class="Icon" :class="isclasses" :width="sizeMap.width" :height="sizeMap.height">
         <use :xlink:href="'#' + icon"></use>
-
     </svg>
-
 </template>
 
 <script>

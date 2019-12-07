@@ -9,16 +9,23 @@ class BlogCard
         return component('BlogCard')
             ->with('title', $blog->title)
             ->with('route', route('blog.show', [$blog->slug]))
-            ->with('user', component('UserImage')
-                ->with('route', route('user.show', [$blog->user]))
-                ->with('image', $blog->user->imagePreset('xsmall_square'))
-                ->with('rank', $blog->user->vars()->rank)
-            )
-            ->with('meta', component('Meta')->with('items', collect()
-                ->push(component('MetaLink')
-                    ->with('title', $blog->user->vars()->name)
+            ->with(
+                'user',
+                component('UserImage')
                     ->with('route', route('user.show', [$blog->user]))
-                ))
+                    ->with('image', $blog->user->imagePreset('xsmall_square'))
+                    ->with('rank', $blog->user->vars()->rank)
+            )
+            ->with(
+                'meta',
+                component('Meta')->with(
+                    'items',
+                    collect()->push(
+                        component('MetaLink')
+                            ->with('title', $blog->user->vars()->name)
+                            ->with('route', route('user.show', [$blog->user]))
+                    )
+                )
             );
     }
 }

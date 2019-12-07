@@ -17,23 +17,24 @@ class MessageController extends Controller
         $messages = collect($user->messages());
 
         return layout('Two')
-
             ->with('background', component('BackgroundMap'))
             ->with('color', 'cyan')
 
             ->with('header', region('UserHeader', $user))
 
-            ->with('content', collect()
-                ->push(component('Title')
-                    ->with('title', trans('message.index.title'))
-                )
-                ->merge($messages->map(function ($message) use ($user) {
-                    if (! $message->fromUser || get_class($message->fromUser) !== User::class) {
-                        return;
-                    }
+            ->with(
+                'content',
+                collect()
+                    ->push(component('Title')->with('title', trans('message.index.title')))
+                    ->merge(
+                        $messages->map(function ($message) use ($user) {
+                            if (!$message->fromUser || get_class($message->fromUser) !== User::class) {
+                                return;
+                            }
 
-                    return region('MessageRow', $message, $user);
-                }))
+                            return region('MessageRow', $message, $user);
+                        })
+                    )
             )
 
             ->with('footer', region('Footer'))
@@ -60,28 +61,35 @@ class MessageController extends Controller
         Message::whereIn('id', $messageIds)->update(['read' => 1]);
 
         return layout('Two')
-
             ->with('background', component('BackgroundMap'))
             ->with('color', 'cyan')
 
             ->with('header', region('UserHeader', $user))
 
-            ->with('content', collect()
-                ->push(component('Title')
-                    ->with('title', trans('message.index.with.title', [
-                        'user_with' => $user_with->vars()->name,
-                        'created_at' => $messages->count() ? $messages->last()->created_at : '',
-                    ]))
-                )
-                ->merge($messages->flatMap(function ($message) use ($user) {
-                    return collect()
-                        ->push(region('MessageWithRow', $message))
-                        ->push(component('Body')
-                            ->is('responsive')
-                            ->with('body', $message->vars()->body)
-                        );
-                }))
-                ->push(region('MessageCreateForm', $user, $user_with))
+            ->with(
+                'content',
+                collect()
+                    ->push(
+                        component('Title')->with(
+                            'title',
+                            trans('message.index.with.title', [
+                                'user_with' => $user_with->vars()->name,
+                                'created_at' => $messages->count() ? $messages->last()->created_at : ''
+                            ])
+                        )
+                    )
+                    ->merge(
+                        $messages->flatMap(function ($message) use ($user) {
+                            return collect()
+                                ->push(region('MessageWithRow', $message))
+                                ->push(
+                                    component('Body')
+                                        ->is('responsive')
+                                        ->with('body', $message->vars()->body)
+                                );
+                        })
+                    )
+                    ->push(region('MessageCreateForm', $user, $user_with))
             )
 
             ->with('footer', region('Footer'))
@@ -107,6 +115,6 @@ class MessageController extends Controller
 
         Log::info('A private message has been sent');
 
-        return backToAnchor('#message-'.$message->id);
+        return backToAnchor('#message-' . $message->id);
     }
 }

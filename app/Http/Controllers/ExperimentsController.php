@@ -29,10 +29,7 @@ class ExperimentsController extends Controller
                     component('Title')
                         ->is('white')
                         ->with('title', $d->name)
-                        ->with(
-                            'route',
-                            route('destination.showSlug', [$d->slug])
-                        )
+                        ->with('route', route('destination.showSlug', [$d->slug]))
                 )
                 ->pushWhen(
                     $user && $user->hasRole('admin'),
@@ -173,12 +170,7 @@ Tõime allpool välja valiku enamjaolt 4-5 päevasteks linnapuhkusteks. Piletihi
         // });
 
         return layout('Two')
-            ->with(
-                'content',
-                collect()->push(
-                    component('Body')->with('body', format_body($t1))
-                )
-            )
+            ->with('content', collect()->push(component('Body')->with('body', format_body($t1))))
             ->with('sidebar', ['a'])
             ->render();
     }
@@ -198,10 +190,7 @@ Tõime allpool välja valiku enamjaolt 4-5 päevasteks linnapuhkusteks. Piletihi
                         $name =
                             $d->isContinent() && $d->vars()->facts()
                                 ? ''
-                                : json_encode(
-                                    $d->vars()->facts(),
-                                    JSON_PRETTY_PRINT
-                                );
+                                : json_encode($d->vars()->facts(), JSON_PRETTY_PRINT);
 
                         $small = $d->vars()->facts()
                             ? [
@@ -275,14 +264,8 @@ Tõime allpool välja valiku enamjaolt 4-5 päevasteks linnapuhkusteks. Piletihi
                                             ->with('width', 200)
                                             ->with('height', 150)
                                     )
-                                    ->with(
-                                        'navbar_desktop',
-                                        region('NavbarDesktop', 'white')
-                                    )
-                                    ->with(
-                                        'navbar_mobile',
-                                        region('NavbarMobile')
-                                    )
+                                    ->with('navbar_desktop', region('NavbarDesktop', 'white'))
+                                    ->with('navbar_mobile', region('NavbarMobile'))
                             )
                     )
 
@@ -290,10 +273,7 @@ Tõime allpool välja valiku enamjaolt 4-5 päevasteks linnapuhkusteks. Piletihi
                         component('Flex')->with('items', [
                             component('UserImage')
                                 ->with('route', route('user.show', [$user]))
-                                ->with(
-                                    'image',
-                                    $user->imagePreset('small_square')
-                                )
+                                ->with('image', $user->imagePreset('small_square'))
                                 ->with('rank', $user->vars()->rank)
                                 ->with('size', 152)
                                 ->with('border', 7)

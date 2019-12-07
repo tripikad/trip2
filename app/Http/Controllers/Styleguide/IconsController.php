@@ -31,14 +31,9 @@ class IconsController extends Controller
 
     private function svgFiles()
     {
-        return collect(Storage::disk('resources')->files('/views/svg'))->map(
-            function ($file) {
-                return str_limit(
-                    file_get_contents(Storage::disk('resources')->path($file)),
-                    200
-                );
-            }
-        );
+        return collect(Storage::disk('resources')->files('/views/svg'))->map(function ($file) {
+            return str_limit(file_get_contents(Storage::disk('resources')->path($file)), 200);
+        });
     }
 
     private function svgComponents()
@@ -52,15 +47,10 @@ class IconsController extends Controller
                     ->push(
                         component('Code')
                             ->is('gray')
-                            ->with(
-                                'code',
-                                $file . "\n\n" . $this->svgFiles()[$index]
-                            )
+                            ->with('code', $file . "\n\n" . $this->svgFiles()[$index])
                     )
                     ->merge(
-                        collect(['sm', 'md', 'lg', 'xl'])->map(function (
-                            $size
-                        ) use ($file) {
+                        collect(['sm', 'md', 'lg', 'xl'])->map(function ($size) use ($file) {
                             return '<div class="StyleIcon">' .
                                 component('Icon')
                                     ->with('size', $size)

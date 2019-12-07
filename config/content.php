@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     'types' => [
         'blog',
         'flight',
@@ -15,11 +14,10 @@ return [
         'photo',
         'static',
         'travelmate',
-        'sponsored',
+        'sponsored'
     ],
 
     'forum' => [
-        'paginate' => 20,
-    ],
-
+        'paginate' => 20
+    ]
 ];

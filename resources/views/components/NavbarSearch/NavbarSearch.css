@@ -1,32 +1,32 @@
 .NavbarSearch {
-	display: flex;
-	align-items: center;
+    display: flex;
+    align-items: center;
 }
 
-	.NavbarSearch__icon {
-		cursor: pointer;
-		margin-right: $margin-sm;
-	}
+.NavbarSearch__icon {
+    cursor: pointer;
+    margin-right: $margin-sm;
+}
 
-	.NavbarSearch__input {
-		background: none;
-		border: none;
-        font: $font-heading-sm;
-		padding: $padding-xs;
-	}
+.NavbarSearch__input {
+    background: none;
+    border: none;
+    font: $font-heading-sm;
+    padding: $padding-xs;
+}
 
-	.NavbarSearch__input:focus {
-	    outline: none;
-	}
+.NavbarSearch__input:focus {
+    outline: none;
+}
 
 .NavbarSearch--white {
-	fill: $white;
+    fill: $white;
 }
 
-	.NavbarSearch--white .NavbarSearch__input {
-		color: $white;
-	}
+.NavbarSearch--white .NavbarSearch__input {
+    color: $white;
+}
 
 .NavbarSearch--gray {
-	fill: $gray-dark;
+    fill: $gray-dark;
 }

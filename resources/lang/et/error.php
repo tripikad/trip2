@@ -1,14 +1,14 @@
 <?php
 
 return [
-
     '404.title' => 'Ups...',
     '404.body' => 'Suure tõenäosusega on lehekülg liigutatud teise kohta. Proovi meie otsingut, et seda leida.<br><br>
 
     Kui soovid minna meie avalehele, vajuta Trip.ee logole.',
 
     '500.title' => 'Täitsa tuksis...',
-    '500.body' => 'Tripil on tehnilised tõrked. Oleme sellest teadlikud ning parandame probleemi võimalikult kiirelt.<br><br>Proovi mõne aja pärast uuesti.',
+    '500.body' =>
+        'Tripil on tehnilised tõrked. Oleme sellest teadlikud ning parandame probleemi võimalikult kiirelt.<br><br>Proovi mõne aja pärast uuesti.',
 
     '503.title' => 'Käib töö ja vile koos',
     '503.body' => 'Hetkel toimub uuenduste ja paranduste üleslaadimine.<br>
@@ -24,6 +24,5 @@ return [
 
      Sisse logimiseks või registreerimiseks vajuta menüüs "Minu Trip.ee"',
 
-    'max_limit' => 'Maksimaalsed valikud tehtud',
-
+    'max_limit' => 'Maksimaalsed valikud tehtud'
 ];

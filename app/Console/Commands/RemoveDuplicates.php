@@ -42,29 +42,44 @@ class RemoveDuplicates extends Command
      */
     public function handle()
     {
-        $topics = Topic::select(['id', 'name'])->whereIn('id', function ($query) {
-            $query->select('id')->from('topics')->groupBy('name')->havingRaw('count(*) > 1');
-        })->get();
+        $topics = Topic::select(['id', 'name'])
+            ->whereIn('id', function ($query) {
+                $query
+                    ->select('id')
+                    ->from('topics')
+                    ->groupBy('name')
+                    ->havingRaw('count(*) > 1');
+            })
+            ->get();
 
-        $destinations = Destination::select(['id', 'name'])->whereIn('id', function ($query) {
-            $query->select('id')->from('destinations')->groupBy('name')->havingRaw('count(*) > 1');
-        })->get();
+        $destinations = Destination::select(['id', 'name'])
+            ->whereIn('id', function ($query) {
+                $query
+                    ->select('id')
+                    ->from('destinations')
+                    ->groupBy('name')
+                    ->havingRaw('count(*) > 1');
+            })
+            ->get();
 
         $removable = [
             'destinations' => [],
-            'topics' => [],
+            'topics' => []
         ];
 
         $replaceable = [
             'destinations' => [],
-            'topics' => [],
+            'topics' => []
         ];
 
         if (isset($topics) && count($topics)) {
             foreach ($topics as $topic) {
                 $removable['topics'][] = $topic->id;
 
-                $new_topic = Topic::select('id')->where('name', $topic->name)->where('id', '!=', $topic->id)->first();
+                $new_topic = Topic::select('id')
+                    ->where('name', $topic->name)
+                    ->where('id', '!=', $topic->id)
+                    ->first();
                 $replaceable['topics'][] = $new_topic->id;
             }
         }
@@ -73,40 +88,67 @@ class RemoveDuplicates extends Command
             foreach ($destinations as $destination) {
                 $removable['destinations'][] = $destination->id;
 
-                $new_destination = Destination::select('id')->where('name', $destination->name)->where('id', '!=', $destination->id)->first();
+                $new_destination = Destination::select('id')
+                    ->where('name', $destination->name)
+                    ->where('id', '!=', $destination->id)
+                    ->first();
                 $replaceable['destinations'][] = $new_destination->id;
             }
         }
 
-        if (! empty($removable['destinations'])) {
+        if (!empty($removable['destinations'])) {
             foreach ($removable['destinations'] as $key => $destination) {
-                if (Content::leftJoin('content_destination', 'contents.id', '=', 'content_destination.content_id')->where('content_destination.destination_id', $destination)->update(['content_destination.destination_id' => $replaceable['destinations'][$key]])) {
-                    $this->info('content_destination.destination_id='.$destination.' MODIFIED WITH destination_id='.$replaceable['destinations'][$key]);
+                if (
+                    Content::leftJoin('content_destination', 'contents.id', '=', 'content_destination.content_id')
+                        ->where('content_destination.destination_id', $destination)
+                        ->update(['content_destination.destination_id' => $replaceable['destinations'][$key]])
+                ) {
+                    $this->info(
+                        'content_destination.destination_id=' .
+                            $destination .
+                            ' MODIFIED WITH destination_id=' .
+                            $replaceable['destinations'][$key]
+                    );
                 }
 
-                if (Flag::where('flaggable_id', $destination)->where('flaggable_type', 'App\Destination')->update(['flaggable_id' => $replaceable['destinations'][$key]])) {
-                    $this->info('flags App\Destination flaggable_id='.$destination.' MODIFIED WITH flaggable_id='.$replaceable['destinations'][$key]);
+                if (
+                    Flag::where('flaggable_id', $destination)
+                        ->where('flaggable_type', 'App\Destination')
+                        ->update(['flaggable_id' => $replaceable['destinations'][$key]])
+                ) {
+                    $this->info(
+                        'flags App\Destination flaggable_id=' .
+                            $destination .
+                            ' MODIFIED WITH flaggable_id=' .
+                            $replaceable['destinations'][$key]
+                    );
                 }
 
-                Cache::forget('popular.destinations.root'.$destination);
-                $this->info('Cache "popular.destinations.root.'.$destination.'" cleared');
+                Cache::forget('popular.destinations.root' . $destination);
+                $this->info('Cache "popular.destinations.root.' . $destination . '" cleared');
             }
 
             if (Destination::whereIn('id', $removable['destinations'])->delete()) {
-                $this->info('Destinations: '.implode(', ', $removable['destinations']).' removed'."\n");
+                $this->info('Destinations: ' . implode(', ', $removable['destinations']) . ' removed' . "\n");
 
                 Cache::forget('destination.names');
                 $this->info('Cache "destination.names" cleared');
 
                 Destination::rebuild(true);
-                $this->info('Destinations tree has been rebuilt'."\n\n");
+                $this->info('Destinations tree has been rebuilt' . "\n\n");
             }
         }
 
-        if (! empty($removable['topics'])) {
+        if (!empty($removable['topics'])) {
             foreach ($removable['topics'] as $key => $topic) {
-                if (Content::leftJoin('content_topic', 'contents.id', '=', 'content_topic.content_id')->where('content_topic.topic_id', $topic)->update(['content_topic.topic_id' => $replaceable['topics'][$key]])) {
-                    $this->info('content_topic.topic_id='.$topic.' MODIFIED WITH topic_id='.$replaceable['topics'][$key]);
+                if (
+                    Content::leftJoin('content_topic', 'contents.id', '=', 'content_topic.content_id')
+                        ->where('content_topic.topic_id', $topic)
+                        ->update(['content_topic.topic_id' => $replaceable['topics'][$key]])
+                ) {
+                    $this->info(
+                        'content_topic.topic_id=' . $topic . ' MODIFIED WITH topic_id=' . $replaceable['topics'][$key]
+                    );
                 }
 
                 /*if (Flag::where('flaggable_id', $topic)->where('flaggable_type', 'App\Topic')->update(['flaggable_id' => $replaceable['topics'][$key]])) {
@@ -115,7 +157,7 @@ class RemoveDuplicates extends Command
             }
 
             if (Topic::whereIn('id', $removable['topics'])->delete()) {
-                $this->info('Topics: '.implode(', ', $removable['topics']).' removed');
+                $this->info('Topics: ' . implode(', ', $removable['topics']) . ' removed');
             }
         }
 

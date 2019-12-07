@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     // General
 
     'post.updated.at' => 'Edited: :updated_at',
@@ -54,7 +53,8 @@ return [
     'edit.field.topics.placeholder' => 'Select topics',
 
     'store.status.1.info' => ':title has been added',
-    'store.status.0.info' => ':title has been added but its unpublished for now. Publish it to make it visible to everybody.',
+    'store.status.0.info' =>
+        ':title has been added but its unpublished for now. Publish it to make it visible to everybody.',
 
     'create.info' => ':title has been created',
     'update.info' => ':title has been updated',
@@ -185,7 +185,8 @@ return [
 
     'travelmate.filter.text' => 'Kui ei leia sobivat kaaslast, siis ehk aitab sind filter.',
 
-    'travelmate.description.title' => 'Soovid kaaslaseks eksperti oma esimesele matkareisile? Lihtsalt seltsilist palmi alla?',
+    'travelmate.description.title' =>
+        'Soovid kaaslaseks eksperti oma esimesele matkareisile? Lihtsalt seltsilist palmi alla?',
     'travelmate.description.text' => 'Siit leiad omale sobiva reisikaaslase.',
 
     // Forum
@@ -332,6 +333,5 @@ return [
 
     'destionation.edit.title' => 'Edit destination',
     'destination.edit.description' => 'Description',
-    'destination.edit.user' => 'Description authors username',
-
+    'destination.edit.user' => 'Description authors username'
 ];

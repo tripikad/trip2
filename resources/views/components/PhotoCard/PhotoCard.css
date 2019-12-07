@@ -11,7 +11,7 @@
     position: absolute;
     bottom: 8px;
     left: 8px;
-    border: 1px solid #FFF;
+    border: 1px solid #fff;
     align-items: center;
     border-radius: $border-radius-lg;
     display: inline-flex;
@@ -22,6 +22,6 @@
 }
 
 .PhotoCard__statusButton {
-    color: #FFF;
+    color: #fff;
     white-space: nowrap;
 }

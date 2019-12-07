@@ -25,23 +25,25 @@ class NewsletterController extends Controller
                 $newsletter_type->subject = str_replace('[[destination_name]]', '...', $newsletter_type->subject);
             }
 
-            $navBar->push(component('Button')
-                ->with('title', $newsletter_type->subject)
-                ->with('route', route('newsletter.view', [$newsletter_type]))
+            $navBar->push(
+                component('Button')
+                    ->with('title', $newsletter_type->subject)
+                    ->with('route', route('newsletter.view', [$newsletter_type]))
             );
         }
 
         return layout('Two')
             ->with('background', component('BackgroundMap'))
             ->with('color', 'gray')
-            ->with('header', region('ForumHeader', collect()
-                ->push(component('Title')
-                    ->with('title', trans('menu.admin.newsletter'))
+            ->with(
+                'header',
+                region(
+                    'ForumHeader',
+                    collect()
+                        ->push(component('Title')->with('title', trans('menu.admin.newsletter')))
+                        ->push(component('BlockHorizontal')->with('content', region('ForumLinks')))
                 )
-                ->push(component('BlockHorizontal')
-                    ->with('content', region('ForumLinks'))
-                )
-            ))
+            )
             ->with('content', $navBar)
             ->with('footer', region('FooterLight'))
             ->render();
@@ -62,18 +64,16 @@ class NewsletterController extends Controller
                 $newsletter_type->subject = str_replace('[[destination_name]]', '...', $newsletter_type->subject);
             }
 
-            $navBar->push(component('Link')
-                ->with('icon', false)
-                ->with('title', $newsletter_type->subject)
-                ->with('route', route('newsletter.view', [$newsletter_type]))
+            $navBar->push(
+                component('Link')
+                    ->with('icon', false)
+                    ->with('title', $newsletter_type->subject)
+                    ->with('route', route('newsletter.view', [$newsletter_type]))
             );
         }
 
         $sents = NewsletterSent::where('newsletter_type_id', $id)
-            ->with([
-                'newsletter_type',
-                'destination',
-            ])
+            ->with(['newsletter_type', 'destination'])
             ->orderBy('id', 'desc')
             ->paginate(15);
 
@@ -81,25 +81,36 @@ class NewsletterController extends Controller
         $right_content = collect();
         $sents->each(function ($sent) use (&$left_content, &$right_content) {
             $subject = $sent->newsletter_type->subject;
-            $subject = str_replace('[[destination_name]]', ($sent->destination ? $sent->destination->name : ''), $subject);
-            $left_content->push(component('Meta')
-                ->with('items', collect()
-                    ->push(
-                        component('Body')
-                            ->with('body', $subject)
-                    )
-                    ->push(
-                        component('Tag')
-                            ->with('title', trans('newsletter.started_at').' '.format_date($sent->started_at))
-                    )
-                    ->push(
-                        component('Tag')
-                            ->with('title', trans('newsletter.ended_at').' '.($sent->ended_at ? format_date($sent->started_at) : trans('newsletter.tag.future')))
-                    )
-                    ->push(
-                        component('Tag')
-                            ->with('title', trans('newsletter.sent').' '.$sent->sending_num.' / '.$sent->sent_num)
-                    )
+            $subject = str_replace(
+                '[[destination_name]]',
+                $sent->destination ? $sent->destination->name : '',
+                $subject
+            );
+            $left_content->push(
+                component('Meta')->with(
+                    'items',
+                    collect()
+                        ->push(component('Body')->with('body', $subject))
+                        ->push(
+                            component('Tag')->with(
+                                'title',
+                                trans('newsletter.started_at') . ' ' . format_date($sent->started_at)
+                            )
+                        )
+                        ->push(
+                            component('Tag')->with(
+                                'title',
+                                trans('newsletter.ended_at') .
+                                    ' ' .
+                                    ($sent->ended_at ? format_date($sent->started_at) : trans('newsletter.tag.future'))
+                            )
+                        )
+                        ->push(
+                            component('Tag')->with(
+                                'title',
+                                trans('newsletter.sent') . ' ' . $sent->sending_num . ' / ' . $sent->sent_num
+                            )
+                        )
                 )
             );
 
@@ -114,35 +125,42 @@ class NewsletterController extends Controller
         return layout('Two')
             ->with('background', component('BackgroundMap'))
             ->with('color', 'gray')
-            ->with('header', region('ForumHeader', collect()
-                ->push(component('Title')
-                    ->with('title', trans('newsletter.title').': '.$newsletter->subject)
+            ->with(
+                'header',
+                region(
+                    'ForumHeader',
+                    collect()
+                        ->push(
+                            component('Title')->with('title', trans('newsletter.title') . ': ' . $newsletter->subject)
+                        )
+                        ->push(component('BlockHorizontal')->with('content', region('ForumLinks')))
                 )
-                ->push(component('BlockHorizontal')
-                    ->with('content', region('ForumLinks'))
-                )
-            ))
-            ->with('content', collect()
-                ->push(component('Grid2')
-                    ->with('gutter', true)
-                    ->with('items', [
-                        component('Button')
-                            ->with('title', trans('newsletter.button.edit'))
-                            ->with('route', route('newsletter.edit', [$newsletter])),
-                        component('Button')
-                            ->is('cyan')
-                            ->with('external', true)
-                            ->with('title', trans('newsletter.button.preview'))
-                            ->with('route', route('newsletter.preview', [$newsletter])),
-                    ])
-                )
-                ->push(component('GridSplit')
-                    ->with('left_col', 9)
-                    ->with('right_col', 3)
-                    ->with('left_content', $left_content)
-                    ->with('right_content', $right_content)
-                )
-                ->push(region('Paginator', $sents))
+            )
+            ->with(
+                'content',
+                collect()
+                    ->push(
+                        component('Grid2')
+                            ->with('gutter', true)
+                            ->with('items', [
+                                component('Button')
+                                    ->with('title', trans('newsletter.button.edit'))
+                                    ->with('route', route('newsletter.edit', [$newsletter])),
+                                component('Button')
+                                    ->is('cyan')
+                                    ->with('external', true)
+                                    ->with('title', trans('newsletter.button.preview'))
+                                    ->with('route', route('newsletter.preview', [$newsletter]))
+                            ])
+                    )
+                    ->push(
+                        component('GridSplit')
+                            ->with('left_col', 9)
+                            ->with('right_col', 3)
+                            ->with('left_content', $left_content)
+                            ->with('right_content', $right_content)
+                    )
+                    ->push(region('Paginator', $sents))
             )
             ->with('sidebar', $navBar)
             ->with('footer', region('FooterLight'))
@@ -163,22 +181,29 @@ class NewsletterController extends Controller
                 $letter_contents[$key] = [
                     'body' => $body,
                     'visible_from' => $request->old('visible_from')[$key],
-                    'visible_to' => $request->old('visible_to')[$key],
+                    'visible_to' => $request->old('visible_to')[$key]
                 ];
             }
         } else {
-            $letter_contents = NewsletterLetterContent::select('body', 'visible_from', 'visible_to')->where('newsletter_type_id', $newsletter->id)
+            $letter_contents = NewsletterLetterContent::select('body', 'visible_from', 'visible_to')
+                ->where('newsletter_type_id', $newsletter->id)
                 ->orderBy('sort_order', 'asc')
                 ->get()
                 ->toArray();
 
             foreach ($letter_contents as &$letter_content) {
                 if ($letter_content['visible_from']) {
-                    $letter_content['visible_from'] = Carbon::createFromFormat('Y-m-d', $letter_content['visible_from'])->format('d.m.Y');
+                    $letter_content['visible_from'] = Carbon::createFromFormat(
+                        'Y-m-d',
+                        $letter_content['visible_from']
+                    )->format('d.m.Y');
                 }
 
                 if ($letter_content['visible_to']) {
-                    $letter_content['visible_to'] = Carbon::createFromFormat('Y-m-d', $letter_content['visible_to'])->format('d.m.Y');
+                    $letter_content['visible_to'] = Carbon::createFromFormat(
+                        'Y-m-d',
+                        $letter_content['visible_to']
+                    )->format('d.m.Y');
                 }
             }
         }
@@ -186,33 +211,42 @@ class NewsletterController extends Controller
         return layout('Two')
             ->with('background', component('BackgroundMap'))
             ->with('color', 'gray')
-            ->with('header', region('ForumHeader', collect()
-                ->push(component('Title')
-                    ->with('title', trans('newsletter.title').': '.$newsletter->subject)
+            ->with(
+                'header',
+                region(
+                    'ForumHeader',
+                    collect()
+                        ->push(
+                            component('Title')->with('title', trans('newsletter.title') . ': ' . $newsletter->subject)
+                        )
+                        ->push(component('BlockHorizontal')->with('content', region('ForumLinks')))
                 )
-                ->push(component('BlockHorizontal')
-                    ->with('content', region('ForumLinks'))
-                )
-            ))
+            )
             ->with('column_class', 'col-11')
-            ->with('content', collect()
-                ->push(
+            ->with(
+                'content',
+                collect()->push(
                     component('Form')
                         ->with('route', route('newsletter.store', [$newsletter]))
                         ->with('id', 'FlightNewsletterSubscribeForm')
-                        ->with('fields', collect()->push(
-                            component('NewsletterComposer')
-                                ->with('content_placeholder', trans('newsletter.field.content'))
-                                ->with('visible_from_placeholder', trans('newsletter.field.visible_from'))
-                                ->with('visible_to_placeholder', trans('newsletter.field.visible_to'))
-                                ->with('cheatsheet', trans('newsletter.cheatsheet.content'))
-                                ->with('letter_contents', $letter_contents)
-                        )->push(
-                            component('FormButtonProcess')
-                                ->with('title', trans('newsletter.button.edit'))
-                                ->with('processingtitle', trans('newsletter.button.subscribe_processing'))
-                                ->with('id', 'FlightNewsletterSubscribeForm')
-                        ))
+                        ->with(
+                            'fields',
+                            collect()
+                                ->push(
+                                    component('NewsletterComposer')
+                                        ->with('content_placeholder', trans('newsletter.field.content'))
+                                        ->with('visible_from_placeholder', trans('newsletter.field.visible_from'))
+                                        ->with('visible_to_placeholder', trans('newsletter.field.visible_to'))
+                                        ->with('cheatsheet', trans('newsletter.cheatsheet.content'))
+                                        ->with('letter_contents', $letter_contents)
+                                )
+                                ->push(
+                                    component('FormButtonProcess')
+                                        ->with('title', trans('newsletter.button.edit'))
+                                        ->with('processingtitle', trans('newsletter.button.subscribe_processing'))
+                                        ->with('id', 'FlightNewsletterSubscribeForm')
+                                )
+                        )
                 )
             )
             ->with('footer', region('FooterLight'))
@@ -239,10 +273,14 @@ class NewsletterController extends Controller
                         $date_from_arr = explode('.', $$date);
 
                         if (count($date_from_arr) == 3) {
-                            if (! checkdate($date_from_arr[1], $date_from_arr[0], $date_from_arr[2])) {
+                            if (!checkdate($date_from_arr[1], $date_from_arr[0], $date_from_arr[2])) {
                                 $errors[] = trans('newsletter.error.wrong_date_format', ['date' => $$date]);
                             } else {
-                                $$date = Carbon::createFromDate($date_from_arr[2], $date_from_arr[1], $date_from_arr[0])->format('Y-m-d');
+                                $$date = Carbon::createFromDate(
+                                    $date_from_arr[2],
+                                    $date_from_arr[1],
+                                    $date_from_arr[0]
+                                )->format('Y-m-d');
                             }
                         } else {
                             $errors[] = trans('newsletter.error.wrong_date_format', ['date' => $$date]);
@@ -255,16 +293,18 @@ class NewsletterController extends Controller
                     'body' => $body,
                     'visible_from' => $date_from,
                     'visible_to' => $date_to,
-                    'sort_order' => $sort_order,
+                    'sort_order' => $sort_order
                 ];
             }
         }
 
         if (count($errors)) {
-            return redirect()->back()->withInput($request->input())->withErrors($errors);
+            return redirect()
+                ->back()
+                ->withInput($request->input())
+                ->withErrors($errors);
         } else {
-            NewsletterLetterContent::where('newsletter_type_id', $newsletter->id)
-                ->delete();
+            NewsletterLetterContent::where('newsletter_type_id', $newsletter->id)->delete();
 
             NewsletterLetterContent::insert($insert);
 
@@ -299,25 +339,38 @@ class NewsletterController extends Controller
                 $errors[] = trans('newsletter.max_limit_exceeded', ['max' => FlightNewsletterSubscribe::$max]);
             }
 
-            if (! count($errors)) {
+            if (!count($errors)) {
                 $insert_destinations = $destination_ids;
                 $insert_price_error = $price_error;
 
                 foreach ($previous_subscriptions as &$previous_subscription) {
                     if ($previous_subscription->price_error) {
                         $insert_price_error = 0;
-                    } elseif ($previous_subscription->destination_id && in_array($previous_subscription->destination_id, $insert_destinations)) {
-                        unset($insert_destinations[array_search($previous_subscription->destination_id, $insert_destinations)]);
+                    } elseif (
+                        $previous_subscription->destination_id &&
+                        in_array($previous_subscription->destination_id, $insert_destinations)
+                    ) {
+                        unset(
+                            $insert_destinations[
+                                array_search($previous_subscription->destination_id, $insert_destinations)
+                            ]
+                        );
                     }
 
                     if ($previous_subscription->active) {
-                        if ($previous_subscription->destination_id && ! in_array($previous_subscription->destination_id, $destination_ids)) {
+                        if (
+                            $previous_subscription->destination_id &&
+                            !in_array($previous_subscription->destination_id, $destination_ids)
+                        ) {
                             $deactivate_subscription_ids[] = $previous_subscription->id;
-                        } elseif ($previous_subscription->price_error && ! $price_error) {
+                        } elseif ($previous_subscription->price_error && !$price_error) {
                             $deactivate_subscription_ids[] = $previous_subscription->id;
                         }
                     } else {
-                        if ($previous_subscription->destination_id && in_array($previous_subscription->destination_id, $destination_ids)) {
+                        if (
+                            $previous_subscription->destination_id &&
+                            in_array($previous_subscription->destination_id, $destination_ids)
+                        ) {
                             $activate_subscription_ids[] = $previous_subscription->id;
                         } elseif ($previous_subscription->price_error && $price_error) {
                             $activate_subscription_ids[] = $previous_subscription->id;
@@ -328,14 +381,14 @@ class NewsletterController extends Controller
                 // Deactivate
                 if (count($deactivate_subscription_ids)) {
                     NewsletterSubscription::whereIn('id', $deactivate_subscription_ids)->update([
-                        'active' => 0,
+                        'active' => 0
                     ]);
                 }
 
                 // Activate
                 if (count($activate_subscription_ids)) {
                     NewsletterSubscription::whereIn('id', $activate_subscription_ids)->update([
-                        'active' => 1,
+                        'active' => 1
                     ]);
                 }
 
@@ -350,7 +403,7 @@ class NewsletterController extends Controller
                             'destination_id' => $destination_id,
                             'active' => 1,
                             'created_at' => Carbon::now(),
-                            'updated_at' => Carbon::now(),
+                            'updated_at' => Carbon::now()
                         ];
                     }
                 }
@@ -363,7 +416,7 @@ class NewsletterController extends Controller
                         'destination_id' => null,
                         'active' => 1,
                         'created_at' => Carbon::now(),
-                        'updated_at' => Carbon::now(),
+                        'updated_at' => Carbon::now()
                     ];
                 }
 
@@ -373,9 +426,9 @@ class NewsletterController extends Controller
 
                 $info = trans('newsletter.subscribed.flight.detailed.successfully');
             }
-        } elseif ($newsletter_type->type == 'flight_general' && ! $user) {
+        } elseif ($newsletter_type->type == 'flight_general' && !$user) {
             $this->validate($request, [
-                'e-post' => 'required|email',
+                'e-post' => 'required|email'
             ]);
 
             $subscription = NewsletterSubscription::where('email', $request->input('e-post'))
@@ -388,9 +441,9 @@ class NewsletterController extends Controller
                 $errors[] = trans('newsletter.error.already_subscribed');
             }
 
-            if (! count($errors)) {
-                if (! $subscription) {
-                    $subscription = new NewsletterSubscription;
+            if (!count($errors)) {
+                if (!$subscription) {
+                    $subscription = new NewsletterSubscription();
                 }
 
                 $subscription->newsletter_type_id = (int) $id;
@@ -405,12 +458,12 @@ class NewsletterController extends Controller
                 ->where('newsletter_type_id', $id)
                 ->first();
 
-            $newsletter_subscribe = ($skip_request ? 1 : $request->newsletter_subscribe ? 1 : 0);
+            $newsletter_subscribe = ($skip_request ? 1 : $request->newsletter_subscribe) ? 1 : 0;
 
             if ($subscription) {
                 $subscription->active = $newsletter_subscribe;
             } else {
-                $subscription = new NewsletterSubscription;
+                $subscription = new NewsletterSubscription();
                 $subscription->user_id = $user->id;
                 $subscription->newsletter_type_id = $id;
                 $subscription->active = $newsletter_subscribe;
@@ -420,9 +473,13 @@ class NewsletterController extends Controller
         }
 
         if (isset($errors) && count($errors)) {
-            return redirect()->back()->withErrors($errors);
+            return redirect()
+                ->back()
+                ->withErrors($errors);
         } elseif (isset($info) && $info) {
-            return redirect()->back()->with('info', $info);
+            return redirect()
+                ->back()
+                ->with('info', $info);
         }
     }
 
@@ -430,7 +487,9 @@ class NewsletterController extends Controller
     {
         $subscription = NewsletterSubscription::where('active', 1)->findOrFail($id);
 
-        if (sha1($subscription->id.$subscription->email.$subscription->user_id.$subscription->created_at) == $hash) {
+        if (
+            sha1($subscription->id . $subscription->email . $subscription->user_id . $subscription->created_at) == $hash
+        ) {
             $title = trans('newsletter.unsubscribed.successfully.title');
             $body = trans('newsletter.unsubscribed.successfully.body');
 
@@ -438,19 +497,27 @@ class NewsletterController extends Controller
             $subscription->save();
 
             return layout('Two')
-                ->with('header', region('StaticHeader', collect()
-                    ->push(component('Title')
-                        ->is('red')
-                        ->is('large')
-                        ->with('title', $title)
+                ->with(
+                    'header',
+                    region(
+                        'StaticHeader',
+                        collect()->push(
+                            component('Title')
+                                ->is('red')
+                                ->is('large')
+                                ->with('title', $title)
+                        )
                     )
-                ))
-                ->with('content', collect()
-                    ->push(component('Body')
-                        ->is('responsive')
-                        ->with('body', $body)
-                    )
-                    ->push('&nbsp;')
+                )
+                ->with(
+                    'content',
+                    collect()
+                        ->push(
+                            component('Body')
+                                ->is('responsive')
+                                ->with('body', $body)
+                        )
+                        ->push('&nbsp;')
                 )
                 ->with('footer', region('FooterLight'))
                 ->render();
@@ -464,13 +531,16 @@ class NewsletterController extends Controller
         $markdown = new Markdown(view(), config('mail.markdown'));
 
         $newsletter = NewsletterType::findOrFail($id);
-        $contents = NewsletterLetterContent::where('newsletter_type_id', $id)->orderBy('sort_order', 'asc')->get();
+        $contents = NewsletterLetterContent::where('newsletter_type_id', $id)
+            ->orderBy('sort_order', 'asc')
+            ->get();
 
         $body = '';
 
         $the_flight = null;
         if ($newsletter->type == 'flight') {
-            $the_flight = Content::where('type', 'flight')->with(['destinations', 'images'])
+            $the_flight = Content::where('type', 'flight')
+                ->with(['destinations', 'images'])
                 ->has('destinations')
                 ->has('images')
                 ->take(1)
@@ -488,7 +558,7 @@ class NewsletterController extends Controller
         return $markdown->render('email.newsletter.newsletter', [
             'heading' => $newsletter->subject,
             'body' => $body,
-            'unsubscribe_route' => '#',
+            'unsubscribe_route' => '#'
         ]);
     }
 
@@ -496,15 +566,16 @@ class NewsletterController extends Controller
     {
         $markdown = new Markdown(view(), config('mail.markdown'));
 
-        $newsletter = NewsletterSent::with([
-            'newsletter_type',
-            'destination',
-        ])->findOrFail($id);
+        $newsletter = NewsletterSent::with(['newsletter_type', 'destination'])->findOrFail($id);
 
         return $markdown->render('email.newsletter.newsletter', [
-            'heading' => str_replace('[[destination_name]]', ($newsletter->destination ? $newsletter->destination->name : ''), $newsletter->newsletter_type->subject),
+            'heading' => str_replace(
+                '[[destination_name]]',
+                $newsletter->destination ? $newsletter->destination->name : '',
+                $newsletter->newsletter_type->subject
+            ),
             'body' => $newsletter->composed_content,
-            'unsubscribe_route' => '#',
+            'unsubscribe_route' => '#'
         ]);
     }
 }

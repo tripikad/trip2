@@ -39,14 +39,16 @@ class ForumMiscTopic extends Command
             'https://trip.ee/foorum/uldfoorum/filipiinide-naised',
             'https://trip.ee/foorum/uldfoorum/kiire-id-kaardi-lugeja-tai-krabi',
             'https://trip.ee/foorum/uldfoorum/huvitavad-templid-passis',
-            'https://trip.ee/foorum/uldfoorum/asjade-toimetamine-kanaaridelt-eestisse',
-            ]);
+            'https://trip.ee/foorum/uldfoorum/asjade-toimetamine-kanaaridelt-eestisse'
+        ]);
 
-        $content = $urls->map(function ($url) {
-            return collect(explode('/', $url))->last();
-        })->map(function ($slug) {
-            return \App\Content::whereSlug($slug)->first();
-        });
+        $content = $urls
+            ->map(function ($url) {
+                return collect(explode('/', $url))->last();
+            })
+            ->map(function ($slug) {
+                return \App\Content::whereSlug($slug)->first();
+            });
 
         /*
         $items = Content::whereType('forum')->join('content_topic', 'content_topic.content_id', '=', 'contents.id')

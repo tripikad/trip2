@@ -18,20 +18,9 @@ class CommentTest extends BrowserKitTestCase
     {
         parent::setUp();
 
-        $this->publicContentTypes = [
-            'blog',
-            'buysell',
-            'expat',
-            'flight',
-            'forum',
-            'news',
-            'shortnews',
-            'travelmate',
-        ];
+        $this->publicContentTypes = ['blog', 'buysell', 'expat', 'flight', 'forum', 'news', 'shortnews', 'travelmate'];
 
-        $this->privateContentTypes = [
-           'internal',
-        ];
+        $this->privateContentTypes = ['internal'];
     }
 
     public function test_regular_user_can_create_and_edit_comment()
@@ -46,7 +35,7 @@ class CommentTest extends BrowserKitTestCase
                 'user_id' => factory(User::class)->create()->id,
                 'type' => $type,
                 'end_at' => Carbon::now()->addDays(30),
-                'start_at' => Carbon::now()->addDays(30),
+                'start_at' => Carbon::now()->addDays(30)
             ]);
 
             // Can comment
@@ -55,14 +44,14 @@ class CommentTest extends BrowserKitTestCase
                 ->visit("content/$content->type/$content->id")
                 ->type("Hola chicos de $content->type", 'body')
                 ->press(trans('comment.create.submit.title'))
-                ->seePageIs(config('sluggable.contentTypeMapping')[$content->type].'/'.$content->slug)
+                ->seePageIs(config('sluggable.contentTypeMapping')[$content->type] . '/' . $content->slug)
                 ->see("Hola chicos de $content->type")
                 ->see($regular_user->name)
                 ->seeInDatabase('comments', [
                     'user_id' => $regular_user->id,
                     'content_id' => $content->id,
                     'body' => "Hola chicos de $content->type",
-                    'status' => 1,
+                    'status' => 1
                 ]);
 
             $comment = Comment::whereBody("Hola chicos de $content->type")->first();
@@ -75,13 +64,13 @@ class CommentTest extends BrowserKitTestCase
                 ->visit("comment/$comment->id/edit")
                 ->type("Hola chicas de $content->type", 'body')
                 ->press(trans('comment.edit.submit.title'))
-                ->seePageIs(config('sluggable.contentTypeMapping')[$content->type].'/'.$content->slug)
+                ->seePageIs(config('sluggable.contentTypeMapping')[$content->type] . '/' . $content->slug)
                 ->see("Hola chicas de $content->type")
                 ->seeInDatabase('comments', [
                     'user_id' => $regular_user->id,
                     'content_id' => $content->id,
                     'body' => "Hola chicas de $content->type",
-                    'status' => 1,
+                    'status' => 1
                 ]);
         }
     }
@@ -93,12 +82,12 @@ class CommentTest extends BrowserKitTestCase
         foreach ($this->publicContentTypes as $type) {
             $content = factory(Content::class)->create([
                 'user_id' => factory(User::class)->create()->id,
-                'type' => 'forum',
+                'type' => 'forum'
             ]);
 
             $comment = factory(Comment::class)->create([
                 'user_id' => factory(User::class)->create()->id,
-                'content_id' => $content->id,
+                'content_id' => $content->id
             ]);
 
             // Can not edit other users comments
@@ -119,24 +108,22 @@ class CommentTest extends BrowserKitTestCase
         foreach ($this->privateContentTypes as $type) {
             $content = factory(Content::class)->create([
                 'user_id' => factory(User::class)->create()->id,
-                'type' => $type,
+                'type' => $type
             ]);
 
             $comment = factory(Comment::class)->create([
                 'user_id' => factory(User::class)->create()->id,
-                'content_id' => $content->id,
+                'content_id' => $content->id
             ]);
 
             // Can not add private content comments
 
-            $response = $this->actingAs($regular_user)
-                ->call('POST', "content/$content->type/$content->id/comment");
+            $response = $this->actingAs($regular_user)->call('POST', "content/$content->type/$content->id/comment");
             $this->assertEquals(302, $response->status());
 
             // Can not edit private content comments
 
-            $response = $this->actingAs($regular_user)
-                ->call('GET', "comment/$comment->id/edit");
+            $response = $this->actingAs($regular_user)->call('GET', "comment/$comment->id/edit");
             $this->assertEquals(401, $response->status());
         }
     }
@@ -153,12 +140,12 @@ class CommentTest extends BrowserKitTestCase
         foreach ($contentTypes as $type) {
             $content = factory(Content::class)->create([
                 'user_id' => $superuser->id,
-                'type' => $type,
+                'type' => $type
             ]);
 
             $comment = factory(Comment::class)->create([
                 'user_id' => $superuser->id,
-                'content_id' => $content->id,
+                'content_id' => $content->id
             ]);
 
             $first_date = Content::find($content->id)->updated_at;

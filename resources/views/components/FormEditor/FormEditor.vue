@@ -1,7 +1,5 @@
 <template>
-
     <div class="FormTextarea" :class="isclasses">
-
         <label :for="name" class="FormTextarea__label">{{ title }}</label>
 
         <textarea
@@ -15,9 +13,7 @@
             :placeholder="placeholder"
             @focus="$events.$emit('editor.show', currentValue)"
         ></textarea>
-            
     </div>
-
 </template>
 
 <script>

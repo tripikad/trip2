@@ -30,14 +30,14 @@ class ConvertBase extends Command
         'trip_forum_buysell',
         'trip_forum_travelmate',
         'trip_image',
-        'trip_offer',
+        'trip_offer'
     ];
 
     protected $forumTypeMap = [
         'trip_forum' => 'forum',
         'trip_forum_buysell' => 'forum',
         'trip_forum_expat' => 'forum',
-        'trip_forum_other' => 'forum',
+        'trip_forum_other' => 'forum'
     ];
 
     public function __construct()
@@ -91,11 +91,11 @@ class ConvertBase extends Command
 
     public function convertNode($node, $modelname, $type, $route = '')
     {
-        if (! $modelname::find($node->nid)) {
+        if (!$modelname::find($node->nid)) {
             if ($this->isUserConvertable($node->uid)) {
-                $user_id = ($node->uid > 0) ? $node->uid : 1;
+                $user_id = $node->uid > 0 ? $node->uid : 1;
 
-                $model = new $modelname;
+                $model = new $modelname();
 
                 $model->id = $node->nid;
                 $model->type = $type;
@@ -106,7 +106,7 @@ class ConvertBase extends Command
                 $model->start_at = isset($node->start_at) ? $node->start_at : null;
                 $model->end_at = isset($node->end_at) ? $node->end_at : null;
                 $model->duration = isset($node->duration) ? $this->cleanAll($node->duration) : null;
-                $model->price = (isset($node->price) && is_int((int) $node->price)) ? $node->price : null;
+                $model->price = isset($node->price) && is_int((int) $node->price) ? $node->price : null;
 
                 $model->status = 1;
 
@@ -171,8 +171,8 @@ class ConvertBase extends Command
 
     public function createTerm($term, $modelname, $setParent = false)
     {
-        if (! $modelname::find($term->tid)) {
-            $model = new $modelname;
+        if (!$modelname::find($term->tid)) {
+            $model = new $modelname();
             $model->id = $term->tid;
             $model->name = $this->cleanAll($term->name);
 
@@ -187,7 +187,6 @@ class ConvertBase extends Command
     // Topics
 
     public $topicMap = [
-
         'Konkurss' => ['delete' => true],
         'Trip.ee tänab' => ['move' => 'Trip.ee tagasiside'], // !
         'Up Traveli reisijutu konkurss' => ['move' => 'Trip.ee tagasiside'],
@@ -220,12 +219,12 @@ class ConvertBase extends Command
         'Reisiöömaja' => ['rename' => 'Majutus ja hotellid'],
         'Reisikiri' => ['delete' => true],
         'Auto-motoreis' => ['rename' => 'Autoreis'],
-//      'Reisivideo' => ['delete' => true],
+        //      'Reisivideo' => ['delete' => true],
 
         'Matkavarustus' => ['rename' => 'Varustus'],
         'Reisikirjandus' => ['rename' => 'Reisiraamatud'],
         'Reisi-öömaja' => ['rename' => 'Majutus ja hotellid'],
-//      'Voucherid ja piletid' => [],
+        //      'Voucherid ja piletid' => [],
 
         'Vaba teema' => ['tid' => 5000, 'pattern' => '//i'],
         'Lemmikloom reisil' => ['tid' => 5001, 'pattern' => '/(lemmikloom|koer| kass)/i'],
@@ -235,17 +234,23 @@ class ConvertBase extends Command
         'Turvalisus' => ['tid' => 5005, 'pattern' => '/(turval|varasta)/i'],
         'Uuring' => ['tid' => 5006, 'pattern' => '/(uuring|uurimus|küsitlus)/i'],
         'Töö' => ['tid' => 5007, 'pattern' => '/(töö leid|töö ots|tööle|töökoh)/i'],
-        'Mobiil' => ['tid' => 5008, 'pattern' => '/(mobiil|nutitelef|htc|nokia|mobla|iphone|android|ipad|tablet|sim-|sim kaart|samsung|äpp|rakendus)/i'],
-
+        'Mobiil' => [
+            'tid' => 5008,
+            'pattern' =>
+                '/(mobiil|nutitelef|htc|nokia|mobla|iphone|android|ipad|tablet|sim-|sim kaart|samsung|äpp|rakendus)/i'
+        ]
     ];
 
     public function processTopic($topic)
     {
-        if ($rename = array_get($this->topicMap, $topic->name.'.rename')) {
+        if ($rename = array_get($this->topicMap, $topic->name . '.rename')) {
             $topic->name = $rename;
         }
 
-        if (array_get($this->topicMap, $topic->name.'.move') || array_get($this->topicMap, $topic->name.'.delete')) {
+        if (
+            array_get($this->topicMap, $topic->name . '.move') ||
+            array_get($this->topicMap, $topic->name . '.delete')
+        ) {
             return false;
         }
 
@@ -281,20 +286,24 @@ class ConvertBase extends Command
     {
         $values = [$key1 => $value1, $key2 => $value2];
 
-        if (! DB::table($table)->where($values)->get()) {
+        if (
+            !DB::table($table)
+                ->where($values)
+                ->get()
+        ) {
             DB::table($table)->insert($values);
         }
     }
 
     public function processNodeTopic($topic)
     {
-        if ($move = array_get($this->topicMap, $topic->name.'.move')) {
+        if ($move = array_get($this->topicMap, $topic->name . '.move')) {
             $new = $this->getTermByName($move);
 
             return $new;
         }
 
-        if (array_get($this->topicMap, $topic->name.'.delete')) {
+        if (array_get($this->topicMap, $topic->name . '.delete')) {
             return false;
         }
 
@@ -328,7 +337,7 @@ class ConvertBase extends Command
         });
 
         foreach ($topics as $topic) {
-            if (preg_match($topic['pattern'], $node->title.$node->body)) {
+            if (preg_match($topic['pattern'], $node->title . $node->body)) {
                 $this->insertPivot('content_topic', 'content_id', $node->nid, 'topic_id', $topic['tid']);
             }
         }
@@ -354,13 +363,15 @@ class ConvertBase extends Command
 
     public function convertComments($nid, $status = 0)
     {
-        $comments = $this->getComments($nid)->where('status', '=', $status)->get();
+        $comments = $this->getComments($nid)
+            ->where('status', '=', $status)
+            ->get();
 
         foreach ($comments as $comment) {
-            $user_id = ($comment->uid > 0) ? $comment->uid : 1;
+            $user_id = $comment->uid > 0 ? $comment->uid : 1;
 
             if ($this->isUserConvertable($user_id)) {
-                $model = new \App\Comment;
+                $model = new \App\Comment();
 
                 $model->id = $comment->cid;
                 $model->user_id = $user_id;
@@ -397,7 +408,7 @@ class ConvertBase extends Command
         'Tavakasutaja' => 'regular',
         'Ärikasutaja 2' => 'regular',
         'superuser' => 'superuser',
-        'viktoriin' => 'regular',
+        'viktoriin' => 'regular'
     ];
 
     public function getUser($uid)
@@ -423,7 +434,7 @@ class ConvertBase extends Command
     {
         $user = $this->getUser($uid);
 
-        if (! $user) {
+        if (!$user) {
             return false;
         }
 
@@ -431,7 +442,7 @@ class ConvertBase extends Command
 
         // We only consider user being blocked when it is not admininstrator, editor, senior editor or superuser
 
-        if (! in_array($user->rid, [4, 7, 8, 12])) {
+        if (!in_array($user->rid, [4, 7, 8, 12])) {
             $blockedSender = DB::connection($this->connection)
                 ->table('pm_block_user')
                 ->where('author', '=', $uid)
@@ -446,8 +457,12 @@ class ConvertBase extends Command
          * Case id 9 - Business user
          * Case id 11 - Business user 2.
          */
-        if ($user && $user->status == 1 && ! in_array($user->uid, [7288556, 4694, 3661]) &&
-            ! $blockedSender /* && $user->rid !== 9 && $user->rid !== 11 */) {
+        if (
+            $user &&
+            $user->status == 1 &&
+            !in_array($user->uid, [7288556, 4694, 3661]) &&
+            !$blockedSender /* && $user->rid !== 9 && $user->rid !== 11 */
+        ) {
             return true;
         } else {
             return false;
@@ -475,7 +490,7 @@ class ConvertBase extends Command
     public function createUser($user)
     {
         if ($this->isUserConvertable($user->uid)) {
-            $model = new \App\User;
+            $model = new \App\User();
 
             $profile = $this->getProfileFields($user->uid);
 
@@ -486,29 +501,21 @@ class ConvertBase extends Command
             if (isset($profile) && isset($profile[13])) {
                 $homepage = $this->cleanUrl($profile[13]);
 
-                $model->contact_homepage = (
-                    $this->isUrl($homepage)
-                    && ! $this->isFacebookUrl($homepage)
-                    && ! $this->isTwitterUrl($homepage)
-                    && ! $this->isInstagramUrl($homepage)
-                    )
-                    ? $homepage
-                    : null;
+                $model->contact_homepage =
+                    $this->isUrl($homepage) &&
+                    !$this->isFacebookUrl($homepage) &&
+                    !$this->isTwitterUrl($homepage) &&
+                    !$this->isInstagramUrl($homepage)
+                        ? $homepage
+                        : null;
 
-                $model->contact_facebook = ($this->isUrl($homepage)
-                    && $this->isFacebookUrl($homepage))
-                    ? $homepage
-                    : null;
+                $model->contact_facebook =
+                    $this->isUrl($homepage) && $this->isFacebookUrl($homepage) ? $homepage : null;
 
-                $model->contact_twitter = ($this->isUrl($homepage)
-                    && $this->isTwitterUrl($homepage))
-                    ? $homepage
-                    : null;
+                $model->contact_twitter = $this->isUrl($homepage) && $this->isTwitterUrl($homepage) ? $homepage : null;
 
-                $model->contact_instagram = ($this->isUrl($homepage)
-                    && $this->isInstagramUrl($homepage))
-                    ? $homepage
-                    : null;
+                $model->contact_instagram =
+                    $this->isUrl($homepage) && $this->isInstagramUrl($homepage) ? $homepage : null;
 
                 $model->gender = isset($profile[24]) ? $this->convertGender($profile[24]) : null;
                 $model->birthyear = isset($profile[25]) ? $this->convertBirthyear($profile[25]) : null;
@@ -553,7 +560,7 @@ class ConvertBase extends Command
 
     public function convertUser($uid)
     {
-        if (! \App\User::find($uid) && $uid > 0) {
+        if (!\App\User::find($uid) && $uid > 0) {
             $user = $this->getUser($uid);
             $this->createUser($user);
 
@@ -593,12 +600,12 @@ class ConvertBase extends Command
         $image = \App\Image::create($data);
         $model->images()->attach($image);
 
-        $from = 'http://trip.ee/'.$imagePath;
+        $from = 'http://trip.ee/' . $imagePath;
 
-        $to = config('imagepresets.original.path').$filename;
+        $to = config('imagepresets.original.path') . $filename;
 
         if ($this->copyFiles) {
-            if (file_exists($to) && ! $this->overwriteFiles) {
+            if (file_exists($to) && !$this->overwriteFiles) {
                 return false;
             }
 
@@ -619,9 +626,9 @@ class ConvertBase extends Command
             $ext = pathinfo($imageUrl)['extension'];
 
             if ($this->fileHash) {
-                $filename = $file.'-'.strtolower(str_random(4)).'.'.$ext;
+                $filename = $file . '-' . strtolower(str_random(4)) . '.' . $ext;
             } else {
-                $filename = $file.'.'.$ext;
+                $filename = $file . '.' . $ext;
             }
 
             $filename = preg_replace('/\s+/', '_', $filename);
@@ -649,10 +656,10 @@ class ConvertBase extends Command
 
             $from = $imageUrl;
 
-            $to = config('imagepresets.original.path').$filename;
+            $to = config('imagepresets.original.path') . $filename;
 
             if ($this->copyFiles) {
-                if (file_exists($to) && ! $this->overwriteFiles) {
+                if (file_exists($to) && !$this->overwriteFiles) {
                     return $newImage;
                 }
 
@@ -669,33 +676,33 @@ class ConvertBase extends Command
     public function getFlags($id, $type)
     {
         return \DB::connection($this->connection)
-           ->table('flag_content')
-           ->where('content_id', $id)
-           ->where('content_type', $type) // node, comment, term
-           ->orderBy('timestamp', 'desc')
-           ->get();
+            ->table('flag_content')
+            ->where('content_id', $id)
+            ->where('content_type', $type) // node, comment, term
+            ->orderBy('timestamp', 'desc')
+            ->get();
     }
 
     public function getUserDestinationFlags($uid)
     {
         return \DB::connection($this->connection)
-           ->table('flag_content')
-           ->where('uid', $uid)
-           ->where('content_type', 'term')
-           ->whereIn('fid', [6, 7])
-           ->orderBy('timestamp', 'desc')
-           ->get();
+            ->table('flag_content')
+            ->where('uid', $uid)
+            ->where('content_type', 'term')
+            ->whereIn('fid', [6, 7])
+            ->orderBy('timestamp', 'desc')
+            ->get();
     }
 
     public function createFlag($flag, $modelname)
     {
-        $user_id = ($flag->uid > 0) ? $flag->uid : 1;
+        $user_id = $flag->uid > 0 ? $flag->uid : 1;
 
         if ($user_id == 1) {
             $user_id = 12;
         }
 
-        $model = new \App\Flag;
+        $model = new \App\Flag();
 
         $model->user_id = $user_id;
 
@@ -717,8 +724,8 @@ class ConvertBase extends Command
             '2' => 'good',
             '3' => 'bad',
             '4' => 'good',
-            '5' => 'bad',
-         ];
+            '5' => 'bad'
+        ];
 
         $flags = $this->getFlags($id, $type);
 
@@ -736,8 +743,8 @@ class ConvertBase extends Command
     {
         $flag_map = [
             '6' => 'havebeen',
-            '7' => 'wantstogo',
-         ];
+            '7' => 'wantstogo'
+        ];
 
         $flags = $this->getUserDestinationFlags($uid);
 
@@ -757,7 +764,7 @@ class ConvertBase extends Command
     {
         return \DB::connection($this->connection)
             ->table('url_alias')
-            ->where('src', '=', 'node/'.$nid)
+            ->where('src', '=', 'node/' . $nid)
             ->first();
     }
 
@@ -765,18 +772,17 @@ class ConvertBase extends Command
     {
         return \DB::connection($this->connection)
             ->table('url_alias')
-            ->where('src', '=', 'taxonomy/term/'.$tid)
+            ->where('src', '=', 'taxonomy/term/' . $tid)
             ->first();
     }
 
     public function convertNodeAlias($nid)
     {
         if ($alias = $this->getNodeAlias($nid)) {
-            \DB::table('aliases')
-            ->insert([
+            \DB::table('aliases')->insert([
                 'aliasable_id' => $nid,
                 'aliasable_type' => 'content',
-                'path' => $alias->dst,
+                'path' => $alias->dst
             ]);
         }
     }
@@ -787,7 +793,7 @@ class ConvertBase extends Command
             'aliasable_id' => $nid,
             'aliasable_type' => $aliasable_type,
             'path' => $path,
-            'route_type' => $route_type,
+            'route_type' => $route_type
         ]);
     }
 
@@ -800,26 +806,26 @@ class ConvertBase extends Command
                 return;
             }
 
-            if ($renameTermName = isset($this->topicMap[$term->name]) ? $this->topicMap[$term->name]['rename'] : false) {
+            if (
+                $renameTermName = isset($this->topicMap[$term->name]) ? $this->topicMap[$term->name]['rename'] : false
+            ) {
                 if ($renameTerm = $this->getTermByName($renameTermName)) {
                     $tid = $renameTerm->tid;
                 }
             }
 
-            \DB::table('aliases')
-                ->insert([
-                    'aliasable_id' => $tid,
-                    'aliasable_type' => $aliasable_type,
-                    'path' => $alias->dst,
-                ]);
+            \DB::table('aliases')->insert([
+                'aliasable_id' => $tid,
+                'aliasable_type' => $aliasable_type,
+                'path' => $alias->dst
+            ]);
 
             if ($aliasable_type != 'destination') {
-                \DB::table('aliases')
-                    ->insert([
-                        'aliasable_id' => $tid,
-                        'aliasable_type' => $aliasable_type,
-                        'path' => 'taxonomy/term/'.$tid,
-                    ]);
+                \DB::table('aliases')->insert([
+                    'aliasable_id' => $tid,
+                    'aliasable_type' => $aliasable_type,
+                    'path' => 'taxonomy/term/' . $tid
+                ]);
             }
         }
     }
@@ -831,7 +837,7 @@ class ConvertBase extends Command
         try {
             $response = $this->client->get($from, [
                 'save_to' => $to,
-                'exceptions' => false,
+                'exceptions' => false
             ]);
         } catch (\GuzzleHttp\Exception\ConnectException $e) {
             return false;
@@ -858,9 +864,10 @@ class ConvertBase extends Command
                         config("imagepresets.presets.$preset.height"),
                         function ($constraint) {
                             $constraint->aspectRatio();
-                        })
+                        }
+                    )
                     ->save(
-                        config("imagepresets.presets.$preset.path").basename($to),
+                        config("imagepresets.presets.$preset.path") . basename($to),
                         config("imagepresets.presets.$preset.quality")
                     );
             }
@@ -872,12 +879,12 @@ class ConvertBase extends Command
 
     public function chunkLimit()
     {
-        return ($this->take / $this->chunk) - 1;
+        return $this->take / $this->chunk - 1;
     }
 
     public function formatTimestamp($timestamp)
     {
-        if (! $timestamp) {
+        if (!$timestamp) {
             return;
         }
 
@@ -886,20 +893,25 @@ class ConvertBase extends Command
 
     public function formatDateTime($datetime)
     {
-        if (! $datetime) {
+        if (!$datetime) {
             return;
         }
 
         $el = explode('T', $datetime);
 
-        return \Carbon\Carbon::createFromFormat('Y-m-d', $el[0])->startOfDay()->toDateTimeString();
+        return \Carbon\Carbon::createFromFormat('Y-m-d', $el[0])
+            ->startOfDay()
+            ->toDateTimeString();
     }
 
     public function formatFields($node, $fields)
     {
-        return  implode("\n", array_map(function ($field) use ($node) {
-            return '<strong>'.$field.'</strong>: '.$node->$field;
-        }, $fields));
+        return implode(
+            "\n",
+            array_map(function ($field) use ($node) {
+                return '<strong>' . $field . '</strong>: ' . $node->$field;
+            }, $fields)
+        );
     }
 
     public function scrambleString($string)
@@ -969,7 +981,11 @@ class ConvertBase extends Command
 
     public function convertTexyUrls($string)
     {
-        return preg_replace("/\"(.*)\":(?i)\b((?:https?:\/\/|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}\/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'\\\".,<>?«»“”‘’%]))/i", '<a href="$2">$1</a>', $string);
+        return preg_replace(
+            "/\"(.*)\":(?i)\b((?:https?:\/\/|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}\/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'\\\".,<>?«»“”‘’%]))/i",
+            '<a href="$2">$1</a>',
+            $string
+        );
 
         return preg_replace("/\"(.*)\":(?:https?:\/\/.*)\s/i", '<a href="$2">$1</a>', $string);
     }
@@ -987,8 +1003,8 @@ class ConvertBase extends Command
     public function removeUppercase($string)
     {
         if ($string == mb_convert_case($string, MB_CASE_UPPER, 'UTF-8')) {
-            return mb_convert_case(mb_substr($string, 0, 1), MB_CASE_UPPER, 'UTF-8')
-                .mb_convert_case(mb_substr($string, 1), MB_CASE_LOWER, 'UTF-8');
+            return mb_convert_case(mb_substr($string, 0, 1), MB_CASE_UPPER, 'UTF-8') .
+                mb_convert_case(mb_substr($string, 1), MB_CASE_LOWER, 'UTF-8');
         }
 
         return $string;
@@ -1001,24 +1017,24 @@ class ConvertBase extends Command
 
     public function isFacebookUrl($url)
     {
-        return preg_match("/(.*)\.facebook\.com(.*)/", $url);
+        return preg_match('/(.*)\.facebook\.com(.*)/', $url);
     }
 
     public function isInstagramUrl($url)
     {
-        return preg_match("/(.*)\.instagram\.com(.*)/", $url);
+        return preg_match('/(.*)\.instagram\.com(.*)/', $url);
     }
 
     public function isTwitterUrl($url)
     {
-        return preg_match("/(.*)\.twitter\.com(.*)/", $url);
+        return preg_match('/(.*)\.twitter\.com(.*)/', $url);
     }
 
     public function convertGender($string)
     {
         $genderMap = [
             'Mees' => 2,
-            'Naine' => 2,
+            'Naine' => 2
         ];
 
         if (isset($genderMap[$string])) {

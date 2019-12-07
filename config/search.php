@@ -6,23 +6,23 @@ return [
         'buysell',
         'expat',
         'news',
-        'flight',
+        'flight'
         //'blog',
     ],
     'types' => [
         'forum' => [
             'items_per_page' => 15,
             'order' => 'updated_at',
-            'order_type' => 'desc',
+            'order_type' => 'desc'
         ],
         'news' => [
             'items_per_page' => 10,
             'order' => 'created_at',
-            'order_type' => 'desc',
+            'order_type' => 'desc'
         ],
         'destination' => [
             'items_per_page' => 20,
-            'order' => 'name',
+            'order' => 'name'
         ],
         // 'blog' => [
         //     'items_per_page' => 15,
@@ -32,13 +32,12 @@ return [
         'flight' => [
             'items_per_page' => 15,
             'order' => 'created_at',
-            'order_type' => 'desc',
+            'order_type' => 'desc'
         ],
         'user' => [
             'items_per_page' => 15,
-            'order' => 'name',
-        ],
+            'order' => 'name'
+        ]
     ],
-    'ajax_results' => 8,
-
+    'ajax_results' => 8
 ];

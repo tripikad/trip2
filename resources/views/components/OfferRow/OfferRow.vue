@@ -8,15 +8,13 @@
             </div>
             <div class="OfferRow__meta">
                 <tag
-                    v-for="(destination,i) in offer.end_destinations"
+                    v-for="(destination, i) in offer.end_destinations"
                     :key="i"
                     :title="destination.name"
                     isclasses="Tag--white"
                 />
                 <div class="OfferRow__metaPrimary">{{ offer.duration_formatted }}</div>
-                <div
-                    class="OfferRow__metaSecondary"
-                >{{ offer.start_at_formatted }} → {{ offer.end_at_formatted }}</div>
+                <div class="OfferRow__metaSecondary">{{ offer.start_at_formatted }} → {{ offer.end_at_formatted }}</div>
                 <div v-if="offer.user.name" class="OfferRow__metaPrimary">{{ offer.user.name }}</div>
                 <div v-if="offer.data.guide" class="OfferRow__metaSecondary">{{ offer.data.guide }}</div>
             </div>

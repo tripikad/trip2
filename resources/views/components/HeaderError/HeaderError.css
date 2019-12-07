@@ -3,12 +3,12 @@
     padding: calc($spacer * 1.5);
 }
 
-    .HeaderError__title {
-        color: $white;
-        font: $font-heading-sm;
-        margin-bottom: $margin-xs;
-    }
+.HeaderError__title {
+    color: $white;
+    font: $font-heading-sm;
+    margin-bottom: $margin-xs;
+}
 
-    .HeaderError__title:last-child {
-        margin-bottom: 0;
-    }
+.HeaderError__title:last-child {
+    margin-bottom: 0;
+}

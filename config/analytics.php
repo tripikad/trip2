@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
      * current selected provider: NoAnalytics, GoogleAnalytics
      */
@@ -11,7 +10,6 @@ return [
      * configurations for all possible providers
      */
     'configurations' => [
-
         /*
          * The Google Analytics provider supports the following properties:
          * - tracking_id (string)
@@ -22,7 +20,6 @@ return [
          * - debug (bool) - default will be false if no config property exists
          */
         'GoogleAnalytics' => [
-
             /*
              * Tracking ID
              */
@@ -53,9 +50,7 @@ return [
             /*
              * Enable the debugging version of the
              */
-            'debug' => false,
-        ],
-
-    ],
-
+            'debug' => false
+        ]
+    ]
 ];

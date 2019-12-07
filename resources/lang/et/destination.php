@@ -2,8 +2,7 @@
 
 return [
     'show.children.continent' => ':count riik|:count riiki',
-    'show.children.country' =>
-        ':count linn või piirkond|:count linna või piirkonda',
+    'show.children.country' => ':count linn või piirkond|:count linna või piirkonda',
     'show.children.city' => ':count koht|:count kohta',
 
     'show.stat.havebeen' => ':count on siin käinud',
@@ -20,10 +19,8 @@ return [
 
     'show.good.offer' => 'Head pakkumised',
     'show.link.view.all' => 'Veel &rsaquo;',
-    'show.user.havebeen.title' =>
-        'Kui palju Trip.ee kasutajatest on siin käinud?',
-    'show.user.wantstogo.title' =>
-        'Kui palju Trip.ee kasutajatest tahavad sinna minna?',
+    'show.user.havebeen.title' => 'Kui palju Trip.ee kasutajatest on siin käinud?',
+    'show.user.wantstogo.title' => 'Kui palju Trip.ee kasutajatest tahavad sinna minna?',
 
     'show.user.button.havebeen' => 'Ma olen siin käinud',
     'show.user.button.havenotbeen' => 'Ma ei ole siin käinud',

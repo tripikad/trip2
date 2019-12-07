@@ -12,7 +12,6 @@ class StatisticsTest extends BrowserKitTestCase
 
     public function test_unlogged_or_regular_or_admin_can_not_see_statistics()
     {
-
         // Unlogged user
 
         $response = $this->call('GET', 'statistics');
@@ -22,22 +21,20 @@ class StatisticsTest extends BrowserKitTestCase
 
         $regular_user = factory(User::class)->create([
             'verified' => 'true',
-            'role' => 'regular',
+            'role' => 'regular'
         ]);
 
-        $response = $this->actingAs($regular_user)
-            ->call('GET', 'statistics');
+        $response = $this->actingAs($regular_user)->call('GET', 'statistics');
         $this->assertEquals(401, $response->status());
 
         // Admin user
 
         $admin_user = factory(User::class)->create([
             'verified' => 'true',
-            'role' => 'admin',
+            'role' => 'admin'
         ]);
 
-        $response = $this->actingAs($admin_user)
-            ->call('GET', 'statistics');
+        $response = $this->actingAs($admin_user)->call('GET', 'statistics');
         $this->assertEquals(401, $response->status());
     }
 
@@ -45,7 +42,7 @@ class StatisticsTest extends BrowserKitTestCase
     {
         $super_user = factory(User::class)->create([
             'verified' => 'true',
-            'role' => 'superuser',
+            'role' => 'superuser'
         ]);
 
         $this->actingAs($super_user)

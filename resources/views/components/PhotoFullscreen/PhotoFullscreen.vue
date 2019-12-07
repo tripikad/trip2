@@ -1,18 +1,9 @@
 <template>
-
-    <div
-        class="PhotoFullscreen"
-        :class="isclasses"
-        v-show="open"
-        @click="open = false"
-    >
-
+    <div class="PhotoFullscreen" :class="isclasses" v-show="open" @click="open = false">
         <img class="PhotoFullscreen__photo" :src="large" />
 
         <div class="PhotoFullscreen__meta" v-html="meta"></div>
-
     </div>
-
 </template>
 
 <script>

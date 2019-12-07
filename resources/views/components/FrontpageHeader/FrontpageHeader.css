@@ -6,14 +6,14 @@
     padding-top: $padding-md;
 }
 
-    .FrontpageHeader__content {
-        margin-top: $margin-xl;
-        display: flex;
-        justify-content: center;
-    }
+.FrontpageHeader__content {
+    margin-top: $margin-xl;
+    display: flex;
+    justify-content: center;
+}
 
-    .FrontpageHeader__search {
-        margin-bottom: $margin-xl;
-        width: 50%;
-        width: 100% ?if $tablet;
-    }
+.FrontpageHeader__search {
+    margin-bottom: $margin-xl;
+    width: 50%;
+    width: 100% ?if $tablet;
+}

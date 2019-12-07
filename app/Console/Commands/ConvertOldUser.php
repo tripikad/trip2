@@ -16,10 +16,11 @@ class ConvertOldUser extends ConvertBase
 
         $this->convertUser($uid);
 
-        $nodes = $this->getNodes('trip_forum')->where('node.uid', '=', $uid)->get();
+        $nodes = $this->getNodes('trip_forum')
+            ->where('node.uid', '=', $uid)
+            ->get();
 
         foreach ($nodes as $node) {
-
             // TODO
         }
 
@@ -32,8 +33,8 @@ class ConvertOldUser extends ConvertBase
         $this->info('Converting comments');
 
         foreach ($comments as $comment) {
-            if (Content::find($comment->nid) && ! Comment::find($comment->cid)) {
-                $model = new Comment;
+            if (Content::find($comment->nid) && !Comment::find($comment->cid)) {
+                $model = new Comment();
 
                 $model->id = $comment->cid;
                 $model->user_id = $comment->uid;
@@ -46,7 +47,7 @@ class ConvertOldUser extends ConvertBase
 
                 $model->save();
 
-                $this->line('Converting comment '.$comment->cid);
+                $this->line('Converting comment ' . $comment->cid);
             }
         }
     }

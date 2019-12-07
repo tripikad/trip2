@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     'isnew' => 'New',
 
     'count' => ':count comment|:count comments',
@@ -22,6 +21,5 @@ return [
 
     'edit.title' => 'Edit comment',
     'edit.body.title' => 'Comment',
-    'edit.submit.title' => 'Save comment',
-
+    'edit.submit.title' => 'Save comment'
 ];

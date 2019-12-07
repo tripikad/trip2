@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     'index.about' => 'Trip.ee is a travel community',
 
     'index.search.title' => 'Where do you want to go today?',
@@ -30,6 +29,5 @@ return [
 
     'index.about.title' => 'Read more about Trip.ee ›',
     'index.about.register' => 'Join with Trip.ee',
-    'index.about.login' => 'Log in',
-
+    'index.about.login' => 'Log in'
 ];

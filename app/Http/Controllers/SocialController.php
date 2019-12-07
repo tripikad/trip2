@@ -27,7 +27,9 @@ class SocialController extends Controller
         try {
             $user = Socialite::driver('facebook')->user();
         } catch (Exception $e) {
-            return redirect()->route('login.form')->with('info', trans('auth.login.facebook.service.error'));
+            return redirect()
+                ->route('login.form')
+                ->with('info', trans('auth.login.facebook.service.error'));
         }
 
         $authUser = $this->findOrCreateUser($user, 'facebook');
@@ -36,12 +38,16 @@ class SocialController extends Controller
             Auth::login($authUser, true);
 
             Log::info('Facebook social login', [
-                'name' =>  $authUser->name,
+                'name' => $authUser->name
             ]);
 
-            return redirect()->route('frontpage.index')->with('info', trans('auth.login.login.info'));
+            return redirect()
+                ->route('frontpage.index')
+                ->with('info', trans('auth.login.login.info'));
         } else {
-            return redirect()->route('register.form')->with('info', trans('auth.login.facebook.user.error'));
+            return redirect()
+                ->route('register.form')
+                ->with('info', trans('auth.login.facebook.user.error'));
         }
     }
 
@@ -50,7 +56,9 @@ class SocialController extends Controller
         try {
             $user = Socialite::driver('google')->user();
         } catch (Exception $e) {
-            return redirect()->route('login.form')->with('info', trans('auth.login.google.service.error'));
+            return redirect()
+                ->route('login.form')
+                ->with('info', trans('auth.login.google.service.error'));
         }
 
         $authUser = $this->findOrCreateUser($user, 'google');
@@ -59,12 +67,16 @@ class SocialController extends Controller
             Auth::login($authUser, true);
 
             Log::info('Google social login', [
-                'name' =>  $authUser->name,
+                'name' => $authUser->name
             ]);
 
-            return redirect()->route('frontpage.index')->with('info', trans('auth.login.login.info'));
+            return redirect()
+                ->route('frontpage.index')
+                ->with('info', trans('auth.login.login.info'));
         } else {
-            return redirect()->route('register.form')->with('info', trans('auth.login.google.user.error'));
+            return redirect()
+                ->route('register.form')
+                ->with('info', trans('auth.login.google.user.error'));
         }
     }
 
@@ -78,21 +90,25 @@ class SocialController extends Controller
         }
 
         $new_user = User::create([
-            'name'     => $user->name,
-            'email'    => $user->email,
+            'name' => $user->name,
+            'email' => $user->email,
             'verified' => 1,
-            'role'     => 'regular',
-            'password' => str_random(30),
+            'role' => 'regular',
+            'password' => str_random(30)
         ]);
 
         switch ($provider) {
-            case 'facebook': $avatar_url = $user->avatar_original; break;
-            case 'google': $avatar_url = str_replace('?sz=50', '', $user->avatar); break;
+            case 'facebook':
+                $avatar_url = $user->avatar_original;
+                break;
+            case 'google':
+                $avatar_url = str_replace('?sz=50', '', $user->avatar);
+                break;
         }
 
         //has avatar picture
         if ($avatar_url) {
-            $img_name = 'user-'.$new_user->id;
+            $img_name = 'user-' . $new_user->id;
             $filename = Image::storeImageFromUrl((string) $avatar_url, $img_name);
             $new_user->images()->create(['filename' => $filename]);
         }
@@ -102,6 +118,6 @@ class SocialController extends Controller
 
     public function share($social)
     {
-        return Redirect::away(config("utils.share.$social").URL::previous());
+        return Redirect::away(config("utils.share.$social") . URL::previous());
     }
 }

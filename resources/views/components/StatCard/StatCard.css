@@ -3,12 +3,11 @@
     align-items: center;
 }
 
-    .StatCard__icon {
-        margin-right: $margin-sm;
-    }
+.StatCard__icon {
+    margin-right: $margin-sm;
+}
 
-    .StatCard__title {
-        font: $font-heading-md;
-        color: $white;
-    }
-
+.StatCard__title {
+    font: $font-heading-md;
+    color: $white;
+}

@@ -1,28 +1,23 @@
 <template>
-
     <div class="EditorSmall" :class="isclasses">
-
         <div v-show="!showSource" ref="EditorSmall"></div>
 
         <div v-show="showSource">
-            
             <div class="EditorSmall__toolbar">
                 <div
                     class="EditorSmall__button"
-                    @click="showSource = false; editor.content.innerHTML = localValue"
-                >Back</div> 
+                    @click="
+                        showSource = false
+                        editor.content.innerHTML = localValue
+                    "
+                >
+                    Back
+                </div>
             </div>
-            
-            <textarea
-                class="EditorSmall__source"
-                :name="name"
-                v-model="localValue"
-            ></textarea>
-        
+
+            <textarea class="EditorSmall__source" :name="name" v-model="localValue"></textarea>
         </div>
-
     </div>
-
 </template>
 
 <script>
@@ -56,17 +51,13 @@ export default {
                 },
                 {
                     icon: '•',
-                    result: () =>
-                        pell.exec('insertUnorderedList')
+                    result: () => pell.exec('insertUnorderedList')
                 },
                 {
                     icon: 'Link',
                     result: () => {
-                        var url = window.prompt(
-                            'Enter the link URL'
-                        )
-                        if (url)
-                            pell.exec('createLink', url)
+                        var url = window.prompt('Enter the link URL')
+                        if (url) pell.exec('createLink', url)
                     }
                 },
                 {

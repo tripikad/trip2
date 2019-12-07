@@ -14,25 +14,16 @@
         />
         <div class="OfferList__filters">
             <form-select :options="styles" v-model="activeStyle" isclasses="FormSelect--blue" />
-            <form-select
-                :options="destinations"
-                v-model="activeDestination"
-                isclasses="FormSelect--blue"
-            />
+            <form-select :options="destinations" v-model="activeDestination" isclasses="FormSelect--blue" />
             <form-select :options="companies" v-model="activeCompany" isclasses="FormSelect--blue" />
-            <a :style="{opacity: !notFiltered ? 1 : 0.25}" @click="handleClearFilters">
+            <a :style="{ opacity: !notFiltered ? 1 : 0.25 }" @click="handleClearFilters">
                 <div class="Button Button--cyan">
                     <div class="Button__title">Kõik</div>
                 </div>
             </a>
         </div>
         <div class="OfferList__offers">
-            <OfferRow
-                v-for="(offer, i) in filteredOfferList"
-                :key="i"
-                :offer="offer"
-                :route="offer.route"
-            />
+            <OfferRow v-for="(offer, i) in filteredOfferList" :key="i" :offer="offer" :route="offer.route" />
         </div>
     </div>
 </template>

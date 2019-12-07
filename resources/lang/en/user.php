@@ -8,8 +8,7 @@ return [
     'show.stat.content' => ':content_count posts',
     'show.stat.comment' => ':comment_count comments',
     'show.stat.continents' => ':count visited continents',
-    'show.stat.countries' =>
-        ':count visited countries, :percentage% from :total_count',
+    'show.stat.countries' => ':count visited countries, :percentage% from :total_count',
     'show.stat.places' => ':count visited cities or regions',
     'show.about.joined' => ', joined Trip :created_at',
     'show.about.admin' => ' and forum moderator',
@@ -56,10 +55,8 @@ return [
     'edit.field.contact_instagram.title' => 'Instagram link',
     'edit.field.contact_homepage.title' => 'Homepage link',
 
-    'edit.field.notify_message.title' =>
-        'Notify me when someone sends me a private message',
-    'edit.field.notify_follow.title' =>
-        'Notify me when someone posts a comment to the content I follow',
+    'edit.field.notify_message.title' => 'Notify me when someone sends me a private message',
+    'edit.field.notify_follow.title' => 'Notify me when someone posts a comment to the content I follow',
 
     'edit.submit' => 'Update profile',
 
@@ -70,8 +67,7 @@ return [
 
     'activity.index.title' => 'Latest activity',
     'activity.index.row.content' => ':user posted :title at :created_at',
-    'activity.index.row.comment' =>
-        ':user added a comment :comment_title at the post :title at :created_at',
+    'activity.index.row.comment' => ':user added a comment :comment_title at the post :title at :created_at',
     'activity.view.full.post' => 'View full post',
 
     'show.contact_facebook.title' => 'Facebook',
@@ -81,8 +77,7 @@ return [
 
     'destinations.title' => 'My destinations',
     'destinations.submit.title' => 'Add',
-    'destinations.update.info' =>
-        'Destinations added successfully to your profile!',
+    'destinations.update.info' => 'Destinations added successfully to your profile!',
     'destinations.have.been.title' => 'I have been',
     'destinations.want.to.go.title' => 'I want to go',
     'destinations.remove.title' => 'Remove',

@@ -29,11 +29,7 @@ class BodyFormatter
         if (preg_match_all($linksPattern, $this->body, $matches)) {
             foreach ($matches[0] as $match) {
                 $this->body = preg_replace('/https?:\/\//', '', $this->body);
-                $this->body = str_replace(
-                    $match,
-                    'http://' . $match,
-                    $this->body
-                );
+                $this->body = str_replace($match, 'http://' . $match, $this->body);
             }
         }
 
@@ -62,16 +58,7 @@ class BodyFormatter
         $this->body = preg_replace_callback(
             $flightmapPattern,
             function ($matches) {
-                $airports = collect(
-                    explode(
-                        '-',
-                        str_replace(
-                            [';', ',', ' ', '  '],
-                            '-',
-                            strtoupper($matches[1])
-                        )
-                    )
-                )
+                $airports = collect(explode('-', str_replace([';', ',', ' ', '  '], '-', strtoupper($matches[1]))))
                     ->map(function ($a) {
                         return trim($a);
                     })
@@ -145,11 +132,7 @@ class BodyFormatter
                     $cleanedMatch
                 );
 
-                $cleanedMatch = preg_replace(
-                    '/^[ \t]*[\r\n]+/m',
-                    '',
-                    $cleanedMatch
-                );
+                $cleanedMatch = preg_replace('/^[ \t]*[\r\n]+/m', '', $cleanedMatch);
 
                 if ($months = Yaml::parse($cleanedMatch)) {
                     $this->body = str_replace(

@@ -6,6 +6,6 @@
     font: $font-text-lg;
 }
 
-    .FormUpload--hidden {
-        display: none;
-    }
+.FormUpload--hidden {
+    display: none;
+}

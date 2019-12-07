@@ -20,7 +20,7 @@ class CommentTest extends DuskTestCase
             // 'buysell',
             // 'expat',
             // 'flight',
-            'forum',
+            'forum'
             // 'news',
             // 'shortnews',
             // 'travelmate',
@@ -36,7 +36,7 @@ class CommentTest extends DuskTestCase
                 'user_id' => factory(User::class)->create()->id,
                 'type' => $type,
                 'end_at' => Carbon::now()->addDays(30),
-                'start_at' => Carbon::now()->addDays(30),
+                'start_at' => Carbon::now()->addDays(30)
             ]);
 
             $this->browse(function ($browser) use ($regular_user, $content) {

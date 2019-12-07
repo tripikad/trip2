@@ -15,16 +15,16 @@ class ConvertUrl extends ConvertBase
             ->map(function ($value, $key) {
                 return (object) [
                     'from' => $this->getTermByName($key)->tid,
-                    'to' => $this->getTermByName(collect($value)->first())->tid,
+                    'to' => $this->getTermByName(collect($value)->first())->tid
                 ];
             })
             ->map(function ($moveMap) {
                 $alias = $this->getTermAlias($moveMap->from);
 
                 return (object) [
-                    'path1' => 'taxonomy/term/'.$moveMap->from,
+                    'path1' => 'taxonomy/term/' . $moveMap->from,
                     'path2' => $alias ? $alias->dst : null,
-                    'aliasable_id' => $moveMap->to,
+                    'aliasable_id' => $moveMap->to
                 ];
             })
             ->map(function ($moveMap) {
@@ -36,14 +36,14 @@ class ConvertUrl extends ConvertBase
                 \DB::table('aliases')->insert([
                     'aliasable_id' => $moveMap->aliasable_id,
                     'aliasable_type' => 'topic',
-                    'path' =>  $moveMap->path1,
+                    'path' => $moveMap->path1
                 ]);
 
                 if ($moveMap->path2) {
                     \DB::table('aliases')->insert([
                         'aliasable_id' => $moveMap->aliasable_id,
                         'aliasable_type' => 'topic',
-                        'path' =>  $moveMap->path2,
+                        'path' => $moveMap->path2
                     ]);
                 }
             });
@@ -63,7 +63,7 @@ class ConvertUrl extends ConvertBase
 
                 return (object) [
                     'path' => $alias ? $alias->dst : null,
-                    'aliasable_id' => null,
+                    'aliasable_id' => null
                 ];
             })
             ->filter(function ($deleteMap) {
@@ -78,7 +78,7 @@ class ConvertUrl extends ConvertBase
                 \DB::table('aliases')->insert([
                     'aliasable_id' => 0,
                     'aliasable_type' => 'topic',
-                    'path' =>  $deleteMap->path,
+                    'path' => $deleteMap->path
                 ]);
             });
     }

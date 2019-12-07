@@ -29,8 +29,7 @@ class ViewComposerServiceProvider extends ServiceProvider
                 $numbers = [];
 
                 for ($i = $data['from']; $i <= $data['to']; $i++) {
-                    $numbers[$i] = (strlen($i) == 1 ? '0' : '').
-                        $i;
+                    $numbers[$i] = (strlen($i) == 1 ? '0' : '') . $i;
                 }
 
                 $view->with('from_to', $numbers);

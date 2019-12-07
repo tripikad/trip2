@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     'content.good.flag.title' => 'You liked the post',
     'content.good.unflag.title' => 'You changed your mind',
 
@@ -12,6 +11,5 @@ return [
     'comment.good.unflag.title' => 'You changed your mind',
 
     'comment.bad.flag.title' => 'You unliked the comment',
-    'comment.bad.unflag.title' => 'You changed your mind',
-
+    'comment.bad.unflag.title' => 'You changed your mind'
 ];

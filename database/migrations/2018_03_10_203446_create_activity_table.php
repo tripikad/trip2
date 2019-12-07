@@ -19,12 +19,13 @@ class CreateActivityTable extends Migration
             $table->string('activity_type', 100)->default('App\\Content');
             $table->string('type', 50)->default('view');
             $table->integer('value')->default(0);
-            $table->integer('user_id')->nullable()->index();
+            $table
+                ->integer('user_id')
+                ->nullable()
+                ->index();
             $table->timestamps();
 
-            $table->unique([
-                'ip', 'activity_id', 'activity_type', 'type',
-            ]);
+            $table->unique(['ip', 'activity_id', 'activity_type', 'type']);
         });
     }
 

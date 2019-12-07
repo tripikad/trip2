@@ -16,7 +16,10 @@ class TravelmateTest extends BrowserKitTestCase
     {
         $regular_user_creating_travelmate = factory(User::class)->create();
 
-        $start_at = Carbon::now()->addMonths(1)->startOfMonth()->toDateTimeString();
+        $start_at = Carbon::now()
+            ->addMonths(1)
+            ->startOfMonth()
+            ->toDateTimeString();
 
         $this->actingAs($regular_user_creating_travelmate)
             ->visit('reisikaaslased')
@@ -36,11 +39,14 @@ class TravelmateTest extends BrowserKitTestCase
                 'type' => 'travelmate',
                 'status' => 1,
                 'start_at' => $start_at,
-                'duration' => 'From here to eternity',
+                'duration' => 'From here to eternity'
             ]);
 
         $content = Content::whereTitle('Hello travelmate title')->first();
-        $edited_start_at = Carbon::now()->addMonths(2)->startOfMonth()->toDateTimeString();
+        $edited_start_at = Carbon::now()
+            ->addMonths(2)
+            ->startOfMonth()
+            ->toDateTimeString();
 
         $this->actingAs($regular_user_creating_travelmate)
             ->visit("reisikaaslased/$content->slug")
@@ -60,7 +66,7 @@ class TravelmateTest extends BrowserKitTestCase
                 'type' => 'travelmate',
                 'status' => 1,
                 'start_at' => $edited_start_at,
-                'duration' => 'Hasta la eternidad',
+                'duration' => 'Hasta la eternidad'
             ]);
     }
 

@@ -6,17 +6,14 @@ class FrontpageFlight
 {
     public function render($flights)
     {
-        return component('Grid')->with('items', $flights
-            ->map(function ($flight, $index) {
+        return component('Grid')->with(
+            'items',
+            $flights->map(function ($flight, $index) {
                 $destination = $flight->destinations->first();
 
                 if ($destination) {
-                    return region(
-                            'DestinationBar',
-                            $destination,
-                            ['purple', 'yellow', 'red'][$index]
-                        )
-                        .region('FlightCard', $flight);
+                    return region('DestinationBar', $destination, ['purple', 'yellow', 'red'][$index]) .
+                        region('FlightCard', $flight);
                 }
             })
         );

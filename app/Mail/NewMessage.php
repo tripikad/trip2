@@ -52,23 +52,20 @@ class NewMessage extends Mailable implements ShouldQueue
     {
         $this->subject(
             trans('message.store.email.subject', [
-                'user' => $this->user_from->name,
+                'user' => $this->user_from->name
             ])
         )->markdown('email.message.store');
 
         $header = [
-            'category' => [
-                'private_message',
-            ],
+            'category' => ['private_message'],
             'unique_args' => [
                 'message_from_user_id' => (string) $this->user_from->id,
-                'message_to_user_id' => (string) $this->user_to->id,
-            ],
+                'message_to_user_id' => (string) $this->user_to->id
+            ]
         ];
 
         $this->withSwiftMessage(function ($message) use ($header) {
-            $message->getHeaders()
-                ->addTextHeader('X-SMTPAPI', format_smtp_header($header));
+            $message->getHeaders()->addTextHeader('X-SMTPAPI', format_smtp_header($header));
         });
     }
 }

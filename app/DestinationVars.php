@@ -97,8 +97,7 @@ class DestinationVars
     {
         if ($facts = $this->facts()) {
             if ($facts->area > 1000) {
-                return number_format(round($facts->area, -3), 0, ',', ' ') .
-                    ' km²';
+                return number_format(round($facts->area, -3), 0, ',', ' ') . ' km²';
             } else {
                 return $facts->area;
             }

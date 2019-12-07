@@ -11,8 +11,7 @@ class FollowController extends Controller
 {
     public function index($user_id)
     {
-        $user = User::with('follows')
-            ->findorFail($user_id);
+        $user = User::with('follows')->findorFail($user_id);
 
         return View::make('pages.follow.index')
             ->with('user', $user)
@@ -24,32 +23,43 @@ class FollowController extends Controller
         $content = \App\Content::findorFail($id);
 
         if ($status == 1) {
-            auth()->user()->follows()->create([
-                'followable_id' => $id,
-                'followable_type' => 'App\Content',
-            ]);
+            auth()
+                ->user()
+                ->follows()
+                ->create([
+                    'followable_id' => $id,
+                    'followable_type' => 'App\Content'
+                ]);
 
             Log::info('Content has been followed', [
-                'user' =>  Auth::user()->name,
-                'link' => route('content.show', [$type, $id]),
+                'user' => Auth::user()->name,
+                'link' => route('content.show', [$type, $id])
             ]);
 
-            return back()
-                ->with('info', trans("content.action.follow.$status.info", [
-                    'title' => $content->title,
-                ]));
+            return back()->with(
+                'info',
+                trans("content.action.follow.$status.info", [
+                    'title' => $content->title
+                ])
+            );
         }
 
         if ($status == 0) {
-            auth()->user()->follows()->where([
-                'followable_id' => $id,
-                'followable_type' => 'App\Content',
-            ])->delete();
+            auth()
+                ->user()
+                ->follows()
+                ->where([
+                    'followable_id' => $id,
+                    'followable_type' => 'App\Content'
+                ])
+                ->delete();
 
-            return back()
-                ->with('info', trans("content.action.follow.$status.info", [
-                    'title' => $content->title,
-                ]));
+            return back()->with(
+                'info',
+                trans("content.action.follow.$status.info", [
+                    'title' => $content->title
+                ])
+            );
         }
 
         return back();

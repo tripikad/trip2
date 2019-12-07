@@ -34,21 +34,17 @@ class ConfirmRegistration extends Mailable
      */
     public function build()
     {
-        $this->subject(trans('auth.register.email.subject'))
-            ->markdown('email.auth.register');
+        $this->subject(trans('auth.register.email.subject'))->markdown('email.auth.register');
 
         $header = [
-            'category' => [
-                'auth_register',
-            ],
+            'category' => ['auth_register'],
             'unique_args' => [
-                'user_id' => (string) $this->user->id,
-            ],
+                'user_id' => (string) $this->user->id
+            ]
         ];
 
         $this->withSwiftMessage(function ($message) use ($header) {
-            $message->getHeaders()
-                ->addTextHeader('X-SMTPAPI', format_smtp_header($header));
+            $message->getHeaders()->addTextHeader('X-SMTPAPI', format_smtp_header($header));
         });
     }
 }

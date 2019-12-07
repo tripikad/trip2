@@ -8,8 +8,7 @@ return [
     'show.stat.content' => ':content_count postitust',
     'show.stat.comment' => ':comment_count kommentaari',
     'show.stat.continents' => ':count külastatud kontinenti',
-    'show.stat.countries' =>
-        ':count külastatud riiki, :percentage% maailma :total_countst riigist',
+    'show.stat.countries' => ':count külastatud riiki, :percentage% maailma :total_countst riigist',
     'show.stat.cities' => ':count külastatud linna või piirkonda',
     'show.about.joined' => ', liitus Tripiga :created_at',
     'show.about.admin' => ' ja toimetuse liige',
@@ -53,18 +52,15 @@ return [
     'edit.field.real.name.show.title' => 'Ei soovi avalikustada oma nime',
     'edit.field.birthyear.title' => 'Sünniaasta',
     'edit.field.description.label' => 'Lühikirjeldus',
-    'edit.field.description.title' =>
-        'Kirjelda tripikatele ennast ja oma reisikogemusi…',
+    'edit.field.description.title' => 'Kirjelda tripikatele ennast ja oma reisikogemusi…',
 
     'edit.field.contact_facebook.title' => 'Facebook\'i URL',
     'edit.field.contact_twitter.title' => 'Twitter\'i URL',
     'edit.field.contact_instagram.title' => 'Instagram\'i URL',
     'edit.field.contact_homepage.title' => 'Kodulehekülg',
 
-    'edit.field.notify_message.title' =>
-        'Teavita mind, kui keegi on saatnud mulle sõnumi',
-    'edit.field.notify_follow.title' =>
-        'Teavita mind, kui keegi on kirjutanud kommentaari postitusele, mida ma jälgin',
+    'edit.field.notify_message.title' => 'Teavita mind, kui keegi on saatnud mulle sõnumi',
+    'edit.field.notify_follow.title' => 'Teavita mind, kui keegi on kirjutanud kommentaari postitusele, mida ma jälgin',
 
     'edit.profile_color.title' => 'Profiili värv',
     'edit.profile_color.description' => 'Kuvatakse sinu profiili taustana',
@@ -84,8 +80,7 @@ return [
     // V1
 
     'activity.index.title' => 'Viimased postitused',
-    'activity.index.row.content' =>
-        ':user lisas postituse :title kuupäeval :created_at',
+    'activity.index.row.content' => ':user lisas postituse :title kuupäeval :created_at',
     'activity.index.row.comment' =>
         ':user kirjutas kommentaari :comment_title postitusele :title kuupäeval :created_at',
     'activity.view.full.post' => 'Vaata postitust',
@@ -97,8 +92,7 @@ return [
 
     'destinations.title' => 'Minu sihtkohad',
     'destinations.submit.title' => 'Lisa',
-    'destinations.update.info' =>
-        'Uued sihtkohad sinu profiilile on edukalt lisatud!',
+    'destinations.update.info' => 'Uued sihtkohad sinu profiilile on edukalt lisatud!',
     'destinations.have.been.title' => 'Ma olen käinud',
     'destinations.want.to.go.title' => 'Ma tahan minna',
     'destinations.remove.title' => 'Kustuta',

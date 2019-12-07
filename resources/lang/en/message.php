@@ -1,12 +1,11 @@
 <?php
 
 return [
-
-//  'index.title' => ':user messages',
+    //  'index.title' => ':user messages',
     'index.title' => 'Messages',
     'index.row.description' => 'With :user, last message at :created_at',
 
-//  'index.with.title' => ':user messages with :user_with',
+    //  'index.with.title' => ':user messages with :user_with',
     'index.with.title' => 'Messages',
     'index.with.row.description' => 'By :user at :created_at',
 
@@ -14,6 +13,5 @@ return [
     'create.submit.title' => 'Send private message',
 
     'store.email.subject' => ':user has sent you a private message',
-    'store.email.body' => 'See the full message here :url',
-
+    'store.email.body' => 'See the full message here :url'
 ];

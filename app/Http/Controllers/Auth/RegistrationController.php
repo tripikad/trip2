@@ -24,74 +24,99 @@ class RegistrationController extends Controller
             ->with('color', 'gray')
             ->with('background', component('BackgroundMap'))
             ->with('header', region('StaticHeader'))
-            ->with('top', collect()
-                ->push(component('Title')
-                    ->is('center')
-                    ->is('large')
-                    ->with('title', trans('auth.register.title'))
-                )
-                ->push('&nbsp;')
-                ->push(component('Title')
-                    ->is('center')
-                    ->is('small')
-                    ->with('title', trans('auth.register.subhead.title'))
+            ->with(
+                'top',
+                collect()
+                    ->push(
+                        component('Title')
+                            ->is('center')
+                            ->is('large')
+                            ->with('title', trans('auth.register.title'))
+                    )
+                    ->push('&nbsp;')
+                    ->push(
+                        component('Title')
+                            ->is('center')
+                            ->is('small')
+                            ->with('title', trans('auth.register.subhead.title'))
+                    )
+            )
+            ->with(
+                'content_top',
+                component('Grid3')->with(
+                    'items',
+                    collect()
+                        ->push(component('AuthTab')->with('title', 'E-mailiga'))
+                        ->push(
+                            component('AuthTab')
+                                ->is('facebook')
+                                ->with('route', route('facebook.redirect'))
+                                ->with('title', 'Facebook')
+                        )
+                        ->push(
+                            component('AuthTab')
+                                ->is('google')
+                                ->with('route', route('google.redirect'))
+                                ->with('title', 'Google')
+                        )
                 )
             )
-            ->with('content_top', component('Grid3')->with('items', collect()
-                ->push(component('AuthTab')
-                    ->with('title', 'E-mailiga')
+            ->with(
+                'content',
+                collect()->push(
+                    component('Form')
+                        ->with('route', route('register.submit'))
+                        ->with(
+                            'fields',
+                            collect()
+                                ->push(Honeypot::generate('full_name', 'time'))
+                                ->push(
+                                    component('FormTextfield')
+                                        ->is('large')
+                                        ->with('title', trans('auth.register.field.name.title'))
+                                        ->with('name', 'name')
+                                )
+                                ->push(
+                                    component('FormTextfield')
+                                        ->is('large')
+                                        ->with('title', trans('auth.register.field.email.title'))
+                                        ->with('name', 'email')
+                                )
+                                ->push(
+                                    component('FormPassword')
+                                        ->is('large')
+                                        ->with('title', trans('auth.register.field.password.title'))
+                                        ->with('name', 'password')
+                                )
+                                ->push(
+                                    component('FormPassword')
+                                        ->is('large')
+                                        ->with('title', trans('auth.register.field.password_confirmation.title'))
+                                        ->with('name', 'password_confirmation')
+                                )
+                                ->push(
+                                    component('FormButton')
+                                        ->is('wide')
+                                        ->is('large')
+                                        ->with('title', trans('auth.register.submit.title'))
+                                )
+                        )
                 )
-                ->push(component('AuthTab')
-                    ->is('facebook')
-                    ->with('route', route('facebook.redirect'))
-                    ->with('title', 'Facebook')
-                )
-                ->push(component('AuthTab')
-                    ->is('google')
-                    ->with('route', route('google.redirect'))
-                    ->with('title', 'Google')
-                )
-            ))
-            ->with('content', collect()
-                ->push(component('Form')
-                    ->with('route', route('register.submit'))
-                    ->with('fields', collect()
-                        ->push(Honeypot::generate('full_name', 'time'))
-                        ->push(component('FormTextfield')
-                            ->is('large')
-                            ->with('title', trans('auth.register.field.name.title'))
-                            ->with('name', 'name')
-                        )
-                        ->push(component('FormTextfield')
-                            ->is('large')
-                            ->with('title', trans('auth.register.field.email.title'))
-                            ->with('name', 'email')
-                        )
-                        ->push(component('FormPassword')
-                            ->is('large')
-                            ->with('title', trans('auth.register.field.password.title'))
-                            ->with('name', 'password')
-                        )
-                        ->push(component('FormPassword')
-                            ->is('large')
-                            ->with('title', trans('auth.register.field.password_confirmation.title'))
-                            ->with('name', 'password_confirmation')
-                        )
-                        ->push(component('FormButton')
-                            ->is('wide')
-                            ->is('large')
-                            ->with('title', trans('auth.register.submit.title'))
-                        )
-                ))
             )
-            ->with('bottom', collect()->push(component('MetaLink')
-                ->with('title', trans('auth.register.field.eula.title', [
-                    'link' => format_link(
-                        route('static.show.id', [25151]),
-                        trans('auth.register.field.eula.title.link')
-                    ),
-                ]))
-            ))
+            ->with(
+                'bottom',
+                collect()->push(
+                    component('MetaLink')->with(
+                        'title',
+                        trans('auth.register.field.eula.title', [
+                            'link' => format_link(
+                                route('static.show.id', [25151]),
+                                trans('auth.register.field.eula.title.link')
+                            )
+                        ])
+                    )
+                )
+            )
             ->with('footer', region('FooterLight'))
             ->render();
     }
@@ -103,13 +128,13 @@ class RegistrationController extends Controller
             'email' => 'required|email|max:64|unique:users',
             'password' => 'required|confirmed|min:6',
             'eula' => 'boolean',
-            'full_name'   => 'honeypot',
-            'time'   => 'required|honeytime:3',
+            'full_name' => 'honeypot',
+            'time' => 'required|honeytime:3'
         ]);
 
         $fields = [
             'role' => 'regular',
-            'password' => Hash::make($request->get('password')),
+            'password' => Hash::make($request->get('password'))
         ];
 
         $user = User::create(array_merge($request->all(), $fields));
@@ -117,8 +142,8 @@ class RegistrationController extends Controller
         Mail::to($user->email, $user->name)->queue(new ConfirmRegistration($user));
 
         Log::info('New user registered', [
-            'name' =>  $user->name,
-            'link' =>  route('user.show', [$user]),
+            'name' => $user->name,
+            'link' => route('user.show', [$user])
         ]);
 
         return redirect()
@@ -132,8 +157,8 @@ class RegistrationController extends Controller
         $user->confirmEmail();
 
         Log::info('New user confirmed registration', [
-            'name' =>  $user->name,
-            'link' =>  route('user.show', [$user]),
+            'name' => $user->name,
+            'link' => route('user.show', [$user])
         ]);
 
         $weekly_newsletter = NewsletterType::where('type', 'weekly')
@@ -143,7 +168,7 @@ class RegistrationController extends Controller
         // @todo Avoid direct controller method call
 
         if ($weekly_newsletter) {
-            (new NewsletterController)->subscribe(request(), $weekly_newsletter->id, $user, true);
+            (new NewsletterController())->subscribe(request(), $weekly_newsletter->id, $user, true);
         }
 
         return redirect()

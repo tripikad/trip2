@@ -76,20 +76,16 @@ class UserVars
 
     public function destinationHaveBeen()
     {
-        return $this->user->flags
-            ->where('flag_type', 'havebeen')
-            ->filter(function ($flag) {
-                return $flag->flaggable;
-            });
+        return $this->user->flags->where('flag_type', 'havebeen')->filter(function ($flag) {
+            return $flag->flaggable;
+        });
     }
 
     public function destinationWantsToGo()
     {
-        return $this->user->flags
-            ->where('flag_type', 'wantstogo')
-            ->filter(function ($flag) {
-                return $flag->flaggable;
-            });
+        return $this->user->flags->where('flag_type', 'wantstogo')->filter(function ($flag) {
+            return $flag->flaggable;
+        });
     }
 
     public function likes()

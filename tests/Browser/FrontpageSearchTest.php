@@ -17,7 +17,7 @@ class FrontpageSearchTest extends DuskTestCase
         $content = factory(Content::class)->create([
             'user_id' => factory(User::class)->create()->id,
             'type' => 'forum',
-            'title' => 'Donde esta nuestra playa',
+            'title' => 'Donde esta nuestra playa'
         ]);
 
         Searchable::unguard();
@@ -31,13 +31,14 @@ class FrontpageSearchTest extends DuskTestCase
             'title' => $content->title,
             'body' => $content->body,
             'created_at' => $content->created_at,
-            'updated_at' => $content->updated_at,
+            'updated_at' => $content->updated_at
         ]);
 
         Searchable::reguard();
 
         $this->browse(function (Browser $browser) {
-            $browser->visit('/')
+            $browser
+                ->visit('/')
                 ->pause(100)
                 ->assertSourceHas('Kuhu sa soovid minna?')
                 ->type('.FrontpageSearch__input', 'Donde esta nuestra playa')
