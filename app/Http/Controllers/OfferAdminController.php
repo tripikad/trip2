@@ -165,7 +165,7 @@ class OfferAdminController extends Controller
                                                         ->with('max', 1)
                                                         ->with(
                                                             'value',
-                                                            $startDestination ? [$startDestination->id] : ''
+                                                            $startDestination ? [$startDestination->id] : []
                                                         )
                                                 )
                                                 ->push(
@@ -185,16 +185,13 @@ class OfferAdminController extends Controller
                                                     component('FormTextfield')
                                                         ->with('title', trans('offer.admin.edit.start_at'))
                                                         ->with('name', 'start_at')
-                                                        ->with(
-                                                            'value',
-                                                            $startDestination ? [$startDestination->id] : ''
-                                                        )
+                                                        ->with('value', '')
                                                 )
                                                 ->push(
                                                     component('FormTextfield')
                                                         ->with('title', trans('offer.admin.edit.end_at'))
                                                         ->with('name', 'end_at')
-                                                        ->with('options', $destinations)
+                                                        ->with('value', '')
                                                 )
                                         )
                                     )
