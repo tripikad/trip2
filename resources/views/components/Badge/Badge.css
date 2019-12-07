@@ -1,5 +1,3 @@
-@import "variables";
-
 .Badge {
     background: $red;
     align-items: center;

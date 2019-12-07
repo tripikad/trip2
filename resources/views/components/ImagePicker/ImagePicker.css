@@ -1,5 +1,3 @@
-@import "variables";
-
 .ImagePicker {
     position: fixed;
     background: rgba(0, 0, 0, 0.8);

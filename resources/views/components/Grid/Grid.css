@@ -1,5 +1,3 @@
-@import 'variables';
-
 .Grid {
     display: grid;
     display: block ?if $tablet;

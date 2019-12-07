@@ -10,7 +10,7 @@ $opacity = $opacity ?? 0.25;
 
 <div class="ExperimentalCard {{ $isclasses }}" 
     style="
-        min-height: calc({{ $height}} * {{ style_vars()->spacer }});
+        min-height: calc({{ $height}} * {{ styles('spacer') }});
         background-image: linear-gradient(
             rgba(0, 0, 0, {{ $opacity }}),
             rgba(0, 0, 0, {{ $opacity }})

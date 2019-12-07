@@ -47,8 +47,8 @@ class AppServiceProvider extends ServiceProvider
 
         Collection::macro('onlyLast', function ($count = 1) {
             return $this->reverse()
-        ->slice(0, $count)
-        ->reverse();
+                ->slice(0, $count)
+                ->reverse();
         });
 
         Collection::macro('withoutLastWhenOdd', function () {
@@ -111,9 +111,7 @@ class AppServiceProvider extends ServiceProvider
         view()->composer('layouts.main', function () use ($auth) {
             if ($auth->check()) {
                 Analytics::setUserId($auth->user()->id);
-                Analytics::trackCustom(
-          "ga('set', 'user_role', '" . $auth->user()->role . "');"
-        );
+                Analytics::trackCustom("ga('set', 'user_role', '" . $auth->user()->role . "');");
             }
         });
     }

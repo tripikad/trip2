@@ -1,5 +1,3 @@
-@import "variables";
-
 .Navbar {
     display: flex;
     justify-content: space-between;

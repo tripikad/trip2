@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Styleguide;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 
-class ExperimentsComponentsController extends Controller
+class ComponentsController extends Controller
 {
     public function index()
     {
@@ -13,12 +14,8 @@ class ExperimentsComponentsController extends Controller
             ->with(
                 'content',
                 collect()
-                    ->push(region('ExperimentalMenu'))
-                    ->push(
-                        component('Title')
-                            ->is('large')
-                            ->with('title', 'Components')
-                    )
+                    ->push(region('StyleguideMenu'))
+                    ->push(component('Title')->with('title', 'Components'))
                     ->merge(
                         $this->components()
                             ->filter(function ($c) {

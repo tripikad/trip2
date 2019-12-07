@@ -1,5 +1,3 @@
-@import "variables";
-
 .FormUpload {
     border: $border-dotted-gray-md;
     border-radius: $border-radius-md;

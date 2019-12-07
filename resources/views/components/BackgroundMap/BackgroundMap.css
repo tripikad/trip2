@@ -1,5 +1,3 @@
-@import "variables";
-
 .BackgroundMap {
     position: absolute;
     top: calc($spacer * -12);

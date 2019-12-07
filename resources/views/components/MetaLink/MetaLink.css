@@ -1,5 +1,3 @@
-@import 'variables';
-
 .MetaLink {
     padding: 0 $padding-xs;
     border-radius: $border-radius-md;

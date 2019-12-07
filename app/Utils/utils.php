@@ -141,11 +141,15 @@ function format_link($route, $title, $blank = false)
     return '<a href="' . $route . '" ' . $target . '>' . $title . '</a>';
 }
 
-function style_vars()
+function styles($value = null)
 {
-    $json = Storage::disk('root')->get('resources/views/styles/variables.json');
-
-    return json_decode($json);
+    if ($value == null) {
+        return config('styles');
+    }
+    if ($value && ($stylevar = config("styles.$value"))) {
+        return $stylevar;
+    }
+    return 0;
 }
 
 function snap($value, $step = 1)

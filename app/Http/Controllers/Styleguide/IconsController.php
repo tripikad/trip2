@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Styleguide;
 
-use App\Content;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
+use App\Content;
 
-class ExperimentsIconsController extends Controller
+class IconsController extends Controller
 {
     public function index()
     {
@@ -16,7 +17,7 @@ class ExperimentsIconsController extends Controller
             ->with(
                 'content',
                 collect()
-                    ->push(region('ExperimentalMenu'))
+                    ->push(region('StyleguideMenu'))
                     ->push(component('Title')->with('title', 'Icons'))
                     ->push(
                         component('Code')
@@ -57,7 +58,7 @@ class ExperimentsIconsController extends Controller
                             )
                     )
                     ->merge(
-                        collect(['sm', 'md', 'lg', 'xl', ''])->map(function (
+                        collect(['sm', 'md', 'lg', 'xl'])->map(function (
                             $size
                         ) use ($file) {
                             return '<div class="StyleIcon">' .

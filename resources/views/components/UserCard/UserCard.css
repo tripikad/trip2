@@ -1,5 +1,3 @@
-@import "variables";
-
 .UserCard {
 	display: flex;
 	background: $cyan;

@@ -5,7 +5,7 @@ module.exports = {
             path: ['./resources/views/styles', './node_modules']
         }),
         require('postcss-simple-vars')({
-            variables: () => require('./resources/views/styles/variables.json'),
+            variables: () => require('./resources/views/styles/styles'),
             silent: true
         }),
         require('postcss-responsive-type')(),

@@ -1,5 +1,3 @@
-@import "variables";
-
 .AuthTab {
     background: $white;
     height: $height-md;

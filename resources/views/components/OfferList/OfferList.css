@@ -1,5 +1,3 @@
-@import 'variables';
-
 .OfferList > *,
 .OfferList__offers > * {
     margin-bottom: $margin-lg;

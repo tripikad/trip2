@@ -1,5 +1,3 @@
-@import "variables";
-
 ul.HeaderTabs {
     font: $font-text-md;
     list-style: none;

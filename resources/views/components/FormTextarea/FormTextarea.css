@@ -1,5 +1,3 @@
-@import 'variables';
-
 .FormTextarea__label {
     color: $gray;
     display: block;
