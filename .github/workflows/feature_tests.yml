@@ -16,31 +16,38 @@ jobs:
           - 3306/tcp
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
     steps:
-    - name: Verify MySQL connection from host
-      run: |
-        sudo apt-get install -y mysql-client
-        mysql --host 127.0.0.1 --port ${{ job.services.mysql.ports['3306'] }} -uroot -ppassword -e "SHOW DATABASES"
-        echo mysql port: ${{ job.services.mysql.ports['3306'] }}
-    - uses: actions/checkout@v1
-    - name: Copy .env
-      run: php -r "file_exists('.env') || copy('.env.example', '.env');"
-    - name: Install Dependencies
-      run: composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
-    - name: Generate key
-      run: php artisan key:generate
-    - name: Run Migration
-      run: php artisan migrate -v
-      env:
-        DB_DATABASE2: trip2
-        DB_HOST2: 127.0.0.1
-        DB_USERNAME2: root
-        DB_PASSWORD2: password
-        DB_PORT2: ${{ job.services.mysql.ports[3306] }}
-    - name: Run PHPUnit
-      run: php vendor/bin/phpunit
-      env:
-        DB_DATABASE2: trip2
-        DB_HOST2: 127.0.0.1
-        DB_USERNAME2: root
-        DB_PASSWORD2: password
-        DB_PORT2: ${{ job.services.mysql.ports[3306] }}
+      - name: Verify MySQL connection from host
+        run: |
+          sudo apt-get install -y mysql-client
+          mysql --host 127.0.0.1 --port ${{ job.services.mysql.ports['3306'] }} -uroot -ppassword -e "SHOW DATABASES"
+          echo mysql port: ${{ job.services.mysql.ports['3306'] }}
+      - uses: actions/checkout@v1
+      - name: Copy .env
+        run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+      - name: Cache composer
+        id: composer-cache
+        uses: actions/cache@v1
+        with:
+          path: vendor
+          key: ${{ runner.OS }}-build-${{ hashFiles('composer.json') }}
+      - name: composer install
+        if: steps.composer-cache.outputs.cache-hit != 'true'
+        run: composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
+      - name: Generate key
+        run: php artisan key:generate
+      - name: Run Migration
+        run: php artisan migrate -v
+        env:
+          DB_DATABASE2: trip2
+          DB_HOST2: 127.0.0.1
+          DB_USERNAME2: root
+          DB_PASSWORD2: password
+          DB_PORT2: ${{ job.services.mysql.ports[3306] }}
+      - name: Run PHPUnit
+        run: php vendor/bin/phpunit
+        env:
+          DB_DATABASE2: trip2
+          DB_HOST2: 127.0.0.1
+          DB_USERNAME2: root
+          DB_PASSWORD2: password
+          DB_PORT2: ${{ job.services.mysql.ports[3306] }}

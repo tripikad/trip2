@@ -1,3 +1,4 @@
+<<<<<<< HEAD
     .FormTextarea__label {
         color: $gray;
         display: block;
@@ -5,19 +6,30 @@
         line-height: $line-height-md;
         margin-bottom: $margin-sm;
     }
+=======
+@import 'variables';
 
-    .FormTextarea__textarea {
-        border-radius: $border-radius-md;
-        border: $border-gray-md;
-        font: $font-text-md;
-        padding: $padding-sm;
-        width: 100%;
-        color: $gray-dark;
-    }
+.FormTextarea__label {
+    color: $gray;
+    display: block;
+    font: $font-heading-sm;
+    line-height: $line-height-md;
+    margin-bottom: $margin-sm;
+}
+>>>>>>> master
 
-    .FormTextarea__textarea::placeholder {
-        color: $gray-light;
-    }
+.FormTextarea__textarea {
+    border-radius: $border-radius-md;
+    border: $border-gray-md;
+    font: $font-text-md;
+    padding: $padding-sm;
+    width: 100%;
+    color: $gray-dark;
+}
+
+.FormTextarea__textarea::placeholder {
+    color: $gray-light;
+}
 
 .FormTextarea--borderless .FormTextarea__textarea {
     border: none;

@@ -10,7 +10,7 @@ $disabled = $disabled ?? false;
 
 @endphp
 
-<div class="FormTextarea {{ $isclasses }}">
+<div class="FormTextarea {{ $isclasses }} {{ $errors->first($name) ? 'FormTextfield--error' : ''}}">
 
     @if ($title)
 
@@ -25,8 +25,9 @@ $disabled = $disabled ?? false;
         rows="{{ $rows }}"
         cols="{{ $cols }} "
         placeholder="{{ $placeholder }}"
+        dusk="{{ slug($title) }}"
         @if($disabled)
-        disabled
+          disabled
         @endif
     >{{ $value }}</textarea>
 

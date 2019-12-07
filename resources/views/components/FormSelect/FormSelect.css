@@ -1,4 +1,15 @@
+<<<<<<< HEAD
 .FormSelect {
+=======
+@import 'variables';
+
+.FormSelect__label {
+    color: $gray;
+    display: block;
+    font: $font-heading-sm;
+    line-height: $line-height-md;
+    margin-bottom: $margin-sm;
+>>>>>>> master
 }
 
 .multiselect__content {
@@ -70,4 +81,12 @@
 
 .FormSelect--blue .multiselect__select:before {
     border-color: $white transparent transparent !important;
+}
+
+.FormSelect--error .multiselect__tags {
+    border: 2px solid $red !important;
+}
+
+.FormSelect--error .FormSelect__label {
+    color: $red;
 }

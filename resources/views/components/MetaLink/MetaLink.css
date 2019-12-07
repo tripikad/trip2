@@ -3,7 +3,6 @@
     border-radius: $border-radius-md;
     cursor: pointer;
     transition: $transition-md;
-    margin-left: -7px;
 }
 
 .MetaLink__title {
