@@ -382,3 +382,11 @@ layout('One')->cached(false);
 #### Making a layout
 
 At the time of writing there is no helper command to create a layout .
+
+## Backend arcitecture
+
+### Models
+
+See the [PR](pull/1934) for entity-relationship diagram:
+
+[graph.png](https://github.com/tripikad/trip2/blob/96e4c22fca273759990300a8a52a217d7607a57a/graph.png?raw=true)

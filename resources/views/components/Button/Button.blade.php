@@ -8,7 +8,7 @@ $title = $title ?? '';
 @endphp
 
 
-<a href="{{ $route }}" target="{{ $target }}">
+<a href="{{ $route }}" target="{{ $target }}" dusk="{{ $title ? slug($title) : '' }}">
 
     <div class="Button {{ $isclasses }}">
 

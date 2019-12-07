@@ -34,21 +34,15 @@ Route::put('news/{id}/update', 'NewsController@update')
 
 // Shortnews
 
-Route::get('luhiuudised', 'NewsController@shortnewsIndex')->name(
-    'shortnews.index'
-);
+Route::get('luhiuudised', 'NewsController@shortnewsIndex')->name('shortnews.index');
 
 Route::get('luhiuudised/{slug}', 'NewsController@show')->name('shortnews.show');
 
 // Flight
 
-Route::get('odavad-lennupiletid', 'FlightController@index')->name(
-    'flight.index'
-);
+Route::get('odavad-lennupiletid', 'FlightController@index')->name('flight.index');
 
-Route::get('odavad-lennupiletid/{slug}', 'FlightController@show')->name(
-    'flight.show'
-);
+Route::get('odavad-lennupiletid/{slug}', 'FlightController@show')->name('flight.show');
 
 Route::get('flight/create', 'FlightController@create')
     ->name('flight.create')
@@ -68,13 +62,9 @@ Route::put('flight/{id}/update', 'FlightController@update')
 
 // Travelmates
 
-Route::get('reisikaaslased', 'TravelmateController@index')->name(
-    'travelmate.index'
-);
+Route::get('reisikaaslased', 'TravelmateController@index')->name('travelmate.index');
 
-Route::get('reisikaaslased/{slug}', 'TravelmateController@show')->name(
-    'travelmate.show'
-);
+Route::get('reisikaaslased/{slug}', 'TravelmateController@show')->name('travelmate.show');
 
 Route::get('travelmate/create', 'TravelmateController@create')
     ->name('travelmate.create')
@@ -94,37 +84,21 @@ Route::put('travelmate/{id}/update', 'TravelmateController@update')
 
 // Forum
 
-Route::get('foorum/uldfoorum', 'ForumController@forumIndex')->name(
-    'forum.index'
-);
+Route::get('foorum/uldfoorum', 'ForumController@forumIndex')->name('forum.index');
 
-Route::get('foorum/ost-muuk', 'ForumController@buysellIndex')->name(
-    'buysell.index'
-);
+Route::get('foorum/ost-muuk', 'ForumController@buysellIndex')->name('buysell.index');
 
-Route::get('foorum/elu-valimaal', 'ForumController@expatIndex')->name(
-    'expat.index'
-);
+Route::get('foorum/elu-valimaal', 'ForumController@expatIndex')->name('expat.index');
 
-Route::get('foorum/vaba-teema', 'ForumController@miscIndex')->name(
-    'misc.index'
-);
+Route::get('foorum/vaba-teema', 'ForumController@miscIndex')->name('misc.index');
 
-Route::get('foorum/uldfoorum/{slug}', 'ForumController@show')->name(
-    'forum.show'
-);
+Route::get('foorum/uldfoorum/{slug}', 'ForumController@show')->name('forum.show');
 
-Route::get('foorum/ost-muuk/{slug}', 'ForumController@show')->name(
-    'buysell.show'
-);
+Route::get('foorum/ost-muuk/{slug}', 'ForumController@show')->name('buysell.show');
 
-Route::get('foorum/elu-valimaal/{slug}', 'ForumController@show')->name(
-    'expat.show'
-);
+Route::get('foorum/elu-valimaal/{slug}', 'ForumController@show')->name('expat.show');
 
-Route::get('foorum/vaba-teema/{slug}', 'ForumController@show')->name(
-    'misc.show'
-);
+Route::get('foorum/vaba-teema/{slug}', 'ForumController@show')->name('misc.show');
 
 Route::get('forum/create/{type}', 'ForumController@create')
     ->name('forum.create')
@@ -191,15 +165,9 @@ Route::get('newsletter/preview_sent/{id}', 'NewsletterController@preview_sent')
     ->name('newsletter.preview_sent')
     ->middleware('role:superuser');
 
-Route::post(
-    'newsletter/subscribe/{id}',
-    'NewsletterController@subscribe'
-)->name('newsletter.subscribe');
+Route::post('newsletter/subscribe/{id}', 'NewsletterController@subscribe')->name('newsletter.subscribe');
 
-Route::get(
-    'newsletter/unsubscribe/{hash}-{id}',
-    'NewsletterController@unsubscribe'
-)->name('newsletter.unsubscribe');
+Route::get('newsletter/unsubscribe/{hash}-{id}', 'NewsletterController@unsubscribe')->name('newsletter.unsubscribe');
 
 // Blog
 
@@ -265,13 +233,9 @@ Route::post('photo/store', 'PhotoController@store')
 
 // Content redirects
 
-Route::get('content/{type}', 'ContentController@redirectIndex')->name(
-    'content.index'
-);
+Route::get('content/{type}', 'ContentController@redirectIndex')->name('content.index');
 
-Route::get('content/{type}/{id}', 'ContentController@redirectShow')->name(
-    'content.show'
-);
+Route::get('content/{type}/{id}', 'ContentController@redirectShow')->name('content.show');
 
 // Comments
 
@@ -323,37 +287,24 @@ Route::get('user/{id}/follows', 'ForumController@followIndex')
     ->name('follow.index')
     ->middleware('role:admin,userowner');
 
-Route::put(
-    'content/{type}/{id}/follow/{status}',
-    'FollowController@followContent'
-)
+Route::put('content/{type}/{id}/follow/{status}', 'FollowController@followContent')
     ->name('follow.follow.content')
     ->middleware('role:regular');
 
 // Destination
 
-Route::get('sihtkoht/{id}', 'DestinationController@show')->name(
-    'destination.show'
-);
+Route::get('sihtkoht/{id}', 'DestinationController@show')->name('destination.show');
 
-Route::get('sihtkoht/{slug}', 'DestinationController@showSlug')->name(
-    'destination.showSlug'
-);
+Route::get('sihtkoht/{slug}', 'DestinationController@showSlug')->name('destination.showSlug');
 
-Route::get('sihtkohad', 'DestinationController@index')->name(
-    'destination.index'
-);
+Route::get('sihtkohad', 'DestinationController@index')->name('destination.index');
 // Search
 
 Route::get('search', 'SearchController@search')->name('search.results');
 
-Route::get('search/ajaxsearch', 'SearchController@ajaxsearch')->name(
-    'search.ajax'
-);
+Route::get('search/ajaxsearch', 'SearchController@ajaxsearch')->name('search.ajax');
 
-Route::get('search/{token}', 'SearchController@search')->name(
-    'search.results.type'
-);
+Route::get('search/{token}', 'SearchController@search')->name('search.results.type');
 
 // Image
 
@@ -400,39 +351,21 @@ Route::post('utils/format', 'UtilsController@format')->name('utils.format');
 
 // Experiments and style guides
 
-Route::get('experiments', 'ExperimentsController@index')->name(
-    'experiments.index'
-);
+Route::get('experiments', 'ExperimentsController@index')->name('experiments.index');
 
-Route::get(
-    'experiments/destinations',
-    'ExperimentsController@destinationIndex'
-)->name('experiments.destination.index');
+Route::get('experiments/destinations', 'ExperimentsController@destinationIndex')->name('experiments.destination.index');
 
-Route::get('experiments/user/{id?}', 'ExperimentsController@userIndex')->name(
-    'experiments.user.index'
-);
+Route::get('experiments/user/{id?}', 'ExperimentsController@userIndex')->name('experiments.user.index');
 
-Route::post('experiments/store', 'ExperimentsController@store')->name(
-    'experiments.store'
-);
+Route::post('experiments/store', 'ExperimentsController@store')->name('experiments.store');
 
-Route::get('experiments/styles', 'ExperimentsStylesController@index')->name(
-    'experiments.styles.index'
-);
+Route::get('experiments/styles', 'ExperimentsStylesController@index')->name('experiments.styles.index');
 
-Route::get('experiments/icons', 'ExperimentsIconsController@index')->name(
-    'experiments.icons.index'
-);
+Route::get('experiments/icons', 'ExperimentsIconsController@index')->name('experiments.icons.index');
 
-Route::get('experiments/grid', 'ExperimentsGridController@index')->name(
-    'experiments.grid.index'
-);
+Route::get('experiments/grid', 'ExperimentsGridController@index')->name('experiments.grid.index');
 
-Route::get(
-    'experiments/components',
-    'ExperimentsComponentsController@index'
-)->name('experiments.components.index');
+Route::get('experiments/components', 'ExperimentsComponentsController@index')->name('experiments.components.index');
 
 // Registration
 
@@ -565,15 +498,36 @@ Route::get('lendude_sooduspakkumised/rss', [
 
 // Offers
 
-Route::get('offers', 'OfferController@index')->name('offers.index');
+Route::get('offer', 'OfferController@index')->name('offer.index');
 
-Route::get('offers/json', 'OfferController@indexJson')->name(
-    'offers.index.json'
-);
+Route::get('offer/json', 'OfferController@indexJson')->name('offer.index.json');
 
-Route::get('offers/{id}', 'OfferController@show')->name('offers.show');
+Route::get('offer/{id}', 'OfferController@show')->name('offer.show');
 
-Route::post('offers/{id}/send', 'OfferController@send')->name('offers.send');
+// Offers admin
+
+Route::get('offer/admin', 'OfferAdminController@index')
+    ->name('offer.admin.index')
+    ->middleware('role:superuser');
+
+Route::get('offer/admin/company', 'OfferAdminController@companyIndex')
+    ->name('offer.admin.company.index')
+    ->middleware('company');
+
+Route::get('offer/admin/create/{style}', 'OfferAdminController@create')
+    ->name('offer.admin.create')
+    ->middleware('company')
+    ->where('style', '(' . collect(config('offer.styles'))->implode('|') . ')');
+
+Route::post('offer/admin/store', 'OfferAdminController@store')
+    ->name('offer.admin.store')
+    ->middleware('company');
+
+// Bookings
+
+Route::post('booking/{id}', 'BookingController@create')
+    ->middleware('role:superuser')
+    ->name('booking.create');
 
 // Legacy user paths
 
@@ -589,51 +543,27 @@ Route::get('node/taxonomy/term/{id}', 'RedirectController@redirectTaxonomy');
 
 Route::get('content/taxonomy/term/{id}', 'RedirectController@redirectTaxonomy');
 
-Route::get(
-    'content/{blurb}/taxonomy/term/{id}',
-    'RedirectController@redirectTaxonomyBlurb'
-);
+Route::get('content/{blurb}/taxonomy/term/{id}', 'RedirectController@redirectTaxonomyBlurb');
 
 Route::get('trip_destination/tid/{id}', 'RedirectController@redirectTaxonomy');
 
 Route::get('sihtkoht/{title}', 'RedirectController@redirectDestination');
 
-Route::get(
-    'content/{blurb}/sihtkoht/{title}',
-    'RedirectController@redirectDestinationBlurb'
-);
+Route::get('content/{blurb}/sihtkoht/{title}', 'RedirectController@redirectDestinationBlurb');
 
-Route::get(
-    'content/{blurb}/{blurb2}/sihtkoht/{title}',
-    'RedirectController@redirectDestinationBlurb2'
-);
+Route::get('content/{blurb}/{blurb2}/sihtkoht/{title}', 'RedirectController@redirectDestinationBlurb2');
 
 Route::get('node/sihtkoht/{title}', 'RedirectController@redirectDestination');
 
-Route::get(
-    'content/sihtkoht/{title}',
-    'RedirectController@redirectDestination'
-);
+Route::get('content/sihtkoht/{title}', 'RedirectController@redirectDestination');
 
-Route::get(
-    'category/{part1}/{part2}/{part3?}/{part4?}',
-    'RedirectController@redirectCategory'
-);
+Route::get('category/{part1}/{part2}/{part3?}/{part4?}', 'RedirectController@redirectCategory');
 
-Route::get(
-    'node/category/{part1}/{part2}/{part3?}/{part4?}',
-    'RedirectController@redirectCategory'
-);
+Route::get('node/category/{part1}/{part2}/{part3?}/{part4?}', 'RedirectController@redirectCategory');
 
-Route::get(
-    'content/category/{part1}/{part2}/{part3?}/{part4?}',
-    'RedirectController@redirectCategory'
-);
+Route::get('content/category/{part1}/{part2}/{part3?}/{part4?}', 'RedirectController@redirectCategory');
 
-Route::get(
-    'content/{blurb}/category/{part1}/{part2}/{part3?}/{part4?}',
-    'RedirectController@redirectCategoryBlurb'
-);
+Route::get('content/{blurb}/category/{part1}/{part2}/{part3?}/{part4?}', 'RedirectController@redirectCategoryBlurb');
 
 Route::get(
     'sein/term/{id}/{a?}/{b?}/{c?}/{d?}/{e?}/{f?}/{g?}/{h?}/{i?}/{j?}/{k?}/{l?}/{m?}/{n?}',
@@ -661,10 +591,7 @@ Route::get('node/{id}/atom/feed', 'RedirectController@redirectNode');
 
 Route::get('crss/node/{id}', 'RedirectController@redirectNode');
 
-Route::get('content/{path}', 'RedirectController@redirectContent')->where(
-    'path',
-    '.*'
-);
+Route::get('content/{path}', 'RedirectController@redirectContent')->where('path', '.*');
 
 // All other legacy aliases
 
