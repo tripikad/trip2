@@ -160,7 +160,6 @@ class OffersAdminTest extends DuskTestCase
                 ->click(dusk('Lisa seiklusreis'))
                 ->pause(1000)
                 ->type(dusk('Pealkiri'), 'Montaña alta para gringo')
-                ->type(dusk('Hind'), '1000')
                 ->click(dusk('Reisi alguskoht'))
                 ->keys(dusk('Reisi alguskoht'), 'Sol', '{enter}')
                 ->click(dusk('Reisi sihtkohad'))
