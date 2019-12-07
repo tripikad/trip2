@@ -25,6 +25,7 @@ jobs:
             - uses: actions/setup-node@v1
             - name: Copy .env
               run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+<<<<<<< HEAD
             - name: Cache composer
               id: composer-cache
               uses: actions/cache@v1
@@ -33,6 +34,9 @@ jobs:
                   key: ${{ runner.OS }}-build-${{ hashFiles('composer.json') }}
             - name: composer install
               if: steps.composer-cache.outputs.cache-hit != 'true'
+=======
+            - name: Install Dependencies
+>>>>>>> master
               run: composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
             - name: Generate key
               run: php artisan key:generate
@@ -46,6 +50,7 @@ jobs:
                   DB_PORT2: ${{ job.services.mysql.ports[3306] }}
             - name: Upgrade chrome driver
               run: php artisan dusk:update --detect
+<<<<<<< HEAD
             - name: Cache node_modules
               id: npm-cache
               uses: actions/cache@v1
@@ -54,6 +59,9 @@ jobs:
                   key: ${{ runner.OS }}-build-${{ hashFiles('package.json') }}
             - name: npm install
               if: steps.npm-cache.outputs.cache-hit != 'true'
+=======
+            - name: Install npm packages
+>>>>>>> master
               run: npm install
             - name: Build frontend
               run: npm run build
@@ -76,3 +84,11 @@ jobs:
                   DB_PASSWORD2: password
                   DB_PORT2: ${{ job.services.mysql.ports[3306] }}
                   FULL_BASE_URL: http://127.0.0.1:8000
+<<<<<<< HEAD
+=======
+            - uses: actions/upload-artifact@v1
+              if: failure()
+              with:
+                  name: screenshots
+                  path: tests/Browser/screenshots/
+>>>>>>> master

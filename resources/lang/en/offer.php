@@ -1,0 +1,32 @@
+<?php
+
+return [
+    'index.title' => 'Offers',
+    'show.back' => 'All offers',
+    'show.book' => 'Make a booking',
+    'book.title' => 'Make a booking',
+    'book.back' => 'All offers',
+    'book.name' => 'Full name',
+    'book.email' => 'E-mail',
+    'book.phone' => 'Phone',
+    'book.adults' => 'Number of adults',
+    'book.children' => 'Number of children and their age',
+    'book.notes' => 'Notes',
+    'book.insurance' => 'I need an insurance',
+    'book.installments' => 'I want to pay by installments',
+    'book.flexible' => 'I am flexible with dates (± 3 days)',
+    'book.email.subject' => ':name booked an offer :title',
+    'book.email.title' => 'Booking for',
+    'book.email.id' => 'Booking ID',
+    'book.email.name' => 'Name',
+    'book.email.email' => 'E-mail',
+    'book.email.phone' => 'Phone',
+    'book.email.adults' => 'Number of adults',
+    'book.email.children' => 'Number of children and their age',
+    'book.email.notes' => 'Notes',
+    'book.email.insurance' => 'I need an insurance',
+    'book.email.installments' => 'I want to pay by installments',
+    'book.email.flexible' => 'I am flexible with dates (± 3 days)',
+    'book.email.yes' => '✔ Yes',
+    'book.email.no' => 'No'
+];

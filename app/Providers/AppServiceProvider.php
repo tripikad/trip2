@@ -47,8 +47,8 @@ class AppServiceProvider extends ServiceProvider
 
         Collection::macro('onlyLast', function ($count = 1) {
             return $this->reverse()
-                ->slice(0, $count)
-                ->reverse();
+        ->slice(0, $count)
+        ->reverse();
         });
 
         Collection::macro('withoutLastWhenOdd', function () {
@@ -88,25 +88,21 @@ class AppServiceProvider extends ServiceProvider
             return $this;
         });
 
-        Collection::macro('pushXY', function ($x = 0, $y = 0, $item) {
-            $spacer = style_vars()->spacer;
-            $this->push(
-                '<div style="
-                  margin-left: calc(' .
-                    $x .
-                    ' * ' .
-                    $spacer .
-                    ');
-                  margin-top: calc(' .
-                    $x .
-                    ' * ' .
-                    $spacer .
-                    ')
-                ">' .
-                    $item .
-                    '</div>'
-            );
-            return $this;
+        // https://adamwathan.me/2016/04/06/cleaning-up-form-input-with-transpose
+        Collection::macro('transpose', function () {
+            $items = array_map(function (...$items) {
+                return $items;
+            }, ...$this->values());
+
+            return new static($items);
+        });
+
+        Collection::macro('fromPairs', function () {
+            return $this->reduce(function ($assoc, $item) {
+                [$key, $value] = $item;
+                $assoc[$key] = $value;
+                return $assoc;
+            });
         });
     }
 
@@ -116,8 +112,8 @@ class AppServiceProvider extends ServiceProvider
             if ($auth->check()) {
                 Analytics::setUserId($auth->user()->id);
                 Analytics::trackCustom(
-                    "ga('set', 'user_role', '" . $auth->user()->role . "');"
-                );
+          "ga('set', 'user_role', '" . $auth->user()->role . "');"
+        );
             }
         });
     }

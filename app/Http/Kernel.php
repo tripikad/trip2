@@ -18,7 +18,7 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
-        \App\Http\Middleware\TrustProxies::class,
+        \App\Http\Middleware\TrustProxies::class
     ];
 
     /**
@@ -38,12 +38,9 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\XssProtection::class,
             \App\Http\Middleware\LastPageExceptAuth::class,
             \App\Http\Middleware\LoggedCookie::class,
-            \App\Http\Middleware\UserActivity::class,
+            \App\Http\Middleware\UserActivity::class
         ],
-        'api' => [
-            'throttle:60,1',
-            'bindings',
-        ],
+        'api' => ['throttle:60,1', 'bindings']
     ];
 
     /**
@@ -58,8 +55,9 @@ class Kernel extends HttpKernel
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'role' => \App\Http\Middleware\Role::class,
+        'company' => \App\Http\Middleware\Company::class,
         'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
-        'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class
     ];
 }
