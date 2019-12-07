@@ -47,8 +47,8 @@ class AppServiceProvider extends ServiceProvider
 
         Collection::macro('onlyLast', function ($count = 1) {
             return $this->reverse()
-        ->slice(0, $count)
-        ->reverse();
+                ->slice(0, $count)
+                ->reverse();
         });
 
         Collection::macro('withoutLastWhenOdd', function () {
@@ -87,8 +87,6 @@ class AppServiceProvider extends ServiceProvider
             return $this->merge(collect(array_fill(0, $count, '<br />')));
             return $this;
         });
-<<<<<<< HEAD
-=======
 
         // https://adamwathan.me/2016/04/06/cleaning-up-form-input-with-transpose
         Collection::macro('transpose', function () {
@@ -106,7 +104,6 @@ class AppServiceProvider extends ServiceProvider
                 return $assoc;
             });
         });
->>>>>>> master
     }
 
     protected function google_analytics_track($auth)
@@ -114,9 +111,7 @@ class AppServiceProvider extends ServiceProvider
         view()->composer('layouts.main', function () use ($auth) {
             if ($auth->check()) {
                 Analytics::setUserId($auth->user()->id);
-                Analytics::trackCustom(
-          "ga('set', 'user_role', '" . $auth->user()->role . "');"
-        );
+                Analytics::trackCustom("ga('set', 'user_role', '" . $auth->user()->role . "');");
             }
         });
     }
