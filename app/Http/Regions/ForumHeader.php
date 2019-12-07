@@ -4,9 +4,9 @@ namespace App\Http\Regions;
 
 class ForumHeader
 {
-  public function render($content = [])
-  {
-    return component('HeaderLight')
+    public function render($content = [])
+    {
+        return component('HeaderLight')
       ->with('content', $content)
       ->with(
         'navbar',
@@ -22,5 +22,5 @@ class ForumHeader
           ->with('navbar_desktop', region('NavbarDesktop'))
           ->with('navbar_mobile', region('NavbarMobile'))
       );
-  }
+    }
 }

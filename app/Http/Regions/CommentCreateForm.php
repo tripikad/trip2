@@ -4,9 +4,9 @@ namespace App\Http\Regions;
 
 class CommentCreateForm
 {
-  public function render($content, $is = '')
-  {
-    return component('Block')
+    public function render($content, $is = '')
+    {
+        return component('Block')
       ->is('border')
       ->is($is)
       ->with(
@@ -38,5 +38,5 @@ class CommentCreateForm
             )
         )
       );
-  }
+    }
 }

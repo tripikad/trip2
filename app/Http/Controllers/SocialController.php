@@ -12,84 +12,84 @@ use Socialite;
 
 class SocialController extends Controller
 {
-  public function facebookRedirect()
-  {
-    return Socialite::driver('facebook')->redirect();
-  }
+    public function facebookRedirect()
+    {
+        return Socialite::driver('facebook')->redirect();
+    }
 
-  public function googleRedirect()
-  {
-    return Socialite::driver('google')->redirect();
-  }
+    public function googleRedirect()
+    {
+        return Socialite::driver('google')->redirect();
+    }
 
-  public function facebook()
-  {
-    try {
-      $user = Socialite::driver('facebook')->user();
-    } catch (Exception $e) {
-      return redirect()
+    public function facebook()
+    {
+        try {
+            $user = Socialite::driver('facebook')->user();
+        } catch (Exception $e) {
+            return redirect()
         ->route('login.form')
         ->with('info', trans('auth.login.facebook.service.error'));
-    }
+        }
 
-    $authUser = $this->findOrCreateUser($user, 'facebook');
+        $authUser = $this->findOrCreateUser($user, 'facebook');
 
-    if ($authUser) {
-      Auth::login($authUser, true);
+        if ($authUser) {
+            Auth::login($authUser, true);
 
-      Log::info('Facebook social login', [
+            Log::info('Facebook social login', [
         'name' => $authUser->name
       ]);
 
-      return redirect()
+            return redirect()
         ->route('frontpage.index')
         ->with('info', trans('auth.login.login.info'));
-    } else {
-      return redirect()
+        } else {
+            return redirect()
         ->route('register.form')
         ->with('info', trans('auth.login.facebook.user.error'));
+        }
     }
-  }
 
-  public function google()
-  {
-    try {
-      $user = Socialite::driver('google')->user();
-    } catch (Exception $e) {
-      return redirect()
+    public function google()
+    {
+        try {
+            $user = Socialite::driver('google')->user();
+        } catch (Exception $e) {
+            return redirect()
         ->route('login.form')
         ->with('info', trans('auth.login.google.service.error'));
-    }
+        }
 
-    $authUser = $this->findOrCreateUser($user, 'google');
+        $authUser = $this->findOrCreateUser($user, 'google');
 
-    if ($authUser) {
-      Auth::login($authUser, true);
+        if ($authUser) {
+            Auth::login($authUser, true);
 
-      Log::info('Google social login', [
+            Log::info('Google social login', [
         'name' => $authUser->name
       ]);
 
-      return redirect()
+            return redirect()
         ->route('frontpage.index')
         ->with('info', trans('auth.login.login.info'));
-    } else {
-      return redirect()
+        } else {
+            return redirect()
         ->route('register.form')
         ->with('info', trans('auth.login.google.user.error'));
-    }
-  }
-
-  protected function findOrCreateUser($user, $provider)
-  {
-    $authUser = User::where('email', $user->email)->first();
-    $avatar_url = null;
-
-    if ($authUser) {
-      return $authUser;
+        }
     }
 
-    $new_user = User::create([
+    protected function findOrCreateUser($user, $provider)
+    {
+        $authUser = User::where('email', $user->email)->first();
+        $avatar_url = null;
+
+        if ($authUser) {
+            return $authUser;
+        }
+
+        $new_user = User::create([
       'name' => $user->name,
       'email' => $user->email,
       'verified' => 1,
@@ -97,7 +97,7 @@ class SocialController extends Controller
       'password' => str_random(30)
     ]);
 
-    switch ($provider) {
+        switch ($provider) {
       case 'facebook':
         $avatar_url = $user->avatar_original;
         break;
@@ -106,18 +106,18 @@ class SocialController extends Controller
         break;
     }
 
-    //has avatar picture
-    if ($avatar_url) {
-      $img_name = 'user-' . $new_user->id;
-      $filename = Image::storeImageFromUrl((string) $avatar_url, $img_name);
-      $new_user->images()->create(['filename' => $filename]);
+        //has avatar picture
+        if ($avatar_url) {
+            $img_name = 'user-' . $new_user->id;
+            $filename = Image::storeImageFromUrl((string) $avatar_url, $img_name);
+            $new_user->images()->create(['filename' => $filename]);
+        }
+
+        return $new_user;
     }
 
-    return $new_user;
-  }
-
-  public function share($social)
-  {
-    return Redirect::away(config("utils.share.$social") . URL::previous());
-  }
+    public function share($social)
+    {
+        return Redirect::away(config("utils.share.$social") . URL::previous());
+    }
 }

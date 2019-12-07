@@ -10,16 +10,16 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class ExpatTest extends BrowserKitTestCase
 {
-  use DatabaseTransactions;
+    use DatabaseTransactions;
 
-  public function test_regular_user_can_create_expat_post()
-  {
-    // Vue: EditorComment\EditorComment conflict - BrowserKit cannot find body input element.
-    $this->markTestSkipped();
+    public function test_regular_user_can_create_expat_post()
+    {
+        // Vue: EditorComment\EditorComment conflict - BrowserKit cannot find body input element.
+        $this->markTestSkipped();
 
-    $regular_user_creating_expat = factory(User::class)->create();
+        $regular_user_creating_expat = factory(User::class)->create();
 
-    $this->actingAs($regular_user_creating_expat)
+        $this->actingAs($regular_user_creating_expat)
       ->visit('foorum/elu-valimaal')
       ->click(trans('content.expat.create.title'))
       ->seePageIs('forum/create/expat')
@@ -36,9 +36,9 @@ class ExpatTest extends BrowserKitTestCase
         'status' => 1
       ]);
 
-    $content = Content::whereTitle('Hello expat title')->first();
+        $content = Content::whereTitle('Hello expat title')->first();
 
-    $this->actingAs($regular_user_creating_expat)
+        $this->actingAs($regular_user_creating_expat)
       ->visit("foorum/elu-valimaal/$content->slug")
       ->click(trans('content.action.edit.title'))
       ->seePageIs("forum/$content->id/edit")
@@ -55,61 +55,61 @@ class ExpatTest extends BrowserKitTestCase
         'type' => 'expat',
         'status' => 1
       ]);
-  }
+    }
 
-  public function test_regular_user_can_see_but_can_not_edit_other_expat_posts()
-  {
-    // Vue: EditorComment\EditorComment conflict - BrowserKit cannot find body input element.
-    $this->markTestSkipped();
+    public function test_regular_user_can_see_but_can_not_edit_other_expat_posts()
+    {
+        // Vue: EditorComment\EditorComment conflict - BrowserKit cannot find body input element.
+        $this->markTestSkipped();
 
-    $regular_user_creating_expat = factory(User::class)->create();
-    $regular_user_viewing_expat = factory(User::class)->create();
+        $regular_user_creating_expat = factory(User::class)->create();
+        $regular_user_viewing_expat = factory(User::class)->create();
 
-    $this->actingAs($regular_user_creating_expat)
+        $this->actingAs($regular_user_creating_expat)
       ->visit('foorum/elu-valimaal')
       ->click(trans('content.expat.create.title'))
       ->type('Hello expat title', 'title')
       ->type('Hello expat body', 'body')
       ->press(trans('content.create.submit.title'));
 
-    $content = Content::whereTitle('Hello expat title')->first();
+        $content = Content::whereTitle('Hello expat title')->first();
 
-    $this->actingAs($regular_user_viewing_expat)
+        $this->actingAs($regular_user_viewing_expat)
       ->visit("foorum/elu-valimaal/$content->slug")
       ->see('Hello expat title')
       ->see('Hello expat body')
       ->dontSeeInElement('.MetaLink__title', trans('content.action.edit.title'));
 
-    $response = $this->call('GET', "forum/$content->id/edit");
+        $response = $this->call('GET', "forum/$content->id/edit");
 
-    $this->assertEquals(401, $response->status());
-  }
+        $this->assertEquals(401, $response->status());
+    }
 
-  public function test_nonlogged_user_can_see_but_can_not_edit_other_expat()
-  {
-    // Vue: EditorComment\EditorComment conflict - BrowserKit cannot find body input element.
-    $this->markTestSkipped();
+    public function test_nonlogged_user_can_see_but_can_not_edit_other_expat()
+    {
+        // Vue: EditorComment\EditorComment conflict - BrowserKit cannot find body input element.
+        $this->markTestSkipped();
 
-    $regular_user_creating_expat = factory(User::class)->create();
+        $regular_user_creating_expat = factory(User::class)->create();
 
-    $this->actingAs($regular_user_creating_expat)
+        $this->actingAs($regular_user_creating_expat)
       ->visit('foorum/elu-valimaal')
       ->click(trans('content.expat.create.title'))
       ->type('Hello expat title', 'title')
       ->type('Hello expat body', 'body')
       ->press(trans('content.create.submit.title'));
 
-    $content = Content::whereTitle('Hello expat title')->first();
+        $content = Content::whereTitle('Hello expat title')->first();
 
-    Auth::logout();
+        Auth::logout();
 
-    $this->visit("foorum/elu-valimaal/$content->slug")
+        $this->visit("foorum/elu-valimaal/$content->slug")
       ->see('Hello expat title')
       ->see('Hello expat body')
       ->dontSeeInElement('.MetaLink__title', trans('content.action.edit.title'));
 
-    $response = $this->call('GET', "forum/$content->id/edit");
+        $response = $this->call('GET', "forum/$content->id/edit");
 
-    $this->assertEquals(401, $response->status());
-  }
+        $this->assertEquals(401, $response->status());
+    }
 }

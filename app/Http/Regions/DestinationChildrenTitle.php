@@ -4,9 +4,9 @@ namespace App\Http\Regions;
 
 class DestinationChildrenTitle
 {
-  public function render($destination, $childrens)
-  {
-    return collect()
+    public function render($destination, $childrens)
+    {
+        return collect()
       ->pushWhen(
         $destination->isContinent(),
         component('Title')
@@ -42,5 +42,5 @@ class DestinationChildrenTitle
       )
       ->render()
       ->implode('');
-  }
+    }
 }

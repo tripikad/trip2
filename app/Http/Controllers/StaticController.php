@@ -7,13 +7,13 @@ use App\Content;
 
 class StaticController extends Controller
 {
-  public function show($slug)
-  {
-    $post = Content::findOrFail(config('static.slugs')[$slug]);
+    public function show($slug)
+    {
+        $post = Content::findOrFail(config('static.slugs')[$slug]);
 
-    $loggedUser = request()->user();
+        $loggedUser = request()->user();
 
-    return layout('Two')
+        return layout('Two')
       ->with('title', $post->vars()->title)
       ->with('head_title', $post->vars()->title)
       ->with('head_description', $post->vars()->description)
@@ -43,22 +43,22 @@ class StaticController extends Controller
       ->with('footer', region('FooterLight'))
 
       ->render();
-  }
+    }
 
-  public function showId($id)
-  {
-    $slug = collect(config('static.slugs'))
+    public function showId($id)
+    {
+        $slug = collect(config('static.slugs'))
       ->flip()
       ->get($id);
 
-    return redirect()->route('static.show', [$slug]);
-  }
+        return redirect()->route('static.show', [$slug]);
+    }
 
-  public function edit($id)
-  {
-    $static = Content::findOrFail($id);
+    public function edit($id)
+    {
+        $static = Content::findOrFail($id);
 
-    return layout('Two')
+        return layout('Two')
       ->with(
         'header',
         region('StaticHeader', collect()->push(component('Title')->with('title', $static->vars()->title)))
@@ -94,24 +94,24 @@ class StaticController extends Controller
       ->with('footer', region('FooterLight'))
 
       ->render();
-  }
+    }
 
-  public function update($id)
-  {
-    $static = Content::findOrFail($id);
+    public function update($id)
+    {
+        $static = Content::findOrFail($id);
 
-    $rules = [
+        $rules = [
       'title' => 'required',
       'body' => 'required'
     ];
 
-    $this->validate(request(), $rules);
+        $this->validate(request(), $rules);
 
-    $static->update([
+        $static->update([
       'title' => request()->title,
       'body' => request()->body
     ]);
 
-    return redirect()->route('static.show', collect(config('static.slugs'))->flip()[$static->id]);
-  }
+        return redirect()->route('static.show', collect(config('static.slugs'))->flip()[$static->id]);
+    }
 }

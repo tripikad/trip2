@@ -4,9 +4,9 @@ namespace App\Http\Regions;
 
 class Share
 {
-  public function render()
-  {
-    return component('Grid2')
+    public function render()
+    {
+        return component('Grid2')
       ->with('gutter', true)
       ->with(
         'items',
@@ -28,5 +28,5 @@ class Share
               ->with('route', route('utils.share', ['twitter']))
           )
       );
-  }
+    }
 }

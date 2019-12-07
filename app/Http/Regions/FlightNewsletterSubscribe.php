@@ -8,85 +8,85 @@ use App\NewsletterType;
 
 class FlightNewsletterSubscribe
 {
-  public static $max = 5;
+    public static $max = 5;
 
-  public function render()
-  {
-    $selected_values = [];
-    $request = request();
-    $user = $request->user();
+    public function render()
+    {
+        $selected_values = [];
+        $request = request();
+        $user = $request->user();
 
-    $newsletter_type = NewsLetterType::whereType($user ? 'flight' : 'flight_general')->whereActive(1);
+        $newsletter_type = NewsLetterType::whereType($user ? 'flight' : 'flight_general')->whereActive(1);
 
-    if ($user) {
-      $newsletter_type = $newsletter_type->with('user_subscriptions');
-    }
-
-    $newsletter_type = $newsletter_type->first();
-
-    if ($newsletter_type) {
-      if ($user) {
-        $subscriptions = $newsletter_type->user_subscriptions;
-
-        if ($subscriptions) {
-          $subscriptions = $subscriptions->where('active', 1);
+        if ($user) {
+            $newsletter_type = $newsletter_type->with('user_subscriptions');
         }
-      } else {
-        $subscriptions = collect([]);
-      }
 
-      /*$destinations = Cache::remember('continents_and_countries', 30, function () {
-                return Destination::select('id', 'name')->get();
-            });*/
+        $newsletter_type = $newsletter_type->first();
 
-      $destinations = Cache::remember('continents_and_countries', 30, function () {
-        $destinations = Destination::select(['id', 'name', 'parent_id'])
+        if ($newsletter_type) {
+            if ($user) {
+                $subscriptions = $newsletter_type->user_subscriptions;
+
+                if ($subscriptions) {
+                    $subscriptions = $subscriptions->where('active', 1);
+                }
+            } else {
+                $subscriptions = collect([]);
+            }
+
+            /*$destinations = Cache::remember('continents_and_countries', 30, function () {
+                      return Destination::select('id', 'name')->get();
+                  });*/
+
+            $destinations = Cache::remember('continents_and_countries', 30, function () {
+                $destinations = Destination::select(['id', 'name', 'parent_id'])
           ->where('depth', '<=', 1)
           ->get();
 
-        /*$parent_destinations = [];
-                foreach ($destinations as &$destination) {
-                    if (! $destination->parent_id) {
-                        $parent_destinations[$destination->id] = $destination->name;
-                    }
+                /*$parent_destinations = [];
+                        foreach ($destinations as &$destination) {
+                            if (! $destination->parent_id) {
+                                $parent_destinations[$destination->id] = $destination->name;
+                            }
+                        }
+
+                        foreach ($destinations as &$destination) {
+                            if ($destination->parent_id && isset($parent_destinations[$destination->parent_id])) {
+                                $destination->name = $parent_destinations[$destination->parent_id] . ' › ' . $destination->name;
+                            }
+                        }*/
+
+                return $destinations;
+            });
+
+            if ($request->old('destinations')) {
+                $selected_values = [];
+
+                foreach ($request->old('destinations') as $destination) {
+                    $selected_values[] = (int) $destination;
                 }
 
-                foreach ($destinations as &$destination) {
-                    if ($destination->parent_id && isset($parent_destinations[$destination->parent_id])) {
-                        $destination->name = $parent_destinations[$destination->parent_id] . ' › ' . $destination->name;
-                    }
-                }*/
+                $selected_values = collect($selected_values);
+            }
 
-        return $destinations;
-      });
-
-      if ($request->old('destinations')) {
-        $selected_values = [];
-
-        foreach ($request->old('destinations') as $destination) {
-          $selected_values[] = (int) $destination;
-        }
-
-        $selected_values = collect($selected_values);
-      }
-
-      $fields = collect();
-      $info = null;
-      if ($user) {
-        //dd($subscriptions);
-        if (count($subscriptions)) {
-          $selected_values = array_values(
+            $fields = collect();
+            $info = null;
+            if ($user) {
+                //dd($subscriptions);
+                if (count($subscriptions)) {
+                    $selected_values = array_values(
             $subscriptions
               ->pluck('destination_id')
               ->reject(function ($value, $key) {
-                return !$value;
+                  return !$value;
               })
               ->toArray()
           );
-          $price_error = $subscriptions->where('price_error', 1)->first();
-        }
+                    $price_error = $subscriptions->where('price_error', 1)->first();
+                }
 
-        $fields
+                $fields
           ->push(
             component('FormSelectMultiple')
               ->with('name', 'destinations')
@@ -103,24 +103,24 @@ class FlightNewsletterSubscribe
               ->with('name', 'price_error')
               ->with('value', $price_error ?? 0)
           );
-      } else {
-        $fields->push(
+            } else {
+                $fields->push(
           component('FormTextfield')
             ->with('name', 'e-post')
             ->with('placeholder', trans('newsletter.subscribe.field.email'))
         );
 
-        $info = trans('newsletter.subscribe.info.general');
-      }
+                $info = trans('newsletter.subscribe.info.general');
+            }
 
-      $fields->push(
+            $fields->push(
         component('FormButtonProcess')
           ->with('title', trans('newsletter.button.subscribe_flight'))
           ->with('processingtitle', trans('newsletter.button.subscribe_processing'))
           ->with('id', 'FlightNewsletterSubscribeForm')
       );
 
-      return component('Block')
+            return component('Block')
         ->is('gray')
         ->with('title', trans('newsletter.subscribe.flight.heading'))
         ->with(
@@ -139,8 +139,8 @@ class FlightNewsletterSubscribe
                 ->with('body', $info)
             )
         );
-    } else {
-      return;
+        } else {
+            return;
+        }
     }
-  }
 }

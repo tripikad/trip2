@@ -4,9 +4,9 @@ namespace App\Http\Regions;
 
 class MessageCreateForm
 {
-  public function render($user, $user_with)
-  {
-    return component('Block')
+    public function render($user, $user_with)
+    {
+        return component('Block')
       ->is('white')
       ->with(
         'content',
@@ -25,5 +25,5 @@ class MessageCreateForm
             )
         )
       );
-  }
+    }
 }

@@ -4,12 +4,12 @@ namespace App\Http\Regions;
 
 class BlogRow
 {
-  public function render($blog)
-  {
-    $commentCount = $blog->vars()->commentCount();
-    $loggedUser = request()->user();
+    public function render($blog)
+    {
+        $commentCount = $blog->vars()->commentCount();
+        $loggedUser = request()->user();
 
-    return component('BlogRow')
+        return component('BlogRow')
       ->with(
         'user',
         component('UserImage')
@@ -34,7 +34,7 @@ class BlogRow
             ->push(component('MetaLink')->with('title', $blog->vars()->created_at))
             ->merge(
               $blog->destinations->map(function ($destination) {
-                return component('Tag')
+                  return component('Tag')
                   ->is('orange')
                   ->with('title', $destination->name)
                   ->with('route', route('destination.showSlug', [$destination->slug]));
@@ -42,7 +42,7 @@ class BlogRow
             )
             ->merge(
               $blog->topics->map(function ($topic) {
-                return component('MetaLink')->with('title', $topic->name);
+                  return component('MetaLink')->with('title', $topic->name);
               })
             )
             ->pushWhen(
@@ -64,5 +64,5 @@ class BlogRow
             )
         )
       );
-  }
+    }
 }

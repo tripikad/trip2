@@ -6,18 +6,18 @@ use Closure;
 
 class LastPageExceptAuth
 {
-  public function handle($request, Closure $next)
-  {
-    if (!request()->ajax()) {
-      $this->save_current_page();
+    public function handle($request, Closure $next)
+    {
+        if (!request()->ajax()) {
+            $this->save_current_page();
+        }
+
+        return $next($request);
     }
 
-    return $next($request);
-  }
-
-  protected function save_current_page()
-  {
-    if (
+    protected function save_current_page()
+    {
+        if (
       !in_array(
         request()
           ->route()
@@ -36,9 +36,9 @@ class LastPageExceptAuth
         ]
       )
     ) {
-      session([
+            session([
         'last_active_page' => request()->fullUrl()
       ]);
+        }
     }
-  }
 }

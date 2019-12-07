@@ -4,9 +4,9 @@ namespace App\Http\Regions;
 
 class Header
 {
-  public function render($content = [], $background = '/photos/header3.jpg', $is = '')
-  {
-    return component('Header')
+    public function render($content = [], $background = '/photos/header3.jpg', $is = '')
+    {
+        return component('Header')
       ->is($is)
       ->with('background', $background)
       ->with(
@@ -25,5 +25,5 @@ class Header
           ->with('navbar_mobile', region('NavbarMobile', 'white'))
       )
       ->with('content', $content);
-  }
+    }
 }

@@ -4,11 +4,11 @@ namespace App\Http\Regions;
 
 class ForumPost
 {
-  public function render($post, $editRoute = 'forum.edit')
-  {
-    $user = auth()->user();
+    public function render($post, $editRoute = 'forum.edit')
+    {
+        $user = auth()->user();
 
-    $followStatus =
+        $followStatus =
       $user &&
       $user
         ->follows()
@@ -20,7 +20,7 @@ class ForumPost
         ? 0
         : 1;
 
-    return component('ForumPost')
+        return component('ForumPost')
       ->with('title', $post->vars()->title)
       ->with(
         'user',
@@ -45,7 +45,7 @@ class ForumPost
             ->push(component('MetaLink')->with('title', $post->vars()->created_at))
             ->merge(
               $post->destinations->map(function ($destination) {
-                return component('Tag')
+                  return component('Tag')
                   ->is('orange')
                   ->with('title', $destination->name)
                   ->with('route', route('destination.showSlug', [$destination->slug]));
@@ -53,7 +53,7 @@ class ForumPost
             )
             ->merge(
               $post->topics->map(function ($topic) {
-                return component('MetaLink')
+                  return component('MetaLink')
                   ->with('title', $topic->name)
                   ->with(
                     'route',
@@ -123,5 +123,5 @@ class ForumPost
           ->is('responsive')
           ->with('body', $post->vars()->body)
       );
-  }
+    }
 }

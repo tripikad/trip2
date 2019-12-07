@@ -4,11 +4,11 @@ namespace App\Http\Regions;
 
 class Comment
 {
-  public function render($comment, $firstUnreadCommentId = false, $is = '')
-  {
-    $user = auth()->user();
+    public function render($comment, $firstUnreadCommentId = false, $is = '')
+    {
+        $user = auth()->user();
 
-    return component('Comment')
+        return component('Comment')
       ->when($comment->status || ($user && $user->hasRole('admin')))
       ->is($comment->status ?: 'pink')
       ->is($is)
@@ -91,5 +91,5 @@ class Comment
           ->is($comment->status ?: 'gray')
           ->with('body', $comment->vars()->body)
       );
-  }
+    }
 }

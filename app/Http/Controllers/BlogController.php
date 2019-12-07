@@ -8,12 +8,12 @@ use App\Destination;
 
 class BlogController extends Controller
 {
-  public function index()
-  {
-    $blogs = Content::getLatestPagedItems('blog', 10);
-    $loggedUser = request()->user();
+    public function index()
+    {
+        $blogs = Content::getLatestPagedItems('blog', 10);
+        $loggedUser = request()->user();
 
-    return layout('Two')
+        return layout('Two')
       ->with(
         'header',
         region(
@@ -33,7 +33,7 @@ class BlogController extends Controller
         collect()
           ->merge(
             $blogs->flatMap(function ($blog) {
-              return collect()
+                return collect()
                 ->push(region('BlogRow', $blog))
                 ->push(
                   component('Body')
@@ -63,14 +63,14 @@ class BlogController extends Controller
       ->with('footer', region('Footer'))
 
       ->render();
-  }
+    }
 
-  public function show($slug)
-  {
-    $user = auth()->user();
-    $blog = Content::getItemBySlug($slug, $user);
+    public function show($slug)
+    {
+        $user = auth()->user();
+        $blog = Content::getItemBySlug($slug, $user);
 
-    return layout('Two')
+        return layout('Two')
       ->with(
         'header',
         region(
@@ -112,7 +112,7 @@ class BlogController extends Controller
           )
           ->merge(
             $blog->comments->map(function ($comment) {
-              return region('Comment', $comment);
+                return region('Comment', $comment);
             })
           )
           ->pushWhen($user && $user->hasRole('regular'), region('CommentCreateForm', $blog))
@@ -130,15 +130,15 @@ class BlogController extends Controller
       ->with('footer', region('Footer'))
 
       ->render();
-  }
+    }
 
-  public function create()
-  {
-    $destinations = Destination::select('id', 'name')
+    public function create()
+    {
+        $destinations = Destination::select('id', 'name')
       ->orderBy('name', 'asc')
       ->get();
 
-    return layout('Two')
+        return layout('Two')
       ->with(
         'header',
         region(
@@ -191,29 +191,29 @@ class BlogController extends Controller
       ->with('footer', region('Footer'))
 
       ->render();
-  }
+    }
 
-  public function store()
-  {
-    $loggedUser = request()->user();
+    public function store()
+    {
+        $loggedUser = request()->user();
 
-    $rules = [
+        $rules = [
       'title' => 'required',
       'body' => 'required'
     ];
 
-    $this->validate(request(), $rules);
+        $this->validate(request(), $rules);
 
-    $blog = $loggedUser->contents()->create([
+        $blog = $loggedUser->contents()->create([
       'title' => request()->title,
       'body' => request()->body,
       'type' => 'blog',
       'status' => 1
     ]);
 
-    $blog->destinations()->attach(request()->destinations);
+        $blog->destinations()->attach(request()->destinations);
 
-    Log::info('New content added', [
+        Log::info('New content added', [
       'user' => $blog->user->name,
       'title' => $blog->title,
       'type' => $blog->type,
@@ -221,7 +221,7 @@ class BlogController extends Controller
       'link' => route('blog.show', [$blog->slug])
     ]);
 
-    return redirect()
+        return redirect()
       ->route('blog.index')
       ->with(
         'info',
@@ -229,16 +229,16 @@ class BlogController extends Controller
           'title' => $blog->title
         ])
       );
-  }
+    }
 
-  public function edit($id)
-  {
-    $blog = Content::findOrFail($id);
-    $destinations = Destination::select('id', 'name')
+    public function edit($id)
+    {
+        $blog = Content::findOrFail($id);
+        $destinations = Destination::select('id', 'name')
       ->orderBy('name', 'asc')
       ->get();
 
-    return layout('Two')
+        return layout('Two')
       ->with(
         'header',
         region(
@@ -300,27 +300,27 @@ class BlogController extends Controller
       ->with('footer', region('Footer'))
 
       ->render();
-  }
+    }
 
-  public function update($id)
-  {
-    $blog = Content::findOrFail($id);
+    public function update($id)
+    {
+        $blog = Content::findOrFail($id);
 
-    $rules = [
+        $rules = [
       'title' => 'required',
       'body' => 'required'
     ];
 
-    $this->validate(request(), $rules);
+        $this->validate(request(), $rules);
 
-    $blog->update([
+        $blog->update([
       'title' => request()->title,
       'body' => request()->body
     ]);
 
-    $blog->destinations()->sync(request()->destinations ?: []);
+        $blog->destinations()->sync(request()->destinations ?: []);
 
-    return redirect()
+        return redirect()
       ->route('blog.show', [$blog->slug])
       ->with(
         'info',
@@ -328,5 +328,5 @@ class BlogController extends Controller
           'title' => $blog->title
         ])
       );
-  }
+    }
 }

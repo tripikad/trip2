@@ -8,24 +8,24 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class FormatBodyTest extends TestCase
 {
-  use DatabaseTransactions;
+    use DatabaseTransactions;
 
-  public function test_body_text_is_formatted()
-  {
-    $cases = [
+    public function test_body_text_is_formatted()
+    {
+        $cases = [
       ['**Hello** World', '<p><strong>Hello</strong> World</p>', 'Double asterisks are converted to HTML strong tag'],
       ['_Hello_ World', '<p><em>Hello</em> World</p>', 'Underlines are converted to HTML em tag'],
       ["* Hello\n* World", "<ul>\n<li>Hello</li>\n<li>World</li>\n</ul>", '* are converted to unordered lists']
     ];
 
-    foreach ($cases as $case) {
-      $this->assertEquals($case[1], format_body($case[0]), $case[2]);
+        foreach ($cases as $case) {
+            $this->assertEquals($case[1], format_body($case[0]), $case[2]);
+        }
     }
-  }
 
-  public function test_body_links_are_formatted()
-  {
-    $cases = [
+    public function test_body_links_are_formatted()
+    {
+        $cases = [
       [
         'Hello <a href="http://tc.tradetracker.net/?c=23368&m=12&a=258453&u=%2Fflightsearch%2F%3FSearch%3Dtrue%26TripType%3D2%26SegNo%3D2%26SO0%3DTLL%26SD0%3DHKG%26SDP0%3D25-09-2017%26SO1%3DHKG%26SD1%3DTLL%26SDP1%3D06-10-2017%26AD%3D1%26TK%3DECO%26DO%3Dfalse%26NA%3Dfalse%26currency%3DEUR">Tradetracker</a>',
         '<p>Hello <a href="http://tc.tradetracker.net/?c=23368&m=12&a=258453&u=%2Fflightsearch%2F%3FSearch%3Dtrue%26TripType%3D2%26SegNo%3D2%26SO0%3DTLL%26SD0%3DHKG%26SDP0%3D25-09-2017%26SO1%3DHKG%26SD1%3DTLL%26SDP1%3D06-10-2017%26AD%3D1%26TK%3DECO%26DO%3Dfalse%26NA%3Dfalse%26currency%3DEUR" target="_blank">Tradetracker</a></p>',
@@ -90,16 +90,16 @@ class FormatBodyTest extends TestCase
             */
     ];
 
-    foreach ($cases as $case) {
-      $this->assertEquals($case[1], format_body($case[0]), $case[2]);
+        foreach ($cases as $case) {
+            $this->assertEquals($case[1], format_body($case[0]), $case[2]);
+        }
     }
-  }
 
-  public function test_body_images_are_formatted()
-  {
-    $image = Image::create(['filename' => str_random(6) . '.jpg']);
+    public function test_body_images_are_formatted()
+    {
+        $image = Image::create(['filename' => str_random(6) . '.jpg']);
 
-    $cases = [
+        $cases = [
       [
         'Hello [[' . $image->id . ']]',
         '<p>Hello <img src="' . $image->preset('large') . '" /></p>',
@@ -108,14 +108,14 @@ class FormatBodyTest extends TestCase
       ['Hello [[0]]', '<p>Hello [[0]]</p>', 'Non-existing image references should be kept as is']
     ];
 
-    foreach ($cases as $case) {
-      $this->assertEquals($case[1], format_body($case[0]), $case[2]);
+        foreach ($cases as $case) {
+            $this->assertEquals($case[1], format_body($case[0]), $case[2]);
+        }
     }
-  }
 
-  public function test_calendar_is_formatted()
-  {
-    $cases = [
+    public function test_calendar_is_formatted()
+    {
+        $cases = [
       [
         "[[\nJanuary:\n- First\n]]",
         component('FlightCalendar')
@@ -136,8 +136,8 @@ class FormatBodyTest extends TestCase
       ]
     ];
 
-    foreach ($cases as $case) {
-      $this->assertEquals($case[1], format_body($case[0]), $case[2]);
+        foreach ($cases as $case) {
+            $this->assertEquals($case[1], format_body($case[0]), $case[2]);
+        }
     }
-  }
 }

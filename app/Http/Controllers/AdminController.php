@@ -7,14 +7,14 @@ use App\Content;
 
 class AdminController extends Controller
 {
-  public function unpublishedIndex()
-  {
-    $user = auth()->user();
-    $contents = Content::whereStatus(0)
+    public function unpublishedIndex()
+    {
+        $user = auth()->user();
+        $contents = Content::whereStatus(0)
       ->latest()
       ->simplePaginate(50);
 
-    return layout('Two')
+        return layout('Two')
       ->with('background', component('BackgroundMap'))
       ->with('color', 'gray')
 
@@ -38,7 +38,7 @@ class AdminController extends Controller
         collect()
           ->merge(
             $contents->map(function ($content) {
-              return component('Block')->with(
+                return component('Block')->with(
                 'content',
                 collect()
                   ->push(
@@ -66,16 +66,16 @@ class AdminController extends Controller
       ->with('footer', region('FooterLight'))
 
       ->render();
-  }
+    }
 
-  public function imageIndex()
-  {
-    $user = auth()->user();
-    $images = Image::doesntHave('user')
+    public function imageIndex()
+    {
+        $user = auth()->user();
+        $images = Image::doesntHave('user')
       ->latest()
       ->simplePaginate(36);
 
-    return layout('Two')
+        return layout('Two')
       ->with('background', component('BackgroundMap'))
       ->with('color', 'gray')
 
@@ -120,10 +120,10 @@ class AdminController extends Controller
           ->push(component('ImageUpload')->with('reload', true))
           ->merge(
             $images->chunk(6)->map(function ($chunk) {
-              return component('BlockHorizontal')->with(
+                return component('BlockHorizontal')->with(
                 'content',
                 $chunk->map(function ($image) {
-                  return collect()
+                    return collect()
                     ->push(
                       component('PhotoCard')
                         ->with('small', $image->preset('xsmall_square'))
@@ -146,5 +146,5 @@ class AdminController extends Controller
       ->with('footer', region('FooterLight'))
 
       ->render();
-  }
+    }
 }

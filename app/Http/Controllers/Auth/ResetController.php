@@ -15,22 +15,22 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ResetController extends Controller
 {
-  use ResetsPasswords;
+    use ResetsPasswords;
 
-  protected $redirectPath = '/';
+    protected $redirectPath = '/';
 
-  protected $redirectTo = '/';
+    protected $redirectTo = '/';
 
-  public function __construct()
-  {
-    $this->middleware('guest');
-  }
+    public function __construct()
+    {
+        $this->middleware('guest');
+    }
 
-  public function applyForm()
-  {
-    // return view('pages.auth.reset.apply');
+    public function applyForm()
+    {
+        // return view('pages.auth.reset.apply');
 
-    return layout('One')
+        return layout('One')
       ->cached(false)
       ->with('color', 'gray')
       ->with('background', component('BackgroundMap'))
@@ -89,17 +89,17 @@ class ResetController extends Controller
       )
       ->with('footer', region('FooterLight'))
       ->render();
-  }
-
-  public function passwordForm($token = null)
-  {
-    if (is_null($token)) {
-      throw new NotFoundHttpException();
     }
 
-    // return view('pages.auth.reset.password')->with('token', $token);
+    public function passwordForm($token = null)
+    {
+        if (is_null($token)) {
+            throw new NotFoundHttpException();
+        }
 
-    return layout('One')
+        // return view('pages.auth.reset.password')->with('token', $token);
+
+        return layout('One')
       ->cached(false)
       ->with('color', 'gray')
       ->with('background', component('BackgroundMap'))
@@ -155,48 +155,48 @@ class ResetController extends Controller
       )
       ->with('footer', region('FooterLight'))
       ->render();
-  }
+    }
 
-  public function postEmail(Request $request)
-  {
-    $this->validate($request, [
+    public function postEmail(Request $request)
+    {
+        $this->validate($request, [
       'email' => 'required|email',
       'full_name' => 'honeypot',
       'time' => 'required|honeytime:2'
     ]);
 
-    $response = Password::sendResetLink($request->only('email'));
+        $response = Password::sendResetLink($request->only('email'));
 
-    if ($response == Password::INVALID_USER) {
-      Log::info('User tried to reset password, but e-mail was invalid', [
+        if ($response == Password::INVALID_USER) {
+            Log::info('User tried to reset password, but e-mail was invalid', [
         'email' => $request->email
       ]);
 
-      return redirect()
+            return redirect()
         ->back()
         ->withErrors(['email' => trans($response)]);
-    }
+        }
 
-    $user = User::where('email', $request->email)
+        $user = User::where('email', $request->email)
       ->take(1)
       ->first();
 
-    if ($user) {
-      Mail::to($user->email, $user->name)->queue(new ResetPassword($user));
-    }
+        if ($user) {
+            Mail::to($user->email, $user->name)->queue(new ResetPassword($user));
+        }
 
-    Log::info('Password reset request has been submitted', [
+        Log::info('Password reset request has been submitted', [
       'email' => $request->email
     ]);
 
-    //if ($response == Password::RESET_LINK_SENT)
-    return redirect()
+        //if ($response == Password::RESET_LINK_SENT)
+        return redirect()
       ->back()
       ->with('info', trans($response));
-  }
+    }
 
-  protected function getEmailSubject()
-  {
-    return property_exists($this, 'subject') ? $this->subject : trans('auth.reset.email.subject');
-  }
+    protected function getEmailSubject()
+    {
+        return property_exists($this, 'subject') ? $this->subject : trans('auth.reset.email.subject');
+    }
 }

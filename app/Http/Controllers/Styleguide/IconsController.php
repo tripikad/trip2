@@ -8,11 +8,11 @@ use App\Content;
 
 class IconsController extends Controller
 {
-  public function index()
-  {
-    $photos = Content::getLatestItems('photo', 6);
+    public function index()
+    {
+        $photos = Content::getLatestItems('photo', 6);
 
-    return layout('Two')
+        return layout('Two')
       ->with('title', 'Styles')
       ->with(
         'content',
@@ -27,23 +27,23 @@ class IconsController extends Controller
           ->merge($this->svgComponents())
       )
       ->render();
-  }
+    }
 
-  private function svgFiles()
-  {
-    return collect(Storage::disk('resources')->files('/views/svg'))->map(function ($file) {
-      return str_limit(file_get_contents(Storage::disk('resources')->path($file)), 200);
-    });
-  }
+    private function svgFiles()
+    {
+        return collect(Storage::disk('resources')->files('/views/svg'))->map(function ($file) {
+            return str_limit(file_get_contents(Storage::disk('resources')->path($file)), 200);
+        });
+    }
 
-  private function svgComponents()
-  {
-    return collect(Storage::disk('resources')->files('/views/svg'))
+    private function svgComponents()
+    {
+        return collect(Storage::disk('resources')->files('/views/svg'))
       ->map(function ($file) {
-        return str_replace(['.svg'], '', basename($file));
+          return str_replace(['.svg'], '', basename($file));
       })
       ->map(function ($file, $index) {
-        return collect()
+          return collect()
           ->push(
             component('Code')
               ->is('gray')
@@ -51,7 +51,7 @@ class IconsController extends Controller
           )
           ->merge(
             collect(['sm', 'md', 'lg', 'xl'])->map(function ($size) use ($file) {
-              return '<div class="StyleIcon">' .
+                return '<div class="StyleIcon">' .
                 component('Icon')
                   ->with('size', $size)
                   ->with('icon', $file)
@@ -63,5 +63,5 @@ class IconsController extends Controller
       })
       ->flatten()
       ->push(component('StyleIcon'));
-  }
+    }
 }

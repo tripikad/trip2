@@ -6,9 +6,9 @@ use Carbon\Carbon;
 
 class FooterLight
 {
-  protected function prepareCol1Links()
-  {
-    return collect()
+    protected function prepareCol1Links()
+    {
+        return collect()
       ->push([
         'title' => trans('menu.footer.flights'),
         'route' => route('flight.index')
@@ -34,13 +34,13 @@ class FooterLight
         'route' => route('destination.index')
       ])
       ->map(function ($item) {
-        return (object) $item;
+          return (object) $item;
       });
-  }
+    }
 
-  protected function prepareCol2Links()
-  {
-    return collect()
+    protected function prepareCol2Links()
+    {
+        return collect()
       ->push([
         'title' => trans('menu.footer2.forum'),
         'route' => route('forum.index')
@@ -54,15 +54,15 @@ class FooterLight
         'route' => route('expat.index')
       ])
       ->map(function ($item) {
-        return (object) $item;
+          return (object) $item;
       });
-  }
+    }
 
-  protected function prepareCol3Links()
-  {
-    $loggedUser = request()->user();
+    protected function prepareCol3Links()
+    {
+        $loggedUser = request()->user();
 
-    return collect()
+        return collect()
       ->push([
         'title' => trans('menu.footer3.about'),
         'route' => route('static.show', 'tripist')
@@ -96,13 +96,13 @@ class FooterLight
         'route' => route('login.logout')
       ])
       ->map(function ($item) {
-        return (object) $item;
+          return (object) $item;
       });
-  }
+    }
 
-  protected function prepareSocialLinks()
-  {
-    return collect()
+    protected function prepareSocialLinks()
+    {
+        return collect()
       ->push([
         'title' => trans('menu.footer-social.facebook'),
         'route' => 'https://facebook.com/tripeeee',
@@ -136,13 +136,13 @@ class FooterLight
         'target' => ''
       ])
       ->map(function ($item) {
-        return (object) $item;
+          return (object) $item;
       });
-  }
+    }
 
-  public function render($color = 'light')
-  {
-    return component('Footer')
+    public function render($color = 'light')
+    {
+        return component('Footer')
       ->is($color)
       ->with('logo_route', route('frontpage.index'))
       ->with(
@@ -166,5 +166,5 @@ class FooterLight
           'current_year' => Carbon::now()->year
         ])
       );
-  }
+    }
 }

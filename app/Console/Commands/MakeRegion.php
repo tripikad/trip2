@@ -7,14 +7,14 @@ use Illuminate\Console\Command;
 
 class MakeRegion extends Command
 {
-  protected $signature = 'make:region { name }';
+    protected $signature = 'make:region { name }';
 
-  public function handle()
-  {
-    $name = $this->argument('name');
-    $dir = 'app/Http/Regions';
+    public function handle()
+    {
+        $name = $this->argument('name');
+        $dir = 'app/Http/Regions';
 
-    $php = [
+        $php = [
       '<?php',
       'namespace App\Http\Regions;',
       "class $name\n{",
@@ -24,11 +24,11 @@ class MakeRegion extends Command
       "}\n"
     ];
 
-    Storage::disk('root')->put("$dir/$name.php", implode("\n\n", $php));
+        Storage::disk('root')->put("$dir/$name.php", implode("\n\n", $php));
 
-    $this->info("\n$dir/$name.php created\n");
-    $this->line("Your next steps:\n");
-    $this->line("    1. Add a following line to app/Http/Controllers/ExperimentsController.php\n");
-    $this->comment("       ->push(region('$name', (object) ['body' => 'I am $name region']))\n");
-  }
+        $this->info("\n$dir/$name.php created\n");
+        $this->line("Your next steps:\n");
+        $this->line("    1. Add a following line to app/Http/Controllers/ExperimentsController.php\n");
+        $this->comment("       ->push(region('$name', (object) ['body' => 'I am $name region']))\n");
+    }
 }

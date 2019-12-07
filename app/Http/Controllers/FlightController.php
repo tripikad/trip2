@@ -11,24 +11,24 @@ use App\Destination;
 
 class FlightController extends Controller
 {
-  public function index()
-  {
-    $currentDestination = Request::get('destination');
-    $currentTopic = Request::get('topic');
+    public function index()
+    {
+        $currentDestination = Request::get('destination');
+        $currentTopic = Request::get('topic');
 
-    $sliceSize = 10;
-    $flights = Content::getLatestPagedItems('flight', 2 * $sliceSize, $currentDestination, $currentTopic);
+        $sliceSize = 10;
+        $flights = Content::getLatestPagedItems('flight', 2 * $sliceSize, $currentDestination, $currentTopic);
 
-    $forums = Content::getLatestPagedItems('forum', 3, null, null, 'updated_at');
-    $destinations = Destination::select('id', 'name')
+        $forums = Content::getLatestPagedItems('forum', 3, null, null, 'updated_at');
+        $destinations = Destination::select('id', 'name')
       ->has('content_flights')
       ->get();
-    //$topics = Topic::select('id', 'name')->get();
+        //$topics = Topic::select('id', 'name')->get();
 
-    $travelmates = Content::getLatestItems('travelmate', 3);
-    $news = Content::getLatestItems('news', 1);
+        $travelmates = Content::getLatestItems('travelmate', 3);
+        $news = Content::getLatestItems('news', 1);
 
-    return layout('Two')
+        return layout('Two')
       ->with('title', trans('content.flight.index.title'))
       ->with('head_title', trans('content.flight.index.title'))
       ->with('head_description', trans('site.description.flight'))
@@ -66,13 +66,13 @@ class FlightController extends Controller
           ->push(component('Promo')->with('promo', 'flightoffer_list_top'))
           ->merge(
             $flights->slice(0, $sliceSize)->map(function ($flight) {
-              return region('FlightRow', $flight);
+                return region('FlightRow', $flight);
             })
           )
           ->push(component('Promo')->with('promo', 'body'))
           ->merge(
             $flights->slice($sliceSize)->map(function ($flight) {
-              return region('FlightRow', $flight);
+                return region('FlightRow', $flight);
             })
           )
           ->push(region('Paginator', $flights, $currentDestination, $currentTopic))
@@ -99,21 +99,21 @@ class FlightController extends Controller
       ->with('footer', region('Footer'))
 
       ->render();
-  }
+    }
 
-  public function show($slug)
-  {
-    $loggedUser = auth()->user();
+    public function show($slug)
+    {
+        $loggedUser = auth()->user();
 
-    $flight = Content::getItemBySlug($slug, $loggedUser);
-    $flight->vars()->add_view;
+        $flight = Content::getItemBySlug($slug, $loggedUser);
+        $flight->vars()->add_view;
 
-    $flights = Content::getLatestItems('flight', 4);
-    $forums = Content::getLatestPagedItems('forum', 3, null, null, 'updated_at');
-    $travelmates = Content::getLatestItems('travelmate', 3);
-    $news = Content::getLatestItems('news', 1);
+        $flights = Content::getLatestItems('flight', 4);
+        $forums = Content::getLatestPagedItems('forum', 3, null, null, 'updated_at');
+        $travelmates = Content::getLatestItems('travelmate', 3);
+        $news = Content::getLatestItems('news', 1);
 
-    return layout('Two')
+        return layout('Two')
       ->with('title', trans('content.flight.index.title'))
       ->with('head_title', $flight->vars()->title)
       ->with('head_description', $flight->vars()->description)
@@ -150,7 +150,7 @@ class FlightController extends Controller
                   )
                   ->merge(
                     $flight->destinations->map(function ($destination) {
-                      return component('Tag')
+                        return component('Tag')
                         ->is('white')
                         ->with('title', $destination->name)
                         ->with('route', route('destination.showSlug', [$destination->slug]));
@@ -205,7 +205,7 @@ class FlightController extends Controller
           ->push(region('Share'))
           ->merge(
             $flight->comments->map(function ($comment) {
-              return region('Comment', $comment);
+                return region('Comment', $comment);
             })
           )
           ->pushWhen($loggedUser && $loggedUser->hasRole('regular'), region('CommentCreateForm', $flight))
@@ -216,7 +216,7 @@ class FlightController extends Controller
               ->with(
                 'content',
                 $flights->map(function ($flight) {
-                  return region('FlightRow', $flight);
+                    return region('FlightRow', $flight);
                 })
               )
           )
@@ -244,15 +244,15 @@ class FlightController extends Controller
       ->with('footer', region('Footer'))
 
       ->render();
-  }
+    }
 
-  public function create()
-  {
-    $destinations = Destination::select('id', 'name')
+    public function create()
+    {
+        $destinations = Destination::select('id', 'name')
       ->orderBy('name')
       ->get();
 
-    return layout('Two')
+        return layout('Two')
       ->with(
         'header',
         region(
@@ -316,34 +316,34 @@ class FlightController extends Controller
       ->with('footer', region('Footer'))
 
       ->render();
-  }
+    }
 
-  public function store()
-  {
-    $loggedUser = request()->user();
+    public function store()
+    {
+        $loggedUser = request()->user();
 
-    $rules = [
+        $rules = [
       'title' => 'required',
       'body' => 'required'
     ];
 
-    $this->validate(request(), $rules);
+        $this->validate(request(), $rules);
 
-    $flight = $loggedUser->contents()->create([
+        $flight = $loggedUser->contents()->create([
       'title' => request()->title,
       'body' => request()->body,
       'type' => 'flight',
       'status' => 1
     ]);
 
-    $flight->destinations()->attach(request()->destinations);
+        $flight->destinations()->attach(request()->destinations);
 
-    if ($imageToken = request()->image_id) {
-      $imageId = str_replace(['[[', ']]'], '', $imageToken);
-      $flight->images()->attach([$imageId]);
-    }
+        if ($imageToken = request()->image_id) {
+            $imageId = str_replace(['[[', ']]'], '', $imageToken);
+            $flight->images()->attach([$imageId]);
+        }
 
-    Log::info('New content added', [
+        Log::info('New content added', [
       'user' => $flight->user->name,
       'title' => $flight->title,
       'type' => $flight->type,
@@ -351,7 +351,7 @@ class FlightController extends Controller
       'link' => route('news.show', [$flight->slug])
     ]);
 
-    return redirect()
+        return redirect()
       ->route('flight.index')
       ->with(
         'info',
@@ -359,16 +359,16 @@ class FlightController extends Controller
           'title' => $flight->title
         ])
       );
-  }
+    }
 
-  public function edit($id)
-  {
-    $flight = Content::findOrFail($id);
-    $destinations = Destination::select('id', 'name')
+    public function edit($id)
+    {
+        $flight = Content::findOrFail($id);
+        $destinations = Destination::select('id', 'name')
       ->orderBy('name')
       ->get();
 
-    return layout('Two')
+        return layout('Two')
       ->with(
         'header',
         region(
@@ -434,32 +434,32 @@ class FlightController extends Controller
       ->with('footer', region('Footer'))
 
       ->render();
-  }
+    }
 
-  public function update($id)
-  {
-    $flight = Content::findOrFail($id);
+    public function update($id)
+    {
+        $flight = Content::findOrFail($id);
 
-    $rules = [
+        $rules = [
       'title' => 'required',
       'body' => 'required'
     ];
 
-    $this->validate(request(), $rules);
+        $this->validate(request(), $rules);
 
-    $flight->update([
+        $flight->update([
       'title' => request()->title,
       'body' => request()->body
     ]);
 
-    $flight->destinations()->sync(request()->destinations ?: []);
+        $flight->destinations()->sync(request()->destinations ?: []);
 
-    if ($imageToken = request()->image_id) {
-      $imageId = str_replace(['[[', ']]'], '', $imageToken);
-      $flight->images()->sync([$imageId] ?: []);
-    }
+        if ($imageToken = request()->image_id) {
+            $imageId = str_replace(['[[', ']]'], '', $imageToken);
+            $flight->images()->sync([$imageId] ?: []);
+        }
 
-    return redirect()
+        return redirect()
       ->route('flight.show', [$flight->slug])
       ->with(
         'info',
@@ -467,5 +467,5 @@ class FlightController extends Controller
           'title' => $flight->title
         ])
       );
-  }
+    }
 }

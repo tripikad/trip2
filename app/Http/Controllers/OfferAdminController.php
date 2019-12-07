@@ -12,14 +12,14 @@ use Log;
 
 class OfferAdminController extends Controller
 {
-  public function index()
-  {
-    $offers = Offer::latest()
+    public function index()
+    {
+        $offers = Offer::latest()
       ->with(['user:id,name', 'startDestinations', 'endDestinations'])
       ->take(100)
       ->get();
 
-    return layout('Offer')
+        return layout('Offer')
       ->with('head_robots', 'noindex')
       ->with('title', 'Offer')
       ->with('color', 'blue')
@@ -37,7 +37,7 @@ class OfferAdminController extends Controller
           ->br()
           ->merge(
             $offers->map(function ($offer) {
-              return component('OfferRow')
+                return component('OfferRow')
                 ->is($offer->status == 1 ? '' : 'unpublished')
                 ->with('offer', $offer)
                 ->with('route', $offer->status == 1 ? route('offer.show', [$offer]) : '');
@@ -46,19 +46,19 @@ class OfferAdminController extends Controller
       )
       ->with('footer', region('FooterLight', ''))
       ->render();
-  }
+    }
 
-  public function companyIndex()
-  {
-    $loggedUser = request()->user();
+    public function companyIndex()
+    {
+        $loggedUser = request()->user();
 
-    $offers = $loggedUser
+        $offers = $loggedUser
       ->offers()
       ->latest()
       ->with(['user:id,name', 'startDestinations', 'endDestinations'])
       ->get();
 
-    return layout('Offer')
+        return layout('Offer')
       ->with('head_robots', 'noindex')
       ->with('title', 'Offer')
       ->with('color', 'blue')
@@ -76,7 +76,7 @@ class OfferAdminController extends Controller
           ->br()
           ->merge(
             $offers->map(function ($offer) {
-              return component('OfferRow')
+                return component('OfferRow')
                 ->is($offer->status ? '' : 'unpublished')
                 ->with('offer', $offer);
             })
@@ -84,19 +84,19 @@ class OfferAdminController extends Controller
       )
       ->with('footer', region('FooterLight', ''))
       ->render();
-  }
+    }
 
-  public function create($style)
-  {
-    $isPackage = $style == 'package';
+    public function create($style)
+    {
+        $isPackage = $style == 'package';
 
-    $destinations = Destination::select('id', 'name')
+        $destinations = Destination::select('id', 'name')
       ->orderBy('name', 'asc')
       ->get();
 
-    $startDestination = Destination::whereName('Tallinn')->first();
+        $startDestination = Destination::whereName('Tallinn')->first();
 
-    return layout('Two')
+        return layout('Two')
       ->with('color', 'blue')
       ->with(
         'header',
@@ -254,7 +254,7 @@ class OfferAdminController extends Controller
                         'items',
                         collect(array_fill(0, 5, null))
                           ->map(function ($value, $key) use ($isPackage) {
-                            return collect()
+                              return collect()
                               ->push(
                                 component($isPackage ? 'FormTextfield' : 'FormHidden')
                                   ->with('title', trans('offer.admin.edit.hotel.name') . ' ' . ($key + 1))
@@ -300,33 +300,33 @@ class OfferAdminController extends Controller
       )
       ->with('footer', region('FooterLight'))
       ->render();
-  }
+    }
 
-  public function store()
-  {
-    $loggedUser = request()->user();
+    public function store()
+    {
+        $loggedUser = request()->user();
 
-    $rules = [
+        $rules = [
       'title' => 'required',
       'start_destinations' => 'required',
       'end_destinations' => 'required'
     ];
 
-    $this->validate(request(), $rules);
+        $this->validate(request(), $rules);
 
-    $status = request()->get('status') == 'on';
-    $flights = request()->get('flights') == 'on';
-    $transfer = request()->get('transfer') == 'on';
+        $status = request()->get('status') == 'on';
+        $flights = request()->get('flights') == 'on';
+        $transfer = request()->get('transfer') == 'on';
 
-    $hotels = collect(request()->only('hotel_name', 'hotel_rating', 'hotel_type', 'hotel_price'))
+        $hotels = collect(request()->only('hotel_name', 'hotel_rating', 'hotel_type', 'hotel_price'))
       ->transpose()
       ->map(function ($h) {
-        return (object) collect(['name', 'rating', 'type', 'price'])
+          return (object) collect(['name', 'rating', 'type', 'price'])
           ->zip($h)
           ->fromPairs();
       });
 
-    $offer = $loggedUser->offers()->create([
+        $offer = $loggedUser->offers()->create([
       'status' => $status,
       'title' => request()->get('title'),
       'style' => request()->get('style'),
@@ -346,25 +346,25 @@ class OfferAdminController extends Controller
       ]
     ]);
 
-    $offer->startDestinations()->attach(
+        $offer->startDestinations()->attach(
       collect(request()->get('start_destinations'))->mapWithKeys(function ($value) {
-        return [$value[0] => ['type' => 'start']];
+          return [$value[0] => ['type' => 'start']];
       })
     );
 
-    $offer->endDestinations()->attach(
+        $offer->endDestinations()->attach(
       collect(request()->get('end_destinations'))->mapWithKeys(function ($value) {
-        return [$value[0] => ['type' => 'end']];
+          return [$value[0] => ['type' => 'end']];
       })
     );
 
-    Log::info('New offer added', [
+        Log::info('New offer added', [
       'user' => $offer->user->name,
       'title' => $offer->title,
       'link' => route('offer.show', [$offer])
     ]);
 
-    return redirect()
+        return redirect()
       ->route('offer.admin.company.index')
       ->with(
         'info',
@@ -372,5 +372,5 @@ class OfferAdminController extends Controller
           'title' => $offer->title
         ])
       );
-  }
+    }
 }

@@ -10,13 +10,13 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class FlightTest extends BrowserKitTestCase
 {
-  use DatabaseTransactions;
+    use DatabaseTransactions;
 
-  public function test_admin_user_can_create_and_edit_flight()
-  {
-    $admin_user_creating_flight = factory(User::class)->create(['role' => 'admin']);
+    public function test_admin_user_can_create_and_edit_flight()
+    {
+        $admin_user_creating_flight = factory(User::class)->create(['role' => 'admin']);
 
-    $this->actingAs($admin_user_creating_flight)
+        $this->actingAs($admin_user_creating_flight)
       ->visit('odavad-lennupiletid')
       ->click(trans('content.flight.create.title'))
       ->seePageIs('flight/create')
@@ -33,9 +33,9 @@ class FlightTest extends BrowserKitTestCase
         'status' => 1
       ]);
 
-    $content = Content::whereTitle('Hello flight title')->first();
+        $content = Content::whereTitle('Hello flight title')->first();
 
-    $this->actingAs($admin_user_creating_flight)
+        $this->actingAs($admin_user_creating_flight)
       ->visit("odavad-lennupiletid/$content->slug")
       ->click(trans('content.action.edit.title'))
       ->seePageIs("flight/$content->id/edit")
@@ -52,51 +52,51 @@ class FlightTest extends BrowserKitTestCase
         'type' => 'flight',
         'status' => 1
       ]);
-  }
+    }
 
-  public function test_regular_users_can_not_see_and_edit_unpublished_flight()
-  {
-    $admin_user_creating_flight = factory(User::class)->create(['role' => 'admin']);
-    $regular_user_viewing_flight = factory(User::class)->create();
+    public function test_regular_users_can_not_see_and_edit_unpublished_flight()
+    {
+        $admin_user_creating_flight = factory(User::class)->create(['role' => 'admin']);
+        $regular_user_viewing_flight = factory(User::class)->create();
 
-    $this->actingAs($admin_user_creating_flight)
+        $this->actingAs($admin_user_creating_flight)
       ->visit('odavad-lennupiletid')
       ->click(trans('content.flight.create.title'))
       ->type('Hello flight title', 'title')
       ->type('Hello flight body', 'body')
       ->press(trans('content.create.submit.title'));
 
-    $content = Content::whereTitle('Hello flight title')->first();
+        $content = Content::whereTitle('Hello flight title')->first();
 
-    $this->actingAs($regular_user_viewing_flight)
+        $this->actingAs($regular_user_viewing_flight)
       ->visit("odavad-lennupiletid/$content->slug")
       ->seePageIs("odavad-lennupiletid/$content->slug")
       ->see('Hello flight title');
 
-    $edit_response = $this->call('GET', "flight/$content->id/edit");
-    $this->assertEquals(401, $edit_response->status());
-  }
+        $edit_response = $this->call('GET', "flight/$content->id/edit");
+        $this->assertEquals(401, $edit_response->status());
+    }
 
-  public function test_nonlogged_users_can_not_see_and_edit_unpublished_flight()
-  {
-    $admin_user_creating_flight = factory(User::class)->create(['role' => 'admin']);
+    public function test_nonlogged_users_can_not_see_and_edit_unpublished_flight()
+    {
+        $admin_user_creating_flight = factory(User::class)->create(['role' => 'admin']);
 
-    $this->actingAs($admin_user_creating_flight)
+        $this->actingAs($admin_user_creating_flight)
       ->visit('odavad-lennupiletid')
       ->click(trans('content.flight.create.title'))
       ->type('Hello flight title', 'title')
       ->type('Hello flight body', 'body')
       ->press(trans('content.create.submit.title'));
 
-    $content = Content::whereTitle('Hello flight title')->first();
+        $content = Content::whereTitle('Hello flight title')->first();
 
-    Auth::logout();
+        Auth::logout();
 
-    $this->visit("odavad-lennupiletid/$content->slug")
+        $this->visit("odavad-lennupiletid/$content->slug")
       ->seePageIs("odavad-lennupiletid/$content->slug")
       ->see('Hello flight title');
 
-    $edit_response = $this->call('GET', "flight/$content->id/edit");
-    $this->assertEquals(401, $edit_response->status());
-  }
+        $edit_response = $this->call('GET', "flight/$content->id/edit");
+        $this->assertEquals(401, $edit_response->status());
+    }
 }

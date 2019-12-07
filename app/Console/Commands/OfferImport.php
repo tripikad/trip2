@@ -11,34 +11,34 @@ use App\Destination;
 
 class OfferImport extends Command
 {
-  protected $signature = 'offer:import';
+    protected $signature = 'offer:import';
 
-  protected $description = 'Import offers from Google Sheets';
+    protected $description = 'Import offers from Google Sheets';
 
-  public function __construct()
-  {
-    parent::__construct();
-  }
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
-  public function handle()
-  {
-    $sheet_id = '1TLEDlvDC_06gy75IhNAyXaUjt-9oOT2XOqW2LEpycHE';
-    $offers = google_sheet($sheet_id);
+    public function handle()
+    {
+        $sheet_id = '1TLEDlvDC_06gy75IhNAyXaUjt-9oOT2XOqW2LEpycHE';
+        $offers = google_sheet($sheet_id);
 
-    $startDestination = Destination::where('name', 'Tallinn')->first();
-    $moreDestination = Destination::where('name', 'Barcelona')->first();
+        $startDestination = Destination::where('name', 'Tallinn')->first();
+        $moreDestination = Destination::where('name', 'Barcelona')->first();
 
-    $this->info("\nImporting content\n");
+        $this->info("\nImporting content\n");
 
-    $offers->each(function ($o) use ($startDestination, $moreDestination) {
-      $this->line($o->title);
+        $offers->each(function ($o) use ($startDestination, $moreDestination) {
+            $this->line($o->title);
 
-      $endDestination = Destination::where('name', $o->destination)->first();
+            $endDestination = Destination::where('name', $o->destination)->first();
 
-      $user = User::findOrFail($o->userid);
-      $user->update(['company' => true]);
+            $user = User::findOrFail($o->userid);
+            $user->update(['company' => true]);
 
-      $data = [
+            $data = [
         'user_id' => $o->userid,
         'title' => $o->title,
         'style' => $o->style,
@@ -69,23 +69,23 @@ class OfferImport extends Command
         'status' => $o->status
       ];
 
-      $offer = Offer::create(
+            $offer = Offer::create(
         collect($data)
           ->put('id', $o->id)
           ->toArray()
       );
 
-      $offer->startDestinations()->attach(
+            $offer->startDestinations()->attach(
         collect([$startDestination->id])->mapWithKeys(function ($key) {
-          return [$key => ['type' => 'start']];
+            return [$key => ['type' => 'start']];
         })
       );
 
-      $offer->endDestinations()->attach(
+            $offer->endDestinations()->attach(
         collect([$endDestination->id, $moreDestination->id])->mapWithKeys(function ($key) {
-          return [$key => ['type' => 'end']];
+            return [$key => ['type' => 'end']];
         })
       );
-    });
-  }
+        });
+    }
 }
