@@ -163,10 +163,9 @@ class OfferAdminController extends Controller
                                                         ->with('name', 'start_destinations[]')
                                                         ->with('options', $destinations)
                                                         ->with('max', 1)
-
                                                         ->with(
                                                             'value',
-                                                            $startDestination ? [$startDestination->id] : []
+                                                            $startDestination ? [$startDestination->id] : ''
                                                         )
                                                 )
                                                 ->push(
@@ -188,7 +187,7 @@ class OfferAdminController extends Controller
                                                         ->with('name', 'start_at')
                                                         ->with(
                                                             'value',
-                                                            $startDestination ? [$startDestination->id] : []
+                                                            $startDestination ? [$startDestination->id] : ''
                                                         )
                                                 )
                                                 ->push(
