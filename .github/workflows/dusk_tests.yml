@@ -3,83 +3,81 @@ name: Dusk tests
 on: [push]
 
 jobs:
-    dusk-tests:
-        runs-on: ubuntu-latest
-        services:
-            mysql:
-                image: mysql:5.7
-                env:
-                    MYSQL_ALLOW_EMPTY_PASSWORD: false
-                    MYSQL_ROOT_PASSWORD: password
-                    MYSQL_DATABASE: trip2
-                ports:
-                    - 3306/tcp
-                options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
-        steps:
-            - name: Verify MySQL connection from host
-              run: |
-                  sudo apt-get install -y mysql-client
-                  mysql --host 127.0.0.1 --port ${{ job.services.mysql.ports['3306'] }} -uroot -ppassword -e "SHOW DATABASES"
-                  echo mysql port: ${{ job.services.mysql.ports['3306'] }}
-            - uses: actions/checkout@v1
-            - uses: actions/setup-node@v1
-            - name: Copy .env
-              run: php -r "file_exists('.env') || copy('.env.example', '.env');"
-            - name: Cache composer
-              id: composer-cache
-              uses: actions/cache@v1
-              with:
-                  path: vendor
-                  key: ${{ runner.OS }}-build-${{ hashFiles('composer.json') }}
-            - name: composer install
-              if: steps.composer-cache.outputs.cache-hit != 'true'
-            - name: Install Dependencies
-              run: composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
-            - name: Generate key
-              run: php artisan key:generate
-            - name: Run Migration
-              run: php artisan migrate -v
-              env:
-                  DB_DATABASE2: trip2
-                  DB_HOSTNAME2: 127.0.0.1
-                  DB_USERNAME2: root
-                  DB_PASSWORD2: password
-                  DB_PORT2: ${{ job.services.mysql.ports[3306] }}
-            - name: Upgrade chrome driver
-              run: php artisan dusk:update --detect
-            - name: Cache node_modules
-              id: npm-cache
-              uses: actions/cache@v1
-              with:
-                  path: node_modules
-                  key: ${{ runner.OS }}-build-${{ hashFiles('package.json') }}
-            - name: npm install
-              if: steps.npm-cache.outputs.cache-hit != 'true'
-            - name: Install npm packages
-              run: npm install
-            - name: Build frontend
-              run: npm run build
-            - name: Start chrome driver
-              run: ./vendor/laravel/dusk/bin/chromedriver-linux > /dev/null 2>&1 &
-            - name: Run Laravel Server
-              run: php artisan serve > /dev/null 2>&1 &
-              env:
-                  DB_DATABASE2: trip2
-                  DB_HOSTNAME2: 127.0.0.1
-                  DB_USERNAME2: root
-                  DB_PASSWORD2: password
-                  DB_PORT2: ${{ job.services.mysql.ports[3306] }}
-            - name: Run dusk tests
-              run: php artisan dusk
-              env:
-                  DB_DATABASE2: trip2
-                  DB_HOSTNAME2: 127.0.0.1
-                  DB_USERNAME2: root
-                  DB_PASSWORD2: password
-                  DB_PORT2: ${{ job.services.mysql.ports[3306] }}
-                  FULL_BASE_URL: http://127.0.0.1:8000
-            - uses: actions/upload-artifact@v1
-              if: failure()
-              with:
-                  name: screenshots
-                  path: tests/Browser/screenshots/
+  dusk-tests:
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:5.7
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: false
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_DATABASE: trip2
+        ports:
+          - 3306/tcp
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+    steps:
+      - name: Verify MySQL connection from host
+        run: |
+          sudo apt-get install -y mysql-client
+          mysql --host 127.0.0.1 --port ${{ job.services.mysql.ports['3306'] }} -uroot -ppassword -e "SHOW DATABASES"
+          echo mysql port: ${{ job.services.mysql.ports['3306'] }}
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+      - name: Copy .env
+        run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+      - name: Cache composer
+        id: composer-cache
+        uses: actions/cache@v1
+        with:
+          path: vendor
+          key: ${{ runner.OS }}-build-${{ hashFiles('composer.json') }}
+      - name: composer install
+        if: steps.composer-cache.outputs.cache-hit != 'true'
+        run: composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
+      - name: Generate key
+        run: php artisan key:generate
+      - name: Run Migration
+        run: php artisan migrate -v
+        env:
+          DB_DATABASE2: trip2
+          DB_HOSTNAME2: 127.0.0.1
+          DB_USERNAME2: root
+          DB_PASSWORD2: password
+          DB_PORT2: ${{ job.services.mysql.ports[3306] }}
+      - name: Upgrade chrome driver
+        run: php artisan dusk:update --detect
+      - name: Cache node_modules
+        id: npm-cache
+        uses: actions/cache@v1
+        with:
+          path: node_modules
+          key: ${{ runner.OS }}-build-${{ hashFiles('package.json') }}
+      - name: Install npm packages
+        if: steps.npm-cache.outputs.cache-hit != 'true'
+        run: npm install
+      - name: Build frontend
+        run: npm run build
+      - name: Start chrome driver
+        run: ./vendor/laravel/dusk/bin/chromedriver-linux > /dev/null 2>&1 &
+      - name: Run Laravel Server
+        run: php artisan serve > /dev/null 2>&1 &
+        env:
+          DB_DATABASE2: trip2
+          DB_HOSTNAME2: 127.0.0.1
+          DB_USERNAME2: root
+          DB_PASSWORD2: password
+          DB_PORT2: ${{ job.services.mysql.ports[3306] }}
+      - name: Run dusk tests
+        run: php artisan dusk
+        env:
+          DB_DATABASE2: trip2
+          DB_HOSTNAME2: 127.0.0.1
+          DB_USERNAME2: root
+          DB_PASSWORD2: password
+          DB_PORT2: ${{ job.services.mysql.ports[3306] }}
+          FULL_BASE_URL: http://127.0.0.1:8000
+      - uses: actions/upload-artifact@v1
+        if: failure()
+        with:
+          name: screenshots
+          path: tests/Browser/screenshots/
