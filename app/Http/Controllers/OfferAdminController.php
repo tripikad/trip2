@@ -332,8 +332,7 @@ class OfferAdminController extends Controller
         $rules = [
             'title' => 'required',
             'start_destinations' => 'required',
-            'end_destinations' => 'required',
-            'price' => request()->style !== 'package' ? 'required' : ''
+            'end_destinations' => 'required'
         ];
 
         $this->validate(request(), $rules);
