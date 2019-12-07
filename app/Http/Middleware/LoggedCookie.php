@@ -24,11 +24,6 @@ class LoggedCookie
 
             if (Auth::check()) {
                 $response->withCookie(Cookie::forever('logged', 'true'));
-<<<<<<< HEAD
-=======
-
-            // If user is not logged in, remove the cookie
->>>>>>> origin/kika-prettier4
             } else {
                 $response->withCookie(Cookie::forget('logged'));
             }
