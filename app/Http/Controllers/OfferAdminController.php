@@ -164,7 +164,10 @@ class OfferAdminController extends Controller
                                                         ->with('options', $destinations)
                                                         ->with('max', 1)
 
-                                                        ->with('value', [$startDestination->id])
+                                                        ->with(
+                                                            'value',
+                                                            $startDestination ? [$startDestination->id] : []
+                                                        )
                                                 )
                                                 ->push(
                                                     component('FormSelectMultiple')
@@ -183,8 +186,10 @@ class OfferAdminController extends Controller
                                                     component('FormTextfield')
                                                         ->with('title', trans('offer.admin.edit.start_at'))
                                                         ->with('name', 'start_at')
-
-                                                        ->with('value', $startDestination->id)
+                                                        ->with(
+                                                            'value',
+                                                            $startDestination ? [$startDestination->id] : []
+                                                        )
                                                 )
                                                 ->push(
                                                     component('FormTextfield')
