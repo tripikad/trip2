@@ -58,7 +58,10 @@ class Offer extends Model
         if ($this->style == 'package') {
             return $this->data->hotels[0]->price . '€';
         }
-        return $this->data->price . '€';
+        if ($this->style !== 'package' && $this->data->price) {
+            return $this->data->price;
+        }
+        return '0€';
     }
 
     public function getStyleFormattedAttribute()

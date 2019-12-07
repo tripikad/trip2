@@ -169,7 +169,6 @@ class OffersAdminTest extends DuskTestCase
                 ->click(dusk('Lisa seiklusreis'))
                 ->assertPathIs('/offer/admin/company')
                 ->assertSourceHas('Montaña alta para gringo')
-                ->assertSourceHas('1000€')
                 ->assertSourceHas('Universo');
         });
 
