@@ -1,5 +1,5 @@
 <template>
-    <div class="FormSelect" :class="{'FormSelect--error': isError, [isclasses]: true}">
+    <div class="FormSelect" :class="{ 'FormSelect--error': isError, [isclasses]: true }">
         <label v-if="title" :for="name" class="FormSelect__label">{{ title }}</label>
 
         <component

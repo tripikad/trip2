@@ -27,10 +27,7 @@ class EditorTest extends DuskTestCase
                     ->click('.Editor__toolPicker')
                     ->pause(200) // Loading the image picker
                     ->assertSeeIn('.ImagePicker', 'Lohista pilt siia')
-                    ->attach(
-                        '.dz-hidden-input',
-                        storage_path() . '/tests/test.jpg'
-                    )
+                    ->attach('.dz-hidden-input', storage_path() . '/tests/test.jpg')
                     ->pause(5000) // Uploading image
 
                     // @todo make image insertion test work
@@ -56,13 +53,8 @@ class EditorTest extends DuskTestCase
             $this->assertTrue(file_exists($filepath));
             unlink($filepath);
 
-            foreach (
-                ['large', 'medium', 'small', 'small_square', 'xsmall_square']
-                as $preset
-            ) {
-                $filepath =
-                    config("imagepresets.presets.$preset.path") .
-                    $image->filename;
+            foreach (['large', 'medium', 'small', 'small_square', 'xsmall_square'] as $preset) {
+                $filepath = config("imagepresets.presets.$preset.path") . $image->filename;
                 $this->assertTrue(file_exists($filepath));
                 unlink($filepath);
             }

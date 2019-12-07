@@ -14,19 +14,23 @@ class FeedController extends Controller
 
         $feed->setCache(config('cache.feed.atom'), 'rssNewsFeed');
 
-        if (! $feed->isCached()) {
+        if (!$feed->isCached()) {
             $feed->title = config('site.name');
             $feed->description = trans('site.description.main');
             $feed->link = route('news.feed');
             $feed->setShortening(false);
 
-            $contents = Content::whereType('news')->whereStatus(1)->latest()->take(15)->get();
+            $contents = Content::whereType('news')
+                ->whereStatus(1)
+                ->latest()
+                ->take(15)
+                ->get();
 
             foreach ($contents as $content) {
                 $feed->add(
                     $content->title,
                     $content->user->name,
-                    route($content->type.'.show', [$content->slug], true),
+                    route($content->type . '.show', [$content->slug], true),
                     $content->created_at,
                     $content->vars()->body,
                     $content->vars()->body
@@ -44,19 +48,23 @@ class FeedController extends Controller
 
         $feed->setCache(config('cache.feed.atom'), 'rssFlightsFeed');
 
-        if (! $feed->isCached()) {
+        if (!$feed->isCached()) {
             $feed->title = config('site.name');
             $feed->description = trans('site.description.main');
             $feed->link = route('flight.feed');
             $feed->setShortening(false);
 
-            $contents = Content::whereType('flight')->whereStatus(1)->latest()->take(15)->get();
+            $contents = Content::whereType('flight')
+                ->whereStatus(1)
+                ->latest()
+                ->take(15)
+                ->get();
 
             foreach ($contents as $content) {
                 $feed->add(
                     $content->title,
                     $content->user->name,
-                    route($content->type.'.show', [$content->slug], true),
+                    route($content->type . '.show', [$content->slug], true),
                     $content->created_at,
                     $content->vars()->body,
                     $content->vars()->body

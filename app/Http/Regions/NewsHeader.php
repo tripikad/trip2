@@ -33,24 +33,15 @@ class NewsHeader
                     collect()
                         ->push(
                             component('UserImage')
-                                ->with(
-                                    'route',
-                                    route('user.show', [$new->user])
-                                )
-                                ->with(
-                                    'image',
-                                    $new->user->imagePreset('xsmall_square')
-                                )
+                                ->with('route', route('user.show', [$new->user]))
+                                ->with('image', $new->user->imagePreset('xsmall_square'))
                                 ->with('rank', $new->user->vars()->rank)
                         )
                         ->push(
                             component('MetaLink')
                                 ->is('white')
                                 ->with('title', $new->user->vars()->name)
-                                ->with(
-                                    'route',
-                                    route('user.show', [$new->user])
-                                )
+                                ->with('route', route('user.show', [$new->user]))
                         )
                         ->push(
                             component('MetaLink')
@@ -76,35 +67,20 @@ class NewsHeader
                             component('MetaLink')
                                 ->is('green')
                                 ->is('filled')
-                                ->with(
-                                    'title',
-                                    trans('content.action.edit.title')
-                                )
+                                ->with('title', trans('content.action.edit.title'))
                                 ->with('route', route('news.edit', [$new]))
                         )
                         ->pushWhen(
                             $user && $user->hasRole('admin'),
                             component('Form')
-                                ->with(
-                                    'route',
-                                    route('content.status', [
-                                        $new->type,
-                                        $new,
-                                        1 - $new->status
-                                    ])
-                                )
+                                ->with('route', route('content.status', [$new->type, $new, 1 - $new->status]))
                                 ->with(
                                     'fields',
                                     collect()->push(
                                         component('FormLink')
                                             ->is('pink')
                                             ->is('filled')
-                                            ->with(
-                                                'title',
-                                                trans(
-                                                    "content.action.status.$new->status.title"
-                                                )
-                                            )
+                                            ->with('title', trans("content.action.status.$new->status.title"))
                                     )
                                 )
                         )

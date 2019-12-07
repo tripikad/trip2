@@ -1,28 +1,23 @@
 <template>
-
     <div class="EditorComment" :class="isclasses">
-
         <div v-show="!showSource" ref="EditorComment"></div>
 
         <div v-show="showSource">
-
             <div class="EditorComment__toolbar">
                 <div
                     class="EditorComment__button"
-                    @click="showSource = false; editor.content.innerHTML = localValue"
-                >Back</div>
+                    @click="
+                        showSource = false
+                        editor.content.innerHTML = localValue
+                    "
+                >
+                    Back
+                </div>
             </div>
 
-            <textarea
-                class="EditorComment__source"
-                :name="name"
-                v-model="localValue"
-            ></textarea>
-
+            <textarea class="EditorComment__source" :name="name" v-model="localValue"></textarea>
         </div>
-
     </div>
-
 </template>
 
 <script>
@@ -47,9 +42,7 @@ export default {
 
     methods: {
         setFocus() {
-            var el = this.editor.getElementsByClassName(
-                'Body EditorComment__body'
-            )[0]
+            var el = this.editor.getElementsByClassName('Body EditorComment__body')[0]
             var focused = document.activeElement
 
             if (!focused || focused == el) {
@@ -58,27 +51,16 @@ export default {
                 focused = false
             }
 
-            if (
-                (!focused && el.innerHTML == '') ||
-                el.innerHTML == '<br>'
-            ) {
+            if ((!focused && el.innerHTML == '') || el.innerHTML == '<br>') {
                 el.focus()
-                if (
-                    typeof window.getSelection !=
-                        'undefined' &&
-                    typeof document.createRange !=
-                        'undefined'
-                ) {
+                if (typeof window.getSelection != 'undefined' && typeof document.createRange != 'undefined') {
                     var range = document.createRange()
                     range.selectNodeContents(el)
                     range.collapse(false)
                     var sel = window.getSelection()
                     sel.removeAllRanges()
                     sel.addRange(range)
-                } else if (
-                    typeof document.body.createTextRange !=
-                    'undefined'
-                ) {
+                } else if (typeof document.body.createTextRange != 'undefined') {
                     var textRange = document.body.createTextRange()
                     textRange.moveToElementText(el)
                     textRange.collapse(false)
@@ -125,11 +107,8 @@ export default {
                     result: () => {
                         this.setFocus()
 
-                        var url = prompt(
-                            'Enter the link URL'
-                        )
-                        if (url)
-                            pell.exec('createLink', url)
+                        var url = prompt('Enter the link URL')
+                        if (url) pell.exec('createLink', url)
 
                         return false
                     }
@@ -142,8 +121,7 @@ export default {
                         var url = prompt(
                             'Lisa pildi URL.\n\nPilti saad üles laadida näiteks:\nhttps://pasteboard.co/\nvõi\nhttps://imgbb.com/'
                         )
-                        if (url)
-                            pell.exec('insertImage', url)
+                        if (url) pell.exec('insertImage', url)
 
                         return false
                     }

@@ -1,19 +1,10 @@
 <template>
-
     <div class="FrontpageSearchDestination" :class="isclasses">
-
         <div class="FrontpageSearchDestination__icon">
-
-            <component
-                :is="'Icon'"
-                icon="icon-search"
-                size="lg"
-            ></component>
-
+            <component :is="'Icon'" icon="icon-search" size="lg"></component>
         </div>
 
         <div class="FrontpageSearchDestination__search">
-
             <component
                 :is="'Multiselect'"
                 v-model="selected"
@@ -25,11 +16,8 @@
                 @input="onInput"
             >
             </component>
-
         </div>
-
     </div>
-
 </template>
 
 <script>
@@ -55,12 +43,7 @@ export default {
 
     computed: {
         currentRoute() {
-            return this.route.replace(
-                '0',
-                this.selected.slug
-                    ? this.selected.slug
-                    : '0'
-            )
+            return this.route.replace('0', this.selected.slug ? this.selected.slug : '0')
         }
     },
 

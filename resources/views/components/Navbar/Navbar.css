@@ -5,40 +5,39 @@
     height: $height-md;
 }
 
-    .Navbar__logo {
-        margin-left: calc($spacer * -4.5);
-        margin-top: calc($spacer * 2);
+.Navbar__logo {
+    margin-left: calc($spacer * -4.5);
+    margin-top: calc($spacer * 2);
+}
 
-    }
+.Navbar__sitename {
+    display: none;
+}
 
-    .Navbar__sitename {
-        display: none;
-    }
+.Navbar--white .Navbar__logo svg {
+    fill: $white;
+}
 
-    .Navbar--white .Navbar__logo svg {
-        fill: $white;
-    }
+.Navbar__right {
+    display: flex;
+    align-items: center;
+}
 
-    .Navbar__right {
-        display: flex;
-        align-items: center;
-    }
+.Navbar__search {
+    display: block;
+    display: none ?if $tablet;
+}
 
-    .Navbar__search {
-        display: block;
-        display: none ?if $tablet;
-    }
+.Navbar__search svg {
+    fill: $gray-light;
+}
 
-    .Navbar__search svg {
-        fill: $gray-light;
-    }
+.Navbar__desktop {
+    display: block;
+    display: none ?if $tablet;
+}
 
-    .Navbar__desktop {
-        display: block;
-        display: none ?if $tablet;
-    }
-
-    .Navbar__mobile {
-        display: block ?if $tablet;
-        display: none;
-    }
+.Navbar__mobile {
+    display: block ?if $tablet;
+    display: none;
+}

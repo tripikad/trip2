@@ -19,8 +19,8 @@ class UserDelete extends Command
         /** @var User $user */
         $user = User::findorfail($id);
 
-        $this->info('this user has posted '.$user->contents->count().' times');
-        $this->info('this user has commented on '.$user->comments->count().' posts');
+        $this->info('this user has posted ' . $user->contents->count() . ' times');
+        $this->info('this user has commented on ' . $user->comments->count() . ' posts');
 
         if ($this->confirm("Do you wish to delete user: $user->name? [yes|no]")) {
             $user->follows->each(function ($follow) {
@@ -35,22 +35,33 @@ class UserDelete extends Command
 
             //remove user contents
             $user->contents->each(function ($post) {
-
                 //get destinations->id as array and then remove relationship
 
-                $destinations = $post->destinations()->select('destinations.id')->pluck('id')->toArray();
+                $destinations = $post
+                    ->destinations()
+                    ->select('destinations.id')
+                    ->pluck('id')
+                    ->toArray();
 
                 $post->destinations()->detach($destinations);
 
                 //get topics->id as array and then remove relationship
 
-                $topics = $post->topics()->select('topics.id')->pluck('id')->toArray();
+                $topics = $post
+                    ->topics()
+                    ->select('topics.id')
+                    ->pluck('id')
+                    ->toArray();
 
                 $post->topics()->detach($topics);
 
                 //get carriers->id as array and then remove relationship
 
-                $carriers = $post->carriers()->select('carriers.id')->pluck('id')->toArray();
+                $carriers = $post
+                    ->carriers()
+                    ->select('carriers.id')
+                    ->pluck('id')
+                    ->toArray();
 
                 $post->carriers()->detach($carriers);
 

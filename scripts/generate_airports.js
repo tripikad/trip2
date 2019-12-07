@@ -39,14 +39,8 @@ var fs = require('fs')
 var baby = require('babyparse')
 var _ = require('lodash')
 
-var routes = baby.parse(
-    fs.readFileSync(__dirname + '/data/routes.csv').toString(),
-    { header: false }
-).data
-var airports = baby.parse(
-    fs.readFileSync(__dirname + '/data/airports.csv').toString(),
-    { header: false }
-).data
+var routes = baby.parse(fs.readFileSync(__dirname + '/data/routes.csv').toString(), { header: false }).data
+var airports = baby.parse(fs.readFileSync(__dirname + '/data/airports.csv').toString(), { header: false }).data
 
 const makeFloat = str => {
     const f = parseFloat(str)

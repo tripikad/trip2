@@ -19,8 +19,8 @@
     height: calc($spacer * 35);
 }
 
-    .Placeholder__title {
-        font: $font-text-md;
-        color: $gray-dark;
-        text-align: center;
-    }
+.Placeholder__title {
+    font: $font-text-md;
+    color: $gray-dark;
+    text-align: center;
+}

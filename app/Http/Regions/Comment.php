@@ -17,10 +17,7 @@ class Comment
                 'user',
                 component('UserImage')
                     ->with('route', route('user.show', [$comment->user]))
-                    ->with(
-                        'image',
-                        $comment->user->imagePreset('xsmall_square')
-                    )
+                    ->with('image', $comment->user->imagePreset('xsmall_square'))
                     ->with('rank', $comment->user->vars()->rank)
             )
             ->with(
@@ -41,132 +38,56 @@ class Comment
                             component('MetaLink')
                                 ->is('cyan')
                                 ->with('title', $comment->user->vars()->name)
-                                ->with(
-                                    'route',
-                                    route('user.show', [$comment->user])
-                                )
+                                ->with('route', route('user.show', [$comment->user]))
                         )
                         ->push(
                             component('MetaLink')
                                 ->with('title', $comment->vars()->created_at)
                                 ->with(
                                     'route',
-                                    route('forum.show', [
-                                        $comment->content->slug,
-                                        '#comment-' . $comment->id
-                                    ])
+                                    route('forum.show', [$comment->content->slug, '#comment-' . $comment->id])
                                 )
                         )
                         ->pushWhen(
-                            $user &&
-                                $user->hasRoleOrOwner(
-                                    'admin',
-                                    $comment->user->id
-                                ),
+                            $user && $user->hasRoleOrOwner('admin', $comment->user->id),
                             component('MetaLink')
                                 ->is('green')
-                                ->with(
-                                    'title',
-                                    trans('comment.action.edit.title')
-                                )
-                                ->with(
-                                    'route',
-                                    route('comment.edit', [$comment])
-                                )
+                                ->with('title', trans('comment.action.edit.title'))
+                                ->with('route', route('comment.edit', [$comment]))
                         )
                         ->pushWhen(
                             $user && $user->hasRole('admin'),
                             component('Form')
-                                ->with(
-                                    'route',
-                                    route('comment.status', [
-                                        $comment,
-                                        1 - $comment->status
-                                    ])
-                                )
+                                ->with('route', route('comment.status', [$comment, 1 - $comment->status]))
                                 ->with('method', 'PUT')
                                 ->with(
                                     'fields',
                                     collect()->push(
                                         component('FormLink')
                                             ->is('pink')
-                                            ->with(
-                                                'title',
-                                                trans(
-                                                    "comment.action.status.$comment->status.title"
-                                                )
-                                            )
+                                            ->with('title', trans("comment.action.status.$comment->status.title"))
                                     )
                                 )
                         )
                         ->push(
                             component('Flag')
                                 ->is('green')
-                                ->with(
-                                    'route',
-                                    route('flag.toggle', [
-                                        'comment',
-                                        $comment,
-                                        'good'
-                                    ])
-                                )
-                                ->with(
-                                    'value',
-                                    $comment->vars()->flagCount('good')
-                                )
-                                ->with(
-                                    'flagged',
-                                    $user
-                                        ? $user
-                                            ->vars()
-                                            ->hasFlaggedComment(
-                                                $comment,
-                                                'good'
-                                            )
-                                        : false
-                                )
+                                ->with('route', route('flag.toggle', ['comment', $comment, 'good']))
+                                ->with('value', $comment->vars()->flagCount('good'))
+                                ->with('flagged', $user ? $user->vars()->hasFlaggedComment($comment, 'good') : false)
                                 ->with('icon', 'icon-thumb-up')
-                                ->with(
-                                    'flagtitle',
-                                    trans('flag.comment.good.flag.title')
-                                )
-                                ->with(
-                                    'unflagtitle',
-                                    trans('flag.comment.good.unflag.title')
-                                )
+                                ->with('flagtitle', trans('flag.comment.good.flag.title'))
+                                ->with('unflagtitle', trans('flag.comment.good.unflag.title'))
                         )
                         ->push(
                             component('Flag')
                                 ->is('red')
-                                ->with(
-                                    'route',
-                                    route('flag.toggle', [
-                                        'comment',
-                                        $comment,
-                                        'bad'
-                                    ])
-                                )
-                                ->with(
-                                    'value',
-                                    $comment->vars()->flagCount('bad')
-                                )
-                                ->with(
-                                    'flagged',
-                                    $user
-                                        ? $user
-                                            ->vars()
-                                            ->hasFlaggedComment($comment, 'bad')
-                                        : false
-                                )
+                                ->with('route', route('flag.toggle', ['comment', $comment, 'bad']))
+                                ->with('value', $comment->vars()->flagCount('bad'))
+                                ->with('flagged', $user ? $user->vars()->hasFlaggedComment($comment, 'bad') : false)
                                 ->with('icon', 'icon-thumb-down')
-                                ->with(
-                                    'flagtitle',
-                                    trans('flag.comment.bad.flag.title')
-                                )
-                                ->with(
-                                    'unflagtitle',
-                                    trans('flag.comment.bad.unflag.title')
-                                )
+                                ->with('flagtitle', trans('flag.comment.bad.flag.title'))
+                                ->with('unflagtitle', trans('flag.comment.bad.unflag.title'))
                         )
                 )
             )

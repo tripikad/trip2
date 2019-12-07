@@ -104,10 +104,7 @@ export default {
             const yOffset = 0.2
             return geoEquirectangular()
                 .scale(this.currentWidth / 8)
-                .translate([
-                    this.currentWidth / 2 - this.currentWidth * xOffset,
-                    this.currentHeight / (2 - yOffset)
-                ])
+                .translate([this.currentWidth / 2 - this.currentWidth * xOffset, this.currentHeight / (2 - yOffset)])
                 .precision(0.1)
         },
         geopath() {
@@ -117,14 +114,10 @@ export default {
             return this.currentWidth / 350
         },
         largeRadius() {
-            return this.currentWidth < this.tabletBreakpoint
-                ? 7
-                : this.radius * 3
+            return this.currentWidth < this.tabletBreakpoint ? 7 : this.radius * 3
         },
         activeCountryDots() {
-            return this.countrydots.filter(
-                d => intersection(d[2], this.areas).length
-            )
+            return this.countrydots.filter(d => intersection(d[2], this.areas).length)
         }
     },
 
@@ -137,10 +130,7 @@ export default {
                         type: 'Feature',
                         geometry: {
                             type: 'LineString',
-                            coordinates: coordinates.map(({ lon, lat }) => [
-                                lon,
-                                lat
-                            ])
+                            coordinates: coordinates.map(({ lon, lat }) => [lon, lat])
                         }
                     }
                 ]

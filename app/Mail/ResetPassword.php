@@ -34,21 +34,17 @@ class ResetPassword extends Mailable
      */
     public function build()
     {
-        $this->subject(trans('auth.reset.email.subject'))
-            ->markdown('email.auth.reset');
+        $this->subject(trans('auth.reset.email.subject'))->markdown('email.auth.reset');
 
         $header = [
-            'category' => [
-                'auth_reset',
-            ],
+            'category' => ['auth_reset'],
             'unique_args' => [
-                'user_id' => (string) $this->user->id,
-            ],
+                'user_id' => (string) $this->user->id
+            ]
         ];
 
         $this->withSwiftMessage(function ($message) use ($header) {
-            $message->getHeaders()
-                ->addTextHeader('X-SMTPAPI', format_smtp_header($header));
+            $message->getHeaders()->addTextHeader('X-SMTPAPI', format_smtp_header($header));
         });
     }
 }

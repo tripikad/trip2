@@ -33,7 +33,7 @@ class MiscTest extends BrowserKitTestCase
                 'title' => 'Hello misc title',
                 'body' => 'Hello misc body',
                 'type' => 'misc',
-                'status' => 1,
+                'status' => 1
             ]);
 
         $content = Content::whereTitle('Hello misc title')->first();
@@ -53,7 +53,7 @@ class MiscTest extends BrowserKitTestCase
                 'title' => 'Hola misc titulo',
                 'body' => 'Hola misc cuerpo',
                 'type' => 'misc',
-                'status' => 1,
+                'status' => 1
             ]);
     }
 

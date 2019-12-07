@@ -11,17 +11,13 @@ class Kernel extends ConsoleKernel
 
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('generate:userRankings')
-            ->dailyAt('04:00');
+        $schedule->command('generate:userRankings')->dailyAt('04:00');
 
-        $schedule->command('sitemap:generate')
-            ->dailyAt('05:00');
+        $schedule->command('sitemap:generate')->dailyAt('05:00');
 
-        $schedule->command('search:index')
-            ->cron('0 */4 * * *');
+        $schedule->command('search:index')->cron('0 */4 * * *');
 
-        $schedule->command('search:index --optimize')
-            ->dailyAt('05:55');
+        $schedule->command('search:index --optimize')->dailyAt('05:55');
 
         //$schedule->command('newsletter:send --check-newsletters')
         //    ->cron('*/10 * * * *');
@@ -37,7 +33,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }

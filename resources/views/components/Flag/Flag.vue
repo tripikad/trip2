@@ -1,24 +1,10 @@
 <template>
-
-    <div
-        class="Flag"
-        :class="[isclasses, {'Flag--unflagged': ! currentFlagged}]"
-        @click="toggleFlag"
-    >
-
+    <div class="Flag" :class="[isclasses, { 'Flag--unflagged': !currentFlagged }]" @click="toggleFlag">
         <div class="Flag__icon">
-
-            <component
-                :is="'Icon'"
-                :icon="icon"
-                size="sm"
-            ></component>
-
+            <component :is="'Icon'" :icon="icon" size="sm"></component>
         </div>
         <div class="Flag__value">{{ currentValue }}</div>
-
     </div>
-
 </template>
 
 <script>
@@ -50,9 +36,7 @@ export default {
                 this.currentValue = res.data
                 this.currentFlagged = !this.currentFlagged
                 this.$events.$emit('alert', {
-                    title: this.currentFlagged
-                        ? this.flagtitle
-                        : this.unflagtitle
+                    title: this.currentFlagged ? this.flagtitle : this.unflagtitle
                 })
             })
         }

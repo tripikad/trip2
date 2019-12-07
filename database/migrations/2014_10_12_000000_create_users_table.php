@@ -25,8 +25,14 @@ class CreateUsersTable extends Migration
             $table->string('profile_color')->default('m-green');
             $table->string('real_name');
             $table->boolean('real_name_show')->default(false);
-            $table->integer('gender')->unsigned()->nullable();
-            $table->integer('birthyear')->unsigned()->nullable();
+            $table
+                ->integer('gender')
+                ->unsigned()
+                ->nullable();
+            $table
+                ->integer('birthyear')
+                ->unsigned()
+                ->nullable();
 
             $table->text('description')->nullable();
 

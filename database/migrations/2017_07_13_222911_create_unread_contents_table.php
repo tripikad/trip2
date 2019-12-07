@@ -15,15 +15,32 @@ class CreateUnreadContentsTable extends Migration
     {
         Schema::create('unread_contents', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('content_id')->index()->unsigned();
-            $table->integer('user_id')->index()->unsigned();
-            $table->timestamp('read_at')->index()->nullable();
+            $table
+                ->integer('content_id')
+                ->index()
+                ->unsigned();
+            $table
+                ->integer('user_id')
+                ->index()
+                ->unsigned();
+            $table
+                ->timestamp('read_at')
+                ->index()
+                ->nullable();
 
-            $table->foreign('content_id')->references('id')->on('contents')
-                ->onUpdate('cascade')->onDelete('cascade');
+            $table
+                ->foreign('content_id')
+                ->references('id')
+                ->on('contents')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
 
-            $table->foreign('user_id')->references('id')->on('users')
-                ->onUpdate('cascade')->onDelete('cascade');
+            $table
+                ->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
         });
     }
 

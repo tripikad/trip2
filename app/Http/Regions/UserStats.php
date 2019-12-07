@@ -17,9 +17,7 @@ class UserStats
                             ->with(
                                 'title',
                                 trans('user.show.stat.likes', [
-                                    'likes_count' => $user
-                                        ->vars()
-                                        ->flagCount('good')
+                                    'likes_count' => $user->vars()->flagCount('good')
                                 ])
                             )
                     )
@@ -30,9 +28,7 @@ class UserStats
                             ->with(
                                 'title',
                                 trans('user.show.stat.dislikes', [
-                                    'dislikes_count' => $user
-                                        ->vars()
-                                        ->flagCount('bad')
+                                    'dislikes_count' => $user->vars()->flagCount('bad')
                                 ])
                             )
                     )
@@ -41,8 +37,7 @@ class UserStats
                             ->with(
                                 'title',
                                 trans('user.show.stat.content', [
-                                    'content_count' => $user->vars()
-                                        ->contentCount
+                                    'content_count' => $user->vars()->contentCount
                                 ])
                             )
                             ->with('icon', 'icon-comment')
@@ -52,8 +47,7 @@ class UserStats
                             ->with(
                                 'title',
                                 trans('user.show.stat.comment', [
-                                    'comment_count' => $user->vars()
-                                        ->commentCount
+                                    'comment_count' => $user->vars()->commentCount
                                 ])
                             )
                             ->with('icon', 'icon-comment')

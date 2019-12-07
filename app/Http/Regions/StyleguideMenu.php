@@ -14,15 +14,7 @@ class StyleguideMenu
                         ->is('blue')
                         ->is('smallest')
                         ->with('title', $link['title'])
-                        ->with(
-                            'route',
-                            route(
-                                $link['route'],
-                                array_key_exists('preview', $link)
-                                    ? ['preview']
-                                    : null
-                            )
-                        );
+                        ->with('route', route($link['route'], array_key_exists('preview', $link) ? ['preview'] : null));
                 })
             )
         );

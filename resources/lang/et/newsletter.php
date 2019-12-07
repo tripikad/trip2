@@ -12,7 +12,12 @@ return [
     'button.view.sent' => 'Vaata kirja',
     'button.edit' => 'Muuda kirja',
 
-    'subscribe.info.general' => 'Liitumisel saadetakse sulle kuni 3 korda nädalas uusi lennupakkumisi. Täpsemate pakkumiste reeglite määramiseks <a href="'.route('login.form').'">logi sisse</a> ja tule lennupakkumiste leheküljele tagasi. Kui sul pole veel kasutajat siis esmalt <a href="'.route('register.form').'">registreeru kasutajaks</a>.',
+    'subscribe.info.general' =>
+        'Liitumisel saadetakse sulle kuni 3 korda nädalas uusi lennupakkumisi. Täpsemate pakkumiste reeglite määramiseks <a href="' .
+        route('login.form') .
+        '">logi sisse</a> ja tule lennupakkumiste leheküljele tagasi. Kui sul pole veel kasutajat siis esmalt <a href="' .
+        route('register.form') .
+        '">registreeru kasutajaks</a>.',
 
     'subscribe.flight.heading' => 'Lennupakkumised e-posti',
     'subscribe.field.email' => 'Sinu e-post',
@@ -33,11 +38,17 @@ return [
     'content.modified.successfully' => 'Uudiskirja sisu on edukalt muudetud!',
 
     'field.content' => 'Sisu (HTML, tekst, [[token]] viited)',
-    'field.visible_from' => 'Kuva kuupäevast alates (N: '.Carbon\Carbon::now()->format('d.m.Y').')',
-    'field.visible_to' => 'Ära kuva enam kuupäevast (N: '.Carbon\Carbon::now()->addDays(14)->format('d.m.Y').')',
+    'field.visible_from' => 'Kuva kuupäevast alates (N: ' . Carbon\Carbon::now()->format('d.m.Y') . ')',
+    'field.visible_to' =>
+        'Ära kuva enam kuupäevast (N: ' .
+        Carbon\Carbon::now()
+            ->addDays(14)
+            ->format('d.m.Y') .
+        ')',
 
     'unsubscribed.successfully.title' => 'Oled uudiskirjast lahkunud.',
-    'unsubscribed.successfully.body' => 'Oled seda tüüpi uudiskirjade nimekirjast nüüd kustutatud.<br><br>Kui sind häirivad veel mingit tüüpi uudiskirjad siis neid saad lihtsasti tühistada logides sisse oma kontosse.',
+    'unsubscribed.successfully.body' =>
+        'Oled seda tüüpi uudiskirjade nimekirjast nüüd kustutatud.<br><br>Kui sind häirivad veel mingit tüüpi uudiskirjad siis neid saad lihtsasti tühistada logides sisse oma kontosse.',
 
     'cheatsheet.content' => '
         <b>[[the_flight]]</b> - Kindel lennupakkumine (toimib sihtkoha järgi lennupakkumise uudiskirjaga ainult)<br>
@@ -48,6 +59,5 @@ return [
         
         Võimalikud <b>order_by</b> väärtused: <b>created_at</b> | <b>id</b> | <b>updated_at</b> | <b>pop</b> | <b>created_at,asc</b> | <b>id,asc</b>...<br>
         Võimalikud <b>type</b> väärtused: <b>flight</b> | <b>forum</b> | <b>buysell</b> | <b>expat</b> | <b>travelmate</b> | <b>news</b> | <b>shortnews</b>
-    ',
-
+    '
 ];

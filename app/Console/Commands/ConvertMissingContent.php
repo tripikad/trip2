@@ -22,7 +22,7 @@ class ConvertMissingContent extends ConvertBase
         'trip_forum_buysell' => 'buysell',
         'trip_forum_travelmate' => 'travelmate',
         'trip_image' => 'photo',
-        'trip_offer' => 'forum',
+        'trip_offer' => 'forum'
     ];
 
     public function getNodes($type)
@@ -46,8 +46,8 @@ class ConvertMissingContent extends ConvertBase
 
     public function convertMissingNode($node, $modelname, $type, $route = '')
     {
-        if (! $modelname::find($node->nid)) {
-            $model = new $modelname;
+        if (!$modelname::find($node->nid)) {
+            $model = new $modelname();
 
             $model->id = $node->nid;
             $model->type = $type;
@@ -58,7 +58,7 @@ class ConvertMissingContent extends ConvertBase
             $model->start_at = isset($node->start_at) ? $node->start_at : null;
             $model->end_at = isset($node->end_at) ? $node->end_at : null;
             $model->duration = isset($node->duration) ? $this->cleanAll($node->duration) : null;
-            $model->price = (isset($node->price) && is_int((int) $node->price)) ? $node->price : null;
+            $model->price = isset($node->price) && is_int((int) $node->price) ? $node->price : null;
             $model->slug = $this->getUniqueSlug($this->cleanAll($node->title));
             $model->status = 1;
 
@@ -90,11 +90,13 @@ class ConvertMissingContent extends ConvertBase
 
     public function convertComments($nid, $status = 0)
     {
-        $comments = $this->getComments($nid)->where('status', '=', $status)->get();
+        $comments = $this->getComments($nid)
+            ->where('status', '=', $status)
+            ->get();
 
         foreach ($comments as $comment) {
-            if (! App\Comment::find($comment->cid)) {
-                $model = new \App\Comment;
+            if (!App\Comment::find($comment->cid)) {
+                $model = new \App\Comment();
 
                 $model->id = $comment->cid;
                 $model->user_id = $this->targetUserId->id;
@@ -115,7 +117,7 @@ class ConvertMissingContent extends ConvertBase
     protected function createTargetUser()
     {
         $user = User::where('name', '=', 'Tripi külastaja')->first();
-        if (! $user) {
+        if (!$user) {
             $model = new User();
             $model->name = 'Tripi külastaja';
             $model->password = 'none';
@@ -136,7 +138,7 @@ class ConvertMissingContent extends ConvertBase
     {
         $this->line('Converting missing content');
 
-        if (! $this->targetUserId = $this->createTargetUser()) {
+        if (!($this->targetUserId = $this->createTargetUser())) {
             $this->line('Invalid user');
             exit(0);
         }

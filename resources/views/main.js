@@ -35,11 +35,7 @@ Vue.prototype.$events = events
 
 // Set up global props
 
-const globalProps = JSON.parse(
-    decodeURIComponent(
-        document.querySelector('#globalprops').getAttribute('content')
-    )
-)
+const globalProps = JSON.parse(decodeURIComponent(document.querySelector('#globalprops').getAttribute('content')))
 Vue.prototype.$globalProps = globalProps
 
 // Set up style variables

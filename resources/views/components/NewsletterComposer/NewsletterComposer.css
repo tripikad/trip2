@@ -49,13 +49,11 @@
     width: 100%;
 }
 
-.NewsletterComposer__visibleLeft
-{
+.NewsletterComposer__visibleLeft {
     flex: 1;
 }
 
-.NewsletterComposer__visibleRight
-{
+.NewsletterComposer__visibleRight {
     flex: 1;
 }
 .NewsletterComposer__button {

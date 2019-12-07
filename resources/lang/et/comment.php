@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     'isnew' => 'Uus',
 
     'count' => ':count kommentaar|:count kommentaari',
@@ -25,6 +24,5 @@ return [
 
     'edit.title' => 'Muuda kommentaari',
     'edit.body.title' => 'Kommentaar',
-    'edit.submit.title' => 'Salvesta kommentaar',
-
+    'edit.submit.title' => 'Salvesta kommentaar'
 ];

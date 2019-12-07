@@ -54,14 +54,14 @@ class Newsletter extends Command
                 $users->chunk(750, function ($users_chunk) use ($newsletter, $subscription_ids, &$total_count) {
                     $insert = [];
                     foreach ($users_chunk as &$user) {
-                        if (! in_array($user->id, $subscription_ids)) {
+                        if (!in_array($user->id, $subscription_ids)) {
                             $total_count++;
                             $insert[] = [
                                 'newsletter_type_id' => $newsletter->id,
                                 'user_id' => $user->id,
                                 'active' => 1,
                                 'created_at' => Carbon::now(),
-                                'updated_at' => Carbon::now(),
+                                'updated_at' => Carbon::now()
                             ];
                         }
                     }
@@ -69,7 +69,7 @@ class Newsletter extends Command
                     if (count($insert)) {
                         NewsletterSubscription::insert($insert);
 
-                        $this->info($total_count.' Kasutajat lisatud uudiskirjaga liitujate alla.');
+                        $this->info($total_count . ' Kasutajat lisatud uudiskirjaga liitujate alla.');
                     }
                 });
             }
@@ -79,22 +79,31 @@ class Newsletter extends Command
             $check_active_at = Carbon::createFromFormat('Y-m-d H:i:s', $this->first_active_at);
 
             if ($this->option('check-newsletters')) {
-                $newsletters = NewsletterType::where('active', 1)->with([
-                    'newsletter_visible_content',
-                    'subscriptions',
-                    //'subscriptions.sents',
-                ])->get();
+                $newsletters = NewsletterType::where('active', 1)
+                    ->with([
+                        'newsletter_visible_content',
+                        'subscriptions'
+                        //'subscriptions.sents',
+                    ])
+                    ->get();
 
                 foreach ($newsletters as &$newsletter) {
-                    if ($newsletter->check_user_active_at && $check_active_at->addDays($newsletter->send_days_after)->timestamp <= Carbon::now()->timestamp) {
-                        $this->info('Tegelen mitte aktiivsete kasutaja kontrollimise ja vajadusel uudiskirja ootenimekirja lisamisega.');
+                    if (
+                        $newsletter->check_user_active_at &&
+                        $check_active_at->addDays($newsletter->send_days_after)->timestamp <= Carbon::now()->timestamp
+                    ) {
+                        $this->info(
+                            'Tegelen mitte aktiivsete kasutaja kontrollimise ja vajadusel uudiskirja ootenimekirja lisamisega.'
+                        );
 
                         $newsletter->last_sent_at = Carbon::now();
                         $newsletter->save();
 
                         $this->queueLongTimeAgo($newsletter);
                     } elseif ($newsletter->type == 'flight' && $newsletter->subscriptions->count()) {
-                        $this->info('Tegelen lennupakkumiste kontrollimise ja vajadusel uudiskirja ootenimekirja lisamisega.');
+                        $this->info(
+                            'Tegelen lennupakkumiste kontrollimise ja vajadusel uudiskirja ootenimekirja lisamisega.'
+                        );
 
                         $newsletter->last_sent_at = Carbon::now();
                         $newsletter->save();
@@ -102,20 +111,28 @@ class Newsletter extends Command
                         $this->getDestinations();
 
                         $this->queueFlights($newsletter);
-                    } elseif ($newsletter->type == 'flight_general' &&
-                        (! $newsletter->send_at || ($newsletter->send_at->timestamp <= Carbon::now()->timestamp)) &&
-                        $newsletter->subscriptions->count()) {
-                        $this->info('Tegelen külalistele lennupakkumiste kontrollimise ja vajadusel ootenimirja lisamisega.');
+                    } elseif (
+                        $newsletter->type == 'flight_general' &&
+                        (!$newsletter->send_at || $newsletter->send_at->timestamp <= Carbon::now()->timestamp) &&
+                        $newsletter->subscriptions->count()
+                    ) {
+                        $this->info(
+                            'Tegelen külalistele lennupakkumiste kontrollimise ja vajadusel ootenimirja lisamisega.'
+                        );
 
                         $newsletter->last_sent_at = Carbon::now();
                         $newsletter->send_at = Carbon::now()->addDays($newsletter->send_days_after);
                         $newsletter->save();
 
                         $this->queueNewsletter($newsletter);
-                    } elseif ($newsletter->type == 'weekly' &&
-                        (! $newsletter->send_at || ($newsletter->send_at->timestamp <= Carbon::now()->timestamp)) &&
-                        $newsletter->subscriptions->count()) {
-                        $this->info('Tegelen nädalauudiskirja kontrollimise ja vajadusel uudiskirja ootenimekirja lisamisega.');
+                    } elseif (
+                        $newsletter->type == 'weekly' &&
+                        (!$newsletter->send_at || $newsletter->send_at->timestamp <= Carbon::now()->timestamp) &&
+                        $newsletter->subscriptions->count()
+                    ) {
+                        $this->info(
+                            'Tegelen nädalauudiskirja kontrollimise ja vajadusel uudiskirja ootenimekirja lisamisega.'
+                        );
 
                         $newsletter->last_sent_at = Carbon::now();
                         $newsletter->send_at = Carbon::now()->addDays($newsletter->send_days_after);
@@ -132,18 +149,19 @@ class Newsletter extends Command
                     'user',
                     'subscription',
                     'subscription.user',
-                    'sent.newsletter_type',
-                ])->where('sending', 1)
+                    'sent.newsletter_type'
+                ])
+                    ->where('sending', 1)
                     ->take($this->mails_per_minute)
                     ->orderBy('id', 'desc')
                     ->get();
 
                 // To avoid double mails
                 NewsletterSentSubscriber::whereIn('id', $mail_receivers->pluck('id')->toArray())->update([
-                    'sending' => 0,
+                    'sending' => 0
                 ]);
 
-                if (! is_array($this->destinations)) {
+                if (!is_array($this->destinations)) {
                     $this->destinations = $this->getDestinations(false);
                 }
 
@@ -161,7 +179,10 @@ class Newsletter extends Command
                     if ($mail_receiver->sent) {
                         $body = $mail_receiver->sent->composed_content;
 
-                        if ($mail_receiver->sent->destination_id && isset($destination_names[$mail_receiver->sent->destination_id])) {
+                        if (
+                            $mail_receiver->sent->destination_id &&
+                            isset($destination_names[$mail_receiver->sent->destination_id])
+                        ) {
                             $destination_name = $destination_names[$mail_receiver->sent->destination_id];
                         } else {
                             $destination_name = '';
@@ -192,14 +213,22 @@ class Newsletter extends Command
                                 }
 
                                 if ($mail_receiver->sent->newsletter_type->type == 'flight') {
-                                    $category = 'Lennupakkumine_'.$destination_name;
+                                    $category = 'Lennupakkumine_' . $destination_name;
                                 } else {
                                     $category = $mail_receiver->sent->newsletter_type->type;
                                 }
                             }
 
                             // sha1(subscription.id + subscription.email + subscription.user_id + subscription.created_at)
-                            $unsubscribe_route = route('newsletter.unsubscribe', [sha1($mail_receiver->subscription->id.$mail_receiver->subscription->email.$mail_receiver->subscription->user_id.$mail_receiver->subscription->created_at), $mail_receiver->subscription->id]);
+                            $unsubscribe_route = route('newsletter.unsubscribe', [
+                                sha1(
+                                    $mail_receiver->subscription->id .
+                                        $mail_receiver->subscription->email .
+                                        $mail_receiver->subscription->user_id .
+                                        $mail_receiver->subscription->created_at
+                                ),
+                                $mail_receiver->subscription->id
+                            ]);
                         } elseif ($mail_receiver->user) {
                             $email = $mail_receiver->user->email;
                             $name = $mail_receiver->user->name;
@@ -208,12 +237,14 @@ class Newsletter extends Command
                             $unsubscribe_route = null;
                         }
 
-                        if ($email && $subject && $body/* && $user_id && $unsubscribe_route*/) {
-                            Mail::to($email, $name)->send(new NewsletterMail($body, $subject, $category, $user_id, $unsubscribe_route));
+                        if ($email && $subject && $body /* && $user_id && $unsubscribe_route*/) {
+                            Mail::to($email, $name)->send(
+                                new NewsletterMail($body, $subject, $category, $user_id, $unsubscribe_route)
+                            );
 
                             if ($k == 50 || $receivers_total == $total) {
                                 $k = 0;
-                                $this->line('Sending.. '.$total.'/'.$receivers_total);
+                                $this->line('Sending.. ' . $total . '/' . $receivers_total);
                             }
 
                             // sleep for 500 ms - don't know if necessary but maybe there is spam risk without that
@@ -228,7 +259,13 @@ class Newsletter extends Command
             }
         }
 
-        $this->info('Task lõpetatud praeguseks. Aega kulus kokku: '.$this->time_spent().' sekundit (millest uneaega '.(float) $sleep_time.' sekundit).');
+        $this->info(
+            'Task lõpetatud praeguseks. Aega kulus kokku: ' .
+                $this->time_spent() .
+                ' sekundit (millest uneaega ' .
+                (float) $sleep_time .
+                ' sekundit).'
+        );
     }
 
     protected function time_spent()
@@ -249,7 +286,7 @@ class Newsletter extends Command
             $sent = null;
         }
 
-        if (! $sent) {
+        if (!$sent) {
             $body = '';
 
             foreach ($newsletter->newsletter_visible_content as &$content) {
@@ -259,7 +296,7 @@ class Newsletter extends Command
             $sent = $this->createNewSent([
                 'newsletter_type_id' => $newsletter->id,
                 'started_at' => Carbon::now(),
-                'composed_content' => $body,
+                'composed_content' => $body
             ]);
         }
 
@@ -279,7 +316,7 @@ class Newsletter extends Command
                 'user_id' => $sent->user_id,
                 'sending' => 1,
                 'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ];
 
             if ($chunk_count == $chunk_max || $count_added == $subscriptions_count) {
@@ -290,7 +327,7 @@ class Newsletter extends Command
 
                 if ($count_added == $subscriptions_count || $chunk_rounds == 10) {
                     $chunk_rounds = 0;
-                    $this->line($count_added.' liitujat lisatud kirja saajate ootelisti.');
+                    $this->line($count_added . ' liitujat lisatud kirja saajate ootelisti.');
                 }
 
                 $insert_to_queue = [];
@@ -302,9 +339,19 @@ class Newsletter extends Command
     {
         $users = User::select('id')
             ->where(function ($query) use ($newsletter) {
-                $query->whereNull('active_at')
-                    ->orWhere('active_at', '<=', DB::raw('(NOW() - INTERVAL '.$newsletter->send_days_after.' DAY)'));
-            })->whereRaw('(SELECT COUNT(*) FROM `newsletter_sent_subscribers` WHERE `user_id` = `users`.`id` AND (`newsletter_sent_subscribers`.`created_at` > (NOW() - INTERVAL '.$newsletter->send_days_after.' DAY))) = 0')
+                $query
+                    ->whereNull('active_at')
+                    ->orWhere(
+                        'active_at',
+                        '<=',
+                        DB::raw('(NOW() - INTERVAL ' . $newsletter->send_days_after . ' DAY)')
+                    );
+            })
+            ->whereRaw(
+                '(SELECT COUNT(*) FROM `newsletter_sent_subscribers` WHERE `user_id` = `users`.`id` AND (`newsletter_sent_subscribers`.`created_at` > (NOW() - INTERVAL ' .
+                    $newsletter->send_days_after .
+                    ' DAY))) = 0'
+            )
             ->orderBy('id', 'asc');
 
         $users_count = $users->count();
@@ -321,7 +368,7 @@ class Newsletter extends Command
                 $sent = null;
             }
 
-            if (! $sent) {
+            if (!$sent) {
                 $body = '';
 
                 foreach ($newsletter->newsletter_visible_content as &$content) {
@@ -331,11 +378,13 @@ class Newsletter extends Command
                 $sent = $this->createNewSent([
                     'newsletter_type_id' => $newsletter->id,
                     'started_at' => Carbon::now(),
-                    'composed_content' => $body,
+                    'composed_content' => $body
                 ]);
             }
 
-            $this->info($users_count.' kasutajat pole sisse loginud vähemalt '.$newsletter->send_days_after.' päeva');
+            $this->info(
+                $users_count . ' kasutajat pole sisse loginud vähemalt ' . $newsletter->send_days_after . ' päeva'
+            );
             $count_added = 0;
 
             $chunk_count = 0;
@@ -351,7 +400,7 @@ class Newsletter extends Command
                     'user_id' => $user->id,
                     'sending' => 1,
                     'created_at' => Carbon::now(),
-                    'updated_at' => Carbon::now(),
+                    'updated_at' => Carbon::now()
                 ];
 
                 if ($chunk_count == $chunk_max || $count_added == $users_count) {
@@ -362,7 +411,9 @@ class Newsletter extends Command
 
                     if ($count_added == $users_count || $chunk_rounds == 10) {
                         $chunk_rounds = 0;
-                        $this->line($count_added.' kasutajat lisatud "Pole ammu sind näinud" kirja saajate ootelisti.');
+                        $this->line(
+                            $count_added . ' kasutajat lisatud "Pole ammu sind näinud" kirja saajate ootelisti.'
+                        );
                     }
 
                     $insert_to_queue = [];
@@ -373,12 +424,20 @@ class Newsletter extends Command
 
     protected function queueFlights($newsletter)
     {
-        $destination_ids = $newsletter->subscriptions->pluck('destination_id')->unique()->reject(function ($value, $key) {
-            return ! $value;
-        })->toArray();
-        $price_error = $newsletter->subscriptions->pluck('price_error')->unique()->reject(function ($value, $key) {
-            return ! $value;
-        })->toArray();
+        $destination_ids = $newsletter->subscriptions
+            ->pluck('destination_id')
+            ->unique()
+            ->reject(function ($value, $key) {
+                return !$value;
+            })
+            ->toArray();
+        $price_error = $newsletter->subscriptions
+            ->pluck('price_error')
+            ->unique()
+            ->reject(function ($value, $key) {
+                return !$value;
+            })
+            ->toArray();
 
         $destination_ids_total = count($destination_ids);
         $count_processed = 0;
@@ -402,16 +461,15 @@ class Newsletter extends Command
 
                 $content = Content::where('status', 1)
                     ->join('content_destination', 'content_destination.content_id', '=', 'contents.id')
-                    ->select([
-                        'contents.*',
-                        'content_destination.destination_id',
-                    ])->where('type', 'flight')
+                    ->select(['contents.*', 'content_destination.destination_id'])
+                    ->where('type', 'flight')
                     ->whereDate('created_at', Carbon::today()->format('Y-m-d'));
 
                 if (count($price_error)) {
                     $content = $content->where(function ($query) use ($find_by_destinations) {
-                        $query->whereIn('content_destination.destination_id', $find_by_destinations)
-                            ->orWhereRaw('LOWER(`title`) LIKE \'%'.mb_strtolower('veahind').'%\'');
+                        $query
+                            ->whereIn('content_destination.destination_id', $find_by_destinations)
+                            ->orWhereRaw('LOWER(`title`) LIKE \'%' . mb_strtolower('veahind') . '%\'');
                     });
                 } else {
                     $content = $content->whereIn('content_destination.destination_id', $find_by_destinations);
@@ -428,8 +486,7 @@ class Newsletter extends Command
             $previous_sents = NewsletterSent::where('newsletter_type_id', $newsletter->id)
                 ->where(function ($query) use ($price_error, $destination_ids) {
                     if (count($price_error)) {
-                        $query->whereIn('destination_id', $destination_ids)
-                            ->orWhere('price_error', 1);
+                        $query->whereIn('destination_id', $destination_ids)->orWhere('price_error', 1);
                     } else {
                         $query->whereIn('destination_id', $destination_ids);
                     }
@@ -451,7 +508,7 @@ class Newsletter extends Command
 
             if (count($update_sents)) {
                 NewsletterSent::whereIn('id', $update_sents)->update([
-                    'ended_at' => Carbon::now(),
+                    'ended_at' => Carbon::now()
                 ]);
             }
 
@@ -465,7 +522,10 @@ class Newsletter extends Command
             foreach ($flights as &$flight) {
                 $possible_destinations[] = $flight->destination_id;
                 if (isset($this->parent_destinations[$flight->destination_id])) {
-                    $possible_destinations = array_merge($possible_destinations, $this->parent_destinations[$flight->destination_id]);
+                    $possible_destinations = array_merge(
+                        $possible_destinations,
+                        $this->parent_destinations[$flight->destination_id]
+                    );
                 }
 
                 /* Don't override
@@ -479,11 +539,11 @@ class Newsletter extends Command
 
                 $chunk_count++;
                 $count_processed++;
-                if (! in_array($flight->id, $flight_ids)) {
+                if (!in_array($flight->id, $flight_ids)) {
                     $flight_ids[] = $flight->id;
                 }
 
-                if (! in_array($flight->id, $sent_content_ids)) {
+                if (!in_array($flight->id, $sent_content_ids)) {
                     $flight_body = '';
 
                     foreach ($newsletter->newsletter_visible_content as &$content) {
@@ -497,7 +557,7 @@ class Newsletter extends Command
                         'price_error' => strpos(mb_strtolower($flight->title), 'veahind') !== false ? 1 : 0,
                         'content_id' => $flight->id,
                         'started_at' => Carbon::now(),
-                        'ended_at' => null,
+                        'ended_at' => null
                     ];
                 }
 
@@ -513,8 +573,7 @@ class Newsletter extends Command
             $sents = NewsletterSent::select(['id', 'price_error', 'content_id', 'destination_id'])
                 ->where(function ($query) use ($price_error, $destination_ids) {
                     if (count($price_error)) {
-                        $query->whereIn('destination_id', $destination_ids)
-                            ->orWhere('price_error', 1);
+                        $query->whereIn('destination_id', $destination_ids)->orWhere('price_error', 1);
                     } else {
                         $query->whereIn('destination_id', $destination_ids);
                     }
@@ -536,20 +595,23 @@ class Newsletter extends Command
                 $count_processed++;
 
                 foreach ($sents as &$sent) {
-                    if ($sent->destination_id == $subscription->destination_id || ($sent->price_error == 1 && $subscription->price_error == 1)) {
+                    if (
+                        $sent->destination_id == $subscription->destination_id ||
+                        ($sent->price_error == 1 && $subscription->price_error == 1)
+                    ) {
                         $existing_sent_ids = [];
                         if ($subscription->sents->count()) {
                             $existing_sent_ids = $subscription->sents->pluck('sent_id')->toArray();
                         }
 
-                        if (! in_array($sent->id, $existing_sent_ids)) {
+                        if (!in_array($sent->id, $existing_sent_ids)) {
                             $insert[] = [
                                 'subscription_id' => $subscription->id,
                                 'sent_id' => $sent->id,
                                 'user_id' => $subscription->user_id,
                                 'sending' => 1,
                                 'created_at' => Carbon::now(),
-                                'updated_at' => Carbon::now(),
+                                'updated_at' => Carbon::now()
                             ];
                         }
                     }
@@ -571,7 +633,7 @@ class Newsletter extends Command
     protected function createNewSent($data = [])
     {
         if (count($data)) {
-            $sent = new NewsletterSent;
+            $sent = new NewsletterSent();
 
             foreach ($data as $key => &$value) {
                 $sent->$key = $value;
@@ -604,17 +666,21 @@ class Newsletter extends Command
                 return $subs;
             });
 
-            $this->parent_destinations = Cache::remember('newsletter_parent_destinations', $this->cache_time, function () {
-                $parents = [];
+            $this->parent_destinations = Cache::remember(
+                'newsletter_parent_destinations',
+                $this->cache_time,
+                function () {
+                    $parents = [];
 
-                $destinations_by_id = $this->destinations->keyBy('id');
+                    $destinations_by_id = $this->destinations->keyBy('id');
 
-                foreach ($this->destinations as &$destination) {
-                    $parents[$destination->id] = $this->getParents($destination->id, $destinations_by_id);
+                    foreach ($this->destinations as &$destination) {
+                        $parents[$destination->id] = $this->getParents($destination->id, $destinations_by_id);
+                    }
+
+                    return $parents;
                 }
-
-                return $parents;
-            });
+            );
         }
 
         return $this->destinations;

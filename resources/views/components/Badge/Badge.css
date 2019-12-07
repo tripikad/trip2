@@ -8,16 +8,15 @@
     padding: calc($spacer / 2) calc($spacer / 1.5) calc($spacer / 4) calc($spacer / 1.5);
 }
 
-    .Badge__title {
-        font: $font-text-xs;
-        color: $white;
-    }
+.Badge__title {
+    font: $font-text-xs;
+    color: $white;
+}
 
 .Badge--white {
-     background: $white;
+    background: $white;
 }
 
 .Badge--white .Badge__title {
-     color: $green;
+    color: $green;
 }
-

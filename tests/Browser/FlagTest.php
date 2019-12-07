@@ -14,7 +14,7 @@ class FlagTest extends DuskTestCase
 
         $content = factory(Content::class)->create([
             'user_id' => factory(User::class)->create()->id,
-            'type' => 'forum',
+            'type' => 'forum'
         ]);
 
         $this->browse(function ($browser) use ($regular_user, $content) {

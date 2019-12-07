@@ -38,19 +38,29 @@ class Comment extends Model
     {
         $actions = [];
 
-        if (auth()->user() && auth()->user()->hasRoleOrOwner('admin', $this->user->id)) {
+        if (
+            auth()->user() &&
+            auth()
+                ->user()
+                ->hasRoleOrOwner('admin', $this->user->id)
+        ) {
             $actions['edit'] = [
-               'title' => trans('comment.action.edit.title'),
-               'route' => route('comment.edit', [$this]),
-           ];
+                'title' => trans('comment.action.edit.title'),
+                'route' => route('comment.edit', [$this])
+            ];
         }
 
-        if (auth()->user() && auth()->user()->hasRole('admin')) {
+        if (
+            auth()->user() &&
+            auth()
+                ->user()
+                ->hasRole('admin')
+        ) {
             $actions['status'] = [
-               'title' => trans("comment.action.status.$this->status.title"),
-               'route' => route('comment.status', [$this, (1 - $this->status)]),
-               'method' => 'PUT',
-           ];
+                'title' => trans("comment.action.status.$this->status.title"),
+                'route' => route('comment.status', [$this, 1 - $this->status]),
+                'method' => 'PUT'
+            ];
         }
 
         return $actions;
@@ -79,27 +89,25 @@ class Comment extends Model
         }
 
         return [
-
-          'good' => [
-              'value' => count($this->flags->where('flag_type', 'good')),
-              'flaggable' => Auth::check(),
-              'flaggable_type' => 'comment',
-              'flaggable_id' => $this->id,
-              'flag_type' => 'good',
-              'return' => '#comment-'.$this->id,
-              'active' => $good_active,
-          ],
-          'bad' => [
-              'value' => count($this->flags->where('flag_type', 'bad')),
-              'flaggable' => Auth::check(),
-              'flaggable_type' => 'comment',
-              'flaggable_id' => $this->id,
-              'flag_type' => 'bad',
-              'return' => '#comment-'.$this->id,
-              'active' => $bad_active,
-          ],
-
-       ];
+            'good' => [
+                'value' => count($this->flags->where('flag_type', 'good')),
+                'flaggable' => Auth::check(),
+                'flaggable_type' => 'comment',
+                'flaggable_id' => $this->id,
+                'flag_type' => 'good',
+                'return' => '#comment-' . $this->id,
+                'active' => $good_active
+            ],
+            'bad' => [
+                'value' => count($this->flags->where('flag_type', 'bad')),
+                'flaggable' => Auth::check(),
+                'flaggable_type' => 'comment',
+                'flaggable_id' => $this->id,
+                'flag_type' => 'bad',
+                'return' => '#comment-' . $this->id,
+                'active' => $bad_active
+            ]
+        ];
     }
 
     public function vars()

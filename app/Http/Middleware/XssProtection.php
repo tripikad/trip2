@@ -8,7 +8,7 @@ class XssProtection
 {
     public function handle($request, Closure $next)
     {
-        if (! in_array(strtolower($request->method()), ['put', 'post', 'patch'])) {
+        if (!in_array(strtolower($request->method()), ['put', 'post', 'patch'])) {
             return $next($request);
         }
 
@@ -20,7 +20,7 @@ class XssProtection
 
         $request->merge($input);
 
-        if ($request->has('body') && ! is_array($request->input('body'))) {
+        if ($request->has('body') && !is_array($request->input('body'))) {
             $user = auth()->user();
             $role = false;
             if ($user) {
@@ -29,9 +29,9 @@ class XssProtection
                 }
             }
 
-            if (! $role) {
+            if (!$role) {
                 $request->merge(['body' => strip_tags($request->body, config('site.allowedtags'))]);
-            } elseif (! preg_match('#('.implode('|', config('site.allowAllTags')).')#', $request->path())) {
+            } elseif (!preg_match('#(' . implode('|', config('site.allowAllTags')) . ')#', $request->path())) {
                 $request->merge(['body' => strip_tags($request->body, config('site.allowedtags_flight_news'))]);
             } else {
                 $request->merge(['body' => trim(preg_replace('/\s\s+/', ' ', str_replace("\n", '', $request->body)))]);

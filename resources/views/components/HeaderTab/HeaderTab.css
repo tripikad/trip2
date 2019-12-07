@@ -8,14 +8,14 @@
     color: $white-hover;
 }
 
-    .HeaderTab__count {
-        border-radius: calc($spacer * 4);
-        color: $white;
-        background: $gray;
-        padding: 4px 9px 1px;
-        display: inline-block;
-        margin-left: calc($spacer / 4);
-    }
+.HeaderTab__count {
+    border-radius: calc($spacer * 4);
+    color: $white;
+    background: $gray;
+    padding: 4px 9px 1px;
+    display: inline-block;
+    margin-left: calc($spacer / 4);
+}
 
 .HeaderTab:hover,
 .HeaderTab__active {
@@ -29,8 +29,8 @@
     background: $white-hover;
 }
 
-    .HeaderTab:hover .HeaderTab__count,
-    .HeaderTab__active .HeaderTab__count {
-        background: $gray-light;
-        color: $gray-dark;
-    }
+.HeaderTab:hover .HeaderTab__count,
+.HeaderTab__active .HeaderTab__count {
+    background: $gray-light;
+    color: $gray-dark;
+}

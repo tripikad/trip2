@@ -1,17 +1,16 @@
 <?php
 
 return [
-
     'headers' => [
-        'default' => 60 * 10,
+        'default' => 60 * 10
     ],
 
     'destination' => [
-        'getPopular' => 30, // minutes
+        'getPopular' => 30 // minutes
     ],
 
     'feed' => [
-        'atom' => 60 * 10,
+        'atom' => 60 * 10
     ],
 
     /*
@@ -39,40 +38,40 @@ return [
     */
 
     'stores' => [
-
         'apc' => [
-            'driver' => 'apc',
+            'driver' => 'apc'
         ],
 
         'array' => [
-            'driver' => 'array',
+            'driver' => 'array'
         ],
 
         'database' => [
             'driver' => 'database',
-            'table'  => 'cache',
-            'connection' => null,
+            'table' => 'cache',
+            'connection' => null
         ],
 
         'file' => [
             'driver' => 'file',
-            'path'   => storage_path('framework/cache'),
+            'path' => storage_path('framework/cache')
         ],
 
         'memcached' => [
-            'driver'  => 'memcached',
+            'driver' => 'memcached',
             'servers' => [
                 [
-                    'host' => '127.0.0.1', 'port' => 11211, 'weight' => 100,
-                ],
-            ],
+                    'host' => '127.0.0.1',
+                    'port' => 11211,
+                    'weight' => 100
+                ]
+            ]
         ],
 
         'redis' => [
             'driver' => 'redis',
-            'connection' => 'default',
-        ],
-
+            'connection' => 'default'
+        ]
     ],
 
     /*
@@ -86,6 +85,5 @@ return [
     |
     */
 
-    'prefix' => '',
-
+    'prefix' => ''
 ];

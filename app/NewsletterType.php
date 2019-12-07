@@ -34,12 +34,13 @@ class NewsletterType extends Model
     {
         $date_today = Carbon::now()->format('Y-m-d');
 
-        return $this->hasMany('App\NewsletterLetterContent', 'newsletter_type_id', 'id')->where(function ($query) use ($date_today) {
-            $query->whereNull('visible_from')
-                ->orWhereDate('visible_from', '<=', $date_today);
-        })->where(function ($query) use ($date_today) {
-            $query->whereNull('visible_to')
-                ->orWhereDate('visible_to', '>=', $date_today);
-        })->orderBy('sort_order', 'asc');
+        return $this->hasMany('App\NewsletterLetterContent', 'newsletter_type_id', 'id')
+            ->where(function ($query) use ($date_today) {
+                $query->whereNull('visible_from')->orWhereDate('visible_from', '<=', $date_today);
+            })
+            ->where(function ($query) use ($date_today) {
+                $query->whereNull('visible_to')->orWhereDate('visible_to', '>=', $date_today);
+            })
+            ->orderBy('sort_order', 'asc');
     }
 }

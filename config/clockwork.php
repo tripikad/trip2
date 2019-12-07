@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Enable Clockwork
@@ -67,7 +66,7 @@ return [
     'storage_files_path' => env('CLOCKWORK_STORAGE_FILES_PATH', storage_path('clockwork')),
 
     'storage_sql_database' => env('CLOCKWORK_STORAGE_SQL_DATABASE', storage_path('clockwork.sqlite')),
-    'storage_sql_table'    => env('CLOCKWORK_STORAGE_SQL_TABLE', 'clockwork'),
+    'storage_sql_table' => env('CLOCKWORK_STORAGE_SQL_TABLE', 'clockwork'),
 
     /*
     |--------------------------------------------------------------------------
@@ -115,7 +114,7 @@ return [
     'filter' => [
         'cacheQueries', // collecting cache queries in cache-heavy might have a negative performance impact and use a lot of disk space
         'routes', // collecting routes data on every request might use a lot of disk space
-        'viewsData', // collecting views data, including all variables passed to the view on every request might use a lot of disk space
+        'viewsData' // collecting views data, including all variables passed to the view on every request might use a lot of disk space
     ],
 
     /*
@@ -130,7 +129,7 @@ return [
 
     'filter_uris' => [
         '/__clockwork/.*', // disable collecting data for clockwork-web assets
-        '/horizon/.*', // disable collecting data for Laravel Horizon requests
+        '/horizon/.*' // disable collecting data for Laravel Horizon requests
     ],
 
     /*
@@ -161,8 +160,7 @@ return [
     |
     */
 
-    'ignored_events' => [
-    ],
+    'ignored_events' => [],
 
     /*
     |--------------------------------------------------------------------------
@@ -207,6 +205,5 @@ return [
     |
     */
 
-    'server_timing' => env('CLOCKWORK_SERVER_TIMING', 10),
-
+    'server_timing' => env('CLOCKWORK_SERVER_TIMING', 10)
 ];

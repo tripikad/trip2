@@ -1,5 +1,5 @@
 <template>
-    <div class="FormSelectMultiple" :class="{'FormSelect--error': isError, [isclasses]: true}">
+    <div class="FormSelectMultiple" :class="{ 'FormSelect--error': isError, [isclasses]: true }">
         <label v-if="title" :for="name" class="FormSelect__label">{{ title }}</label>
 
         <component

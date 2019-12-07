@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     1 => [
         'type' => 'continent',
         'english_name' => 'Euroopa',
@@ -9496,6 +9495,5 @@ return [
         'lat' => 42.50606,
         'lon' => 27.46781,
         'calling_code' => '+93'
-    ],
-
+    ]
 ];

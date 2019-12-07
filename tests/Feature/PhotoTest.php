@@ -19,7 +19,7 @@ class PhotoTest extends BrowserKitTestCase
             ->visit('reisipildid')
             ->click(trans('content.photo.create.title'))
             ->seePageIs('photo/create')
-            ->attach(storage_path().'/tests/test.jpg', 'file')
+            ->attach(storage_path() . '/tests/test.jpg', 'file')
             ->type('Hello photo title', 'title')
             ->press(trans('content.create.submit.title'))
             ->seePageIs('reisipildid')
@@ -27,7 +27,7 @@ class PhotoTest extends BrowserKitTestCase
                 'user_id' => $regular_user_uploading_photo->id,
                 'title' => 'Hello photo title',
                 'type' => 'photo',
-                'status' => 1,
+                'status' => 1
             ]);
 
         $photo = Content::whereTitle('Hello photo title')->first();
@@ -35,7 +35,7 @@ class PhotoTest extends BrowserKitTestCase
 
         // Check original file exists and clean up
 
-        $filepath = config('imagepresets.original.path').$filename;
+        $filepath = config('imagepresets.original.path') . $filename;
 
         $this->assertTrue(file_exists($filepath));
         unlink($filepath);
@@ -43,7 +43,7 @@ class PhotoTest extends BrowserKitTestCase
         // Check thumbnails exist and clean up
 
         foreach (['large', 'medium', 'small', 'small_square', 'xsmall_square'] as $preset) {
-            $filepath = config("imagepresets.presets.$preset.path").$filename;
+            $filepath = config("imagepresets.presets.$preset.path") . $filename;
             $this->assertTrue(file_exists($filepath));
             unlink($filepath);
         }

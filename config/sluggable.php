@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
      * What attributes do we use to build the slug?
      * This can be a single field, like "name" which will build a slug from:
@@ -134,7 +133,7 @@ return [
         'shortnews' => 'luhiuudised',
         'photo' => 'reisipildid',
         'internal' => 'toimetus',
-        'sponsored' => 'toimetaja-valik',
+        'sponsored' => 'toimetaja-valik'
     ],
 
     'staticContentMapping' => [
@@ -142,7 +141,6 @@ return [
         972 => 'kontakt',
         22125 => 'reklaam',
         97203 => 'mis-on-veahind',
-        25151 => 'kasutustingimused',
-    ],
-
+        25151 => 'kasutustingimused'
+    ]
 ];

@@ -14,7 +14,7 @@ class AuthTest extends BrowserKitTestCase
 
     public function test_user_can_register_confirm_and_login()
     {
-        $user = 'test_user_'.date('Ymd');
+        $user = 'test_user_' . date('Ymd');
 
         Honeypot::disable();
 
@@ -48,7 +48,7 @@ class AuthTest extends BrowserKitTestCase
             ->seeInDatabase('users', [
                 'name' => $user,
                 'verified' => 1,
-                'registration_token' => null,
+                'registration_token' => null
             ])
             ->seePageIs('login');
         //->see(trans('auth.register.confirmed.info')); // FIXME
@@ -121,7 +121,7 @@ class AuthTest extends BrowserKitTestCase
     {
         $token = User::whereName($name)->first()->registration_token;
 
-        return '/register/confirm/'.$token;
+        return '/register/confirm/' . $token;
     }
 
     public function getResetToken($email)
@@ -130,8 +130,7 @@ class AuthTest extends BrowserKitTestCase
             ->whereEmail($email)
             ->orderBy('created_at', 'desc')
             ->take(1)
-            ->first()
-            ->token;
+            ->first()->token;
 
         return $token;
     }

@@ -48,17 +48,27 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapWebRoutes()
     {
-        Route::group([
-            'middleware' => 'web',
-            'namespace' => $this->namespace,
-        ], function ($router) {
-            $router->pattern('id', '[0-9]+');
-            $router->pattern('id2', '[0-9]+');
-            $router->pattern('type', '('.implode('|', config('content.types')).')');
-            $router->pattern('social', '('.collect(config('utils.share'))->keys()->implode('|').')');
+        Route::group(
+            [
+                'middleware' => 'web',
+                'namespace' => $this->namespace
+            ],
+            function ($router) {
+                $router->pattern('id', '[0-9]+');
+                $router->pattern('id2', '[0-9]+');
+                $router->pattern('type', '(' . implode('|', config('content.types')) . ')');
+                $router->pattern(
+                    'social',
+                    '(' .
+                        collect(config('utils.share'))
+                            ->keys()
+                            ->implode('|') .
+                        ')'
+                );
 
-            require base_path('routes/web.php');
-        });
+                require base_path('routes/web.php');
+            }
+        );
     }
 
     /**
@@ -70,12 +80,15 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapApiRoutes()
     {
-        Route::group([
-            'middleware' => 'api',
-            'namespace' => $this->namespace,
-            'prefix' => 'api',
-        ], function ($router) {
-            require base_path('routes/api.php');
-        });
+        Route::group(
+            [
+                'middleware' => 'api',
+                'namespace' => $this->namespace,
+                'prefix' => 'api'
+            ],
+            function ($router) {
+                require base_path('routes/api.php');
+            }
+        );
     }
 }

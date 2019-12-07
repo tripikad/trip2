@@ -6,10 +6,10 @@
     justify-content: center;
 }
 
-    .AuthTab__title {
-        color: $blue;
-        font: $font-heading-md;
-    }
+.AuthTab__title {
+    color: $blue;
+    font: $font-heading-md;
+}
 
 .AuthTab--facebook {
     background: $facebook;

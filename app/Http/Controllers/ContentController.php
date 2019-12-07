@@ -30,9 +30,12 @@ class ContentController extends Controller
             if (request()->ajax()) {
                 return new JsonResponse(trans("content.action.status.$status.info", ['title' => $content->title]));
             } else {
-                return back()->with('info', trans("content.action.status.$status.info", [
-                    'title' => $content->title,
-                ]));
+                return back()->with(
+                    'info',
+                    trans("content.action.status.$status.info", [
+                        'title' => $content->title
+                    ])
+                );
             }
         }
 

@@ -29,10 +29,7 @@ class PhotoRow
                     ->with('edit_status', true)
                     ->with('photo_id', $photo->id)
                     ->with('status', $photo->status)
-                    ->with(
-                        'button_title',
-                        trans('content.action.status.1.title')
-                    );
+                    ->with('button_title', trans('content.action.status.1.title'));
             }
 
             return $component;
@@ -40,14 +37,7 @@ class PhotoRow
 
         if ($content->count() && $content->count() < 9) {
             $content = $content->merge(
-                array_fill(
-                    0,
-                    9 - $content->count(),
-                    component('PhotoCard')->with(
-                        'small',
-                        '/photos/image_none.svg'
-                    )
-                )
+                array_fill(0, 9 - $content->count(), component('PhotoCard')->with('small', '/photos/image_none.svg'))
             );
         }
 

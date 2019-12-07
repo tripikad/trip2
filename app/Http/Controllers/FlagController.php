@@ -14,16 +14,16 @@ class FlagController extends Controller
         $flags = [
             'content' => [
                 'flag_types' => ['bad', 'good'],
-                'controller' => 'App\Content',
+                'controller' => 'App\Content'
             ],
             'comment' => [
                 'flag_types' => ['bad', 'good'],
-                'controller' => 'App\Comment',
+                'controller' => 'App\Comment'
             ],
             'destination' => [
                 'flag_types' => ['havebeen', 'wantstogo'],
-                'controller' => 'App\Destination',
-            ],
+                'controller' => 'App\Destination'
+            ]
         ];
 
         if (isset($flags[$flaggable_type]) && count($flags[$flaggable_type])) {
@@ -35,23 +35,27 @@ class FlagController extends Controller
                     $fields = [
                         'flaggable_type' => $typeMap,
                         'flaggable_id' => $flaggable_id,
-                        'flag_type' => $flag_type,
+                        'flag_type' => $flag_type
                     ];
 
-                    $flag = Auth::user()->flags()->where($fields);
+                    $flag = Auth::user()
+                        ->flags()
+                        ->where($fields);
 
                     if (count($flag->get())) {
                         $flag->delete();
                     } else {
-                        Auth::user()->flags()->create($fields);
+                        Auth::user()
+                            ->flags()
+                            ->create($fields);
 
                         Log::info('Content has been flagged', [
-                            'user' =>  Auth::user()->name,
-                            'data' =>  [
+                            'user' => Auth::user()->name,
+                            'data' => [
                                 'type' => $flaggable_type,
                                 'id' => $flaggable_id,
-                                'flagtype' => $flag_type,
-                            ],
+                                'flagtype' => $flag_type
+                            ]
                         ]);
                     }
                 }
@@ -59,13 +63,16 @@ class FlagController extends Controller
         }
 
         if (Request::ajax()) {
-            if (($flaggable_type == 'content' || $flaggable_type == 'comment')
-                && in_array($flag_type, $flags[$flaggable_type]['flag_types'])) {
-                return $flags[$flaggable_type]['controller']::find($flaggable_id)
+            if (
+                ($flaggable_type == 'content' || $flaggable_type == 'comment') &&
+                in_array($flag_type, $flags[$flaggable_type]['flag_types'])
+            ) {
+                return $flags[$flaggable_type]['controller']
+                    ::find($flaggable_id)
                     ->flags()
                     ->where([
                         'flaggable_type' => $flags[$flaggable_type]['controller'],
-                        'flag_type' => $flag_type,
+                        'flag_type' => $flag_type
                     ])
                     ->count();
             } else {

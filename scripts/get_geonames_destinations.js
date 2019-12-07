@@ -67,9 +67,7 @@ var continents = destinations
     })
 
 var countries = destinations
-    .filter(country =>
-        continents.find(continent => continent.id === country.parent_id)
-    )
+    .filter(country => continents.find(continent => continent.id === country.parent_id))
     .map(c => {
         c.type = 'country'
         return c
@@ -100,16 +98,14 @@ async.each(
         // Query each destination from Geonames API by its name or Geoname ID
 
         var url = !!id
-            ? 'http://api.geonames.org/getJSON?username=kristjanjansen&geonameId=' +
-              id.geonameId
+            ? 'http://api.geonames.org/getJSON?username=kristjanjansen&geonameId=' + id.geonameId
             : 'http://api.geonames.org/searchJSON?formatted=true&q=' +
               encodeURIComponent(city.name) +
               '&maxRows=1&username=kristjanjansen&style=full&lang=et'
 
         request({ url, json: true }, (err, res, body) => {
             if (body) {
-                var data =
-                    body.geonames && body.geonames[0] ? body.geonames[0] : body
+                var data = body.geonames && body.geonames[0] ? body.geonames[0] : body
 
                 citiesData.push({
                     type: city.type,

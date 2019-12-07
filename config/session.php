@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Default Session Driver
@@ -161,6 +160,5 @@ return [
     |
     */
 
-    'http_only' => true,
-
+    'http_only' => true
 ];

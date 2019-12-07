@@ -24,11 +24,7 @@ class FontsController extends Controller
     {
         return collect(styles())
             ->filter(function ($value, $key) {
-                return starts_with($key, [
-                    'font-text',
-                    'font-heading',
-                    'font-code'
-                ]);
+                return starts_with($key, ['font-text', 'font-heading', 'font-code']);
             })
             ->map(function ($value, $key) {
                 return component('StyleFont')

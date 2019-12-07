@@ -24,15 +24,13 @@ class ContentVars
 
         $message = '%s does not respond to the "%s" property or method.';
 
-        throw new Exception(
-            sprintf($message, static::class, $property)
-        );
+        throw new Exception(sprintf($message, static::class, $property));
     }
 
     public function title()
     {
         if ($this->content->price) {
-            return $this->content->title.' '.$this->content->price.'€';
+            return $this->content->title . ' ' . $this->content->price . '€';
         }
 
         return $this->content->title;
@@ -72,7 +70,7 @@ class ContentVars
     {
         $user = auth()->user();
 
-        $table_name = with(new Activity)->getTable();
+        $table_name = with(new Activity())->getTable();
         $ip = request()->ip();
 
         if (mb_strlen($ip) == 0) {
@@ -95,12 +93,18 @@ class ContentVars
         $created_at = DB::getPdo()->quote(Carbon::now()->format('Y-m-d H:i:s'));
         $updated_at = DB::getPdo()->quote(Carbon::now()->format('Y-m-d H:i:s'));
 
-        DB::select("INSERT INTO `$table_name` (`ip`, `activity_id`, `activity_type`, `type`, `value`, `user_id`, `created_at`, `updated_at`) 
-        VALUES ($ip, $activity_id, $activity_type, $type, $value, ".($user_id ?? 'null').", $created_at, $updated_at) 
+        DB::select(
+            "INSERT INTO `$table_name` (`ip`, `activity_id`, `activity_type`, `type`, `value`, `user_id`, `created_at`, `updated_at`) 
+        VALUES ($ip, $activity_id, $activity_type, $type, $value, " .
+                ($user_id ?? 'null') .
+                ", $created_at, $updated_at) 
         ON DUPLICATE KEY UPDATE 
         `value`=`value` + 1,
-        ".($user_id ? '`user_id`=VALUES(`user_id`), ' : '').'
-        `updated_at`=VALUES(`updated_at`)');
+        " .
+                ($user_id ? '`user_id`=VALUES(`user_id`), ' : '') .
+                '
+        `updated_at`=VALUES(`updated_at`)'
+        );
     }
 
     public function update_content_read()
@@ -108,10 +112,12 @@ class ContentVars
         $user = auth()->user();
 
         if ($user) {
-            $unreadContent = UnreadContent::where('content_id', $this->content->id)->where('user_id', $user->id)->first();
+            $unreadContent = UnreadContent::where('content_id', $this->content->id)
+                ->where('user_id', $user->id)
+                ->first();
 
-            if (! $unreadContent) {
-                $unreadContent = new UnreadContent;
+            if (!$unreadContent) {
+                $unreadContent = new UnreadContent();
                 $unreadContent->content_id = $this->content->id;
                 $unreadContent->user_id = $user->id;
             }
@@ -123,7 +129,7 @@ class ContentVars
 
     public function isNew()
     {
-        if (! $this->unreadData) {
+        if (!$this->unreadData) {
             $this->unreadData = UnreadContent::getUnreadContent($this->content);
         }
 
@@ -141,7 +147,7 @@ class ContentVars
 
     public function firstUnreadCommentId()
     {
-        if (! $this->unreadData) {
+        if (!$this->unreadData) {
             $this->unreadData = UnreadContent::getUnreadContent($this->content);
         }
 
@@ -152,7 +158,7 @@ class ContentVars
 
     public function unreadCommentCount()
     {
-        if (! $this->unreadData) {
+        if (!$this->unreadData) {
             $this->unreadData = UnreadContent::getUnreadContent($this->content);
         }
 

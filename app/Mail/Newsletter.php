@@ -32,21 +32,17 @@ class Newsletter extends Mailable
      */
     public function build()
     {
-        $this->subject($this->heading)
-            ->markdown('email.newsletter.newsletter');
+        $this->subject($this->heading)->markdown('email.newsletter.newsletter');
 
         $header = [
-            'category' => [
-                $this->category,
-            ],
+            'category' => [$this->category],
             'unique_args' => [
-                'user_id' => (string) $this->user_id,
-            ],
+                'user_id' => (string) $this->user_id
+            ]
         ];
 
         $this->withSwiftMessage(function ($message) use ($header) {
-            $message->getHeaders()
-                ->addTextHeader('X-SMTPAPI', format_smtp_header($header));
+            $message->getHeaders()->addTextHeader('X-SMTPAPI', format_smtp_header($header));
         });
     }
 }

@@ -12,11 +12,7 @@ class RedirectController extends Controller
     public function redirectNode($node_id)
     {
         if ($content = Content::find($node_id)) {
-            return redirect()
-                ->route(
-                    $content->type.'.show', [
-                    $content->slug,
-                ], 301);
+            return redirect()->route($content->type . '.show', [$content->slug], 301);
         }
 
         abort(404);
@@ -25,17 +21,13 @@ class RedirectController extends Controller
     public function redirectContent($path)
     {
         $alias = \DB::table('aliases')
-            ->wherePath('content/'.$path)
+            ->wherePath('content/' . $path)
             ->first();
 
         if ($alias) {
             $content = Content::find($alias->aliasable_id);
 
-            return redirect()
-                ->route(
-                    $content->type.'.show', [
-                    $content->slug,
-                ], 301);
+            return redirect()->route($content->type . '.show', [$content->slug], 301);
         }
 
         abort(404);
@@ -44,7 +36,6 @@ class RedirectController extends Controller
     public function redirectAlias($part1, $part2 = '')
     {
         $pathMap = [
-
             'content/mis-on-veahind.html' => 'mis-on-veahind',
             'kasutustingimused' => 'kasutustingimused',
             'reklaam' => 'reklaam',
@@ -77,11 +68,10 @@ class RedirectController extends Controller
             'sein/reisipakkumised' => '/',
             'sein/turg' => '/',
 
-            'sein' => '/',
-
+            'sein' => '/'
         ];
 
-        $path = $part2 ? $part1.'/'.$part2 : $part1;
+        $path = $part2 ? $part1 . '/' . $part2 : $part1;
 
         if (isset($pathMap[$path])) {
             return redirect($pathMap[$path], 301);
@@ -93,36 +83,36 @@ class RedirectController extends Controller
     public function redirectTaxonomy($tid)
     {
         $alias = \DB::table('aliases')
-            ->wherePath('taxonomy/term/'.$tid)
+            ->wherePath('taxonomy/term/' . $tid)
             ->first();
 
         $tid = $alias ? $alias->aliasable_id : $tid;
 
         if ($destination = Destination::find($tid)) {
-            return redirect()->route(
-                'destination.showSlug', [
-                    $destination->slug,
-                ], 301);
+            return redirect()->route('destination.showSlug', [$destination->slug], 301);
         }
 
         if ($topic = Topic::find($tid)) {
             return redirect()->route(
-                'forum.index', [
-                    'topic' => $topic,
-                ], 301);
+                'forum.index',
+                [
+                    'topic' => $topic
+                ],
+                301
+            );
         }
 
         if ($carrier = Carrier::find($tid)) {
             return redirect()->route(
-                'flight.index', [
-                    'carrier' => $carrier,
-                ], 301);
+                'flight.index',
+                [
+                    'carrier' => $carrier
+                ],
+                301
+            );
         }
 
-        return redirect()->route(
-            'content.index', [
-                'forum',
-            ], 301);
+        return redirect()->route('content.index', ['forum'], 301);
     }
 
     public function redirectTaxonomyBlurb($blurb, $tid)
@@ -133,16 +123,13 @@ class RedirectController extends Controller
     public function redirectDestination($title)
     {
         $alias = \DB::table('aliases')
-            ->wherePath('sihtkoht/'.$title)
+            ->wherePath('sihtkoht/' . $title)
             ->first();
 
         if ($alias) {
             $destination = Destination::find($alias->aliasable_id);
 
-            return redirect()->route(
-                'destination.showSlug', [
-                    $destination->slug,
-                ], 301);
+            return redirect()->route('destination.showSlug', [$destination->slug], 301);
         }
 
         abort(404);
@@ -172,17 +159,17 @@ class RedirectController extends Controller
 
         if ($alias) {
             if ($destination = Destination::find($alias->aliasable_id)) {
-                return redirect()->route(
-                    'destination.showSlug', [
-                        $destination->slug,
-                    ], 301);
+                return redirect()->route('destination.showSlug', [$destination->slug], 301);
             }
 
             if ($topic = Topic::find($alias->aliasable_id)) {
                 return redirect()->route(
-                    'forum.index', [
-                        'topic' => $topic,
-                    ], 301);
+                    'forum.index',
+                    [
+                        'topic' => $topic
+                    ],
+                    301
+                );
             }
 
             return redirect()->route('forum.index', 301);

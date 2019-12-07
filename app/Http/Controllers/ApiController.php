@@ -10,12 +10,7 @@ class ApiController extends Controller
     public function destinations()
     {
         $data = Destination::select('id', 'parent_id', 'name')->get();
-        return response()->json(
-            $data,
-            200,
-            [],
-            JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT
-        );
+        return response()->json($data, 200, [], JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
     }
 
     // Exposes our destinations metadata via API

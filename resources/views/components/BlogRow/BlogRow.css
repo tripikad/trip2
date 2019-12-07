@@ -5,13 +5,13 @@
     text-align: center ?if $mobile;
 }
 
-    .BlogRow__user {
-        margin-right: $margin-sm;
-        margin-bottom: $margin-sm ?if $mobile;
-    }
+.BlogRow__user {
+    margin-right: $margin-sm;
+    margin-bottom: $margin-sm ?if $mobile;
+}
 
-    .BlogRow__title {
-        font: $font-heading-lg;
-        color: $gray-dark;
-        margin-bottom: $margin-sm ?if $mobile;
-    }
+.BlogRow__title {
+    font: $font-heading-lg;
+    color: $gray-dark;
+    margin-bottom: $margin-sm ?if $mobile;
+}

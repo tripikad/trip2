@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     // General
 
     'post.view' => 'loetud :number kord',
@@ -34,7 +33,8 @@ return [
 
     'action.message.send' => 'Saada sõnum',
 
-    'action.more.about.text' => 'Trip.ee on reisihuviliste kogukond, keda ühendab reisipisik ning huvi kaugete maade ja kultuuride vastu.',
+    'action.more.about.text' =>
+        'Trip.ee on reisihuviliste kogukond, keda ühendab reisipisik ning huvi kaugete maade ja kultuuride vastu.',
 
     'action.register' => 'Liitu Trip.ee-ga',
     'action.more.about' => 'Loe, mis on Trip.ee',
@@ -64,7 +64,8 @@ return [
     'edit.submit.title' => 'Uuenda',
     'edit.submitting.title' => 'Uuendan...',
     'edit.notes.heading' => 'Hea teada',
-    'edit.notes.body' => 'Ole hea ja uuri enne postitamist Trip.ee otsinguga juba olemasolevaid teemasid ning palun pane postitusele selle sisu avav pealkiri (mitte piirdudes koha või riigi nimega).</p>',
+    'edit.notes.body' =>
+        'Ole hea ja uuri enne postitamist Trip.ee otsinguga juba olemasolevaid teemasid ning palun pane postitusele selle sisu avav pealkiri (mitte piirdudes koha või riigi nimega).</p>',
 
     'misc.edit.notes.heading' => 'Hea teada',
     'misc.edit.notes.body' => '<p>Siia postita mõtteid muudel teemadel</p>',
@@ -73,7 +74,8 @@ return [
     'edit.field.topics.placeholder' => 'Vali teemad',
 
     'store.status.1.info' => ':title on edukalt lisatud.',
-    'store.status.0.info' => ':title on lisatud, kuid teistele peidetud. Vajuta lingile "Avalikusta", et näidata seda teistele.',
+    'store.status.0.info' =>
+        ':title on lisatud, kuid teistele peidetud. Vajuta lingile "Avalikusta", et näidata seda teistele.',
 
     'store.info' => ':title on lisatud.',
     'update.info' => ':title on uuendatud.',
@@ -141,7 +143,8 @@ return [
 
     'flight.index.title' => 'Lennupakkumised',
     'flight.index.field.price' => 'Alates :price:symbol',
-    'flight.index.about.title' => 'Hoiame headel pakkumistel igapäevaselt silma peal ning jagame neid kõigi huvilistega.',
+    'flight.index.about.title' =>
+        'Hoiame headel pakkumistel igapäevaselt silma peal ning jagame neid kõigi huvilistega.',
     'flight.index.about.text' => 'Pakkumised võivad aeguda juba paari päevaga.',
     'flight.index.from' => 'al',
 
@@ -218,10 +221,12 @@ return [
 
     'travelmate.filter.text' => 'Kui ei leia sobivat kaaslast, siis ehk aitab sind filter.',
 
-    'travelmate.description.title' => 'Soovid kaaslaseks eksperti oma esimesele matkareisile? Lihtsalt seltsilist palmi alla?',
+    'travelmate.description.title' =>
+        'Soovid kaaslaseks eksperti oma esimesele matkareisile? Lihtsalt seltsilist palmi alla?',
     'travelmate.description.text' => 'Siit leiad omale sobiva reisikaaslase.',
 
-    'travelmate.about.text' => 'Trip.ee on reisihuviliste kogukond, keda ühendab reisipisik ning huvi kaugete maade ja kultuuride vastu',
+    'travelmate.about.text' =>
+        'Trip.ee on reisihuviliste kogukond, keda ühendab reisipisik ning huvi kaugete maade ja kultuuride vastu',
 
     'travelmate.no.results' => 'Hetkel pole ühtegi aktiivset reisikaaslase otsijat.',
 
@@ -402,6 +407,5 @@ return [
 
     'destionation.edit.title' => 'Muuda sihtkohta',
     'destination.edit.description' => 'Kirjeldus',
-    'destination.edit.user' => 'Kirjelduse autori kasutajanimi',
-
+    'destination.edit.user' => 'Kirjelduse autori kasutajanimi'
 ];

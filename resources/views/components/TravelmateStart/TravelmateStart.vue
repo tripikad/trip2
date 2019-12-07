@@ -1,22 +1,19 @@
 <template>
-
     <div class="TravelmateStart" :class="isclasses">
         <div class="TravelmateStart__fields">
-
-            <div class="TravelmateStart__field"
+            <div
+                class="TravelmateStart__field"
                 v-for="(date, index) in dates"
                 :key="index"
                 @click="atClick(index)"
-                :class="{ 'TravelmateStart--active': activeIndex === index }">
+                :class="{ 'TravelmateStart--active': activeIndex === index }"
+            >
                 {{ date.title }}
             </div>
-
         </div>
 
-        <input v-show="false" type="text" :value="localValue" :name="name">
-
+        <input v-show="false" type="text" :value="localValue" :name="name" />
     </div>
-
 </template>
 
 <script>
@@ -40,14 +37,11 @@ export default {
     },
     computed: {
         localValue() {
-            return this.dates[this.activeIndex].datetime
-                .date
+            return this.dates[this.activeIndex].datetime.date
         }
     },
     mounted() {
-        var index = this.dates.findIndex(
-            date => date.datetime.date == this.value.date
-        )
+        var index = this.dates.findIndex(date => date.datetime.date == this.value.date)
         this.activeIndex = index ? index : 0
     }
 }

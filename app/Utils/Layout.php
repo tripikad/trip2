@@ -34,10 +34,7 @@ class Layout
         $response = response()->view("layouts.$this->layout.$this->layout", $this->with);
 
         return $this->cached
-            ? $response->header(
-                'Cache-Control',
-                'public, s-maxage='.config('cache.headers.default')
-            )
+            ? $response->header('Cache-Control', 'public, s-maxage=' . config('cache.headers.default'))
             : $response;
     }
 }

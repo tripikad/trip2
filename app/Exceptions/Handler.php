@@ -22,7 +22,7 @@ class Handler extends ExceptionHandler
         \Symfony\Component\HttpKernel\Exception\HttpException::class,
         \Illuminate\Database\Eloquent\ModelNotFoundException::class,
         \Illuminate\Session\TokenMismatchException::class,
-        \Illuminate\Validation\ValidationException::class,
+        \Illuminate\Validation\ValidationException::class
     ];
 
     /**
@@ -30,10 +30,7 @@ class Handler extends ExceptionHandler
      *
      * @var array
      */
-    protected $dontFlash = [
-        'password',
-        'password_confirmation',
-    ];
+    protected $dontFlash = ['password', 'password_confirmation'];
 
     /**
      * Report or log an exception.
@@ -71,7 +68,10 @@ class Handler extends ExceptionHandler
             Config::set('app.debug', true);
         }
 
-        if (! config('app.debug') && ($e instanceof \ErrorException || $e instanceof FatalErrorException || $e instanceof QueryException)) {
+        if (
+            !config('app.debug') &&
+            ($e instanceof \ErrorException || $e instanceof FatalErrorException || $e instanceof QueryException)
+        ) {
             try {
                 return response()->view('errors.500', [], 500);
             } catch (Exception $e) {

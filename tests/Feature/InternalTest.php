@@ -30,7 +30,7 @@ class InternalTest extends BrowserKitTestCase
                 'title' => 'Hello internal title',
                 'body' => 'Hello internal body',
                 'type' => 'internal',
-                'status' => 1,
+                'status' => 1
             ]);
 
         $content = Content::whereTitle('Hello internal title')->first();
@@ -50,7 +50,7 @@ class InternalTest extends BrowserKitTestCase
                 'title' => 'Hola blog titulo',
                 'body' => 'Hola blog cuerpo',
                 'type' => 'internal',
-                'status' => 1,
+                'status' => 1
             ]);
     }
 
@@ -60,11 +60,11 @@ class InternalTest extends BrowserKitTestCase
         $regular_user_viewing_internal = factory(User::class)->create();
 
         $this->actingAs($admin_user_creating_internal)
-                ->visit('internal')
-                ->click(trans('content.internal.create.title'))
-                ->type('Hello internal title', 'title')
-                ->type('Hello internal body', 'body')
-                ->press(trans('content.create.submit.title'));
+            ->visit('internal')
+            ->click(trans('content.internal.create.title'))
+            ->type('Hello internal title', 'title')
+            ->type('Hello internal body', 'body')
+            ->press(trans('content.create.submit.title'));
 
         $content = Content::whereTitle('Hello internal title')->first();
 
@@ -82,11 +82,11 @@ class InternalTest extends BrowserKitTestCase
         $admin_user_creating_internal = factory(User::class)->create(['role' => 'admin']);
 
         $this->actingAs($admin_user_creating_internal)
-                ->visit('internal')
-                ->click(trans('content.internal.create.title'))
-                ->type('Hello internal title', 'title')
-                ->type('Hello internal body', 'body')
-                ->press(trans('content.create.submit.title'));
+            ->visit('internal')
+            ->click(trans('content.internal.create.title'))
+            ->type('Hello internal title', 'title')
+            ->type('Hello internal body', 'body')
+            ->press(trans('content.create.submit.title'));
 
         $content = Content::whereTitle('Hello internal title')->first();
 

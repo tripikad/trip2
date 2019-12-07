@@ -124,10 +124,7 @@ class GridController extends Controller
                         $photos->take(4)->map(function ($photo) {
                             return component('ExperimentalCard')
                                 ->with('title', $photo->vars()->shortTitle)
-                                ->with(
-                                    'background',
-                                    $photo->imagePreset('medium')
-                                );
+                                ->with('background', $photo->imagePreset('medium'));
                         })
                     )
             )
@@ -153,10 +150,7 @@ class GridController extends Controller
                         $photos->take(6)->map(function ($photo) {
                             return component('ExperimentalCard')
                                 ->with('title', $photo->vars()->shortTitle)
-                                ->with(
-                                    'background',
-                                    $photo->imagePreset('medium')
-                                );
+                                ->with('background', $photo->imagePreset('medium'));
                         })
                     )
             );
@@ -193,10 +187,7 @@ class GridController extends Controller
                         $photos->map(function ($photo) {
                             return component('ExperimentalCard')
                                 ->with('title', $photo->vars()->shortTitle)
-                                ->with(
-                                    'background',
-                                    $photo->imagePreset('medium')
-                                );
+                                ->with('background', $photo->imagePreset('medium'));
                         })
                     )
             );

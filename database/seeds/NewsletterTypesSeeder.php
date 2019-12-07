@@ -22,7 +22,7 @@ class NewsletterTypesSeeder extends Seeder
                 'send_at' => Carbon::now()->addDays(3),
                 'active' => true,
                 'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ],
             [
                 'subject' => 'Pole Sind ammu näinud',
@@ -33,7 +33,7 @@ class NewsletterTypesSeeder extends Seeder
                 'send_at' => null,
                 'active' => true,
                 'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ],
             [
                 'subject' => 'Leidsime Sulle sobiva lennupakkumise sihtkohta [[destination_name]]',
@@ -44,7 +44,7 @@ class NewsletterTypesSeeder extends Seeder
                 'send_at' => null,
                 'active' => true,
                 'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
             ],
             [
                 'subject' => 'Siin on kõige uuemad lennupakkumised!',
@@ -55,8 +55,8 @@ class NewsletterTypesSeeder extends Seeder
                 'send_at' => Carbon::now()->addDays(3),
                 'active' => true,
                 'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-            ],
+                'updated_at' => Carbon::now()
+            ]
         ]);
     }
 }

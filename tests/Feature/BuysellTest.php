@@ -33,7 +33,7 @@ class BuysellTest extends BrowserKitTestCase
                 'title' => 'Hello buysell title',
                 'body' => 'Hello buysell body',
                 'type' => 'buysell',
-                'status' => 1,
+                'status' => 1
             ]);
 
         $content = Content::whereTitle('Hello buysell title')->first();
@@ -53,7 +53,7 @@ class BuysellTest extends BrowserKitTestCase
                 'title' => 'Hola buysell titulo',
                 'body' => 'Hola buysell cuerpo',
                 'type' => 'buysell',
-                'status' => 1,
+                'status' => 1
             ]);
     }
 

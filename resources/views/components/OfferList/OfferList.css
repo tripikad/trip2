@@ -7,7 +7,6 @@
     display: flex;
     display: block ?if $tablet;
     margin-bottom: $margin-xl;
-
 }
 
 .OfferList__filters > * {

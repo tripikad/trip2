@@ -4,23 +4,23 @@
     padding-top: calc($spacer / 2);
 }
 
-    .Flag__icon {
-        margin-right: $margin-xxs;
-    }
+.Flag__icon {
+    margin-right: $margin-xxs;
+}
 
-    .Flag__icon:hover {
-        cursor: pointer;
-    }
+.Flag__icon:hover {
+    cursor: pointer;
+}
 
-    .Flag__icon svg {
-        fill: $gray-light;
-    }
+.Flag__icon svg {
+    fill: $gray-light;
+}
 
-    .Flag__value {
-        font: $font-text-sm;
-        color: $gray;
-        margin-right: $margin-xxs;
-    }
+.Flag__value {
+    font: $font-text-sm;
+    color: $gray;
+    margin-right: $margin-xxs;
+}
 
 .Flag--green.Flag--unflagged .Flag__icon svg,
 .Flag--red.Flag--unflagged .Flag__icon svg {
