@@ -7,46 +7,46 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class MessageTest extends BrowserKitTestCase
 {
-  use DatabaseTransactions;
+    use DatabaseTransactions;
 
-  public function test_unlogged_user_can_not_see_messages()
-  {
-    $user1 = factory(User::class)->create();
-    $user2 = factory(User::class)->create();
+    public function test_unlogged_user_can_not_see_messages()
+    {
+        $user1 = factory(User::class)->create();
+        $user2 = factory(User::class)->create();
 
-    $this->visit("user/$user1->id")
+        $this->visit("user/$user1->id")
       ->dontSeeLink(trans('user.show.message.create'))
       ->get("user/$user1->id/messages/$user2->id")
       ->seeStatusCode(401);
-  }
+    }
 
-  public function test_regular_user_can_not_see_other_user_messages()
-  {
-    $user1 = factory(User::class)->create();
-    $user2 = factory(User::class)->create();
-    $user3 = factory(User::class)->create();
+    public function test_regular_user_can_not_see_other_user_messages()
+    {
+        $user1 = factory(User::class)->create();
+        $user2 = factory(User::class)->create();
+        $user3 = factory(User::class)->create();
 
-    $message = factory(Message::class)->create([
+        $message = factory(Message::class)->create([
       'user_id_from' => $user1->id,
       'user_id_to' => $user2->id
     ]);
 
-    $this->actingAs($user3)
+        $this->actingAs($user3)
       ->visit("user/$user1->id")
       ->dontSeeLink(trans('menu.user.message'), 'user/' . $user1->id . '/messages')
       ->get("user/$user1->id/messages/$user2->id")
       ->seeStatusCode(401);
-  }
+    }
 
-  public function test_regular_user_can_send_and_receive_message()
-  {
-    $user1 = factory(User::class)->create();
-    $user2 = factory(User::class)->create();
-    $user3 = factory(User::class)->create();
+    public function test_regular_user_can_send_and_receive_message()
+    {
+        $user1 = factory(User::class)->create();
+        $user2 = factory(User::class)->create();
+        $user3 = factory(User::class)->create();
 
-    // Sending a message
+        // Sending a message
 
-    $this->actingAs($user1)
+        $this->actingAs($user1)
       ->visit("user/$user2->id")
       ->click(trans('user.show.message.create'))
       ->seePageIs("user/$user1->id/messages/$user2->id")
@@ -55,24 +55,24 @@ class MessageTest extends BrowserKitTestCase
       ->seePageIs("user/$user1->id/messages/$user2->id")
       ->see('Hola');
 
-    $this->seeInDatabase('messages', [
+        $this->seeInDatabase('messages', [
       'user_id_from' => $user1->id,
       'user_id_to' => $user2->id,
       'body' => 'Hola'
     ]);
 
-    // Sender going back to messages page
+        // Sender going back to messages page
 
-    $this->actingAs($user1)
+        $this->actingAs($user1)
       ->visit("user/$user1->id")
       ->click(trans('menu.user.message'))
       ->seePageIs("user/$user1->id/messages")
       ->visit("user/$user1->id/messages/$user2->id")
       ->seePageIs("user/$user1->id/messages/$user2->id");
 
-    // Recipient receiving and replying a message
+        // Recipient receiving and replying a message
 
-    $this->actingAs($user2)
+        $this->actingAs($user2)
       ->visit("user/$user2->id")
       ->click(trans('menu.user.message'))
       ->seePageIs("user/$user2->id/messages")
@@ -86,46 +86,46 @@ class MessageTest extends BrowserKitTestCase
       ->seePageIs("user/$user2->id/messages/$user1->id")
       ->see('Ciao');
 
-    $this->seeInDatabase('messages', [
+        $this->seeInDatabase('messages', [
       'user_id_from' => $user2->id,
       'user_id_to' => $user1->id,
       'body' => 'Ciao'
     ]);
 
-    // Sender receiving a reply
+        // Sender receiving a reply
 
-    $this->actingAs($user1)
+        $this->actingAs($user1)
       ->visit("user/$user1->id/messages")
       ->seePageIs("user/$user1->id/messages")
       ->visit("user/$user1->id/messages/$user2->id")
       ->seePageIs("user/$user1->id/messages/$user2->id")
       ->see('Ciao')
       ->see($user2->name);
-  }
+    }
 
-  public function test_regular_user_can_receive_messages_from_different_senders()
-  {
-    $user1 = factory(User::class)->create(['verified' => true]);
-    $user2 = factory(User::class)->create(['verified' => true]);
-    $user3 = factory(User::class)->create(['verified' => true]);
+    public function test_regular_user_can_receive_messages_from_different_senders()
+    {
+        $user1 = factory(User::class)->create(['verified' => true]);
+        $user2 = factory(User::class)->create(['verified' => true]);
+        $user3 = factory(User::class)->create(['verified' => true]);
 
-    factory(Message::class)->create([
+        factory(Message::class)->create([
       'user_id_from' => $user1->id,
       'user_id_to' => $user3->id,
       'body' => 'Hola'
     ]);
 
-    factory(Message::class)->create([
+        factory(Message::class)->create([
       'user_id_from' => $user2->id,
       'user_id_to' => $user3->id,
       'body' => 'Ciao'
     ]);
 
-    $this->actingAs($user3)
+        $this->actingAs($user3)
       ->visit("user/$user3->id/messages/$user1->id")
       ->see('Hola')
       ->see($user1->name)
       ->dontSee('Ciao')
       ->dontSee($user2->name);
-  }
+    }
 }

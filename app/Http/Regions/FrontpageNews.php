@@ -4,9 +4,9 @@ namespace App\Http\Regions;
 
 class FrontpageNews
 {
-  public function render($news)
-  {
-    return collect()
+    public function render($news)
+    {
+        return collect()
       ->push(
         component('BlockTitle')
           ->with('title', trans('frontpage.index.news.title'))
@@ -18,9 +18,9 @@ class FrontpageNews
           ->with(
             'items',
             $news->map(function ($new) {
-              return region('NewsCard', $new);
+                return region('NewsCard', $new);
             })
           )
       );
-  }
+    }
 }

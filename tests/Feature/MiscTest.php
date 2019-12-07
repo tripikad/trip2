@@ -10,16 +10,16 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class MiscTest extends BrowserKitTestCase
 {
-  use DatabaseTransactions;
+    use DatabaseTransactions;
 
-  public function test_regular_user_can_create_misc_post()
-  {
-    // Vue: EditorComment\EditorComment conflict - BrowserKit cannot find body input element.
-    $this->markTestSkipped();
+    public function test_regular_user_can_create_misc_post()
+    {
+        // Vue: EditorComment\EditorComment conflict - BrowserKit cannot find body input element.
+        $this->markTestSkipped();
 
-    $regular_user_creating_misc = factory(User::class)->create();
+        $regular_user_creating_misc = factory(User::class)->create();
 
-    $this->actingAs($regular_user_creating_misc)
+        $this->actingAs($regular_user_creating_misc)
       ->visit('foorum/vaba-teema')
       ->click(trans('content.misc.create.title'))
       ->seePageIs('forum/create/misc')
@@ -36,9 +36,9 @@ class MiscTest extends BrowserKitTestCase
         'status' => 1
       ]);
 
-    $content = Content::whereTitle('Hello misc title')->first();
+        $content = Content::whereTitle('Hello misc title')->first();
 
-    $this->actingAs($regular_user_creating_misc)
+        $this->actingAs($regular_user_creating_misc)
       ->visit("foorum/vaba-teema/$content->slug")
       ->click(trans('content.action.edit.title'))
       ->seePageIs("forum/$content->id/edit")
@@ -55,61 +55,61 @@ class MiscTest extends BrowserKitTestCase
         'type' => 'misc',
         'status' => 1
       ]);
-  }
+    }
 
-  public function test_regular_user_can_see_but_can_not_edit_other_misc_posts()
-  {
-    // Vue: EditorComment\EditorComment conflict - BrowserKit cannot find body input element.
-    $this->markTestSkipped();
+    public function test_regular_user_can_see_but_can_not_edit_other_misc_posts()
+    {
+        // Vue: EditorComment\EditorComment conflict - BrowserKit cannot find body input element.
+        $this->markTestSkipped();
 
-    $regular_user_creating_misc = factory(User::class)->create();
-    $regular_user_viewing_misc = factory(User::class)->create();
+        $regular_user_creating_misc = factory(User::class)->create();
+        $regular_user_viewing_misc = factory(User::class)->create();
 
-    $this->actingAs($regular_user_creating_misc)
+        $this->actingAs($regular_user_creating_misc)
       ->visit('foorum/vaba-teema')
       ->click(trans('content.misc.create.title'))
       ->type('Hello misc title', 'title')
       ->type('Hello misc body', 'body')
       ->press(trans('content.create.submit.title'));
 
-    $content = Content::whereTitle('Hello misc title')->first();
+        $content = Content::whereTitle('Hello misc title')->first();
 
-    $this->actingAs($regular_user_viewing_misc)
+        $this->actingAs($regular_user_viewing_misc)
       ->visit("foorum/vaba-teema/$content->slug")
       ->see('Hello misc title')
       ->see('Hello misc body')
       ->dontSeeInElement('.MetaLink__title', trans('content.action.edit.title'));
 
-    $response = $this->call('GET', "forum/$content->id/edit");
+        $response = $this->call('GET', "forum/$content->id/edit");
 
-    $this->assertEquals(401, $response->status());
-  }
+        $this->assertEquals(401, $response->status());
+    }
 
-  public function test_nonlogged_user_can_see_but_can_not_edit_other_blogs()
-  {
-    // Vue: EditorComment\EditorComment conflict - BrowserKit cannot find body input element.
-    $this->markTestSkipped();
+    public function test_nonlogged_user_can_see_but_can_not_edit_other_blogs()
+    {
+        // Vue: EditorComment\EditorComment conflict - BrowserKit cannot find body input element.
+        $this->markTestSkipped();
 
-    $regular_user_creating_misc = factory(User::class)->create();
+        $regular_user_creating_misc = factory(User::class)->create();
 
-    $this->actingAs($regular_user_creating_misc)
+        $this->actingAs($regular_user_creating_misc)
       ->visit('foorum/vaba-teema')
       ->click(trans('content.misc.create.title'))
       ->type('Hello misc title', 'title')
       ->type('Hello misc body', 'body')
       ->press(trans('content.create.submit.title'));
 
-    $content = Content::whereTitle('Hello misc title')->first();
+        $content = Content::whereTitle('Hello misc title')->first();
 
-    Auth::logout();
+        Auth::logout();
 
-    $this->visit("foorum/vaba-teema/$content->slug")
+        $this->visit("foorum/vaba-teema/$content->slug")
       ->see('Hello misc title')
       ->see('Hello misc body')
       ->dontSeeInElement('.MetaLink__title', trans('content.action.edit.title'));
 
-    $response = $this->call('GET', "forum/$content->id/edit");
+        $response = $this->call('GET', "forum/$content->id/edit");
 
-    $this->assertEquals(401, $response->status());
-  }
+        $this->assertEquals(401, $response->status());
+    }
 }

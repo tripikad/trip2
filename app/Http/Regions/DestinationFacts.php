@@ -4,9 +4,9 @@ namespace App\Http\Regions;
 
 class DestinationFacts
 {
-  public function render($destination)
-  {
-    return collect()
+    public function render($destination)
+    {
+        return collect()
       ->push(
         component('DestinationFacts')->with(
           'facts',
@@ -42,5 +42,5 @@ class DestinationFacts
       )
       ->render()
       ->implode('');
-  }
+    }
 }

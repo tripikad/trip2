@@ -4,11 +4,11 @@ namespace App\Http\Regions;
 
 class ForumLinks
 {
-  public function render($user = false)
-  {
-    $user = auth()->user();
+    public function render($user = false)
+    {
+        $user = auth()->user();
 
-    return collect()
+        return collect()
       ->push(
         component('Link')
           ->is('large')
@@ -47,5 +47,5 @@ class ForumLinks
           ->with('title', trans('menu.auth.admin'))
           ->with('route', route('internal.index'))
       );
-  }
+    }
 }

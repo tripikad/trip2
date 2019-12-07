@@ -6,13 +6,13 @@ use App\Content;
 
 class InternalController extends Controller
 {
-  public function index()
-  {
-    $forums = Content::getLatestPagedItems('internal', false, false, false, 'updated_at');
+    public function index()
+    {
+        $forums = Content::getLatestPagedItems('internal', false, false, false, 'updated_at');
 
-    $loggedUser = request()->user();
+        $loggedUser = request()->user();
 
-    $navBar = collect()
+        $navBar = collect()
       ->pushWhen(
         $loggedUser && $loggedUser->hasRole('admin'),
         component('Button')
@@ -33,26 +33,26 @@ class InternalController extends Controller
           ->with('route', route('admin.content.index'))
       );
 
-    if ($loggedUser && $loggedUser->hasRole('superuser')) {
-      $static_contents = Content::select('id', 'title')
+        if ($loggedUser && $loggedUser->hasRole('superuser')) {
+            $static_contents = Content::select('id', 'title')
         ->whereType('static')
         ->get();
-      foreach ($static_contents as &$static_content) {
-        $navBar->push(
+            foreach ($static_contents as &$static_content) {
+                $navBar->push(
           component('Link')
             ->with('title', trans('menu.admin.static', ['title' => $static_content->title]))
             ->with('route', route('static.edit', [$static_content->id]))
         );
-      }
+            }
 
-      $navBar->push(
+            $navBar->push(
         component('Link')
           ->with('title', trans('menu.admin.newsletter'))
           ->with('route', route('newsletter.index'))
       );
-    }
+        }
 
-    return layout('Two')
+        return layout('Two')
       ->with('background', component('BackgroundMap'))
       ->with('color', 'gray')
 
@@ -71,7 +71,7 @@ class InternalController extends Controller
         collect()
           ->merge(
             $forums->map(function ($forum) {
-              return region('ForumRow', $forum, route('internal.show', [$forum]));
+                return region('ForumRow', $forum, route('internal.show', [$forum]));
             })
           )
           ->push(region('Paginator', $forums))
@@ -82,18 +82,18 @@ class InternalController extends Controller
       ->with('footer', region('FooterLight'))
 
       ->render();
-  }
+    }
 
-  public function show($slug)
-  {
-    $loggedUser = auth()->user();
-    $forum = Content::findOrFail($slug);
+    public function show($slug)
+    {
+        $loggedUser = auth()->user();
+        $forum = Content::findOrFail($slug);
 
-    $firstUnreadCommentId = $forum->vars()->firstUnreadCommentId;
+        $firstUnreadCommentId = $forum->vars()->firstUnreadCommentId;
 
-    $forum->vars()->update_content_read;
+        $forum->vars()->update_content_read;
 
-    return layout('Two')
+        return layout('Two')
       ->with('background', component('BackgroundMap'))
       ->with('color', 'gray')
 
@@ -108,7 +108,7 @@ class InternalController extends Controller
           ->push(region('ForumPost', $forum, 'internal.edit'))
           ->merge(
             $forum->comments->map(function ($comment) use ($firstUnreadCommentId) {
-              return region('Comment', $comment, $firstUnreadCommentId, 'inset');
+                return region('Comment', $comment, $firstUnreadCommentId, 'inset');
             })
           )
           ->pushWhen($loggedUser && $loggedUser->hasRole('regular'), region('CommentCreateForm', $forum, 'inset'))
@@ -128,11 +128,11 @@ class InternalController extends Controller
       ->with('footer', region('FooterLight'))
 
       ->render();
-  }
+    }
 
-  public function create()
-  {
-    return layout('Two')
+    public function create()
+    {
+        return layout('Two')
       ->with('background', component('BackgroundMap'))
       ->with('color', 'gray')
 
@@ -181,27 +181,27 @@ class InternalController extends Controller
       ->with('footer', region('Footer'))
 
       ->render();
-  }
+    }
 
-  public function store()
-  {
-    $loggedUser = request()->user();
+    public function store()
+    {
+        $loggedUser = request()->user();
 
-    $rules = [
+        $rules = [
       'title' => 'required',
       'body' => 'required'
     ];
 
-    $this->validate(request(), $rules);
+        $this->validate(request(), $rules);
 
-    $internal = $loggedUser->contents()->create([
+        $internal = $loggedUser->contents()->create([
       'title' => request()->title,
       'body' => request()->body,
       'type' => 'internal',
       'status' => '1'
     ]);
 
-    return redirect()
+        return redirect()
       ->route('internal.index')
       ->with(
         'info',
@@ -209,13 +209,13 @@ class InternalController extends Controller
           'title' => $internal->title
         ])
       );
-  }
+    }
 
-  public function edit($id)
-  {
-    $internal = Content::findOrFail($id);
+    public function edit($id)
+    {
+        $internal = Content::findOrFail($id);
 
-    return layout('Two')
+        return layout('Two')
       ->with('background', component('BackgroundMap'))
       ->with('color', 'gray')
 
@@ -264,25 +264,25 @@ class InternalController extends Controller
       ->with('footer', region('Footer'))
 
       ->render();
-  }
+    }
 
-  public function update($id)
-  {
-    $internal = Content::findOrFail($id);
+    public function update($id)
+    {
+        $internal = Content::findOrFail($id);
 
-    $rules = [
+        $rules = [
       'title' => 'required',
       'body' => 'required'
     ];
 
-    $this->validate(request(), $rules);
+        $this->validate(request(), $rules);
 
-    $internal->update([
+        $internal->update([
       'title' => request()->title,
       'body' => request()->body
     ]);
 
-    return redirect()
+        return redirect()
       ->route('internal.show', [$internal])
       ->with(
         'info',
@@ -290,5 +290,5 @@ class InternalController extends Controller
           'title' => $internal->title
         ])
       );
-  }
+    }
 }

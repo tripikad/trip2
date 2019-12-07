@@ -7,11 +7,11 @@ use App\Content;
 
 class GridController extends Controller
 {
-  public function index()
-  {
-    $photos = Content::getLatestItems('photo', 6);
+    public function index()
+    {
+        $photos = Content::getLatestItems('photo', 6);
 
-    return layout('Two')
+        return layout('Two')
       ->with('title', 'Styles')
       ->with(
         'content',
@@ -40,11 +40,11 @@ class GridController extends Controller
           ->merge($this->grid($photos))
       )
       ->render();
-  }
+    }
 
-  public function row($photos)
-  {
-    return collect()
+    public function row($photos)
+    {
+        return collect()
       ->push(
         component('Code')
           ->is('gray')
@@ -65,7 +65,7 @@ class GridController extends Controller
           ->with(
             'items',
             $photos->take(4)->map(function ($photo) {
-              return component('Title')
+                return component('Title')
                 ->is('smallest')
                 ->with('title', $photo->vars()->shortTitle);
             })
@@ -95,17 +95,17 @@ class GridController extends Controller
           ->with(
             'items',
             $photos->take(2)->map(function ($photo) {
-              return component('Title')
+                return component('Title')
                 ->is('smallest')
                 ->with('title', $photo->vars()->shortTitle);
             })
           )
       );
-  }
+    }
 
-  public function flexGrid($photos)
-  {
-    return collect()
+    public function flexGrid($photos)
+    {
+        return collect()
       ->push(
         component('Code')
           ->is('gray')
@@ -122,7 +122,7 @@ class GridController extends Controller
           ->with(
             'items',
             $photos->take(4)->map(function ($photo) {
-              return component('ExperimentalCard')
+                return component('ExperimentalCard')
                 ->with('title', $photo->vars()->shortTitle)
                 ->with('background', $photo->imagePreset('medium'));
             })
@@ -148,17 +148,17 @@ class GridController extends Controller
           ->with(
             'items',
             $photos->take(6)->map(function ($photo) {
-              return component('ExperimentalCard')
+                return component('ExperimentalCard')
                 ->with('title', $photo->vars()->shortTitle)
                 ->with('background', $photo->imagePreset('medium'));
             })
           )
       );
-  }
+    }
 
-  public function grid($photos)
-  {
-    return collect()
+    public function grid($photos)
+    {
+        return collect()
       ->push(
         component('Body')->with('body', 'Only supported in <a href="https://caniuse.com/css-grid">latest browsers</a>')
       )
@@ -182,11 +182,11 @@ class GridController extends Controller
           ->with(
             'items',
             $photos->map(function ($photo) {
-              return component('ExperimentalCard')
+                return component('ExperimentalCard')
                 ->with('title', $photo->vars()->shortTitle)
                 ->with('background', $photo->imagePreset('medium'));
             })
           )
       );
-  }
+    }
 }

@@ -7,88 +7,88 @@ use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
 {
-  // Setup
+    // Setup
 
-  protected $fillable = ['user_id', 'content_id', 'body', 'status'];
+    protected $fillable = ['user_id', 'content_id', 'body', 'status'];
 
-  protected $appends = ['title', 'body_filtered'];
+    protected $appends = ['title', 'body_filtered'];
 
-  protected $touches = ['content'];
+    protected $touches = ['content'];
 
-  // Relations
+    // Relations
 
-  public function content()
-  {
-    return $this->belongsTo('App\Content');
-  }
+    public function content()
+    {
+        return $this->belongsTo('App\Content');
+    }
 
-  public function user()
-  {
-    return $this->belongsTo('App\User');
-  }
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 
-  public function flags()
-  {
-    return $this->morphMany('App\Flag', 'flaggable');
-  }
+    public function flags()
+    {
+        return $this->morphMany('App\Flag', 'flaggable');
+    }
 
-  // V1
+    // V1
 
-  public function getActions()
-  {
-    $actions = [];
+    public function getActions()
+    {
+        $actions = [];
 
-    if (
+        if (
       auth()->user() &&
       auth()
         ->user()
         ->hasRoleOrOwner('admin', $this->user->id)
     ) {
-      $actions['edit'] = [
+            $actions['edit'] = [
         'title' => trans('comment.action.edit.title'),
         'route' => route('comment.edit', [$this])
       ];
-    }
+        }
 
-    if (
+        if (
       auth()->user() &&
       auth()
         ->user()
         ->hasRole('admin')
     ) {
-      $actions['status'] = [
+            $actions['status'] = [
         'title' => trans("comment.action.status.$this->status.title"),
         'route' => route('comment.status', [$this, 1 - $this->status]),
         'method' => 'PUT'
       ];
+        }
+
+        return $actions;
     }
 
-    return $actions;
-  }
+    public function getFlags()
+    {
+        $goods = $this->flags->where('flag_type', 'good');
+        $bads = $this->flags->where('flag_type', 'bad');
 
-  public function getFlags()
-  {
-    $goods = $this->flags->where('flag_type', 'good');
-    $bads = $this->flags->where('flag_type', 'bad');
+        $good_active = null;
+        $bad_active = null;
 
-    $good_active = null;
-    $bad_active = null;
+        if (Auth::check()) {
+            foreach ($goods as $good) {
+                if ($good->user_id == Auth::user()->id) {
+                    $good_active = 1;
+                }
+            }
 
-    if (Auth::check()) {
-      foreach ($goods as $good) {
-        if ($good->user_id == Auth::user()->id) {
-          $good_active = 1;
+            foreach ($bads as $bad) {
+                if ($bad->user_id == Auth::user()->id) {
+                    $bad_active = 1;
+                }
+            }
         }
-      }
 
-      foreach ($bads as $bad) {
-        if ($bad->user_id == Auth::user()->id) {
-          $bad_active = 1;
-        }
-      }
-    }
-
-    return [
+        return [
       'good' => [
         'value' => count($this->flags->where('flag_type', 'good')),
         'flaggable' => Auth::check(),
@@ -108,10 +108,10 @@ class Comment extends Model
         'active' => $bad_active
       ]
     ];
-  }
+    }
 
-  public function vars()
-  {
-    return new CommentVars($this);
-  }
+    public function vars()
+    {
+        return new CommentVars($this);
+    }
 }

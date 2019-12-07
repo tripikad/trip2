@@ -4,9 +4,9 @@ namespace App\Http\Regions;
 
 class DestinationStat
 {
-  public function render($destination)
-  {
-    return component('Flex')->with(
+    public function render($destination)
+    {
+        return component('Flex')->with(
       'items',
       collect()
         ->push(
@@ -36,5 +36,5 @@ class DestinationStat
             )
         )
     );
-  }
+    }
 }

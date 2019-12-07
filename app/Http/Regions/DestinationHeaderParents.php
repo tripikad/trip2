@@ -4,9 +4,9 @@ namespace App\Http\Regions;
 
 class DestinationHeaderParents
 {
-  public function render($parents)
-  {
-    return component('Meta')->with(
+    public function render($parents)
+    {
+        return component('Meta')->with(
       'items',
       collect()
         ->push(
@@ -18,9 +18,9 @@ class DestinationHeaderParents
         )
         ->merge(
           $parents->map(function ($parent) {
-            $title = $parent->vars()->name;
+              $title = $parent->vars()->name;
 
-            return component('Tag')
+              return component('Tag')
               ->is('large')
               ->is('white')
               ->with('title', ' ‹ &nbsp;' . $title)
@@ -28,5 +28,5 @@ class DestinationHeaderParents
           })
         )
     );
-  }
+    }
 }

@@ -4,9 +4,9 @@ namespace App\Http\Regions;
 
 class MessageRow
 {
-  public function render($message, $user)
-  {
-    return component('MessageRow')
+    public function render($message, $user)
+    {
+        return component('MessageRow')
       ->with('id', $message->id)
       ->with(
         'title',
@@ -25,5 +25,5 @@ class MessageRow
           ->with('border', 3)
       )
       ->with('route', route('message.index.with', [$user, $message->withUser]));
-  }
+    }
 }

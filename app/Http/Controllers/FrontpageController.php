@@ -9,23 +9,23 @@ use App\Destination;
 
 class FrontpageController extends Controller
 {
-  public function index()
-  {
-    $loggedUser = auth()->user();
+    public function index()
+    {
+        $loggedUser = auth()->user();
 
-    $flights = Content::getLatestItems('flight', 9, 'id');
-    $forums = Content::getLatestItems('forum', 18, 'updated_at', ['unread_content', 'views']);
-    $news = Content::getLatestItems('news', 6, 'id');
-    $shortNews = Content::getLatestItems('shortnews', 4, 'id');
-    $blogs = Content::getLatestItems('blog', 3, 'id');
-    $photos = Content::getLatestItems('photo', 9, 'id');
-    $travelmates = Content::getLatestItems('travelmate', 5, 'id');
+        $flights = Content::getLatestItems('flight', 9, 'id');
+        $forums = Content::getLatestItems('forum', 18, 'updated_at', ['unread_content', 'views']);
+        $news = Content::getLatestItems('news', 6, 'id');
+        $shortNews = Content::getLatestItems('shortnews', 4, 'id');
+        $blogs = Content::getLatestItems('blog', 3, 'id');
+        $photos = Content::getLatestItems('photo', 9, 'id');
+        $travelmates = Content::getLatestItems('travelmate', 5, 'id');
 
-    $destinations = Cache::remember('destinations_with_slug', 30, function () {
-      return Destination::select('id', 'name', 'slug')->get();
-    });
+        $destinations = Cache::remember('destinations_with_slug', 30, function () {
+            return Destination::select('id', 'name', 'slug')->get();
+        });
 
-    return layout('Frontpage')
+        return layout('Frontpage')
       ->with('title', trans('site.about'))
       ->with('head_title', trans('site.about'))
       ->with('head_description', trans('site.description.main'))
@@ -69,13 +69,13 @@ class FrontpageController extends Controller
           )
           ->merge(
             $forums->take($forums->count() / 2)->map(function ($forum) {
-              return region('ForumRow', $forum);
+                return region('ForumRow', $forum);
             })
           )
           ->push(component('Promo')->with('promo', 'body'))
           ->merge(
             $forums->slice($forums->count() / 2)->map(function ($forum) {
-              return region('ForumRow', $forum);
+                return region('ForumRow', $forum);
             })
           )
       )
@@ -90,7 +90,7 @@ class FrontpageController extends Controller
               collect()
                 ->merge(
                   collect(['forum', 'buysell', 'expat', 'misc'])->flatMap(function ($type) use ($loggedUser) {
-                    return collect()
+                      return collect()
                       ->push(
                         component('Link')
                           ->is('large')
@@ -174,7 +174,7 @@ class FrontpageController extends Controller
                   component('Grid3')->with(
                     'items',
                     $blogs->map(function ($blog) {
-                      return region('BlogCard', $blog);
+                        return region('BlogCard', $blog);
                     })
                   )
                 )
@@ -186,5 +186,5 @@ class FrontpageController extends Controller
       ->with('footer', region('Footer'))
 
       ->render();
-  }
+    }
 }

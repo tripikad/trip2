@@ -4,12 +4,12 @@ namespace App\Http\Regions;
 
 class TravelmateAbout
 {
-  public function render()
-  {
-    $type = 'travelmate';
-    $user = auth()->user();
+    public function render()
+    {
+        $type = 'travelmate';
+        $user = auth()->user();
 
-    return component('Block')->with(
+        return component('Block')->with(
       'content',
       collect()
         ->push(component('Body')->with('body', trans('content.travelmate.description.title')))
@@ -26,5 +26,5 @@ class TravelmateAbout
             ->with('route', route("$type.create"))
         )
     );
-  }
+    }
 }

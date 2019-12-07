@@ -7,9 +7,9 @@ use App\Offer;
 
 class OfferController extends Controller
 {
-  public function index()
-  {
-    return layout('Offer')
+    public function index()
+    {
+        return layout('Offer')
       ->with('color', 'blue')
       ->with('head_robots', 'noindex')
       ->with(
@@ -35,33 +35,33 @@ class OfferController extends Controller
       )
       ->with('footer', region('FooterLight', ''))
       ->render();
-  }
+    }
 
-  public function indexJson()
-  {
-    $data = Offer::public()
+    public function indexJson()
+    {
+        $data = Offer::public()
       ->latest()
       ->with(['user:id,name', 'startDestinations', 'endDestinations'])
       ->get()
       ->map(function ($offer) {
-        $offer->route = route('offer.show', $offer);
-        return $offer;
+          $offer->route = route('offer.show', $offer);
+          return $offer;
       });
 
-    return response()->json($data);
-  }
+        return response()->json($data);
+    }
 
-  public function show($id)
-  {
-    $offer = Offer::public()->findOrFail($id);
+    public function show($id)
+    {
+        $offer = Offer::public()->findOrFail($id);
 
-    $photos = Content::getLatestPagedItems('photo', 9, $offer->endDestinations->first()->id);
+        $photos = Content::getLatestPagedItems('photo', 9, $offer->endDestinations->first()->id);
 
-    $user = auth()->user();
-    $email = $user ? $user->email : '';
-    $name = $user && $user->real_name ? $user->real_name : '';
+        $user = auth()->user();
+        $email = $user ? $user->email : '';
+        $name = $user && $user->real_name ? $user->real_name : '';
 
-    return layout('Offer')
+        return layout('Offer')
       ->with('head_robots', 'noindex')
       ->with('title', 'Offer')
       ->with('color', 'blue')
@@ -280,5 +280,5 @@ class OfferController extends Controller
       )
       ->with('footer', region('FooterLight', ''))
       ->render();
-  }
+    }
 }

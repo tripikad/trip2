@@ -9,13 +9,13 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class UserTest extends BrowserKitTestCase
 {
-  use DatabaseTransactions;
+    use DatabaseTransactions;
 
-  public function test_user_can_edit_its_profile()
-  {
-    $user_editing_profile = factory(User::class)->create();
+    public function test_user_can_edit_its_profile()
+    {
+        $user_editing_profile = factory(User::class)->create();
 
-    $this->actingAs($user_editing_profile)
+        $this->actingAs($user_editing_profile)
       ->visit("user/$user_editing_profile->id")
       ->click(trans('menu.user.edit.profile'))
       ->seePageIs("user/$user_editing_profile->id/edit")
@@ -49,32 +49,32 @@ class UserTest extends BrowserKitTestCase
         'contact_twitter' => 'http://twitter.com',
         'contact_homepage' => 'http://calavera.com'
       ]);
-  }
+    }
 
-  public function test_user_can_upload_profile_image()
-  {
-    $user_editing_profile = factory(User::class)->create();
+    public function test_user_can_upload_profile_image()
+    {
+        $user_editing_profile = factory(User::class)->create();
 
-    $this->actingAs($user_editing_profile)
+        $this->actingAs($user_editing_profile)
       ->visit("user/$user_editing_profile->id/edit")
       ->attach(storage_path() . '/tests/test.jpg', 'file')
       ->press(trans('user.edit.submit'))
       ->seePageIs("user/$user_editing_profile->id");
 
-    $filename = $user_editing_profile->images()->first()->filename;
+        $filename = $user_editing_profile->images()->first()->filename;
 
-    // Check original file exists and clean up
+        // Check original file exists and clean up
 
-    $filepath = config('imagepresets.original.path') . $filename;
-    $this->assertTrue(file_exists($filepath));
-    unlink($filepath);
+        $filepath = config('imagepresets.original.path') . $filename;
+        $this->assertTrue(file_exists($filepath));
+        unlink($filepath);
 
-    // See thumbnails exist and clean up
+        // See thumbnails exist and clean up
 
-    foreach (['large', 'medium', 'small', 'small_square', 'xsmall_square'] as $preset) {
-      $filepath = config("imagepresets.presets.$preset.path") . $filename;
-      $this->assertTrue(file_exists($filepath));
-      unlink($filepath);
+        foreach (['large', 'medium', 'small', 'small_square', 'xsmall_square'] as $preset) {
+            $filepath = config("imagepresets.presets.$preset.path") . $filename;
+            $this->assertTrue(file_exists($filepath));
+            unlink($filepath);
+        }
     }
-  }
 }
