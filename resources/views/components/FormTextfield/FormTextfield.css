@@ -1,27 +1,3 @@
-<<<<<<< HEAD
-    .FormTextfield__label {
-        color: $gray;
-        display: block;
-        font: $font-heading-sm;
-        line-height: $line-height-md;
-        margin-bottom: $margin-sm;
-    }
-
-    .FormTextfield__input {
-        border-radius: $border-radius-md;
-        border: $border-gray-md;
-        color: $gray-dark;
-        font: $font-text-md;
-        padding: $padding-sm;
-        width: 100%;
-    }
-
-    .FormTextfield__input::placeholder {
-        color: $gray-light;
-    }
-=======
-@import 'variables';
-
 .FormTextfield__label {
     color: $gray;
     display: block;
@@ -42,7 +18,6 @@
 .FormTextfield__input::placeholder {
     color: $gray-light;
 }
->>>>>>> master
 
 .FormTextfield--large .FormTextfield__input {
     font: $font-heading-md;

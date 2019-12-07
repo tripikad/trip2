@@ -1,15 +1,9 @@
-<<<<<<< HEAD
-.FormSelect {
-=======
-@import 'variables';
-
 .FormSelect__label {
     color: $gray;
     display: block;
     font: $font-heading-sm;
     line-height: $line-height-md;
     margin-bottom: $margin-sm;
->>>>>>> master
 }
 
 .multiselect__content {

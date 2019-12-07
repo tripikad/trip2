@@ -351,30 +351,17 @@ Route::post('utils/format', 'UtilsController@format')->name('utils.format');
 
 // Style guides
 
-Route::get('styleguide', 'Styleguide\StyleguideController@index')->name(
-    'styleguide.index'
-);
+Route::get('styleguide', 'Styleguide\StyleguideController@index')->name('styleguide.index');
 
-Route::get('styleguide/colors', 'Styleguide\ColorsController@index')->name(
-    'styleguide.colors.index'
-);
+Route::get('styleguide/colors', 'Styleguide\ColorsController@index')->name('styleguide.colors.index');
 
-Route::get('styleguide/fonts', 'Styleguide\FontsController@index')->name(
-    'styleguide.fonts.index'
-);
+Route::get('styleguide/fonts', 'Styleguide\FontsController@index')->name('styleguide.fonts.index');
 
-Route::get('styleguide/icons', 'Styleguide\IconsController@index')->name(
-    'styleguide.icons.index'
-);
+Route::get('styleguide/icons', 'Styleguide\IconsController@index')->name('styleguide.icons.index');
 
-Route::get('styleguide/grid', 'Styleguide\GridController@index')->name(
-    'styleguide.grid.index'
-);
+Route::get('styleguide/grid', 'Styleguide\GridController@index')->name('styleguide.grid.index');
 
-Route::get(
-    'styleguide/components',
-    'Styleguide\ComponentsController@index'
-)->name('styleguide.components.index');
+Route::get('styleguide/components', 'Styleguide\ComponentsController@index')->name('styleguide.components.index');
 
 // Experiments
 
@@ -386,17 +373,6 @@ Route::get('experiments/user/{id?}', 'ExperimentsController@userIndex')->name('e
 
 Route::post('experiments/store', 'ExperimentsController@store')->name('experiments.store');
 
-<<<<<<< HEAD
-=======
-Route::get('experiments/styles', 'ExperimentsStylesController@index')->name('experiments.styles.index');
-
-Route::get('experiments/icons', 'ExperimentsIconsController@index')->name('experiments.icons.index');
-
-Route::get('experiments/grid', 'ExperimentsGridController@index')->name('experiments.grid.index');
-
-Route::get('experiments/components', 'ExperimentsComponentsController@index')->name('experiments.components.index');
-
->>>>>>> master
 // Registration
 
 Route::get('register', [

@@ -1,13 +1,8 @@
-<<<<<<< HEAD
-=======
-@import 'variables';
-
 .FormCheckbox {
     display: flex;
     align-items: baseline;
 }
 
->>>>>>> master
 .FormCheckbox__label {
     color: $gray;
     font: $font-heading-sm;
