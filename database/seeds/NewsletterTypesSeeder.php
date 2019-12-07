@@ -5,14 +5,14 @@ use Illuminate\Database\Seeder;
 
 class NewsletterTypesSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
-    public function run()
-    {
-        DB::table('newsletter_types')->insert([
+  /**
+   * Run the database seeds.
+   *
+   * @return void
+   */
+  public function run()
+  {
+    DB::table('newsletter_types')->insert([
       [
         'subject' => 'Mis toimus Tripis möödunud nädalal?',
         'type' => 'weekly',
@@ -58,5 +58,5 @@ class NewsletterTypesSeeder extends Seeder
         'updated_at' => Carbon::now()
       ]
     ]);
-    }
+  }
 }

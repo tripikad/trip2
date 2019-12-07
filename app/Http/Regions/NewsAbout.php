@@ -4,12 +4,12 @@ namespace App\Http\Regions;
 
 class NewsAbout
 {
-    public function render()
-    {
-        $type = 'news';
-        $user = auth()->user();
+  public function render()
+  {
+    $type = 'news';
+    $user = auth()->user();
 
-        return component('Block')->with(
+    return component('Block')->with(
       'content',
       collect()
         ->push(component('Body')->with('body', trans("site.description.$type")))
@@ -20,5 +20,5 @@ class NewsAbout
             ->with('route', route('news.create'))
         )
     );
-    }
+  }
 }

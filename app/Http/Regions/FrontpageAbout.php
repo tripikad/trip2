@@ -4,9 +4,9 @@ namespace App\Http\Regions;
 
 class FrontpageAbout
 {
-    public function render()
-    {
-        return component('GridSplit')
+  public function render()
+  {
+    return component('GridSplit')
       ->with(
         'left_content',
         collect()->push(
@@ -31,5 +31,5 @@ class FrontpageAbout
             ->with('route', route('register.form'))
         )
       );
-    }
+  }
 }

@@ -4,9 +4,9 @@ namespace App\Http\Regions;
 
 class UserRow
 {
-    public function render($user)
-    {
-        return component('Flex')
+  public function render($user)
+  {
+    return component('Flex')
       ->with('gap', 1)
       ->with('align', 'center')
       ->with(
@@ -25,5 +25,5 @@ class UserRow
               ->with('title', $user ? $user->name : '')
           )
       );
-    }
+  }
 }

@@ -4,17 +4,17 @@ namespace App\Http\Regions;
 
 class DestinationHeader
 {
-    public function render($destination, $user)
-    {
-        $parents = $destination->getAncestors();
-        $childrens = $destination->getImmediateDescendants()->sortBy('name');
+  public function render($destination, $user)
+  {
+    $parents = $destination->getAncestors();
+    $childrens = $destination->getImmediateDescendants()->sortBy('name');
 
-        $body = $destination->description ? $destination->vars()->description : '';
-        if ($body && $destination->user) {
-            $body .= ' (<a href="' . route('user.show', [$destination->user]) . '">' . $destination->user->name . '</a>)';
-        }
+    $body = $destination->description ? $destination->vars()->description : '';
+    if ($body && $destination->user) {
+      $body .= ' (<a href="' . route('user.show', [$destination->user]) . '">' . $destination->user->name . '</a>)';
+    }
 
-        return component('HeaderLight')
+    return component('HeaderLight')
       ->with(
         'navbar',
         component('Navbar')
@@ -65,7 +65,7 @@ class DestinationHeader
               ->with(
                 'items',
                 $childrens->map(function ($children) {
-                    return component('Tag')
+                  return component('Tag')
                     ->is('white')
                     ->is('large')
                     ->with('title', $children->name)
@@ -84,5 +84,5 @@ class DestinationHeader
               ->with('route', route('destination.edit', [$destination]))
           )
       );
-    }
+  }
 }

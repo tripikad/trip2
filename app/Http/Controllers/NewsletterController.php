@@ -14,25 +14,25 @@ use App\Http\Regions\FlightNewsletterSubscribe;
 
 class NewsletterController extends Controller
 {
-    public function index()
-    {
-        $newsletter_types = NewsletterType::all();
+  public function index()
+  {
+    $newsletter_types = NewsletterType::all();
 
-        $navBar = collect();
+    $navBar = collect();
 
-        foreach ($newsletter_types as &$newsletter_type) {
-            if (strpos($newsletter_type->subject, '[[destination_name]]') !== false) {
-                $newsletter_type->subject = str_replace('[[destination_name]]', '...', $newsletter_type->subject);
-            }
+    foreach ($newsletter_types as &$newsletter_type) {
+      if (strpos($newsletter_type->subject, '[[destination_name]]') !== false) {
+        $newsletter_type->subject = str_replace('[[destination_name]]', '...', $newsletter_type->subject);
+      }
 
-            $navBar->push(
+      $navBar->push(
         component('Button')
           ->with('title', $newsletter_type->subject)
           ->with('route', route('newsletter.view', [$newsletter_type]))
       );
-        }
+    }
 
-        return layout('Two')
+    return layout('Two')
       ->with('background', component('BackgroundMap'))
       ->with('color', 'gray')
       ->with(
@@ -47,42 +47,42 @@ class NewsletterController extends Controller
       ->with('content', $navBar)
       ->with('footer', region('FooterLight'))
       ->render();
+  }
+
+  public function view($id)
+  {
+    $newsletter = NewsLetterType::findOrFail($id);
+    if (strpos($newsletter->subject, '[[destination_name]]') !== false) {
+      $newsletter->subject = str_replace('[[destination_name]]', '...', $newsletter->subject);
     }
 
-    public function view($id)
-    {
-        $newsletter = NewsLetterType::findOrFail($id);
-        if (strpos($newsletter->subject, '[[destination_name]]') !== false) {
-            $newsletter->subject = str_replace('[[destination_name]]', '...', $newsletter->subject);
-        }
+    $newsletter_types = NewsletterType::all();
+    $navBar = collect();
 
-        $newsletter_types = NewsletterType::all();
-        $navBar = collect();
+    foreach ($newsletter_types as &$newsletter_type) {
+      if (strpos($newsletter_type->subject, '[[destination_name]]') !== false) {
+        $newsletter_type->subject = str_replace('[[destination_name]]', '...', $newsletter_type->subject);
+      }
 
-        foreach ($newsletter_types as &$newsletter_type) {
-            if (strpos($newsletter_type->subject, '[[destination_name]]') !== false) {
-                $newsletter_type->subject = str_replace('[[destination_name]]', '...', $newsletter_type->subject);
-            }
-
-            $navBar->push(
+      $navBar->push(
         component('Link')
           ->with('icon', false)
           ->with('title', $newsletter_type->subject)
           ->with('route', route('newsletter.view', [$newsletter_type]))
       );
-        }
+    }
 
-        $sents = NewsletterSent::where('newsletter_type_id', $id)
+    $sents = NewsletterSent::where('newsletter_type_id', $id)
       ->with(['newsletter_type', 'destination'])
       ->orderBy('id', 'desc')
       ->paginate(15);
 
-        $left_content = collect();
-        $right_content = collect();
-        $sents->each(function ($sent) use (&$left_content, &$right_content) {
-            $subject = $sent->newsletter_type->subject;
-            $subject = str_replace('[[destination_name]]', $sent->destination ? $sent->destination->name : '', $subject);
-            $left_content->push(
+    $left_content = collect();
+    $right_content = collect();
+    $sents->each(function ($sent) use (&$left_content, &$right_content) {
+      $subject = $sent->newsletter_type->subject;
+      $subject = str_replace('[[destination_name]]', $sent->destination ? $sent->destination->name : '', $subject);
+      $left_content->push(
         component('Meta')->with(
           'items',
           collect()
@@ -107,15 +107,15 @@ class NewsletterController extends Controller
         )
       );
 
-            $right_content->push(
+      $right_content->push(
         component('Button')
           ->with('external', true)
           ->with('title', trans('newsletter.button.view.sent'))
           ->with('route', route('newsletter.preview_sent', [$sent]))
       );
-        });
+    });
 
-        return layout('Two')
+    return layout('Two')
       ->with('background', component('BackgroundMap'))
       ->with('color', 'gray')
       ->with(
@@ -156,48 +156,48 @@ class NewsletterController extends Controller
       ->with('sidebar', $navBar)
       ->with('footer', region('FooterLight'))
       ->render();
+  }
+
+  public function edit($id)
+  {
+    $request = request();
+    $newsletter = NewsLetterType::findOrFail($id);
+    if (strpos($newsletter->subject, '[[destination_name]]') !== false) {
+      $newsletter->subject = str_replace('[[destination_name]]', '...', $newsletter->subject);
     }
 
-    public function edit($id)
-    {
-        $request = request();
-        $newsletter = NewsLetterType::findOrFail($id);
-        if (strpos($newsletter->subject, '[[destination_name]]') !== false) {
-            $newsletter->subject = str_replace('[[destination_name]]', '...', $newsletter->subject);
-        }
-
-        $letter_contents = [];
-        if ($request->old('body')) {
-            foreach ($request->old('body') as $key => &$body) {
-                $letter_contents[$key] = [
+    $letter_contents = [];
+    if ($request->old('body')) {
+      foreach ($request->old('body') as $key => &$body) {
+        $letter_contents[$key] = [
           'body' => $body,
           'visible_from' => $request->old('visible_from')[$key],
           'visible_to' => $request->old('visible_to')[$key]
         ];
-            }
-        } else {
-            $letter_contents = NewsletterLetterContent::select('body', 'visible_from', 'visible_to')
+      }
+    } else {
+      $letter_contents = NewsletterLetterContent::select('body', 'visible_from', 'visible_to')
         ->where('newsletter_type_id', $newsletter->id)
         ->orderBy('sort_order', 'asc')
         ->get()
         ->toArray();
 
-            foreach ($letter_contents as &$letter_content) {
-                if ($letter_content['visible_from']) {
-                    $letter_content['visible_from'] = Carbon::createFromFormat('Y-m-d', $letter_content['visible_from'])->format(
+      foreach ($letter_contents as &$letter_content) {
+        if ($letter_content['visible_from']) {
+          $letter_content['visible_from'] = Carbon::createFromFormat('Y-m-d', $letter_content['visible_from'])->format(
             'd.m.Y'
           );
-                }
-
-                if ($letter_content['visible_to']) {
-                    $letter_content['visible_to'] = Carbon::createFromFormat('Y-m-d', $letter_content['visible_to'])->format(
-            'd.m.Y'
-          );
-                }
-            }
         }
 
-        return layout('Two')
+        if ($letter_content['visible_to']) {
+          $letter_content['visible_to'] = Carbon::createFromFormat('Y-m-d', $letter_content['visible_to'])->format(
+            'd.m.Y'
+          );
+        }
+      }
+    }
+
+    return layout('Two')
       ->with('background', component('BackgroundMap'))
       ->with('color', 'gray')
       ->with(
@@ -238,146 +238,146 @@ class NewsletterController extends Controller
       )
       ->with('footer', region('FooterLight'))
       ->render();
-    }
+  }
 
-    public function store(Request $request, $id)
-    {
-        $newsletter = NewsLetterType::findOrFail($id);
-        $insert = [];
-        $errors = [];
-        if ($request->input('body') == null) {
-            $errors[] = trans('newsletter.error.empty');
-        } else {
-            $sort_order = 0;
-            foreach ($request->input('body') as $key => &$body) {
-                $sort_order++;
+  public function store(Request $request, $id)
+  {
+    $newsletter = NewsLetterType::findOrFail($id);
+    $insert = [];
+    $errors = [];
+    if ($request->input('body') == null) {
+      $errors[] = trans('newsletter.error.empty');
+    } else {
+      $sort_order = 0;
+      foreach ($request->input('body') as $key => &$body) {
+        $sort_order++;
 
-                $date_from = $request->input('visible_from')[$key] == '' ? null : $request->input('visible_from')[$key];
-                $date_to = $request->input('visible_to')[$key] == '' ? null : $request->input('visible_to')[$key];
+        $date_from = $request->input('visible_from')[$key] == '' ? null : $request->input('visible_from')[$key];
+        $date_to = $request->input('visible_to')[$key] == '' ? null : $request->input('visible_to')[$key];
 
-                foreach (['date_from', 'date_to'] as $date) {
-                    if ($$date) {
-                        $date_from_arr = explode('.', $$date);
+        foreach (['date_from', 'date_to'] as $date) {
+          if ($$date) {
+            $date_from_arr = explode('.', $$date);
 
-                        if (count($date_from_arr) == 3) {
-                            if (!checkdate($date_from_arr[1], $date_from_arr[0], $date_from_arr[2])) {
-                                $errors[] = trans('newsletter.error.wrong_date_format', ['date' => $$date]);
-                            } else {
-                                $$date = Carbon::createFromDate($date_from_arr[2], $date_from_arr[1], $date_from_arr[0])->format(
+            if (count($date_from_arr) == 3) {
+              if (!checkdate($date_from_arr[1], $date_from_arr[0], $date_from_arr[2])) {
+                $errors[] = trans('newsletter.error.wrong_date_format', ['date' => $$date]);
+              } else {
+                $$date = Carbon::createFromDate($date_from_arr[2], $date_from_arr[1], $date_from_arr[0])->format(
                   'Y-m-d'
                 );
-                            }
-                        } else {
-                            $errors[] = trans('newsletter.error.wrong_date_format', ['date' => $$date]);
-                        }
-                    }
-                }
+              }
+            } else {
+              $errors[] = trans('newsletter.error.wrong_date_format', ['date' => $$date]);
+            }
+          }
+        }
 
-                $insert[] = [
+        $insert[] = [
           'newsletter_type_id' => $newsletter->id,
           'body' => $body,
           'visible_from' => $date_from,
           'visible_to' => $date_to,
           'sort_order' => $sort_order
         ];
-            }
-        }
+      }
+    }
 
-        if (count($errors)) {
-            return redirect()
+    if (count($errors)) {
+      return redirect()
         ->back()
         ->withInput($request->input())
         ->withErrors($errors);
-        } else {
-            NewsletterLetterContent::where('newsletter_type_id', $newsletter->id)->delete();
+    } else {
+      NewsletterLetterContent::where('newsletter_type_id', $newsletter->id)->delete();
 
-            NewsletterLetterContent::insert($insert);
+      NewsletterLetterContent::insert($insert);
 
-            return redirect()
+      return redirect()
         ->route('newsletter.view', [$newsletter])
         ->with('info', trans('newsletter.content.modified.successfully'));
-        }
+    }
+  }
+
+  public function subscribe(Request $request, $id, $user = null, $skip_request = false)
+  {
+    $newsletter_type = NewsLetterType::findOrFail($id);
+
+    if ($user === null) {
+      $user = $request->user();
     }
 
-    public function subscribe(Request $request, $id, $user = null, $skip_request = false)
-    {
-        $newsletter_type = NewsLetterType::findOrFail($id);
+    $errors = [];
 
-        if ($user === null) {
-            $user = $request->user();
-        }
-
-        $errors = [];
-
-        if ($newsletter_type->type == 'flight' && $user) {
-            $previous_subscriptions = NewsletterSubscription::where('user_id', $user->id)
+    if ($newsletter_type->type == 'flight' && $user) {
+      $previous_subscriptions = NewsletterSubscription::where('user_id', $user->id)
         ->where('newsletter_type_id', $id)
         ->get();
 
-            $deactivate_subscription_ids = [];
-            $activate_subscription_ids = [];
+      $deactivate_subscription_ids = [];
+      $activate_subscription_ids = [];
 
-            $destination_ids = $request->input('destinations') ?? [];
-            $price_error = $request->input('price_error') ? 1 : 0;
+      $destination_ids = $request->input('destinations') ?? [];
+      $price_error = $request->input('price_error') ? 1 : 0;
 
-            if (count($destination_ids) > FlightNewsletterSubscribe::$max) {
-                $errors[] = trans('newsletter.max_limit_exceeded', ['max' => FlightNewsletterSubscribe::$max]);
-            }
+      if (count($destination_ids) > FlightNewsletterSubscribe::$max) {
+        $errors[] = trans('newsletter.max_limit_exceeded', ['max' => FlightNewsletterSubscribe::$max]);
+      }
 
-            if (!count($errors)) {
-                $insert_destinations = $destination_ids;
-                $insert_price_error = $price_error;
+      if (!count($errors)) {
+        $insert_destinations = $destination_ids;
+        $insert_price_error = $price_error;
 
-                foreach ($previous_subscriptions as &$previous_subscription) {
-                    if ($previous_subscription->price_error) {
-                        $insert_price_error = 0;
-                    } elseif (
+        foreach ($previous_subscriptions as &$previous_subscription) {
+          if ($previous_subscription->price_error) {
+            $insert_price_error = 0;
+          } elseif (
             $previous_subscription->destination_id &&
             in_array($previous_subscription->destination_id, $insert_destinations)
           ) {
-                        unset($insert_destinations[array_search($previous_subscription->destination_id, $insert_destinations)]);
-                    }
+            unset($insert_destinations[array_search($previous_subscription->destination_id, $insert_destinations)]);
+          }
 
-                    if ($previous_subscription->active) {
-                        if (
+          if ($previous_subscription->active) {
+            if (
               $previous_subscription->destination_id &&
               !in_array($previous_subscription->destination_id, $destination_ids)
             ) {
-                            $deactivate_subscription_ids[] = $previous_subscription->id;
-                        } elseif ($previous_subscription->price_error && !$price_error) {
-                            $deactivate_subscription_ids[] = $previous_subscription->id;
-                        }
-                    } else {
-                        if (
+              $deactivate_subscription_ids[] = $previous_subscription->id;
+            } elseif ($previous_subscription->price_error && !$price_error) {
+              $deactivate_subscription_ids[] = $previous_subscription->id;
+            }
+          } else {
+            if (
               $previous_subscription->destination_id &&
               in_array($previous_subscription->destination_id, $destination_ids)
             ) {
-                            $activate_subscription_ids[] = $previous_subscription->id;
-                        } elseif ($previous_subscription->price_error && $price_error) {
-                            $activate_subscription_ids[] = $previous_subscription->id;
-                        }
-                    }
-                }
+              $activate_subscription_ids[] = $previous_subscription->id;
+            } elseif ($previous_subscription->price_error && $price_error) {
+              $activate_subscription_ids[] = $previous_subscription->id;
+            }
+          }
+        }
 
-                // Deactivate
-                if (count($deactivate_subscription_ids)) {
-                    NewsletterSubscription::whereIn('id', $deactivate_subscription_ids)->update([
+        // Deactivate
+        if (count($deactivate_subscription_ids)) {
+          NewsletterSubscription::whereIn('id', $deactivate_subscription_ids)->update([
             'active' => 0
           ]);
-                }
+        }
 
-                // Activate
-                if (count($activate_subscription_ids)) {
-                    NewsletterSubscription::whereIn('id', $activate_subscription_ids)->update([
+        // Activate
+        if (count($activate_subscription_ids)) {
+          NewsletterSubscription::whereIn('id', $activate_subscription_ids)->update([
             'active' => 1
           ]);
-                }
+        }
 
-                // Insert new record
-                $insert_records = [];
-                if (count($insert_destinations)) {
-                    foreach ($insert_destinations as &$destination_id) {
-                        $insert_records[] = [
+        // Insert new record
+        $insert_records = [];
+        if (count($insert_destinations)) {
+          foreach ($insert_destinations as &$destination_id) {
+            $insert_records[] = [
               'newsletter_type_id' => $id,
               'user_id' => $user->id,
               'price_error' => 0,
@@ -386,11 +386,11 @@ class NewsletterController extends Controller
               'created_at' => Carbon::now(),
               'updated_at' => Carbon::now()
             ];
-                    }
-                }
+          }
+        }
 
-                if ($insert_price_error) {
-                    $insert_records[] = [
+        if ($insert_price_error) {
+          $insert_records[] = [
             'newsletter_type_id' => $id,
             'user_id' => $user->id,
             'price_error' => 1,
@@ -399,83 +399,83 @@ class NewsletterController extends Controller
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
           ];
-                }
+        }
 
-                if (count($insert_records)) {
-                    NewsletterSubscription::insert($insert_records);
-                }
+        if (count($insert_records)) {
+          NewsletterSubscription::insert($insert_records);
+        }
 
-                $info = trans('newsletter.subscribed.flight.detailed.successfully');
-            }
-        } elseif ($newsletter_type->type == 'flight_general' && !$user) {
-            $this->validate($request, [
+        $info = trans('newsletter.subscribed.flight.detailed.successfully');
+      }
+    } elseif ($newsletter_type->type == 'flight_general' && !$user) {
+      $this->validate($request, [
         'e-post' => 'required|email'
       ]);
 
-            $subscription = NewsletterSubscription::where('email', $request->input('e-post'))
+      $subscription = NewsletterSubscription::where('email', $request->input('e-post'))
         ->where('newsletter_type_id', $id)
         ->whereNull('user_id')
         ->whereNull('destination_id')
         ->first();
 
-            if ($subscription && $subscription->active) {
-                $errors[] = trans('newsletter.error.already_subscribed');
-            }
+      if ($subscription && $subscription->active) {
+        $errors[] = trans('newsletter.error.already_subscribed');
+      }
 
-            if (!count($errors)) {
-                if (!$subscription) {
-                    $subscription = new NewsletterSubscription();
-                }
+      if (!count($errors)) {
+        if (!$subscription) {
+          $subscription = new NewsletterSubscription();
+        }
 
-                $subscription->newsletter_type_id = (int) $id;
-                $subscription->email = $request->input('e-post');
-                $subscription->active = 1;
-                $subscription->save();
-            }
+        $subscription->newsletter_type_id = (int) $id;
+        $subscription->email = $request->input('e-post');
+        $subscription->active = 1;
+        $subscription->save();
+      }
 
-            $info = trans('newsletter.subscribed.flight.successfully');
-        } elseif ($newsletter_type->type == 'weekly' && $user) {
-            $subscription = NewsletterSubscription::where('user_id', $user->id)
+      $info = trans('newsletter.subscribed.flight.successfully');
+    } elseif ($newsletter_type->type == 'weekly' && $user) {
+      $subscription = NewsletterSubscription::where('user_id', $user->id)
         ->where('newsletter_type_id', $id)
         ->first();
 
-            $newsletter_subscribe = ($skip_request ? 1 : $request->newsletter_subscribe) ? 1 : 0;
+      $newsletter_subscribe = ($skip_request ? 1 : $request->newsletter_subscribe) ? 1 : 0;
 
-            if ($subscription) {
-                $subscription->active = $newsletter_subscribe;
-            } else {
-                $subscription = new NewsletterSubscription();
-                $subscription->user_id = $user->id;
-                $subscription->newsletter_type_id = $id;
-                $subscription->active = $newsletter_subscribe;
-            }
+      if ($subscription) {
+        $subscription->active = $newsletter_subscribe;
+      } else {
+        $subscription = new NewsletterSubscription();
+        $subscription->user_id = $user->id;
+        $subscription->newsletter_type_id = $id;
+        $subscription->active = $newsletter_subscribe;
+      }
 
-            $subscription->save();
-        }
-
-        if (isset($errors) && count($errors)) {
-            return redirect()
-        ->back()
-        ->withErrors($errors);
-        } elseif (isset($info) && $info) {
-            return redirect()
-        ->back()
-        ->with('info', $info);
-        }
+      $subscription->save();
     }
 
-    public function unsubscribe($hash, $id)
-    {
-        $subscription = NewsletterSubscription::where('active', 1)->findOrFail($id);
+    if (isset($errors) && count($errors)) {
+      return redirect()
+        ->back()
+        ->withErrors($errors);
+    } elseif (isset($info) && $info) {
+      return redirect()
+        ->back()
+        ->with('info', $info);
+    }
+  }
 
-        if (sha1($subscription->id . $subscription->email . $subscription->user_id . $subscription->created_at) == $hash) {
-            $title = trans('newsletter.unsubscribed.successfully.title');
-            $body = trans('newsletter.unsubscribed.successfully.body');
+  public function unsubscribe($hash, $id)
+  {
+    $subscription = NewsletterSubscription::where('active', 1)->findOrFail($id);
 
-            $subscription->active = 0;
-            $subscription->save();
+    if (sha1($subscription->id . $subscription->email . $subscription->user_id . $subscription->created_at) == $hash) {
+      $title = trans('newsletter.unsubscribed.successfully.title');
+      $body = trans('newsletter.unsubscribed.successfully.body');
 
-            return layout('Two')
+      $subscription->active = 0;
+      $subscription->save();
+
+      return layout('Two')
         ->with(
           'header',
           region(
@@ -500,25 +500,25 @@ class NewsletterController extends Controller
         )
         ->with('footer', region('FooterLight'))
         ->render();
-        } else {
-            return abort(404);
-        }
+    } else {
+      return abort(404);
     }
+  }
 
-    public function preview($id)
-    {
-        $markdown = new Markdown(view(), config('mail.markdown'));
+  public function preview($id)
+  {
+    $markdown = new Markdown(view(), config('mail.markdown'));
 
-        $newsletter = NewsletterType::findOrFail($id);
-        $contents = NewsletterLetterContent::where('newsletter_type_id', $id)
+    $newsletter = NewsletterType::findOrFail($id);
+    $contents = NewsletterLetterContent::where('newsletter_type_id', $id)
       ->orderBy('sort_order', 'asc')
       ->get();
 
-        $body = '';
+    $body = '';
 
-        $the_flight = null;
-        if ($newsletter->type == 'flight') {
-            $the_flight = Content::where('type', 'flight')
+    $the_flight = null;
+    if ($newsletter->type == 'flight') {
+      $the_flight = Content::where('type', 'flight')
         ->with(['destinations', 'images'])
         ->has('destinations')
         ->has('images')
@@ -526,28 +526,28 @@ class NewsletterController extends Controller
         ->inRandomOrder()
         ->first();
 
-            $destination_names = $the_flight->destinations->pluck('name')->first();
-            $newsletter->subject = str_replace('[[destination_name]]', $destination_names, $newsletter->subject);
-        }
+      $destination_names = $the_flight->destinations->pluck('name')->first();
+      $newsletter->subject = str_replace('[[destination_name]]', $destination_names, $newsletter->subject);
+    }
 
-        foreach ($contents as &$content) {
-            $body .= $content->vars()->compose($the_flight);
-        }
+    foreach ($contents as &$content) {
+      $body .= $content->vars()->compose($the_flight);
+    }
 
-        return $markdown->render('email.newsletter.newsletter', [
+    return $markdown->render('email.newsletter.newsletter', [
       'heading' => $newsletter->subject,
       'body' => $body,
       'unsubscribe_route' => '#'
     ]);
-    }
+  }
 
-    public function preview_sent($id)
-    {
-        $markdown = new Markdown(view(), config('mail.markdown'));
+  public function preview_sent($id)
+  {
+    $markdown = new Markdown(view(), config('mail.markdown'));
 
-        $newsletter = NewsletterSent::with(['newsletter_type', 'destination'])->findOrFail($id);
+    $newsletter = NewsletterSent::with(['newsletter_type', 'destination'])->findOrFail($id);
 
-        return $markdown->render('email.newsletter.newsletter', [
+    return $markdown->render('email.newsletter.newsletter', [
       'heading' => str_replace(
         '[[destination_name]]',
         $newsletter->destination ? $newsletter->destination->name : '',
@@ -556,5 +556,5 @@ class NewsletterController extends Controller
       'body' => $newsletter->composed_content,
       'unsubscribe_route' => '#'
     ]);
-    }
+  }
 }

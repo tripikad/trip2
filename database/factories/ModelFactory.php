@@ -21,9 +21,9 @@ use App\Destination;
 use App\Offer;
 
 $factory->define(User::class, function ($faker) {
-    $name = $faker->name;
+  $name = $faker->name;
 
-    return [
+  return [
     'name' => $name,
     'email' => $faker->email,
     'password' => bcrypt($name),
@@ -43,7 +43,7 @@ $factory->define(User::class, function ($faker) {
 });
 
 $factory->define(Message::class, function ($faker) {
-    return [
+  return [
     'user_id_from' => 1,
     'user_id_to' => 2,
     'body' => $faker->paragraph(),
@@ -52,7 +52,7 @@ $factory->define(Message::class, function ($faker) {
 });
 
 $factory->define(Content::class, function ($faker) {
-    return [
+  return [
     'user_id' => 1,
     'title' => $faker->sentence(),
     'body' => $faker->paragraph(),
@@ -62,7 +62,7 @@ $factory->define(Content::class, function ($faker) {
 });
 
 $factory->define(Comment::class, function ($faker) {
-    return [
+  return [
     'user_id' => 1,
     'content_id' => 1,
     'body' => $faker->paragraph(),
@@ -71,7 +71,7 @@ $factory->define(Comment::class, function ($faker) {
 });
 
 $factory->define(Follow::class, function ($faker) {
-    return [
+  return [
     'user_id' => 1,
     'followable_id' => 1,
     'followable_type' => 'App\Content'
@@ -79,14 +79,14 @@ $factory->define(Follow::class, function ($faker) {
 });
 
 $factory->define(Destination::class, function ($faker) {
-    return [
+  return [
     'name' => $faker->word(),
     'description' => $faker->paragraph()
   ];
 });
 
 $factory->define(Offer::class, function ($faker) {
-    return [
+  return [
     'status' => 1,
     'title' => $faker->sentence(3),
     'style' => 'adventure',
@@ -108,8 +108,8 @@ $factory->define(Offer::class, function ($faker) {
 });
 
 $factory->afterCreating(Offer::class, function ($row, $faker) {
-    $startDestination = factory(Destination::class)->create();
-    $endDestination = factory(Destination::class)->create();
-    $row->startDestinations()->attach([$startDestination->id => ['type' => 'start']]);
-    $row->endDestinations()->attach([$endDestination->id => ['type' => 'end']]);
+  $startDestination = factory(Destination::class)->create();
+  $endDestination = factory(Destination::class)->create();
+  $row->startDestinations()->attach([$startDestination->id => ['type' => 'start']]);
+  $row->endDestinations()->attach([$endDestination->id => ['type' => 'end']]);
 });

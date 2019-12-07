@@ -7,15 +7,15 @@ use Illuminate\Http\Request;
 
 class ImageController extends Controller
 {
-    public function index()
-    {
-        $user = auth()->user();
-        $images = Image::doesntHave('user')
+  public function index()
+  {
+    $user = auth()->user();
+    $images = Image::doesntHave('user')
       ->orderBy('created_at', 'desc')
       ->take(25)
       ->get()
       ->map(function ($image) {
-          return [
+        return [
           'title' => str_limit($image->filename, 20),
           'small' => $image->preset('small_square'),
           'large' => $image->preset('large'),
@@ -23,26 +23,26 @@ class ImageController extends Controller
         ];
       });
 
-        return $images;
-    }
+    return $images;
+  }
 
-    public function store(Request $request)
-    {
-        // Converting MB to KB
+  public function store(Request $request)
+  {
+    // Converting MB to KB
 
-        $maxfilesize = config('site.maxfilesize') * 1024;
+    $maxfilesize = config('site.maxfilesize') * 1024;
 
-        $this->validate($request, [
+    $this->validate($request, [
       'image' => "required|image|max:$maxfilesize"
     ]);
 
-        $filename = Image::storeImageFile($request->file('image'));
-        $image = Image::create(['filename' => $filename]);
+    $filename = Image::storeImageFile($request->file('image'));
+    $image = Image::create(['filename' => $filename]);
 
-        if ($request->ajax()) {
-            return $image;
-        }
-
-        return back();
+    if ($request->ajax()) {
+      return $image;
     }
+
+    return back();
+  }
 }

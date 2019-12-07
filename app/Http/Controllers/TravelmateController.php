@@ -12,22 +12,22 @@ use App\Destination;
 
 class TravelmateController extends Controller
 {
-    public function index()
-    {
-        $currentDestination = Request::get('destination');
-        $currentTopic = Request::get('topic');
+  public function index()
+  {
+    $currentDestination = Request::get('destination');
+    $currentTopic = Request::get('topic');
 
-        $travelmates = Content::getLatestPagedItems('travelmate', 24, $currentDestination, $currentTopic);
-        $destinations = Destination::select('id', 'name')->get();
-        $topics = Topic::select('id', 'name')
+    $travelmates = Content::getLatestPagedItems('travelmate', 24, $currentDestination, $currentTopic);
+    $destinations = Destination::select('id', 'name')->get();
+    $topics = Topic::select('id', 'name')
       ->orderBy('name', 'asc')
       ->get();
 
-        $flights = Content::getLatestItems('flight', 3);
-        $forums = Content::getLatestPagedItems('forum', 3, null, null, 'updated_at');
-        $news = Content::getLatestItems('news', 1);
+    $flights = Content::getLatestItems('flight', 3);
+    $forums = Content::getLatestPagedItems('forum', 3, null, null, 'updated_at');
+    $news = Content::getLatestItems('news', 1);
 
-        return layout('Two')
+    return layout('Two')
       ->with('title', trans('content.travelmate.index.title'))
       ->with('head_title', trans('content.travelmate.index.title'))
       ->with('head_description', trans('site.description.travelmate'))
@@ -68,7 +68,7 @@ class TravelmateController extends Controller
               ->with(
                 'items',
                 $travelmates->map(function ($travelmate) {
-                    return region('TravelmateCard', $travelmate);
+                  return region('TravelmateCard', $travelmate);
                 })
               )
           )
@@ -93,21 +93,21 @@ class TravelmateController extends Controller
       ->with('footer', region('Footer'))
 
       ->render();
-    }
+  }
 
-    public function show($slug)
-    {
-        $user = auth()->user();
-        $travelmate = Content::getItemBySlug($slug, $user);
-        $travelmate->vars()->add_view;
+  public function show($slug)
+  {
+    $user = auth()->user();
+    $travelmate = Content::getItemBySlug($slug, $user);
+    $travelmate->vars()->add_view;
 
-        $travelmates = Content::getLatestItems('travelmate', 3);
+    $travelmates = Content::getLatestItems('travelmate', 3);
 
-        $flights = Content::getLatestItems('flight', 3);
-        $forums = Content::getLatestPagedItems('forum', 3, null, null, 'updated_at');
-        $news = Content::getLatestItems('news', 1);
+    $flights = Content::getLatestItems('flight', 3);
+    $forums = Content::getLatestPagedItems('forum', 3, null, null, 'updated_at');
+    $news = Content::getLatestItems('news', 1);
 
-        return layout('Two')
+    return layout('Two')
       ->with('title', trans('content.travelmate.index.title'))
       ->with('head_title', $travelmate->vars()->title)
       ->with('head_description', $travelmate->vars()->description)
@@ -160,14 +160,14 @@ class TravelmateController extends Controller
                 )
                 ->merge(
                   $travelmate->destinations->map(function ($tag) {
-                      return component('Tag')
+                    return component('Tag')
                       ->is('orange')
                       ->with('title', $tag->name);
                   })
                 )
                 ->merge(
                   $travelmate->topics->map(function ($tag) {
-                      return component('MetaLink')->with('title', $tag->name);
+                    return component('MetaLink')->with('title', $tag->name);
                   })
                 )
                 ->pushWhen(
@@ -191,7 +191,7 @@ class TravelmateController extends Controller
           ->push(region('Share'))
           ->merge(
             $travelmate->comments->map(function ($comment) {
-                return region('Comment', $comment);
+              return region('Comment', $comment);
             })
           )
           ->pushWhen($user && $user->hasRole('regular'), region('CommentCreateForm', $travelmate))
@@ -215,30 +215,30 @@ class TravelmateController extends Controller
       ->with('footer', region('Footer'))
 
       ->render();
-    }
+  }
 
-    public function create()
-    {
-        $destinations = Destination::select('id', 'name')
+  public function create()
+  {
+    $destinations = Destination::select('id', 'name')
       ->orderBy('name', 'asc')
       ->get();
-        $topics = Topic::select('id', 'name')
+    $topics = Topic::select('id', 'name')
       ->orderBy('name', 'asc')
       ->get();
 
-        $dates = collect();
+    $dates = collect();
 
-        foreach (range(0, 6) as $i) {
-            $now = Carbon::now()->startOfDay();
-            $nextDate = $now->addMonths($i)->startOfMonth();
-            $dates->push([
+    foreach (range(0, 6) as $i) {
+      $now = Carbon::now()->startOfDay();
+      $nextDate = $now->addMonths($i)->startOfMonth();
+      $dates->push([
         'datetime' => $nextDate, // 2017-08-01 00:00:00
         'title' =>
           $nextDate->format('M Y') . ($i > 5 ? ' ' . trans('content.travelmate.edit.field.start_at.suffix') : '') // Oct 2017
       ]);
-        }
+    }
 
-        return layout('Two')
+    return layout('Two')
       ->with('background', component('BackgroundMap'))
       ->with('color', 'gray')
 
@@ -335,31 +335,31 @@ class TravelmateController extends Controller
       ->with('footer', region('Footer'))
 
       ->render();
-    }
+  }
 
-    public function edit($id)
-    {
-        $travelmate = Content::findOrFail($id);
-        $destinations = Destination::select('id', 'name')
+  public function edit($id)
+  {
+    $travelmate = Content::findOrFail($id);
+    $destinations = Destination::select('id', 'name')
       ->orderBy('name', 'asc')
       ->get();
-        $topics = Topic::select('id', 'name')
+    $topics = Topic::select('id', 'name')
       ->orderBy('name', 'asc')
       ->get();
 
-        $dates = collect();
+    $dates = collect();
 
-        foreach (range(0, 6) as $i) {
-            $now = Carbon::now()->startOfDay();
-            $nextDate = $now->addMonths($i)->startOfMonth();
-            $dates->push([
+    foreach (range(0, 6) as $i) {
+      $now = Carbon::now()->startOfDay();
+      $nextDate = $now->addMonths($i)->startOfMonth();
+      $dates->push([
         'datetime' => $nextDate, // 2017-08-01 00:00:00
         'title' =>
           $nextDate->format('M Y') . ($i > 5 ? ' ' . trans('content.travelmate.edit.field.start_at.suffix') : '') // Oct 2017
       ]);
-        }
+    }
 
-        return layout('Two')
+    return layout('Two')
       ->with('background', component('BackgroundMap'))
       ->with('color', 'gray')
 
@@ -461,21 +461,21 @@ class TravelmateController extends Controller
       ->with('footer', region('Footer'))
 
       ->render();
-    }
+  }
 
-    public function store()
-    {
-        $loggedUser = request()->user();
+  public function store()
+  {
+    $loggedUser = request()->user();
 
-        $rules = [
+    $rules = [
       'title' => 'required',
       'body' => 'required',
       'start_at' => 'date'
     ];
 
-        $this->validate(request(), $rules);
+    $this->validate(request(), $rules);
 
-        $travelmate = $loggedUser->contents()->create([
+    $travelmate = $loggedUser->contents()->create([
       'title' => request()->title,
       'body' => request()->body,
       'type' => 'travelmate',
@@ -484,10 +484,10 @@ class TravelmateController extends Controller
       'duration' => request()->duration
     ]);
 
-        $travelmate->destinations()->attach(request()->destinations);
-        $travelmate->topics()->attach(request()->topics);
+    $travelmate->destinations()->attach(request()->destinations);
+    $travelmate->topics()->attach(request()->topics);
 
-        Log::info('New content added', [
+    Log::info('New content added', [
       'user' => $travelmate->user->name,
       'title' => $travelmate->title,
       'type' => $travelmate->type,
@@ -495,7 +495,7 @@ class TravelmateController extends Controller
       'link' => route('travelmate.show', [$travelmate->slug])
     ]);
 
-        return redirect()
+    return redirect()
       ->route('travelmate.index')
       ->with(
         'info',
@@ -503,31 +503,31 @@ class TravelmateController extends Controller
           'title' => $travelmate->title
         ])
       );
-    }
+  }
 
-    public function update($id)
-    {
-        $travelmate = Content::findOrFail($id);
+  public function update($id)
+  {
+    $travelmate = Content::findOrFail($id);
 
-        $rules = [
+    $rules = [
       'title' => 'required',
       'body' => 'required',
       'start_at' => 'date'
     ];
 
-        $this->validate(request(), $rules);
+    $this->validate(request(), $rules);
 
-        $travelmate->update([
+    $travelmate->update([
       'title' => request()->title,
       'body' => request()->body,
       'start_at' => Carbon::parse(request()->start_at),
       'duration' => request()->duration
     ]);
 
-        $travelmate->destinations()->sync(request()->destinations ?: []);
-        $travelmate->topics()->sync(request()->topics ?: []);
+    $travelmate->destinations()->sync(request()->destinations ?: []);
+    $travelmate->topics()->sync(request()->topics ?: []);
 
-        return redirect()
+    return redirect()
       ->route('travelmate.show', [$travelmate->slug])
       ->with(
         'info',
@@ -535,5 +535,5 @@ class TravelmateController extends Controller
           'title' => $travelmate->title
         ])
       );
-    }
+  }
 }

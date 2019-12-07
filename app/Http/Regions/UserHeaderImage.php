@@ -4,9 +4,9 @@ namespace App\Http\Regions;
 
 class UserHeaderImage
 {
-    public function render($user, $loggedUser)
-    {
-        return component('UserHeaderImage')
+  public function render($user, $loggedUser)
+  {
+    return component('UserHeaderImage')
       ->with(
         'user',
         component('UserImage')
@@ -36,5 +36,5 @@ class UserHeaderImage
           )
         )
       );
-    }
+  }
 }

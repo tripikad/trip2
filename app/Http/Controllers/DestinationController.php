@@ -9,9 +9,9 @@ use Illuminate\Http\Request;
 
 class DestinationController extends Controller
 {
-    public function index()
-    {
-        $continents = collect([
+  public function index()
+  {
+    $continents = collect([
       'Põhja-Ameerika',
       'Euroopa',
       'Aasia',
@@ -22,22 +22,22 @@ class DestinationController extends Controller
       'Aafrika',
       'Antarktika'
     ])->map(function ($name) {
-        return Destination::continents()
+      return Destination::continents()
         ->whereName($name)
         ->first();
     });
 
-        $areas = Destination::countries()->pluck('id');
+    $areas = Destination::countries()->pluck('id');
 
-        $dots = Destination::citiesOrPlaces()
+    $dots = Destination::citiesOrPlaces()
       ->get()
       ->map(function ($d) {
-          return $d->vars()->snappedCoordinates();
+        return $d->vars()->snappedCoordinates();
       })
       ->filter()
       ->values();
 
-        return layout('Offer')
+    return layout('Offer')
       ->with('color', 'yellow')
       ->with('header', region('OfferHeader'))
       ->with(
@@ -69,7 +69,7 @@ class DestinationController extends Controller
             ->with(
               'items',
               $continents->map(function ($d) {
-                  return component('Title')
+                return component('Title')
                   ->is('white')
                   ->with('title', str_replace('ja Okeaania', '', $d->name))
                   ->with('route', route('destination.showSlug', [$d->slug]));
@@ -79,29 +79,29 @@ class DestinationController extends Controller
       )
       ->with('footer', region('FooterLight', ''))
       ->render();
-    }
+  }
 
-    public function show($id)
-    {
-        $destination = Destination::findOrFail($id);
+  public function show($id)
+  {
+    $destination = Destination::findOrFail($id);
 
-        return redirect(route('destination.showSlug', $destination->slug), 301);
-    }
+    return redirect(route('destination.showSlug', $destination->slug), 301);
+  }
 
-    public function showSlug($slug)
-    {
-        $destination = Destination::findBySlugOrFail($slug);
+  public function showSlug($slug)
+  {
+    $destination = Destination::findBySlugOrFail($slug);
 
-        $photos = Content::getLatestPagedItems('photo', 9, $destination->id);
-        $forums = Content::getLatestPagedItems('forum', 8, $destination->id);
+    $photos = Content::getLatestPagedItems('photo', 9, $destination->id);
+    $forums = Content::getLatestPagedItems('forum', 8, $destination->id);
 
-        $flights = Content::getLatestPagedItems('flight', 6, $destination->id);
-        $travelmates = Content::getLatestPagedItems('travelmate', 6, $destination->id);
-        $news = Content::getLatestPagedItems('news', 2, $destination->id);
+    $flights = Content::getLatestPagedItems('flight', 6, $destination->id);
+    $travelmates = Content::getLatestPagedItems('travelmate', 6, $destination->id);
+    $news = Content::getLatestPagedItems('news', 2, $destination->id);
 
-        $loggedUser = request()->user();
+    $loggedUser = request()->user();
 
-        return layout('Two')
+    return layout('Two')
       ->with(
         'head_description',
         trans('site.description.destination', [
@@ -158,7 +158,7 @@ class DestinationController extends Controller
               ->with(
                 'content',
                 $forums->map(function ($forum) {
-                    return region('ForumRow', $forum);
+                  return region('ForumRow', $forum);
                 })
               )
           )
@@ -182,13 +182,13 @@ class DestinationController extends Controller
       ->with('footer', region('Footer'))
 
       ->render();
-    }
+  }
 
-    public function edit($id)
-    {
-        $destination = Destination::findOrFail($id);
+  public function edit($id)
+  {
+    $destination = Destination::findOrFail($id);
 
-        return layout('Two')
+    return layout('Two')
       ->with(
         'header',
         region(
@@ -234,27 +234,27 @@ class DestinationController extends Controller
       ->with('footer', region('Footer'))
 
       ->render();
-    }
+  }
 
-    public function update(Request $request, $id)
-    {
-        $rules = [
+  public function update(Request $request, $id)
+  {
+    $rules = [
       'user' => 'exists:users,name'
     ];
 
-        $this->validate($request, $rules);
+    $this->validate($request, $rules);
 
-        $destination = Destination::findOrFail($id);
+    $destination = Destination::findOrFail($id);
 
-        $destination->description = $request->description;
+    $destination->description = $request->description;
 
-        if ($request->user && $request->user != '') {
-            $user = User::where('name', $request->user)->first();
-            $destination->user_id = $user->id;
-        }
-
-        $destination->save();
-
-        return redirect(route('destination.show', $destination));
+    if ($request->user && $request->user != '') {
+      $user = User::where('name', $request->user)->first();
+      $destination->user_id = $user->id;
     }
+
+    $destination->save();
+
+    return redirect(route('destination.show', $destination));
+  }
 }

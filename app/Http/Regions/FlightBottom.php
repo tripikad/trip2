@@ -4,9 +4,9 @@ namespace App\Http\Regions;
 
 class FlightBottom
 {
-    public function render($forums, $travelmates, $news)
-    {
-        return component('Grid3')
+  public function render($forums, $travelmates, $news)
+  {
+    return component('Grid3')
       ->with('gutter', true)
       ->with(
         'items',
@@ -18,7 +18,7 @@ class FlightBottom
               ->with(
                 'content',
                 $forums->map(function ($forum) {
-                    return region('ForumRow', $forum);
+                  return region('ForumRow', $forum);
                 })
               )
           )
@@ -29,7 +29,7 @@ class FlightBottom
               ->with(
                 'content',
                 $travelmates->map(function ($travelmate) {
-                    return region('TravelmateCard', $travelmate);
+                  return region('TravelmateCard', $travelmate);
                 })
               )
           )
@@ -40,10 +40,10 @@ class FlightBottom
               ->with(
                 'content',
                 $news->map(function ($new) {
-                    return region('NewsCard', $new);
+                  return region('NewsCard', $new);
                 })
               )
           )
       );
-    }
+  }
 }

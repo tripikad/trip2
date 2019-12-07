@@ -4,7 +4,7 @@ namespace App\Http\Regions;
 
 class Filter
 {
-    public function render(
+  public function render(
     $destinations,
     $topics,
     $currentDestination = null,
@@ -12,7 +12,7 @@ class Filter
     $currentPage = 1,
     $type = ''
   ) {
-        return component('Form')
+    return component('Form')
       ->with('route', route('utils.filter'))
       ->with(
         'fields',
@@ -48,5 +48,5 @@ class Filter
                         ->with('value', $currentPage)
                     )*/
       );
-    }
+  }
 }

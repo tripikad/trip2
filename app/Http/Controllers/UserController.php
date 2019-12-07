@@ -10,15 +10,15 @@ use App\NewsletterType;
 
 class UserController extends Controller
 {
-    public function show($id)
-    {
-        $types = ['forum', 'travelmate', 'buysell'];
+  public function show($id)
+  {
+    $types = ['forum', 'travelmate', 'buysell'];
 
-        $user = User::findOrFail($id);
+    $user = User::findOrFail($id);
 
-        $loggedUser = request()->user();
+    $loggedUser = request()->user();
 
-        $photos = $user
+    $photos = $user
       ->contents()
       ->whereType('photo')
       ->whereStatus(1)
@@ -26,18 +26,18 @@ class UserController extends Controller
       ->latest()
       ->get();
 
-        $comments = $user
+    $comments = $user
       ->comments()
       ->with('user', 'content', 'content.user', 'content.comments', 'content.destinations', 'flags')
       ->whereStatus(1)
       ->whereHas('content', function ($query) use ($types) {
-          $query->whereIn('type', $types);
+        $query->whereIn('type', $types);
       })
       ->latest()
       ->take(24)
       ->get();
 
-        return layout('Two')
+    return layout('Two')
       ->with('title', $user->vars()->name())
       ->with('head_title', $user->vars()->name())
       ->with(
@@ -89,7 +89,7 @@ class UserController extends Controller
           )
           ->merge(
             $comments->flatMap(function ($comment) {
-                return collect()
+              return collect()
                 ->push(
                   component('Meta')->with(
                     'items',
@@ -123,27 +123,27 @@ class UserController extends Controller
       ->with('footer', region('Footer'))
 
       ->render();
-    }
+  }
 
-    public function edit($id)
-    {
-        $user = User::findOrFail($id);
-        $weekly_newsletter = NewsletterType::where('type', 'weekly')
+  public function edit($id)
+  {
+    $user = User::findOrFail($id);
+    $weekly_newsletter = NewsletterType::where('type', 'weekly')
       ->with('user_subscriptions')
       ->where('active', 1)
       ->first();
 
-        if ($weekly_newsletter) {
-            $weekly_subscription = $weekly_newsletter->user_subscriptions->first();
+    if ($weekly_newsletter) {
+      $weekly_subscription = $weekly_newsletter->user_subscriptions->first();
 
-            if ($weekly_subscription && $weekly_subscription->active) {
-                $weekly_subscription = 1;
-            } else {
-                $weekly_subscription = 0;
-            }
-        }
+      if ($weekly_subscription && $weekly_subscription->active) {
+        $weekly_subscription = 1;
+      } else {
+        $weekly_subscription = 0;
+      }
+    }
 
-        return layout('One')
+    return layout('One')
       ->with('color', 'gray')
       ->with('background', component('BackgroundMap'))
       ->with('header', region('StaticHeader'))
@@ -308,14 +308,14 @@ class UserController extends Controller
       ->with('footer', region('FooterLight'))
 
       ->render();
-    }
+  }
 
-    public function update($id)
-    {
-        $user = User::findorFail($id);
-        $maxfilesize = config('site.maxfilesize') * 1024;
+  public function update($id)
+  {
+    $user = User::findorFail($id);
+    $maxfilesize = config('site.maxfilesize') * 1024;
 
-        $rules = [
+    $rules = [
       'name' => 'required|unique:users,name,' . $user->id,
       'email' => 'required|unique:users,email,' . $user->id,
       'password' => 'sometimes|confirmed|min:6',
@@ -328,19 +328,19 @@ class UserController extends Controller
       'file' => "image|max:$maxfilesize"
     ];
 
-        $this->validate(request(), $rules);
+    $this->validate(request(), $rules);
 
-        $weekly_newsletter = NewsletterType::where('type', 'weekly')
+    $weekly_newsletter = NewsletterType::where('type', 'weekly')
       ->where('active', 1)
       ->first();
 
-        // @todo Avoid direct controller method call
+    // @todo Avoid direct controller method call
 
-        if ($weekly_newsletter) {
-            (new NewsletterController())->subscribe(request(), $weekly_newsletter->id);
-        }
+    if ($weekly_newsletter) {
+      (new NewsletterController())->subscribe(request(), $weekly_newsletter->id);
+    }
 
-        $user->update([
+    $user->update([
       'name' => request()->name,
       'email' => request()->email,
       'password' => Hash::make(request()->password),
@@ -355,8 +355,8 @@ class UserController extends Controller
       'contact_homepage' => request()->contact_homepage
     ]);
 
-        if (request()->hasFile('file')) {
-            $filename =
+    if (request()->hasFile('file')) {
+      $filename =
         'picture-' .
         $user->id .
         '.' .
@@ -364,39 +364,39 @@ class UserController extends Controller
           ->file('file')
           ->getClientOriginalExtension();
 
-            $filename = Image::storeImageFile(request()->file('file'), $filename);
+      $filename = Image::storeImageFile(request()->file('file'), $filename);
 
-            $user->images()->delete();
-            $user->images()->create(['filename' => $filename]);
-        }
-
-        return redirect()
-      ->route('user.show', [$user])
-      ->with('info', trans('user.update.info'));
+      $user->images()->delete();
+      $user->images()->create(['filename' => $filename]);
     }
 
-    public function destinationsEdit($id)
-    {
-        $user = User::findorFail($id);
-        $destinations = Destination::select('id', 'name')
+    return redirect()
+      ->route('user.show', [$user])
+      ->with('info', trans('user.update.info'));
+  }
+
+  public function destinationsEdit($id)
+  {
+    $user = User::findorFail($id);
+    $destinations = Destination::select('id', 'name')
       ->orderBy('name', 'asc')
       ->get();
 
-        $havebeen = $user
+    $havebeen = $user
       ->destinationHaveBeen()
       ->filter(function ($flag) use ($destinations) {
-          return $destinations->contains('id', $flag->flaggable_id);
+        return $destinations->contains('id', $flag->flaggable_id);
       })
       ->pluck('flaggable_id');
 
-        $wantstogo = $user
+    $wantstogo = $user
       ->destinationWantsToGo()
       ->filter(function ($flag) use ($destinations) {
-          return $destinations->contains('id', $flag->flaggable_id);
+        return $destinations->contains('id', $flag->flaggable_id);
       })
       ->pluck('flaggable_id');
 
-        return layout('One')
+    return layout('One')
       ->with('color', 'gray')
       ->with('background', component('BackgroundMap'))
       ->with('header', region('StaticHeader'))
@@ -455,53 +455,53 @@ class UserController extends Controller
       ->with('footer', region('FooterLight'))
 
       ->render();
-    }
+  }
 
-    public function destinationsStore($id)
-    {
-        $rules = [
+  public function destinationsStore($id)
+  {
+    $rules = [
       'havebeen.*' => 'exists:destinations,id',
       'wantstogo.*' => 'exists:destinations,id'
     ];
 
-        $this->validate(request(), $rules);
+    $this->validate(request(), $rules);
 
-        $user = User::findorFail($id);
+    $user = User::findorFail($id);
 
-        // Updating havebeen
+    // Updating havebeen
 
-        $user
+    $user
       ->flags()
       ->where('flaggable_type', 'App\Destination')
       ->where('flag_type', 'havebeen')
       ->delete();
 
-        collect(request()->havebeen)->each(function ($id) use ($user) {
-            $user->flags()->create([
+    collect(request()->havebeen)->each(function ($id) use ($user) {
+      $user->flags()->create([
         'flaggable_type' => 'App\Destination',
         'flaggable_id' => $id,
         'flag_type' => 'havebeen'
       ]);
-        });
+    });
 
-        // Updating wantstogo
+    // Updating wantstogo
 
-        $user
+    $user
       ->flags()
       ->where('flaggable_type', 'App\Destination')
       ->where('flag_type', 'wantstogo')
       ->delete();
 
-        collect(request()->wantstogo)->each(function ($id) use ($user) {
-            $user->flags()->create([
+    collect(request()->wantstogo)->each(function ($id) use ($user) {
+      $user->flags()->create([
         'flaggable_type' => 'App\Destination',
         'flaggable_id' => $id,
         'flag_type' => 'wantstogo'
       ]);
-        });
+    });
 
-        return redirect()
+    return redirect()
       ->route('user.show', [$user])
       ->with('info', trans('user.update.info'));
-    }
+  }
 }

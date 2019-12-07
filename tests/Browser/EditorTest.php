@@ -9,13 +9,13 @@ use Tests\DuskTestCase;
 
 class EditorTest extends DuskTestCase
 {
-    public function test_superuser_can_create_content_with_editor()
-    {
-        $super_user = factory(User::class)->create(['role' => 'superuser']);
+  public function test_superuser_can_create_content_with_editor()
+  {
+    $super_user = factory(User::class)->create(['role' => 'superuser']);
 
-        foreach (['news', 'flight'] as $type) {
-            $this->browse(function ($browser) use ($super_user, $type) {
-                $browser
+    foreach (['news', 'flight'] as $type) {
+      $this->browse(function ($browser) use ($super_user, $type) {
+        $browser
           ->loginAs($super_user)
           ->visit("$type/create")
           ->type('title', "Hola editores de titulo de $type")
@@ -42,30 +42,30 @@ class EditorTest extends DuskTestCase
           ->click('.Editor__toolOk')
           ->press('Lisa')
           ->assertSee("Hola editores de titulo de $type");
-            });
+      });
 
-            // Cleanup
+      // Cleanup
 
-            $image = Image::latest()->first();
+      $image = Image::latest()->first();
 
-            $filepath = config('imagepresets.original.path') . $image->filename;
+      $filepath = config('imagepresets.original.path') . $image->filename;
 
-            $this->assertTrue(file_exists($filepath));
-            unlink($filepath);
+      $this->assertTrue(file_exists($filepath));
+      unlink($filepath);
 
-            foreach (['large', 'medium', 'small', 'small_square', 'xsmall_square'] as $preset) {
-                $filepath = config("imagepresets.presets.$preset.path") . $image->filename;
-                $this->assertTrue(file_exists($filepath));
-                unlink($filepath);
-            }
+      foreach (['large', 'medium', 'small', 'small_square', 'xsmall_square'] as $preset) {
+        $filepath = config("imagepresets.presets.$preset.path") . $image->filename;
+        $this->assertTrue(file_exists($filepath));
+        unlink($filepath);
+      }
 
-            $content = Content::whereTitle("Hola editores de titulo de $type")
+      $content = Content::whereTitle("Hola editores de titulo de $type")
         ->whereType($type)
         ->whereUserId($super_user->id)
         ->first()
         ->delete();
-        }
-
-        $super_user->delete();
     }
+
+    $super_user->delete();
+  }
 }

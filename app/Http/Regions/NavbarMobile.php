@@ -4,11 +4,11 @@ namespace App\Http\Regions;
 
 class NavbarMobile
 {
-    protected function prepareLinks()
-    {
-        $user = request()->user();
+  protected function prepareLinks()
+  {
+    $user = request()->user();
 
-        return collect()
+    return collect()
       ->push([
         'title' => trans('menu.header.home'),
         'route' => route('frontpage.index')
@@ -30,13 +30,13 @@ class NavbarMobile
         'route' => route('news.index')
       ])
       ->toArray();
-    }
+  }
 
-    protected function prepareSublinks()
-    {
-        $user = request()->user();
+  protected function prepareSublinks()
+  {
+    $user = request()->user();
 
-        return collect()
+    return collect()
       ->pushWhen(!$user, [
         'title' => trans('menu.auth.login'),
         'route' => route('login.form')
@@ -75,13 +75,13 @@ class NavbarMobile
         'route' => route('login.logout')
       ])
       ->toArray();
-    }
+  }
 
-    public function render($color = '')
-    {
-        $user = request()->user();
+  public function render($color = '')
+  {
+    $user = request()->user();
 
-        return collect()
+    return collect()
       ->push(
         component('NavbarMobile')
           ->is($color)
@@ -100,5 +100,5 @@ class NavbarMobile
           ->render()
       )
       ->implode('');
-    }
+  }
 }

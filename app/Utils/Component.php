@@ -7,74 +7,74 @@ use InvalidArgumentException;
 
 class Component
 {
-    protected $component;
-    protected $is;
-    protected $with;
-    protected $when;
-    protected $vue;
+  protected $component;
+  protected $is;
+  protected $with;
+  protected $when;
+  protected $vue;
 
-    public function __construct($component)
-    {
-        $this->component = $component;
-        $this->is = collect();
-        $this->with = collect();
-        $this->when = true;
-        $this->vue = false;
-    }
+  public function __construct($component)
+  {
+    $this->component = $component;
+    $this->is = collect();
+    $this->with = collect();
+    $this->when = true;
+    $this->vue = false;
+  }
 
-    public function is($is)
-    {
-        $this->is->push($is);
+  public function is($is)
+  {
+    $this->is->push($is);
 
-        return $this;
-    }
+    return $this;
+  }
 
-    public function with($key, $value)
-    {
-        $this->with->put($key, $value);
+  public function with($key, $value)
+  {
+    $this->with->put($key, $value);
 
-        return $this;
-    }
+    return $this;
+  }
 
-    public function when($condition)
-    {
-        $this->when = $condition;
+  public function when($condition)
+  {
+    $this->when = $condition;
 
-        return $this;
-    }
+    return $this;
+  }
 
-    public function vue()
-    {
-        $this->vue = true;
+  public function vue()
+  {
+    $this->vue = true;
 
-        return $this;
-    }
+    return $this;
+  }
 
-    public function generateIsClasses()
-    {
-        $component = $this->component;
+  public function generateIsClasses()
+  {
+    $component = $this->component;
 
-        if (!$this->is->isEmpty()) {
-            return $this->is
+    if (!$this->is->isEmpty()) {
+      return $this->is
         ->map(function ($item) use ($component) {
-            return $component . '--' . $item;
+          return $component . '--' . $item;
         })
         ->implode(' ');
-        }
-
-        return '';
     }
 
-    public function renderBlade($name)
-    {
-        return View::make($name, $this->with)
+    return '';
+  }
+
+  public function renderBlade($name)
+  {
+    return View::make($name, $this->with)
       ->with('isclasses', $this->generateIsClasses())
       ->render();
-    }
+  }
 
-    public function renderVue($vueComponent)
-    {
-        $errors = session()->get('errors')
+  public function renderVue($vueComponent)
+  {
+    $errors = session()->get('errors')
       ? json_encode(
         collect(
           session()
@@ -86,16 +86,16 @@ class Component
       )
       : null;
 
-        $props = $this->with
+    $props = $this->with
       ->putWhen($errors, 'errors', $errors)
       ->map(function ($value, $key) {
-          $value = json_encode($value, JSON_HEX_APOS);
+        $value = json_encode($value, JSON_HEX_APOS);
 
-          return ":$key='$value'";
+        return ":$key='$value'";
       })
       ->implode(' ');
 
-        $component =
+    $component =
       '<fade><component is="' .
       $vueComponent .
       '" isclasses="' .
@@ -104,8 +104,8 @@ class Component
       $props .
       ' ></component></fade>';
 
-        if ($this->with->has('height')) {
-            return '<div style="min-height:' .
+    if ($this->with->has('height')) {
+      return '<div style="min-height:' .
         'var(--' .
         $vueComponent .
         '--height, ' .
@@ -113,48 +113,48 @@ class Component
         ')">' .
         $component .
         '</div>';
-        }
-        return $component;
+    }
+    return $component;
+  }
+
+  public function render()
+  {
+    if (!$this->when) {
+      return '';
     }
 
-    public function render()
-    {
-        if (!$this->when) {
-            return '';
-        }
+    $name = "components.$this->component.$this->component";
+    $bladeName = resource_path("views/components/$this->component/$this->component.blade.php");
+    $vueName = resource_path("views/components/$this->component/$this->component.vue");
+    $suffixedVueName = resource_path('views/components/' . $this->component . '/' . $this->component . 'Vue.vue');
 
-        $name = "components.$this->component.$this->component";
-        $bladeName = resource_path("views/components/$this->component/$this->component.blade.php");
-        $vueName = resource_path("views/components/$this->component/$this->component.vue");
-        $suffixedVueName = resource_path('views/components/' . $this->component . '/' . $this->component . 'Vue.vue');
-
-        if ($this->vue && is_file($suffixedVueName)) {
-            return $this->renderVue($this->component . 'Vue');
-        }
-        if (!is_file($bladeName) && is_file($suffixedVueName)) {
-            return $this->renderVue($this->component . 'Vue');
-        }
-
-        if ($this->vue && is_file($vueName)) {
-            return $this->renderVue($this->component);
-        }
-        if ($this->vue && !is_file($this->component)) {
-            return '';
-        }
-        if (is_file($vueName) && is_file($bladeName)) {
-            return $this->renderBlade($name);
-        }
-        if (!is_file($vueName) && is_file($bladeName)) {
-            return $this->renderBlade($name);
-        }
-        if (is_file($vueName) && !is_file($bladeName)) {
-            return $this->renderVue($this->component);
-        }
-        return '';
+    if ($this->vue && is_file($suffixedVueName)) {
+      return $this->renderVue($this->component . 'Vue');
+    }
+    if (!is_file($bladeName) && is_file($suffixedVueName)) {
+      return $this->renderVue($this->component . 'Vue');
     }
 
-    public function __toString()
-    {
-        return $this->render();
+    if ($this->vue && is_file($vueName)) {
+      return $this->renderVue($this->component);
     }
+    if ($this->vue && !is_file($this->component)) {
+      return '';
+    }
+    if (is_file($vueName) && is_file($bladeName)) {
+      return $this->renderBlade($name);
+    }
+    if (!is_file($vueName) && is_file($bladeName)) {
+      return $this->renderBlade($name);
+    }
+    if (is_file($vueName) && !is_file($bladeName)) {
+      return $this->renderVue($this->component);
+    }
+    return '';
+  }
+
+  public function __toString()
+  {
+    return $this->render();
+  }
 }

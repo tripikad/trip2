@@ -4,9 +4,9 @@ namespace App\Http\Regions;
 
 class TravelmateCard
 {
-    public function render($travelmate, $tagLimit = 4)
-    {
-        return component('TravelmateCard')
+  public function render($travelmate, $tagLimit = 4)
+  {
+    return component('TravelmateCard')
       ->with(
         'user',
         component('UserImage')
@@ -31,7 +31,7 @@ class TravelmateCard
             )
             ->merge(
               $travelmate->destinations->take($tagLimit)->map(function ($destination) {
-                  return component('Tag')
+                return component('Tag')
                   ->is('orange')
                   ->with('title', $destination->name)
                   ->with('route', route('destination.showSlug', [$destination->slug]));
@@ -45,11 +45,11 @@ class TravelmateCard
             )
             ->merge(
               $travelmate->topics->take($tagLimit)->map(function ($topic) {
-                  return component('MetaLink')->with('title', $topic->name);
+                return component('MetaLink')->with('title', $topic->name);
               })
             )
             ->pushWhen($travelmate->topics->count() > $tagLimit, component('MetaLink')->with('title', '...'))
         )
       );
-    }
+  }
 }

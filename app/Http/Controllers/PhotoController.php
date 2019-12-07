@@ -11,17 +11,17 @@ use App\Destination;
 
 class PhotoController extends Controller
 {
-    public function index()
-    {
-        $loggedUser = request()->user();
+  public function index()
+  {
+    $loggedUser = request()->user();
 
-        $destinationId = Request::get('destination');
+    $destinationId = Request::get('destination');
 
-        $destinationTitle = $destinationId ? ': ' . Destination::findOrFail($destinationId)->name : '';
+    $destinationTitle = $destinationId ? ': ' . Destination::findOrFail($destinationId)->name : '';
 
-        $photos = Content::getLatestPagedItems('photo', 89, $destinationId);
+    $photos = Content::getLatestPagedItems('photo', 89, $destinationId);
 
-        return layout('Two')
+    return layout('Two')
       ->with(
         'header',
         region(
@@ -50,23 +50,23 @@ class PhotoController extends Controller
       ->with('footer', region('FooterLight'))
 
       ->render();
-    }
+  }
 
-    public function userIndex($id)
-    {
-        $loggedUser = request()->user();
+  public function userIndex($id)
+  {
+    $loggedUser = request()->user();
 
-        $user = User::findOrFail($id);
-        $userTitle = ': ' . $user->vars()->name;
+    $user = User::findOrFail($id);
+    $userTitle = ': ' . $user->vars()->name;
 
-        $photos = $user
+    $photos = $user
       ->contents()
       ->whereType('photo')
       ->whereStatus(1)
       ->latest()
       ->simplePaginate(89);
 
-        return layout('Two')
+    return layout('Two')
       ->with(
         'header',
         region(
@@ -95,22 +95,22 @@ class PhotoController extends Controller
       ->with('footer', region('FooterLight'))
 
       ->render();
-    }
+  }
 
-    public function show($id)
-    {
-        $photo = Content::whereType('photo')
+  public function show($id)
+  {
+    $photo = Content::whereType('photo')
       ->whereId($id)
       ->whereStatus(1)
       ->first();
 
-        $loggedUser = request()->user();
+    $loggedUser = request()->user();
 
-        if (!$photo) {
-            return abort(404);
-        }
+    if (!$photo) {
+      return abort(404);
+    }
 
-        return layout('Two')
+    return layout('Two')
       ->with(
         'header',
         region(
@@ -156,15 +156,15 @@ class PhotoController extends Controller
       ->with('footer', region('FooterLight'))
 
       ->render();
-    }
+  }
 
-    public function create()
-    {
-        $destinations = Destination::select('id', 'name')
+  public function create()
+  {
+    $destinations = Destination::select('id', 'name')
       ->orderBy('name', 'asc')
       ->get();
 
-        return layout('Two')
+    return layout('Two')
       ->with('background', component('BackgroundMap'))
       ->with('color', 'gray')
 
@@ -238,39 +238,39 @@ class PhotoController extends Controller
       ->with('footer', region('Footer'))
 
       ->render();
-    }
+  }
 
-    public function store()
-    {
-        $loggedUser = request()->user();
-        $maxfilesize = config('site.maxfilesize') * 1024;
+  public function store()
+  {
+    $loggedUser = request()->user();
+    $maxfilesize = config('site.maxfilesize') * 1024;
 
-        $rules = [
+    $rules = [
       'title' => 'required',
       'file' => "required|image|max:$maxfilesize"
     ];
 
-        $this->validate(request(), $rules);
+    $this->validate(request(), $rules);
 
-        $photo = $loggedUser->contents()->create([
+    $photo = $loggedUser->contents()->create([
       'title' => request()->title,
       'type' => 'photo',
       'status' => 1
     ]);
 
-        $filename = Image::storeImageFile(request()->file('file'));
-        $photo->images()->create(['filename' => $filename]);
+    $filename = Image::storeImageFile(request()->file('file'));
+    $photo->images()->create(['filename' => $filename]);
 
-        $photo->destinations()->attach(request()->destinations);
+    $photo->destinations()->attach(request()->destinations);
 
-        Log::info('New content added', [
+    Log::info('New content added', [
       'user' => $photo->user->name,
       'title' => $photo->title,
       'type' => $photo->type,
       'body' => $photo->body
     ]);
 
-        return redirect()
+    return redirect()
       ->route('photo.index')
       ->with(
         'info',
@@ -278,5 +278,5 @@ class PhotoController extends Controller
           'title' => $photo->title
         ])
       );
-    }
+  }
 }

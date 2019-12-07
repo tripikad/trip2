@@ -4,9 +4,9 @@ namespace App\Http\Regions;
 
 class DestinationHeaderAbout
 {
-    public function render($destination, $user)
-    {
-        return collect()
+  public function render($destination, $user)
+  {
+    return collect()
       ->push(
         component('Title')
           ->is('large')
@@ -16,5 +16,5 @@ class DestinationHeaderAbout
       ->push(region('DestinationFacts', $destination))
       ->render()
       ->implode('<br />');
-    }
+  }
 }

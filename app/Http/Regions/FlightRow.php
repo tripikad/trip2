@@ -4,11 +4,11 @@ namespace App\Http\Regions;
 
 class FlightRow
 {
-    public function render($flight)
-    {
-        $user = auth()->user();
+  public function render($flight)
+  {
+    $user = auth()->user();
 
-        return component('FlightRow')
+    return component('FlightRow')
       ->with('route', route('flight.show', [$flight->slug]))
       ->with(
         'icon',
@@ -32,7 +32,7 @@ class FlightRow
             )
             ->merge(
               $flight->destinations->map(function ($destination) {
-                  return component('Tag')
+                return component('Tag')
                   ->is('orange')
                   ->with('title', $destination->name)
                   ->with('route', route('destination.showSlug', [$destination->slug]));
@@ -40,10 +40,10 @@ class FlightRow
             )
             ->merge(
               $flight->topics->map(function ($tag) {
-                  return component('Tag')->with('title', $tag->name);
+                return component('Tag')->with('title', $tag->name);
               })
             )
         )
       );
-    }
+  }
 }

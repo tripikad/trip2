@@ -4,9 +4,9 @@ namespace App\Http\Regions;
 
 class NewsLinks
 {
-    public function render()
-    {
-        return collect()
+  public function render()
+  {
+    return collect()
       ->push(
         component('Link')
           ->is('white')
@@ -19,5 +19,5 @@ class NewsLinks
           ->with('title', trans('menu.news.shortnews'))
           ->with('route', route('shortnews.index'))
       );
-    }
+  }
 }

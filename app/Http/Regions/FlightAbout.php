@@ -4,12 +4,12 @@ namespace App\Http\Regions;
 
 class FlightAbout
 {
-    public function render()
-    {
-        $type = 'flight';
-        $user = auth()->user();
+  public function render()
+  {
+    $type = 'flight';
+    $user = auth()->user();
 
-        return component('Block')->with(
+    return component('Block')->with(
       'content',
       collect()
         ->push(component('Body')->with('body', trans("site.description.$type")))
@@ -32,5 +32,5 @@ class FlightAbout
             ->with('route', route("$type.create"))
         )
     );
-    }
+  }
 }

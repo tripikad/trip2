@@ -8,9 +8,9 @@ use Illuminate\Support\Collection;
 
 class StatisticsController extends Controller
 {
-    public function index()
-    {
-        return layout('Two')
+  public function index()
+  {
+    return layout('Two')
       ->with('background', component('BackgroundMap'))
 
       ->with('color', 'gray')
@@ -24,7 +24,7 @@ class StatisticsController extends Controller
         'content',
         collect()->merge(
           collect(['User', 'Content', 'Comment', 'Flag'])->flatMap(function ($model) {
-              return collect()
+            return collect()
               ->push(component('Title')->with('title', $model))
               ->push(
                 component('Title')
@@ -45,15 +45,15 @@ class StatisticsController extends Controller
       ->with('footer', region('FooterLight'))
 
       ->render();
-    }
+  }
 
-    public function getMonthlyStat($model)
-    {
-        return Collection::times(3, function ($year) use ($model) {
-            $model = 'App\\' . $model;
-            $table = (new $model())->getTable();
+  public function getMonthlyStat($model)
+  {
+    return Collection::times(3, function ($year) use ($model) {
+      $model = 'App\\' . $model;
+      $table = (new $model())->getTable();
 
-            return $model
+      return $model
         ::select(DB::raw("DATE_FORMAT(created_at, '%M') date"), DB::raw('count(' . $table . '.id) as aggregate'))
         ->groupBy(DB::raw('MONTH(' . $table . '.created_at)'))
         ->whereBetween(
@@ -79,8 +79,8 @@ class StatisticsController extends Controller
         )
         ->orderBy('created_at')
         ->pluck('aggregate');
-        })->map(function ($values, $year) {
-            return collect()
+    })->map(function ($values, $year) {
+      return collect()
         // We fill the values that are missing
         // between now and end of current year
         // with 0s so the graph can skip those
@@ -97,16 +97,16 @@ class StatisticsController extends Controller
             ->subYears($year)
             ->format('Y')
         );
-        });
-    }
+    });
+  }
 
-    public function getWeeklyStat($model)
-    {
-        return Collection::times(3, function ($year) use ($model) {
-            $model = 'App\\' . $model;
-            $table = (new $model())->getTable();
+  public function getWeeklyStat($model)
+  {
+    return Collection::times(3, function ($year) use ($model) {
+      $model = 'App\\' . $model;
+      $table = (new $model())->getTable();
 
-            return $model
+      return $model
         ::select(DB::raw("DATE_FORMAT(created_at, '%u') date"), DB::raw('count(' . $table . '.id) as aggregate'))
         ->groupBy(DB::raw('WEEK(' . $table . '.created_at)'))
         ->whereBetween(
@@ -130,8 +130,8 @@ class StatisticsController extends Controller
         )
         ->orderBy('created_at')
         ->pluck('aggregate');
-        })->map(function ($values, $year) {
-            return collect()
+    })->map(function ($values, $year) {
+      return collect()
         ->put('values', array_pad($values->all(), 54, 0))
         ->put(
           'title',
@@ -139,6 +139,6 @@ class StatisticsController extends Controller
             ->subYears($year)
             ->format('Y')
         );
-        });
-    }
+    });
+  }
 }

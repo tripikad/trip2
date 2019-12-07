@@ -4,9 +4,9 @@ namespace App\Http\Regions;
 
 class UserStats
 {
-    public function render($user, $loggedUser)
-    {
-        return component('Flex')
+  public function render($user, $loggedUser)
+  {
+    return component('Flex')
       ->with('justify', 'center')
       ->with(
         'items',
@@ -53,5 +53,5 @@ class UserStats
               ->with('icon', 'icon-comment')
           )
       );
-    }
+  }
 }

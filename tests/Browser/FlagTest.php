@@ -8,17 +8,17 @@ use Tests\DuskTestCase;
 
 class FlagTest extends DuskTestCase
 {
-    public function test_regular_user_can_flag_forum_content()
-    {
-        $regular_user = factory(User::class)->create();
+  public function test_regular_user_can_flag_forum_content()
+  {
+    $regular_user = factory(User::class)->create();
 
-        $content = factory(Content::class)->create([
+    $content = factory(Content::class)->create([
       'user_id' => factory(User::class)->create()->id,
       'type' => 'forum'
     ]);
 
-        $this->browse(function ($browser) use ($regular_user, $content) {
-            $browser
+    $this->browse(function ($browser) use ($regular_user, $content) {
+      $browser
         ->loginAs($regular_user)
         ->visit("node/$content->id") // @todo Use non-legacy ID-based alias
         ->assertSeeIn('.Flag--green .Flag__value', '0')
@@ -30,9 +30,9 @@ class FlagTest extends DuskTestCase
         ->pause(1000)
         ->assertSeeIn('.Flag--green .Flag__value', '0')
         ->assertSeeIn('.Alert', 'Mõtlesid ringi');
-        });
+    });
 
-        $content->delete();
-        $regular_user->delete();
-    }
+    $content->delete();
+    $regular_user->delete();
+  }
 }

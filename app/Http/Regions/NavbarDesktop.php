@@ -4,11 +4,11 @@ namespace App\Http\Regions;
 
 class NavbarDesktop
 {
-    protected function prepareLinks()
-    {
-        $user = request()->user();
+  protected function prepareLinks()
+  {
+    $user = request()->user();
 
-        return collect()
+    return collect()
       ->put('flight', [
         'title' => trans('menu.header.flights'),
         'route' => route('flight.index')
@@ -26,13 +26,13 @@ class NavbarDesktop
         'route' => route('news.index')
       ])
       ->toArray();
-    }
+  }
 
-    protected function prepareSublinks()
-    {
-        $user = request()->user();
+  protected function prepareSublinks()
+  {
+    $user = request()->user();
 
-        return collect()
+    return collect()
       ->pushWhen(!$user, [
         'title' => trans('menu.auth.login'),
         'route' => route('login.form')
@@ -71,13 +71,13 @@ class NavbarDesktop
         'route' => route('login.logout')
       ])
       ->toArray();
-    }
+  }
 
-    public function render($color = '')
-    {
-        $user = request()->user();
+  public function render($color = '')
+  {
+    $user = request()->user();
 
-        return collect()
+    return collect()
       ->push(
         component('NavbarDesktop')
           ->is($color)
@@ -98,5 +98,5 @@ class NavbarDesktop
           ->render()
       )
       ->implode('');
-    }
+  }
 }

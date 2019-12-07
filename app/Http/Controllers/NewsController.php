@@ -11,27 +11,27 @@ use App\Destination;
 
 class NewsController extends Controller
 {
-    public function shortnewsIndex()
-    {
-        return $this->index('shortnews');
-    }
+  public function shortnewsIndex()
+  {
+    return $this->index('shortnews');
+  }
 
-    public function index($type = 'news')
-    {
-        $currentDestination = Request::get('destination');
-        $currentTopic = Request::get('topic');
+  public function index($type = 'news')
+  {
+    $currentDestination = Request::get('destination');
+    $currentTopic = Request::get('topic');
 
-        $news = Content::getLatestPagedItems($type, false, $currentDestination, $currentTopic);
-        $destinations = Destination::select('id', 'name')->get();
-        $topics = Topic::select('id', 'name')
+    $news = Content::getLatestPagedItems($type, false, $currentDestination, $currentTopic);
+    $destinations = Destination::select('id', 'name')->get();
+    $topics = Topic::select('id', 'name')
       ->orderBy('name', 'asc')
       ->get();
 
-        $flights = Content::getLatestItems('flight', 3);
-        $forums = Content::getLatestPagedItems('forum', 3, null, null, 'updated_at');
-        $travelmates = Content::getLatestItems('travelmate', 3);
+    $flights = Content::getLatestItems('flight', 3);
+    $forums = Content::getLatestPagedItems('forum', 3, null, null, 'updated_at');
+    $travelmates = Content::getLatestItems('travelmate', 3);
 
-        return layout('Two')
+    return layout('Two')
       ->with('title', trans('content.' . $type . '.index.title'))
       ->with('head_title', trans('content.' . $type . '.index.title'))
       ->with('head_description', trans('site.description.news'))
@@ -73,7 +73,7 @@ class NewsController extends Controller
               ->with(
                 'items',
                 $news->map(function ($new) {
-                    return region('NewsCard', $new);
+                  return region('NewsCard', $new);
                 })
               )
           )
@@ -98,19 +98,19 @@ class NewsController extends Controller
       ->with('footer', region('Footer'))
 
       ->render();
-    }
+  }
 
-    public function show($slug)
-    {
-        $user = auth()->user();
-        $new = Content::getItemBySlug($slug, $user);
-        $new->vars()->add_view;
+  public function show($slug)
+  {
+    $user = auth()->user();
+    $new = Content::getItemBySlug($slug, $user);
+    $new->vars()->add_view;
 
-        $flights = Content::getLatestItems('flight', 3);
-        $forums = Content::getLatestPagedItems('forum', 3, null, null, 'updated_at');
-        $travelmates = Content::getLatestItems('travelmate', 3);
+    $flights = Content::getLatestItems('flight', 3);
+    $forums = Content::getLatestPagedItems('forum', 3, null, null, 'updated_at');
+    $travelmates = Content::getLatestItems('travelmate', 3);
 
-        return layout('Two')
+    return layout('Two')
       ->with('title', trans('content.news.index.title'))
       ->with('head_title', $new->vars()->title)
       ->with('head_description', $new->vars()->description)
@@ -139,7 +139,7 @@ class NewsController extends Controller
           )
           ->merge(
             $new->comments->map(function ($comment) {
-                return region('Comment', $comment);
+              return region('Comment', $comment);
             })
           )
           ->pushWhen($user && $user->hasRole('regular'), region('CommentCreateForm', $new))
@@ -162,18 +162,18 @@ class NewsController extends Controller
       ->with('footer', region('Footer'))
 
       ->render();
-    }
+  }
 
-    public function create($type = 'news')
-    {
-        $destinations = Destination::select('id', 'name')
+  public function create($type = 'news')
+  {
+    $destinations = Destination::select('id', 'name')
       ->orderBy('name')
       ->get();
-        $topics = Topic::select('id', 'name')
+    $topics = Topic::select('id', 'name')
       ->orderBy('name')
       ->get();
 
-        return layout('Two')
+    return layout('Two')
       ->with(
         'header',
         region(
@@ -204,7 +204,7 @@ class NewsController extends Controller
                       ->with(
                         'options',
                         collect(['news', 'shortnews'])->map(function ($type) {
-                            return collect()
+                          return collect()
                             ->put('id', $type)
                             ->put('name', trans("content.$type.index.title"));
                         })
@@ -256,36 +256,36 @@ class NewsController extends Controller
       ->with('footer', region('Footer'))
 
       ->render();
-    }
+  }
 
-    public function store()
-    {
-        $loggedUser = request()->user();
+  public function store()
+  {
+    $loggedUser = request()->user();
 
-        $rules = [
+    $rules = [
       'title' => 'required',
       'body' => 'required',
       'type' => 'in:news,shortnews'
     ];
 
-        $this->validate(request(), $rules);
+    $this->validate(request(), $rules);
 
-        $news = $loggedUser->contents()->create([
+    $news = $loggedUser->contents()->create([
       'title' => request()->title,
       'body' => request()->body,
       'type' => request()->type,
       'status' => 0
     ]);
 
-        $news->destinations()->attach(request()->destinations);
-        $news->topics()->attach(request()->topics);
+    $news->destinations()->attach(request()->destinations);
+    $news->topics()->attach(request()->topics);
 
-        if ($imageToken = request()->image_id) {
-            $imageId = str_replace(['[[', ']]'], '', $imageToken);
-            $news->images()->attach([$imageId]);
-        }
+    if ($imageToken = request()->image_id) {
+      $imageId = str_replace(['[[', ']]'], '', $imageToken);
+      $news->images()->attach([$imageId]);
+    }
 
-        Log::info('New content added', [
+    Log::info('New content added', [
       'user' => $news->user->name,
       'title' => $news->title,
       'type' => $news->type,
@@ -293,7 +293,7 @@ class NewsController extends Controller
       'link' => route('news.show', [$news->slug])
     ]);
 
-        return redirect()
+    return redirect()
       ->route('news.show', [$news->slug])
       ->with(
         'info',
@@ -301,19 +301,19 @@ class NewsController extends Controller
           'title' => $news->title
         ])
       );
-    }
+  }
 
-    public function edit($id)
-    {
-        $news = Content::findOrFail($id);
-        $destinations = Destination::select('id', 'name')
+  public function edit($id)
+  {
+    $news = Content::findOrFail($id);
+    $destinations = Destination::select('id', 'name')
       ->orderBy('name')
       ->get();
-        $topics = Topic::select('id', 'name')
+    $topics = Topic::select('id', 'name')
       ->orderBy('name')
       ->get();
 
-        return layout('Two')
+    return layout('Two')
       ->with(
         'header',
         region(
@@ -345,7 +345,7 @@ class NewsController extends Controller
                       ->with(
                         'options',
                         collect(['news', 'shortnews'])->map(function ($type) {
-                            return collect()
+                          return collect()
                             ->put('id', $type)
                             ->put('name', trans("content.$type.index.title"));
                         })
@@ -399,35 +399,35 @@ class NewsController extends Controller
       ->with('footer', region('Footer'))
 
       ->render();
-    }
+  }
 
-    public function update($id)
-    {
-        $news = Content::findOrFail($id);
+  public function update($id)
+  {
+    $news = Content::findOrFail($id);
 
-        $rules = [
+    $rules = [
       'title' => 'required',
       'body' => 'required',
       'type' => 'in:news,shortnews'
     ];
 
-        $this->validate(request(), $rules);
+    $this->validate(request(), $rules);
 
-        $news->update([
+    $news->update([
       'title' => request()->title,
       'body' => request()->body,
       'type' => request()->type
     ]);
 
-        $news->destinations()->sync(request()->destinations ?: []);
-        $news->topics()->sync(request()->topics ?: []);
+    $news->destinations()->sync(request()->destinations ?: []);
+    $news->topics()->sync(request()->topics ?: []);
 
-        if ($imageToken = request()->image_id) {
-            $imageId = str_replace(['[[', ']]'], '', $imageToken);
-            $news->images()->sync([$imageId] ?: []);
-        }
+    if ($imageToken = request()->image_id) {
+      $imageId = str_replace(['[[', ']]'], '', $imageToken);
+      $news->images()->sync([$imageId] ?: []);
+    }
 
-        return redirect()
+    return redirect()
       ->route('news.show', [$news->slug])
       ->with(
         'info',
@@ -435,5 +435,5 @@ class NewsController extends Controller
           'title' => $news->title
         ])
       );
-    }
+  }
 }

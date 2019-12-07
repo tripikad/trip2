@@ -6,9 +6,9 @@ use App\Destination;
 
 class UserHeader
 {
-    private function prepareActionsForUser($user, $loggedUser)
-    {
-        return collect()
+  private function prepareActionsForUser($user, $loggedUser)
+  {
+    return collect()
       ->pushWhen(
         // Only owner sees the link, others can access it anyway and button is unneccesary
         $loggedUser && $loggedUser->id == $user->id,
@@ -39,47 +39,47 @@ class UserHeader
           ->with('title', trans('menu.user.add.places'))
           ->with('route', route('user.destinations.edit', [$user]))
       );
-    }
+  }
 
-    public function render($user)
-    {
-        $countryCount = 195;
+  public function render($user)
+  {
+    $countryCount = 195;
 
-        $loggedUser = request()->user();
+    $loggedUser = request()->user();
 
-        $hasBeenContinents = $user
+    $hasBeenContinents = $user
       ->vars()
       ->destinationHaveBeen()
       ->map->flaggable->filter(function ($d) {
-          return $d->isContinent();
+        return $d->isContinent();
       });
 
-        $hasBeenCountries = $user
+    $hasBeenCountries = $user
       ->vars()
       ->destinationHaveBeen()
       ->map->flaggable->filter(function ($d) {
-          return $d->isCountry();
+        return $d->isCountry();
       });
 
-        $countryDots = $hasBeenCountries->pluck('id')->values();
+    $countryDots = $hasBeenCountries->pluck('id')->values();
 
-        $hasBeenCities = $user
+    $hasBeenCities = $user
       ->vars()
       ->destinationHaveBeen()
       ->map->flaggable->filter(function ($d) {
-          return $d->isCity();
+        return $d->isCity();
       });
 
-        $cityDots = $hasBeenCities
+    $cityDots = $hasBeenCities
       ->map(function ($d) {
-          return $d->vars()->snappedCoordinates();
+        return $d->vars()->snappedCoordinates();
       })
       ->filter()
       ->values();
 
-        $wantsToGo = $user->vars()->destinationWantsToGo()->map->flaggable;
+    $wantsToGo = $user->vars()->destinationWantsToGo()->map->flaggable;
 
-        return component('HeaderLight')
+    return component('HeaderLight')
       ->with(
         'navbar',
         component('Navbar')
@@ -152,7 +152,7 @@ class UserHeader
               ->with(
                 'items',
                 $hasBeenContinents->map(function ($destination) {
-                    return component('Tag')
+                  return component('Tag')
                     ->is('white')
                     ->is('large')
                     ->with('title', $destination->name)
@@ -198,7 +198,7 @@ class UserHeader
               ->with(
                 'items',
                 $hasBeenCountries->map(function ($destination) {
-                    return component('Tag')
+                  return component('Tag')
                     ->is('white')
                     ->is('large')
                     ->with('title', $destination->name)
@@ -241,7 +241,7 @@ class UserHeader
               ->with(
                 'items',
                 $hasBeenCities->map(function ($destination) {
-                    return component('Tag')
+                  return component('Tag')
                     ->is('white')
                     ->is('large')
                     ->with('title', $destination->name)
@@ -279,7 +279,7 @@ class UserHeader
               ->with(
                 'items',
                 $wantsToGo->map(function ($destination) {
-                    return component('Tag')
+                  return component('Tag')
                     ->is('white')
                     ->is('large')
                     ->with('title', $destination->name)
@@ -294,5 +294,5 @@ class UserHeader
               ->with('items', $this->prepareActionsForUser($user, $loggedUser))
           )
       );
-    }
+  }
 }

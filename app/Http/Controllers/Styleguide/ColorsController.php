@@ -6,9 +6,9 @@ use App\Http\Controllers\Controller;
 
 class ColorsController extends Controller
 {
-    public function index()
-    {
-        return layout('Two')
+  public function index()
+  {
+    return layout('Two')
       ->with('title', 'Styles')
       ->with(
         'content',
@@ -18,18 +18,18 @@ class ColorsController extends Controller
           ->merge($this->colors())
       )
       ->render();
-    }
+  }
 
-    public function colors()
-    {
-        return collect(styles())
+  public function colors()
+  {
+    return collect(styles())
       ->filter(function ($value, $key) {
-          return !ends_with($key, '-hover') && starts_with($value, 'hsl');
+        return !ends_with($key, '-hover') && starts_with($value, 'hsl');
       })
       ->map(function ($value, $key) {
-          return component('StyleColor')
+        return component('StyleColor')
           ->with('key', $key)
           ->with('value', $value);
       });
-    }
+  }
 }

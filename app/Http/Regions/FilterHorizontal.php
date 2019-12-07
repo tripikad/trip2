@@ -4,7 +4,7 @@ namespace App\Http\Regions;
 
 class FilterHorizontal
 {
-    public function render(
+  public function render(
     $destinations,
     $topics,
     $currentDestination = null,
@@ -12,7 +12,7 @@ class FilterHorizontal
     $currentPage = 1,
     $type = ''
   ) {
-        return component('FormHorizontal')
+    return component('FormHorizontal')
       ->with('route', route('utils.filter'))
       ->with(
         'fields',
@@ -48,5 +48,5 @@ class FilterHorizontal
                         ->with('value', $currentPage)
                     )*/
       );
-    }
+  }
 }

@@ -6,9 +6,9 @@ use App\Http\Controllers\Controller;
 
 class FontsController extends Controller
 {
-    public function index()
-    {
-        return layout('Two')
+  public function index()
+  {
+    return layout('Two')
       ->with('title', 'Styles')
       ->with(
         'content',
@@ -18,18 +18,18 @@ class FontsController extends Controller
           ->merge($this->fonts())
       )
       ->render();
-    }
+  }
 
-    public function fonts()
-    {
-        return collect(styles())
+  public function fonts()
+  {
+    return collect(styles())
       ->filter(function ($value, $key) {
-          return starts_with($key, ['font-text', 'font-heading', 'font-code']);
+        return starts_with($key, ['font-text', 'font-heading', 'font-code']);
       })
       ->map(function ($value, $key) {
-          return component('StyleFont')
+        return component('StyleFont')
           ->with('value', $value)
           ->with('key', $key);
       });
-    }
+  }
 }

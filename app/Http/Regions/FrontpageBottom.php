@@ -4,9 +4,9 @@ namespace App\Http\Regions;
 
 class FrontpageBottom
 {
-    public function render($flights, $travelmates)
-    {
-        return component('GridSplit')
+  public function render($flights, $travelmates)
+  {
+    return component('GridSplit')
       ->with('left_col', 8)
       ->with('right_col', 4)
       ->with(
@@ -18,7 +18,7 @@ class FrontpageBottom
             ->with(
               'content',
               $flights->map(function ($flight) {
-                  return region('FlightRow', $flight);
+                return region('FlightRow', $flight);
               })
             )
         )
@@ -32,10 +32,10 @@ class FrontpageBottom
             ->with(
               'content',
               $travelmates->map(function ($travelmate) {
-                  return region('TravelmateCard', $travelmate);
+                return region('TravelmateCard', $travelmate);
               })
             )
         )
       );
-    }
+  }
 }

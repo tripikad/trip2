@@ -4,9 +4,9 @@ namespace App\Http\Regions;
 
 class FrontpageHeader
 {
-    public function render($destinations)
-    {
-        return component('FrontpageHeader')
+  public function render($destinations)
+  {
+    return component('FrontpageHeader')
       ->with('background', '/photos/header3.jpg')
       ->with(
         'navbar',
@@ -31,5 +31,5 @@ class FrontpageHeader
           ->with('placeholder', trans('frontpage.index.search.title'))
           ->with('options', $destinations)
       );
-    }
+  }
 }

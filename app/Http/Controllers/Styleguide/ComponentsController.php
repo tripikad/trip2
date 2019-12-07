@@ -7,9 +7,9 @@ use Illuminate\Support\Facades\Storage;
 
 class ComponentsController extends Controller
 {
-    public function index()
-    {
-        return layout('Two')
+  public function index()
+  {
+    return layout('Two')
       ->with('title', 'Components')
       ->with(
         'content',
@@ -19,10 +19,10 @@ class ComponentsController extends Controller
           ->merge(
             $this->components()
               ->filter(function ($c) {
-                  return !starts_with($c, 'Aff');
+                return !starts_with($c, 'Aff');
               })
               ->map(function ($c) {
-                  return collect()
+                return collect()
                   ->push(
                     component('Code')
                       ->is('gray')
@@ -40,35 +40,35 @@ class ComponentsController extends Controller
           ->flatten()
       )
       ->render();
-    }
+  }
 
-    public function components()
-    {
-        return collect(Storage::disk('resources')->directories('/views/components'))->map(function ($dir) {
-            return basename($dir);
-        });
-    }
+  public function components()
+  {
+    return collect(Storage::disk('resources')->directories('/views/components'))->map(function ($dir) {
+      return basename($dir);
+    });
+  }
 
-    public function isVueComponent($c)
-    {
-        return Storage::disk('resources')->exists('/views/components/' . $c . '/' . $c . '.vue');
-    }
+  public function isVueComponent($c)
+  {
+    return Storage::disk('resources')->exists('/views/components/' . $c . '/' . $c . '.vue');
+  }
 
-    public function isBladeComponent($c)
-    {
-        return Storage::disk('resources')->exists('/views/components/' . $c . '/' . $c . '.blade.php');
-    }
+  public function isBladeComponent($c)
+  {
+    return Storage::disk('resources')->exists('/views/components/' . $c . '/' . $c . '.blade.php');
+  }
 
-    public function isCss($c)
-    {
-        return Storage::disk('resources')->exists('/views/components/' . $c . '/' . $c . '.css');
-    }
+  public function isCss($c)
+  {
+    return Storage::disk('resources')->exists('/views/components/' . $c . '/' . $c . '.css');
+  }
 
-    public function componentCode($c)
-    {
-        return str_pad($c, 30, ' ') .
+  public function componentCode($c)
+  {
+    return str_pad($c, 30, ' ') .
       ($this->isBladeComponent($c) ? 'blade   ' : '        ') .
       ($this->isVueComponent($c) ? '   vue' : '      ') .
       ($this->isCss($c) ? '   css' : '      ');
-    }
+  }
 }

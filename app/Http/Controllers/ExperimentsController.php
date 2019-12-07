@@ -7,22 +7,22 @@ use App\User;
 
 class ExperimentsController extends Controller
 {
-    // public function index2()
-    // {
-    //     return layout('Offer')
-    //         ->with(
-    //             'content',
-    //             collect()
-    //                 ->push('<div style="background: red">aa</div>')
-    //                 ->push(component('Dotmap')->with('height', '300px'))
-    //         )
-    //         ->render();
-    // }
+  // public function index2()
+  // {
+  //     return layout('Offer')
+  //         ->with(
+  //             'content',
+  //             collect()
+  //                 ->push('<div style="background: red">aa</div>')
+  //                 ->push(component('Dotmap')->with('height', '300px'))
+  //         )
+  //         ->render();
+  // }
 
-    public function list($d, $user)
-    {
-        return $d->map(function ($d) use ($user) {
-            return collect()
+  public function list($d, $user)
+  {
+    return $d->map(function ($d) use ($user) {
+      return collect()
         ->br(2)
         ->push(region('DestinationParents', $d->getAncestors()))
         ->push(
@@ -52,66 +52,66 @@ class ExperimentsController extends Controller
             ->is('responsive')
             ->with('body', format_body($d->description))
         );
-        });
-    }
+    });
+  }
 
-    public function index()
-    {
-        $user = request()->user();
+  public function index()
+  {
+    $user = request()->user();
 
-        $continents = Destination::continents()
+    $continents = Destination::continents()
       ->get()
       ->sortBy('name');
 
-        $countries = Destination::countries()
+    $countries = Destination::countries()
       ->get()
       ->sortBy('name');
 
-        $cities = Destination::cities()
+    $cities = Destination::cities()
       ->get()
       ->sortBy('name');
 
-        $places = Destination::places()
+    $places = Destination::places()
       ->get()
       ->sortBy('name');
 
-        // $c = $continents->map(function ($d) use ($user) {
-        //     return collect()
-        //         ->br(2)
-        //         ->push(region('DestinationParents', $d->getAncestors()))
-        //         ->push(
-        //             component('Title')
-        //                 ->is('white')
-        //                 ->with('title', $d->name)
-        //                 ->with(
-        //                     'route',
-        //                     route('destination.showSlug', [$d->slug])
-        //                 )
-        //         )
-        //         ->pushWhen(
-        //             $user && $user->hasRole('admin'),
-        //             component('Button')
-        //                 ->is('small')
-        //                 ->is('narrow')
-        //                 ->with('title', trans('content.action.edit.title'))
-        //                 ->with('route', route('destination.edit', [$d]))
-        //         )
-        //         ->pushWhen(
-        //             $d->user,
-        //             component('Title')
-        //                 ->is('semitransparent')
-        //                 ->is('smaller')
-        //                 ->with('title', $d->user ? $d->user->name . ':' : '')
-        //         )
-        //         ->push(
-        //             component('Body')
-        //                 ->is('semitransparent')
-        //                 ->is('responsive')
-        //                 ->with('body', format_body($d->description))
-        //         );
-        // });
+    // $c = $continents->map(function ($d) use ($user) {
+    //     return collect()
+    //         ->br(2)
+    //         ->push(region('DestinationParents', $d->getAncestors()))
+    //         ->push(
+    //             component('Title')
+    //                 ->is('white')
+    //                 ->with('title', $d->name)
+    //                 ->with(
+    //                     'route',
+    //                     route('destination.showSlug', [$d->slug])
+    //                 )
+    //         )
+    //         ->pushWhen(
+    //             $user && $user->hasRole('admin'),
+    //             component('Button')
+    //                 ->is('small')
+    //                 ->is('narrow')
+    //                 ->with('title', trans('content.action.edit.title'))
+    //                 ->with('route', route('destination.edit', [$d]))
+    //         )
+    //         ->pushWhen(
+    //             $d->user,
+    //             component('Title')
+    //                 ->is('semitransparent')
+    //                 ->is('smaller')
+    //                 ->with('title', $d->user ? $d->user->name . ':' : '')
+    //         )
+    //         ->push(
+    //             component('Body')
+    //                 ->is('semitransparent')
+    //                 ->is('responsive')
+    //                 ->with('body', format_body($d->description))
+    //         );
+    // });
 
-        return layout('Offer')
+    return layout('Offer')
       ->with('color', 'yellow')
       ->with('header', region('OfferHeader'))
       ->with(
@@ -152,44 +152,44 @@ class ExperimentsController extends Controller
       )
       ->with('footer', region('FooterLight', ''))
       ->render();
-    }
+  }
 
-    public function flightIndex()
-    {
-        $t1 = '
+  public function flightIndex()
+  {
+    $t1 = '
 ### flightmap:TLL,HEL,JFK,POM
 
 [[flightmap:TLL,HEL,JFK,POM]]
 
 Tõime allpool välja valiku enamjaolt 4-5 päevasteks linnapuhkusteks. Piletihinnas sisaldub nii äraantav pagas kui toitlustamine lennuki pardal.';
 
-        // $a = collect(['TLL', 'JFK', 'LAX'])->map(function ($a) {
-        //     return collect(config('airports'))
-        //         ->where('iata', $a)
-        //         ->first();
-        // });
+    // $a = collect(['TLL', 'JFK', 'LAX'])->map(function ($a) {
+    //     return collect(config('airports'))
+    //         ->where('iata', $a)
+    //         ->first();
+    // });
 
-        return layout('Two')
+    return layout('Two')
       ->with('content', collect()->push(component('Body')->with('body', format_body($t1))))
       ->with('sidebar', ['a'])
       ->render();
-    }
+  }
 
-    public function destinationIndex()
-    {
-        $ds = Destination::skip(50)
+  public function destinationIndex()
+  {
+    $ds = Destination::skip(50)
       ->take(50)
       ->get();
 
-        return layout('Offer')
+    return layout('Offer')
       ->with('color', 'blue')
       ->with(
         'content',
         $ds
           ->map(function ($d) {
-              $name = $d->isContinent() && $d->vars()->facts() ? '' : json_encode($d->vars()->facts(), JSON_PRETTY_PRINT);
+            $name = $d->isContinent() && $d->vars()->facts() ? '' : json_encode($d->vars()->facts(), JSON_PRETTY_PRINT);
 
-              $small = $d->vars()->facts()
+            $small = $d->vars()->facts()
               ? [
                 [
                   'lat' => snap($d->vars()->facts()->lat),
@@ -198,7 +198,7 @@ Tõime allpool välja valiku enamjaolt 4-5 päevasteks linnapuhkusteks. Piletihi
               ]
               : false;
 
-              return collect()
+            return collect()
               ->push(
                 component('Title')
                   //->is('white')
@@ -227,22 +227,22 @@ Tõime allpool välja valiku enamjaolt 4-5 päevasteks linnapuhkusteks. Piletihi
           ->flatten()
       )
       ->render();
-    }
+  }
 
-    public function userIndex($id = 27)
-    {
-        $user = User::findOrFail($id);
+  public function userIndex($id = 27)
+  {
+    $user = User::findOrFail($id);
 
-        $been = $user
+    $been = $user
       ->vars()
       ->destinationHaveBeen()
       ->map(function ($f) {
-          return $f->flaggable->id;
+        return $f->flaggable->id;
       })
       ->values();
-        // dd($wantsToGo);
+    // dd($wantsToGo);
 
-        return layout('Offer')
+    return layout('Offer')
       ->with('color', 'cyan')
       ->with(
         'top',
@@ -287,5 +287,5 @@ Tõime allpool välja valiku enamjaolt 4-5 päevasteks linnapuhkusteks. Piletihi
       )
       ->with('footer', region('FooterLight', ''))
       ->render();
-    }
+  }
 }

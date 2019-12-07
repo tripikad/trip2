@@ -4,11 +4,11 @@ namespace App\Http\Regions;
 
 class ForumAbout
 {
-    public function render($type = 'forum')
-    {
-        $user = auth()->user();
+  public function render($type = 'forum')
+  {
+    $user = auth()->user();
 
-        return component('Block')
+    return component('Block')
       ->with('title', trans('frontpage.index.forum.title'))
       ->with(
         'content',
@@ -21,5 +21,5 @@ class ForumAbout
               ->with('route', route('forum.create', [$type]))
           )
       );
-    }
+  }
 }

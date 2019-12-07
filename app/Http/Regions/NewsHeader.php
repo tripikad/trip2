@@ -4,11 +4,11 @@ namespace App\Http\Regions;
 
 class NewsHeader
 {
-    public function render($new)
-    {
-        $user = auth()->user();
+  public function render($new)
+  {
+    $user = auth()->user();
 
-        return component('NewsHeader')
+    return component('NewsHeader')
       ->with('title', $new->vars()->title)
       ->with('background', $new->getHeadImage())
       ->with(
@@ -50,14 +50,14 @@ class NewsHeader
             )
             ->merge(
               $new->destinations->map(function ($tag) {
-                  return component('Tag')
+                return component('Tag')
                   ->is('white')
                   ->with('title', $tag->vars()->shortName);
               })
             )
             ->merge(
               $new->topics->map(function ($tag) {
-                  return component('MetaLink')
+                return component('MetaLink')
                   ->is('white')
                   ->with('title', $tag->vars()->shortName);
               })
@@ -86,5 +86,5 @@ class NewsHeader
             )
         )
       );
-    }
+  }
 }

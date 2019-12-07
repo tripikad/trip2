@@ -6,13 +6,13 @@ use App\Http\Controllers\Controller;
 
 class StyleguideController extends Controller
 {
-    public function index()
-    {
-        return layout('Two')
+  public function index()
+  {
+    return layout('Two')
       ->with(
         'content',
         collect(config('styleguide'))->map(function ($link, $key) {
-            return component('Title')
+          return component('Title')
             ->is($key > 0 ? 'blue' : '')
             ->is($key > 0 ? 'small' : '')
             ->with('title', $link['title'])
@@ -21,5 +21,5 @@ class StyleguideController extends Controller
       )
 
       ->render();
-    }
+  }
 }

@@ -4,9 +4,9 @@ namespace App\Http\Regions;
 
 class BlogCard
 {
-    public function render($blog)
-    {
-        return component('BlogCard')
+  public function render($blog)
+  {
+    return component('BlogCard')
       ->with('title', $blog->title)
       ->with('route', route('blog.show', [$blog->slug]))
       ->with(
@@ -27,5 +27,5 @@ class BlogCard
           )
         )
       );
-    }
+  }
 }

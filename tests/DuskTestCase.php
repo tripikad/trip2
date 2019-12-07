@@ -9,31 +9,31 @@ use Facebook\WebDriver\Remote\DesiredCapabilities;
 
 abstract class DuskTestCase extends BaseTestCase
 {
-    use CreatesApplication;
+  use CreatesApplication;
 
-    /**
-     * Prepare for Dusk test execution.
-     *
-     * @beforeClass
-     * @return void
-     */
-    public static function prepare()
-    {
-        static::startChromeDriver();
-    }
+  /**
+   * Prepare for Dusk test execution.
+   *
+   * @beforeClass
+   * @return void
+   */
+  public static function prepare()
+  {
+    static::startChromeDriver();
+  }
 
-    /**
-     * Create the RemoteWebDriver instance.
-     *
-     * @return \Facebook\WebDriver\Remote\RemoteWebDriver
-     */
-    protected function driver()
-    {
-        $options = (new ChromeOptions())->addArguments(['--disable-gpu', '--headless', '--window-size=1200,1200']);
+  /**
+   * Create the RemoteWebDriver instance.
+   *
+   * @return \Facebook\WebDriver\Remote\RemoteWebDriver
+   */
+  protected function driver()
+  {
+    $options = (new ChromeOptions())->addArguments(['--disable-gpu', '--headless', '--window-size=1200,1200']);
 
-        return RemoteWebDriver::create(
+    return RemoteWebDriver::create(
       'http://localhost:9515',
       DesiredCapabilities::chrome()->setCapability(ChromeOptions::CAPABILITY, $options)
     );
-    }
+  }
 }

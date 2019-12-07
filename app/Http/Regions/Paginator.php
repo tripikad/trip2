@@ -4,9 +4,9 @@ namespace App\Http\Regions;
 
 class Paginator
 {
-    public function render($paginator, $currentDestination = null, $currentTopic = null)
-    {
-        return $paginator
+  public function render($paginator, $currentDestination = null, $currentTopic = null)
+  {
+    return $paginator
       ->appends(
         collect()
           ->putWhen($currentDestination, 'destination', $currentDestination)
@@ -14,5 +14,5 @@ class Paginator
           ->all()
       )
       ->links('components.Paginator.Paginator');
-    }
+  }
 }

@@ -4,9 +4,9 @@ namespace App\Http\Regions;
 
 class UserCard
 {
-    public function render($user)
-    {
-        return component('UserCard')
+  public function render($user)
+  {
+    return component('UserCard')
       ->with(
         'image',
         component('UserImage')
@@ -20,5 +20,5 @@ class UserCard
       ->with('name', $user->name)
       ->with('route', route('user.show', [$user]))
       ->with('meta', 'Liitus ' . $user->vars()->created_at_relative);
-    }
+  }
 }

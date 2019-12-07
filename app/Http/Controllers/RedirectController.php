@@ -9,33 +9,33 @@ use App\Destination;
 
 class RedirectController extends Controller
 {
-    public function redirectNode($node_id)
-    {
-        if ($content = Content::find($node_id)) {
-            return redirect()->route($content->type . '.show', [$content->slug], 301);
-        }
-
-        abort(404);
+  public function redirectNode($node_id)
+  {
+    if ($content = Content::find($node_id)) {
+      return redirect()->route($content->type . '.show', [$content->slug], 301);
     }
 
-    public function redirectContent($path)
-    {
-        $alias = \DB::table('aliases')
+    abort(404);
+  }
+
+  public function redirectContent($path)
+  {
+    $alias = \DB::table('aliases')
       ->wherePath('content/' . $path)
       ->first();
 
-        if ($alias) {
-            $content = Content::find($alias->aliasable_id);
+    if ($alias) {
+      $content = Content::find($alias->aliasable_id);
 
-            return redirect()->route($content->type . '.show', [$content->slug], 301);
-        }
-
-        abort(404);
+      return redirect()->route($content->type . '.show', [$content->slug], 301);
     }
 
-    public function redirectAlias($part1, $part2 = '')
-    {
-        $pathMap = [
+    abort(404);
+  }
+
+  public function redirectAlias($part1, $part2 = '')
+  {
+    $pathMap = [
       'content/mis-on-veahind.html' => 'mis-on-veahind',
       'kasutustingimused' => 'kasutustingimused',
       'reklaam' => 'reklaam',
@@ -71,120 +71,120 @@ class RedirectController extends Controller
       'sein' => '/'
     ];
 
-        $path = $part2 ? $part1 . '/' . $part2 : $part1;
+    $path = $part2 ? $part1 . '/' . $part2 : $part1;
 
-        if (isset($pathMap[$path])) {
-            return redirect($pathMap[$path], 301);
-        }
-
-        abort(404);
+    if (isset($pathMap[$path])) {
+      return redirect($pathMap[$path], 301);
     }
 
-    public function redirectTaxonomy($tid)
-    {
-        $alias = \DB::table('aliases')
+    abort(404);
+  }
+
+  public function redirectTaxonomy($tid)
+  {
+    $alias = \DB::table('aliases')
       ->wherePath('taxonomy/term/' . $tid)
       ->first();
 
-        $tid = $alias ? $alias->aliasable_id : $tid;
+    $tid = $alias ? $alias->aliasable_id : $tid;
 
-        if ($destination = Destination::find($tid)) {
-            return redirect()->route('destination.showSlug', [$destination->slug], 301);
-        }
+    if ($destination = Destination::find($tid)) {
+      return redirect()->route('destination.showSlug', [$destination->slug], 301);
+    }
 
-        if ($topic = Topic::find($tid)) {
-            return redirect()->route(
+    if ($topic = Topic::find($tid)) {
+      return redirect()->route(
         'forum.index',
         [
           'topic' => $topic
         ],
         301
       );
-        }
+    }
 
-        if ($carrier = Carrier::find($tid)) {
-            return redirect()->route(
+    if ($carrier = Carrier::find($tid)) {
+      return redirect()->route(
         'flight.index',
         [
           'carrier' => $carrier
         ],
         301
       );
-        }
-
-        return redirect()->route('content.index', ['forum'], 301);
     }
 
-    public function redirectTaxonomyBlurb($blurb, $tid)
-    {
-        return $this->redirectTaxonomy($tid);
-    }
+    return redirect()->route('content.index', ['forum'], 301);
+  }
 
-    public function redirectDestination($title)
-    {
-        $alias = \DB::table('aliases')
+  public function redirectTaxonomyBlurb($blurb, $tid)
+  {
+    return $this->redirectTaxonomy($tid);
+  }
+
+  public function redirectDestination($title)
+  {
+    $alias = \DB::table('aliases')
       ->wherePath('sihtkoht/' . $title)
       ->first();
 
-        if ($alias) {
-            $destination = Destination::find($alias->aliasable_id);
+    if ($alias) {
+      $destination = Destination::find($alias->aliasable_id);
 
-            return redirect()->route('destination.showSlug', [$destination->slug], 301);
-        }
-
-        abort(404);
+      return redirect()->route('destination.showSlug', [$destination->slug], 301);
     }
 
-    public function redirectDestinationBlurb($blurb, $title)
-    {
-        return $this->redirectDestination($title);
-    }
+    abort(404);
+  }
 
-    public function redirectDestinationBlurb2($blurb, $blurb2, $title)
-    {
-        return $this->redirectDestination($title);
-    }
+  public function redirectDestinationBlurb($blurb, $title)
+  {
+    return $this->redirectDestination($title);
+  }
 
-    public function redirectCategory($part1, $part2, $part3 = null, $part4 = null)
-    {
-        $path = collect(['category', $part1, $part2, $part3, $part4])
+  public function redirectDestinationBlurb2($blurb, $blurb2, $title)
+  {
+    return $this->redirectDestination($title);
+  }
+
+  public function redirectCategory($part1, $part2, $part3 = null, $part4 = null)
+  {
+    $path = collect(['category', $part1, $part2, $part3, $part4])
       ->reject(function ($name) {
-          return empty($name);
+        return empty($name);
       })
       ->implode('/');
 
-        $alias = \DB::table('aliases')
+    $alias = \DB::table('aliases')
       ->wherePath($path)
       ->first();
 
-        if ($alias) {
-            if ($destination = Destination::find($alias->aliasable_id)) {
-                return redirect()->route('destination.showSlug', [$destination->slug], 301);
-            }
+    if ($alias) {
+      if ($destination = Destination::find($alias->aliasable_id)) {
+        return redirect()->route('destination.showSlug', [$destination->slug], 301);
+      }
 
-            if ($topic = Topic::find($alias->aliasable_id)) {
-                return redirect()->route(
+      if ($topic = Topic::find($alias->aliasable_id)) {
+        return redirect()->route(
           'forum.index',
           [
             'topic' => $topic
           ],
           301
         );
-            }
+      }
 
-            return redirect()->route('forum.index', 301);
-        }
-
-        abort(404);
+      return redirect()->route('forum.index', 301);
     }
 
-    public function redirectCategoryBlurb($blurb, $part1, $part2, $part3 = null, $part4 = null)
-    {
-        return $this->redirectCategory($part1, $part2, $part3, $part4);
-    }
+    abort(404);
+  }
 
-    public function redirectUser($id)
-    {
-        return redirect()->route('user.show', [$id], 301);
-    }
+  public function redirectCategoryBlurb($blurb, $part1, $part2, $part3 = null, $part4 = null)
+  {
+    return $this->redirectCategory($part1, $part2, $part3, $part4);
+  }
+
+  public function redirectUser($id)
+  {
+    return redirect()->route('user.show', [$id], 301);
+  }
 }

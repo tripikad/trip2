@@ -15,11 +15,11 @@ use App\Http\Controllers\NewsletterController;
 
 class RegistrationController extends Controller
 {
-    public function form()
-    {
-        //return view('pages.auth.register');
+  public function form()
+  {
+    //return view('pages.auth.register');
 
-        return layout('One')
+    return layout('One')
       ->cached(false)
       ->with('color', 'gray')
       ->with('background', component('BackgroundMap'))
@@ -116,11 +116,11 @@ class RegistrationController extends Controller
       )
       ->with('footer', region('FooterLight'))
       ->render();
-    }
+  }
 
-    public function submit(Request $request)
-    {
-        $this->validate($request, [
+  public function submit(Request $request)
+  {
+    $this->validate($request, [
       'name' => 'required|max:64|unique:users',
       'email' => 'required|email|max:64|unique:users',
       'password' => 'required|confirmed|min:6',
@@ -129,47 +129,47 @@ class RegistrationController extends Controller
       'time' => 'required|honeytime:3'
     ]);
 
-        $fields = [
+    $fields = [
       'role' => 'regular',
       'password' => Hash::make($request->get('password'))
     ];
 
-        $user = User::create(array_merge($request->all(), $fields));
+    $user = User::create(array_merge($request->all(), $fields));
 
-        Mail::to($user->email, $user->name)->queue(new ConfirmRegistration($user));
+    Mail::to($user->email, $user->name)->queue(new ConfirmRegistration($user));
 
-        Log::info('New user registered', [
+    Log::info('New user registered', [
       'name' => $user->name,
       'link' => route('user.show', [$user])
     ]);
 
-        return redirect()
+    return redirect()
       ->route('login.form')
       ->with('info', trans('auth.register.sent.info'));
-    }
+  }
 
-    public function confirm($token)
-    {
-        $user = User::where('registration_token', $token)->firstOrFail();
-        $user->confirmEmail();
+  public function confirm($token)
+  {
+    $user = User::where('registration_token', $token)->firstOrFail();
+    $user->confirmEmail();
 
-        Log::info('New user confirmed registration', [
+    Log::info('New user confirmed registration', [
       'name' => $user->name,
       'link' => route('user.show', [$user])
     ]);
 
-        $weekly_newsletter = NewsletterType::where('type', 'weekly')
+    $weekly_newsletter = NewsletterType::where('type', 'weekly')
       ->where('active', 1)
       ->first();
 
-        // @todo Avoid direct controller method call
+    // @todo Avoid direct controller method call
 
-        if ($weekly_newsletter) {
-            (new NewsletterController())->subscribe(request(), $weekly_newsletter->id, $user, true);
-        }
+    if ($weekly_newsletter) {
+      (new NewsletterController())->subscribe(request(), $weekly_newsletter->id, $user, true);
+    }
 
-        return redirect()
+    return redirect()
       ->route('login.form')
       ->with('info', trans('auth.register.confirmed.info'));
-    }
+  }
 }

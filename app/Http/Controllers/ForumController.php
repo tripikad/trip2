@@ -13,45 +13,45 @@ use App\Destination;
 
 class ForumController extends Controller
 {
-    public function forumIndex()
-    {
-        return $this->index('forum');
-    }
+  public function forumIndex()
+  {
+    return $this->index('forum');
+  }
 
-    public function buysellIndex()
-    {
-        return $this->index('buysell');
-    }
+  public function buysellIndex()
+  {
+    return $this->index('buysell');
+  }
 
-    public function expatIndex()
-    {
-        return $this->index('expat');
-    }
+  public function expatIndex()
+  {
+    return $this->index('expat');
+  }
 
-    public function miscIndex()
-    {
-        return $this->index('misc');
-    }
+  public function miscIndex()
+  {
+    return $this->index('misc');
+  }
 
-    private function index($type)
-    {
-        $currentDestination = Request::get('destination');
-        $currentTopic = Request::get('topic');
+  private function index($type)
+  {
+    $currentDestination = Request::get('destination');
+    $currentTopic = Request::get('topic');
 
-        $forums = Content::getLatestPagedItems($type, false, $currentDestination, $currentTopic, 'updated_at', [
+    $forums = Content::getLatestPagedItems($type, false, $currentDestination, $currentTopic, 'updated_at', [
       'unread_content',
       'views'
     ]);
-        $destinations = Destination::select('id', 'name')->get();
-        $topics = Topic::select('id', 'name')
+    $destinations = Destination::select('id', 'name')->get();
+    $topics = Topic::select('id', 'name')
       ->orderBy('name', 'asc')
       ->get();
 
-        $flights = Content::getLatestItems('flight', 3);
-        $travelmates = Content::getLatestItems('travelmate', 3);
-        $news = Content::getLatestItems('news', 1);
+    $flights = Content::getLatestItems('flight', 3);
+    $travelmates = Content::getLatestItems('travelmate', 3);
+    $news = Content::getLatestItems('news', 1);
 
-        return layout('Two')
+    return layout('Two')
       ->with('title', trans("content.$type.index.title"))
       ->with('head_title', trans("content.$type.index.title"))
       ->with('head_description', trans("site.description.$type"))
@@ -91,7 +91,7 @@ class ForumController extends Controller
         collect()
           ->merge(
             $forums->map(function ($forum) {
-                return region('ForumRow', $forum);
+              return region('ForumRow', $forum);
             })
           )
           ->push(region('Paginator', $forums, $currentDestination, $currentTopic))
@@ -115,18 +115,18 @@ class ForumController extends Controller
       ->with('footer', region('FooterLight'))
 
       ->render();
-    }
+  }
 
-    public function followIndex($user_id)
-    {
-        $user = User::findOrFail($user_id);
-        $follows = $user->follows;
+  public function followIndex($user_id)
+  {
+    $user = User::findOrFail($user_id);
+    $follows = $user->follows;
 
-        $flights = Content::getLatestItems('flight', 3);
-        $travelmates = Content::getLatestItems('travelmate', 3);
-        $news = Content::getLatestItems('news', 1);
+    $flights = Content::getLatestItems('flight', 3);
+    $travelmates = Content::getLatestItems('travelmate', 3);
+    $news = Content::getLatestItems('news', 1);
 
-        return layout('Two')
+    return layout('Two')
       ->with('background', component('BackgroundMap'))
       ->with('color', 'gray')
 
@@ -150,7 +150,7 @@ class ForumController extends Controller
           ->pushWhen($follows->count() == 0, component('Title')->with('title', trans('follow.index.empty')))
           ->merge(
             $user->follows->map(function ($follow) {
-                return region('ForumRow', $follow->followable);
+              return region('ForumRow', $follow->followable);
             })
           )
       )
@@ -172,54 +172,54 @@ class ForumController extends Controller
       ->with('footer', region('FooterLight'))
 
       ->render();
-    }
+  }
 
-    public function show($slug)
-    {
-        $user = auth()->user();
-        $forum = Content::whereSlug($slug)
+  public function show($slug)
+  {
+    $user = auth()->user();
+    $forum = Content::whereSlug($slug)
       ->with('flags', 'images', 'user', 'user.images', 'destinations', 'topics')
       ->withCount('views')
       ->when(!$user || !$user->hasRole('admin'), function ($query) use ($user) {
-          return $query->whereStatus(1);
+        return $query->whereStatus(1);
       })
       ->first();
-        if (!$forum) {
-            abort(404);
-        }
-        $forum->vars()->add_view;
+    if (!$forum) {
+      abort(404);
+    }
+    $forum->vars()->add_view;
 
-        $comments = Comment::where('content_id', $forum->id)
+    $comments = Comment::where('content_id', $forum->id)
       ->with('user', 'user.images', 'flags', 'content')
       ->when(!$user || !$user->hasRole('admin'), function ($query) use ($user) {
-          return $query->whereStatus(1);
+        return $query->whereStatus(1);
       })
       ->paginate(config('content.forum.paginate'));
 
-        $anchor = '';
-        $type = $forum->type;
+    $anchor = '';
+    $type = $forum->type;
 
-        $firstUnreadCommentId = $forum->vars()->firstUnreadCommentId;
+    $firstUnreadCommentId = $forum->vars()->firstUnreadCommentId;
 
-        $flights = Content::getLatestItems('flight', 3);
-        $travelmates = Content::getLatestItems('travelmate', 3);
-        $news = Content::getLatestItems('news', 1);
+    $flights = Content::getLatestItems('flight', 3);
+    $travelmates = Content::getLatestItems('travelmate', 3);
+    $news = Content::getLatestItems('news', 1);
 
-        $forum->vars()->update_content_read;
+    $forum->vars()->update_content_read;
 
-        if ($comments->total()) {
-            $last_comment = Comment::select('id')
+    if ($comments->total()) {
+      $last_comment = Comment::select('id')
         ->where('content_id', $forum->id)
         ->when(!$user || !$user->hasRole('admin'), function ($query) use ($user) {
-            return $query->whereStatus(1);
+          return $query->whereStatus(1);
         })
         ->orderBy('id', 'desc')
         ->first();
 
-            $anchor = '?page=' . $comments->lastPage() . '#comment-' . $last_comment->id;
-        }
+      $anchor = '?page=' . $comments->lastPage() . '#comment-' . $last_comment->id;
+    }
 
-        return layout('Two')
+    return layout('Two')
       ->with('title', trans('content.forum.index.title'))
       ->with('head_title', $forum->vars()->title)
       ->with('head_description', $forum->vars()->description)
@@ -270,7 +270,7 @@ class ForumController extends Controller
           )
           ->merge(
             $comments->map(function ($comment) use ($firstUnreadCommentId) {
-                return region('Comment', $comment, $firstUnreadCommentId, 'inset');
+              return region('Comment', $comment, $firstUnreadCommentId, 'inset');
             })
           )
           ->push(component('CommentInset')->with('content', region('PaginatorExtended', $comments)))
@@ -296,18 +296,18 @@ class ForumController extends Controller
       ->with('footer', region('FooterLight'))
 
       ->render();
-    }
+  }
 
-    public function create($type = 'forum')
-    {
-        $destinations = Destination::select('id', 'name')
+  public function create($type = 'forum')
+  {
+    $destinations = Destination::select('id', 'name')
       ->orderBy('name', 'asc')
       ->get();
-        $topics = Topic::select('id', 'name')
+    $topics = Topic::select('id', 'name')
       ->orderBy('name', 'asc')
       ->get();
 
-        return layout('Two')
+    return layout('Two')
       ->with('background', component('BackgroundMap'))
       ->with('color', 'gray')
 
@@ -344,7 +344,7 @@ class ForumController extends Controller
                       ->with(
                         'options',
                         collect(['forum', 'buysell', 'expat', 'misc'])->map(function ($type) {
-                            return collect()
+                          return collect()
                             ->put('id', $type)
                             ->put('name', trans("content.$type.index.title"));
                         })
@@ -406,33 +406,33 @@ class ForumController extends Controller
       ->with('footer', region('Footer'))
 
       ->render();
-    }
+  }
 
-    public function store()
-    {
-        $loggedUser = request()->user();
+  public function store()
+  {
+    $loggedUser = request()->user();
 
-        $rules = [
+    $rules = [
       'title' => 'required',
       'body' => 'required',
       'type' => 'in:forum,buysell,expat,misc'
     ];
 
-        $this->validate(request(), $rules);
+    $this->validate(request(), $rules);
 
-        $forum = $loggedUser->contents()->create([
+    $forum = $loggedUser->contents()->create([
       'title' => request()->title,
       'body' => request()->body,
       'type' => request()->type,
       'status' => 1
     ]);
 
-        if ($forum->type != 'misc') {
-            $forum->destinations()->attach(request()->destinations);
-            $forum->topics()->attach(request()->topics);
-        }
+    if ($forum->type != 'misc') {
+      $forum->destinations()->attach(request()->destinations);
+      $forum->topics()->attach(request()->topics);
+    }
 
-        Log::info('New content added', [
+    Log::info('New content added', [
       'user' => $forum->user->name,
       'title' => $forum->title,
       'type' => $forum->type,
@@ -440,7 +440,7 @@ class ForumController extends Controller
       'link' => route("$forum->type.show", [$forum->slug])
     ]);
 
-        return redirect()
+    return redirect()
       ->route("$forum->type.index")
       ->with(
         'info',
@@ -448,20 +448,20 @@ class ForumController extends Controller
           'title' => $forum->title
         ])
       );
-    }
+  }
 
-    public function edit($id)
-    {
-        $forum = Content::findOrFail($id);
+  public function edit($id)
+  {
+    $forum = Content::findOrFail($id);
 
-        $destinations = Destination::select('id', 'name')
+    $destinations = Destination::select('id', 'name')
       ->orderBy('name', 'asc')
       ->get();
-        $topics = Topic::select('id', 'name')
+    $topics = Topic::select('id', 'name')
       ->orderBy('name', 'asc')
       ->get();
 
-        return layout('Two')
+    return layout('Two')
       ->with('background', component('BackgroundMap'))
       ->with('color', 'gray')
 
@@ -498,7 +498,7 @@ class ForumController extends Controller
                       ->with(
                         'options',
                         collect(['forum', 'buysell', 'expat', 'misc'])->map(function ($type) {
-                            return collect()
+                          return collect()
                             ->put('id', $type)
                             ->put('name', trans("content.$type.index.title"));
                         })
@@ -562,32 +562,32 @@ class ForumController extends Controller
       ->with('footer', region('Footer'))
 
       ->render();
-    }
+  }
 
-    public function update($id)
-    {
-        $forum = Content::findOrFail($id);
+  public function update($id)
+  {
+    $forum = Content::findOrFail($id);
 
-        $rules = [
+    $rules = [
       'title' => 'required',
       'body' => 'required',
       'type' => 'in:forum,buysell,expat,misc'
     ];
 
-        $this->validate(request(), $rules);
+    $this->validate(request(), $rules);
 
-        $forum->update([
+    $forum->update([
       'title' => request()->title,
       'body' => request()->body,
       'type' => request()->type
     ]);
 
-        if ($forum->type != 'misc') {
-            $forum->destinations()->sync(request()->destinations ?: []);
-            $forum->topics()->sync(request()->topics ?: []);
-        }
+    if ($forum->type != 'misc') {
+      $forum->destinations()->sync(request()->destinations ?: []);
+      $forum->topics()->sync(request()->topics ?: []);
+    }
 
-        return redirect()
+    return redirect()
       ->route('forum.show', [$forum->slug])
       ->with(
         'info',
@@ -595,5 +595,5 @@ class ForumController extends Controller
           'title' => $forum->title
         ])
       );
-    }
+  }
 }

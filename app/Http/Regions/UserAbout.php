@@ -4,9 +4,9 @@ namespace App\Http\Regions;
 
 class UserAbout
 {
-    public function render($user)
-    {
-        return component('Title')
+  public function render($user)
+  {
+    return component('Title')
       ->is('white')
       ->is('small')
       ->with(
@@ -22,5 +22,5 @@ class UserAbout
 
           ->implode('')
       );
-    }
+  }
 }

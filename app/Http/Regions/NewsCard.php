@@ -4,11 +4,11 @@ namespace App\Http\Regions;
 
 class NewsCard
 {
-    public function render($post)
-    {
-        $commentCount = $post->vars()->commentCount();
+  public function render($post)
+  {
+    $commentCount = $post->vars()->commentCount();
 
-        return component('NewsCard')
+    return component('NewsCard')
       ->with('route', route($post->type . '.show', [$post->slug]))
       ->with('image', $post->imagePreset('small'))
       ->with('title', $post->vars()->shortTitle)
@@ -24,5 +24,5 @@ class NewsCard
             )
         )
       );
-    }
+  }
 }

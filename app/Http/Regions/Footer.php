@@ -6,9 +6,9 @@ use Carbon\Carbon;
 
 class Footer
 {
-    protected function prepareCol1Links()
-    {
-        return collect()
+  protected function prepareCol1Links()
+  {
+    return collect()
       ->push([
         'title' => trans('menu.footer.flights'),
         'route' => route('flight.index')
@@ -34,13 +34,13 @@ class Footer
         'route' => route('destination.index')
       ])
       ->map(function ($item) {
-          return (object) $item;
+        return (object) $item;
       });
-    }
+  }
 
-    protected function prepareCol2Links()
-    {
-        return collect()
+  protected function prepareCol2Links()
+  {
+    return collect()
       ->push([
         'title' => trans('menu.footer2.forum'),
         'route' => route('forum.index')
@@ -54,15 +54,15 @@ class Footer
         'route' => route('expat.index')
       ])
       ->map(function ($item) {
-          return (object) $item;
+        return (object) $item;
       });
-    }
+  }
 
-    protected function prepareCol3Links()
-    {
-        $loggedUser = request()->user();
+  protected function prepareCol3Links()
+  {
+    $loggedUser = request()->user();
 
-        return collect()
+    return collect()
       ->push([
         'title' => trans('menu.footer3.about'),
         'route' => route('static.show', 'tripist')
@@ -96,13 +96,13 @@ class Footer
         'route' => 'https://facebook.com/tripeeee'
       ])
       ->map(function ($item) {
-          return (object) $item;
+        return (object) $item;
       });
-    }
+  }
 
-    protected function prepareSocialLinks()
-    {
-        return collect()
+  protected function prepareSocialLinks()
+  {
+    return collect()
       ->push([
         'title' => trans('menu.footer-social.facebook'),
         'route' => 'https://facebook.com/tripeeee',
@@ -136,13 +136,13 @@ class Footer
         'target' => ''
       ])
       ->map(function ($item) {
-          return (object) $item;
+        return (object) $item;
       });
-    }
+  }
 
-    public function render()
-    {
-        return component('Footer')
+  public function render()
+  {
+    return component('Footer')
       ->with('image', '/photos/footer.jpg')
       ->with('logo_route', route('frontpage.index'))
       ->with(
@@ -166,5 +166,5 @@ class Footer
           'current_year' => Carbon::now()->year
         ])
       );
-    }
+  }
 }

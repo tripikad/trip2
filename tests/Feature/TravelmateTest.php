@@ -10,18 +10,18 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class TravelmateTest extends BrowserKitTestCase
 {
-    use DatabaseTransactions;
+  use DatabaseTransactions;
 
-    public function test_regular_user_can_create_and_edit_travelmate()
-    {
-        $regular_user_creating_travelmate = factory(User::class)->create();
+  public function test_regular_user_can_create_and_edit_travelmate()
+  {
+    $regular_user_creating_travelmate = factory(User::class)->create();
 
-        $start_at = Carbon::now()
+    $start_at = Carbon::now()
       ->addMonths(1)
       ->startOfMonth()
       ->toDateTimeString();
 
-        $this->actingAs($regular_user_creating_travelmate)
+    $this->actingAs($regular_user_creating_travelmate)
       ->visit('reisikaaslased')
       ->click(trans('content.travelmate.create.title'))
       ->seePageIs('travelmate/create')
@@ -42,13 +42,13 @@ class TravelmateTest extends BrowserKitTestCase
         'duration' => 'From here to eternity'
       ]);
 
-        $content = Content::whereTitle('Hello travelmate title')->first();
-        $edited_start_at = Carbon::now()
+    $content = Content::whereTitle('Hello travelmate title')->first();
+    $edited_start_at = Carbon::now()
       ->addMonths(2)
       ->startOfMonth()
       ->toDateTimeString();
 
-        $this->actingAs($regular_user_creating_travelmate)
+    $this->actingAs($regular_user_creating_travelmate)
       ->visit("reisikaaslased/$content->slug")
       ->click(trans('content.action.edit.title'))
       ->seePageIs("travelmate/$content->id/edit")
@@ -68,9 +68,9 @@ class TravelmateTest extends BrowserKitTestCase
         'start_at' => $edited_start_at,
         'duration' => 'Hasta la eternidad'
       ]);
-    }
+  }
 
-    /*
+  /*
       public function test_regular_user_cannot_edit_other_user_content()
       {
           $creator_user = factory(User::class)->create();
