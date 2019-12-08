@@ -15,9 +15,27 @@ composer install
 cp .env.example .env
 php artisan key:generate
 php artisan dusk:update --detect
-yarn # or npm install
+npm install
 npm run dev
 ```
+
+### Debugging
+
+Laravel Telescope is available for debugging under `/telescope` path. 
+
+To enable it, add the following lines to `.env`:
+
+```env
+TELESCOPE_ENABLED=true
+```
+
+To enable optional dark mode for Telescope, add this:
+
+```env
+TELESCOPE_DARKMODE=true
+```
+
+Note that for production environment `/telescope` is only available for logged in users that have `role:superuser` role.
 
 ### Databases
 
@@ -26,7 +44,7 @@ mysqladmin -uroot create trip
 mysqladmin -uroot create trip2
 ```
 
-Optionally use https://www.sequelpro.com to set up the databases. Ask for access to staging server to get the latest `trip2` database dump and migrate the data over, either using Sequel Pro or running
+Optionally use https://www.sequelpro.com or https://tableplus.com/ to set up the databases. Ask for access to staging server to get the latest `trip2` database dump and migrate the data over, either using Sequel Pro or running
 
 ```
 mysql -uroot trip2 < dump.sql
@@ -100,7 +118,7 @@ valet restart
 2. Run
 
     ```
-    php artisan dusk:update
+    php artisan dusk:update --detect
     ```
 
     If you want to run Dusk tests with previous version of Chrome you will need specify a version of Dusk update. Read more here https://github.com/staudenmeir/dusk-updater
