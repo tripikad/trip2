@@ -13,7 +13,7 @@
 @isset($subcopy)
 @slot('subcopy')
 @component('mail::subcopy')
-{{ trim($subcopy, ' \t') }}
+{{ trim($subcopy ?? '', ' \t') }}
 @endcomponent
 @endslot
 @endisset
