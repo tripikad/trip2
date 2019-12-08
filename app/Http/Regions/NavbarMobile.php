@@ -64,11 +64,11 @@ class NavbarMobile
             ])
             ->pushWhen($user && $user->company, [
                 'title' => trans('menu.offer.admin.company.index'),
-                'route' => route('offer.admin.company.index')
+                'route' => route('offer.admin.index')
             ])
             ->pushWhen($user && $user->hasRole('superuser'), [
-                'title' => trans('menu.offer.admin.index'),
-                'route' => route('offer.admin.index')
+                'title' => trans('menu.company.index'),
+                'route' => route('company.index')
             ])
             ->pushWhen($user, [
                 'title' => trans('menu.auth.logout'),

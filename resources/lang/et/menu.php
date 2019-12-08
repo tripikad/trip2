@@ -69,6 +69,6 @@ return [
     'admin.newsletter' => 'Uudiskirjad',
     'admin.static' => 'Muuda - :title',
 
-    'offer.admin.company.index' => 'Reisipakkumiste lisamine',
-    'offer.admin.index' => 'Reisipakkumiste haldus'
+    'offer.admin.index' => 'Reisipakkumiste lisamine',
+    'company.index' => 'Reisifirmad ja pakkumised'
 ];

@@ -14,7 +14,11 @@
         />
         <div class="OfferList__filters">
             <form-select :options="styles" v-model="activeStyle" isclasses="FormSelect--blue" />
-            <form-select :options="destinations" v-model="activeDestination" isclasses="FormSelect--blue" />
+            <form-select
+                :options="destinations"
+                v-model="activeDestination"
+                isclasses="FormSelect--blue"
+            />
             <form-select :options="companies" v-model="activeCompany" isclasses="FormSelect--blue" />
             <a :style="{ opacity: !notFiltered ? 1 : 0.25 }" @click="handleClearFilters">
                 <div class="Button Button--cyan">
@@ -23,7 +27,12 @@
             </a>
         </div>
         <div class="OfferList__offers">
-            <OfferRow v-for="(offer, i) in filteredOfferList" :key="i" :offer="offer" :route="offer.route" />
+            <OfferRow
+                v-for="(offer, i) in filteredOfferList"
+                :key="i"
+                :offer="offer"
+                :route="offer.route"
+            />
         </div>
     </div>
 </template>
@@ -34,7 +43,8 @@ import { parseSheets, unique } from '../../utils/utils'
 export default {
     props: {
         isclasses: { default: '' },
-        route: { default: '' }
+        route: { default: '' },
+        user_id: { default: '' }
     },
     data: () => ({
         offers: [],
@@ -75,9 +85,9 @@ export default {
         companies() {
             return [
                 { id: -1, name: 'Kõik firmad' },
-                ...unique(this.offers.map(o => o.user.name)).map((name, id) => ({
+                ...unique(this.offers.map(o => o.user.id)).map(id => ({
                     id,
-                    name
+                    name: id
                 }))
             ]
         },
@@ -93,8 +103,8 @@ export default {
         styles() {
             return [
                 { id: -1, name: 'Kõik reisistiilid' },
-                ...unique(this.offers.map(o => o.style)).map((name, id) => ({
-                    id,
+                ...unique(this.offers.map(o => o.style)).map(name => ({
+                    name,
                     name
                 }))
             ]
@@ -103,7 +113,7 @@ export default {
             return this.offers
                 .filter(o => {
                     if (this.activeCompany > -1) {
-                        return o.user.name == this.getById(this.companies, this.activeCompany, 'name')
+                        return o.user.id == this.getById(this.companies, this.activeCompany, 'name')
                     }
                     return true
                 })
@@ -159,6 +169,9 @@ export default {
                         this.maxPrice < this.minPrice + this.priceRange
                             ? this.minPrice + this.priceRange
                             : this.maxPrice
+                    if (this.user_id) {
+                        this.activeCompany = this.user_id
+                    }
                 })
         }
     }

@@ -4,7 +4,7 @@
 
 It's recommended to use Laravel Valet for development. Follow its instructions. https://laravel.com/docs/master/valet
 
-Your will also need Yarn https://yarnpkg.com/en/docs/install
+It's also recommended to install `composer require global hirak/prestissimo` first.
 
 Then:
 

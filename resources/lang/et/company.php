@@ -1,6 +1,13 @@
 <?php
 return [
+    'index.title' => 'Reisifirmad',
+    'index.create' => 'Lisa uus reisifirma',
+    'index.edit' => 'Muuda',
+    'index.offer' => 'Reisipakkumised',
     'create.title' => 'Lisa reisifirma',
+    'create.submit' => 'Lisa reisifirma',
+    'create.info' => 'Uus firma on lisatud',
+    'edit.title' => 'Uuenda firma profiili',
     'edit.credentials' => 'Nimi ja parool',
     'edit.name.title' => 'Kasutajanimi',
     'edit.company_name.title' => 'Firmanimi',
@@ -13,5 +20,6 @@ return [
     'edit.homepage.title' => 'Kodulehe link',
     'edit.facebook.title' => 'Facebooki lehe link',
     'edit.instagram.title' => 'Instagrami link',
-    'edit.submit' => 'Lisa reisifirma',
+    'edit.submit' => 'Uuenda',
+    'edit.info' => 'Firma profiil on uuendatud'
 ];

@@ -502,7 +502,13 @@ Route::get('lendude_sooduspakkumised/rss', [
     'as' => 'flight.feed'
 ]);
 
-// Company
+// Companies
+
+Route::get('company', 'CompanyController@index')
+    ->name('company.index')
+    ->middleware('role:superuser');
+
+Route::get('company/{id}', 'CompanyController@show')->name('company.show');
 
 Route::get('company/create', 'CompanyController@create')
     ->name('company.create')
@@ -511,6 +517,14 @@ Route::get('company/create', 'CompanyController@create')
 Route::post('company/store', 'CompanyController@store')
     ->name('company.store')
     ->middleware('role:superuser');
+
+Route::get('company/{id}/edit', 'CompanyController@edit')
+    ->name('company.edit')
+    ->middleware('role:superuser,userowner');
+
+Route::put('company/{id}/update', 'CompanyController@update')
+    ->name('company.update')
+    ->middleware('role:superuser,userowner');
 
 // Offers
 
@@ -524,10 +538,6 @@ Route::get('offer/{id}', 'OfferController@show')->name('offer.show');
 
 Route::get('offer/admin', 'OfferAdminController@index')
     ->name('offer.admin.index')
-    ->middleware('role:superuser');
-
-Route::get('offer/admin/company', 'OfferAdminController@companyIndex')
-    ->name('offer.admin.company.index')
     ->middleware('company');
 
 Route::get('offer/admin/create/{style}', 'OfferAdminController@create')

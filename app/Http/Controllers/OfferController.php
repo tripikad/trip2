@@ -4,11 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Content;
 use App\Offer;
+use App\User;
 
 class OfferController extends Controller
 {
     public function index()
     {
+        $user = null;
+
+        if (request()->has('user_id')) {
+            $user = User::whereCompany(true)->findOrFail(request()->user_id);
+        }
+
         return layout('Offer')
             ->with('color', 'blue')
             ->with('head_robots', 'noindex')
@@ -31,6 +38,7 @@ class OfferController extends Controller
                     component('OfferList')
                         ->with('height', '200vh')
                         ->with('route', route('offer.index.json'))
+                        ->with('user_id', $user ? $user->id : '')
                 )
             )
             ->with('footer', region('FooterLight', ''))

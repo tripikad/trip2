@@ -7,85 +7,12 @@ use Carbon\Carbon;
 use App\Content;
 use App\Offer;
 use App\Destination;
+use App\User;
 
 use Log;
 
 class OfferAdminController extends Controller
 {
-    public function index()
-    {
-        $offers = Offer::latest()
-            ->with(['user:id,name', 'startDestinations', 'endDestinations'])
-            ->take(100)
-            ->get();
-
-        return layout('Offer')
-            ->with('head_robots', 'noindex')
-            ->with('title', 'Offer')
-            ->with('color', 'blue')
-            ->with('header', region('OfferHeader'))
-            ->with(
-                'content',
-                collect()
-                    ->push(
-                        component('Title')
-                            ->is('large')
-                            ->is('white')
-                            ->with('title', trans('offer.admin.index.title'))
-                    )
-                    ->push(region('OfferAdminButtons'))
-                    ->br()
-                    ->merge(
-                        $offers->map(function ($offer) {
-                            return component('OfferRow')
-                                ->is($offer->status == 1 ? '' : 'unpublished')
-                                ->with('offer', $offer)
-                                ->with('route', $offer->status == 1 ? route('offer.show', [$offer]) : '');
-                        })
-                    )
-            )
-            ->with('footer', region('FooterLight', ''))
-            ->render();
-    }
-
-    public function companyIndex()
-    {
-        $loggedUser = request()->user();
-
-        $offers = $loggedUser
-            ->offers()
-            ->latest()
-            ->with(['user:id,name', 'startDestinations', 'endDestinations'])
-            ->get();
-
-        return layout('Offer')
-            ->with('head_robots', 'noindex')
-            ->with('title', 'Offer')
-            ->with('color', 'blue')
-            ->with('header', region('OfferHeader'))
-            ->with(
-                'content',
-                collect()
-                    ->push(
-                        component('Title')
-                            ->is('large')
-                            ->is('white')
-                            ->with('title', trans('offer.admin.company.index.title'))
-                    )
-                    ->push(region('OfferAdminButtons'))
-                    ->br()
-                    ->merge(
-                        $offers->map(function ($offer) {
-                            return component('OfferRow')
-                                ->is($offer->status ? '' : 'unpublished')
-                                ->with('offer', $offer);
-                        })
-                    )
-            )
-            ->with('footer', region('FooterLight', ''))
-            ->render();
-    }
-
     public function create($style)
     {
         $isPackage = $style == 'package';
@@ -388,7 +315,7 @@ class OfferAdminController extends Controller
         ]);
 
         return redirect()
-            ->route('offer.admin.company.index')
+            ->route('offer.admin.index')
             ->with(
                 'info',
                 trans('offer.admin.store.info', [

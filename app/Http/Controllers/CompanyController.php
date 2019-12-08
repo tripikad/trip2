@@ -2,17 +2,101 @@
 
 namespace App\Http\Controllers;
 
-//use Illuminate\Support\Facades\Hash;
 use Hash;
+use Carbon\Carbon;
+
 use App\User;
 use App\Image;
-use Carbon\Carbon;
+use App\Offer;
 
 class CompanyController extends Controller
 {
+    public function index()
+    {
+        $companies = User::whereCompany(true)->get();
+
+        $offers = Offer::latest()
+            ->with(['user:id,name', 'startDestinations', 'endDestinations'])
+            ->take(100)
+            ->get();
+
+        return layout('Offer')
+            ->with('head_robots', 'noindex')
+            ->with('title', 'Offer')
+            ->with('color', 'blue')
+            ->with('header', region('OfferHeader'))
+            ->with(
+                'content',
+                collect()
+                    ->push(
+                        component('Title')
+                            ->is('large')
+                            ->is('white')
+                            ->with('title', trans('company.index.title'))
+                    )
+                    ->push(
+                        component('Button')
+                            ->is('orange')
+                            ->is('narrow')
+                            ->with('title', trans('company.index.create'))
+                            ->with('route', route('company.create'))
+                    )
+                    ->merge(
+                        $companies->map(function ($company) {
+                            return component('Flex')
+                                ->with('align', 'center')
+                                ->with(
+                                    'items',
+                                    collect()
+                                        ->push(
+                                            component('Title')
+                                                ->is('small')
+                                                ->is('white')
+                                                ->with('title', $company->name)
+                                                ->with('route', route('company.show', $company))
+                                        )
+                                        ->push(
+                                            component('Button')
+                                                ->is('orange')
+                                                ->is('small')
+                                                ->is('narrow')
+                                                ->with('title', trans('company.index.edit'))
+                                                ->with(
+                                                    'route',
+                                                    route('company.edit', [$company, 'redirect' => 'company.index'])
+                                                )
+                                        )
+                                );
+                        })
+                    )
+                    ->br()
+                    ->push(
+                        component('Title')
+                            ->is('large')
+                            ->is('white')
+                            ->with('title', trans('company.index.offer'))
+                    )
+                    ->merge(
+                        $offers->map(function ($offer) {
+                            return component('OfferRow')
+                                ->is($offer->status == 1 ? '' : 'unpublished')
+                                ->with('offer', $offer)
+                                ->with('route', $offer->status == 1 ? route('offer.show', [$offer]) : '');
+                        })
+                    )
+            )
+            ->with('footer', region('FooterLight', ''))
+            ->render();
+    }
+
+    public function show($id)
+    {
+        $user = User::whereCompany(true)->findOrFail($id);
+        return redirect()->route('offer.index', ['user_id' => $user->id]);
+    }
+
     public function create()
     {
-
         $loggedUser = request()->user();
 
         return layout('Offer')
@@ -122,7 +206,8 @@ class CompanyController extends Controller
                                     component('FormButton')
                                         ->is('wide')
                                         ->is('large')
-                                        ->with('title', trans('company.edit.submit'))
+                                        ->is('orange')
+                                        ->with('title', trans('company.create.submit'))
                                 )
                         )
                 )
@@ -154,7 +239,7 @@ class CompanyController extends Controller
         $user = User::create([
             'name' => request()->name,
             'email' => request()->email,
-            'password' =>  Hash::make(request()->password),
+            'password' => Hash::make(request()->password),
             'real_name' => request()->company_name,
             'real_name_show' => 1,
             'notify_message' => 0,
@@ -185,7 +270,67 @@ class CompanyController extends Controller
         }
 
         return redirect()
-            ->route('user.show', [$user])
-            ->with('info', trans('user.update.info'));
+            ->route('company.index')
+            ->with('info', trans('company.create.info'));
+    }
+
+    public function edit($id)
+    {
+        $user = User::findOrFail($id);
+
+        return layout('Offer')
+            ->with('title', 'Offer')
+            ->with('color', 'blue')
+            ->with('header', region('OfferHeader'))
+            ->with(
+                'content',
+                collect()->push(
+                    component('Title')
+                        ->is('large')
+                        ->is('white')
+                        ->is('center')
+                        ->with('title', trans('company.edit.title'))
+                )
+            )
+            ->with(
+                'bottom',
+                collect()->push(
+                    component('Form')
+                        ->with('route', route('company.update', [$id]))
+                        ->with('method', 'PUT')
+                        ->with('files', true)
+                        ->with(
+                            'fields',
+                            collect()
+                                // ->push(
+                                //     component('Title')
+                                //         ->is('small')
+                                //         ->is('blue')
+                                //         ->with('title', trans('company.edit.credentials'))
+                                // )
+                                ->pushWhen(
+                                    request()->has('redirect'),
+                                    component('FormHidden')
+                                        ->with('name', 'redirect')
+                                        ->with('value', request()->redirect)
+                                )
+                                ->push(
+                                    component('FormButton')
+                                        ->is('wide')
+                                        ->is('large')
+                                        ->is('orange')
+                                        ->with('title', trans('company.edit.submit'))
+                                )
+                        )
+                )
+            )
+            ->render();
+    }
+
+    public function update($id)
+    {
+        return redirect()
+            ->route(request()->has('redirect') ? request()->redirect : 'offer.admin.index')
+            ->with('info', trans('company.edit.info'));
     }
 }
