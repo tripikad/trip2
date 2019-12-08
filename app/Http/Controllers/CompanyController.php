@@ -13,6 +13,7 @@ class CompanyController extends Controller
 {
     public function index()
     {
+<<<<<<< HEAD
         $companies = User::whereCompany(true)->get();
 
         $offers = Offer::latest()
@@ -97,6 +98,8 @@ class CompanyController extends Controller
 
     public function create()
     {
+=======
+>>>>>>> origin/kika-company
         $loggedUser = request()->user();
 
         return layout('Offer')

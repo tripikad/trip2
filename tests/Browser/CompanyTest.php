@@ -13,7 +13,6 @@ class CompanyTest extends DuskTestCase
 {
     public function test_superuser_can_add_company_and_company_can_log_in()
     {
-
         $superuser = factory(User::class)->create(['role' => 'superuser']);
 
         $this->browse(function (Browser $browser) use ($superuser) {
