@@ -20,10 +20,6 @@ return [
     'edit.homepage.title' => 'Kodulehe link',
     'edit.facebook.title' => 'Facebooki lehe link',
     'edit.instagram.title' => 'Instagrami link',
-<<<<<<< HEAD
     'edit.submit' => 'Uuenda',
     'edit.info' => 'Firma profiil on uuendatud'
-=======
-    'edit.submit' => 'Lisa reisifirma',
->>>>>>> origin/kika-company
 ];
