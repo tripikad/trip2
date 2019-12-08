@@ -12,7 +12,6 @@ class CompanyController extends Controller
 {
     public function create()
     {
-
         $loggedUser = request()->user();
 
         return layout('Offer')
