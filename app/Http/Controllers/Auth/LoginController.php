@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use Log;
 use Auth;
 use Honeypot;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class LoginController extends Controller
@@ -157,14 +158,14 @@ class LoginController extends Controller
 
     protected function signIn(Request $request)
     {
-        return Auth::attempt($this->getCredentials(), $request->has('remember'));
+        return Auth::attempt($this->getCredentials($request), $request->has('remember'));
     }
 
-    protected function getCredentials()
+    protected function getCredentials(Request $request)
     {
         return [
-            'name' => request()->name,
-            'password' => request()->password,
+            'name' => $request->input('name'),
+            'password' => $request->input('password'),
             'verified' => true
         ];
     }

@@ -6,7 +6,7 @@ $value = $value ?? '';
 
 @endphp
 
-<div class="FormPassword {{ $isclasses }} {{ $errors->first($name) ? 'FormPassword--error' : ''}}">
+<div class="FormPassword {{ $isclasses }}">
 
     @if ($title)
 
@@ -20,7 +20,6 @@ $value = $value ?? '';
         name="{{ $name }}"
         type="password"
         value="{{ $value }}"
-        dusk="{{ slug($title) }}"
     >
 
 </div>

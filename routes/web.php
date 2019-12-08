@@ -502,16 +502,6 @@ Route::get('lendude_sooduspakkumised/rss', [
     'as' => 'flight.feed'
 ]);
 
-// Company
-
-Route::get('company/create', 'CompanyController@create')
-    ->name('company.create')
-    ->middleware('role:superuser');
-
-Route::post('company/store', 'CompanyController@store')
-    ->name('company.store')
-    ->middleware('role:superuser');
-
 // Offers
 
 Route::get('offer', 'OfferController@index')->name('offer.index');
