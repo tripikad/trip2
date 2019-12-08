@@ -4,7 +4,6 @@ namespace Tests\Browser;
 
 use Tests\DuskTestCase;
 use Laravel\Dusk\Browser;
-use Honeypot;
 
 use App\User;
 use App\Offer;
@@ -14,8 +13,6 @@ class CompanyTest extends DuskTestCase
 {
     public function test_superuser_can_add_company_and_company_can_log_in()
     {
-        Honeypot::disable();
-
         $superuser = factory(User::class)->create(['role' => 'superuser']);
 
         $this->browse(function (Browser $browser) use ($superuser) {
@@ -28,21 +25,12 @@ class CompanyTest extends DuskTestCase
                 ->type(dusk('Parool'), 'nomedemihijo')
                 ->type(dusk('Parool uuesti'), 'nomedemihijo')
                 ->type(dusk('E-mail'), 'empresaria@rica.es')
-                //->attach('file', './storage/tests/test.jpg')
+                ->attach('file', './storage/tests/test.jpg')
                 ->scrollToBottom()
                 ->pause(500)
-                ->click(dusk('Lisa reisifirma'));
+                ->click(dusk('Lisa reisifirma'))
+                ->screenshot('c');
         });
 
-        $this->browse(function (Browser $browser) use ($superuser) {
-            $browser
-                ->visit('/logout')
-                ->visit('/login')
-                ->type(dusk('Kasutajanimi'), 'empresariarica')
-                ->type(dusk('Parool'), 'nomedemihijo')
-                ->click(dusk('Logi sisse'))
-                ->visit('/offer/admin/company')
-                ->assertSourceHas('Lisa seiklusreis');
-        });
     }
 }
