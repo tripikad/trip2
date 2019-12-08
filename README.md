@@ -14,7 +14,6 @@ cd trip2
 composer install
 cp .env.example .env
 php artisan key:generate
-php artisan dusk:update --detect
 yarn # or npm install
 npm run dev
 ```
