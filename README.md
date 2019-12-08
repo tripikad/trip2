@@ -37,6 +37,7 @@ TELESCOPE_DARKMODE=true
 
 Note that for production environment `/telescope` is only available for logged in users that have `role:superuser` role.
 
+
 ### Databases
 
 ```
@@ -107,6 +108,18 @@ To clear the cache, run
 ```
 rm -R /tmp/nginx/*
 valet restart
+```
+
+## Formatting code
+
+To format the `php`, `caa`, `js` and `vue` files we use [Prettier](https://prettier.io/). 
+
+It is recommended to use [VS Code Prettier plugin](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) and set `Format on Save` setting to `true`.
+
+To format all files in one go, run
+
+```sh
+npm run prettier
 ```
 
 ## Testing
