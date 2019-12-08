@@ -4,7 +4,6 @@ namespace Tests\Browser;
 
 use Tests\DuskTestCase;
 use Laravel\Dusk\Browser;
-use Honeypot;
 
 use App\User;
 use App\Offer;
@@ -14,7 +13,6 @@ class CompanyTest extends DuskTestCase
 {
     public function test_superuser_can_add_company_and_company_can_log_in()
     {
-        Honeypot::disable();
 
         $superuser = factory(User::class)->create(['role' => 'superuser']);
 
