@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+//use Illuminate\Support\Facades\Hash;
 use Hash;
-
 use App\User;
 use App\Image;
 use Carbon\Carbon;
@@ -12,12 +12,6 @@ class CompanyController extends Controller
 {
     public function create()
     {
-        // dump('$2y$10$yuQeLK1C3s/dtntOkSIXEOxR0eTAep2bvdstmd.lp8vGkqDt0QsrS');
-
-        //        "$2y$10$ObZ2CDSBOlFcqDzjs/t4NeEDAvOFPJMznpuQe5OoAsPtXMw/a83vC"
-
-        // dd(Hash::make('123456'));
-        //  die();
 
         $loggedUser = request()->user();
 
@@ -139,7 +133,6 @@ class CompanyController extends Controller
 
     public function store()
     {
-        // dd(request()->password);
         $maxfilesize = config('site.maxfilesize') * 1024;
 
         $rules = [
@@ -161,7 +154,7 @@ class CompanyController extends Controller
         $user = User::create([
             'name' => request()->name,
             'email' => request()->email,
-            'password' => Hash::make(request()->password),
+            'password' =>  Hash::make(request()->password),
             'real_name' => request()->company_name,
             'real_name_show' => 1,
             'notify_message' => 0,
@@ -190,6 +183,8 @@ class CompanyController extends Controller
             $user->images()->delete();
             $user->images()->create(['filename' => $filename]);
         }
+
+        dd($pw);
 
         return redirect()
             ->route('user.show', [$user])
