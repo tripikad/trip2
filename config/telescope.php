@@ -4,7 +4,6 @@ use Laravel\Telescope\Watchers;
 use Laravel\Telescope\Http\Middleware\Authorize;
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Telescope Domain
@@ -46,8 +45,8 @@ return [
 
     'storage' => [
         'database' => [
-            'connection' => env('DB_CONNECTION', 'mysql'),
-        ],
+            'connection' => env('DB_CONNECTION', 'mysql')
+        ]
     ],
 
     /*
@@ -74,10 +73,7 @@ return [
     |
     */
 
-    'middleware' => [
-        'web',
-        Authorize::class,
-    ],
+    'middleware' => ['web', Authorize::class],
 
     /*
     |--------------------------------------------------------------------------
@@ -114,7 +110,7 @@ return [
 
         Watchers\CommandWatcher::class => [
             'enabled' => env('TELESCOPE_COMMAND_WATCHER', true),
-            'ignore' => [],
+            'ignore' => []
         ],
 
         Watchers\DumpWatcher::class => env('TELESCOPE_DUMP_WATCHER', true),
@@ -126,7 +122,7 @@ return [
 
         Watchers\ModelWatcher::class => [
             'enabled' => env('TELESCOPE_MODEL_WATCHER', true),
-            'events' => ['eloquent.*'],
+            'events' => ['eloquent.*']
         ],
 
         Watchers\NotificationWatcher::class => env('TELESCOPE_NOTIFICATION_WATCHER', true),
@@ -134,22 +130,22 @@ return [
         Watchers\QueryWatcher::class => [
             'enabled' => env('TELESCOPE_QUERY_WATCHER', true),
             'ignore_packages' => true,
-            'slow' => 100,
+            'slow' => 100
         ],
 
         Watchers\RedisWatcher::class => env('TELESCOPE_REDIS_WATCHER', true),
 
         Watchers\RequestWatcher::class => [
             'enabled' => env('TELESCOPE_REQUEST_WATCHER', true),
-            'size_limit' => env('TELESCOPE_RESPONSE_SIZE_LIMIT', 64),
+            'size_limit' => env('TELESCOPE_RESPONSE_SIZE_LIMIT', 64)
         ],
 
         Watchers\GateWatcher::class => [
             'enabled' => env('TELESCOPE_GATE_WATCHER', true),
             'ignore_abilities' => [],
-            'ignore_packages' => true,
+            'ignore_packages' => true
         ],
 
-        Watchers\ScheduleWatcher::class => env('TELESCOPE_SCHEDULE_WATCHER', true),
-    ],
+        Watchers\ScheduleWatcher::class => env('TELESCOPE_SCHEDULE_WATCHER', true)
+    ]
 ];
