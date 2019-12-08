@@ -169,7 +169,6 @@ return [
         Roumen\Sitemap\SitemapServiceProvider::class,
         //Eduardokum\LaravelMailAutoEmbed\Providers\LaravelMailAutoEmbedServiceProvider::class,
         Eduardokum\LaravelMailAutoEmbed\ServiceProvider::class,
-        Clockwork\Support\Laravel\ClockworkServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -178,6 +177,7 @@ return [
         App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider.php
         App\Providers\EventServiceProvider::class,
+        App\Providers\TelescopeServiceProvider::class,
         App\Providers\ViewComposerServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\DuskServiceProvider::class
