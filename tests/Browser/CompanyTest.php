@@ -16,11 +16,11 @@ class CompanyTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             $browser
                 ->visit('/company')
-                ->asserSee('Pead esmalt sisse logima')
+                ->assertSee('Pead esmalt sisse logima')
                 ->assertDontSee('Halda reisipakkumisi')
                 ->assertDontSee('Lisa seiklusreis')
                 ->visit('/company/admin')
-                ->asserSee('Pead esmalt sisse logima')
+                ->assertSee('Pead esmalt sisse logima')
                 ->assertDontSee('Halda reisifirmasid');
         });
     }
@@ -33,11 +33,11 @@ class CompanyTest extends DuskTestCase
             $browser
                 ->loginAs($regular_user)
                 ->visit('/company')
-                ->asserSee('Õigused puuduvad')
+                ->assertSee('Õigused puuduvad')
                 ->assertDontSee('Halda reisipakkumisi')
                 ->assertDontSee('Lisa seiklusreis')
                 ->visit('/company/admin')
-                ->asserSee('Õigused puuduvad')
+                ->assertSee('Õigused puuduvad')
                 ->assertDontSee('Halda reisifirmasid');
         });
 
@@ -52,11 +52,11 @@ class CompanyTest extends DuskTestCase
             $browser
                 ->loginAs($admin_user)
                 ->visit('/company')
-                ->asserSee('Õigused puuduvad')
+                ->assertSee('Õigused puuduvad')
                 ->assertDontSee('Halda reisipakkumisi')
                 ->assertDontSee('Lisa seiklusreis')
                 ->visit('/company/admin')
-                ->asserSee('Õigused puuduvad')
+                ->assertSee('Õigused puuduvad')
                 ->assertDontSee('Halda reisifirmasid');
         });
 
