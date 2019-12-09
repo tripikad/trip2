@@ -140,18 +140,18 @@ class OfferAdminController extends Controller
                                         )
                                 )
                                 ->push(
-                                    component(!$isPackage ? 'FormTextarea' : 'FormHidden')
-                                        ->with('title', trans('offer.admin.edit.accommodation'))
-                                        ->with('name', 'accommodation')
-                                        ->with('value', old('accommodation'))
-                                        ->with('rows', 4)
+                                    component('FormTextarea')
+                                        ->with('title', trans('offer.admin.edit.description'))
+                                        ->with('name', 'description')
+                                        ->with('value', old('description'))
+                                        ->with('rows', 8)
                                 )
                                 ->push(
                                     component(!$isPackage ? 'FormTextarea' : 'FormHidden')
                                         ->with('title', trans('offer.admin.edit.included'))
                                         ->with('name', 'included')
                                         ->with('value', old('included'))
-                                        ->with('rows', 4)
+                                        ->with('rows', 8)
                                 )
                                 ->push(
                                     component('FormCheckbox')
@@ -159,16 +159,30 @@ class OfferAdminController extends Controller
                                         ->with('title', trans('offer.admin.edit.flights'))
                                 )
                                 ->push(
+                                    component('FormCheckbox')
+                                        ->with('name', 'transfer')
+                                        ->with('title', trans('offer.admin.edit.transfer'))
+                                )
+                                ->push(
+                                    component(!$isPackage ? 'FormTextarea' : 'FormHidden')
+                                        ->with('title', trans('offer.admin.edit.notincluded'))
+                                        ->with('name', 'notincluded')
+                                        ->with('value', old('notincluded'))
+                                        ->with('rows', 8)
+                                )
+                                ->push(
                                     component(!$isPackage ? 'FormTextarea' : 'FormHidden')
                                         ->with('title', trans('offer.admin.edit.extras'))
                                         ->with('name', 'extras')
                                         ->with('value', old('extras'))
-                                        ->with('rows', 4)
+                                        ->with('rows', 8)
                                 )
                                 ->push(
-                                    component('FormCheckbox')
-                                        ->with('name', 'transfer')
-                                        ->with('title', trans('offer.admin.edit.transfer'))
+                                    component(!$isPackage ? 'FormTextarea' : 'FormHidden')
+                                        ->with('title', trans('offer.admin.edit.accommodation'))
+                                        ->with('name', 'accommodation')
+                                        ->with('value', old('accommodation'))
+                                        ->with('rows', 2)
                                 )
                                 ->push(
                                     component('FlexGrid')
@@ -228,13 +242,7 @@ class OfferAdminController extends Controller
                                                 ->flatten()
                                         )
                                 )
-                                ->push(
-                                    component('FormTextarea')
-                                        ->with('title', trans('offer.admin.edit.description'))
-                                        ->with('name', 'description')
-                                        ->with('value', old('description'))
-                                        ->with('rows', 4)
-                                )
+
                                 ->push(
                                     component('FormButton')
                                         ->is('large')
@@ -284,6 +292,7 @@ class OfferAdminController extends Controller
                 'size' => request()->get('size'),
                 'accommodation' => request()->get('accommodation'),
                 'included' => request()->get('included'),
+                'notincluded' => request()->get('notincluded'),
                 'extras' => request()->get('extras'),
                 'description' => request()->get('description'),
                 'flights' => $flights,

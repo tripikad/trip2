@@ -221,6 +221,76 @@ class OfferController extends Controller
                         region('PhotoRow', $photos->count() < 18 ? $photos->slice(0, 9) : $photos)
                     )
                     ->br()
+                    ->push(
+                        component('Title')
+                            ->is('small')
+                            ->is('white')
+                            ->is('center')
+                            ->with('title', trans('offer.show.description'))
+                    )
+                    ->push(
+                        '<div style="padding: 0 10vw">' .
+                            component('Body')
+                                ->is('white')
+                                ->with('body', format_body($offer->data->description)) .
+                            '</div>'
+                    )
+                    ->push(
+                        component('Title')
+                            ->is('small')
+                            ->is('white')
+                            ->is('center')
+                            ->with('title', trans('offer.show.accommodation'))
+                    )
+                    ->push(
+                        '<div style="padding: 0 10vw">' .
+                            component('Body')
+                                ->is('white')
+                                ->with('body', format_body($offer->data->accommodation)) .
+                            '</div>'
+                    )
+                    ->push(
+                        component('Title')
+                            ->is('small')
+                            ->is('white')
+                            ->is('center')
+                            ->with('title', trans('offer.show.included'))
+                    )
+                    ->push(
+                        '<div style="padding: 0 10vw">' .
+                            component('Body')
+                                ->is('white')
+                                ->with('body', format_body($offer->data->included)) .
+                            '</div>'
+                    )
+                    ->push(
+                        component('Title')
+                            ->is('small')
+                            ->is('white')
+                            ->is('center')
+                            ->with('title', trans('offer.show.notincluded'))
+                    )
+                    ->push(
+                        '<div style="padding: 0 10vw">' .
+                            component('Body')
+                                ->is('white')
+                                ->with('body', format_body($offer->data->notincluded)) .
+                            '</div>'
+                    )
+                    ->push(
+                        component('Title')
+                            ->is('small')
+                            ->is('white')
+                            ->is('center')
+                            ->with('title', trans('offer.show.extras'))
+                    )
+                    ->push(
+                        '<div style="padding: 0 10vw">' .
+                            component('Body')
+                                ->is('white')
+                                ->with('body', format_body($offer->data->extras)) .
+                            '</div>'
+                    )
                     ->pushWhen(
                         $user && $user->hasRole('superuser'),
                         component('Title')
