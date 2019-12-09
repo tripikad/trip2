@@ -1,6 +1,7 @@
 <?php
 
 namespace Tests;
+use Laravel\Dusk\Browser;
 
 use Laravel\Dusk\TestCase as BaseTestCase;
 use Facebook\WebDriver\Chrome\ChromeOptions;
@@ -35,5 +36,14 @@ abstract class DuskTestCase extends BaseTestCase
             'http://localhost:9515',
             DesiredCapabilities::chrome()->setCapability(ChromeOptions::CAPABILITY, $options)
         );
+    }
+
+    public function tearDown()
+    {
+        parent::tearDown();
+
+        $this->browse(function (Browser $browser) {
+            $browser->driver->manage()->deleteAllCookies();
+        });
     }
 }

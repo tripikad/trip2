@@ -123,24 +123,68 @@ class OffersAdminTest extends DuskTestCase
 
         $this->browse(function (Browser $browser) use ($company, $offer) {
             $browser
-                ->visit('/logout')
                 ->loginAs($company)
-                ->visit('/company')
                 ->visit("/offer/$offer->id")
                 ->assertSee('Montaña alta para gringo')
                 ->assertSee('See reisipakkumine pole avalikustatud');
         });
 
-        // Assert companies do not see each other unpublished offers
+        // Assert superuser sees unpublished content
 
-        // $other_company = factory(User::class)->create(['company' => true]);
+        $superuser = factory(User::class)->create(['role' => 'superuser']);
 
-        // $this->browse(function (Browser $browser) use ($other_company) {
-        //     $browser
-        //         ->loginAs($other_company)
-        //         ->visit("/offer/$offer->id")
-        //         ->assertDontSee('Montaña alta para gringo');
-        // });
+        $this->browse(function (Browser $browser) use ($superuser, $offer) {
+            $browser
+                ->loginAs($superuser)
+                ->visit("/offer/$offer->id")
+                ->assertSee('Montaña alta para gringo')
+                ->assertSee('See reisipakkumine pole avalikustatud');
+        });
+
+        // Assert other company do not see other company unpublished offer
+
+        $other_company = factory(User::class)->create(['company' => true]);
+
+        $this->browse(function (Browser $browser) use ($offer, $other_company) {
+            $browser
+                ->loginAs($other_company)
+                ->visit("/offer/$offer->id")
+                ->assertSee('Õigused puuduvad')
+                ->assertDontSee('Montaña alta para gringo');
+        });
+
+        // Assert regular user do not unpublished offer
+
+        $regular_user = factory(User::class)->create();
+
+        $this->browse(function (Browser $browser) use ($offer, $regular_user) {
+            $browser
+                ->loginAs($regular_user)
+                ->visit("/offer/$offer->id")
+                ->assertSee('Õigused puuduvad')
+                ->assertDontSee('Montaña alta para gringo');
+        });
+
+        // Assert admin user do not see unpublished offer
+
+        $admin_user = factory(User::class)->create(['role' => 'admin']);
+
+        $this->browse(function (Browser $browser) use ($offer, $admin_user) {
+            $browser
+                ->loginAs($admin_user)
+                ->visit("/offer/$offer->id")
+                ->assertSee('Õigused puuduvad')
+                ->assertDontSee('Montaña alta para gringo');
+        });
+
+        $this->browse(function (Browser $browser) use ($offer, $admin_user) {
+            $browser
+                ->logout()
+                ->visit('/')
+                ->visit("/offer/$offer->id")
+                ->assertSee('Pead esmalt sisse logima')
+                ->assertDontSee('Montaña alta para gringo');
+        });
 
         // Cleanup
 
@@ -148,6 +192,9 @@ class OffersAdminTest extends DuskTestCase
         $destination2->delete();
         $offer->delete();
         $company->delete();
-        //$other_company->delete();
+        $superuser->delete();
+        $other_company->delete();
+        $regular_user->delete();
+        $admin_user->delete();
     }
 }
