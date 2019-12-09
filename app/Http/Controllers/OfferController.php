@@ -67,7 +67,7 @@ class OfferController extends Controller
         if (!$user && $offer->status == 0) {
             return abort(401);
         }
-        if ($user && $offer->status == 0 && !$user->hasRoleOrOwner('superuser', $offer->id)) {
+        if ($user && $offer->status == 0 && !$user->hasRoleOrOwner('superuser', $offer->user->id)) {
             return abort(401);
         }
 
