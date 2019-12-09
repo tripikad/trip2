@@ -1,7 +1,6 @@
 <?php
 
 namespace Tests;
-use Laravel\Dusk\Browser;
 
 use Laravel\Dusk\TestCase as BaseTestCase;
 use Facebook\WebDriver\Chrome\ChromeOptions;
