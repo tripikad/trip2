@@ -98,7 +98,7 @@ class CompanyController extends Controller
                             ->is('orange')
                             ->is('narrow')
                             ->with('title', trans('company.create'))
-                            ->with('route', route('company.create'))
+                            ->with('route', route('company.create', ['redirect' => 'company.admin.index']))
                     )
                     ->merge(
                         $companies->map(function ($company) {
@@ -380,6 +380,12 @@ class CompanyController extends Controller
                         ->with(
                             'fields',
                             collect()
+                                ->pushWhen(
+                                    request()->has('redirect'),
+                                    component('FormHidden')
+                                        ->with('name', 'redirect')
+                                        ->with('value', request()->redirect)
+                                )
                                 ->push(
                                     component('Title')
                                         ->is('small')
@@ -458,7 +464,7 @@ class CompanyController extends Controller
                                         ->is('wide')
                                         ->is('large')
                                         ->is('orange')
-                                        ->with('title', trans('company.create.submit'))
+                                        ->with('title', trans('company.edit.submit'))
                                 )
                         )
                 )
@@ -469,7 +475,52 @@ class CompanyController extends Controller
 
     public function update($id)
     {
-        dd(request()->all());
+        $user = User::findorFail($id);
+        $maxfilesize = config('site.maxfilesize') * 1024;
+
+        $rules = [
+            'name' => 'required|unique:users,name,' . $user->id,
+            'email' => 'required|unique:users,email,' . $user->id,
+            'password' => 'sometimes|confirmed|min:6',
+            'password_confirmation' => 'required_with:password|same:password',
+            'description' => 'min:2',
+            'contact_facebook' => 'url',
+            'contact_homepage' => 'url',
+            'file' => "image|max:$maxfilesize"
+        ];
+
+        $this->validate(request(), $rules);
+
+        $user->update([
+            'name' => request()->name,
+            'email' => request()->email,
+            'password' => Hash::make(request()->password),
+            'real_name' => request()->company_name,
+            'real_name_show' => request()->real_name_show ? 0 : 1,
+            'notify_message' => request()->notify_message ? 1 : 0,
+            'notify_follow' => request()->notify_follow ? 1 : 0,
+            'description' => request()->description,
+            'contact_facebook' => request()->contact_facebook,
+            'contact_instagram' => '',
+            'contact_twitter' => '',
+            'contact_homepage' => request()->contact_homepage
+        ]);
+
+        if (request()->hasFile('file')) {
+            $filename =
+                'picture-' .
+                $user->id .
+                '.' .
+                request()
+                    ->file('file')
+                    ->getClientOriginalExtension();
+
+            $filename = Image::storeImageFile(request()->file('file'), $filename);
+
+            $user->images()->delete();
+            $user->images()->create(['filename' => $filename]);
+        }
+
         return redirect()
             ->route(request()->has('redirect') ? request()->redirect : 'company.index')
             ->with('info', trans('company.edit.info'));
