@@ -63,7 +63,7 @@ class CompanyTest extends DuskTestCase
         $admin_user->delete();
     }
 
-    public function test_superuser_can_add_company_and_company_can_log_in()
+    public function test_superuser_can_add_company_and_company_can_log_in_and_edit()
     {
         $superuser = factory(User::class)->create(['role' => 'superuser']);
 
@@ -71,11 +71,11 @@ class CompanyTest extends DuskTestCase
             $browser
                 ->loginAs($superuser)
                 ->visit('/company/create')
-                ->asserSee('Lisa reisifirma')
+                ->assertSee('Lisa reisifirma')
                 ->type(dusk('Kasutajanimi'), 'empresariarica')
                 ->type(dusk('Firmanimi'), 'Empresaria Rica')
                 ->type(dusk('Parool'), 'nomedemihijo')
-                ->type(dusk('Parool uuesti'), 'nomedemihijo')
+                ->type(dusk('Korda parooli'), 'nomedemihijo')
                 ->type(dusk('E-mail'), 'empresaria@rica.es')
                 //->attach('file', './storage/tests/test.jpg')
                 ->scrollToBottom()
@@ -91,7 +91,17 @@ class CompanyTest extends DuskTestCase
                 ->type(dusk('Parool'), 'nomedemihijo')
                 ->click(dusk('Logi sisse'))
                 ->visit('/company')
-                ->asserSee('Lisa seiklusreis');
+                ->click(dusk('Muuda profiili'))
+                ->assertSee('Uuenda firma profiili')
+                ->type(dusk('Kasutajanimi'), 'vagabundopobre')
+                ->type(dusk('Firmanimi'), 'Vagabundo Pobre')
+                ->type(dusk('Uus parool'), 'nomedemihija')
+                ->type(dusk('Korda parooli'), 'nomedemihija')
+                //->attach('file', './storage/tests/test.jpg')
+                ->scrollToBottom()
+                ->pause(500)
+                ->click(dusk('Uuendaa'))
+                ->screenshot('a');
         });
     }
 }

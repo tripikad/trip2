@@ -524,11 +524,13 @@ Route::post('company/store', 'CompanyController@store')
 
 Route::get('company/{id}/edit', 'CompanyController@edit')
     ->name('company.edit')
-    ->middleware('role:superuser,userowner');
+    ->middleware('role:superuser,userowner')
+    ->middleware('company');
 
 Route::put('company/{id}/update', 'CompanyController@update')
     ->name('company.update')
-    ->middleware('role:superuser,userowner');
+    ->middleware('role:superuser,userowner')
+    ->middleware('company');
 
 // Offers
 
