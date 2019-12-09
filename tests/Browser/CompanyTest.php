@@ -11,6 +11,58 @@ use App\Destination;
 
 class CompanyTest extends DuskTestCase
 {
+    public function test_unlogged_users_can_not_access_company_and_company_admin_page()
+    {
+        $this->browse(function (Browser $browser) {
+            $browser
+                ->visit('/company')
+                ->see('Pead esmalt sisse logima')
+                ->dontSee('Halda reisipakkumisi')
+                ->dontSee('Lisa seiklusreis')
+                ->visit('/company/admin')
+                ->see('Pead esmalt sisse logima')
+                ->dontSee('Halda reisifirmasid');
+        });
+    }
+
+    public function test_regular_users_can_not_access_offer_admin()
+    {
+        $regular_user = factory(User::class)->create();
+
+        $this->browse(function (Browser $browser) use ($regular_user) {
+            $browser
+                ->loginAs($regular_user)
+                ->visit('/company')
+                ->see('Õigused puuduvad')
+                ->dontSee('Halda reisipakkumisi')
+                ->dontSee('Lisa seiklusreis')
+                ->visit('/company/admin')
+                ->see('Õigused puuduvad')
+                ->dontSee('Halda reisifirmasid');
+        });
+
+        $regular_user->delete();
+    }
+
+    public function test_admin_users_can_not_access_offer_admin()
+    {
+        $admin_user = factory(User::class)->create(['role' => 'admin']);
+
+        $this->browse(function (Browser $browser) use ($admin_user) {
+            $browser
+                ->loginAs($admin_user)
+                ->visit('/company')
+                ->see('Õigused puuduvad')
+                ->dontSee('Halda reisipakkumisi')
+                ->dontSee('Lisa seiklusreis')
+                ->visit('/company/admin')
+                ->see('Õigused puuduvad')
+                ->dontSee('Halda reisifirmasid');
+        });
+
+        $admin_user->delete();
+    }
+
     public function test_superuser_can_add_company_and_company_can_log_in()
     {
         $superuser = factory(User::class)->create(['role' => 'superuser']);
@@ -38,7 +90,7 @@ class CompanyTest extends DuskTestCase
                 ->type(dusk('Kasutajanimi'), 'empresariarica')
                 ->type(dusk('Parool'), 'nomedemihijo')
                 ->click(dusk('Logi sisse'))
-                ->visit('/offer/admin/company')
+                ->visit('/company')
                 ->see('Lisa seiklusreis');
         });
     }

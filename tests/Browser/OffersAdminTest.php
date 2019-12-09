@@ -11,61 +11,6 @@ use App\Destination;
 
 class OffersAdminTest extends DuskTestCase
 {
-    public function test_unlogged_users_can_not_access_offer_admin()
-    {
-        $this->browse(function (Browser $browser) {
-            $browser
-                ->visit('/offer/admin')
-                ->assertSourceHas('Pead esmalt sisse logima')
-                ->assertSourceMissing('Kõik reisipakkumised')
-                ->assertSourceMissing('Lisa seiklusreis')
-                ->visit('/offer/admin/company')
-                ->assertSourceHas('Pead esmalt sisse logima')
-                ->assertSourceMissing('Reisipakkumiste lisamine')
-                ->assertSourceMissing('Lisa seiklusreis');
-        });
-    }
-
-    public function test_regular_users_can_not_access_offer_admin()
-    {
-        $regular_user = factory(User::class)->create();
-
-        $this->browse(function (Browser $browser) use ($regular_user) {
-            $browser
-                ->loginAs($regular_user)
-                ->visit('/offer/admin')
-                ->assertSourceHas('Õigused puuduvad')
-                ->assertSourceMissing('Kõik reisipakkumised')
-                ->assertSourceMissing('Lisa seiklusreis')
-                ->visit('/offer/admin/company')
-                ->assertSourceHas('Õigused puuduvad')
-                ->assertSourceMissing('Minu reisipakkumised')
-                ->assertSourceMissing('Lisa seiklusreis');
-        });
-
-        $regular_user->delete();
-    }
-
-    public function test_admin_users_can_not_access_offer_admin()
-    {
-        $admin_user = factory(User::class)->create(['role' => 'admin']);
-
-        $this->browse(function (Browser $browser) use ($admin_user) {
-            $browser
-                ->loginAs($admin_user)
-                ->visit('/offer/admin')
-                ->assertSourceHas('Õigused puuduvad')
-                ->assertSourceMissing('Kõik reisipakkumised')
-                ->assertSourceMissing('Lisa seiklusreis')
-                ->visit('/offer/admin/company')
-                ->assertSourceHas('Õigused puuduvad')
-                ->assertSourceMissing('Minu reisipakkumised')
-                ->assertSourceMissing('Lisa seiklusreis');
-        });
-
-        $admin_user->delete();
-    }
-
     public function test_company_can_not_add_offer_without_required_fields()
     {
         $company = factory(User::class)->create(['company' => true]);
@@ -73,16 +18,16 @@ class OffersAdminTest extends DuskTestCase
         $this->browse(function (Browser $browser) use ($company) {
             $browser
                 ->loginAs($company)
-                ->visit('/offer/admin/company')
-                ->assertSourceHas('Reisipakkumiste lisamine')
+                ->visit('/company')
+                ->see('Halda reisipakkumisi')
                 ->click(dusk('Lisa paketireis'))
                 ->assertPathIs('/offer/admin/create/package')
                 ->scrollToBottom()
                 ->pause(1000)
                 ->click(dusk('Lisa paketireis'))
                 ->assertPathIs('/offer/admin/create/package')
-                ->assertSourceHas('Väli nimega "Pealkiri" on kohustuslik')
-                ->assertSourceHas('Väli nimega "Reisi sihtkohad" on kohustuslik');
+                ->see('Väli nimega "Pealkiri" on kohustuslik')
+                ->see('Väli nimega "Reisi sihtkohad" on kohustuslik');
         });
 
         $company->delete();
@@ -98,8 +43,8 @@ class OffersAdminTest extends DuskTestCase
         $this->browse(function (Browser $browser) use ($company) {
             $browser
                 ->loginAs($company)
-                ->visit('/offer/admin/company')
-                ->assertSourceHas('Reisipakkumiste lisamine')
+                ->visit('/company')
+                ->see('Halda reisipakkumisi')
                 ->click(dusk('Lisa paketireis'))
                 ->click(dusk('Pakkumine on avalikustatud'))
                 ->type(dusk('Pealkiri'), 'Playa Bonita para Mamacita')
@@ -113,10 +58,10 @@ class OffersAdminTest extends DuskTestCase
                 ->scrollToBottom()
                 ->pause(1000)
                 ->click(dusk('Lisa paketireis'))
-                ->assertPathIs('/offer/admin/company')
-                ->assertSourceHas('Playa Bonita para Mamacita')
-                ->assertSourceHas('2000€')
-                ->assertSourceHas('Sol');
+                ->assertPathIs('/company')
+                ->see('Playa Bonita para Mamacita')
+                ->see('2000€')
+                ->see('Sol');
         });
 
         // Assert users can see the offer without being logged in
@@ -130,8 +75,8 @@ class OffersAdminTest extends DuskTestCase
                 ->pause(500)
                 ->click(dusk('Playa Bonita para Mamacita'))
                 ->assertPathIs("/offer/$offer->id")
-                ->assertSourceHas('2000€')
-                ->assertSourceHas('Paketireis');
+                ->see('2000€')
+                ->see('Paketireis');
         });
 
         // Cleanup
@@ -155,8 +100,8 @@ class OffersAdminTest extends DuskTestCase
         $this->browse(function (Browser $browser) use ($company) {
             $browser
                 ->loginAs($company)
-                ->visit('/offer/admin/company')
-                ->assertSourceHas('Reisipakkumiste lisamine')
+                ->visit('/company')
+                ->see('Halda reisipakkumisi')
                 ->click(dusk('Lisa seiklusreis'))
                 ->pause(1000)
                 ->type(dusk('Pealkiri'), 'Montaña alta para gringo')
@@ -167,9 +112,9 @@ class OffersAdminTest extends DuskTestCase
                 ->scrollToBottom()
                 ->pause(1000)
                 ->click(dusk('Lisa seiklusreis'))
-                ->assertPathIs('/offer/admin/company')
-                ->assertSourceHas('Montaña alta para gringo')
-                ->assertSourceHas('Universo');
+                ->assertPathIs('/company')
+                ->see('Montaña alta para gringo')
+                ->see('Universo');
         });
 
         $offer = Offer::whereTitle('Montaña alta para gringo')->first();
@@ -181,8 +126,8 @@ class OffersAdminTest extends DuskTestCase
             $browser
                 ->loginAs($company)
                 ->visit("/offer/$offer->id")
-                ->assertSourceHas('Suure tõenäosusega on lehekülg liigutatud teise kohta')
-                ->assertSourceMissing('Montaña alta para gringo');
+                ->see('Suure tõenäosusega on lehekülg liigutatud teise kohta')
+                ->dontSee('Montaña alta para gringo');
         });
 
         // Assert companies do not see each other unpublished offers
@@ -193,7 +138,7 @@ class OffersAdminTest extends DuskTestCase
             $browser
                 ->loginAs($other_company)
                 ->visit('/offer/admin/company')
-                ->assertSourceMissing('Montaña alta para gringo');
+                ->dontSee('Montaña alta para gringo');
         });
 
         // Cleanup
