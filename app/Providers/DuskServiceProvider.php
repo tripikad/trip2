@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Providers;
+
 use PHPUnit\Framework\Assert as PHPUnit;
 
 use Laravel\Dusk\Browser;
