@@ -31,7 +31,7 @@ class CompanyTest extends DuskTestCase
                 ->assertDontSee('Halda reisipakkumisi')
                 ->assertDontSee('Lisa seiklusreis')
                 ->visit('/company/admin')
-                ->assertSee('Pead esmalt sisse logimaa')
+                ->assertSee('Pead esmalt sisse logima')
                 ->assertDontSee('Halda reisifirmasid');
         });
     }
@@ -107,6 +107,9 @@ class CompanyTest extends DuskTestCase
 
     public function tearDown()
     {
+        if ($user = User::whereEmail('empresaria@rica.es')->first()) {
+            $user->delete();
+        }
         $this->regular_user->delete();
         $this->admin_user->delete();
         $this->super_user->delete();
