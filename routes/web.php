@@ -506,6 +506,10 @@ Route::get('lendude_sooduspakkumised/rss', [
 
 Route::get('company', 'CompanyController@index')
     ->name('company.index')
+    ->middleware('company');
+
+Route::get('company/admin', 'CompanyController@adminIndex')
+    ->name('company.admin.index')
     ->middleware('role:superuser');
 
 Route::get('company/{id}', 'CompanyController@show')->name('company.show');
@@ -535,10 +539,6 @@ Route::get('offer/json', 'OfferController@indexJson')->name('offer.index.json');
 Route::get('offer/{id}', 'OfferController@show')->name('offer.show');
 
 // Offers admin
-
-Route::get('offer/admin', 'OfferAdminController@index')
-    ->name('offer.admin.index')
-    ->middleware('company');
 
 Route::get('offer/admin/create/{style}', 'OfferAdminController@create')
     ->name('offer.admin.create')

@@ -4,7 +4,7 @@
 }
 
 .FlexGrid__item {
-    margin-bottom: $margin-md ?if $tablet;
+    margin-bottom: $margin-sm ?if $tablet;
 }
 
 .FlexGrid__item:last-child {

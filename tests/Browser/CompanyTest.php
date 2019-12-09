@@ -19,7 +19,7 @@ class CompanyTest extends DuskTestCase
             $browser
                 ->loginAs($superuser)
                 ->visit('/company/create')
-                ->assertSourceHas('Lisa reisifirma')
+                ->see('Lisa reisifirma')
                 ->type(dusk('Kasutajanimi'), 'empresariarica')
                 ->type(dusk('Firmanimi'), 'Empresaria Rica')
                 ->type(dusk('Parool'), 'nomedemihijo')
@@ -39,7 +39,7 @@ class CompanyTest extends DuskTestCase
                 ->type(dusk('Parool'), 'nomedemihijo')
                 ->click(dusk('Logi sisse'))
                 ->visit('/offer/admin/company')
-                ->assertSourceHas('Lisa seiklusreis');
+                ->see('Lisa seiklusreis');
         });
     }
 }

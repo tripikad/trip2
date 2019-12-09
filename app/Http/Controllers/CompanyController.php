@@ -13,6 +13,43 @@ class CompanyController extends Controller
 {
     public function index()
     {
+        $loggedUser = request()->user();
+
+        $offers = $loggedUser
+            ->offers()
+            ->latest()
+            ->with(['user:id,name', 'startDestinations', 'endDestinations'])
+            ->get();
+
+        return layout('Offer')
+            ->with('title', 'Offer')
+            ->with('color', 'blue')
+            ->with('header', region('OfferHeader'))
+            ->with(
+                'content',
+                collect()
+                    ->push(
+                        component('Title')
+                            ->is('large')
+                            ->is('white')
+                            ->with('title', trans('company.index.title'))
+                    )
+                    ->push(region('OfferAdminButtons', $loggedUser))
+                    ->br()
+                    ->merge(
+                        $offers->map(function ($offer) {
+                            return component('OfferRow')
+                                ->is($offer->status ? '' : 'unpublished')
+                                ->with('offer', $offer);
+                        })
+                    )
+            )
+            ->with('footer', region('FooterLight', ''))
+            ->render();
+    }
+
+    public function adminIndex()
+    {
         $companies = User::whereCompany(true)->get();
 
         $offers = Offer::latest()
@@ -63,7 +100,10 @@ class CompanyController extends Controller
                                                 ->with('title', trans('company.index.edit'))
                                                 ->with(
                                                     'route',
-                                                    route('company.edit', [$company, 'redirect' => 'company.index'])
+                                                    route('company.edit', [
+                                                        $company,
+                                                        'redirect' => 'company.admin.index'
+                                                    ])
                                                 )
                                         )
                                 );
@@ -330,7 +370,7 @@ class CompanyController extends Controller
     public function update($id)
     {
         return redirect()
-            ->route(request()->has('redirect') ? request()->redirect : 'offer.admin.index')
+            ->route(request()->has('redirect') ? request()->redirect : 'company.index')
             ->with('info', trans('company.edit.info'));
     }
 }

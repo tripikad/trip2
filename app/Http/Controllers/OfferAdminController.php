@@ -315,7 +315,7 @@ class OfferAdminController extends Controller
         ]);
 
         return redirect()
-            ->route('offer.admin.index')
+            ->route('company.index')
             ->with(
                 'info',
                 trans('offer.admin.store.info', [

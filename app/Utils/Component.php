@@ -96,13 +96,13 @@ class Component
             ->implode(' ');
 
         $component =
-            '<fade><component is="' .
+            '<transition appear name="Fade"><component is="' .
             $vueComponent .
             '" isclasses="' .
             $this->generateIsClasses() .
             '" ' .
             $props .
-            ' ></component></fade>';
+            ' ></component></transition>';
 
         if ($this->with->has('height')) {
             return '<div style="min-height:' .

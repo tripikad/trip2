@@ -6,7 +6,7 @@ class OfferAdminButtons
 {
     public function render($user)
     {
-        return component('FlexGrid')
+        return component('Grid')
             ->with('cols', 3)
             ->with(
                 'items',

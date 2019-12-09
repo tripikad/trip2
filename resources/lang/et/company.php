@@ -1,7 +1,7 @@
 <?php
 return [
-    'index.title' => 'Reisifirmad',
-    'index.create' => 'Lisa uus reisifirma',
+    'index.title' => 'Halda reisipakkumisi',
+    'index.admin.title' => 'Halda reisifirmasid',
     'index.edit' => 'Muuda',
     'index.offer' => 'Reisipakkumised',
     'create.title' => 'Lisa reisifirma',
