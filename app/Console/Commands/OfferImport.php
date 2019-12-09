@@ -51,10 +51,14 @@ class OfferImport extends Command
                     'guide' => $o->guide,
                     'size' => $o->people,
                     'description' => $o->description,
-                    'accommodation' => '- ' . collect(explode(',', $o->accommodation))->implode("\n- "),
-                    'included' => '- ' . collect(explode(',', $o->included))->implode("\n- "),
-                    'notincluded' => '- ' . collect(explode(',', $o->notincluded))->implode("\n- "),
-                    'extras' => '- ' . collect(explode(',', $o->extras))->implode("\n- "),
+                    'accommodation' => $o->accommodation
+                        ? '- ' . collect(explode(',', $o->accommodation))->implode("\n- ")
+                        : '',
+                    'included' => $o->included ? '- ' . collect(explode(',', $o->included))->implode("\n- ") : '',
+                    'notincluded' => $o->notincluded
+                        ? '- ' . collect(explode(',', $o->notincluded))->implode("\n- ")
+                        : '',
+                    'extras' => $o->extras ? '- ' . collect(explode(',', $o->extras))->implode("\n- ") : '',
                     'flights' => false,
                     'transfer' => false,
                     'hotels' => [

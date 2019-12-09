@@ -49,10 +49,7 @@ class CompanyController extends Controller
                                                 component('OfferRow')
                                                     ->is($offer->status == 1 ? '' : 'unpublished')
                                                     ->with('offer', $offer)
-                                                    ->with(
-                                                        'route',
-                                                        $offer->status == 1 ? route('offer.show', [$offer]) : ''
-                                                    )
+                                                    ->with('route', route('offer.show', [$offer]))
                                             )
                                             ->push(
                                                 component('Button')
@@ -154,10 +151,7 @@ class CompanyController extends Controller
                                                 component('OfferRow')
                                                     ->is($offer->status == 1 ? '' : 'unpublished')
                                                     ->with('offer', $offer)
-                                                    ->with(
-                                                        'route',
-                                                        $offer->status == 1 ? route('offer.show', [$offer]) : ''
-                                                    )
+                                                    ->with('route', route('offer.show', [$offer]))
                                             )
                                             ->push(
                                                 component('Button')

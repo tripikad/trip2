@@ -61,11 +61,18 @@ class OfferController extends Controller
 
     public function show($id)
     {
-        $offer = Offer::public()->findOrFail($id);
+        $user = auth()->user();
+        $offer = Offer::findOrFail($id);
+
+        if (!$user && $offer->status == 0) {
+            return abort(401);
+        }
+        if ($user && $offer->status == 0 && !$user->hasRoleOrOwner('superuser', $offer->id)) {
+            return abort(401);
+        }
 
         $photos = Content::getLatestPagedItems('photo', 9, $offer->endDestinations->first()->id);
 
-        $user = auth()->user();
         $email = $user ? $user->email : '';
         $name = $user && $user->real_name ? $user->real_name : '';
 
@@ -77,6 +84,11 @@ class OfferController extends Controller
             ->with(
                 'top',
                 collect()
+                    ->pushWhen(
+                        !$offer->status,
+                        component('HeaderUnpublished')->with('title', trans('offer.show.unpublished'))
+                    )
+                    ->pushWhen(!$offer->status, '&nbsp;')
                     ->push(
                         component('Center')->with(
                             'item',

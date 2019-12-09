@@ -4,6 +4,7 @@ return [
     'index' => 'Reisipakkumised',
     'show.back' => 'Kõik reisipakkumised',
     'show.book' => 'Broneeri reis',
+    'show.unpublished' => 'See reisipakkumine pole avalikustatud',
     'book' => 'Broneeri reis',
     'book.back' => 'Tagasi reisipakkumise juurde',
     'book.name' => 'Eesnimi ja perekonnanimi',
