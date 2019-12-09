@@ -6,11 +6,22 @@ use Tests\DuskTestCase;
 use Laravel\Dusk\Browser;
 
 use App\User;
-use App\Offer;
-use App\Destination;
 
 class CompanyTest extends DuskTestCase
 {
+    protected $regular_user;
+    protected $admin_user;
+    protected $super_user;
+
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->regular_user = factory(User::class)->create();
+        $this->admin_user = factory(User::class)->create(['role' => 'admin']);
+        $this->super_user = factory(User::class)->create(['role' => 'superuser']);
+    }
+
     public function test_unlogged_users_can_not_access_company_and_company_admin_page()
     {
         $this->browse(function (Browser $browser) {
@@ -20,18 +31,16 @@ class CompanyTest extends DuskTestCase
                 ->assertDontSee('Halda reisipakkumisi')
                 ->assertDontSee('Lisa seiklusreis')
                 ->visit('/company/admin')
-                ->assertSee('Pead esmalt sisse logima')
+                ->assertSee('Pead esmalt sisse logimaa')
                 ->assertDontSee('Halda reisifirmasid');
         });
     }
 
     public function test_regular_users_can_not_access_offer_admin()
     {
-        $regular_user = factory(User::class)->create();
-
-        $this->browse(function (Browser $browser) use ($regular_user) {
+        $this->browse(function (Browser $browser) {
             $browser
-                ->loginAs($regular_user)
+                ->loginAs($this->regular_user)
                 ->visit('/company')
                 ->assertSee('Õigused puuduvad')
                 ->assertDontSee('Halda reisipakkumisi')
@@ -40,17 +49,13 @@ class CompanyTest extends DuskTestCase
                 ->assertSee('Õigused puuduvad')
                 ->assertDontSee('Halda reisifirmasid');
         });
-
-        $regular_user->delete();
     }
 
     public function test_admin_users_can_not_access_offer_admin()
     {
-        $admin_user = factory(User::class)->create(['role' => 'admin']);
-
-        $this->browse(function (Browser $browser) use ($admin_user) {
+        $this->browse(function (Browser $browser) {
             $browser
-                ->loginAs($admin_user)
+                ->loginAs($this->admin_user)
                 ->visit('/company')
                 ->assertSee('Õigused puuduvad')
                 ->assertDontSee('Halda reisipakkumisi')
@@ -59,17 +64,13 @@ class CompanyTest extends DuskTestCase
                 ->assertSee('Õigused puuduvad')
                 ->assertDontSee('Halda reisifirmasid');
         });
-
-        $admin_user->delete();
     }
 
     public function test_superuser_can_add_company_and_company_can_log_in_and_edit()
     {
-        $superuser = factory(User::class)->create(['role' => 'superuser']);
-
-        $this->browse(function (Browser $browser) use ($superuser) {
+        $this->browse(function (Browser $browser) {
             $browser
-                ->loginAs($superuser)
+                ->loginAs($this->super_user)
                 ->visit('/company/create')
                 ->assertSee('Lisa reisifirma')
                 ->type(dusk('Kasutajanimi'), 'empresariarica')
@@ -83,7 +84,7 @@ class CompanyTest extends DuskTestCase
                 ->click(dusk('Lisa reisifirma'));
         });
 
-        $this->browse(function (Browser $browser) use ($superuser) {
+        $this->browse(function (Browser $browser) {
             $browser
                 ->visit('/logout')
                 ->visit('/login')
@@ -100,8 +101,14 @@ class CompanyTest extends DuskTestCase
                 //->attach('file', './storage/tests/test.jpg')
                 ->scrollToBottom()
                 ->pause(500)
-                ->click(dusk('Uuendaa'))
-                ->screenshot('a');
+                ->click(dusk('Uuenda'));
         });
+    }
+
+    public function tearDown()
+    {
+        $this->regular_user->delete();
+        $this->admin_user->delete();
+        $this->super_user->delete();
     }
 }

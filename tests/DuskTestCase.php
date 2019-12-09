@@ -37,13 +37,4 @@ abstract class DuskTestCase extends BaseTestCase
             DesiredCapabilities::chrome()->setCapability(ChromeOptions::CAPABILITY, $options)
         );
     }
-
-    public function tearDown()
-    {
-        parent::tearDown();
-
-        $this->browse(function (Browser $browser) {
-            $browser->driver->manage()->deleteAllCookies();
-        });
-    }
 }

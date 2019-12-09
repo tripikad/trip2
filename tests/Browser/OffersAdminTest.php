@@ -74,9 +74,8 @@ class OffersAdminTest extends DuskTestCase
                 ->visit('/offer')
                 ->pause(500)
                 ->click(dusk('Playa Bonita para Mamacita'))
-                ->assertPathIs("/offer/$offer->id")
-                ->assertSee('2000€')
-                ->assertSee('Paketireis');
+                ->assertSee('Playa Bonita para Mamacita')
+                ->assertSee('2000€');
         });
 
         // Cleanup
