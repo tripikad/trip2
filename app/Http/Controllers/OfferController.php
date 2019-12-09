@@ -117,13 +117,17 @@ class OfferController extends Controller
                             ])
                     )
                     ->push(
-                        component('Center')->with(
-                            'item',
-                            component('Tag')
-                                ->is('white')
-                                ->is('large')
-                                ->with('title', $offer->style_formatted)
-                        )
+                        component('Flex')
+                            ->with('justify', 'center')
+                            ->with(
+                                'items',
+                                $offer->endDestinations->map(function ($destination) {
+                                    return component('Tag')
+                                        ->is('large')
+                                        ->is('white')
+                                        ->with('title', $destination->name);
+                                })
+                            )
                     )
                     ->push(
                         component('Title')

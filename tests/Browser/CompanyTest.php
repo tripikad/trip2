@@ -16,12 +16,12 @@ class CompanyTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             $browser
                 ->visit('/company')
-                ->see('Pead esmalt sisse logima')
-                ->dontSee('Halda reisipakkumisi')
-                ->dontSee('Lisa seiklusreis')
+                ->asserSee('Pead esmalt sisse logima')
+                ->assertDontSee('Halda reisipakkumisi')
+                ->assertDontSee('Lisa seiklusreis')
                 ->visit('/company/admin')
-                ->see('Pead esmalt sisse logima')
-                ->dontSee('Halda reisifirmasid');
+                ->asserSee('Pead esmalt sisse logima')
+                ->assertDontSee('Halda reisifirmasid');
         });
     }
 
@@ -33,12 +33,12 @@ class CompanyTest extends DuskTestCase
             $browser
                 ->loginAs($regular_user)
                 ->visit('/company')
-                ->see('Õigused puuduvad')
-                ->dontSee('Halda reisipakkumisi')
-                ->dontSee('Lisa seiklusreis')
+                ->asserSee('Õigused puuduvad')
+                ->assertDontSee('Halda reisipakkumisi')
+                ->assertDontSee('Lisa seiklusreis')
                 ->visit('/company/admin')
-                ->see('Õigused puuduvad')
-                ->dontSee('Halda reisifirmasid');
+                ->asserSee('Õigused puuduvad')
+                ->assertDontSee('Halda reisifirmasid');
         });
 
         $regular_user->delete();
@@ -52,12 +52,12 @@ class CompanyTest extends DuskTestCase
             $browser
                 ->loginAs($admin_user)
                 ->visit('/company')
-                ->see('Õigused puuduvad')
-                ->dontSee('Halda reisipakkumisi')
-                ->dontSee('Lisa seiklusreis')
+                ->asserSee('Õigused puuduvad')
+                ->assertDontSee('Halda reisipakkumisi')
+                ->assertDontSee('Lisa seiklusreis')
                 ->visit('/company/admin')
-                ->see('Õigused puuduvad')
-                ->dontSee('Halda reisifirmasid');
+                ->asserSee('Õigused puuduvad')
+                ->assertDontSee('Halda reisifirmasid');
         });
 
         $admin_user->delete();
@@ -71,7 +71,7 @@ class CompanyTest extends DuskTestCase
             $browser
                 ->loginAs($superuser)
                 ->visit('/company/create')
-                ->see('Lisa reisifirma')
+                ->asserSee('Lisa reisifirma')
                 ->type(dusk('Kasutajanimi'), 'empresariarica')
                 ->type(dusk('Firmanimi'), 'Empresaria Rica')
                 ->type(dusk('Parool'), 'nomedemihijo')
@@ -91,7 +91,7 @@ class CompanyTest extends DuskTestCase
                 ->type(dusk('Parool'), 'nomedemihijo')
                 ->click(dusk('Logi sisse'))
                 ->visit('/company')
-                ->see('Lisa seiklusreis');
+                ->asserSee('Lisa seiklusreis');
         });
     }
 }

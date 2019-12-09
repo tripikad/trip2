@@ -21,14 +21,15 @@ class DuskServiceProvider extends ServiceProvider
             return $this;
         });
 
-        Browser::macro('see', function ($text = '') {
-            PHPUnit::assertTrue(!!strstr($this->driver->getPageSource(), $text), "Do not see [$text] in page source");
-            return $this;
-        });
+        // @TODO2 Remove
+        // Browser::macro('see', function ($text = '') {
+        //     PHPUnit::assertTrue(!!strstr($this->driver->getPageSource(), $text), "Do not see [$text] in page source");
+        //     return $this;
+        // });
 
-        Browser::macro('dontSee', function ($text = '') {
-            PHPUnit::assertTrue(!strstr($this->driver->getPageSource(), $text), "Seeing [$text] in page source");
-            return $this;
-        });
+        // Browser::macro('dontSee', function ($text = '') {
+        //     PHPUnit::assertTrue(!strstr($this->driver->getPageSource(), $text), "Seeing [$text] in page source");
+        //     return $this;
+        // });
     }
 }

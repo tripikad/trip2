@@ -34,219 +34,215 @@ class OfferAdminController extends Controller
                             ->is('white')
                             ->is('large')
                             ->is('center')
-                            ->with('title', trans('offer.admin.company.index.title'))
+                            ->with('title', trans("offer.admin.create.style.$style"))
                     )
                 )
             )
             ->with(
                 'content',
-                collect()
-                    ->push(component('Title')->with('title', trans("offer.admin.create.style.$style")))
-                    ->push(
-                        component('Form')
-                            ->with('route', route('offer.admin.store'))
-                            ->with(
-                                'fields',
-                                collect()
-                                    ->push(
-                                        component('FormHidden')
-                                            ->with('name', 'style')
-                                            ->with('value', $style)
-                                    )
-                                    ->push(
-                                        component('FormCheckbox')
-                                            ->with('name', 'status')
-                                            ->with('title', trans('offer.admin.edit.status'))
-                                            ->with('value', old('status'))
-                                    )
-                                    ->push(
-                                        component('FlexGrid')
-                                            ->with('widths', '6fr 1fr')
-                                            ->with(
-                                                'items',
-                                                collect()
-                                                    ->push(
-                                                        component('FormTextfield')
-                                                            ->with('title', trans('offer.admin.edit.title'))
-                                                            ->with('name', 'title')
-                                                            ->with('value', old('title'))
-                                                    )
-                                                    ->push(
-                                                        component('FormTextField')
-                                                            ->with('title', trans('offer.admin.edit.price'))
-                                                            ->with('name', 'price')
-                                                            ->with('value', old('price'))
-                                                    )
-                                            )
-                                    )
-                                    ->push(
-                                        component('FlexGrid')->with(
+                collect()->push(
+                    component('Form')
+                        ->with('route', route('offer.admin.store'))
+                        ->with(
+                            'fields',
+                            collect()
+                                ->push(
+                                    component('FormHidden')
+                                        ->with('name', 'style')
+                                        ->with('value', $style)
+                                )
+                                ->push(
+                                    component('FormCheckbox')
+                                        ->with('name', 'status')
+                                        ->with('title', trans('offer.admin.edit.status'))
+                                        ->with('value', old('status'))
+                                )
+                                ->push(
+                                    component('FlexGrid')
+                                        ->with('widths', '6fr 1fr')
+                                        ->with(
                                             'items',
                                             collect()
                                                 ->push(
-                                                    component('FormSelectMultiple')
-                                                        ->with('height', 12)
-                                                        ->with('title', trans('offer.admin.edit.start_destinations'))
-                                                        ->with('name', 'start_destinations[]')
-                                                        ->with('options', $destinations)
-                                                        ->with('max', 1)
-                                                        ->with(
-                                                            'value',
-                                                            $startDestination ? [$startDestination->id] : []
+                                                    component('FormTextfield')
+                                                        ->with('title', trans('offer.admin.edit.title'))
+                                                        ->with('name', 'title')
+                                                        ->with('value', old('title'))
+                                                )
+                                                ->push(
+                                                    component('FormTextField')
+                                                        ->with('title', trans('offer.admin.edit.price'))
+                                                        ->with('name', 'price')
+                                                        ->with('value', old('price'))
+                                                )
+                                        )
+                                )
+                                ->push(
+                                    component('FlexGrid')->with(
+                                        'items',
+                                        collect()
+                                            ->push(
+                                                component('FormSelectMultiple')
+                                                    ->with('height', 12)
+                                                    ->with('title', trans('offer.admin.edit.start_destinations'))
+                                                    ->with('name', 'start_destinations[]')
+                                                    ->with('options', $destinations)
+                                                    ->with('max', 1)
+                                                    ->with('value', $startDestination ? [$startDestination->id] : [])
+                                            )
+                                            ->push(
+                                                component('FormSelectMultiple')
+                                                    ->with('height', 12)
+                                                    ->with('title', trans('offer.admin.edit.end_destinations'))
+                                                    ->with('name', 'end_destinations[]')
+                                                    ->with('options', $destinations)
+                                            )
+                                    )
+                                )
+                                ->push(
+                                    component('FlexGrid')->with(
+                                        'items',
+                                        collect()
+                                            ->push(
+                                                component('FormTextfield')
+                                                    ->with('title', trans('offer.admin.edit.start_at'))
+                                                    ->with('name', 'start_at')
+                                                    ->with('value', '')
+                                            )
+                                            ->push(
+                                                component('FormTextfield')
+                                                    ->with('title', trans('offer.admin.edit.end_at'))
+                                                    ->with('name', 'end_at')
+                                                    ->with('value', '')
+                                            )
+                                    )
+                                )
+                                ->push(
+                                    component('FlexGrid')
+                                        ->with('widths', '3fr 1fr')
+                                        ->with(
+                                            'items',
+                                            collect()
+                                                ->push(
+                                                    component(!$isPackage ? 'FormTextfield' : 'FormHidden')
+                                                        ->with('title', trans('offer.admin.edit.guide'))
+                                                        ->with('name', 'guide')
+
+                                                        ->with('value', old('guide'))
+                                                )
+                                                ->push(
+                                                    component(!$isPackage ? 'FormTextfield' : 'FormHidden')
+                                                        ->with('title', trans('offer.admin.edit.size'))
+                                                        ->with('name', 'size')
+
+                                                        ->with('value', old('guide'))
+                                                )
+                                        )
+                                )
+                                ->push(
+                                    component(!$isPackage ? 'FormTextarea' : 'FormHidden')
+                                        ->with('title', trans('offer.admin.edit.accommodation'))
+                                        ->with('name', 'accommodation')
+                                        ->with('value', old('accommodation'))
+                                        ->with('rows', 4)
+                                )
+                                ->push(
+                                    component(!$isPackage ? 'FormTextarea' : 'FormHidden')
+                                        ->with('title', trans('offer.admin.edit.included'))
+                                        ->with('name', 'included')
+                                        ->with('value', old('included'))
+                                        ->with('rows', 4)
+                                )
+                                ->push(
+                                    component('FormCheckbox')
+                                        ->with('name', 'flights')
+                                        ->with('title', trans('offer.admin.edit.flights'))
+                                )
+                                ->push(
+                                    component(!$isPackage ? 'FormTextarea' : 'FormHidden')
+                                        ->with('title', trans('offer.admin.edit.extras'))
+                                        ->with('name', 'extras')
+                                        ->with('value', old('extras'))
+                                        ->with('rows', 4)
+                                )
+                                ->push(
+                                    component('FormCheckbox')
+                                        ->with('name', 'transfer')
+                                        ->with('title', trans('offer.admin.edit.transfer'))
+                                )
+                                ->push(
+                                    component('FlexGrid')
+                                        ->with('gap', !$isPackage ? 0 : 1)
+                                        ->with('cols', 4)
+                                        ->with('widths', '3fr 1fr 2fr 2fr')
+                                        ->with(
+                                            'items',
+                                            collect(array_fill(0, 5, null))
+                                                ->map(function ($value, $key) use ($isPackage) {
+                                                    return collect()
+                                                        ->push(
+                                                            component($isPackage ? 'FormTextfield' : 'FormHidden')
+                                                                ->with(
+                                                                    'title',
+                                                                    trans('offer.admin.edit.hotel.name') .
+                                                                        ' ' .
+                                                                        ($key + 1)
+                                                                )
+                                                                ->with('name', 'hotel_name[]')
+                                                            //->with('value', '')
                                                         )
-                                                )
-                                                ->push(
-                                                    component('FormSelectMultiple')
-                                                        ->with('height', 12)
-                                                        ->with('title', trans('offer.admin.edit.end_destinations'))
-                                                        ->with('name', 'end_destinations[]')
-                                                        ->with('options', $destinations)
-                                                )
+                                                        ->push(
+                                                            component($isPackage ? 'FormTextfield' : 'FormHidden')
+                                                                ->with(
+                                                                    'title',
+                                                                    trans('offer.admin.edit.hotel.rating') .
+                                                                        ' ' .
+                                                                        ($key + 1)
+                                                                )
+                                                                ->with('name', 'hotel_rating[]')
+                                                            //->with('options', '')
+                                                        )
+                                                        ->push(
+                                                            component($isPackage ? 'FormTextfield' : 'FormHidden')
+                                                                ->with(
+                                                                    'title',
+                                                                    trans('offer.admin.edit.hotel.type') .
+                                                                        ' ' .
+                                                                        ($key + 1)
+                                                                )
+                                                                ->with('name', 'hotel_type[]')
+                                                            //->with('options','')
+                                                        )
+                                                        ->push(
+                                                            component($isPackage ? 'FormTextfield' : 'FormHidden')
+                                                                ->with(
+                                                                    'title',
+                                                                    trans('offer.admin.edit.hotel.price') .
+                                                                        ' ' .
+                                                                        ($key + 1)
+                                                                )
+                                                                ->with('name', 'hotel_price[]')
+                                                            //->with('options', '')
+                                                        );
+                                                })
+                                                ->flatten()
                                         )
-                                    )
-                                    ->push(
-                                        component('FlexGrid')->with(
-                                            'items',
-                                            collect()
-                                                ->push(
-                                                    component('FormTextfield')
-                                                        ->with('title', trans('offer.admin.edit.start_at'))
-                                                        ->with('name', 'start_at')
-                                                        ->with('value', '')
-                                                )
-                                                ->push(
-                                                    component('FormTextfield')
-                                                        ->with('title', trans('offer.admin.edit.end_at'))
-                                                        ->with('name', 'end_at')
-                                                        ->with('value', '')
-                                                )
-                                        )
-                                    )
-                                    ->push(
-                                        component('FlexGrid')
-                                            ->with('widths', '3fr 1fr')
-                                            ->with(
-                                                'items',
-                                                collect()
-                                                    ->push(
-                                                        component(!$isPackage ? 'FormTextfield' : 'FormHidden')
-                                                            ->with('title', trans('offer.admin.edit.guide'))
-                                                            ->with('name', 'guide')
-
-                                                            ->with('value', old('guide'))
-                                                    )
-                                                    ->push(
-                                                        component(!$isPackage ? 'FormTextfield' : 'FormHidden')
-                                                            ->with('title', trans('offer.admin.edit.size'))
-                                                            ->with('name', 'size')
-
-                                                            ->with('value', old('guide'))
-                                                    )
-                                            )
-                                    )
-                                    ->push(
-                                        component(!$isPackage ? 'FormTextarea' : 'FormHidden')
-                                            ->with('title', trans('offer.admin.edit.accommodation'))
-                                            ->with('name', 'accommodation')
-                                            ->with('value', old('accommodation'))
-                                            ->with('rows', 4)
-                                    )
-                                    ->push(
-                                        component(!$isPackage ? 'FormTextarea' : 'FormHidden')
-                                            ->with('title', trans('offer.admin.edit.included'))
-                                            ->with('name', 'included')
-                                            ->with('value', old('included'))
-                                            ->with('rows', 4)
-                                    )
-                                    ->push(
-                                        component('FormCheckbox')
-                                            ->with('name', 'flights')
-                                            ->with('title', trans('offer.admin.edit.flights'))
-                                    )
-                                    ->push(
-                                        component(!$isPackage ? 'FormTextarea' : 'FormHidden')
-                                            ->with('title', trans('offer.admin.edit.extras'))
-                                            ->with('name', 'extras')
-                                            ->with('value', old('extras'))
-                                            ->with('rows', 4)
-                                    )
-                                    ->push(
-                                        component('FormCheckbox')
-                                            ->with('name', 'transfer')
-                                            ->with('title', trans('offer.admin.edit.transfer'))
-                                    )
-                                    ->push(
-                                        component('FlexGrid')
-                                            ->with('gap', !$isPackage ? 0 : 1)
-                                            ->with('cols', 4)
-                                            ->with('widths', '3fr 1fr 2fr 2fr')
-                                            ->with(
-                                                'items',
-                                                collect(array_fill(0, 5, null))
-                                                    ->map(function ($value, $key) use ($isPackage) {
-                                                        return collect()
-                                                            ->push(
-                                                                component($isPackage ? 'FormTextfield' : 'FormHidden')
-                                                                    ->with(
-                                                                        'title',
-                                                                        trans('offer.admin.edit.hotel.name') .
-                                                                            ' ' .
-                                                                            ($key + 1)
-                                                                    )
-                                                                    ->with('name', 'hotel_name[]')
-                                                                //->with('value', '')
-                                                            )
-                                                            ->push(
-                                                                component($isPackage ? 'FormTextfield' : 'FormHidden')
-                                                                    ->with(
-                                                                        'title',
-                                                                        trans('offer.admin.edit.hotel.rating') .
-                                                                            ' ' .
-                                                                            ($key + 1)
-                                                                    )
-                                                                    ->with('name', 'hotel_rating[]')
-                                                                //->with('options', '')
-                                                            )
-                                                            ->push(
-                                                                component($isPackage ? 'FormTextfield' : 'FormHidden')
-                                                                    ->with(
-                                                                        'title',
-                                                                        trans('offer.admin.edit.hotel.type') .
-                                                                            ' ' .
-                                                                            ($key + 1)
-                                                                    )
-                                                                    ->with('name', 'hotel_type[]')
-                                                                //->with('options','')
-                                                            )
-                                                            ->push(
-                                                                component($isPackage ? 'FormTextfield' : 'FormHidden')
-                                                                    ->with(
-                                                                        'title',
-                                                                        trans('offer.admin.edit.hotel.price') .
-                                                                            ' ' .
-                                                                            ($key + 1)
-                                                                    )
-                                                                    ->with('name', 'hotel_price[]')
-                                                                //->with('options', '')
-                                                            );
-                                                    })
-                                                    ->flatten()
-                                            )
-                                    )
-                                    ->push(
-                                        component('FormTextarea')
-                                            ->with('title', trans('offer.admin.edit.description'))
-                                            ->with('name', 'description')
-                                            ->with('value', old('description'))
-                                            ->with('rows', 4)
-                                    )
-                                    ->push(
-                                        component('FormButton')
-                                            ->is('large')
-                                            ->with('title', trans("offer.admin.create.style.$style"))
-                                    )
-                            )
-                    )
+                                )
+                                ->push(
+                                    component('FormTextarea')
+                                        ->with('title', trans('offer.admin.edit.description'))
+                                        ->with('name', 'description')
+                                        ->with('value', old('description'))
+                                        ->with('rows', 4)
+                                )
+                                ->push(
+                                    component('FormButton')
+                                        ->is('large')
+                                        ->is('orange')
+                                        ->with('title', trans("offer.admin.create.style.$style"))
+                                )
+                        )
+                )
             )
             ->with('footer', region('FooterLight'))
             ->render();

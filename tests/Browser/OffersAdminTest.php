@@ -19,15 +19,15 @@ class OffersAdminTest extends DuskTestCase
             $browser
                 ->loginAs($company)
                 ->visit('/company')
-                ->see('Halda reisipakkumisi')
+                ->assertSee('Halda reisipakkumisi')
                 ->click(dusk('Lisa paketireis'))
                 ->assertPathIs('/offer/admin/create/package')
                 ->scrollToBottom()
                 ->pause(1000)
                 ->click(dusk('Lisa paketireis'))
                 ->assertPathIs('/offer/admin/create/package')
-                ->see('Väli nimega "Pealkiri" on kohustuslik')
-                ->see('Väli nimega "Reisi sihtkohad" on kohustuslik');
+                ->assertSee('Väli nimega "Pealkiri" on kohustuslik')
+                ->assertSee('Väli nimega "Reisi sihtkohad" on kohustuslik');
         });
 
         $company->delete();
@@ -44,7 +44,7 @@ class OffersAdminTest extends DuskTestCase
             $browser
                 ->loginAs($company)
                 ->visit('/company')
-                ->see('Halda reisipakkumisi')
+                ->assertSee('Halda reisipakkumisi')
                 ->click(dusk('Lisa paketireis'))
                 ->click(dusk('Pakkumine on avalikustatud'))
                 ->type(dusk('Pealkiri'), 'Playa Bonita para Mamacita')
@@ -59,9 +59,9 @@ class OffersAdminTest extends DuskTestCase
                 ->pause(1000)
                 ->click(dusk('Lisa paketireis'))
                 ->assertPathIs('/company')
-                ->see('Playa Bonita para Mamacita')
-                ->see('2000€')
-                ->see('Sol');
+                ->assertSee('Playa Bonita para Mamacita')
+                ->assertSee('2000€')
+                ->assertSee('Sol');
         });
 
         // Assert users can see the offer without being logged in
@@ -70,13 +70,13 @@ class OffersAdminTest extends DuskTestCase
 
         $this->browse(function (Browser $browser) use ($company, $offer) {
             $browser
-                ->logout()
+                ->visit('/logout')
                 ->visit('/offer')
                 ->pause(500)
                 ->click(dusk('Playa Bonita para Mamacita'))
                 ->assertPathIs("/offer/$offer->id")
-                ->see('2000€')
-                ->see('Paketireis');
+                ->assertSee('2000€')
+                ->assertSee('Paketireis');
         });
 
         // Cleanup
@@ -101,7 +101,7 @@ class OffersAdminTest extends DuskTestCase
             $browser
                 ->loginAs($company)
                 ->visit('/company')
-                ->see('Halda reisipakkumisi')
+                ->assertSee('Halda reisipakkumisi')
                 ->click(dusk('Lisa seiklusreis'))
                 ->pause(1000)
                 ->type(dusk('Pealkiri'), 'Montaña alta para gringo')
@@ -113,8 +113,8 @@ class OffersAdminTest extends DuskTestCase
                 ->pause(1000)
                 ->click(dusk('Lisa seiklusreis'))
                 ->assertPathIs('/company')
-                ->see('Montaña alta para gringo')
-                ->see('Universo');
+                ->assertSee('Montaña alta para gringo')
+                ->assertSee('Universo');
         });
 
         $offer = Offer::whereTitle('Montaña alta para gringo')->first();
@@ -126,8 +126,8 @@ class OffersAdminTest extends DuskTestCase
             $browser
                 ->loginAs($company)
                 ->visit("/offer/$offer->id")
-                ->see('Suure tõenäosusega on lehekülg liigutatud teise kohta')
-                ->dontSee('Montaña alta para gringo');
+                ->assertSee('Suure tõenäosusega on lehekülg liigutatud teise kohta')
+                ->assertDontSee('Montaña alta para gringo');
         });
 
         // Assert companies do not see each other unpublished offers
@@ -138,7 +138,7 @@ class OffersAdminTest extends DuskTestCase
             $browser
                 ->loginAs($other_company)
                 ->visit('/offer/admin/company')
-                ->dontSee('Montaña alta para gringo');
+                ->assertDontSee('Montaña alta para gringo');
         });
 
         // Cleanup

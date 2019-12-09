@@ -36,12 +36,34 @@ class CompanyController extends Controller
                     )
                     ->push(region('OfferAdminButtons', $loggedUser))
                     ->br()
-                    ->merge(
-                        $offers->map(function ($offer) {
-                            return component('OfferRow')
-                                ->is($offer->status ? '' : 'unpublished')
-                                ->with('offer', $offer);
-                        })
+                    ->push(
+                        component('Grid')
+                            ->with('widths', '1fr auto')
+                            ->with('gap', 4)
+                            ->with(
+                                'items',
+                                $offers
+                                    ->map(function ($offer) {
+                                        return collect()
+                                            ->push(
+                                                component('OfferRow')
+                                                    ->is($offer->status == 1 ? '' : 'unpublished')
+                                                    ->with('offer', $offer)
+                                                    ->with(
+                                                        'route',
+                                                        $offer->status == 1 ? route('offer.show', [$offer]) : ''
+                                                    )
+                                            )
+                                            ->push(
+                                                component('Button')
+                                                    ->is('orange')
+                                                    ->is('narrow')
+                                                    ->is('small')
+                                                    ->with('title', 'Muuda')
+                                            );
+                                    })
+                                    ->flatten()
+                            )
                     )
             )
             ->with('footer', region('FooterLight', ''))
@@ -69,13 +91,13 @@ class CompanyController extends Controller
                         component('Title')
                             ->is('large')
                             ->is('white')
-                            ->with('title', trans('company.index.title'))
+                            ->with('title', trans('company.admin.index.title'))
                     )
                     ->push(
                         component('Button')
                             ->is('orange')
                             ->is('narrow')
-                            ->with('title', trans('company.index.create'))
+                            ->with('title', trans('company.create'))
                             ->with('route', route('company.create'))
                     )
                     ->merge(
@@ -86,9 +108,12 @@ class CompanyController extends Controller
                                     'items',
                                     collect()
                                         ->push(
+                                            component('UserImage')->with('image', $company->imagePreset('small_square'))
+                                        )
+                                        ->push(
                                             component('Title')
-                                                ->is('small')
                                                 ->is('white')
+                                                ->is('small')
                                                 ->with('title', $company->name)
                                                 ->with('route', route('company.show', $company))
                                         )
@@ -114,15 +139,36 @@ class CompanyController extends Controller
                         component('Title')
                             ->is('large')
                             ->is('white')
-                            ->with('title', trans('company.index.offer'))
+                            ->with('title', trans('company.admin.index.offer'))
                     )
-                    ->merge(
-                        $offers->map(function ($offer) {
-                            return component('OfferRow')
-                                ->is($offer->status == 1 ? '' : 'unpublished')
-                                ->with('offer', $offer)
-                                ->with('route', $offer->status == 1 ? route('offer.show', [$offer]) : '');
-                        })
+                    ->push(
+                        component('Grid')
+                            ->with('widths', '1fr auto')
+                            ->with('gap', 4)
+                            ->with(
+                                'items',
+                                $offers
+                                    ->map(function ($offer) {
+                                        return collect()
+                                            ->push(
+                                                component('OfferRow')
+                                                    ->is($offer->status == 1 ? '' : 'unpublished')
+                                                    ->with('offer', $offer)
+                                                    ->with(
+                                                        'route',
+                                                        $offer->status == 1 ? route('offer.show', [$offer]) : ''
+                                                    )
+                                            )
+                                            ->push(
+                                                component('Button')
+                                                    ->is('orange')
+                                                    ->is('narrow')
+                                                    ->is('small')
+                                                    ->with('title', 'Muuda')
+                                            );
+                                    })
+                                    ->flatten()
+                            )
                     )
             )
             ->with('footer', region('FooterLight', ''))
@@ -237,12 +283,6 @@ class CompanyController extends Controller
                                         ->with('value', old('contact_facebook'))
                                 )
                                 ->push(
-                                    component('FormTextfield')
-                                        ->with('title', trans('company.edit.instagram.title'))
-                                        ->with('name', 'contact_instagram')
-                                        ->with('value', old('contact_instagram'))
-                                )
-                                ->push(
                                     component('FormButton')
                                         ->is('wide')
                                         ->is('large')
@@ -268,8 +308,6 @@ class CompanyController extends Controller
             'password_confirmation' => 'required_with:password|same:password',
             'description' => 'min:2',
             'contact_facebook' => 'url',
-            'contact_twitter' => 'url',
-            'contact_instagram' => 'url',
             'contact_homepage' => 'url',
             'file' => "image|max:$maxfilesize"
         ];
@@ -286,7 +324,7 @@ class CompanyController extends Controller
             'notify_follow' => 0,
             'description' => request()->description,
             'contact_facebook' => request()->contact_facebook,
-            'contact_instagram' => request()->contact_instagram,
+            'contact_instagram' => '',
             'contact_twitter' => '',
             'contact_homepage' => request()->contact_homepage,
             'active_at' => Carbon::now(),

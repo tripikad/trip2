@@ -1,7 +1,7 @@
 @php
 
 $items = $items ?? [];
-$cols = $cols ?? 3;
+$cols = $cols ?? 2;
 $rows = round(collect($items)->count() / $cols, PHP_ROUND_HALF_DOWN);
 $widths = $widths ?? 'repeat('. $cols .', 1fr)';
 $heights = $heights ?? 'repeat('. $rows .', auto)';
