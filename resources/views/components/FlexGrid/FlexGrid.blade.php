@@ -29,7 +29,15 @@ else if (isset($gap) && !is_string($gap)) {
 
                 <div class="FlexGrid__item" style="flex: {{ $widths[$colIndex] }}; marginRight: {{ $loop->last ? '' : $gap_string }}">
 
-                    {!! $item !!}
+                @foreach (items($item) as $collection_item)
+
+                    <div>
+
+                    {!! $collection_item !!}
+
+                    </div>  
+                    
+                @endforeach
 
                 </div>
             

@@ -1,5 +1,13 @@
-.Container--wide {
-    margin: 0 auto;
-    max-width: $desktop-width;
-    width: 100%;
+@import 'variables';
+
+.Container {
+    display: flex;
+    justify-content: center;
+    border: 3px solid red;
+    background-size: cover;
+}
+
+.Container__items {
+    display: flex;
+    flex-direction: column;
 }

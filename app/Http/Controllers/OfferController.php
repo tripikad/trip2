@@ -174,7 +174,7 @@ class OfferController extends Controller
                                     )
                             )
                     )
-                    ->br()
+                    ->spacer()
                     ->push(
                         component('Flex')
                             ->with('justify', 'center')
@@ -227,12 +227,12 @@ class OfferController extends Controller
                                     )
                             )
                     )
-                    ->br()
+                    ->spacer()
                     ->pushWhen(
                         $photos->count(),
                         region('PhotoRow', $photos->count() < 18 ? $photos->slice(0, 9) : $photos)
                     )
-                    ->br()
+                    ->spacer()
                     ->push(
                         component('Title')
                             ->is('small')
@@ -310,7 +310,7 @@ class OfferController extends Controller
                             ->is('white')
                             ->with('title', 'Broneeri reis')
                     )
-                    ->br()
+                    ->spacer()
             )
             ->with(
                 'bottom',

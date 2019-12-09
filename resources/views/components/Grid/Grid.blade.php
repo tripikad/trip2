@@ -11,12 +11,12 @@ $spacer = styles('spacer');
 $gap_map = ['sm' => 1, 'md' => 2, 'lg' => 3];
 
 if (isset($gap) && is_string($gap) && $gap_map[$gap]) {
-  $gap_string = 'calc('. $gap_map[$gap] .' * '. $spacer .')';
-} 
+$gap_string = 'calc('. $gap_map[$gap] .' * '. $spacer .')';
+}
 else if (isset($gap) && !is_string($gap)) {
-  $gap_string = 'calc('. $gap .' * '. $spacer .')';
+$gap_string = 'calc('. $gap .' * '. $spacer .')';
 } else {
-  $gap_string = 'calc('. $gap_map['sm'] .' * '. $spacer .')';
+$gap_string = 'calc('. $gap_map['sm'] .' * '. $spacer .')';
 }
 
 @endphp
@@ -27,14 +27,22 @@ else if (isset($gap) && !is_string($gap)) {
         grid-gap: {{ $gap_string }}
     ">
 
-    @foreach ($items as $item)
+  @foreach ($items as $item)
 
-    <div class="Grid__item">
+  <div class="Grid__item">
 
-        {!! $item !!}
+    @foreach (items($item) as $collection_item)
+
+    <div>
+
+      {!! $collection_item !!}
 
     </div>
 
     @endforeach
+
+  </div>
+
+  @endforeach
 
 </div>

@@ -35,7 +35,7 @@ class CompanyController extends Controller
                             ->with('title', trans('company.index.title'))
                     )
                     ->push(region('OfferAdminButtons', $loggedUser))
-                    ->br()
+                    ->spacer()
                     ->push(
                         component('Grid')
                             ->with('widths', '1fr auto')
@@ -131,7 +131,7 @@ class CompanyController extends Controller
                                 );
                         })
                     )
-                    ->br()
+                    ->spacer()
                     ->push(
                         component('Title')
                             ->is('large')

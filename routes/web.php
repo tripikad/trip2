@@ -367,12 +367,6 @@ Route::get('styleguide/components', 'Styleguide\ComponentsController@index')->na
 
 Route::get('experiments', 'ExperimentsController@index')->name('experiments.index');
 
-Route::get('experiments/destinations', 'ExperimentsController@destinationIndex')->name('experiments.destination.index');
-
-Route::get('experiments/user/{id?}', 'ExperimentsController@userIndex')->name('experiments.user.index');
-
-Route::post('experiments/store', 'ExperimentsController@store')->name('experiments.store');
-
 // Registration
 
 Route::get('register', [

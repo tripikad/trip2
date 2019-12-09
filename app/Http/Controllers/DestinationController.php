@@ -50,7 +50,7 @@ class DestinationController extends Controller
                             ->is('center')
                             ->with('title', 'Sihtkohad')
                     )
-                    ->br()
+                    ->spacer()
                     ->push(
                         component('Dotmap')
                             ->with('height', '300px')

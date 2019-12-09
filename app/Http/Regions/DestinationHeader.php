@@ -55,7 +55,7 @@ class DestinationHeader
                             ->with('body', format_body($destination->description))
                     )
                     ->pushWhen($destination->user, region('UserRow', $destination->user))
-                    ->br()
+                    ->spacer()
                     ->pushWhen($childrens->count(), region('DestinationChildrenTitle', $destination, $childrens))
                     ->pushWhen(
                         $childrens->count(),
@@ -74,7 +74,7 @@ class DestinationHeader
                                 })
                             )
                     )
-                    ->br()
+                    ->spacer()
                     ->push(region('DestinationStat', $destination))
                     ->pushWhen(
                         $user && $user->hasRole('admin'),

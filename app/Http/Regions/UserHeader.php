@@ -107,9 +107,9 @@ class UserHeader
                     )
                     ->push(region('UserHeaderImage', $user, $loggedUser))
                     ->push(component('Center')->with('item', region('UserAbout', $user, $loggedUser)))
-                    ->br()
+                    ->spacer()
                     ->push(region('UserStats', $user, $loggedUser))
-                    ->br()
+                    ->spacer()
                     ->push(
                         component('Body')
                             ->is('white')
