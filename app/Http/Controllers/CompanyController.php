@@ -232,14 +232,14 @@ class CompanyController extends Controller
                                 ->push(
                                     component('FormPassword')
                                         ->is('large')
-                                        ->with('title', trans('company.edit.password.title'))
+                                        ->with('title', trans('company.create.password.title'))
                                         ->with('name', 'password')
                                         ->with('value', '')
                                 )
                                 ->push(
                                     component('FormPassword')
                                         ->is('large')
-                                        ->with('title', trans('company.edit.password_confirmation.title'))
+                                        ->with('title', trans('company.create.password_confirmation.title'))
                                         ->with('name', 'password_confirmation')
                                         ->with('value', '')
                                 )
@@ -374,39 +374,102 @@ class CompanyController extends Controller
                 'bottom',
                 collect()->push(
                     component('Form')
-                        ->with('route', route('company.update', [$id]))
+                        ->with('route', route('company.update', [$user]))
                         ->with('method', 'PUT')
                         ->with('files', true)
                         ->with(
                             'fields',
                             collect()
-                                // ->push(
-                                //     component('Title')
-                                //         ->is('small')
-                                //         ->is('blue')
-                                //         ->with('title', trans('company.edit.credentials'))
-                                // )
-                                ->pushWhen(
-                                    request()->has('redirect'),
-                                    component('FormHidden')
-                                        ->with('name', 'redirect')
-                                        ->with('value', request()->redirect)
+                                ->push(
+                                    component('Title')
+                                        ->is('small')
+                                        ->is('blue')
+                                        ->with('title', trans('company.edit.credentials'))
+                                )
+                                ->push(
+                                    component('FormTextfield')
+                                        ->is('large')
+                                        ->with('title', trans('company.edit.name.title'))
+                                        ->with('name', 'name')
+                                        ->with('value', old('name', $user->name))
+                                )
+                                ->push(
+                                    component('FormTextfield')
+                                        ->is('large')
+                                        ->with('title', trans('company.edit.company_name.title'))
+                                        ->with('name', 'company_name')
+                                        ->with('value', old('company_name', $user->real_name))
+                                )
+                                ->push(
+                                    component('FormTextfield')
+                                        ->is('large')
+                                        ->with('title', trans('company.edit.email.title'))
+                                        ->with('name', 'email')
+                                        ->with('value', old('email', $user->email))
+                                )
+                                ->push(
+                                    component('FormPassword')
+                                        ->is('large')
+                                        ->with('title', trans('company.edit.password.title'))
+                                        ->with('name', 'password')
+                                        ->with('value', '')
+                                )
+                                ->push(
+                                    component('FormPassword')
+                                        ->is('large')
+                                        ->with('title', trans('company.edit.password_confirmation.title'))
+                                        ->with('name', 'password_confirmation')
+                                        ->with('value', '')
+                                )
+                                ->push(
+                                    component('Title')
+                                        ->is('small')
+                                        ->is('blue')
+                                        ->with('title', trans('company.edit.about'))
+                                )
+                                ->push(component('FormUpload')->with('name', 'file'))
+                                ->push(
+                                    component('FormTextarea')
+                                        ->with('rows', 4)
+                                        ->with('title', trans('company.edit.description.title'))
+                                        ->with('name', 'description')
+                                        ->with('value', old('description', $user->description))
+                                )
+                                ->push(
+                                    component('Title')
+                                        ->is('small')
+                                        ->is('blue')
+                                        ->with('title', trans('company.edit.contacts.title'))
+                                )
+                                ->push(
+                                    component('FormTextfield')
+                                        ->with('title', trans('company.edit.homepage.title'))
+                                        ->with('name', 'contact_homepage')
+                                        ->with('value', old('contact_homepage', $user->contact_homepage))
+                                )
+                                ->push(
+                                    component('FormTextfield')
+                                        ->with('title', trans('company.edit.facebook.title'))
+                                        ->with('name', 'contact_facebook')
+                                        ->with('value', old('contact_facebook', $user->contact_facebook))
                                 )
                                 ->push(
                                     component('FormButton')
                                         ->is('wide')
                                         ->is('large')
                                         ->is('orange')
-                                        ->with('title', trans('company.edit.submit'))
+                                        ->with('title', trans('company.create.submit'))
                                 )
                         )
                 )
             )
+            ->with('footer', region('FooterLight', ''))
             ->render();
     }
 
     public function update($id)
     {
+        dd(request()->all());
         return redirect()
             ->route(request()->has('redirect') ? request()->redirect : 'company.index')
             ->with('info', trans('company.edit.info'));
