@@ -2,7 +2,7 @@
 
 namespace App\Http\Regions;
 
-class OfferAdminList
+class CompanyOffers
 {
     public function render($offers)
     {

@@ -21,24 +21,45 @@ class CompanyController extends Controller
             ->with(['user:id,name', 'startDestinations', 'endDestinations'])
             ->get();
 
-        return layout('Offer')
-            ->with('title', 'Offer')
-            ->with('color', 'blue')
-            ->with('header', region('OfferHeader'))
-            ->with(
-                'content',
+        return layout('Full')
+            ->withHeadRobots('noindex')
+            ->withTransparency(true)
+            ->withTitle(trans('offer.index'))
+            ->withItems(
                 collect()
                     ->push(
-                        component('Title')
-                            ->is('large')
-                            ->is('white')
-                            ->with('title', trans('company.index.title'))
+                        component('Section')
+                            ->withPadding(2)
+                            ->withTag('header')
+                            ->withBackground('blue')
+                            ->withItems(collect()->push(region('NavbarLight')))
                     )
-                    ->push(region('OfferAdminButtons', $loggedUser))
-                    ->spacer()
-                    ->push(region('OfferAdminList', $offers))
+                    ->push(
+                        component('Section')
+                            ->withBackground('blue')
+                            ->withPadding(2)
+                            ->withGap(2)
+                            ->withWidth(styles('tablet-width'))
+                            ->withItems(
+                                collect()
+                                    ->push(
+                                        component('Title')
+                                            ->is('white')
+                                            ->is('large')
+                                            ->with('title', trans('company.index.title'))
+                                    )
+                                    ->push(region('CompanyOffersButtons', $loggedUser))
+                                    ->spacer(4)
+                                    ->push(region('CompanyOffers', $offers))
+                            )
+                    )
+                    ->push(
+                        component('Section')
+                            ->withTag('footer')
+                            ->withBackground('blue')
+                            ->withItems(collect()->push(region('FooterLight', '')))
+                    )
             )
-            ->with('footer', region('FooterLight', ''))
             ->render();
     }
 
@@ -68,7 +89,7 @@ class CompanyController extends Controller
                         component('Section')
                             ->withBackground('blue')
                             ->withPadding(2)
-                            ->withGap(1)
+                            ->withGap(2)
                             ->withWidth(styles('tablet-width'))
                             ->withItems(
                                 collect()
@@ -91,7 +112,6 @@ class CompanyController extends Controller
                                     ->spacer(2)
                                     ->push(
                                         component('Grid')
-                                            ->is('debug')
                                             ->withCols(4)
                                             ->withItems(
                                                 $companies->map(function ($company) {
@@ -107,33 +127,14 @@ class CompanyController extends Controller
                                             ->with('title', trans('company.admin.index.offer'))
                                     )
                                     ->spacer(0.5)
-                                    ->push(
-                                        component('FlexGrid')
-                                            ->with('widths', '1fr auto')
-                                            ->with('gap', 2)
-                                            ->with(
-                                                'items',
-                                                $offers
-                                                    ->map(function ($offer) {
-                                                        return collect()
-                                                            ->push(
-                                                                component('OfferRow')
-                                                                    ->is($offer->status == 1 ? '' : 'unpublished')
-                                                                    ->with('offer', $offer)
-                                                                    ->with('route', route('offer.show', [$offer]))
-                                                            )
-                                                            ->push(
-                                                                component('Button')
-                                                                    ->is('orange')
-                                                                    ->is('narrow')
-                                                                    ->is('small')
-                                                                    ->with('title', 'Muuda')
-                                                            );
-                                                    })
-                                                    ->flatten()
-                                            )
-                                    )
+                                    ->push(region('CompanyOffersAdmin', $offers))
                             )
+                    )
+                    ->push(
+                        component('Section')
+                            ->withTag('footer')
+                            ->withBackground('blue')
+                            ->withItems(collect()->push(region('FooterLight', '')))
                     )
             )
             ->render();
@@ -149,114 +150,135 @@ class CompanyController extends Controller
     {
         $loggedUser = request()->user();
 
-        return layout('Offer')
-            ->with('title', 'Offer')
-            ->with('color', 'blue')
-            ->with('header', region('OfferHeader'))
-            ->with(
-                'content',
-                collect()->push(
-                    component('Title')
-                        ->is('large')
-                        ->is('white')
-                        ->is('center')
-                        ->with('title', trans('company.create.title'))
-                )
-            )
-            ->with(
-                'bottom',
-                collect()->push(
-                    component('Form')
-                        ->with('route', route('company.store'))
-                        ->with('files', true)
-                        ->with(
-                            'fields',
-                            collect()
-                                ->push(
-                                    component('Title')
-                                        ->is('small')
-                                        ->is('blue')
-                                        ->with('title', trans('company.edit.credentials'))
-                                )
-                                ->push(
-                                    component('FormTextfield')
-                                        ->is('large')
-                                        ->with('title', trans('company.edit.name.title'))
-                                        ->with('name', 'name')
-                                        ->with('value', old('name'))
-                                )
-                                ->push(
-                                    component('FormTextfield')
-                                        ->is('large')
-                                        ->with('title', trans('company.edit.company_name.title'))
-                                        ->with('name', 'company_name')
-                                        ->with('value', old('company_name'))
-                                )
+        return layout('Full')
+            ->withHeadRobots('noindex')
+            ->withTransparency(true)
+            ->withTitle(trans('offer.index'))
+            ->withItems(
+                collect()
+                    ->push(
+                        component('Section')
+                            ->withPadding(2)
+                            ->withTag('header')
+                            ->withBackground('blue')
+                            ->withItems(collect()->push(region('NavbarLight')))
+                    )
+                    ->push(
+                        component('Section')
+                            ->withBackground('blue')
+                            ->withPadding(2)
+                            ->withWidth(styles('tablet-width'))
+                            ->withItems(
+                                component('Title')
+                                    ->is('white')
+                                    ->is('large')
+                                    ->withTitle(trans('company.create.title'))
+                            )
+                    )
+                    ->push(
+                        component('Section')
+                            ->withBackground('blue')
+                            ->withInnerBackground('white')
+                            ->withInnerPadding(2)
+                            ->withWidth(styles('tablet-width'))
+                            ->withItems(
+                                component('Form')
+                                    ->with('route', route('company.store'))
+                                    ->with('files', true)
+                                    ->with(
+                                        'fields',
+                                        collect()
+                                            ->push(
+                                                component('Title')
+                                                    ->is('small')
+                                                    ->is('blue')
+                                                    ->with('title', trans('company.edit.credentials'))
+                                            )
+                                            ->push(
+                                                component('FormTextfield')
+                                                    ->is('large')
+                                                    ->with('title', trans('company.edit.name.title'))
+                                                    ->with('name', 'name')
+                                                    ->with('value', old('name'))
+                                            )
+                                            ->push(
+                                                component('FormTextfield')
+                                                    ->is('large')
+                                                    ->with('title', trans('company.edit.company_name.title'))
+                                                    ->with('name', 'company_name')
+                                                    ->with('value', old('company_name'))
+                                            )
 
-                                ->push(
-                                    component('FormPassword')
-                                        ->is('large')
-                                        ->with('title', trans('company.create.password.title'))
-                                        ->with('name', 'password')
-                                        ->with('value', '')
-                                )
-                                ->push(
-                                    component('FormPassword')
-                                        ->is('large')
-                                        ->with('title', trans('company.create.password_confirmation.title'))
-                                        ->with('name', 'password_confirmation')
-                                        ->with('value', '')
-                                )
-                                ->push(
-                                    component('Title')
-                                        ->is('small')
-                                        ->is('blue')
-                                        ->with('title', trans('company.edit.about'))
-                                )
-                                ->push(component('FormUpload')->with('name', 'file'))
-                                ->push(
-                                    component('FormTextarea')
-                                        ->with('rows', 4)
-                                        ->with('title', trans('company.edit.description.title'))
-                                        ->with('name', 'description')
-                                        ->with('value', old('description'))
-                                )
-                                ->push(
-                                    component('Title')
-                                        ->is('small')
-                                        ->is('blue')
-                                        ->with('title', trans('company.edit.contacts.title'))
-                                )
-                                ->push(
-                                    component('FormTextfield')
-                                        ->is('large')
-                                        ->with('title', trans('company.edit.email.title'))
-                                        ->with('name', 'email')
-                                        ->with('value', old('email'))
-                                )
-                                ->push(
-                                    component('FormTextfield')
-                                        ->with('title', trans('company.edit.homepage.title'))
-                                        ->with('name', 'contact_homepage')
-                                        ->with('value', old('contact_homepage'))
-                                )
-                                ->push(
-                                    component('FormTextfield')
-                                        ->with('title', trans('company.edit.facebook.title'))
-                                        ->with('name', 'contact_facebook')
-                                        ->with('value', old('contact_facebook'))
-                                )
-                                ->push(
-                                    component('FormButton')
-                                        ->is('wide')
-                                        ->is('large')
-                                        ->is('orange')
-                                        ->with('title', trans('company.create.submit'))
-                                )
-                        )
-                )
+                                            ->push(
+                                                component('FormPassword')
+                                                    ->is('large')
+                                                    ->with('title', trans('company.create.password.title'))
+                                                    ->with('name', 'password')
+                                                    ->with('value', '')
+                                            )
+                                            ->push(
+                                                component('FormPassword')
+                                                    ->is('large')
+                                                    ->with('title', trans('company.create.password_confirmation.title'))
+                                                    ->with('name', 'password_confirmation')
+                                                    ->with('value', '')
+                                            )
+                                            ->push(
+                                                component('Title')
+                                                    ->is('small')
+                                                    ->is('blue')
+                                                    ->with('title', trans('company.edit.about'))
+                                            )
+                                            ->push(component('FormUpload')->with('name', 'file'))
+                                            ->push(
+                                                component('FormTextarea')
+                                                    ->with('rows', 4)
+                                                    ->with('title', trans('company.edit.description.title'))
+                                                    ->with('name', 'description')
+                                                    ->with('value', old('description'))
+                                            )
+                                            ->push(
+                                                component('Title')
+                                                    ->is('small')
+                                                    ->is('blue')
+                                                    ->with('title', trans('company.edit.contacts.title'))
+                                            )
+                                            ->push(
+                                                component('FormTextfield')
+                                                    ->is('large')
+                                                    ->with('title', trans('company.edit.email.title'))
+                                                    ->with('name', 'email')
+                                                    ->with('value', old('email'))
+                                            )
+                                            ->push(
+                                                component('FormTextfield')
+                                                    ->with('title', trans('company.edit.homepage.title'))
+                                                    ->with('name', 'contact_homepage')
+                                                    ->with('value', old('contact_homepage'))
+                                            )
+                                            ->push(
+                                                component('FormTextfield')
+                                                    ->with('title', trans('company.edit.facebook.title'))
+                                                    ->with('name', 'contact_facebook')
+                                                    ->with('value', old('contact_facebook'))
+                                            )
+                                            ->push(
+                                                component('FormButton')
+                                                    ->is('wide')
+                                                    ->is('large')
+                                                    ->is('orange')
+                                                    ->with('title', trans('company.create.submit'))
+                                            )
+                                    )
+                            )
+                    )
+                    ->push(
+                        component('Section')
+                            ->withTag('footer')
+                            ->withBackground('blue')
+                            ->withItems(collect()->push(region('FooterLight', '')))
+                    )
             )
-            ->with('footer', region('FooterLight', ''))
             ->render();
     }
 
@@ -320,120 +342,141 @@ class CompanyController extends Controller
     {
         $user = User::findOrFail($id);
 
-        return layout('Offer')
-            ->with('title', 'Offer')
-            ->with('color', 'blue')
-            ->with('header', region('OfferHeader'))
-            ->with(
-                'content',
-                collect()->push(
-                    component('Title')
-                        ->is('large')
-                        ->is('white')
-                        ->is('center')
-                        ->with('title', trans('company.edit.title'))
-                )
+        return layout('Full')
+            ->withHeadRobots('noindex')
+            ->withTransparency(true)
+            ->withTitle(trans('offer.index'))
+            ->withItems(
+                collect()
+                    ->push(
+                        component('Section')
+                            ->withPadding(2)
+                            ->withTag('header')
+                            ->withBackground('blue')
+                            ->withItems(collect()->push(region('NavbarLight')))
+                    )
+                    ->push(
+                        component('Section')
+                            ->withBackground('blue')
+                            ->withPadding(2)
+                            ->withWidth(styles('tablet-width'))
+                            ->withItems(
+                                component('Title')
+                                    ->is('white')
+                                    ->is('large')
+                                    ->withTitle(trans('company.create.title'))
+                            )
+                    )
+                    ->push(
+                        component('Section')
+                            ->withBackground('blue')
+                            ->withInnerBackground('white')
+                            ->withInnerPadding(2)
+                            ->withWidth(styles('tablet-width'))
+                            ->withItems(
+                                component('Form')
+                                    ->with('route', route('company.update', [$user]))
+                                    ->with('method', 'PUT')
+                                    ->with('files', true)
+                                    ->with(
+                                        'fields',
+                                        collect()
+                                            ->push(
+                                                component('Title')
+                                                    ->is('small')
+                                                    ->is('blue')
+                                                    ->with('title', trans('company.edit.credentials'))
+                                            )
+                                            ->push(
+                                                component('FormTextfield')
+                                                    ->is('large')
+                                                    ->with('title', trans('company.edit.name.title'))
+                                                    ->with('name', 'name')
+                                                    ->with('value', old('name', $user->name))
+                                            )
+                                            ->push(
+                                                component('FormTextfield')
+                                                    ->is('large')
+                                                    ->with('title', trans('company.edit.company_name.title'))
+                                                    ->with('name', 'company_name')
+                                                    ->with('value', old('company_name', $user->real_name))
+                                            )
+                                            ->push(
+                                                component('FormTextfield')
+                                                    ->is('large')
+                                                    ->with('title', trans('company.edit.email.title'))
+                                                    ->with('name', 'email')
+                                                    ->with('value', old('email', $user->email))
+                                            )
+                                            ->push(
+                                                component('FormPassword')
+                                                    ->is('large')
+                                                    ->with('title', trans('company.edit.password.title'))
+                                                    ->with('name', 'password')
+                                                    ->with('value', '')
+                                            )
+                                            ->push(
+                                                component('FormPassword')
+                                                    ->is('large')
+                                                    ->with('title', trans('company.edit.password_confirmation.title'))
+                                                    ->with('name', 'password_confirmation')
+                                                    ->with('value', '')
+                                            )
+                                            ->push(
+                                                component('Title')
+                                                    ->is('small')
+                                                    ->is('blue')
+                                                    ->with('title', trans('company.edit.about'))
+                                            )
+                                            ->push(component('FormUpload')->with('name', 'file'))
+                                            ->push(
+                                                component('FormTextarea')
+                                                    ->with('rows', 4)
+                                                    ->with('title', trans('company.edit.description.title'))
+                                                    ->with('name', 'description')
+                                                    ->with('value', old('description', $user->description))
+                                            )
+                                            ->push(
+                                                component('Title')
+                                                    ->is('small')
+                                                    ->is('blue')
+                                                    ->with('title', trans('company.edit.contacts.title'))
+                                            )
+                                            ->push(
+                                                component('FormTextfield')
+                                                    ->with('title', trans('company.edit.homepage.title'))
+                                                    ->with('name', 'contact_homepage')
+                                                    ->with('value', old('contact_homepage', $user->contact_homepage))
+                                            )
+                                            ->push(
+                                                component('FormTextfield')
+                                                    ->with('title', trans('company.edit.facebook.title'))
+                                                    ->with('name', 'contact_facebook')
+                                                    ->with('value', old('contact_facebook', $user->contact_facebook))
+                                            )
+                                            ->pushWhen(
+                                                request()->has('redirect'),
+                                                component('FormHidden')
+                                                    ->with('name', 'redirect')
+                                                    ->with('value', request()->redirect)
+                                            )
+                                            ->push(
+                                                component('FormButton')
+                                                    ->is('wide')
+                                                    ->is('large')
+                                                    ->is('orange')
+                                                    ->with('title', trans('company.edit.submit'))
+                                            )
+                                    )
+                            )
+                    )
+                    ->push(
+                        component('Section')
+                            ->withTag('footer')
+                            ->withBackground('blue')
+                            ->withItems(collect()->push(region('FooterLight', '')))
+                    )
             )
-            ->with(
-                'bottom',
-                collect()->push(
-                    component('Form')
-                        ->with('route', route('company.update', [$user]))
-                        ->with('method', 'PUT')
-                        ->with('files', true)
-                        ->with(
-                            'fields',
-                            collect()
-                                ->pushWhen(
-                                    request()->has('redirect'),
-                                    component('FormHidden')
-                                        ->with('name', 'redirect')
-                                        ->with('value', request()->redirect)
-                                )
-                                ->push(
-                                    component('Title')
-                                        ->is('small')
-                                        ->is('blue')
-                                        ->with('title', trans('company.edit.credentials'))
-                                )
-                                ->push(
-                                    component('FormTextfield')
-                                        ->is('large')
-                                        ->with('title', trans('company.edit.name.title'))
-                                        ->with('name', 'name')
-                                        ->with('value', old('name', $user->name))
-                                )
-                                ->push(
-                                    component('FormTextfield')
-                                        ->is('large')
-                                        ->with('title', trans('company.edit.company_name.title'))
-                                        ->with('name', 'company_name')
-                                        ->with('value', old('company_name', $user->real_name))
-                                )
-                                ->push(
-                                    component('FormTextfield')
-                                        ->is('large')
-                                        ->with('title', trans('company.edit.email.title'))
-                                        ->with('name', 'email')
-                                        ->with('value', old('email', $user->email))
-                                )
-                                ->push(
-                                    component('FormPassword')
-                                        ->is('large')
-                                        ->with('title', trans('company.edit.password.title'))
-                                        ->with('name', 'password')
-                                        ->with('value', '')
-                                )
-                                ->push(
-                                    component('FormPassword')
-                                        ->is('large')
-                                        ->with('title', trans('company.edit.password_confirmation.title'))
-                                        ->with('name', 'password_confirmation')
-                                        ->with('value', '')
-                                )
-                                ->push(
-                                    component('Title')
-                                        ->is('small')
-                                        ->is('blue')
-                                        ->with('title', trans('company.edit.about'))
-                                )
-                                ->push(component('FormUpload')->with('name', 'file'))
-                                ->push(
-                                    component('FormTextarea')
-                                        ->with('rows', 4)
-                                        ->with('title', trans('company.edit.description.title'))
-                                        ->with('name', 'description')
-                                        ->with('value', old('description', $user->description))
-                                )
-                                ->push(
-                                    component('Title')
-                                        ->is('small')
-                                        ->is('blue')
-                                        ->with('title', trans('company.edit.contacts.title'))
-                                )
-                                ->push(
-                                    component('FormTextfield')
-                                        ->with('title', trans('company.edit.homepage.title'))
-                                        ->with('name', 'contact_homepage')
-                                        ->with('value', old('contact_homepage', $user->contact_homepage))
-                                )
-                                ->push(
-                                    component('FormTextfield')
-                                        ->with('title', trans('company.edit.facebook.title'))
-                                        ->with('name', 'contact_facebook')
-                                        ->with('value', old('contact_facebook', $user->contact_facebook))
-                                )
-                                ->push(
-                                    component('FormButton')
-                                        ->is('wide')
-                                        ->is('large')
-                                        ->is('orange')
-                                        ->with('title', trans('company.edit.submit'))
-                                )
-                        )
-                )
-            )
-            ->with('footer', region('FooterLight', ''))
             ->render();
     }
 
