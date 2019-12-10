@@ -22,6 +22,13 @@ class Layout
         return $this;
     }
 
+    public function __call($method, $parameters)
+    {
+        $with = str_after($method, 'with');
+        $this->with->put(strtolower(snake_case($with)), $parameters ? $parameters[0] : true);
+        return $this;
+    }
+
     public function cached($condition)
     {
         $this->cached = $condition;

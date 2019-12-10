@@ -15,6 +15,7 @@ class ExperimentsController extends Controller
                 'items',
                 c()->push(
                     component('Section')
+                        ->withWidth('100%')
                         ->withPadding(10)
                         ->withInnerPadding(10)
                         ->withBackground('blue')

@@ -83,13 +83,15 @@ class AppServiceProvider extends ServiceProvider
             return $this;
         });
 
-        Collection::macro('br', function ($count = 1) {
-            return $this->merge(collect(array_fill(0, $count, '<br />')));
+        Collection::macro('spacer', function ($value = 1) {
+            return $this->push('<div style="height: ' . spacer($value) . ';"></div>');
             return $this;
         });
 
-        Collection::macro('spacer', function ($value = 1) {
-            return $this->push('<div style="height: ' . spacer($value) . ';"></div>');
+        Collection::macro('spacerWhen', function ($condition, $value = 1) {
+            if ($condition) {
+                return $this->push('<div style="height: ' . spacer($value) . ';"></div>');
+            }
             return $this;
         });
 

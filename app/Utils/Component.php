@@ -39,15 +39,11 @@ class Component
     public function __call($method, $parameters)
     {
         $with = str_after($method, 'with');
-        $this->with->put(strtolower(snake_case($with)), $parameters[0]);
+        $this->with->put(strtolower(snake_case($with)), $parameters ? $parameters[0] : true);
 
         return $this;
     }
-    /*
-            if (method_exists($this->model, $scope = 'scope'.ucfirst($method))) {
-            return $this->callScope([$this->model, $scope], $parameters);
-        }
-    */
+
     public function when($condition)
     {
         $this->when = $condition;

@@ -76,6 +76,144 @@ class OfferController extends Controller
         $email = $user ? $user->email : '';
         $name = $user && $user->real_name ? $user->real_name : '';
 
+        return layout('Full')
+            ->withHeadRobots('noindex')
+            ->withTransparency(true)
+            ->withTitle('Offer')
+            ->withItems(
+                collect()
+                    ->pushWhen(
+                        $offer->status == 0,
+                        component('HeaderUnpublished')->with('title', trans('offer.show.unpublished'))
+                    )
+                    ->push(
+                        component('Section')
+                            ->withPadding(2)
+                            ->withTag('header')
+                            ->withBackground('blue')
+                            ->withItems(collect()->push(region('NavbarLight')))
+                    )
+                    ->push(
+                        component('Section')
+                            ->withDimmed($offer->status == 0)
+                            ->withGap(1)
+                            ->withAlign('center')
+                            ->withBackground('blue')
+                            ->withItems(
+                                collect()
+                                    ->push(
+                                        component('Link')
+                                            ->is('white')
+                                            ->is('semitransparent')
+                                            ->with('title', 'Kõik reisipakkumised')
+                                            ->with('route', route('offer.index'))
+                                    )
+                                    ->push(region('OfferMap', $offer))
+                                    ->push(
+                                        component('Flex')->with(
+                                            'items',
+                                            $offer->endDestinations->map(function ($destination) {
+                                                return component('Tag')
+                                                    ->is('large')
+                                                    ->is('white')
+                                                    ->with('title', $destination->name);
+                                            })
+                                        )
+                                    )
+                                    ->spacer()
+                                    ->push(
+                                        component('Title')
+                                            ->is('large')
+                                            ->is('white')
+                                            ->with('title', $offer->title . ' ' . $offer->price)
+                                    )
+                                    ->push(region('OfferDuration', $offer))
+                                    ->spacer()
+                                    ->push(region('OfferDetails', $offer))
+                                    ->spacer()
+                                    ->pushWhen(
+                                        $user && $user->hasRole('superuser'),
+                                        component('Button')
+                                            ->is('orange')
+                                            ->is('large')
+                                            ->with('title', trans('offer.show.book'))
+                                            ->with('route', route('offer.show', [$id]) . '#book')
+                                    )
+                                    ->spacer(2)
+                            )
+                    )
+                    ->push(
+                        component('Section')
+                            ->withDimmed($offer->status == 0)
+                            ->withPadding(4)
+                            ->withGap(1)
+                            ->withItems(
+                                collect()
+                                    ->pushWhen(
+                                        $offer->data->description,
+                                        component('Body')
+                                            ->is('responsive')
+                                            ->with('body', format_body($offer->data->description))
+                                    )
+                                    ->spacer(2)
+                                    ->push(region('OfferConditions', $offer))
+                            )
+                    )
+                    ->push('<a id="book"></a>')
+                    ->pushWhen(
+                        $user && $user->hasRole('superuser'),
+                        component('Section')
+                            ->withDimmed($offer->status == 0)
+                            ->withPadding(2)
+                            ->withBackground('blue')
+                            ->withAlign('center')
+                            ->withItems(
+                                collect()
+                                    ->spacer(2)
+                                    ->push(
+                                        component('Title')
+                                            ->is('white')
+                                            ->withTitle(trans('offer.show.book'))
+                                    )
+                            )
+                    )
+                    ->pushWhen(
+                        $user && $user->hasRole('superuser'),
+                        component('Section')
+                            ->withDimmed($offer->status == 0)
+                            ->withWidth(styles('mobile-large-width'))
+                            ->withBackground('blue')
+                            ->withInnerBackground('white')
+                            ->withInnerPadding(2)
+                            ->withItems(region('OfferBooking', $id, $name, $email))
+                    )
+                    ->push(
+                        component('Section')
+                            ->withTag('footer')
+                            ->withBackground('blue')
+                            ->withItems(collect()->push(region('FooterLight', '')))
+                    )
+            )
+            ->render();
+    }
+
+    public function show2($id)
+    {
+        $user = auth()->user();
+        $offer = Offer::findOrFail($id);
+
+        if (!$user && $offer->status == 0) {
+            return abort(401);
+        }
+        if ($user && $offer->status == 0 && !$user->hasRoleOrOwner('superuser', $offer->user->id)) {
+            return abort(401);
+        }
+
+        $photos = Content::getLatestPagedItems('photo', 9, $offer->endDestinations->first()->id);
+
+        $email = $user ? $user->email : '';
+        $name = $user && $user->real_name ? $user->real_name : '';
+
         return layout('Offer')
             ->with('head_robots', 'noindex')
             ->with('title', 'Offer')
@@ -148,86 +286,9 @@ class OfferController extends Controller
                             ->is('center')
                             ->with('title', $offer->title . ' ' . $offer->price)
                     )
-                    ->push(
-                        component('Flex')
-                            ->with('justify', 'center')
-                            ->with(
-                                'items',
-                                collect()
-                                    ->push(
-                                        component('Title')
-                                            ->is('small')
-                                            ->is('center')
-                                            ->is('white')
-                                            ->with('title', $offer->duration_formatted)
-                                    )
-                                    ->push(
-                                        component('Title')
-                                            ->is('small')
-                                            ->is('center')
-                                            ->is('white')
-                                            ->is('semitransparent')
-                                            ->with(
-                                                'title',
-                                                $offer->start_at_formatted . ' → ' . $offer->end_at_formatted
-                                            )
-                                    )
-                            )
-                    )
+                    ->push(region('OfferDuration', $offer))
                     ->spacer()
-                    ->push(
-                        component('Flex')
-                            ->with('justify', 'center')
-                            ->with('gap', 'sm')
-                            ->with(
-                                'items',
-                                collect()
-                                    ->push(
-                                        component('Title')
-                                            ->is('smallest')
-                                            ->is('white')
-                                            ->is('semitransparent')
-                                            ->with('title', 'Firma')
-                                    )
-                                    ->push(
-                                        component('Title')
-                                            ->is('smallest')
-                                            ->is('white')
-                                            ->with('title', $offer->user->name)
-                                    )
-                                    ->pushWhen(
-                                        $offer->data->guide !== '',
-                                        component('Title')
-                                            ->is('smallest')
-                                            ->is('white')
-                                            ->is('semitransparent')
-                                            ->with('title', 'Giid')
-                                    )
-                                    ->pushWhen(
-                                        $offer->data->guide !== '',
-                                        component('Title')
-                                            ->is('smallest')
-                                            ->is('white')
-                                            ->with('title', $offer->data->guide)
-                                    )
-                                    ->pushWhen(
-                                        $offer->data->size !== '',
-                                        component('Title')
-                                            ->is('smallest')
-                                            ->is('white')
-                                            ->is('semitransparent')
-                                            ->with('title', 'Grupi suurus')
-                                    )
-                                    ->pushWhen(
-                                        $offer->data->size !== '',
-                                        component('Title')
-                                            ->is('smallest')
-                                            ->is('white')
-                                            ->with('title', $offer->data->size)
-                                    )
-                            )
-                    )
-                    ->spacer()
+                    ->push(region('OfferDetails', $offer))
                     ->pushWhen(
                         $photos->count(),
                         region('PhotoRow', $photos->count() < 18 ? $photos->slice(0, 9) : $photos)
