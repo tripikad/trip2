@@ -93,6 +93,11 @@ class AppServiceProvider extends ServiceProvider
             return $this;
         });
 
+        Collection::macro('fill', function ($value = 1) {
+            return $this->push('<div style="flex: 1;"></div>');
+            return $this;
+        });
+
         // https://adamwathan.me/2016/04/06/cleaning-up-form-input-with-transpose
         Collection::macro('transpose', function () {
             $items = array_map(function (...$items) {

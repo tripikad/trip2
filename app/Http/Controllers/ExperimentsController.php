@@ -10,35 +10,38 @@ class ExperimentsController extends Controller
     {
         $new = Content::whereTitle('Sierra Leone viisa saab nüüd piirilt')->first();
 
-        $items = collect()
-            ->push(region('NavbarLight'))
-            ->spacer(10)
-            ->push(component('Title')->with('title', 'Hello World'));
-
         return layout('Full')
             ->with(
                 'items',
                 collect()
                     ->push(
-                        component('Container')
-                            ->with('padding', 1)
-                            ->with('height', '50vh')
-                            ->with('valign', 'center')
+                        component('Section')
+                            ->with('padding', 2)
+                            ->with('inner_padding', 2)
+                            ->with('background', 'blue')
+                            ->with('inner_background', 'white')
+                    )
+                    ->push(
+                        component('Section')
+                            ->with('padding', 2)
+                            ->with('height', '75vh')
                             ->with('image', $new->getHeadImage())
                             ->with('tint', true)
                             ->with(
                                 'items',
                                 collect()
                                     ->push(region('NavbarLight'))
+                                    ->fill()
                                     ->push(
                                         component('Title')
                                             ->is('white')
+                                            ->is('large')
                                             ->with('title', $new->vars()->title)
                                     )
                             )
                     )
                     ->push(
-                        component('Container')
+                        component('Section')
                             ->with('padding', 4)
                             ->with('width', styles('tablet-width'))
                             ->with(
@@ -47,11 +50,6 @@ class ExperimentsController extends Controller
                                     ->is('responsive')
                                     ->with('body', format_body($new->vars()->body))
                             )
-                    )
-                    ->push(
-                        component('Container')
-                            ->with('background', 'blue')
-                            ->with('items', [region('FooterLight', '')])
                     )
             )
             ->render();

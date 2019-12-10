@@ -18,7 +18,7 @@ class MakeComponent extends Command
 
         $element = 'title';
 
-        $css = ['@import "variables";', ".$name {", '}', ".$name" . '__' . "$element {", "}\n"];
+        $css = [".$name {", '}', ".$name" . '__' . "$element {", "}\n"];
 
         Storage::disk('root')->put("$dir/$name.css", implode("\n\n", $css));
 
