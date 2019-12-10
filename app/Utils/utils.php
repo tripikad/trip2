@@ -222,3 +222,8 @@ function items($items = null)
 
     return collect([$items]);
 }
+
+function c($items = [])
+{
+    return collect($items);
+}
