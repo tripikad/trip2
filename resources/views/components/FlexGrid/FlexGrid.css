@@ -10,7 +10,3 @@
 .FlexGrid__item:last-child {
     margin-bottom: 0;
 }
-
-.FlexGrid--debug .FlexGrid__item {
-    border: 1px dashed $red;
-}

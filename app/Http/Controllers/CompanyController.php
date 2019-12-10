@@ -36,32 +36,7 @@ class CompanyController extends Controller
                     )
                     ->push(region('OfferAdminButtons', $loggedUser))
                     ->spacer()
-                    ->push(
-                        component('Grid')
-                            ->with('widths', '1fr auto')
-                            ->with('gap', 4)
-                            ->with(
-                                'items',
-                                $offers
-                                    ->map(function ($offer) {
-                                        return collect()
-                                            ->push(
-                                                component('OfferRow')
-                                                    ->is($offer->status == 1 ? '' : 'unpublished')
-                                                    ->with('offer', $offer)
-                                                    ->with('route', route('offer.show', [$offer]))
-                                            )
-                                            ->push(
-                                                component('Button')
-                                                    ->is('orange')
-                                                    ->is('narrow')
-                                                    ->is('small')
-                                                    ->with('title', 'Muuda')
-                                            );
-                                    })
-                                    ->flatten()
-                            )
-                    )
+                    ->push(region('OfferAdminList', $offers))
             )
             ->with('footer', region('FooterLight', ''))
             ->render();
@@ -76,96 +51,91 @@ class CompanyController extends Controller
             ->take(100)
             ->get();
 
-        return layout('Offer')
-            ->with('head_robots', 'noindex')
-            ->with('title', 'Offer')
-            ->with('color', 'blue')
-            ->with('header', region('OfferHeader'))
-            ->with(
-                'content',
+        return layout('Full')
+            ->withHeadRobots('noindex')
+            ->withTransparency(true)
+            ->withTitle(trans('offer.index'))
+            ->withItems(
                 collect()
                     ->push(
-                        component('Title')
-                            ->is('large')
-                            ->is('white')
-                            ->with('title', trans('company.admin.index.title'))
+                        component('Section')
+                            ->withPadding(2)
+                            ->withTag('header')
+                            ->withBackground('blue')
+                            ->withItems(collect()->push(region('NavbarLight')))
                     )
                     ->push(
-                        component('Button')
-                            ->is('orange')
-                            ->is('narrow')
-                            ->with('title', trans('company.create'))
-                            ->with('route', route('company.create', ['redirect' => 'company.admin.index']))
-                    )
-                    ->merge(
-                        $companies->map(function ($company) {
-                            return component('Flex')
-                                ->with('align', 'center')
-                                ->with(
-                                    'items',
-                                    collect()
-                                        ->push(
-                                            component('UserImage')->with('image', $company->imagePreset('small_square'))
-                                        )
-                                        ->push(
-                                            component('Title')
-                                                ->is('white')
-                                                ->is('small')
-                                                ->with('title', $company->name)
-                                                ->with('route', route('company.show', $company))
-                                        )
-                                        ->push(
-                                            component('Button')
-                                                ->is('orange')
-                                                ->is('small')
-                                                ->is('narrow')
-                                                ->with('title', trans('company.index.edit'))
-                                                ->with(
-                                                    'route',
-                                                    route('company.edit', [
-                                                        $company,
-                                                        'redirect' => 'company.admin.index'
-                                                    ])
-                                                )
-                                        )
-                                );
-                        })
-                    )
-                    ->spacer()
-                    ->push(
-                        component('Title')
-                            ->is('large')
-                            ->is('white')
-                            ->with('title', trans('company.admin.index.offer'))
-                    )
-                    ->push(
-                        component('Grid')
-                            ->with('widths', '1fr auto')
-                            ->with('gap', 4)
-                            ->with(
-                                'items',
-                                $offers
-                                    ->map(function ($offer) {
-                                        return collect()
-                                            ->push(
-                                                component('OfferRow')
-                                                    ->is($offer->status == 1 ? '' : 'unpublished')
-                                                    ->with('offer', $offer)
-                                                    ->with('route', route('offer.show', [$offer]))
+                        component('Section')
+                            ->withBackground('blue')
+                            ->withPadding(2)
+                            ->withGap(1)
+                            ->withWidth(styles('tablet-width'))
+                            ->withItems(
+                                collect()
+                                    ->push(
+                                        component('Title')
+                                            ->is('white')
+                                            ->is('large')
+                                            ->with('title', trans('company.admin.index.title'))
+                                    )
+                                    ->push(
+                                        component('Button')
+                                            ->is('orange')
+                                            ->is('narrow')
+                                            ->with('title', trans('company.create'))
+                                            ->with(
+                                                'route',
+                                                route('company.create', ['redirect' => 'company.admin.index'])
                                             )
-                                            ->push(
-                                                component('Button')
-                                                    ->is('orange')
-                                                    ->is('narrow')
-                                                    ->is('small')
-                                                    ->with('title', 'Muuda')
-                                            );
-                                    })
-                                    ->flatten()
+                                    )
+                                    ->spacer(2)
+                                    ->push(
+                                        component('Grid')
+                                            ->is('debug')
+                                            ->withCols(4)
+                                            ->withItems(
+                                                $companies->map(function ($company) {
+                                                    return region('CompanyCard', $company);
+                                                })
+                                            )
+                                    )
+                                    ->spacer(4)
+                                    ->push(
+                                        component('Title')
+                                            ->is('large')
+                                            ->is('white')
+                                            ->with('title', trans('company.admin.index.offer'))
+                                    )
+                                    ->spacer(0.5)
+                                    ->push(
+                                        component('FlexGrid')
+                                            ->with('widths', '1fr auto')
+                                            ->with('gap', 2)
+                                            ->with(
+                                                'items',
+                                                $offers
+                                                    ->map(function ($offer) {
+                                                        return collect()
+                                                            ->push(
+                                                                component('OfferRow')
+                                                                    ->is($offer->status == 1 ? '' : 'unpublished')
+                                                                    ->with('offer', $offer)
+                                                                    ->with('route', route('offer.show', [$offer]))
+                                                            )
+                                                            ->push(
+                                                                component('Button')
+                                                                    ->is('orange')
+                                                                    ->is('narrow')
+                                                                    ->is('small')
+                                                                    ->with('title', 'Muuda')
+                                                            );
+                                                    })
+                                                    ->flatten()
+                                            )
+                                    )
                             )
                     )
             )
-            ->with('footer', region('FooterLight', ''))
             ->render();
     }
 

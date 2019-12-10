@@ -8,7 +8,7 @@ use App\User;
 
 class OfferController extends Controller
 {
-    public function index2()
+    public function index()
     {
         $user = null;
 
@@ -19,7 +19,7 @@ class OfferController extends Controller
         return layout('Full')
             ->withHeadRobots('noindex')
             ->withTransparency(true)
-            ->withTitle('Offer')
+            ->withTitle(trans('offer.index'))
             ->withItems(
                 collect()
                     ->push(
@@ -29,7 +29,6 @@ class OfferController extends Controller
                             ->withBackground('blue')
                             ->withItems(collect()->push(region('NavbarLight')))
                     )
-
                     ->push(
                         component('Section')
                             ->withBackground('blue')
@@ -96,8 +95,7 @@ class OfferController extends Controller
 
         return layout('Full')
             ->withHeadRobots('noindex')
-            ->withTransparency(true)
-            ->withTitle('Offer')
+            ->withTitle($offer->title)
             ->withItems(
                 collect()
                     ->pushWhen(
