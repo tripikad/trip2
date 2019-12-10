@@ -528,6 +528,7 @@ Route::put('company/{id}/update', 'CompanyController@update')
 
 // Offers
 
+Route::get('offer2', 'OfferController@index2')->name('offer.index2');
 Route::get('offer', 'OfferController@index')->name('offer.index');
 
 Route::get('offer/json', 'OfferController@indexJson')->name('offer.index.json');

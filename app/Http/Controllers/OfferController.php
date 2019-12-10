@@ -8,7 +8,7 @@ use App\User;
 
 class OfferController extends Controller
 {
-    public function index()
+    public function index2()
     {
         $user = null;
 
@@ -16,32 +16,50 @@ class OfferController extends Controller
             $user = User::whereCompany(true)->findOrFail(request()->user_id);
         }
 
-        return layout('Offer')
-            ->with('color', 'blue')
-            ->with('head_robots', 'noindex')
-            ->with(
-                'header',
-                region(
-                    'OfferHeader',
-                    collect()->push(
-                        component('Title')
-                            ->is('large')
-                            ->is('white')
-                            ->is('center')
-                            ->with('title', trans('offer.index'))
+        return layout('Full')
+            ->withHeadRobots('noindex')
+            ->withTransparency(true)
+            ->withTitle('Offer')
+            ->withItems(
+                collect()
+                    ->push(
+                        component('Section')
+                            ->withPadding(2)
+                            ->withTag('header')
+                            ->withBackground('blue')
+                            ->withItems(collect()->push(region('NavbarLight')))
                     )
-                )
+
+                    ->push(
+                        component('Section')
+                            ->withBackground('blue')
+                            ->withPadding(2)
+                            ->withAlign('center')
+                            ->withWidth(styles('tablet-width'))
+                            ->withItems(
+                                collect()
+                                    ->push(
+                                        component('Title')
+                                            ->is('large')
+                                            ->is('white')
+                                            ->is('center')
+                                            ->with('title', trans('offer.index'))
+                                    )
+                                    ->push(
+                                        component('OfferList')
+                                            ->with('height', '200vh')
+                                            ->with('route', route('offer.index.json'))
+                                            ->with('user_id', $user ? $user->id : '')
+                                    )
+                            )
+                    )
+                    ->push(
+                        component('Section')
+                            ->withTag('footer')
+                            ->withBackground('blue')
+                            ->withItems(collect()->push(region('FooterLight', '')))
+                    )
             )
-            ->with(
-                'content',
-                collect()->push(
-                    component('OfferList')
-                        ->with('height', '200vh')
-                        ->with('route', route('offer.index.json'))
-                        ->with('user_id', $user ? $user->id : '')
-                )
-            )
-            ->with('footer', region('FooterLight', ''))
             ->render();
     }
 
