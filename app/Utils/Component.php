@@ -36,6 +36,14 @@ class Component
         return $this;
     }
 
+    public function __call($method, $parameters)
+    {
+        $with = str_after($method, 'with');
+        $this->with->put(strtolower(snake_case($with)), $parameters ? $parameters[0] : null);
+
+        return $this;
+    }
+
     public function when($condition)
     {
         $this->when = $condition;

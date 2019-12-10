@@ -1,0 +1,21 @@
+@import 'variables';
+
+.Section {
+    display: flex;
+    justify-content: center;
+    background-size: cover;
+}
+
+.Section__items {
+    display: flex;
+    flex-direction: column;
+}
+
+.Section__items > * {
+    margin-bottom: $spacer;
+    margin-bottom: var(--gap);
+}
+
+.Section__items > *:last-child {
+    margin-bottom: 0;
+}

@@ -2,14 +2,14 @@
 
 namespace App\Http\Regions;
 
-class OfferAdminButtons
+class CompanyOffersButtons
 {
     public function render($user)
     {
         return component('Grid')
-            ->with('cols', 3)
-            ->with(
-                'items',
+            ->withCols(3)
+            ->withGap(1)
+            ->withItems(
                 collect(config('offer.styles'))
                     ->map(function ($style) {
                         return component('Button')

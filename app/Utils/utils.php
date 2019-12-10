@@ -6,6 +6,7 @@ use Jenssegers\Date\Date;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Redirect;
 use Cocur\Slugify\Slugify;
+use Illuminate\Support\Collection;
 
 function mail_component($component, $data = [])
 {
@@ -149,7 +150,7 @@ function styles($value = null)
     if ($value && ($stylevar = config("styles.$value"))) {
         return $stylevar;
     }
-    return 0;
+    return '';
 }
 
 function snap($value, $step = 1)
@@ -192,4 +193,32 @@ function slug($title)
 function dusk($title)
 {
     return '@' . slug($title);
+}
+
+function spacer($value = 'md')
+{
+    $spacer = styles('spacer');
+
+    $size_map = ['xs' => 0.25, 'sm' => 0.5, 'md' => 1, 'lg' => 2];
+
+    if (isset($value) && is_string($value) && $size_map[$value]) {
+        return 'calc(' . $size_map[$value] . ' * ' . $spacer . ')';
+    } elseif (isset($value) && !is_string($value)) {
+        return 'calc(' . $value . ' * ' . $spacer . ')';
+    } else {
+        return 'calc(' . $size_map['sm'] . ' * ' . $spacer . ')';
+    }
+}
+
+function items($items = null)
+{
+    if ($items instanceof Collection) {
+        return $items;
+    }
+
+    if (is_array($items)) {
+        return $items;
+    }
+
+    return collect([$items]);
 }

@@ -3,35 +3,24 @@
 $items = $items ?? [];
 
 $justify = $justify ?? '';
-
 $align = $align ?? 'flex-start';
-
-$direction = $direction ?? 'row';
-
-$spacer = styles('spacer');
-
-$gap_map = ['sm' => 1, 'md' => 2, 'lg' => 3];
-
-if (isset($gap) && is_string($gap) && $gap_map[$gap]) {
-$gap_string = 'calc('. $gap_map[$gap] .' * '. $spacer .')';
-} else if (isset($gap) && !is_string($gap)) {
-$gap_string = 'calc('. $gap .' * '. $spacer .')';
-} else {
-$gap_string = 'calc('. $gap_map['sm'] .' * '. $spacer .')';
-}
+$wrap_class = isset($wrap) ? 'Flex--wrap' : '';
+$responsive_class = isset($responsive) && !$responsive ? '' : 'Flex--responsive';
+$gap_value = isset($gap) ? spacer($gap) : spacer(1);
+$overflow = isset($scroll) ? 'auto' : 'none';
 
 @endphp
 
-<div class="Flex {{ $isclasses }}"
-  style="justify-content: {{ $justify }}; align-items: {{ $align }}; flex-direction: {{ $direction }}">
+<div class="Flex {{ $isclasses }} {{ $wrap_class }} {{ $responsive_class }}" style="
+    justify-content: {{ $justify }};
+    align-items: {{ $align }};
+    overflow: {{ $overflow }};
+    --gap: {{ $gap_value }};
+  ">
 
   @foreach ($items as $item)
 
-  <div class="Flex__item" style="margin-right: {{ $loop->last ? '' : $gap_string }}">
-
-    {!! $item !!}
-
-  </div>
+  {!! $item !!}
 
   @endforeach
 

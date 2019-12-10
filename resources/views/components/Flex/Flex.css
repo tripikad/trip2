@@ -1,33 +1,30 @@
 .Flex {
     display: flex;
-    display: block ?if $tablet;
 }
 
-.Flex {
-    flex-direction: column;
+.Flex > * {
+    margin-right: $margin-md;
+    margin-right: var(--gap);
+    margin-right: 0 ?if $tablet;
 }
 
-.Flex__item {
-    margin-bottom: $margin-md ?if $tablet;
+.Flex > *:last-child {
+    margin-right: 0;
 }
 
-.Flex__item:last-child {
-    margin-bottom: 0;
-}
-
-.Flex--wrap {
+.Flex__wrap {
     flex-wrap: wrap;
-    display: flex;
 }
 
-.Flex--large .Flex__item {
-    margin-bottom: $margin-xs;
+.Flex--responsive {
+    flex-direction: column ?if $mobile;
 }
 
-.Flex--center .Flex__item {
-    text-align: center ?if $tablet;
+.Flex--responsive > * {
+    margin-right: 0 ?if $tablet;
+    margin-bottom: $margin-md ?if $tablet;
+    margin-bottom: var(--gap) ?if $tablet;
 }
-
-.Flex--debug .Flex__item {
-    border: 1px dashed $red;
+.Flex--responsive > *:last-child {
+    margin-bottom: 0;
 }

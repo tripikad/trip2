@@ -5,36 +5,33 @@ $cols = $cols ?? 2;
 $rows = round(collect($items)->count() / $cols, PHP_ROUND_HALF_DOWN);
 $widths = $widths ?? 'repeat('. $cols .', 1fr)';
 $heights = $heights ?? 'repeat('. $rows .', auto)';
-
-$spacer = styles('spacer');
-
-$gap_map = ['sm' => 1, 'md' => 2, 'lg' => 3];
-
-if (isset($gap) && is_string($gap) && $gap_map[$gap]) {
-  $gap_string = 'calc('. $gap_map[$gap] .' * '. $spacer .')';
-} 
-else if (isset($gap) && !is_string($gap)) {
-  $gap_string = 'calc('. $gap .' * '. $spacer .')';
-} else {
-  $gap_string = 'calc('. $gap_map['sm'] .' * '. $spacer .')';
-}
+$border = isset($debug) ? '1px dashed ' . styles('red') : 'none';
+$gap_value = isset($gap) ? spacer($gap) : '0';
 
 @endphp
 
 <div class="Grid {{ $isclasses }}" style="
         grid-template-columns: {{ $widths }};
         grid-template-rows: {{ $heights }};
-        grid-gap: {{ $gap_string }}
+        grid-gap: {{ $gap_value }}
     ">
 
-    @foreach ($items as $item)
+  @foreach ($items as $item)
 
-    <div class="Grid__item">
+  <div class="Grid__item" style="border: {{ $border }};">
 
-        {!! $item !!}
+    @foreach (items($item) as $collection_item)
+
+    <div>
+
+      {!! $collection_item !!}
 
     </div>
 
     @endforeach
+
+  </div>
+
+  @endforeach
 
 </div>

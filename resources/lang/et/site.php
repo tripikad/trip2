@@ -1,6 +1,9 @@
 <?php
 
 return [
+    'required' => 'Kohustuslik',
+    'suggested' => 'Soovituslik',
+
     'link.read.more' => 'Loe edasi',
 
     'content.latest.posts' => 'Viimased postitused',

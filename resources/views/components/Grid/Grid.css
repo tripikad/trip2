@@ -10,7 +10,3 @@
 .Grid__item:last-child {
     margin-bottom: 0;
 }
-
-.Grid--debug .Grid__item {
-    border: 1px dashed $red;
-}
