@@ -7,6 +7,17 @@ export const chunk = (arr, length) =>
 
 export const unique = arr => [...new Set(arr)]
 
+// https://stackoverflow.com/a/39903069
+
+export const uniqueFilter = (arr, getter = d => d) =>
+    arr.filter((set => f => !set.has(getter(f)) && set.add(getter(f)))(new Set()))
+
+export const toObject = arr =>
+    arr.reduce((acc, el) => {
+        acc[el[0]] = el[1]
+        return acc
+    }, {})
+
 export const parseSheets = data => {
     return data.feed.entry.map(entry => {
         return Object.keys(entry)

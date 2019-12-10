@@ -22,28 +22,28 @@ class OfferController extends Controller
             ->withTitle(trans('offer.index'))
             ->withItems(
                 collect()
+                    // ->push(
+                    //     component('Section')
+                    //         ->withPadding(2)
+                    //         ->withTag('header')
+                    //         ->withBackground('blue')
+                    //         ->withItems(collect()->push(region('NavbarLight')))
+                    // )
                     ->push(
                         component('Section')
-                            ->withPadding(2)
-                            ->withTag('header')
                             ->withBackground('blue')
-                            ->withItems(collect()->push(region('NavbarLight')))
-                    )
-                    ->push(
-                        component('Section')
-                            ->withBackground('blue')
-                            ->withPadding(2)
+                            ->withPadding(10)
                             ->withAlign('center')
                             ->withWidth(styles('tablet-width'))
                             ->withItems(
                                 collect()
-                                    ->push(
-                                        component('Title')
-                                            ->is('large')
-                                            ->is('white')
-                                            ->is('center')
-                                            ->with('title', trans('offer.index'))
-                                    )
+                                    // ->push(
+                                    //     component('Title')
+                                    //         ->is('large')
+                                    //         ->is('white')
+                                    //         ->is('center')
+                                    //         ->with('title', trans('offer.index'))
+                                    // )
                                     ->push(
                                         component('OfferList')
                                             ->with('height', '200vh')
@@ -67,11 +67,7 @@ class OfferController extends Controller
         $data = Offer::public()
             ->latest()
             ->with(['user:id,name', 'startDestinations', 'endDestinations'])
-            ->get()
-            ->map(function ($offer) {
-                $offer->route = route('offer.show', $offer);
-                return $offer;
-            });
+            ->paginate(3);
 
         return response()->json($data);
     }

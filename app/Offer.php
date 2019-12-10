@@ -23,7 +23,8 @@ class Offer extends Model
         'end_at_formatted',
         'duration_formatted',
         'coordinates',
-        'image'
+        'image',
+        'route'
     ];
 
     protected $hidden = ['created_at', 'updated_at'];
@@ -99,6 +100,7 @@ class Offer extends Model
             ->vars()
             ->coordinates();
     }
+
     public function getImageAttribute()
     {
         $image = $this->endDestinations
@@ -110,5 +112,10 @@ class Offer extends Model
             ->first();
 
         return $image ? $image->imagePreset('small_square') : '';
+    }
+
+    public function getRouteAttribute()
+    {
+        return route('offer.show', [$this->id]);
     }
 }
