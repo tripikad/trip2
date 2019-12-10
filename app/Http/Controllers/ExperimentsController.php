@@ -12,18 +12,23 @@ class ExperimentsController extends Controller
 
         return layout('Full')
             ->withItems(
-                component('Section')->withItems(
-                    component('Flex')
-                        ->withWrap(true)
-                        ->withItems()
-                )
+                collect()
+                    ->push(
+                        component('Section')
+                            ->withBackground('gray-darker')
+                            ->withPadding(1)
+                            ->withInnerPadding(1)
+                            ->withItems('Hello World')
+                    )
+                    ->push(
+                        component('Section')
+                            ->withBackground('red')
+                            ->withInnerBackground('white')
+                            ->withPadding(1)
+                            ->withInnerPadding(1)
+                            ->withItems('Hello World')
+                    )
             )
             ->render();
     }
 }
-
-/*
-
-
-
-                        */
