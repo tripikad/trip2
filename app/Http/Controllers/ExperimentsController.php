@@ -8,10 +8,16 @@ class ExperimentsController extends Controller
 {
     public function index()
     {
-        $new = Content::whereTitle('Sierra Leone viisa saab nüüd piirilt')->first();
+        $photos = Content::getLatestPagedItems('photo', 10, 1);
 
         return layout('Full')
-            ->with('items', [])
+            ->withItems(
+                component('Section')->withItems(
+                    component('Flex')
+                        ->withWrap(true)
+                        ->withItems()
+                )
+            )
             ->render();
     }
 }

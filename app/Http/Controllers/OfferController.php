@@ -120,7 +120,6 @@ class OfferController extends Controller
                                     ->push(
                                         component('Link')
                                             ->is('white')
-                                            ->is('semitransparent')
                                             ->with('title', 'Kõik reisipakkumised')
                                             ->with('route', route('offer.index'))
                                     )
@@ -158,7 +157,12 @@ class OfferController extends Controller
                                     ->spacer(2)
                             )
                     )
-                    ->push(
+                    ->push(region('PhotoSection', $photos))
+                    ->pushWhen(
+                        $offer->data->description ||
+                            $offer->data->included ||
+                            $offer->data->notincluded ||
+                            $offer->data->extras,
                         component('Section')
                             ->withDimmed($offer->status == 0)
                             ->withPadding(4)
@@ -172,7 +176,10 @@ class OfferController extends Controller
                                             ->with('body', format_body($offer->data->description))
                                     )
                                     ->spacer(2)
-                                    ->push(region('OfferConditions', $offer))
+                                    ->pushWhen(
+                                        $offer->data->included || $offer->data->notincluded || $offer->data->extras,
+                                        region('OfferConditions', $offer)
+                                    )
                             )
                     )
                     ->push('<a id="book"></a>')

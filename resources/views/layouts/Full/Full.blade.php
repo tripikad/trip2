@@ -36,7 +36,7 @@ $footer = $footer ?? '';
 
 <div>
 
-    @foreach ($items as $item)
+    @foreach (items($items ?? []) as $item)
 
     {!! $item !!}
 

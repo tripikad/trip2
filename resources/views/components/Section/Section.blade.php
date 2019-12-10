@@ -4,6 +4,7 @@ $tag = $tag ?? 'section';
 $title = isset($title) ? $title : '';
 $gap_value = isset($gap) ? spacer($gap) : '0';
 $padding = isset($padding) ? spacer($padding) : '0';
+$margin = isset($margin) ? $margin : spacer(2);
 $inner_padding = isset($inner_padding) ? spacer($inner_padding) : '0';
 $width_value = isset($width) ? $width : styles('desktop-width');
 $align = $align ?? 'stretch';
@@ -35,7 +36,7 @@ $items_collection = items($items ?? null);
 @endphp
 
 <{{ $tag }} class="Section {{ $isclasses }}" style="
-        padding: {{ $padding }} {{ spacer(2) }}; 
+        padding: {{ $padding }} {{ $margin }}; 
         align-items: {{ $valign }};
         min-height: {{ $height_value }};
         background: {{ $background_color }};
@@ -47,7 +48,7 @@ $items_collection = items($items ?? null);
         --gap: {{ $gap_value }};
         padding: {{ $inner_padding }}; 
         align-items: {{ $align }};
-        width: {{ $width_value }};
+        max-width: {{ $width_value }};
         background: {{ $inner_background_color }};
         opacity: {{ $opacity }};
     ">
