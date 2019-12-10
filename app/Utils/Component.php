@@ -39,7 +39,7 @@ class Component
     public function __call($method, $parameters)
     {
         $with = str_after($method, 'with');
-        $this->with->put(strtolower(snake_case($with)), $parameters ? $parameters[0] : true);
+        $this->with->put(strtolower(snake_case($with)), $parameters ? $parameters[0] : null);
 
         return $this;
     }

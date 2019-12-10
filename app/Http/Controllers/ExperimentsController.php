@@ -11,48 +11,7 @@ class ExperimentsController extends Controller
         $new = Content::whereTitle('Sierra Leone viisa saab nüüd piirilt')->first();
 
         return layout('Full')
-            ->with(
-                'items',
-                c()->push(
-                    component('Section')
-                        ->withWidth('100%')
-                        ->withPadding(10)
-                        ->withInnerPadding(10)
-                        ->withBackground('blue')
-                        ->withInnerBackground('white')
-                        ->withItems('a')
-                )
-                // ->push(
-                //     component('Section')
-                //         ->with('padding', 2)
-                //         ->with('height', '75vh')
-                //         ->with('image', $new->getHeadImage())
-                //         ->with('tint', true)
-                //         ->with(
-                //             'items',
-                //             collect()
-                //                 ->push(region('NavbarLight'))
-                //                 ->fill()
-                //                 ->push(
-                //                     component('Title')
-                //                         ->is('white')
-                //                         ->is('large')
-                //                         ->with('title', $new->vars()->title)
-                //                 )
-                //         )
-                // )
-                // ->push(
-                //     component('Section')
-                //         ->with('padding', 4)
-                //         ->with('width', styles('tablet-width'))
-                //         ->with(
-                //             'items',
-                //             component('Body')
-                //                 ->is('responsive')
-                //                 ->with('body', format_body($new->vars()->body))
-                //         )
-                // )
-            )
+            ->with('items', [])
             ->render();
     }
 }

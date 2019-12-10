@@ -364,7 +364,7 @@ class CompanyController extends Controller
                                 component('Title')
                                     ->is('white')
                                     ->is('large')
-                                    ->withTitle(trans('company.create.title'))
+                                    ->withTitle(trans('company.edit.title'))
                             )
                     )
                     ->push(

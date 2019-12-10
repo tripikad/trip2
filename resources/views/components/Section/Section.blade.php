@@ -11,7 +11,7 @@ $valign = $valign ?? 'stretch';
 $background_color = isset($background) ? styles($background) : '';
 $inner_background_color = isset($inner_background) ? styles($inner_background) : '';
 $border = isset($debug) ? '1px dashed ' . styles('red') : 'none';
-$opacity = isset($dimmed) ? styles('opacity-md') : 1;
+$opacity = isset($dimmed) && $dimmed ? styles('opacity-md') : 1;
 
 $height_value = 'auto';
 

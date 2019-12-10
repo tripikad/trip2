@@ -1,8 +1,21 @@
+.FormTextfield__header {
+    display: flex;
+    justify-content: space-between;
+}
+
 .FormTextfield__label {
     color: $gray;
     display: block;
     font: $font-heading-sm;
     line-height: $line-height-md;
+    margin-bottom: $margin-sm;
+}
+
+.FormTextfield__description {
+    color: $gray-light;
+    font: $font-heading-sm;
+    line-height: $line-height-md;
+    margin-left: $margin-sm;
     margin-bottom: $margin-sm;
 }
 
