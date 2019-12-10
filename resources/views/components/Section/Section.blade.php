@@ -13,6 +13,7 @@ $background_color = isset($background) ? styles($background) : '';
 $inner_background_color = isset($inner_background) ? styles($inner_background) : '';
 $border = isset($debug) ? '1px dashed ' . styles('red') : 'none';
 $opacity = isset($dimmed) && $dimmed ? styles('opacity-md') : 1;
+$margin_top = isset($offset) ? spacer($offset) : '0';
 
 $height_value = 'auto';
 
@@ -48,9 +49,11 @@ $items_collection = items($items ?? null);
         --gap: {{ $gap_value }};
         padding: {{ $inner_padding }}; 
         align-items: {{ $align }};
-        max-width: {{ $width_value }};
+        width: {{ $width_value }};
         background: {{ $inner_background_color }};
         opacity: {{ $opacity }};
+        margin-top: {{ $margin_top }};
+        
     ">
 
         @foreach ($items_collection as $item)

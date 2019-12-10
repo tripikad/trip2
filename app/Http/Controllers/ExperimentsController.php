@@ -24,9 +24,11 @@ class ExperimentsController extends Controller
                         component('Section')
                             ->withBackground('red')
                             ->withInnerBackground('white')
-                            ->withPadding(1)
+                            ->withPadding(2)
                             ->withInnerPadding(1)
                             ->withItems('Hello World')
+                            ->withHeight(10)
+                            ->withOffset(-4)
                     )
             )
             ->render();
