@@ -1,3 +1,6 @@
+import { format, endOfWeek } from 'date-fns'
+import { et } from 'date-fns/locale'
+
 export const intersection = (arr1, arr2) => arr1.filter(n => arr2.includes(n))
 
 export const chunk = (arr, length) =>
@@ -107,3 +110,13 @@ export const slug = text => {
 export const formatCurrency = value => {
     return `${value}€`
 }
+
+export const titleCase = string =>
+    string
+        .split(' ')
+        .map(([h, ...t]) => h.toUpperCase() + t.join('').toLowerCase())
+        .join(' ')
+
+export const localizedFormat = (date, dateFormat) => format(date, dateFormat, { locale: et })
+
+export const localizedEndOfWeek = date => endOfWeek(date, { locale: et })

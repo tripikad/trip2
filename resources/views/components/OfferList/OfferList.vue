@@ -29,7 +29,7 @@
         </div>
         <pre>{{ filterState }}</pre>
         <transition-group name="Fade" class="OfferList__offers">
-            <OfferRow v-for="(offer, i) in filteredOffers" :key="i" :offer="offer" :route="offer.route" />
+            <OfferRow v-for="(offer, i) in filteredOffers" :key="offer.id" :offer="offer" :route="offer.route" />
         </transition-group>
         <pre>{{ filterOptions }}</pre>
         <ButtonVue v-if="nextPageUrl" @click.native.prevent="getData" title="Gimme data" />
@@ -133,7 +133,7 @@ export default {
             this.filterState.maxPrice = this.maxPrice
         }
     },
-    created() {
+    mounted() {
         // Axios returns the response with "data" property
         // It contains the "data" property (again) and pager
         // information from Laravel paged JSON response

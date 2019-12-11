@@ -1,3 +1,28 @@
+import { endOfWeek, endOfMonth, addMonths, addWeeks, isBefore, parseISO, getMonth } from 'date-fns'
+import { titleCase, localizedFormat, localizedEndOfWeek } from './utils/utils'
+
+const now = new Date()
+
+const inThisWeek = localizedEndOfWeek(now)
+const inNextWeek = localizedEndOfWeek(addWeeks(now, 1))
+const inNextMonth = endOfMonth(addMonths(now, 1))
+const inNextThreeMonths = endOfMonth(addMonths(now, 3))
+
+//console.log(`%c${inNextWeek}`, 'color:cyan')
+
+const d = parseISO('2020-01-10 11:33:44')
+
+const before = isBefore(d, inNextWeek)
+
+// https://stackoverflow.com/a/48573773
+
+const getSeason = d => Math.floor((d / 12) * 4) % 4
+
+console.log(getSeason(0))
+console.log(getSeason(1))
+
+//console.log(`%c${titleCase(localizedFormat(endOfNextMonth, 'MMMM'))}`, 'color:cyan')
+
 import Vue from 'vue'
 import VueCookie from 'vue-cookie'
 import axios from 'axios'
