@@ -62,7 +62,7 @@ export default {
         filterState: toObject(filters.map(({ key, defaultState }) => [key, 0])),
         minPrice: 0,
         maxPrice: 0,
-        dateOptions: formatSeasonRange(seasonRange(new Date()))
+        dateOptions: ['Kõik kuupäevad', ...formatSeasonRange(seasonRange(new Date()))]
     }),
     computed: {
         filterOptions() {
@@ -142,6 +142,7 @@ export default {
 
             this.filterState.minPrice = this.minPrice
             this.filterState.maxPrice = this.maxPrice
+            this.filterState.date = 0
         }
     },
     mounted() {

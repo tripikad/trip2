@@ -44,7 +44,10 @@ export const filters = [
         getId: null,
         getTitle: null,
         compare: (o, filterState) => {
-            const [seasonStartDate, seasonEndDate] = seasons[filterState]
+            if (filterState == 0) {
+                return true
+            }
+            const [seasonStartDate, seasonEndDate] = seasons[filterState - 1]
             const startAt = parseISO(o.start_at)
             const endAt = parseISO(o.end_at)
             return isAfter(startAt, seasonStartDate) && isBefore(endAt, seasonEndDate)
