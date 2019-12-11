@@ -35,12 +35,8 @@
                     title="Näita kõiki reise"
                     @click.native.prevent="resetFilterState"
                     isclasses="Button--small Button--cyan Button--narrow"
+                    :style="{ opacity: offers.length == 0 || offers.length == filteredOffers.length ? 0 : 1 }"
                 />
-                <!-- <a @click="resetFilterState">
-                    <div class="Button Button--small Button--cyan Button--narrow">
-                        <div class="Button__title">Näita kõiki reise</div>
-                    </div>
-                </a> -->
             </div>
         </div>
 
