@@ -33,7 +33,6 @@ class OfferController extends Controller
                         component('Section')
                             ->withBackground('blue')
                             ->withPadding(10)
-                            ->withAlign('center')
                             ->withWidth(styles('tablet-width'))
                             ->withItems(
                                 collect()

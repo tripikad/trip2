@@ -3,6 +3,8 @@
         <!--Dotmap :largedots="filteredOffers.map(o => o.coordinates)" /-->
         <form-select :options="filterOptions.style" v-model="filterState.style" isclasses="FormSelect--blue" />
         <form-select :options="filterOptions.company" v-model="filterState.company" isclasses="FormSelect--blue" />
+        <input style="width: 100%" type="range" v-model="filterState.minPrice" min="0" max="4000" step="10" />
+        <input style="width: 100%" type="range" v-model="filterState.maxPrice" min="0" max="4000" step="10" />
         <pre>{{ filterState }}</pre>
         <div class="OfferList__offers">
             <OfferRow v-for="(offer, i) in filteredOffers" :key="i" :offer="offer" :route="offer.route" />
@@ -32,13 +34,19 @@ const filters = [
     },
     {
         key: 'minPrice',
-        defaultTitle: 'Minimaalne hind',
         getId: o => o.price,
-        getTitle: null
+        getTitle: null,
+        compare: (o, filterState) => parseFloat(o.price) >= filterState
+    },
+    {
+        key: 'maxPrice',
+        getId: o => o.price,
+        getTitle: null,
+        compare: (o, filterState) => parseFloat(o.price) <= filterState
     }
 ]
 
-const intialFilterState = toObject(filters.map(({ key }) => [key, -1]))
+const intialFilterState = toObject(filters.map(({ key }) => [key, 0]))
 
 export default {
     props: {
@@ -62,7 +70,7 @@ export default {
                             }))
                             // We return [key,value] pairs that will be
                             // coverted to { key: value } object by toObject()
-                            return [key, [{ id: -1, name: defaultTitle }, ...options]]
+                            return [key, [{ id: 0, name: defaultTitle }, ...options]]
                         }
                         return null
                     })
@@ -77,7 +85,7 @@ export default {
                         // do not filter the data item d,
                         // pass it through
 
-                        if (this.filterState[key] == -1) {
+                        if (this.filterState[key] == 0) {
                             return true
                         }
 
@@ -115,6 +123,7 @@ export default {
             // fetch the data for subsequent pages
 
             this.nextPageUrl = data.next_page_url
+            this.filterState.maxPrice = 4000
         })
     }
 }
