@@ -64,7 +64,7 @@ class OfferController extends Controller
     public function indexJson()
     {
         $data = Offer::public()
-            ->latest()
+            ->orderBy('start_at')
             ->with(['user:id,name', 'startDestinations', 'endDestinations'])
             ->paginate(50);
 

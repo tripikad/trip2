@@ -120,3 +120,33 @@ export const titleCase = string =>
 export const localizedFormat = (date, dateFormat) => format(date, dateFormat, { locale: et })
 
 export const localizedEndOfWeek = date => endOfWeek(date, { locale: et })
+
+// Seasons
+
+const seasons = [[12, 1, 2], [3, 4, 5], [6, 7, 8], [9, 10, 11]]
+const seasonNames = ['Talv', 'Kevad', 'Suvi', 'Sügis']
+
+export const getSeason = date => {
+    // getMonths returns 0 as Jan, 1 as Feb
+    // so we make it more human-readable
+    const month = getMonth(date) + 1
+    // Find out to which subarray the month number belongs
+    return seasons.findIndex(season => season.includes(month))
+}
+
+export const getMonthsToSeasonEnd = date => {
+    const season = getSeason(date)
+    return 2 - seasons[season].findIndex(month => month == getMonth(date) + 1)
+}
+
+export const seasonRanges = (date, length = 4) =>
+    Array.from({ length })
+        .map((_, i) => i * 3)
+        .map(season => {
+            return endOfMonth(addMonths(addMonths(date, getMonthsToSeasonEnd(date)), season))
+        })
+
+export const formatSeasonRanges = range =>
+    range.map(date => {
+        return `${seasonNames[getSeason(date)]} ${format(date, 'yyyy')}`
+    })

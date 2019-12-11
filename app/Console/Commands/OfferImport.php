@@ -37,15 +37,15 @@ class OfferImport extends Command
             $user = User::findOrFail($o->userid);
             $user->update(['company' => true]);
 
+            $start_at = Carbon::createFromFormat('d.m.Y', trim($o->from));
+            $end_at = Carbon::createFromFormat('d.m.Y', trim($o->to));
+
             $data = [
                 'user_id' => $o->userid,
                 'title' => $o->title,
                 'style' => $o->style,
-                'start_at' => Carbon::now()->addMonth(),
-                'end_at' => Carbon::now()
-                    ->addMonth()
-                    ->addWeek(),
-
+                'start_at' => $start_at,
+                'end_at' => $end_at,
                 'data' => [
                     'price' => $o->style == 'package' ? '' : $o->price,
                     'guide' => $o->guide,

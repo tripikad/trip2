@@ -17,7 +17,7 @@ class CompanyController extends Controller
 
         $offers = $loggedUser
             ->offers()
-            ->latest()
+            ->orderBy('start_at')
             ->with(['user:id,name', 'startDestinations', 'endDestinations'])
             ->get();
 
@@ -67,7 +67,7 @@ class CompanyController extends Controller
     {
         $companies = User::whereCompany(true)->get();
 
-        $offers = Offer::latest()
+        $offers = Offer::orderBy('start_at')
             ->with(['user:id,name', 'startDestinations', 'endDestinations'])
             ->take(100)
             ->get();
