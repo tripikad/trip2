@@ -3,8 +3,23 @@
         <!--Dotmap :largedots="filteredOffers.map(o => o.coordinates)" /-->
         <form-select :options="filterOptions.style" v-model="filterState.style" isclasses="FormSelect--blue" />
         <form-select :options="filterOptions.company" v-model="filterState.company" isclasses="FormSelect--blue" />
-        <input style="width: 100%" type="range" v-model="filterState.minPrice" min="0" max="4000" step="10" />
-        <input style="width: 100%" type="range" v-model="filterState.maxPrice" min="0" max="4000" step="10" />
+        <input
+            style="width: 100%"
+            type="range"
+            v-model="filterState.minPrice"
+            :min="minPrice"
+            :max="maxPrice"
+            step="1"
+        />
+        <input
+            style="width: 100%"
+            type="range"
+            v-model="filterState.maxPrice"
+            :min="minPrice"
+            :max="maxPrice"
+            step="1"
+        />
+        {{ maxPrice }}
         <pre>{{ filterState }}</pre>
         <div class="OfferList__offers">
             <OfferRow v-for="(offer, i) in filteredOffers" :key="i" :offer="offer" :route="offer.route" />
@@ -56,7 +71,8 @@ export default {
     data: () => ({
         offers: [],
         nextPageUrl: null,
-        filterState: intialFilterState
+        filterState: intialFilterState,
+        maxPrice: 0
     }),
     computed: {
         filterOptions() {
@@ -100,11 +116,28 @@ export default {
         }
     },
     methods: {
+        getPriceRange() {
+            if (this.offers.length) {
+                const round = 10
+                const prices = this.offers.map(o => parseFloat(o.price))
+
+                return [Math.min(...prices), Math.max(...prices)]
+                //.map(price => Math.ceil(price / round) * round)
+            }
+            return [0, 0]
+        },
         getData() {
             if (this.nextPageUrl) {
                 this.$http.get(this.nextPageUrl).then(({ data }) => {
                     this.offers = [...this.offers, ...data.data]
+
                     this.nextPageUrl = data.next_page_url ? data.next_page_url : null
+
+                    // Set min and max prices for the price range silder
+
+                    const [minPrice, maxPrice] = this.getPriceRange()
+                    this.minPrice = minPrice
+                    this.maxPrice = maxPrice
                 })
             }
         }
@@ -123,7 +156,17 @@ export default {
             // fetch the data for subsequent pages
 
             this.nextPageUrl = data.next_page_url
-            this.filterState.maxPrice = 4000
+
+            // Set min and max prices for the price range silder
+
+            const [minPrice, maxPrice] = this.getPriceRange()
+            this.minPrice = minPrice
+            this.maxPrice = maxPrice
+
+            // Set default min and max price
+
+            this.filterState.minPrice = minPrice
+            this.filterState.maxPrice = maxPrice
         })
     }
 }
