@@ -52,7 +52,9 @@ export default {
     },
 
     mounted() {
-        this.localValue = this.options.find(option => option.id === parseInt(this.value))
+        this.$watch('value', value => (this.localValue = this.options.find(option => option.id === this.value)), {
+            immediate: true
+        })
         this.$watch('localValue', localValue => this.$emit('input', this.localValue ? this.localValue.id : ''))
     }
 }

@@ -77,6 +77,8 @@ export default {
     },
 
     mounted() {
+        // @TODO2 Add watcher for value
+
         // We can not modify the props so we create the local value
         this.localValue = this.value.map(value => {
             // We convert the id's from the input value prop

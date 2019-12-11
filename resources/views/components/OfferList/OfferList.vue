@@ -1,13 +1,20 @@
 <template>
     <div class="OfferList" :class="isclasses">
         <!--Dotmap :largedots="filteredOffers.map(o => o.coordinates)" /-->
-        <form-select :options="filterOptions.style" v-model="filterState.style" isclasses="FormSelect--blue" />
-        <form-select :options="filterOptions.company" v-model="filterState.company" isclasses="FormSelect--blue" />
-        <form-select
-            :options="filterOptions.destination"
-            v-model="filterState.destination"
-            isclasses="FormSelect--blue"
-        />
+        <div class="OfferList__filters">
+            <form-select :options="filterOptions.style" v-model="filterState.style" isclasses="FormSelect--blue" />
+            <form-select :options="filterOptions.company" v-model="filterState.company" isclasses="FormSelect--blue" />
+            <form-select
+                :options="filterOptions.destination"
+                v-model="filterState.destination"
+                isclasses="FormSelect--blue"
+            />
+            <a @click="resetFilterState">
+                <div class="Button Button--cyan">
+                    <div class="Button__title">Kõik</div>
+                </div>
+            </a>
+        </div>
         <input
             style="width: 100%"
             type="range"
@@ -128,15 +135,18 @@ export default {
                     const [minPrice, maxPrice] = this.getPriceRange()
                     this.minPrice = minPrice
                     this.maxPrice = maxPrice
-
-                    // if (this.filterState.minPrice < minPrice) {
-                    //     this.filterState.minPrice = minPrice
-                    // }
-                    // if (this.filterState.maxPrice > maxPrice) {
-                    //     this.filterState.maxPrice = maxPrice
-                    // }
                 })
             }
+        },
+        resetFilterState() {
+            filters.forEach(({ key, getTitle }) => {
+                if (getTitle !== null) {
+                    this.filterState[key] = 0
+                }
+            })
+
+            this.filterState.minPrice = this.minPrice
+            this.filterState.maxPrice = this.maxPrice
         }
     },
     created() {
