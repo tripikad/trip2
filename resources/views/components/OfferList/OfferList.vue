@@ -1,9 +1,15 @@
 <template>
     <div class="OfferList" :class="isclasses">
         <!--Dotmap :largedots="filteredOfferList.map(o => o.coordinates)" /-->
-        <pre>
-        {{ uniques }}
+        <form-select :options="filterOptions.style" v-model="filterState.style" isclasses="FormSelect--blue" />
+        <form-select :options="filterOptions.company" v-model="filterState.company" isclasses="FormSelect--blue" />
+        <!--
+        <pre
+            >{{ filterState }}
+---
+{{ filterOptions }}
         </pre>
+        -->
         <div class="OfferList__offers">
             <OfferRow v-for="(offer, i) in filteredOfferList" :key="i" :offer="offer" :route="offer.route" />
         </div>
@@ -18,7 +24,7 @@ const filters = [
     {
         key: 'company',
         unique: o => o.user.id,
-        result: o => ({ id: o.id, name: o.user.name })
+        result: o => ({ id: o.user.id, name: o.user.name })
     },
     {
         key: 'style',
@@ -26,6 +32,8 @@ const filters = [
         result: o => ({ id: o.style, name: o.style })
     }
 ]
+
+const intialFilterState = toObject(filters.map(({ key }) => [key, -1]))
 
 export default {
     props: {
@@ -35,21 +43,27 @@ export default {
     data: () => ({
         offers: [],
         nextPageUrl: null,
-        activeFilters: {
-            userId: -1
-        }
+        filterState: intialFilterState
     }),
     computed: {
-        uniques() {
+        filterOptions() {
             return toObject(
                 filters.map(({ key, unique, result }) => {
                     return [key, uniqueFilter(this.offers, unique).map(result)]
                 })
             )
         },
-
         filteredOfferList() {
-            return this.offers
+            return filters.reduce(
+                (data, { key, unique }) =>
+                    data.filter(d => {
+                        if (this.filterState[key] == -1) {
+                            return true
+                        }
+                        return unique(d) == this.filterState[key]
+                    }),
+                this.offers
+            )
         }
     },
     methods: {

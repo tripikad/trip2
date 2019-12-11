@@ -67,7 +67,7 @@ class OfferController extends Controller
         $data = Offer::public()
             ->latest()
             ->with(['user:id,name', 'startDestinations', 'endDestinations'])
-            ->paginate(3);
+            ->paginate(50);
 
         return response()->json($data);
     }
