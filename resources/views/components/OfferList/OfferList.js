@@ -1,3 +1,9 @@
+import { parseISO, isBefore, isAfter } from 'date-fns'
+
+import { seasonRange } from '../../utils/utils'
+
+export const seasons = seasonRange(new Date())
+
 export const filters = [
     {
         key: 'company',
@@ -34,9 +40,14 @@ export const filters = [
         compare: (o, filterState) => parseFloat(o.price) <= filterState
     },
     {
-        key: 'dateRange',
+        key: 'date',
         getId: null,
         getTitle: null,
-        compare: (o, filterState) => true
+        compare: (o, filterState) => {
+            const [seasonStartDate, seasonEndDate] = seasons[filterState]
+            const startAt = parseISO(o.start_at)
+            const endAt = parseISO(o.end_at)
+            return isAfter(startAt, seasonStartDate) && isBefore(endAt, seasonEndDate)
+        }
     }
 ]

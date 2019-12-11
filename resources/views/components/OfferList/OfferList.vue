@@ -14,8 +14,9 @@
             :suffix="suffix"
         />
 
+        <form-buttons v-model="filterState.date" :items="dateOptions" isclasses="FormButtons--blue" />
+
         <div class="OfferList__filters">
-            <form-buttons :value="1" :items="['Seiklusreis', 'Paketireis']" isclasses="FormButtons--blue" />
             <form-select :options="filterOptions.style" v-model="filterState.style" isclasses="FormSelect--blue" />
             <form-select :options="filterOptions.company" v-model="filterState.company" isclasses="FormSelect--blue" />
             <form-select
@@ -29,9 +30,10 @@
                 </div>
             </a>
         </div>
+        <pre>{{ dateOptions }}</pre>
         <pre>{{ filterState }}</pre>
         <transition-group name="Fade" class="OfferList__offers">
-            <OfferRow v-for="(offer, i) in filteredOffers" :key="offer.id" :offer="offer" :route="offer.route" />
+            <OfferRow v-for="offer in filteredOffers" :key="offer.id" :offer="offer" :route="offer.route" />
         </transition-group>
         <pre>{{ filterOptions }}</pre>
         <ButtonVue v-if="nextPageUrl" @click.native.prevent="getData" title="Gimme data" />
@@ -41,8 +43,6 @@
 <script>
 import { uniqueFilter, toObject, seasonRange, formatSeasonRange } from '../../utils/utils'
 import { filters } from './OfferList'
-
-console.log(formatSeasonRange(seasonRange(new Date())))
 
 export default {
     props: {
@@ -54,9 +54,9 @@ export default {
         offers: [],
         nextPageUrl: null,
         filterState: toObject(filters.map(({ key, defaultState }) => [key, 0])),
-        dateOptions: [],
         minPrice: 0,
-        maxPrice: 0
+        maxPrice: 0,
+        dateOptions: formatSeasonRange(seasonRange(new Date()))
     }),
     computed: {
         filterOptions() {

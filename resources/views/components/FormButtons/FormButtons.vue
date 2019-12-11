@@ -6,7 +6,10 @@
                 :key="i"
                 class="FormButtons__button"
                 :class="i == activeIndex ? 'FormButtons__button--active' : ''"
-                @click="activeIndex = i"
+                @click="
+                    activeIndex = i
+                    $emit('input', activeIndex)
+                "
             >
                 {{ item }}
             </div>
