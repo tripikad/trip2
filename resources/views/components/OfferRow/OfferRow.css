@@ -28,6 +28,7 @@
 
 .OfferRow__price {
     color: $yellow-light;
+    white-space: nowrap;
 }
 
 .OfferRow__meta {

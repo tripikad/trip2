@@ -18,6 +18,7 @@ class Offer extends Model
 
     protected $appends = [
         'price',
+        'price_formatted',
         'style_formatted',
         'start_at_formatted',
         'end_at_formatted',
@@ -57,12 +58,28 @@ class Offer extends Model
     public function getPriceAttribute($value)
     {
         if ($this->style == 'package') {
-            return $this->data->hotels[0]->price . '€';
+            return $this->data->hotels[0]->price;
         }
         if ($this->style !== 'package' && $this->data->price) {
             return $this->data->price;
         }
-        return '0€';
+        return '';
+    }
+
+    public function getPriceFormattedAttribute()
+    {
+        if ($this->price) {
+            if ($this->style == 'package') {
+                return trans('site.price.starting', [
+                    'price' => $this->price,
+                    'currency' => config('site.currency.eur')
+                ]);
+            }
+            return trans('site.price', [
+                'price' => $this->price,
+                'currency' => config('site.currency.eur')
+            ]);
+        }
     }
 
     public function getStyleFormattedAttribute()

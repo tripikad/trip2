@@ -3,8 +3,8 @@
         <img class="OfferRow__image" :src="offer.image || './photos/image_blank.png'" />
         <div class="OfferRow__content">
             <div class="OfferRow__title">
-                {{ offer.title }} al.
-                <span class="OfferRow__price">{{ offer.price }}</span>
+                {{ offer.title }}
+                <span class="OfferRow__price">{{ offer.price_formatted }}</span>
             </div>
             <div class="OfferRow__meta">
                 <tag

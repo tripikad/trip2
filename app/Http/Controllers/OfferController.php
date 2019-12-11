@@ -136,7 +136,7 @@ class OfferController extends Controller
                                         component('Title')
                                             ->is('large')
                                             ->is('white')
-                                            ->with('title', $offer->title . ' ' . $offer->price)
+                                            ->with('title', $offer->title . ' ' . $offer->price_formatted)
                                     )
                                     ->push(region('OfferDuration', $offer))
                                     ->spacer()

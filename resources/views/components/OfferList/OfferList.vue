@@ -3,16 +3,11 @@
         <!--Dotmap :largedots="filteredOffers.map(o => o.coordinates)" /-->
         <form-select :options="filterOptions.style" v-model="filterState.style" isclasses="FormSelect--blue" />
         <form-select :options="filterOptions.company" v-model="filterState.company" isclasses="FormSelect--blue" />
-        <!--
-        <pre
-            >{{ filterState }}
----
-{{ filterOptions }}
-        </pre>
-        -->
+        <pre>{{ filterState }}</pre>
         <div class="OfferList__offers">
             <OfferRow v-for="(offer, i) in filteredOffers" :key="i" :offer="offer" :route="offer.route" />
         </div>
+        <pre>{{ filterOptions }}</pre>
         <ButtonVue v-if="nextPageUrl" @click.native.prevent="getData" title="Gimme data" />
     </div>
 </template>
@@ -25,17 +20,25 @@ const filters = [
         key: 'company',
         defaultTitle: 'Kõik reisifirmad',
         getId: o => o.user.id,
-        getTitle: o => o.user.name
+        getTitle: o => o.user.name,
+        compare: (o, filterState) => o.user.id == filterState
     },
     {
         key: 'style',
         defaultTitle: 'Kõik reisistiilid',
         getId: o => o.style,
-        getTitle: o => o.style_formatted
+        getTitle: o => o.style_formatted,
+        compare: (o, filterState) => o.style == filterState
+    },
+    {
+        key: 'minPrice',
+        defaultTitle: 'Minimaalne hind',
+        getId: o => o.price,
+        getTitle: null
     }
 ]
 
-const intialFilterState = toObject(filters.map(({ key }) => [key, 0]))
+const intialFilterState = toObject(filters.map(({ key }) => [key, -1]))
 
 export default {
     props: {
@@ -50,24 +53,31 @@ export default {
     computed: {
         filterOptions() {
             return toObject(
-                filters.map(({ key, defaultTitle, getId, getTitle }) => {
-                    const options = uniqueFilter(this.offers, getId).map(o => ({
-                        id: getId(o),
-                        name: getTitle(o)
-                    }))
-                    return [key, [{ id: 0, name: defaultTitle }, ...options]]
-                })
+                filters
+                    .map(({ key, defaultTitle, getId, getTitle }) => {
+                        if (getTitle) {
+                            const options = uniqueFilter(this.offers, getId).map(o => ({
+                                id: getId(o),
+                                name: getTitle(o)
+                            }))
+                            // We return [key,value] pairs that will be
+                            // coverted to { key: value } object by toObject()
+                            return [key, [{ id: -1, name: defaultTitle }, ...options]]
+                        }
+                        return null
+                    })
+                    .filter(f => f)
             )
         },
         filteredOffers() {
             return filters.reduce(
-                (data, { key, getId }) =>
+                (data, { key, getId, compare }) =>
                     data.filter(d => {
                         // If current filter is not enabled
                         // do not filter the data item d,
                         // pass it through
 
-                        if (this.filterState[key] == 0) {
+                        if (this.filterState[key] == -1) {
                             return true
                         }
 
@@ -75,7 +85,7 @@ export default {
                         // and compare it with current filter
                         // active state
 
-                        return getId(d) == this.filterState[key]
+                        return compare(d, this.filterState[key])
                     }),
                 this.offers
             )

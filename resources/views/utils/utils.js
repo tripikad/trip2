@@ -103,3 +103,7 @@ export const slug = text => {
         .replace(/^-+/, '')
         .replace(/-+$/, '')
 }
+
+export const formatCurrency = value => {
+    return `${value}€`
+}
