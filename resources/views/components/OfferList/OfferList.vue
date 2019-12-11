@@ -1,6 +1,18 @@
 <template>
     <div class="OfferList" :class="isclasses">
         <!--Dotmap :largedots="filteredOffers.map(o => o.coordinates)" /-->
+
+        <form-slider-multiple
+            isclasses="FormSliderMultiple--yellow"
+            :value="filterState.minPrice"
+            @input="price => (filterState.minPrice = price)"
+            :value2="filterState.maxPrice"
+            @input2="price => (filterState.maxPrice = price)"
+            :min="minPrice"
+            :max="maxPrice"
+            :step="1"
+            :suffix="suffix"
+        />
         <div class="OfferList__filters">
             <form-select :options="filterOptions.style" v-model="filterState.style" isclasses="FormSelect--blue" />
             <form-select :options="filterOptions.company" v-model="filterState.company" isclasses="FormSelect--blue" />
@@ -15,34 +27,6 @@
                 </div>
             </a>
         </div>
-        <input
-            style="width: 100%"
-            type="range"
-            v-model="filterState.minPrice"
-            :min="minPrice"
-            :max="maxPrice"
-            step="1"
-        />
-        <input
-            style="width: 100%"
-            type="range"
-            v-model="filterState.maxPrice"
-            :min="minPrice"
-            :max="maxPrice"
-            step="1"
-        />
-        <form-slider-multiple
-            isclasses="FormSliderMultiple--yellow"
-            :value="filterState.minPrice"
-            @input="price => (filterState.minPrice = price)"
-            :value2="filterState.maxPrice"
-            @input2="price => (filterState.maxPrice = price)"
-            :min="minPrice"
-            :max="maxPrice"
-            :step="1"
-            :suffix="suffix"
-        />
-        {{ filterState.maxPrice }} / {{ maxPrice }}
         <pre>{{ filterState }}</pre>
         <transition-group name="Fade" class="OfferList__offers">
             <OfferRow v-for="(offer, i) in filteredOffers" :key="i" :offer="offer" :route="offer.route" />
