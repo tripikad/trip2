@@ -23,17 +23,19 @@ import { uniqueFilter, toObject } from '../../utils/utils'
 const filters = [
     {
         key: 'company',
+        defaultTitle: 'Kõik reisifirmad',
         getId: o => o.user.id,
-        result: o => ({ id: o.user.id, name: o.user.name })
+        getTitle: o => o.user.name
     },
     {
         key: 'style',
+        defaultTitle: 'Kõik reisistiilid',
         getId: o => o.style,
-        result: o => ({ id: o.style, name: o.style })
+        getTitle: o => o.style_formatted
     }
 ]
 
-const intialFilterState = toObject(filters.map(({ key }) => [key, -1]))
+const intialFilterState = toObject(filters.map(({ key }) => [key, 0]))
 
 export default {
     props: {
@@ -48,8 +50,12 @@ export default {
     computed: {
         filterOptions() {
             return toObject(
-                filters.map(({ key, getId, result }) => {
-                    return [key, uniqueFilter(this.offers, getId).map(result)]
+                filters.map(({ key, defaultTitle, getId, getTitle }) => {
+                    const options = uniqueFilter(this.offers, getId).map(o => ({
+                        id: getId(o),
+                        name: getTitle(o)
+                    }))
+                    return [key, [{ id: 0, name: defaultTitle }, ...options]]
                 })
             )
         },
@@ -61,7 +67,7 @@ export default {
                         // do not filter the data item d,
                         // pass it through
 
-                        if (this.filterState[key] == -1) {
+                        if (this.filterState[key] == 0) {
                             return true
                         }
 
