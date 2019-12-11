@@ -3,6 +3,11 @@
         <!--Dotmap :largedots="filteredOffers.map(o => o.coordinates)" /-->
         <form-select :options="filterOptions.style" v-model="filterState.style" isclasses="FormSelect--blue" />
         <form-select :options="filterOptions.company" v-model="filterState.company" isclasses="FormSelect--blue" />
+        <form-select
+            :options="filterOptions.destination"
+            v-model="filterState.destination"
+            isclasses="FormSelect--blue"
+        />
         <input
             style="width: 100%"
             type="range"
@@ -28,13 +33,13 @@
             :min="minPrice"
             :max="maxPrice"
             :step="1"
-            suffix="€"
+            :suffix="suffix"
         />
         {{ filterState.maxPrice }} / {{ maxPrice }}
         <pre>{{ filterState }}</pre>
-        <div class="OfferList__offers">
+        <transition-group name="Fade" class="OfferList__offers">
             <OfferRow v-for="(offer, i) in filteredOffers" :key="i" :offer="offer" :route="offer.route" />
-        </div>
+        </transition-group>
         <pre>{{ filterOptions }}</pre>
         <ButtonVue v-if="nextPageUrl" @click.native.prevent="getData" title="Gimme data" />
     </div>
@@ -42,47 +47,18 @@
 
 <script>
 import { uniqueFilter, toObject } from '../../utils/utils'
-
-const filters = [
-    {
-        key: 'company',
-        defaultTitle: 'Kõik reisifirmad',
-        getId: o => o.user.id,
-        getTitle: o => o.user.name,
-        compare: (o, filterState) => o.user.id == filterState
-    },
-    {
-        key: 'style',
-        defaultTitle: 'Kõik reisistiilid',
-        getId: o => o.style,
-        getTitle: o => o.style_formatted,
-        compare: (o, filterState) => o.style == filterState
-    },
-    {
-        key: 'minPrice',
-        getId: o => o.price,
-        getTitle: null,
-        compare: (o, filterState) => parseFloat(o.price) >= filterState
-    },
-    {
-        key: 'maxPrice',
-        getId: o => o.price,
-        getTitle: null,
-        compare: (o, filterState) => parseFloat(o.price) <= filterState
-    }
-]
-
-const intialFilterState = toObject(filters.map(({ key }) => [key, 0]))
+import { filters } from './OfferList'
 
 export default {
     props: {
         isclasses: { default: '' },
-        route: { default: '' }
+        route: { default: '' },
+        suffix: { default: '' }
     },
     data: () => ({
         offers: [],
         nextPageUrl: null,
-        filterState: intialFilterState,
+        filterState: toObject(filters.map(({ key }) => [key, 0])),
         minPrice: 0,
         maxPrice: 0
     }),
@@ -92,10 +68,12 @@ export default {
                 filters
                     .map(({ key, defaultTitle, getId, getTitle }) => {
                         if (getTitle) {
-                            const options = uniqueFilter(this.offers, getId).map(o => ({
-                                id: getId(o),
-                                name: getTitle(o)
-                            }))
+                            const options = uniqueFilter(this.offers, getId)
+                                .map(o => ({
+                                    id: getId(o),
+                                    name: getTitle(o)
+                                }))
+                                .sort((a, b) => a > b)
                             // We return [key,value] pairs that will be
                             // coverted to { key: value } object by toObject()
                             return [key, [{ id: 0, name: defaultTitle }, ...options]]
