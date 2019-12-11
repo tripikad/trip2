@@ -1,4 +1,4 @@
-import { format, endOfWeek } from 'date-fns'
+import { format, endOfWeek, endOfMonth, addMonths, getMonth, subMonths, addSeconds } from 'date-fns'
 import { et } from 'date-fns/locale'
 
 export const intersection = (arr1, arr2) => arr1.filter(n => arr2.includes(n))
@@ -124,7 +124,8 @@ export const localizedEndOfWeek = date => endOfWeek(date, { locale: et })
 // Seasons
 
 const seasons = [[12, 1, 2], [3, 4, 5], [6, 7, 8], [9, 10, 11]]
-const seasonNames = ['Talv', 'Kevad', 'Suvi', 'Sügis']
+
+export const seasonNames = ['Talv', 'Kevad', 'Suvi', 'Sügis']
 
 export const getSeason = date => {
     // getMonths returns 0 as Jan, 1 as Feb
@@ -139,14 +140,16 @@ export const getMonthsToSeasonEnd = date => {
     return 2 - seasons[season].findIndex(month => month == getMonth(date) + 1)
 }
 
-export const seasonRanges = (date, length = 4) =>
+export const seasonRange = (date, length = 4) =>
     Array.from({ length })
         .map((_, i) => i * 3)
         .map(season => {
-            return endOfMonth(addMonths(addMonths(date, getMonthsToSeasonEnd(date)), season))
+            const endDate = endOfMonth(addMonths(addMonths(date, getMonthsToSeasonEnd(date)), season))
+            const startDate = addSeconds(subMonths(endDate, 3), 1)
+            return [startDate, endDate]
         })
 
-export const formatSeasonRanges = range =>
-    range.map(date => {
-        return `${seasonNames[getSeason(date)]} ${format(date, 'yyyy')}`
+export const formatSeasonRange = range =>
+    range.map(([_, endDate]) => {
+        return `${seasonNames[getSeason(endDate)]} ${format(endDate, 'yyyy')}`
     })

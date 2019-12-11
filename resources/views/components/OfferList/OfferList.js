@@ -2,6 +2,7 @@ export const filters = [
     {
         key: 'company',
         defaultTitle: 'Kõik reisifirmad',
+        defaultState: 0,
         getId: o => o.user.id,
         getTitle: o => o.user.name,
         compare: (o, filterState) => o.user.id == filterState
@@ -31,5 +32,11 @@ export const filters = [
         getId: o => o.price,
         getTitle: null,
         compare: (o, filterState) => parseFloat(o.price) <= filterState
+    },
+    {
+        key: 'dateRange',
+        getId: null,
+        getTitle: null,
+        compare: (o, filterState) => true
     }
 ]

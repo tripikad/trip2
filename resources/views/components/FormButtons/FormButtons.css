@@ -2,7 +2,7 @@
     display: inline-flex;
     align-items: center;
     border-radius: $border-radius-md;
-    border: 1px solid $gray;
+    border: 2px solid $gray;
     overflow: hidden;
 }
 
@@ -14,10 +14,10 @@
     line-height: $line-height-xs;
     padding: 0 $padding-md;
     text-align: center;
-    border-right: 1px solid $gray;
+    border-right: 2px solid $gray;
     color: $gray-dark;
     cursor: pointer;
-    height: calc($spacer * 3.2);
+    height: calc($spacer * 3.21);
 }
 
 .FormButtons__button:last-child {
@@ -26,4 +26,23 @@
 
 .FormButtons__button--active {
     background: $gray-light;
+}
+
+.FormButtons--blue {
+    border: 2px solid $white;
+}
+.FormButtons--blue .FormButtons__button {
+    border-right: 2px solid $white;
+}
+
+.FormButtons--blue .FormButtons__button:last-child {
+    border-right: 0;
+}
+
+.FormButtons--blue .FormButtons__button {
+    color: $white;
+}
+/* @TODO2 Convert to variable */
+.FormButtons--blue .FormButtons__button--active {
+    background: rgba(0, 0, 0, 0.25);
 }

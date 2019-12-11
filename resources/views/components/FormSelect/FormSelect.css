@@ -21,6 +21,7 @@
 .multiselect__tags {
     font: $font-text-sm !important;
     border: 2px solid $gray-light !important;
+    border-radius: $border-radius-md !important;
 }
 
 .FormSelect--blue .multiselect__tags {

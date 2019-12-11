@@ -13,7 +13,9 @@
             :step="1"
             :suffix="suffix"
         />
+
         <div class="OfferList__filters">
+            <form-buttons :value="1" :items="['Seiklusreis', 'Paketireis']" isclasses="FormButtons--blue" />
             <form-select :options="filterOptions.style" v-model="filterState.style" isclasses="FormSelect--blue" />
             <form-select :options="filterOptions.company" v-model="filterState.company" isclasses="FormSelect--blue" />
             <form-select
@@ -37,8 +39,10 @@
 </template>
 
 <script>
-import { uniqueFilter, toObject } from '../../utils/utils'
+import { uniqueFilter, toObject, seasonRange, formatSeasonRange } from '../../utils/utils'
 import { filters } from './OfferList'
+
+console.log(formatSeasonRange(seasonRange(new Date())))
 
 export default {
     props: {
@@ -49,7 +53,8 @@ export default {
     data: () => ({
         offers: [],
         nextPageUrl: null,
-        filterState: toObject(filters.map(({ key }) => [key, 0])),
+        filterState: toObject(filters.map(({ key, defaultState }) => [key, 0])),
+        dateOptions: [],
         minPrice: 0,
         maxPrice: 0
     }),
