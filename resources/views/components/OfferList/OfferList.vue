@@ -19,7 +19,18 @@
             :max="maxPrice"
             step="1"
         />
-        {{ maxPrice }}
+        <form-slider-multiple
+            isclasses="FormSliderMultiple--yellow"
+            :value="filterState.minPrice"
+            @input="price => (filterState.minPrice = price)"
+            :value2="filterState.maxPrice"
+            @input2="price => (filterState.maxPrice = price)"
+            :min="minPrice"
+            :max="maxPrice"
+            :step="1"
+            suffix="€"
+        />
+        {{ filterState.maxPrice }} / {{ maxPrice }}
         <pre>{{ filterState }}</pre>
         <div class="OfferList__offers">
             <OfferRow v-for="(offer, i) in filteredOffers" :key="i" :offer="offer" :route="offer.route" />
@@ -72,6 +83,7 @@ export default {
         offers: [],
         nextPageUrl: null,
         filterState: intialFilterState,
+        minPrice: 0,
         maxPrice: 0
     }),
     computed: {
@@ -138,11 +150,18 @@ export default {
                     const [minPrice, maxPrice] = this.getPriceRange()
                     this.minPrice = minPrice
                     this.maxPrice = maxPrice
+
+                    // if (this.filterState.minPrice < minPrice) {
+                    //     this.filterState.minPrice = minPrice
+                    // }
+                    // if (this.filterState.maxPrice > maxPrice) {
+                    //     this.filterState.maxPrice = maxPrice
+                    // }
                 })
             }
         }
     },
-    mounted() {
+    created() {
         // Axios returns the response with "data" property
         // It contains the "data" property (again) and pager
         // information from Laravel paged JSON response
@@ -160,6 +179,7 @@ export default {
             // Set min and max prices for the price range silder
 
             const [minPrice, maxPrice] = this.getPriceRange()
+
             this.minPrice = minPrice
             this.maxPrice = maxPrice
 
