@@ -24,14 +24,14 @@
                 v-model="filterState.destination"
                 isclasses="FormSelect--blue"
             />
+        </div>
+        <div>
             <a @click="resetFilterState">
-                <div class="Button Button--cyan">
-                    <div class="Button__title">Kõik</div>
+                <div class="Button Button--small Button--cyan Button--narrow">
+                    <div class="Button__title">Näita kõiki reise</div>
                 </div>
             </a>
         </div>
-        <pre>{{ dateOptions }}</pre>
-        <pre>{{ filterState }}</pre>
         <transition-group name="Fade" class="OfferList__offers">
             <OfferRow v-for="offer in filteredOffers" :key="offer.id" :offer="offer" :route="offer.route" />
         </transition-group>

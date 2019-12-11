@@ -140,7 +140,7 @@ export const getMonthsToSeasonEnd = date => {
     return 2 - seasons[season].findIndex(month => month == getMonth(date) + 1)
 }
 
-export const seasonRange = (date, length = 4) =>
+export const seasonRange = (date = new Date(), length = 5) =>
     Array.from({ length })
         .map((_, i) => i * 3)
         .map(season => {

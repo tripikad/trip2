@@ -2,7 +2,7 @@ import { parseISO, isBefore, isAfter } from 'date-fns'
 
 import { seasonRange } from '../../utils/utils'
 
-export const seasons = seasonRange(new Date())
+const seasons = seasonRange(new Date())
 
 export const filters = [
     {

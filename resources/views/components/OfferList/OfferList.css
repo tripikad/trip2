@@ -1,17 +1,15 @@
 .OfferList > *,
 .OfferList__offers > * {
-    margin-bottom: $margin-lg;
 }
 
 .OfferList__filters {
     display: flex;
     display: block ?if $tablet;
-    margin-bottom: $margin-xl;
+    margin-bottom: $margin-sm;
 }
 
 .OfferList__filters > * {
     margin-right: $margin-sm;
-    margin-bottom: $margin-md ?if $tablet;
 }
 
 .OfferList__filters > *:last-child {
