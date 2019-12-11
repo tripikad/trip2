@@ -1,37 +1,43 @@
 <template>
     <div class="OfferList" :class="isclasses">
         <!--Dotmap :largedots="filteredOffers.map(o => o.coordinates)" /-->
-
-        <form-slider-multiple
-            isclasses="FormSliderMultiple--yellow"
-            :value="filterState.minPrice"
-            @input="price => (filterState.minPrice = price)"
-            :value2="filterState.maxPrice"
-            @input2="price => (filterState.maxPrice = price)"
-            :min="minPrice"
-            :max="maxPrice"
-            :step="1"
-            :suffix="suffix"
-        />
-
-        <form-buttons v-model="filterState.date" :items="dateOptions" isclasses="FormButtons--blue" />
-
         <div class="OfferList__filters">
-            <form-select :options="filterOptions.style" v-model="filterState.style" isclasses="FormSelect--blue" />
-            <form-select :options="filterOptions.company" v-model="filterState.company" isclasses="FormSelect--blue" />
-            <form-select
-                :options="filterOptions.destination"
-                v-model="filterState.destination"
-                isclasses="FormSelect--blue"
+            <form-slider-multiple
+                isclasses="FormSliderMultiple--yellow"
+                :value="filterState.minPrice"
+                @input="price => (filterState.minPrice = price)"
+                :value2="filterState.maxPrice"
+                @input2="price => (filterState.maxPrice = price)"
+                :min="minPrice"
+                :max="maxPrice"
+                :step="1"
+                :suffix="suffix"
             />
+
+            <form-buttons v-model="filterState.date" :items="dateOptions" isclasses="FormButtons--blue" />
+
+            <div class="OfferList__filtersRow">
+                <form-select :options="filterOptions.style" v-model="filterState.style" isclasses="FormSelect--blue" />
+                <form-select
+                    :options="filterOptions.company"
+                    v-model="filterState.company"
+                    isclasses="FormSelect--blue"
+                />
+                <form-select
+                    :options="filterOptions.destination"
+                    v-model="filterState.destination"
+                    isclasses="FormSelect--blue"
+                />
+            </div>
+            <div>
+                <a @click="resetFilterState">
+                    <div class="Button Button--small Button--cyan Button--narrow">
+                        <div class="Button__title">Näita kõiki reise</div>
+                    </div>
+                </a>
+            </div>
         </div>
-        <div>
-            <a @click="resetFilterState">
-                <div class="Button Button--small Button--cyan Button--narrow">
-                    <div class="Button__title">Näita kõiki reise</div>
-                </div>
-            </a>
-        </div>
+
         <transition-group name="Fade" class="OfferList__offers">
             <OfferRow v-for="offer in filteredOffers" :key="offer.id" :offer="offer" :route="offer.route" />
         </transition-group>

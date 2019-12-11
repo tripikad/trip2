@@ -1,17 +1,22 @@
-.OfferList > *,
-.OfferList__offers > * {
+.OfferList__filters > * {
+    margin-bottom: $margin-md;
 }
 
-.OfferList__filters {
+.OfferList__filtersRow {
     display: flex;
     display: block ?if $tablet;
-    margin-bottom: $margin-sm;
 }
 
-.OfferList__filters > * {
+.OfferList__filtersRow > * {
     margin-right: $margin-sm;
+    margin-right: 0 ?if $tablet;
+    margin-bottom: $margin-md ?if $tablet;
 }
 
-.OfferList__filters > *:last-child {
+.OfferList__filtersRow > *:last-child {
     margin: 0;
+}
+
+.OfferList__offers > * {
+    margin-bottom: $margin-md;
 }
