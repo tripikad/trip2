@@ -1,5 +1,5 @@
 <template>
-    <a :href="route" class="OfferRow" :class="isclasses" :dusk="slugTitle">
+    <a :href="route" class="OfferRow" target="_blank" :class="isclasses" :dusk="slugTitle">
         <img class="OfferRow__image" :src="offer.image || './photos/image_blank.png'" />
         <div class="OfferRow__content">
             <div class="OfferRow__title">

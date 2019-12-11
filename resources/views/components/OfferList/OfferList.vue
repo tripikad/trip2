@@ -1,19 +1,20 @@
 <template>
     <div class="OfferList" :class="isclasses">
-        <!--Dotmap :largedots="filteredOffers.map(o => o.coordinates)" /-->
-        <div class="OfferList__filters">
-            <form-slider-multiple
-                isclasses="FormSliderMultiple--yellow"
-                :value="filterState.minPrice"
-                @input="price => (filterState.minPrice = price)"
-                :value2="filterState.maxPrice"
-                @input2="price => (filterState.maxPrice = price)"
-                :min="minPrice"
-                :max="maxPrice"
-                :step="1"
-                :suffix="suffix"
-            />
+        <Dotmap :largedots="filteredOffers.map(o => o.coordinates)" isclasses="Dotmap--center" />
 
+        <form-slider-multiple
+            isclasses="FormSliderMultiple--yellow"
+            :value="filterState.minPrice"
+            @input="price => (filterState.minPrice = price)"
+            :value2="filterState.maxPrice"
+            @input2="price => (filterState.maxPrice = price)"
+            :min="minPrice"
+            :max="maxPrice"
+            :step="step"
+            :suffix="suffix"
+        />
+
+        <div class="OfferList__filters">
             <form-buttons v-model="filterState.date" :items="dateOptions" isclasses="FormButtons--blue" />
 
             <div class="OfferList__filtersRow">
@@ -30,18 +31,23 @@
                 />
             </div>
             <div>
-                <a @click="resetFilterState">
+                <ButtonVue
+                    title="Näita kõiki reise"
+                    @click.native.prevent="resetFilterState"
+                    isclasses="Button--small Button--cyan Button--narrow"
+                />
+                <!-- <a @click="resetFilterState">
                     <div class="Button Button--small Button--cyan Button--narrow">
                         <div class="Button__title">Näita kõiki reise</div>
                     </div>
-                </a>
+                </a> -->
             </div>
         </div>
 
         <transition-group name="Fade" class="OfferList__offers">
             <OfferRow v-for="offer in filteredOffers" :key="offer.id" :offer="offer" :route="offer.route" />
         </transition-group>
-        <pre>{{ filterOptions }}</pre>
+
         <ButtonVue v-if="nextPageUrl" @click.native.prevent="getData" title="Gimme data" />
     </div>
 </template>
@@ -62,7 +68,8 @@ export default {
         filterState: toObject(filters.map(({ key, defaultState }) => [key, 0])),
         minPrice: 0,
         maxPrice: 0,
-        dateOptions: ['Kõik kuupäevad', ...formatSeasonRange(seasonRange(new Date()))]
+        dateOptions: ['Kõik kuupäevad', ...formatSeasonRange(seasonRange(new Date()))],
+        step: 50
     }),
     computed: {
         filterOptions() {
@@ -113,8 +120,7 @@ export default {
                 const round = 10
                 const prices = this.offers.map(o => parseFloat(o.price))
 
-                return [Math.min(...prices), Math.max(...prices)]
-                //.map(price => Math.ceil(price / round) * round)
+                return [Math.min(...prices), Math.max(...prices)].map(price => Math.ceil(price / this.step) * this.step)
             }
             return [0, 0]
         },

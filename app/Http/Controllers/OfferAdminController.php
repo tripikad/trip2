@@ -266,6 +266,11 @@ class OfferAdminController extends Controller
             'end_destinations' => 'required'
         ];
 
+        // Date::parse($this->start_at)->format('j. M Y');
+        // $rule['date'] = 'required|date_format:d.m.Y';
+        // Carbon::createFromFormat('d.m.Y', trim($o->to));
+        // use Jenssegers\Date\Date;
+
         $this->validate(request(), $rules);
 
         $status = request()->get('status') == 'on';

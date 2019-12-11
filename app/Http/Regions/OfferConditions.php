@@ -9,9 +9,11 @@ class OfferConditions
         return component('FlexGrid')
             ->withCols(2)
             ->withGap(4)
+            ->withDebug()
             ->withItems(
                 collect()
-                    ->push(
+                    ->pushWhen(
+                        $offer->data->included,
                         collect()
                             ->push(
                                 component('Title')
@@ -20,21 +22,30 @@ class OfferConditions
                             )
                             ->push(component('Body')->with('body', format_body($offer->data->included)))
                     )
-                    ->push(
+                    ->pushWhen(
+                        $offer->data->notincluded || $offer->data->extras,
                         collect()
-                            ->push(
+                            ->pushWhen(
+                                $offer->data->notincluded,
                                 component('Title')
                                     ->is('small')
                                     ->with('title', trans('offer.show.notincluded'))
                             )
-                            ->push(component('Body')->with('body', format_body($offer->data->notincluded)))
+                            ->pushWhen(
+                                $offer->data->notincluded,
+                                component('Body')->with('body', format_body($offer->data->notincluded))
+                            )
                             ->spacer(2)
-                            ->push(
+                            ->pushWhen(
+                                $offer->data->extras,
                                 component('Title')
                                     ->is('small')
                                     ->with('title', trans('offer.show.extras'))
                             )
-                            ->push(component('Body')->with('body', format_body($offer->data->extras)))
+                            ->pushWhen(
+                                $offer->data->extras,
+                                component('Body')->with('body', format_body($offer->data->extras))
+                            )
                     )
             );
     }

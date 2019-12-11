@@ -22,30 +22,30 @@ class OfferController extends Controller
             ->withTitle(trans('offer.index'))
             ->withItems(
                 collect()
-                    // ->push(
-                    //     component('Section')
-                    //         ->withPadding(2)
-                    //         ->withTag('header')
-                    //         ->withBackground('blue')
-                    //         ->withItems(collect()->push(region('NavbarLight')))
-                    // )
+                    ->push(
+                        component('Section')
+                            ->withPadding(2)
+                            ->withTag('header')
+                            ->withBackground('blue')
+                            ->withItems(collect()->push(region('NavbarLight')))
+                    )
                     ->push(
                         component('Section')
                             ->withBackground('blue')
-                            ->withPadding(10)
+                            ->withPadding(2)
                             ->withWidth(styles('tablet-width'))
                             ->withItems(
                                 collect()
-                                    // ->push(
-                                    //     component('Title')
-                                    //         ->is('large')
-                                    //         ->is('white')
-                                    //         ->is('center')
-                                    //         ->withTitle(trans('offer.index'))
-                                    // )
+                                    ->push(
+                                        component('Title')
+                                            ->is('large')
+                                            ->is('white')
+                                            ->is('center')
+                                            ->withTitle(trans('offer.index'))
+                                    )
                                     ->push(
                                         component('OfferList')
-                                            ->withHeight('200vh')
+                                            ->withHeight('100vh')
                                             ->withRoute(route('offer.index.json'))
                                             ->withSuffix(config('site.currency.eur'))
                                     )
@@ -135,6 +135,7 @@ class OfferController extends Controller
                                         component('Title')
                                             ->is('large')
                                             ->is('white')
+                                            ->is('center')
                                             ->with('title', $offer->title . ' ' . $offer->price_formatted)
                                     )
                                     ->push(region('OfferDuration', $offer))
@@ -170,7 +171,7 @@ class OfferController extends Controller
                                             ->is('responsive')
                                             ->with('body', format_body($offer->data->description))
                                     )
-                                    ->spacer(2)
+                                    ->spacerWhen($offer->data->description, 2)
                                     ->pushWhen(
                                         $offer->data->included || $offer->data->notincluded || $offer->data->extras,
                                         region('OfferConditions', $offer)
