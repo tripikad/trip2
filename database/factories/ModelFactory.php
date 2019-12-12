@@ -12,6 +12,7 @@
 */
 
 use Carbon\Carbon;
+
 use App\User;
 use App\Follow;
 use App\Comment;
@@ -20,7 +21,9 @@ use App\Message;
 use App\Destination;
 use App\Offer;
 
-$factory->define(User::class, function ($faker) {
+$factory->define(User::class, function () {
+    $faker = Faker\Factory::create();
+
     $name = $faker->name;
 
     return [
@@ -42,7 +45,9 @@ $factory->define(User::class, function ($faker) {
     ];
 });
 
-$factory->define(Message::class, function ($faker) {
+$factory->define(Message::class, function () {
+    $faker = Faker\Factory::create();
+
     return [
         'user_id_from' => 1,
         'user_id_to' => 2,
@@ -51,7 +56,9 @@ $factory->define(Message::class, function ($faker) {
     ];
 });
 
-$factory->define(Content::class, function ($faker) {
+$factory->define(Content::class, function () {
+    $faker = Faker\Factory::create();
+
     return [
         'user_id' => 1,
         'title' => $faker->sentence(),
@@ -61,7 +68,9 @@ $factory->define(Content::class, function ($faker) {
     ];
 });
 
-$factory->define(Comment::class, function ($faker) {
+$factory->define(Comment::class, function () {
+    $faker = Faker\Factory::create();
+
     return [
         'user_id' => 1,
         'content_id' => 1,
@@ -70,7 +79,9 @@ $factory->define(Comment::class, function ($faker) {
     ];
 });
 
-$factory->define(Follow::class, function ($faker) {
+$factory->define(Follow::class, function () {
+    $faker = Faker\Factory::create();
+
     return [
         'user_id' => 1,
         'followable_id' => 1,
@@ -78,14 +89,18 @@ $factory->define(Follow::class, function ($faker) {
     ];
 });
 
-$factory->define(Destination::class, function ($faker) {
+$factory->define(Destination::class, function () {
+    $faker = Faker\Factory::create();
+
     return [
         'name' => $faker->word(),
         'description' => $faker->paragraph()
     ];
 });
 
-$factory->define(Offer::class, function ($faker) {
+$factory->define(Offer::class, function () {
+    $faker = Faker\Factory::create();
+
     return [
         'status' => 1,
         'title' => $faker->sentence(3),
@@ -107,7 +122,9 @@ $factory->define(Offer::class, function ($faker) {
     ];
 });
 
-$factory->afterCreating(Offer::class, function ($row, $faker) {
+$factory->afterCreating(Offer::class, function ($row) {
+    $faker = Faker\Factory::create();
+
     $startDestination = factory(Destination::class)->create();
     $endDestination = factory(Destination::class)->create();
     $row->startDestinations()->attach([$startDestination->id => ['type' => 'start']]);
