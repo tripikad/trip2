@@ -3,7 +3,7 @@
 return [
     'accepted' => ':attribute peab olema lubatud.',
     'active_url' => ':attribute ei ole tõene.',
-    'after' => ':attribute peab olema hilhem kui :date.',
+    'after' => '":attribute" peab olema hiljem kui praegune hetk.',
     'alpha' => ':attribute võib koosneda ainult tähtedest.',
     'alpha_dash' => ':attribute võib koosneda ainult tähtedest, numbritest ja kriipsudest.',
     'alpha_num' => ':attribute võib koosneda ainult tähtedest ja numbritest.',
@@ -18,7 +18,7 @@ return [
     'boolean' => ':attribute väärtus peab olema true või false.',
     'confirmed' => '":attribute" välja kinnitus pole tõene.',
     'date' => ':attribute pole tõene kuupäev.',
-    'date_format' => ':attribute ei vasta formaadile: :format.',
+    'date_format' => '":attribute" ei ole korrektses kuupäevaformaadis.',
     'different' => ':attribute ja :other peavad olema erinevad.',
     'digits' => ':attribute peab olema :digits numbrit pikk.',
     'digits_between' => ':attribute peab olema vahemikus :min kuni :max numbrit pikk.',

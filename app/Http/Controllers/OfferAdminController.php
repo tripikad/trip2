@@ -111,7 +111,7 @@ class OfferAdminController extends Controller
                                                         Date::now()->format(config('offer.date.inputformat'))
                                                     )
                                                     ->with('name', 'start_at')
-                                                    ->with('value', '')
+                                                    ->with('value', old('start_at'))
                                             )
                                             ->push(
                                                 component('FormTextfield')
@@ -121,7 +121,7 @@ class OfferAdminController extends Controller
                                                         Date::now()->format(config('offer.date.inputformat'))
                                                     )
                                                     ->with('name', 'end_at')
-                                                    ->with('value', '')
+                                                    ->with('value', old('end_at'))
                                             )
                                     )
                                 )
@@ -272,9 +272,11 @@ class OfferAdminController extends Controller
             'title' => 'required',
             'start_destinations' => 'required',
             'end_destinations' => 'required',
-            'start_at' => 'date|after:now|date_format:' . config('offer.date.inputformat'),
-            'end_at' => 'date|after:now|date_format:' . config('offer.date.inputformat')
+            'start_at' => 'required|after:now|date_format:' . config('offer.date.inputformat'),
+            'end_at' => 'required|after:now|date_format:' . config('offer.date.inputformat')
         ];
+
+        // date|after:now|
 
         // Date::parse($this->start_at)->format('j. M Y');
         // $rule['date'] = 'required|date_format:d.m.Y';
