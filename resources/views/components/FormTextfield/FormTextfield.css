@@ -49,8 +49,8 @@
 }
 
 .FormTextfield--large .FormTextfield__input {
-    font: $font-heading-md;
-    padding: $padding-sm;
+    font: $font-heading-lg;
+    padding: $padding-md $padding-smeb;
 }
 
 .FormTextfield[disabled] {

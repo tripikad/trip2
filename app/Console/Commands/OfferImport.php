@@ -51,6 +51,7 @@ class OfferImport extends Command
                     'guide' => $o->guide,
                     'size' => $o->people,
                     'description' => $o->description,
+                    'url' => $o->url,
                     'accommodation' => $o->accommodation
                         ? '- ' . collect(explode(',', $o->accommodation))->implode("\n- ")
                         : '',

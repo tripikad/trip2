@@ -19,7 +19,7 @@ class BookingController extends Controller
 
         $rules = [
             'phone' => ['required', new Phone()],
-            'email' => 'email'
+            'email' => 'required|email'
         ];
 
         $this->validate(request(), $rules);
@@ -48,5 +48,14 @@ class BookingController extends Controller
         return redirect()
             ->route('offer.index')
             ->with('info', 'The booking was sent');
+    }
+
+    public function goto($id)
+    {
+        $offer = Offer::findOrFail($id);
+        if ($offer->data->url) {
+            return redirect()->to($offer->data->url);
+        }
+        return redirect()->back();
     }
 }

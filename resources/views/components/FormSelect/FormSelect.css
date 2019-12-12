@@ -34,9 +34,12 @@
     font: $font-text-sm !important;
     border: 2px solid $gray-light !important;
     border-radius: $border-radius-md !important;
-    padding: 13px 40px 8px 14px !important;
+    padding: 11px 40px 4px 14px !important;
 }
-
+.multiselect__input {
+    ppadding: 4px 0 0 8px !important;
+    font: $font-text-md !important;
+}
 .FormSelect--blue .multiselect__tags {
     background: $blue !important;
     border: 2px solid $white !important;
@@ -76,6 +79,9 @@
     border: 2px solid $gray-light !important;
 }
 
+.multiselect__element span {
+    color: $gray-dark !important;
+}
 .FormSelect--blue .multiselect__content {
     border: 2px solid $white !important;
     border-top: none !important;

@@ -7,7 +7,7 @@ class OfferMap
     public function render($offer)
     {
         return component('Dotmap')
-            ->withHeight(spacer(20))
+            ->withHeight(30)
             ->withDestinationFacts(config('destination_facts'))
             ->withLines([
                 $offer->startDestinations

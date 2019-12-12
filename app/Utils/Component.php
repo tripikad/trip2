@@ -118,9 +118,11 @@ class Component
             return '<div style="min-height:' .
                 'var(--' .
                 $vueComponent .
-                '--height, ' .
-                spacer($this->with->get('height')) .
-                ')">' .
+                '--height, calc(' .
+                styles('spacer') .
+                ' * ' .
+                $this->with->get('height') .
+                '))">' .
                 $component .
                 '</div>';
         }

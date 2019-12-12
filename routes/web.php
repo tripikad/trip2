@@ -528,7 +528,6 @@ Route::put('company/{id}/update', 'CompanyController@update')
 
 // Offers
 
-Route::get('offer2', 'OfferController@index2')->name('offer.index2');
 Route::get('offer', 'OfferController@index')->name('offer.index');
 
 Route::get('offer/json', 'OfferController@indexJson')->name('offer.index.json');
@@ -546,11 +545,22 @@ Route::post('offer/admin/store', 'OfferAdminController@store')
     ->name('offer.admin.store')
     ->middleware('company');
 
+Route::get('offer/{id}/edit', 'OfferAdminController@edit')
+    ->name('offer.admin.edit')
+    ->middleware('company');
+
+Route::put('offer/{id}/update', 'OfferAdminController@update')
+    ->name('offer.admin.update')
+    ->middleware('company');
+
 // Bookings
 
 Route::post('booking/{id}', 'BookingController@create')
+    // @LAUNCH remove this control
     ->middleware('role:superuser')
     ->name('booking.create');
+
+Route::get('booking/{id}/goto', 'BookingController@goto')->name('booking.goto');
 
 // Legacy user paths
 

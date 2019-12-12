@@ -22,7 +22,7 @@ return [
     'different' => ':attribute ja :other peavad olema erinevad.',
     'digits' => ':attribute peab olema :digits numbrit pikk.',
     'digits_between' => ':attribute peab olema vahemikus :min kuni :max numbrit pikk.',
-    'email' => ':attribute peab olema tõene e-posti aadress.',
+    'email' => '":attribute" peab olema korrektne E-maili aadress.',
     'filled' => ':attribute on kohustuslik väli.',
     'exists' => 'Valitud :attribute ei ole tõene.',
     'image' => ':attribute peab olema pilt.',
@@ -60,7 +60,7 @@ return [
     ],
     'timezone' => ':attribute peab olema kehtivas vööndis.',
     'unique' => ':attribute on juba eelnevalt kasutusel.',
-    'url' => ':attribute formaat pole lubatud.',
+    'url' => ':attribute link pole korrektne.',
 
     'honeypot' => 'Midagi läks väga-väga valesti',
     'honeytime' => 'Midagi läks valesti, proovi mõne sekundi pärast uuesti',
@@ -77,6 +77,9 @@ return [
         'end_at' => 'Reisi lõppkuupäev',
         'price' => 'Hind',
         'hotel_name.0' => 'Hotelli nimi 1',
-        'hotel_price.0' => 'Hotelli hind 1'
+        'hotel_price.0' => 'Hotelli hind 1',
+        'url' => 'Link',
+        'phone' => 'Telefon',
+        'email' => 'E-mail'
     ]
 ];

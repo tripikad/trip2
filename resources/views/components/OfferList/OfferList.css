@@ -1,5 +1,5 @@
 .OfferList__filters {
-    margin: $margin-md 0 $margin-lg 0;
+    margin: $margin-md 0 $margin-md 0;
     display: flex;
     display: block ?if $tablet;
     flex-direction: column;

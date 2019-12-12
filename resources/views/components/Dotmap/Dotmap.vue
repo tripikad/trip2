@@ -143,9 +143,10 @@ export default {
             return this.projection([0, lat])[1]
         },
         setSize() {
+            // @TODO2 Remove this hack
             if (window.innerWidth > this.tabletBreakpoint) {
                 this.currentWidth = this.width
-                setCssVariable('--Dotmap--height', this.height)
+                setCssVariable('--Dotmap--height', `calc(${this.$styles['spacer']} * 30`)
             } else {
                 this.currentWidth = this.mobileWidth
                 setCssVariable('--Dotmap--height', 'auto')

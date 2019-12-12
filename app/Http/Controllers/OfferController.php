@@ -88,6 +88,11 @@ class OfferController extends Controller
         $email = $user ? $user->email : '';
         $name = $user && $user->real_name ? $user->real_name : '';
 
+        $isPackage = $offer->style == 'package';
+
+        $hasContent =
+            $offer->data->description || $offer->data->included || $offer->data->notincluded || $offer->data->extras;
+
         return layout('Full')
             ->withHeadRobots('noindex')
             ->withTitle($offer->title)
@@ -95,7 +100,7 @@ class OfferController extends Controller
                 collect()
                     ->pushWhen(
                         $offer->status == 0,
-                        component('HeaderUnpublished')->with('title', trans('offer.show.unpublished'))
+                        component('HeaderUnpublished')->withTitle(trans('offer.show.unpublished'))
                     )
                     ->push(
                         component('Section')
@@ -115,8 +120,8 @@ class OfferController extends Controller
                                     ->push(
                                         component('Link')
                                             ->is('white')
-                                            ->with('title', 'Kõik reisipakkumised')
-                                            ->with('route', route('offer.index'))
+                                            ->withTitle('Kõik reisipakkumised')
+                                            ->withRoute(route('offer.index'))
                                     )
                                     ->push(region('OfferMap', $offer))
                                     ->push(
@@ -126,7 +131,7 @@ class OfferController extends Controller
                                                 return component('Tag')
                                                     ->is('large')
                                                     ->is('white')
-                                                    ->with('title', $destination->name);
+                                                    ->withTitle($destination->name);
                                             })
                                         )
                                     )
@@ -136,35 +141,52 @@ class OfferController extends Controller
                                             ->is('large')
                                             ->is('white')
                                             ->is('center')
-                                            ->with('title', $offer->title . ' ' . $offer->price_formatted)
+                                            ->withTitle($offer->title . ' ' . $offer->price_formatted)
                                     )
                                     ->push(region('OfferDuration', $offer))
                                     ->spacer()
                                     ->push(region('OfferDetails', $offer))
-                                    ->spacer()
+                                    ->spacer(2)
                                     ->pushWhen(
-                                        $user && $user->hasRole('superuser'),
+                                        // @LAUNCH Remove user control
+                                        $isPackage && $user && $user->hasRole('superuser'),
                                         component('Button')
                                             ->is('orange')
                                             ->is('large')
-                                            ->with('title', trans('offer.show.book'))
-                                            ->with('route', route('offer.show', [$id]) . '#book')
+                                            ->withTitle(trans('offer.show.book'))
+                                            ->withRoute(route('offer.show', [$id]) . '#book')
                                     )
-                                    ->spacer(2)
+                                    ->spacerWhen($isPackage && $offer->data->url, 1)
+                                    ->pushWhen(
+                                        $isPackage && $offer->data->url,
+                                        component('Button')
+                                            ->is('blue')
+                                            ->withExternal(true)
+                                            ->withTitle(trans('offer.show.goto'))
+                                            ->withRoute(route('booking.goto', [$id]))
+                                    )
+                                    ->pushWhen(
+                                        !$isPackage && $offer->data->url,
+                                        component('Button')
+                                            ->is('orange')
+                                            ->is('large')
+                                            ->withExternal(true)
+                                            ->withTitle(trans('offer.show.goto'))
+                                            ->withRoute(route('booking.goto', [$id]))
+                                    )
+                                    ->spacer(3)
                             )
                     )
                     ->push(region('PhotoSection', $photos))
                     ->pushWhen(
-                        $offer->data->description ||
-                            $offer->data->included ||
-                            $offer->data->notincluded ||
-                            $offer->data->extras,
+                        $hasContent,
                         component('Section')
                             ->withDimmed($offer->status == 0)
-                            ->withPadding(4)
+                            ->withPadding(2)
                             ->withGap(1)
                             ->withItems(
                                 collect()
+                                    ->spacer(2)
                                     ->pushWhen(
                                         $offer->data->description,
                                         component('Body')
@@ -178,9 +200,11 @@ class OfferController extends Controller
                                     )
                             )
                     )
-                    ->push('<a id="book"></a>')
+
+                    ->pushWhen($isPackage, '<a id="book"></a>')
                     ->pushWhen(
-                        $user && $user->hasRole('superuser'),
+                        // @LAUNCH remove user control
+                        $isPackage && $user && $user->hasRole('superuser'),
                         component('Section')
                             ->withDimmed($offer->status == 0)
                             ->withPadding(2)
@@ -192,12 +216,13 @@ class OfferController extends Controller
                                     ->push(
                                         component('Title')
                                             ->is('white')
-                                            ->withTitle(trans('offer.show.book'))
+                                            ->withTitle(trans('offer.show.book.title'))
                                     )
                             )
                     )
                     ->pushWhen(
-                        $user && $user->hasRole('superuser'),
+                        // @LAUNCH remove user control
+                        $isPackage && $user && $user->hasRole('superuser'),
                         component('Section')
                             ->withDimmed($offer->status == 0)
                             ->withWidth(styles('mobile-large-width'))
@@ -205,6 +230,21 @@ class OfferController extends Controller
                             ->withInnerBackground('white')
                             ->withInnerPadding(2)
                             ->withItems(region('OfferBooking', $id, $name, $email))
+                    )
+                    ->pushWhen(
+                        $hasContent && !$isPackage,
+                        component('Section')
+                            ->withDimmed($offer->status == 0)
+                            ->withAlign('center')
+                            ->withPadding(3)
+                            ->withItems(
+                                component('Button')
+                                    ->is('orange')
+                                    ->is('large')
+                                    ->withExternal(true)
+                                    ->withTitle(trans('offer.show.goto'))
+                                    ->withRoute(route('booking.goto', [$id]))
+                            )
                     )
                     ->push(
                         component('Section')
