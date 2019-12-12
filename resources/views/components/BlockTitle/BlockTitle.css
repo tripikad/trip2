@@ -7,6 +7,7 @@
     color: $green;
     font: $font-heading-xs;
     text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
 
 a .BlockTitle__title:hover {
@@ -31,4 +32,12 @@ a .BlockTitle__title:hover {
 
 .BlockTitle--cyan a .BlockTitle__title:hover {
     color: $cyan-hover;
+}
+
+.BlockTitle--white .BlockTitle__title {
+    color: $white;
+}
+
+.BlockTitle--white a .BlockTitle__title:hover {
+    opacity: $opacity-lg;
 }
