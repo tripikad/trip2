@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Carbon\Carbon;
+use Jenssegers\Date\Date;
 
 use App\Content;
 use App\Offer;
@@ -106,12 +106,20 @@ class OfferAdminController extends Controller
                                             ->push(
                                                 component('FormTextfield')
                                                     ->with('title', trans('offer.admin.edit.start_at'))
+                                                    ->with(
+                                                        'placeholder',
+                                                        Date::now()->format(config('offer.date.inputformat'))
+                                                    )
                                                     ->with('name', 'start_at')
                                                     ->with('value', '')
                                             )
                                             ->push(
                                                 component('FormTextfield')
                                                     ->with('title', trans('offer.admin.edit.end_at'))
+                                                    ->with(
+                                                        'placeholder',
+                                                        Date::now()->format(config('offer.date.inputformat'))
+                                                    )
                                                     ->with('name', 'end_at')
                                                     ->with('value', '')
                                             )
@@ -263,7 +271,9 @@ class OfferAdminController extends Controller
         $rules = [
             'title' => 'required',
             'start_destinations' => 'required',
-            'end_destinations' => 'required'
+            'end_destinations' => 'required',
+            'start_at' => 'date|after:now|date_format:' . config('offer.date.inputformat'),
+            'end_at' => 'date|after:now|date_format:' . config('offer.date.inputformat')
         ];
 
         // Date::parse($this->start_at)->format('j. M Y');
@@ -289,8 +299,8 @@ class OfferAdminController extends Controller
             'status' => $status,
             'title' => request()->get('title'),
             'style' => request()->get('style'),
-            'start_at' => Carbon::now()->addMonths(2),
-            'end_at' => Carbon::now()->addMonths(3),
+            'start_at' => Date::createFromFormat(config('offer.date.inputformat'), request()->start_at),
+            'end_at' => Date::createFromFormat(config('offer.date.inputformat'), request()->end_at),
             'data' => [
                 'price' => request()->get('price'),
                 'guide' => request()->get('guide'),

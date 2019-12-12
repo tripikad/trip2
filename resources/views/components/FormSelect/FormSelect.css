@@ -35,7 +35,8 @@
     border: 1px solid $orange !important;
     border-radius: $border-radius-lg !important;
     color: $orange !important;
-    padding: 1px 22px 0 10px !important;
+    padding: 0 22px 0 10px !important;
+    margin-bottom: 3px !important;
 }
 
 .multiselect__tag span {

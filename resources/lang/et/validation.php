@@ -3,7 +3,7 @@
 return [
     'accepted' => ':attribute peab olema lubatud.',
     'active_url' => ':attribute ei ole tõene.',
-    'after' => ':attribute peab olema vähemalt kuupäevaga pärast :date.',
+    'after' => ':attribute peab olema hilhem kui :date.',
     'alpha' => ':attribute võib koosneda ainult tähtedest.',
     'alpha_dash' => ':attribute võib koosneda ainult tähtedest, numbritest ja kriipsudest.',
     'alpha_num' => ':attribute võib koosneda ainult tähtedest ja numbritest.',
@@ -73,6 +73,8 @@ return [
         'title' => 'Pealkiri',
         'start_destinations' => 'Reisi alguskoht',
         'end_destinations' => 'Reisi sihtkohad',
+        'start_at' => 'Reisi alguskuupäev',
+        'end_at' => 'Reisi lõppkuupäev',
         'price' => 'Hind'
     ]
 ];
