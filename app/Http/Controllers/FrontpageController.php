@@ -185,7 +185,15 @@ class FrontpageController extends Controller
                     ->push(component('Promo')->with('promo', 'footer'))
             )
 
-            ->with('footer', region('Footer'))
+            ->with(
+                'footer',
+                collect()
+                    // @LAUNCH remove this check
+                    ->mergeWhen($loggedUser->hasRole('superuser'), region('FrontpageOfferSection'))
+                    ->push(region('Footer'))
+                    ->render()
+                    ->implode('')
+            )
 
             ->render();
     }

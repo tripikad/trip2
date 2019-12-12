@@ -76,11 +76,11 @@ class AppServiceProvider extends ServiceProvider
         });
 
         Collection::macro('mergeWhen', function ($condition, $items) {
+            $merged = $this;
             if ($condition) {
-                $this->merge($items);
+                $merged = $this->merge($items);
             }
-
-            return $this;
+            return $merged;
         });
 
         Collection::macro('spacer', function ($value = 1) {

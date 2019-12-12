@@ -32,5 +32,9 @@ return [
 
     'index.about.title' => 'Loe täpsemalt, mis on Trip.ee',
     'index.about.register' => 'Liitu Trip.ee-ga',
-    'index.about.login' => 'Logi sisse'
+    'index.about.login' => 'Logi sisse',
+
+    'index.offer.title' => 'Reisipakkumised',
+    'index.offer.about' => 'Tripi sõprade poolt pakutavad reisid, seiklustest rannapuhkuseni',
+    'index.offer.button' => 'Vaata kõiki reisipakkumisi'
 ];

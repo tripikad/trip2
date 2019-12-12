@@ -102,7 +102,7 @@ class Offer extends Model
 
     public function getStartAtFormattedAttribute()
     {
-        return Date::parse($this->start_at)->format('j. M Y');
+        return Date::parse($this->start_at)->format('j. M');
     }
 
     public function getEndAtFormattedAttribute()

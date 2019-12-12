@@ -4,6 +4,7 @@
             <a v-for="(link, index) in links" :key="index" :href="link.route">
                 <div @clickaway="submenuOpen = false" class="NavbarDesktop__link">
                     {{ link.title }}
+                    <div v-if="link.new" class="NavbarDesktop__linkBadge">{{ link.new }}</div>
                 </div>
             </a>
 
