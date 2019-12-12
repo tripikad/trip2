@@ -170,6 +170,11 @@
     color: $gray;
 }
 
+.Body--red,
+.Body--red * {
+    color: $red;
+}
+
 .Body--semitransparent,
 .Body--semitransparent * {
     opacity: $opacity-lg;

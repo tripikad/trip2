@@ -1,6 +1,5 @@
-.FormTextfield__header {
+.FormTextarea__header {
     display: flex;
-    justify-content: space-between;
 }
 
 .FormTextarea__label {
@@ -15,7 +14,7 @@
     color: $gray-light;
     font: $font-heading-sm;
     line-height: $line-height-md;
-    margin-left: $margin-sm;
+    margin-left: $margin-xs;
     margin-bottom: $margin-sm;
 }
 

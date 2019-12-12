@@ -75,6 +75,8 @@ return [
         'end_destinations' => 'Reisi sihtkohad',
         'start_at' => 'Reisi alguskuupäev',
         'end_at' => 'Reisi lõppkuupäev',
-        'price' => 'Hind'
+        'price' => 'Hind',
+        'hotel_name.0' => 'Hotelli nimi 1',
+        'hotel_price.0' => 'Hotelli hind 1'
     ]
 ];

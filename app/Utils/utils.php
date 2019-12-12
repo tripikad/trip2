@@ -222,3 +222,21 @@ function items($items = null)
 
     return collect([$items]);
 }
+
+function string2int($string)
+{
+    return intval(preg_replace('/[^0-9]/', '', $string));
+}
+
+function errorKeys()
+{
+    if (session()->get('errors')) {
+        return collect(
+            session()
+                ->get('errors')
+                ->getBag('default')
+                ->messages()
+        )->keys();
+    }
+    return null;
+}
