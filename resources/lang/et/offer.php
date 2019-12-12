@@ -3,9 +3,9 @@
 return [
     'index' => 'Reisipakkumised',
     'show.back' => 'Kõik reisipakkumised',
-    'show.book' => 'Broneeri reis ↓',
+    'show.book' => 'Broneeri reis Tripis ↓',
     'show.book.title' => 'Broneeri reis',
-    'show.goto' => 'Vaata lähemalt reisi koduleheküljelt →',
+    'show.goto' => 'Vaata ja broneeri reisi koduleheküljel →',
     'show.unpublished' => 'See reisipakkumine pole avalikustatud',
     'show.included' => 'Hinna sees',
     'show.notincluded' => 'Hind ei sisalda',

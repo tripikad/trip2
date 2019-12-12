@@ -8,6 +8,8 @@ class Footer
 {
     protected function prepareCol1Links()
     {
+        $user = request()->user();
+
         return collect()
             ->push([
                 'title' => trans('menu.footer.flights'),
@@ -20,6 +22,11 @@ class Footer
             ->push([
                 'title' => trans('menu.footer.news'),
                 'route' => route('news.index')
+            ])
+            // @LAUNCH remove this check
+            ->pushWhen($user && $user->hasRole('superuser'), [
+                'title' => trans('menu.footer.offer'),
+                'route' => route('offer.index')
             ])
             ->push([
                 'title' => trans('menu.footer.blogs'),

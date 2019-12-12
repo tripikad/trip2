@@ -21,7 +21,7 @@
 }
 
 .NavbarDesktop__linkBadge {
-    background: $cyan;
+    background: $blue-hover;
     color: $white;
     padding: 0 $padding-xs;
     font: $font-text-xs;

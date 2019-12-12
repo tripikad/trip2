@@ -65,7 +65,7 @@ export default {
         minPrice: 0,
         maxPrice: 0,
         dateOptions: ['Kõik kuupäevad', ...formatSeasonRange(seasonRange(new Date()))],
-        step: 50
+        step: 100
     }),
     computed: {
         filterOptions() {

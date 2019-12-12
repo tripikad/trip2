@@ -188,8 +188,7 @@ class FrontpageController extends Controller
             ->with(
                 'footer',
                 collect()
-                    // @LAUNCH remove this check
-                    ->mergeWhen($loggedUser->hasRole('superuser'), region('FrontpageOfferSection'))
+                    ->push(region('FrontpageOfferSection'))
                     ->push(region('Footer'))
                     ->render()
                     ->implode('')

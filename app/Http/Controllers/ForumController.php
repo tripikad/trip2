@@ -293,7 +293,14 @@ class ForumController extends Controller
                     ->push(component('Promo')->with('promo', 'footer'))
             )
 
-            ->with('footer', region('FooterLight'))
+            ->with(
+                'footer',
+                collect()
+                    ->push(region('OfferSection'))
+                    ->push(region('FooterLight'))
+                    ->render()
+                    ->implode('')
+            )
 
             ->render();
     }

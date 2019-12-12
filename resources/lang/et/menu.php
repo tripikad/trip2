@@ -25,7 +25,7 @@ return [
 
     'footer.news' => 'Uudised',
     'footer.flights' => 'Lennupakkumised',
-    'footer.offers' => 'Pakkumised',
+    'footer.offer' => 'Reisipakkumised',
     'footer.travelmates' => 'Reisikaaslased',
     'footer.blogs' => 'Reisiblogid',
     'footer.photos' => 'Reisipildid',
