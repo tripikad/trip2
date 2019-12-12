@@ -112,12 +112,14 @@ class Component
             $props .
             ' ></component></transition>';
 
-        if ($this->with->has('height')) {
+        $height = $this->with->get('height');
+
+        if ($height) {
             return '<div style="min-height:' .
                 'var(--' .
                 $vueComponent .
                 '--height, ' .
-                $this->with->get('height') .
+                spacer($this->with->get('height')) .
                 ')">' .
                 $component .
                 '</div>';

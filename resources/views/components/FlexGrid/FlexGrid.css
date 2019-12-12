@@ -1,12 +1,22 @@
 .FlexGrid__row {
     display: flex;
     display: block ?if $tablet;
+    margin-bottom: $margin-sm;
+    margin-bottom: var(--gap);
+}
+
+.FlexGrid__row:last-child {
+    margin-bottom: 0;
 }
 
 .FlexGrid__item {
+    margin-right: $margin-sm;
+    margin-right: var(--gap);
+    margin-right: 0 ?if $tablet;
     margin-bottom: $margin-sm ?if $tablet;
+    margin-bottom: var(--gap) ?if $tablet;
 }
 
 .FlexGrid__item:last-child {
-    margin-bottom: 0;
+    margin-right: 0;
 }

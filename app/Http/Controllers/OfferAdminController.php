@@ -72,6 +72,7 @@ class OfferAdminController extends Controller
                                                 ->push(
                                                     component('FormTextfield')
                                                         ->withTitle(trans('offer.admin.edit.title'))
+                                                        ->withDescription(trans('site.required'))
                                                         ->withName('title')
                                                         ->withValue(old('title'))
                                                 )
@@ -86,27 +87,22 @@ class OfferAdminController extends Controller
                                         )
                                 )
                                 ->push(
-                                    component('FlexGrid')
-                                        ->withGap(1)
-                                        ->withItems(
-                                            collect()
-                                                ->push(
-                                                    component('FormSelectMultiple')
-                                                        ->with('height', 12)
-                                                        ->withTitle(trans('offer.admin.edit.start_destinations'))
-                                                        ->withName('start_destinations[]')
-                                                        ->with('options', $destinations)
-                                                        ->with('max', 1)
-                                                        ->withValue($startDestination ? [$startDestination->id] : [])
-                                                )
-                                                ->push(
-                                                    component('FormSelectMultiple')
-                                                        ->with('height', 12)
-                                                        ->withTitle(trans('offer.admin.edit.end_destinations'))
-                                                        ->withName('end_destinations[]')
-                                                        ->with('options', $destinations)
-                                                )
-                                        )
+                                    component('FormSelectMultiple')
+                                        ->with('height', 7)
+                                        ->withTitle(trans('offer.admin.edit.start_destinations'))
+                                        ->withDescription(trans('site.required'))
+                                        ->withName('start_destinations[]')
+                                        ->with('options', $destinations)
+                                        ->with('max', 1)
+                                        ->withValue($startDestination ? [$startDestination->id] : [])
+                                )
+                                ->push(
+                                    component('FormSelectMultiple')
+                                        ->with('height', 7)
+                                        ->withTitle(trans('offer.admin.edit.end_destinations'))
+                                        ->withDescription(trans('site.required'))
+                                        ->withName('end_destinations[]')
+                                        ->with('options', $destinations)
                                 )
                                 ->push(
                                     component('FlexGrid')
@@ -116,6 +112,7 @@ class OfferAdminController extends Controller
                                                 ->push(
                                                     component('FormTextfield')
                                                         ->withTitle(trans('offer.admin.edit.start_at'))
+                                                        ->withDescription(trans('site.required'))
                                                         ->with(
                                                             'placeholder',
                                                             Date::now()->format(config('offer.date.inputformat'))
@@ -126,6 +123,7 @@ class OfferAdminController extends Controller
                                                 ->push(
                                                     component('FormTextfield')
                                                         ->withTitle(trans('offer.admin.edit.end_at'))
+                                                        ->withDescription(trans('site.required'))
                                                         ->with(
                                                             'placeholder',
                                                             Date::now()->format(config('offer.date.inputformat'))
@@ -184,7 +182,7 @@ class OfferAdminController extends Controller
                                         ->withTitle(trans('offer.admin.edit.flights'))
                                 )
                                 ->push(
-                                    component('FormCheckbox')
+                                    component(!$isPackage ? 'FormHidden' : 'FormCheckbox')
                                         ->withName('transfer')
                                         ->withTitle(trans('offer.admin.edit.transfer'))
                                 )
@@ -274,7 +272,7 @@ class OfferAdminController extends Controller
                                 ->push(
                                     component('FormButton')
                                         ->is('large')
-                                        ->is('orange')
+                                        ->is('wide')
                                         ->withTitle(trans("offer.admin.create.style.$style"))
                                 )
                         )

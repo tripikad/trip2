@@ -45,7 +45,7 @@ class OfferController extends Controller
                                     )
                                     ->push(
                                         component('OfferList')
-                                            ->withHeight('100vh')
+                                            ->withHeight(100)
                                             ->withRoute(route('offer.index.json'))
                                             ->withSuffix(config('site.currency.eur'))
                                     )

@@ -12,14 +12,14 @@ $gap_value = isset($gap) ? spacer($gap) : '0';
 
     @foreach (collect($items)->chunk($cols) as $row)
 
-        <div class="FlexGrid__row" style="marginBottom: {{ $loop->last ? '' : $gap_value }}">
+        <div class="FlexGrid__row">
 
             @foreach ($row->values() as $colIndex => $item)
 
                 <div class="FlexGrid__item" style="
                     flex: {{ $widths[$colIndex] }};
-                    marginRight: {{ $loop->last ? '' : $gap_value }};
                     border: {{ $border }};
+                    --gap: {{ $gap_value }}
                 ">
 
                 @foreach (items($item) as $collection_item)

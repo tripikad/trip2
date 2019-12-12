@@ -19,7 +19,7 @@ class Header
                         component('Icon')
                             ->with('icon', 'tripee_logo')
                             ->with('width', 200)
-                            ->with('height', 150)
+                            ->with('height', 12.5)
                     )
                     ->with('navbar_desktop', region('NavbarDesktop', 'white'))
                     ->with('navbar_mobile', region('NavbarMobile', 'white'))

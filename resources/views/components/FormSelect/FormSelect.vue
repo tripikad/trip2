@@ -1,6 +1,9 @@
 <template>
     <div class="FormSelect" :class="{ 'FormSelect--error': isError, [isclasses]: true }">
-        <label v-if="title" :for="name" class="FormSelect__label">{{ title }}</label>
+        <div class="FormSelect__header">
+            <label v-if="title" :for="name" class="FormSelect__label">{{ title }}</label>
+            <div v-if="description" class="FormSelect__description">{{ description }}</div>
+        </div>
 
         <component
             :is="'Multiselect'"
@@ -27,6 +30,7 @@ export default {
         isclasses: { default: '' },
         errors: { default: () => [] },
         title: { default: '' },
+        description: { default: '' },
         name: { default: '' },
         options: { default: '' },
         placeholder: { default: '' },
