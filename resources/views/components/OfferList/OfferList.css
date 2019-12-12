@@ -26,5 +26,5 @@
 }
 
 .OfferList__offers > * {
-    margin-bottom: $margin-md;
+    margin-bottom: $margin-lg;
 }

@@ -282,7 +282,12 @@ class OfferAdminController extends Controller
                                                 ->flatten()
                                         )
                                 )
-
+                                ->pushWhen(
+                                    request()->has('redirect'),
+                                    component('FormHidden')
+                                        ->with('name', 'redirect')
+                                        ->with('value', request()->redirect)
+                                )
                                 ->push(
                                     component('FormButton')
                                         ->is('large')
@@ -615,7 +620,12 @@ class OfferAdminController extends Controller
                                                 ->flatten()
                                         )
                                 )
-
+                                ->pushWhen(
+                                    request()->has('redirect'),
+                                    component('FormHidden')
+                                        ->with('name', 'redirect')
+                                        ->with('value', request()->redirect)
+                                )
                                 ->push(
                                     component('FormButton')
                                         ->is('large')
@@ -702,7 +712,7 @@ class OfferAdminController extends Controller
         ]);
 
         return redirect()
-            ->route('company.index')
+            ->route(request()->has('redirect') ? request()->redirect : 'company.index')
             ->with(
                 'info',
                 trans('offer.admin.store.info', [
@@ -786,7 +796,7 @@ class OfferAdminController extends Controller
         ]);
 
         return redirect()
-            ->route('company.index')
+            ->route(request()->has('redirect') ? request()->redirect : 'company.index')
             ->with(
                 'info',
                 trans('offer.admin.update.info', [

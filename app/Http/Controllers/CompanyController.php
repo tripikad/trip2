@@ -101,7 +101,6 @@ class CompanyController extends Controller
                                     )
                                     ->push(
                                         component('Button')
-                                            ->is('orange')
                                             ->is('narrow')
                                             ->with('title', trans('company.create'))
                                             ->with(
@@ -151,6 +150,7 @@ class CompanyController extends Controller
         $loggedUser = request()->user();
 
         return layout('Full')
+            // @LAUNCH Remove
             ->withHeadRobots('noindex')
             ->withTransparency(true)
             ->withTitle(trans('offer.index'))
@@ -266,7 +266,6 @@ class CompanyController extends Controller
                                                 component('FormButton')
                                                     ->is('wide')
                                                     ->is('large')
-                                                    ->is('orange')
                                                     ->with('title', trans('company.create.submit'))
                                             )
                                     )
@@ -464,7 +463,6 @@ class CompanyController extends Controller
                                                 component('FormButton')
                                                     ->is('wide')
                                                     ->is('large')
-                                                    ->is('orange')
                                                     ->with('title', trans('company.edit.submit'))
                                             )
                                     )

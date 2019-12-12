@@ -21,7 +21,6 @@ class CompanyOffers
                         )
                         ->push(
                             component('Button')
-                                ->is('orange')
                                 ->is('narrow')
                                 ->is('small')
                                 ->with('title', trans('offer.admin.edit'))

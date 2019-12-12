@@ -14,7 +14,6 @@ class CompanyOffersButtons
                     ->map(function ($style) {
                         return component('Button')
                             ->is('large')
-                            ->is('orange')
                             ->with('title', trans("offer.admin.create.style.$style"))
                             ->with('route', route('offer.admin.create', [$style]));
                     })

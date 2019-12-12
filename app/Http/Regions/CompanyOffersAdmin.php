@@ -21,10 +21,13 @@ class CompanyOffersAdmin
                         )
                         ->push(
                             component('Button')
-                                ->is('orange')
                                 ->is('narrow')
                                 ->is('small')
-                                ->with('title', 'Muuda')
+                                ->with('title', trans('offer.admin.edit'))
+                                ->with(
+                                    'route',
+                                    route('offer.admin.edit', [$offer, 'redirect' => 'company.admin.index'])
+                                )
                         );
                 })
             );

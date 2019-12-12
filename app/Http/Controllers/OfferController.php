@@ -143,6 +143,17 @@ class OfferController extends Controller
                                             ->is('center')
                                             ->withTitle($offer->title . ' ' . $offer->price_formatted)
                                     )
+                                    ->pushWhen(
+                                        $user->hasRoleOrOwner('superuser', $offer),
+                                        component('Button')
+                                            ->is('narrow')
+                                            ->is('small')
+                                            ->with('title', trans('offer.admin.edit'))
+                                            ->with(
+                                                'route',
+                                                route('offer.admin.edit', [$offer, 'redirect' => 'offer.index'])
+                                            )
+                                    )
                                     ->push(region('OfferDuration', $offer))
                                     ->spacer()
                                     ->push(region('OfferDetails', $offer))
