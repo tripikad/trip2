@@ -22,11 +22,7 @@ class OfferImport extends Command
 
     public function handle()
     {
-        // @LAUNCH
-        // if (env('OFFER_ENABLED')) {
-        //     $this->info("\nOffers are live, they can longer imported");
-        //     die();
-        // }
+        // @LAUNCH Remove
 
         if ($this->confirm('This command imports new offers. Do you want to continue?')) {
             $sheet_id = '1TLEDlvDC_06gy75IhNAyXaUjt-9oOT2XOqW2LEpycHE';
@@ -73,20 +69,32 @@ class OfferImport extends Command
                             [
                                 'name' => $o->hotel,
                                 'type' => $o->hoteltype,
-                                'rating' => $o->hotelrating,
+                                'rating' => intval(only_numbers($o->hotelrating)),
                                 'price' => $o->style == 'package' ? $o->hotelprice : ''
                             ],
-                            // [
-                            //     'name' => $o->hotel . ' Economy',
-                            //     'type' => $o->hoteltype,
-                            //     'rating' => $o->hotelrating,
-                            //     'price' => $o->style == 'package' ? '200' : ''
-                            // ],
+                            [
+                                'name' => $o->hotel . ' Economy',
+                                'type' => $o->hoteltype,
+                                'rating' => intval(only_numbers($o->hotelrating)) + 1,
+                                'price' => $o->style == 'package' ? '200' : ''
+                            ],
                             [
                                 'name' => $o->hotel . ' Lux',
                                 'type' => $o->hoteltype,
-                                'rating' => $o->hotelrating,
+                                'rating' => intval(only_numbers($o->hotelrating)) - 2,
+                                'price' => $o->style == 'package' ? '1000' : ''
+                            ],
+                            [
+                                'name' => $o->hotel . ' Deluxe Plus',
+                                'type' => $o->hoteltype,
+                                'rating' => intval(only_numbers($o->hotelrating)) + 2,
                                 'price' => $o->style == 'package' ? '3500' : ''
+                            ],
+                            [
+                                'name' => $o->hotel . ' Millionaire Suite',
+                                'type' => $o->hoteltype,
+                                'rating' => intval(only_numbers($o->hotelrating)) + 3,
+                                'price' => $o->style == 'package' ? '10000' : ''
                             ]
                         ]
                     ],

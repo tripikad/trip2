@@ -6,6 +6,9 @@
     width: 100%;
 }
 
+.HotelRow__nameAndDetails {
+    overflow: hidden;
+}
 .HotelRow__details {
     display: flex;
     align-items: center;
@@ -32,11 +35,11 @@
 }
 
 .HotelRow__url {
-    color: $blue;
+    color: $green;
     font: $font-text-sm;
 }
 
 .HotelRow__price {
     font: $font-heading-xl;
-    color: $orange;
+    color: $yellow;
 }

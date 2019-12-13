@@ -24,9 +24,16 @@ class BookingController extends Controller
 
         $this->validate(request(), $rules);
 
+        $hotel = null;
+
+        if (request()->hotel > 0) {
+            $hotel = $offer->data->hotels[request()->hotel - 1];
+        }
+
         $bookingData = [
             'user_id' => $user ? $user->id : null,
             'data' => [
+                'hotel' => $hotel ? $hotel->name : '',
                 'name' => request()->name,
                 'email' => request()->email,
                 'phone' => request()->phone,
@@ -41,13 +48,13 @@ class BookingController extends Controller
 
         $booking = $offer->bookings()->create($bookingData);
 
-        // return new CreateBooking($offer, $booking);
+        //return new CreateBooking($offer, $booking);
 
         Mail::to($offer->user->email)->queue(new CreateBooking($offer, $booking));
 
         return redirect()
             ->route('offer.index')
-            ->with('info', 'The booking was sent');
+            ->with('info', trans('offer.booking.create.info'));
     }
 
     public function goto($id)

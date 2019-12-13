@@ -3,9 +3,10 @@
 return [
     'index' => 'Reisipakkumised',
     'show.back' => 'Kõik reisipakkumised',
-    'show.book' => 'Broneeri reis Tripis ↓',
+    'show.book' => 'Broneeri reis Tripis',
     'show.book.title' => 'Broneeri reis',
     'show.goto' => 'Vaata ja broneeri reisi koduleheküljel ›',
+    'show.url' => 'Vaata lisainfot ›',
     'show.unpublished' => 'See reisipakkumine pole avalikustatud',
     'show.included' => 'Hinna sees',
     'show.notincluded' => 'Hind ei sisalda',
@@ -62,6 +63,8 @@ return [
     'style.package.multiple' => 'Paketireisid',
     'book' => 'Broneeri reis',
     'book.back' => 'Tagasi reisipakkumise juurde',
+    'book.hotel' => 'Vali hotell',
+    'book.contact' => 'Sisesta kontaktandmed',
     'book.name' => 'Eesnimi ja perekonnanimi',
     'book.email' => 'E-mail',
     'book.phone' => 'Telefon',
@@ -73,8 +76,8 @@ return [
     'book.flexible' => 'Olen kuupäevade osas paindlik (± 3 päeva)',
     'book.submit' => 'Broneeri reis',
     'book.email.subject' => ':name broneeris reisi :title',
-    'book.email' => 'Broneering reisile',
     'book.email.id' => 'Broneeringu ID',
+    'book.email.hotel' => 'Hotell',
     'book.email.name' => 'Nimi',
     'book.email.email' => 'E-mail',
     'book.email.phone' => 'Telefon',
@@ -86,5 +89,6 @@ return [
     'book.email.flexible' => 'Olen kuupäevade osas paindlik (± 3 päeva)',
     'book.email.yes' => '✔ Jah',
     'book.email.no' => 'Ei',
-    'book.hotel.url' => 'Info ›'
+    'book.hotel.url' => 'Info ›',
+    'booking.create.info' => 'Sinu broneering saadeti reisikorraldajale'
 ];

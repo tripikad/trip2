@@ -20,6 +20,7 @@ class OfferController extends Controller
             ->withHeadRobots('noindex')
             ->withTransparency(true)
             ->withTitle(trans('offer.index'))
+            ->with('head_image', request()->root() . '/photos/offer_social.png')
             ->withItems(
                 collect()
                     ->push(
@@ -94,7 +95,9 @@ class OfferController extends Controller
             $offer->data->description || $offer->data->included || $offer->data->notincluded || $offer->data->extras;
 
         return layout('Full')
+            // @LAUNCH
             ->withHeadRobots('noindex')
+            ->with('head_image', './photos/offer_social.png')
             ->withTitle($offer->title)
             ->withItems(
                 collect()
@@ -169,14 +172,6 @@ class OfferController extends Controller
                                     )
                                     ->spacerWhen($isPackage && $offer->data->url, 1)
                                     ->pushWhen(
-                                        $isPackage && $offer->data->url,
-                                        component('Button')
-                                            ->is('blue')
-                                            ->withExternal(true)
-                                            ->withTitle(trans('offer.show.goto'))
-                                            ->withRoute(route('booking.goto', [$id]))
-                                    )
-                                    ->pushWhen(
                                         !$isPackage && $offer->data->url,
                                         component('Button')
                                             ->is('orange')
@@ -240,7 +235,7 @@ class OfferController extends Controller
                             ->withBackground('blue')
                             ->withInnerBackground('white')
                             ->withInnerPadding(2)
-                            ->withItems(region('OfferBooking', $id, $name, $email))
+                            ->withItems(region('OfferBooking', $id, $name, $email, $offer))
                     )
                     ->pushWhen(
                         $hasContent && !$isPackage,

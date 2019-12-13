@@ -4,12 +4,25 @@ namespace App\Http\Regions;
 
 class OfferBooking
 {
-    public function render($id, $name, $email)
+    public function render($id, $name, $email, $offer)
     {
         return component('Form')
             ->withRoute(route('booking.create', $id))
             ->withFields(
                 collect()
+                    ->push(
+                        component('Title')
+                            ->is('small')
+                            ->is('blue')
+                            ->with('title', trans('offer.book.hotel'))
+                    )
+                    ->push(region('OfferBookingHotel', $offer))
+                    ->push(
+                        component('Title')
+                            ->is('small')
+                            ->is('blue')
+                            ->with('title', trans('offer.book.contact'))
+                    )
                     ->push(
                         component('FormTextfield')
                             ->withName('name')

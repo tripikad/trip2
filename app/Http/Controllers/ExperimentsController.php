@@ -15,38 +15,36 @@ class ExperimentsController extends Controller
         return layout('Full')
             ->withItems(
                 component('Section')
-                    ->padding(10)
-                    ->withWidth(styles('mobile-large-width'))
-                    ->height('100vh')
+                    ->withWidth('600px') // 1200
+                    ->withHeight('335px') // 675
                     ->withBackground('blue')
-                    ->withInnerBackground('white')
-                    ->withInnerPadding(2)
+                    ->withAlign('center')
+                    ->withImage('./photos/map.png')
                     ->withItems(
-                        component('FormAccordion')
-                            ->is('large')
-                            ->withItems(
-                                collect($offer->data->hotels)
-                                    ->map(function ($hotel) use ($offer) {
-                                        $hotel->price = format_currency($hotel->price);
-                                        $query = urlencode(
-                                            $hotel->name .
-                                                ' ' .
-                                                $offer
-                                                    ->endDestinations()
-                                                    ->pluck('name')
-                                                    ->implode(' ')
-                                        );
-                                        $hotel->url = 'https://www.tripadvisor.com/Search?q=' . $query;
-                                        $hotel->urlTitle = trans('offer.book.hotel.url');
-                                        $stars = intval(only_numbers($hotel->rating));
-                                        if ($stars > 0) {
-                                            $hotel->rating = implode('', array_fill(0, $stars, '★'));
-                                        }
-                                        return component('HotelRow')
-                                            ->withHotel($hotel)
-                                            ->render();
-                                    })
-                                    ->push('aaa')
+                        collect()
+                            ->spacer(2)
+                            ->push(
+                                component('Icon')
+                                    ->with('icon', 'tripee_logo')
+                                    ->with('width', 320)
+                                    ->with('height', 110)
+                            )
+                            ->push(
+                                component('Title')
+                                    ->is('large')
+                                    ->is('white')
+                                    ->is('center')
+                                    ->withTitle(trans('frontpage.index.offer.title'))
+                                    ->withRoute(route('offer.index'))
+                            )
+                            ->spacer(3)
+                            ->push(
+                                component('Title')
+                                    ->is('small')
+                                    ->is('white')
+                                    ->is('center')
+                                    ->withTitle(trans('Hulludest seiklustest<br>rannapuhkuseni'))
+                                    ->withRoute(route('offer.index'))
                             )
                     )
             )

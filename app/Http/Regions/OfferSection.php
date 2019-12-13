@@ -8,7 +8,10 @@ class OfferSection
 {
     public function render()
     {
-        if (env('OFFER_ENABLED', false)) {
+        // @LAUNCH
+        $loggedUser = request()->user();
+
+        if ($loggedUser && $loggedUser->hasRole('superuser')) {
             $adventureOffers = Offer::public()
                 ->orderBy('start_at')
                 ->with(['user:id,name', 'startDestinations', 'endDestinations'])
@@ -28,6 +31,7 @@ class OfferSection
                     component('Section')
                         ->withHeight(spacer(24))
                         ->withBackground('blue')
+                        ->withImage('./photos/map.png')
                         ->withItems(
                             collect()
                                 ->spacer(3)

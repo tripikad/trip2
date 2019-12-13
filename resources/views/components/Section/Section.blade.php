@@ -42,6 +42,7 @@ $items_collection = items($items ?? null);
         min-height: {{ $height_value }};
         background: {{ $background_color }};
         background-image: {{ $background_image }};
+        background-repeat: no-repeat;
         border: {{ $border }};
 ">
 

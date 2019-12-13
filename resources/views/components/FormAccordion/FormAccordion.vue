@@ -22,10 +22,14 @@ export default {
     props: {
         isclasses: { default: '' },
         name: { default: '' },
+        value: { default: 0 },
         items: { default: [] }
     },
     data: () => ({
         activeIndex: 0
-    })
+    }),
+    mounted() {
+        this.$watch('value', value => (this.activeIndex = value), { immediate: true })
+    }
 }
 </script>

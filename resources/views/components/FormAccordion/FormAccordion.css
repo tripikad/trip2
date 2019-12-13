@@ -1,6 +1,6 @@
 .FormAccordion {
     border-radius: $border-radius-md;
-    border: 2px solid $gray;
+    border: 2px solid $gray-light;
     overflow: hidden;
 }
 
@@ -10,18 +10,22 @@
     font: $font-heading-sm;
     line-height: $line-height-sm;
     padding: 0 calc($spacer * 2);
-    border-bottom: 2px solid $gray;
+    border-bottom: 2px solid $gray-light;
     color: $gray-dark;
     cursor: pointer;
     /* @TODO2 Remove this hack */
-    height: calc($spacer * 4.58);
+    min-height: calc($spacer * 4.58);
 }
 .FormAccordion__button:last-child {
     border: none;
 }
 
+.FormAccordion__button:hover {
+    background: $gray-lighter;
+}
+
 .FormAccordion__button--active {
-    background: $gray-light;
+    background: $gray-lighter;
 }
 
 .FormAccordion__button:last-child {
@@ -40,5 +44,7 @@
     background: rgba(0, 0, 0, 0.25);
 }
 .FormAccordion--large .FormAccordion__button {
-    height: calc($spacer * 7);
+    min-height: calc($spacer * 7);
+    padding-top: $padding-md;
+    padding-bottom: $padding-md;
 }

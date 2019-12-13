@@ -6,6 +6,8 @@ class OfferDetails
 {
     public function render($offer)
     {
+        $isPackage = $offer->style == 'package';
+
         return component('Flex')
             ->with('justify', 'center')
             ->with('gap', 'sm')
@@ -54,6 +56,16 @@ class OfferDetails
                             ->is('smallest')
                             ->is('white')
                             ->with('title', $offer->data->size)
+                    )
+                    ->push('&nbsp;&nbsp;&nbsp;')
+                    ->pushWhen(
+                        $isPackage && $offer->data->url,
+                        component('Title')
+                            ->is('smallest')
+                            ->is('white')
+                            ->withExternal(true)
+                            ->withTitle(trans('offer.show.url'))
+                            ->withRoute($offer->data->url)
                     )
             );
     }
