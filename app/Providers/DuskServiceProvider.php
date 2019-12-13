@@ -20,16 +20,5 @@ class DuskServiceProvider extends ServiceProvider
             $this->script('window.scrollTo(0, 9999999)');
             return $this;
         });
-
-        // @TODO2 Remove
-        // Browser::macro('see', function ($text = '') {
-        //     PHPUnit::assertTrue(!!strstr($this->driver->getPageSource(), $text), "Do not see [$text] in page source");
-        //     return $this;
-        // });
-
-        // Browser::macro('dontSee', function ($text = '') {
-        //     PHPUnit::assertTrue(!strstr($this->driver->getPageSource(), $text), "Seeing [$text] in page source");
-        //     return $this;
-        // });
     }
 }

@@ -20,11 +20,7 @@ class OfferClear extends Command
 
     public function handle()
     {
-        // @LAUNCH
-        // if (env('OFFER_ENABLED')) {
-        //     $this->info("\nOffers are live, they can longer cleared");
-        //     die();
-        // }
+        // @LAUNCH Remove
 
         if ($this->confirm('This command removes all offer content. Do you want to continue?')) {
             DB::table('offers')->truncate();
