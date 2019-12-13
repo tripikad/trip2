@@ -61,7 +61,7 @@ class OfferAdminController extends Controller
                                     component('FormCheckbox')
                                         ->withName('status')
                                         ->withTitle(trans('offer.admin.edit.status'))
-                                        ->withValue(old('status'))
+                                        ->withValue(old('status', true))
                                 )
                                 ->push(
                                     component('FlexGrid')
@@ -367,7 +367,7 @@ class OfferAdminController extends Controller
                                                         ->withValue(old('title', $offer->title))
                                                 )
                                                 ->push(
-                                                    component($isPackage ? 'FormHidden' : 'FormTextField')
+                                                    component($isPackage ? 'FormHidden' : 'FormTextfield')
                                                         ->withTitle(trans('offer.admin.edit.price'))
                                                         ->withSuffix(config('site.currency.eur'))
                                                         ->withDescription($isPackage ? '' : trans('site.required'))
@@ -670,7 +670,6 @@ class OfferAdminController extends Controller
                     ->zip($h)
                     ->fromPairs();
             });
-
         $offer = $loggedUser->offers()->create([
             'status' => $status,
             'title' => request()->title,
