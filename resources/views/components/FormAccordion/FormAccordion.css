@@ -16,7 +16,6 @@
     /* @TODO2 Remove this hack */
     height: calc($spacer * 4.58);
 }
-
 .FormAccordion__button:last-child {
     border: none;
 }
@@ -39,4 +38,7 @@
 /* @TODO2 Convert to variable */
 .FormAccordion--blue .FormAccordion__button--active {
     background: rgba(0, 0, 0, 0.25);
+}
+.FormAccordion--large .FormAccordion__button {
+    height: calc($spacer * 7);
 }

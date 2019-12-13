@@ -240,3 +240,8 @@ function errorKeys()
     }
     return null;
 }
+
+function format_currency($price)
+{
+    return $price . config('site.currency.eur');
+}

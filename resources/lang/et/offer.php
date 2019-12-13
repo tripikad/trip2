@@ -5,7 +5,7 @@ return [
     'show.back' => 'Kõik reisipakkumised',
     'show.book' => 'Broneeri reis Tripis ↓',
     'show.book.title' => 'Broneeri reis',
-    'show.goto' => 'Vaata ja broneeri reisi koduleheküljel →',
+    'show.goto' => 'Vaata ja broneeri reisi koduleheküljel ›',
     'show.unpublished' => 'See reisipakkumine pole avalikustatud',
     'show.included' => 'Hinna sees',
     'show.notincluded' => 'Hind ei sisalda',
@@ -85,5 +85,6 @@ return [
     'book.email.installments' => 'Soovin tasuda järelmaksuga',
     'book.email.flexible' => 'Olen kuupäevade osas paindlik (± 3 päeva)',
     'book.email.yes' => '✔ Jah',
-    'book.email.no' => 'Ei'
+    'book.email.no' => 'Ei',
+    'book.hotel.url' => 'Info ›'
 ];
