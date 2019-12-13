@@ -160,7 +160,7 @@ class OfferController extends Controller
                                             ->withTitle($offer->title . ' ' . $offer->price_formatted)
                                     )
                                     ->pushWhen(
-                                        $user->hasRoleOrOwner('superuser', $offer),
+                                        $user && $user->hasRoleOrOwner('superuser', $offer->id),
                                         component('Button')
                                             ->is('narrow')
                                             ->is('small')

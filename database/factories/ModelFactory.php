@@ -103,7 +103,8 @@ $factory->define(Offer::class, function ($faker) {
             'description' => '',
             'flights' => true,
             'transfer' => true,
-            'hotels' => []
+            'hotels' => [],
+            'url' => ''
         ]
     ];
 });

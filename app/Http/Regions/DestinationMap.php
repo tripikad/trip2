@@ -41,7 +41,7 @@ class DestinationMap
         }
 
         return component('Dotmap')
-            ->with('height', '300px')
+            ->with('height', 25)
             ->with('areas', $areas)
             ->with('smalldots', $smalldots)
             ->with('largedots', $largedots)

@@ -100,7 +100,7 @@ class UserHeader
                 collect()
                     ->push(
                         component('Dotmap')
-                            ->with('height', '300px')
+                            ->with('height', 25)
                             ->is('center')
                             ->with('areas', $countryDots)
                             ->with('smalldots', $cityDots)
