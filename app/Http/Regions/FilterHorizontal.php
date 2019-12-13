@@ -37,7 +37,11 @@ class FilterHorizontal
                             ->with('searchable', false)
                             ->with('value', $currentTopic)
                     )
-                    ->push(component('FormButton')->with('title', trans('content.index.filter.submit.title')))
+                    ->push(
+                        component('FormButton')
+                            ->is('large')
+                            ->with('title', trans('content.index.filter.submit.title'))
+                    )
                     ->push(
                         component('FormHidden')
                             ->with('name', 'type')

@@ -39,5 +39,10 @@ a .BlockTitle__title:hover {
 }
 
 .BlockTitle--white a .BlockTitle__title:hover {
+    color: $white;
     opacity: $opacity-lg;
+}
+
+.BlockTitle--white svg > * {
+    fill: $white;
 }

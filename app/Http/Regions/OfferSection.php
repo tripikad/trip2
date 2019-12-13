@@ -8,11 +8,7 @@ class OfferSection
 {
     public function render()
     {
-        // @LAUNCH Remove this check
-
-        $loggedUser = request()->user();
-
-        if ($loggedUser && $loggedUser->hasRole('superuser')) {
+        if (env('OFFERS_ENABLED', false)) {
             $adventureOffers = Offer::public()
                 ->orderBy('start_at')
                 ->with(['user:id,name', 'startDestinations', 'endDestinations'])
@@ -46,6 +42,7 @@ class OfferSection
                                                             component('BlockTitle')
                                                                 ->is('white')
                                                                 ->withTitle(trans('offer.style.adventure.multiple'))
+                                                                ->withRoute(route('offer.index'))
                                                         )
                                                         ->spacer(2)
                                                         ->merge(
@@ -69,6 +66,7 @@ class OfferSection
                                                             component('BlockTitle')
                                                                 ->is('white')
                                                                 ->withTitle(trans('offer.style.package.multiple'))
+                                                                ->withRoute(route('offer.index'))
                                                         )
                                                         ->spacer(2)
                                                         ->merge(
