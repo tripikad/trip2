@@ -8,6 +8,7 @@ return [
     'show.goto' => 'Vaata ja broneeri reisi koduleheküljel ›',
     'show.url' => 'Vaata lisainfot ›',
     'show.unpublished' => 'See reisipakkumine pole avalikustatud',
+    'show.expired' => 'See reisipakkumine on aegunud',
     'show.included' => 'Hinna sees',
     'show.notincluded' => 'Hind ei sisalda',
     'show.extras' => 'Lisatasu eest',

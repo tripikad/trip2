@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
+
 use App\Content;
 use App\Offer;
 use App\User;
@@ -67,6 +69,7 @@ class OfferController extends Controller
         $data = Offer::public()
             ->orderBy('start_at')
             ->with(['user:id,name', 'startDestinations', 'endDestinations'])
+            ->whereDate('start_at', '>', Carbon::now())
             ->paginate(50);
 
         return response()->json($data);
@@ -80,7 +83,10 @@ class OfferController extends Controller
         if (!$user && $offer->status == 0) {
             return abort(401);
         }
-        if ($user && $offer->status == 0 && !$user->hasRoleOrOwner('superuser', $offer->user->id)) {
+        if ($offer->status == 0 && $user && !$user->hasRoleOrOwner('superuser', $offer->user->id)) {
+            return abort(401);
+        }
+        if ($offer->start_at->lt(Carbon::now()) && $user && !$user->hasRoleOrOwner('superuser', $offer->user->id)) {
             return abort(401);
         }
 
@@ -102,9 +108,16 @@ class OfferController extends Controller
             ->withItems(
                 collect()
                     ->pushWhen(
+                        $offer->start_at->lt(Carbon::now()),
+                        component('HeaderUnpublished')
+                            ->is('gray')
+                            ->withTitle(trans('offer.show.expired'))
+                    )
+                    ->pushWhen(
                         $offer->status == 0,
                         component('HeaderUnpublished')->withTitle(trans('offer.show.unpublished'))
                     )
+
                     ->push(
                         component('Section')
                             ->withPadding(2)
