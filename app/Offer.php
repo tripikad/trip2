@@ -1,6 +1,7 @@
 <?php
 
 namespace App;
+use Cache;
 
 use Illuminate\Database\Eloquent\Model;
 use Jenssegers\Date\Date;
@@ -58,7 +59,15 @@ class Offer extends Model
     public function getPriceAttribute($value)
     {
         if ($this->style == 'package') {
-            return $this->data->hotels[0]->price;
+            return collect($this->data->hotels)
+                ->pluck('price')
+                ->map(function ($p) {
+                    return only_numbers($p);
+                })
+                ->filter(function ($p) {
+                    return !empty($p);
+                })
+                ->min();
         }
         if ($this->style !== 'package' && $this->data->price) {
             return $this->data->price;
@@ -120,15 +129,19 @@ class Offer extends Model
 
     public function getImageAttribute()
     {
-        $image = $this->endDestinations
-            ->first()
-            ->content()
-            ->latest()
-            ->whereType('photo')
-            ->whereStatus(1)
-            ->first();
-
-        return $image ? $image->imagePreset('small_square') : '';
+        // Cache image to avoid N+1 query problem
+        // Eager loading via many intermediates is
+        // more complicated
+        return Cache::remember('offer_image_' . $this->id, 10, function () {
+            $image = $this->endDestinations
+                ->first()
+                ->content()
+                ->latest()
+                ->whereType('photo')
+                ->whereStatus(1)
+                ->first();
+            return $image ? $image->imagePreset('small_square') : '';
+        });
     }
 
     public function getRouteAttribute()

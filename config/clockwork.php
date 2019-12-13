@@ -33,7 +33,7 @@ return [
             'enabled' => env('CLOCKWORK_CACHE_ENABLED', true),
 
             // Collect cache queries including results (high performance impact with a high number of queries)
-            'collect_queries' => env('CLOCKWORK_CACHE_QUERIES', false)
+            'collect_queries' => env('CLOCKWORK_CACHE_QUERIES', true)
         ],
 
         // Database usage stats and queries

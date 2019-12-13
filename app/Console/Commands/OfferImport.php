@@ -73,14 +73,20 @@ class OfferImport extends Command
                             [
                                 'name' => $o->hotel,
                                 'type' => $o->hoteltype,
-                                'rating' => 5,
-                                'price' => $o->style == 'package' ? '1000' : ''
+                                'rating' => $o->hotelrating,
+                                'price' => $o->style == 'package' ? $o->hotelprice : ''
                             ],
+                            // [
+                            //     'name' => $o->hotel . ' Economy',
+                            //     'type' => $o->hoteltype,
+                            //     'rating' => $o->hotelrating,
+                            //     'price' => $o->style == 'package' ? '200' : ''
+                            // ],
                             [
-                                'name' => $o->hotel,
+                                'name' => $o->hotel . ' Lux',
                                 'type' => $o->hoteltype,
-                                'rating' => 4,
-                                'price' => $o->style == 'package' ? '800' : ''
+                                'rating' => $o->hotelrating,
+                                'price' => $o->style == 'package' ? '3500' : ''
                             ]
                         ]
                     ],

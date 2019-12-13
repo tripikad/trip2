@@ -223,9 +223,9 @@ function items($items = null)
     return collect([$items]);
 }
 
-function string2int($string)
+function only_numbers($string)
 {
-    return intval(preg_replace('/[^0-9]/', '', $string));
+    return preg_replace('/[^0-9]/', '', $string);
 }
 
 function errorKeys()

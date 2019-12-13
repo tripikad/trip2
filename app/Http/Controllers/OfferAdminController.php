@@ -678,7 +678,7 @@ class OfferAdminController extends Controller
             'start_at' => Date::createFromFormat(config('offer.date.inputformat'), request()->start_at),
             'end_at' => Date::createFromFormat(config('offer.date.inputformat'), request()->end_at),
             'data' => [
-                'price' => string2int(request()->price) > 0 ? string2int(request()->price) : '',
+                'price' => intval(only_numbers(request()->price)) > 0 ? intval(only_numbers(request()->price)) : '',
                 'guide' => request()->guide,
                 'size' => request()->size,
                 'description' => request()->description,
@@ -762,7 +762,7 @@ class OfferAdminController extends Controller
             'start_at' => Date::createFromFormat(config('offer.date.inputformat'), request()->start_at),
             'end_at' => Date::createFromFormat(config('offer.date.inputformat'), request()->end_at),
             'data' => [
-                'price' => string2int(request()->price) > 0 ? string2int(request()->price) : '',
+                'price' => intval(only_numbers(request()->price)) > 0 ? intval(only_numbers(request()->price)) : '',
                 'guide' => request()->guide,
                 'size' => request()->size,
                 'description' => request()->description,

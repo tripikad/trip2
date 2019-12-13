@@ -1,11 +1,11 @@
 <template>
     <div>
-        <div class="FormButtons" :class="isclasses">
+        <div class="FormAccordion" :class="isclasses">
             <div
                 v-for="(item, i) in items"
                 :key="i"
-                class="FormButtons__button"
-                :class="i == activeIndex ? 'FormButtons__button--active' : ''"
+                class="FormAccordion__button"
+                :class="i == activeIndex ? 'FormAccordion__button--active' : ''"
                 @click="
                     activeIndex = i
                     $emit('input', activeIndex)
