@@ -1,6 +1,7 @@
 <?php
 
 namespace App;
+
 use Cache;
 
 use Illuminate\Database\Eloquent\Model;
