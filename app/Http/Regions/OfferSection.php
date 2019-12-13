@@ -8,7 +8,7 @@ class OfferSection
 {
     public function render()
     {
-        if (env('OFFERS_ENABLED', false)) {
+        if (env('OFFER_ENABLED', false)) {
             $adventureOffers = Offer::public()
                 ->orderBy('start_at')
                 ->with(['user:id,name', 'startDestinations', 'endDestinations'])
