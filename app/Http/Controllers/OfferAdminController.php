@@ -77,7 +77,7 @@ class OfferAdminController extends Controller
                                                         ->withValue(old('title'))
                                                 )
                                                 ->push(
-                                                    component($isPackage ? 'FormHidden' : 'FormTextField')
+                                                    component($isPackage ? 'FormHidden' : 'FormTextfield')
                                                         ->withTitle(trans('offer.admin.edit.price'))
                                                         ->withSuffix(config('site.currency.eur'))
                                                         ->withDescription($isPackage ? '' : trans('site.required'))

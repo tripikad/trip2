@@ -84,25 +84,27 @@ class OffersAdminTest extends DuskTestCase
                 ->type(dusk('Hotelli nimi 2'), 'El Sueño Hotel')
                 ->type(dusk('Hotelli hind 2'), '1987')
                 ->scrollToBottom()
-                ->pause(1000)
+                ->pause(500)
                 ->click(dusk('Lisa paketireis'))
                 ->assertPathIs('/company')
+                ->pause(500)
                 ->assertSee('Playa Bonita para Mamacita')
                 ->assertSee('1987€')
                 ->assertSee('Sol');
         });
 
         // Assert users can see the offer without being logged in
-
-        $this->browse(function (Browser $browser) {
-            $browser
-                ->visit('/logout')
-                ->visit('/offer')
-                ->pause(500)
-                ->click(dusk('Playa Bonita para Mamacita'))
-                ->assertSee('Playa Bonita para Mamacita')
-                ->assertSee('1987€');
-        });
+        // @LAUNCH Uncomment this
+        // $this->browse(function (Browser $browser) {
+        //     $browser
+        //         ->visit('/logout')
+        //         ->visit('/offer')
+        //         ->pause(500)
+        //         ->click(dusk('Playa Bonita para Mamacita'))
+        //         ->pause(500)
+        //         ->assertSee('Playa Bonita para Mamacita')
+        //         ->assertSee('1987€');
+        // });
     }
 
     public function test_company_can_add_unpublished_adventure_offer()
