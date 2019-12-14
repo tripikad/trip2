@@ -2734,3 +2734,8 @@
 1576329423-0650-2022487082,1576329422.7791,GET,/offer,"App\Http\Controllers\OfferController@index",200,286.34405136108
 1576329424-5707-465504949,1576329424.5214,GET,/api/countrydots,"App\Http\Controllers\ApiController@countrydots",200,49.962997436523
 1576329424-7211-171767502,1576329424.5364,GET,/offer/json,"App\Http\Controllers\OfferController@indexJson",200,185.11986732483
+1576329695-5401-201901511,1576329695.3007,GET,/offer/3,"App\Http\Controllers\OfferController@show",200,240.28491973877
+1576329696-7537-1195390103,1576329696.6183,GET,/offer,"App\Http\Controllers\OfferController@index",200,136.5818977356
+1576329699-5339-1187395109,1576329699.4209,GET,/api/countrydots,"App\Http\Controllers\ApiController@countrydots",200,114.11690711975
+1576329700-8919-935987442,1576329700.8148,GET,/api/countrydots,"App\Http\Controllers\ApiController@countrydots",200,77.654123306274
+1576329701-1043-25455943,1576329700.8161,GET,/offer/json,"App\Http\Controllers\OfferController@indexJson",200,288.76495361328
