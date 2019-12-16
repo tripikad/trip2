@@ -1,5 +1,3 @@
-@import "variables";
-
 .Paginator__button--active {
     background: $green;
     color: $white;

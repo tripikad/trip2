@@ -18,8 +18,7 @@ class UserHeader
                     ->with('route', route('user.show', [$user]))
             )
             ->pushWhen(
-                $loggedUser &&
-                    $loggedUser->hasRoleOrOwner('superuser', $loggedUser->id),
+                $loggedUser && $loggedUser->hasRoleOrOwner('superuser', $loggedUser->id),
                 component('Button')
                     ->is('cyan')
                     ->with('title', trans('menu.user.edit.profile'))
@@ -34,8 +33,7 @@ class UserHeader
                     ->with('route', route('message.index', [$user]))
             )
             ->pushWhen(
-                $loggedUser &&
-                    $loggedUser->hasRoleOrOwner('superuser', $loggedUser->id),
+                $loggedUser && $loggedUser->hasRoleOrOwner('superuser', $loggedUser->id),
                 component('Button')
                     ->is('cyan')
                     ->with('title', trans('menu.user.add.places'))
@@ -108,12 +106,7 @@ class UserHeader
                             ->with('smalldots', $cityDots)
                     )
                     ->push(region('UserHeaderImage', $user, $loggedUser))
-                    ->push(
-                        component('Center')->with(
-                            'item',
-                            region('UserAbout', $user, $loggedUser)
-                        )
-                    )
+                    ->push(component('Center')->with('item', region('UserAbout', $user, $loggedUser)))
                     ->br()
                     ->push(region('UserStats', $user, $loggedUser))
                     ->br()
@@ -121,10 +114,7 @@ class UserHeader
                         component('Body')
                             ->is('white')
                             ->is('responsive')
-                            ->with(
-                                'body',
-                                format_body($user->vars()->description)
-                            )
+                            ->with('body', format_body($user->vars()->description))
                     )
                     ->pushWhen($wantsToGo->count(), '&nbsp;')
                     ->pushWhen(
@@ -146,12 +136,9 @@ class UserHeader
                                             ->is('white')
                                             ->with(
                                                 'title',
-                                                trans(
-                                                    'user.show.stat.continents',
-                                                    [
-                                                        'count' => $hasBeenContinents->count()
-                                                    ]
-                                                )
+                                                trans('user.show.stat.continents', [
+                                                    'count' => $hasBeenContinents->count()
+                                                ])
                                             )
                                     )
                             )
@@ -164,19 +151,12 @@ class UserHeader
                             ->with('gap', 0.5)
                             ->with(
                                 'items',
-                                $hasBeenContinents->map(function (
-                                    $destination
-                                ) {
+                                $hasBeenContinents->map(function ($destination) {
                                     return component('Tag')
                                         ->is('white')
                                         ->is('large')
                                         ->with('title', $destination->name)
-                                        ->with(
-                                            'route',
-                                            route('destination.showSlug', [
-                                                $destination->slug
-                                            ])
-                                        );
+                                        ->with('route', route('destination.showSlug', [$destination->slug]));
                                 })
                             )
                     )
@@ -199,18 +179,13 @@ class UserHeader
                                             ->is('white')
                                             ->with(
                                                 'title',
-                                                trans(
-                                                    'user.show.stat.countries',
-                                                    [
-                                                        'total_count' => $countryCount,
-                                                        'count' => $hasBeenCountries->count(),
-                                                        'percentage' => round(
-                                                            ($hasBeenCountries->count() /
-                                                                $countryCount) *
-                                                                100
-                                                        )
-                                                    ]
-                                                )
+                                                trans('user.show.stat.countries', [
+                                                    'total_count' => $countryCount,
+                                                    'count' => $hasBeenCountries->count(),
+                                                    'percentage' => round(
+                                                        ($hasBeenCountries->count() / $countryCount) * 100
+                                                    )
+                                                ])
                                             )
                                     )
                             )
@@ -229,12 +204,7 @@ class UserHeader
                                         ->is('white')
                                         ->is('large')
                                         ->with('title', $destination->name)
-                                        ->with(
-                                            'route',
-                                            route('destination.showSlug', [
-                                                $destination->slug
-                                            ])
-                                        );
+                                        ->with('route', route('destination.showSlug', [$destination->slug]));
                                 })
                             )
                     )
@@ -277,12 +247,7 @@ class UserHeader
                                         ->is('white')
                                         ->is('large')
                                         ->with('title', $destination->name)
-                                        ->with(
-                                            'route',
-                                            route('destination.showSlug', [
-                                                $destination->slug
-                                            ])
-                                        );
+                                        ->with('route', route('destination.showSlug', [$destination->slug]));
                                 })
                             )
                     )
@@ -320,12 +285,7 @@ class UserHeader
                                         ->is('white')
                                         ->is('large')
                                         ->with('title', $destination->name)
-                                        ->with(
-                                            'route',
-                                            route('destination.showSlug', [
-                                                $destination->slug
-                                            ])
-                                        );
+                                        ->with('route', route('destination.showSlug', [$destination->slug]));
                                 })
                             )
                     )
@@ -333,10 +293,7 @@ class UserHeader
                     ->push(
                         component('Flex')
                             ->with('justify', 'center')
-                            ->with(
-                                'items',
-                                $this->prepareActionsForUser($user, $loggedUser)
-                            )
+                            ->with('items', $this->prepareActionsForUser($user, $loggedUser))
                     )
             );
     }

@@ -1,5 +1,3 @@
-@import "variables";
-
 .show-mobile-desktop {
     display: block ?if media (min-width: $tablet-width); /* desktop */
     display: none ?if media (min-width: $mobile-width) and (max-width: $tablet-width); /* tablet */

@@ -21,13 +21,13 @@ class ActivityTest extends BrowserKitTestCase
         $content1 = factory(Content::class)->create([
             'user_id' => $user1->id,
             'title' => 'Bom dia',
-            'type' => 'forum',
+            'type' => 'forum'
         ]);
 
         $comment1 = factory(Comment::class)->create([
             'user_id' => $user1->id,
             'content_id' => $content1->id,
-            'body' => 'Preciosa',
+            'body' => 'Preciosa'
         ]);
 
         $this->visit("user/$user1->id")

@@ -67,9 +67,7 @@ export default {
         },
         insertBold() {
             var doc = this.editor.getDoc()
-            doc.replaceSelection(
-                '**' + this.editor.getDoc().getSelection() + '**'
-            )
+            doc.replaceSelection('**' + this.editor.getDoc().getSelection() + '**')
             this.editor.focus()
         },
         insertItalic() {
@@ -110,10 +108,7 @@ export default {
         insertTable() {
             var doc = this.editor.getDoc()
             var cursor = doc.getCursor()
-            doc.replaceRange(
-                '\nEsimene | Teine\n---|---\nEsimene | Teine\n\n',
-                cursor
-            )
+            doc.replaceRange('\nEsimene | Teine\n---|---\nEsimene | Teine\n\n', cursor)
             doc.setCursor({
                 line: cursor.line + 4,
                 ch: 7

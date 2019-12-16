@@ -12,7 +12,7 @@ class UtilsController extends Controller
         $body = Request::input('body');
 
         return Response::json([
-            'body' => format_body($body),
+            'body' => format_body($body)
         ]);
     }
 
@@ -21,7 +21,7 @@ class UtilsController extends Controller
         return redirect()->route(Request::get('type'), [
             'destination' => Request::get('destination'),
             'topic' => Request::get('topic'),
-            'page' => Request::get('page'),
+            'page' => Request::get('page')
         ]);
     }
 }

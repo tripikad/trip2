@@ -1,7 +1,5 @@
 <template>
-
     <div class="FormTextfield" :class="isclasses">
-
         <label :for="name" class="FormTextfield__label">{{ title }}</label>
 
         <input
@@ -12,10 +10,8 @@
             v-model="currentValue"
             :placeholder="placeholder"
             @focus="$events.$emit('imagepicker.show', name)"
-        >
-
+        />
     </div>
-
 </template>
 
 <script>

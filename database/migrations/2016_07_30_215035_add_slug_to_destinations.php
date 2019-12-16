@@ -27,7 +27,11 @@ class AddSlugToDestinations extends Migration
         });
 
         Schema::table('destinations', function (Blueprint $table) {
-            $table->string('slug')->nullable(false)->unique()->change();
+            $table
+                ->string('slug')
+                ->nullable(false)
+                ->unique()
+                ->change();
         });
     }
 

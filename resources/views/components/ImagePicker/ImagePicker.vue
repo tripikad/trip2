@@ -1,27 +1,17 @@
 <template>
-
     <div class="ImagePicker" v-if="show">
-    
         <div class="ImagePicker__close" @click="show = false">×</div>
 
         <component :is="'ImageUpload'"></component>
 
-        <div
-            class="ImagePicker__card"
-            v-for="(image, index) in images"
-            :key="index"
-            @click="onClick(image)"
-        >
+        <div class="ImagePicker__card" v-for="(image, index) in images" :key="index" @click="onClick(image)">
             <img class="ImagePicker__image" :src="image.small" />
 
             <div class="ImagePicker__title">
                 {{ image.title }}
             </div>
-
         </div>
-
     </div>
-
 </template>
 
 <script>
@@ -46,11 +36,9 @@ export default {
             })
         },
         getImages() {
-            this.$http
-                .get(this.$globalProps.imagePickerRoute)
-                .then(res => {
-                    this.images = res.data
-                })
+            this.$http.get(this.$globalProps.imagePickerRoute).then(res => {
+                this.images = res.data
+            })
         }
     },
     mounted() {

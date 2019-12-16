@@ -1,5 +1,3 @@
-@import "variables";
-
 .PlaceholderPromo {
     height: $height-xl;
     opacity: $opacity-lg;
@@ -26,15 +24,15 @@
     padding-top: calc(2.5 / 4 * 100%) ?if $tablet;
 }
 
-    .PlaceholderPromo .PlaceholderPromo__title {
-        color: $white;
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        font: $font-code-md;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+.PlaceholderPromo .PlaceholderPromo__title {
+    color: $white;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    font: $font-code-md;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

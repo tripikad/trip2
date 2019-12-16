@@ -1,29 +1,14 @@
 <template>
-
     <div class="Linechart" :class="isclasses">
-
         <svg :width="width" :height="height">
-
             <!-- X Axis -->
 
-            <line
-                :x1="0"
-                :y1="height"
-                :x2="width"
-                :y2="height"
-                stroke="rgba(0,0,0,0.2)"
-            />
+            <line :x1="0" :y1="height" :x2="width" :y2="height" stroke="rgba(0,0,0,0.2)" />
 
             <!-- Y Axis -->
 
-            <line
-                :x1="0"
-                :y1="0"
-                :x2="0"
-                :y2="height"
-                stroke="rgba(0,0,0,0.2)"
-            />
-            
+            <line :x1="0" :y1="0" :x2="0" :y2="height" stroke="rgba(0,0,0,0.2)" />
+
             <!-- Line graphs -->
 
             <path
@@ -33,7 +18,7 @@
                 stroke-width="2"
                 stroke="hsl(205, 82%, 57%)"
                 :d="line(item.values)"
-                :opacity="1 - (index * 0.4)"
+                :opacity="1 - index * 0.4"
             />
 
             <!-- Vertical cursor -->
@@ -63,28 +48,20 @@
                 @mouseleave="currentIndex = false"
             />
 
-            <!-- Legend --> 
+            <!-- Legend -->
 
             <g
                 v-for="(line, index) in legend"
                 :key="index"
-                :transform="'translate(0,'+ (index * 20) + ')'"
-                :opacity="1 - (index * 0.3)"
+                :transform="'translate(0,' + index * 20 + ')'"
+                :opacity="1 - index * 0.3"
             >
-                <text
-                    x="15"
-                    y="20"
-                    font-family="Sailec"
-                    font-size="14px"
-                    fill="hsl(205, 82%, 57%)"
-                >
+                <text x="15" y="20" font-family="Sailec" font-size="14px" fill="hsl(205, 82%, 57%)">
                     {{ line.title }}: {{ line.value }}
-                </text> 
+                </text>
             </g>
-        </svg>  
-
+        </svg>
     </div>
-
 </template>
 
 <script>
@@ -118,30 +95,13 @@ export default {
     methods: {
         xScale(index) {
             return scaleLinear()
-                .domain([
-                    0,
-                    this.items[0].values.length - 1
-                ])
-                .range([
-                    this.padding,
-                    this.width - this.padding
-                ])(index)
+                .domain([0, this.items[0].values.length - 1])
+                .range([this.padding, this.width - this.padding])(index)
         },
         yScale(value) {
             return scaleLinear()
-                .domain(
-                    extent(
-                        merge(
-                            this.items.map(
-                                item => item.values
-                            )
-                        )
-                    )
-                )
-                .range([
-                    this.height - this.padding,
-                    this.padding
-                ])(value)
+                .domain(extent(merge(this.items.map(item => item.values))))
+                .range([this.height - this.padding, this.padding])(value)
         },
         line(items) {
             return line()

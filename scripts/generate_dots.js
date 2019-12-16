@@ -6,9 +6,7 @@ const countries = require(__dirname + '/data/countries.json')
 const facts = require(__dirname + '/data/trip_facts.json')
 
 const iso3toId = iso3 => {
-    const destination = facts
-        .filter(f => f.type == 'country')
-        .find(f => f.country_code3 === iso3)
+    const destination = facts.filter(f => f.type == 'country').find(f => f.country_code3 === iso3)
     return destination ? destination.id : 0
 }
 
@@ -52,20 +50,14 @@ for (let lat = 80; lat > -80; lat -= step) {
             .filter(country => country.properties.name !== 'Antarctica')
             .forEach(country => {
                 if (country.geometry.type === 'Polygon') {
-                    const intersection = turf.intersect(
-                        box,
-                        turf.polygon(country.geometry.coordinates)
-                    )
+                    const intersection = turf.intersect(box, turf.polygon(country.geometry.coordinates))
                     if (intersection !== null) {
                         dot.properties.countries.push(iso3toId(country.id))
                     }
                 }
                 if (country.geometry.type === 'MultiPolygon') {
                     country.geometry.coordinates.forEach(polygon => {
-                        const intersection = turf.intersect(
-                            box,
-                            turf.polygon(polygon)
-                        )
+                        const intersection = turf.intersect(box, turf.polygon(polygon))
                         if (intersection !== null) {
                             dot.properties.countries.push(iso3toId(country.id))
                         }
@@ -93,12 +85,7 @@ console.log('<?php return [')
 
 console.log(
     dots
-        .map(
-            dot =>
-                `[${dot.geometry.coordinates[0]},${
-                    dot.geometry.coordinates[1]
-                },[${dot.properties.countries}]],`
-        )
+        .map(dot => `[${dot.geometry.coordinates[0]},${dot.geometry.coordinates[1]},[${dot.properties.countries}]],`)
         .join('')
 )
 

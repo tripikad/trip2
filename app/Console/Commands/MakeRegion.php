@@ -16,12 +16,12 @@ class MakeRegion extends Command
 
         $php = [
             '<?php',
-            "namespace App\Http\Regions;",
+            'namespace App\Http\Regions;',
             "class $name\n{",
             "    public function render(\$post)\n    {",
             "        return component('Body')\n            ->with('body', \$post->body);",
             '    }',
-            "}\n",
+            "}\n"
         ];
 
         Storage::disk('root')->put("$dir/$name.php", implode("\n\n", $php));

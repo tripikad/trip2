@@ -1,5 +1,3 @@
-@import "variables";
-
 .Two__header {
     position: relative;
 }
@@ -18,7 +16,7 @@
 
 .Two--noSidebar .Two__contentInnerContainer {
     justify-content: center;
-} 
+}
 
 .Two__content {
     background: $white;
@@ -29,7 +27,6 @@
     padding-bottom: $margin-xl;
     padding-bottom: $margin-lg ?if $tablet;
 }
-
 
 .Two__content > .Two__sidebarTop {
     display: none;

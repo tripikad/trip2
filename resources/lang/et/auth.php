@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     'register.title' => 'Registreeri',
     'register.field.name.title' => 'Kasutajanimi',
     'register.field.email.title' => 'E-post',
@@ -55,7 +54,7 @@ return [
 
     'reset.email.subject' => 'Taasta oma parool',
     'reset.email.body.line1' => 'Vajuta allolevat nuppu parooli taastamiseks:',
-    'reset.email.body.line2' => 'Märkuseks: kui sina ise pole uut parooli taastanud, siis võid selle kirja rahulikult kustutada.',
-    'reset.email.button.text' => 'Vajuta siia oma kasutaja parooli muutmiseks',
-
+    'reset.email.body.line2' =>
+        'Märkuseks: kui sina ise pole uut parooli taastanud, siis võid selle kirja rahulikult kustutada.',
+    'reset.email.button.text' => 'Vajuta siia oma kasutaja parooli muutmiseks'
 ];

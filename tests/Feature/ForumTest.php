@@ -33,7 +33,7 @@ class ForumTest extends BrowserKitTestCase
                 'title' => 'Hello forum title',
                 'body' => 'Hello forum body',
                 'type' => 'forum',
-                'status' => 1,
+                'status' => 1
             ]);
 
         $content = Content::whereTitle('Hello forum title')->first();
@@ -53,7 +53,7 @@ class ForumTest extends BrowserKitTestCase
                 'title' => 'Hola forum titulo',
                 'body' => 'Hola forum cuerpo',
                 'type' => 'forum',
-                'status' => 1,
+                'status' => 1
             ]);
     }
 

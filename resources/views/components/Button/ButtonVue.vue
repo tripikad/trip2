@@ -1,5 +1,5 @@
 <template>
-    <a :href="route" :target="external ? '_blank' : ''">
+    <a :href="route" :target="external ? '_blank' : ''" dusk="slugTitle">
         <div class="Button" :class="isclasses">
             <div v-if="icon" class="Button__icon">
                 <!-- component('Icon')->is('white')->with('icon', $icon) !!} -->
@@ -11,6 +11,8 @@
 </template>
 
 <script>
+import { slug } from '../../utils/utils'
+
 export default {
     props: {
         isclasses: { default: '', type: String },
@@ -21,6 +23,11 @@ export default {
         },
         icon: { default: '', type: String },
         title: { default: '', type: String }
+    },
+    computed: {
+        slugTitle() {
+            return this.title ? slug(this.title) : ''
+        }
     }
 }
 </script>

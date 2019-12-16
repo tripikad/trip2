@@ -1,5 +1,3 @@
-@import "variables";
-
 .ExperimentalCard {
     background-repeat: no-repeat;
     background-size: cover;
@@ -11,13 +9,13 @@
     justify-content: center;
 }
 
-    .ExperimentalCard__title {
-        color: $white;
-        font: $font-heading-md;
-        text-shadow: $text-shadow-md;
-        text-align: center;
-    }
+.ExperimentalCard__title {
+    color: $white;
+    font: $font-heading-md;
+    text-shadow: $text-shadow-md;
+    text-align: center;
+}
 
-    .ExperimentalCard__title:hover {
-        color: $white-hover;
-    }
+.ExperimentalCard__title:hover {
+    color: $white-hover;
+}

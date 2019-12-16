@@ -1,12 +1,15 @@
 <template>
-
     <div class="FrontpageSearch" :class="isclasses">
-
         <div class="FrontpageSearch__search">
-            <input type="text" autocomplete="off" :placeholder="placeholder" class="FrontpageSearch__input"
+            <input
+                type="text"
+                autocomplete="off"
+                :placeholder="placeholder"
+                class="FrontpageSearch__input"
                 v-model="query"
                 @keyup="keymonitor"
-                @blur="blurMonitor">
+                @blur="blurMonitor"
+            />
 
             <div class="FrontpageSearch__icon" @click="redirect">
                 <component :is="'Icon'" icon="icon-search" size="lg"></component>
@@ -16,11 +19,15 @@
         </div>
 
         <div class="FrontpageSearch__results" v-if="showResultContainer" @mousedown="blurMonitorPrevent">
-            <component v-for="(result, index) in results" :is="'SearchRow'" :result="result" :key="index" :index="index"></component>
+            <component
+                v-for="(result, index) in results"
+                :is="'SearchRow'"
+                :result="result"
+                :key="index"
+                :index="index"
+            ></component>
         </div>
-
     </div>
-
 </template>
 
 <script>
@@ -78,29 +85,18 @@ export default {
             }, 150)
         },
         performSearch: function() {
-            if (
-                this.query &&
-                this.query != '' &&
-                String(this.query).length > 2 &&
-                !this.enterPressed
-            ) {
+            if (this.query && this.query != '' && String(this.query).length > 2 && !this.enterPressed) {
                 if (this.query != this.lastKeyword) {
                     this.$http
-                        .get(
-                            '/search/ajaxsearch/?q=' +
-                                this.query +
-                                '&_t=' +
-                                Date.now(),
-                            {
-                                before: function(xhr) {
-                                    if (this.lastRequest) {
-                                        this.lastRequest.abort()
-                                    }
-
-                                    this.lastRequest = xhr
+                        .get('/search/ajaxsearch/?q=' + this.query + '&_t=' + Date.now(), {
+                            before: function(xhr) {
+                                if (this.lastRequest) {
+                                    this.lastRequest.abort()
                                 }
+
+                                this.lastRequest = xhr
                             }
-                        )
+                        })
                         .then(
                             res => {
                                 this.results = res.data

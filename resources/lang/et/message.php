@@ -1,8 +1,7 @@
 <?php
 
 return [
-
-//    'index.title' => ':user sõnumid',
+    //    'index.title' => ':user sõnumid',
     'index.title' => 'Sõnumid',
     'index.row.description' => 'Sõnumid kasutajaga :user, viimane :created_at',
 
@@ -14,6 +13,5 @@ return [
 
     'store.email.subject' => ':user on saatnud sulle sõnumi',
     'store.email.body' => 'Täispika sõnumi lugemiseks vajuta allolevat nuppu:',
-    'store.email.button.text' => 'Sõnumi lugemiseks vajuta siia',
-
+    'store.email.button.text' => 'Sõnumi lugemiseks vajuta siia'
 ];

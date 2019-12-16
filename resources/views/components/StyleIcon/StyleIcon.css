@@ -1,5 +1,3 @@
-@import 'variables';
-
 .StyleIcon .Icon {
     border: 1px solid $gray !important;
 }

@@ -15,7 +15,10 @@ class CreateNewsletterLetterContents extends Migration
     public function up()
     {
         Schema::create('newsletter_letter_contents', function (Blueprint $table) {
-            $table->integer('newsletter_type_id')->unsigned()->index();
+            $table
+                ->integer('newsletter_type_id')
+                ->unsigned()
+                ->index();
             /*
              * [[type:flight|take:3]] - latest 3 flights
              * [[type:flight|skip:1|take:1]] - skip 1 flight and after that latest 1 flight
@@ -30,8 +33,12 @@ class CreateNewsletterLetterContents extends Migration
             $table->date('visible_to')->nullable();
             $table->timestamps();
 
-            $table->foreign('newsletter_type_id')->references('id')->on('newsletter_types')
-                ->onUpdate('cascade')->onDelete('cascade');
+            $table
+                ->foreign('newsletter_type_id')
+                ->references('id')
+                ->on('newsletter_types')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
         });
 
         Artisan::call('db:seed', ['--class' => 'NewsletterLetterContentsSeeder']);

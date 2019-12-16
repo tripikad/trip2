@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Styleguide;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 
-class ExperimentsComponentsController extends Controller
+class ComponentsController extends Controller
 {
     public function index()
     {
@@ -13,12 +14,8 @@ class ExperimentsComponentsController extends Controller
             ->with(
                 'content',
                 collect()
-                    ->push(region('ExperimentalMenu'))
-                    ->push(
-                        component('Title')
-                            ->is('large')
-                            ->with('title', 'Components')
-                    )
+                    ->push(region('StyleguideMenu'))
+                    ->push(component('Title')->with('title', 'Components'))
                     ->merge(
                         $this->components()
                             ->filter(function ($c) {
@@ -29,15 +26,9 @@ class ExperimentsComponentsController extends Controller
                                     ->push(
                                         component('Code')
                                             ->is('gray')
-                                            ->with(
-                                                'code',
-                                                $this->componentCode($c)
-                                            )
+                                            ->with('code', $this->componentCode($c))
                                     )
-                                    ->pushWhen(
-                                        request()->has('preview'),
-                                        component($c)->with('title', $c)
-                                    )
+                                    ->pushWhen(request()->has('preview'), component($c)->with('title', $c))
                                     ->pushWhen(
                                         request()->has('preview'),
                                         component($c)
@@ -53,32 +44,24 @@ class ExperimentsComponentsController extends Controller
 
     public function components()
     {
-        return collect(
-            Storage::disk('resources')->directories('/views/components')
-        )->map(function ($dir) {
+        return collect(Storage::disk('resources')->directories('/views/components'))->map(function ($dir) {
             return basename($dir);
         });
     }
 
     public function isVueComponent($c)
     {
-        return Storage::disk('resources')->exists(
-            '/views/components/' . $c . '/' . $c . '.vue'
-        );
+        return Storage::disk('resources')->exists('/views/components/' . $c . '/' . $c . '.vue');
     }
 
     public function isBladeComponent($c)
     {
-        return Storage::disk('resources')->exists(
-            '/views/components/' . $c . '/' . $c . '.blade.php'
-        );
+        return Storage::disk('resources')->exists('/views/components/' . $c . '/' . $c . '.blade.php');
     }
 
     public function isCss($c)
     {
-        return Storage::disk('resources')->exists(
-            '/views/components/' . $c . '/' . $c . '.css'
-        );
+        return Storage::disk('resources')->exists('/views/components/' . $c . '/' . $c . '.css');
     }
 
     public function componentCode($c)

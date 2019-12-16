@@ -1,60 +1,58 @@
-@import "variables";
-
 .FlightCalendar {
     display: flex;
     width: 100%;
 }
 
-    .FlightCalendar__month {
-        margin-right: $margin-xs;
-        flex: 1;
-    }
+.FlightCalendar__month {
+    margin-right: $margin-xs;
+    flex: 1;
+}
 
-    .FlightCalendar__month:last-child {
-        margin-right: 0;
-    }
+.FlightCalendar__month:last-child {
+    margin-right: 0;
+}
 
-    .FlightCalendar__monthTitle {
-        font: $font-text-xs;
-        text-transform: uppercase;
-        margin-bottom: $margin-xs;
-        text-align: center;
-        color: $gray-dark;
-    }
+.FlightCalendar__monthTitle {
+    font: $font-text-xs;
+    text-transform: uppercase;
+    margin-bottom: $margin-xs;
+    text-align: center;
+    color: $gray-dark;
+}
 
-    .FlightCalendar__card {
-        position: relative;
-        width: 100%;
-        background: $gray-light;
-        display: flex;
-        margin-bottom: $margin-xs;
-        height: $height-md;
-    }
+.FlightCalendar__card {
+    position: relative;
+    width: 100%;
+    background: $gray-light;
+    display: flex;
+    margin-bottom: $margin-xs;
+    height: $height-md;
+}
 
-    .FlightCalendar__card a {
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        text-align: center;
-        align-items: center;
-        justify-content: center;
-        display: flex;
-    }
+.FlightCalendar__card a {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
 
-    .FlightCalendar__card,
-    .FlightCalendar__card a {
-        text-align: center;
-        align-items: center;
-        justify-content: center;
-        display: flex;
-    }
+.FlightCalendar__card,
+.FlightCalendar__card a {
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
 
-    .FlightCalendar__card:hover {
-        background: $gray-light-hover;
-    }
+.FlightCalendar__card:hover {
+    background: $gray-light-hover;
+}
 
-    .FlightCalendar__card:last-child {
-        margin-bottom: 0;
-    }
+.FlightCalendar__card:last-child {
+    margin-bottom: 0;
+}

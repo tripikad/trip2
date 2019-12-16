@@ -1,5 +1,3 @@
-@import 'variables';
-
 .FlexGrid__row {
     display: flex;
     display: block ?if $tablet;

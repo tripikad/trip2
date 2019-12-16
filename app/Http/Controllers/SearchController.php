@@ -19,7 +19,7 @@ class SearchController extends Controller
         'flight' => 'flight',
         'news' => 'news',
         'destination' => 'destination',
-        'user' => 'user',
+        'user' => 'user'
     ];
     private $search_limit = 15;
     private $default_active_search = 'forum';
@@ -28,7 +28,7 @@ class SearchController extends Controller
     public function search(Request $request, $search_type = false)
     {
         if ($search_type) {
-            if (! in_array($search_type, array_keys(config('search.types')))) {
+            if (!in_array($search_type, array_keys(config('search.types')))) {
                 abort(404);
             }
         }
@@ -39,7 +39,7 @@ class SearchController extends Controller
         $data = [
             'items' => null,
             'paginate' => null,
-            'count' => 0,
+            'count' => 0
         ];
 
         if ($search_type) {
@@ -54,7 +54,7 @@ class SearchController extends Controller
         foreach ($search_type_keys as $key => $type) {
             $key_value = array_search($type, $search_type_keys);
 
-            if ($q && ! empty($q)) {
+            if ($q && !empty($q)) {
                 if ($active_search == $type) {
                     // Perform results & count query
 
@@ -66,10 +66,11 @@ class SearchController extends Controller
                 } else {
                     // Perform count query only
 
-                    $data['count'] = $this->searchByKeyword($this->search_types[$type], $q, $sort_order, null, true) ?? 0;
+                    $data['count'] =
+                        $this->searchByKeyword($this->search_types[$type], $q, $sort_order, null, true) ?? 0;
                 }
 
-                if ($this->default_active_search == 'forum' && $data['count'] == 0 && ! $this->default_found) {
+                if ($this->default_active_search == 'forum' && $data['count'] == 0 && !$this->default_found) {
                     $next_key = $key_value + 1;
 
                     if (isset($search_type_keys[$next_key])) {
@@ -81,27 +82,30 @@ class SearchController extends Controller
             $original_key = $search_type_keys[$key_value];
 
             $tabs[$original_key]['count'] = $data['count'];
-            $tabs[$original_key]['title'] = trans('search.tab.'.$original_key);
-            $tabs[$original_key]['route'] = $data['count'] ? route('search.results.type', [$original_key, 'q='.$q]) : '#';
+            $tabs[$original_key]['title'] = trans('search.tab.' . $original_key);
+            $tabs[$original_key]['route'] = $data['count']
+                ? route('search.results.type', [$original_key, 'q=' . $q])
+                : '#';
         }
 
         $tabs_component = collect();
         foreach ($tabs as $type => &$tab) {
             $tabs_component->push(
-                component('HeaderTab')->with('title', $tab['title'])
+                component('HeaderTab')
+                    ->with('title', $tab['title'])
                     ->with('route', $tab['route'])
                     ->with('count', $tab['count'])
-                    ->with('active', ($type == $active_search ? true : false))
+                    ->with('active', $type == $active_search ? true : false)
             );
         }
 
         Log::info('User searched', [
             'search' => $q,
             'sort_order' => $sort_order,
-            'user' => auth()->check() ? 'logged' : 'unlogged',
+            'user' => auth()->check() ? 'logged' : 'unlogged'
         ]);
 
-        $data['paginate']->withPath(env('FULL_BASE_URL').'search/'.$active_search);
+        $data['paginate']->withPath(env('FULL_BASE_URL') . 'search/' . $active_search);
         $data['paginate']->appends(['q' => $q, 'sort_order' => $sort_order]);
 
         $search_results = collect();
@@ -110,18 +114,26 @@ class SearchController extends Controller
             foreach ($data['items'] as $item) {
                 if ($active_search == 'flight') {
                     $search_results->push(
-                        component('SearchRow')->with('title', str_limit($item->title, 80))
-                            ->with('route', route($item->type.'.show', [$item->slug]))
-                            ->with('date', Carbon::createFromFormat('Y-m-d H:i:s', $item->updated_at)->format('d.m.Y H:i'))
+                        component('SearchRow')
+                            ->with('title', str_limit($item->title, 80))
+                            ->with('route', route($item->type . '.show', [$item->slug]))
+                            ->with(
+                                'date',
+                                Carbon::createFromFormat('Y-m-d H:i:s', $item->updated_at)->format('d.m.Y H:i')
+                            )
                             ->with('image_alt', $item->imagePreset('small_square'))
                             ->with('body', str_limit(strip_tags($item->vars()->body() ?? '&nbsp;'), 300))
-                            ->with('badge', ($item->price ? $item->price.'€' : null))
+                            ->with('badge', $item->price ? $item->price . '€' : null)
                     );
                 } elseif ($active_search == 'news') {
                     $search_results->push(
-                        component('SearchRow')->with('title', str_limit($item->title, 80))
-                            ->with('route', route($item->type.'.show', [$item->slug]))
-                            ->with('date', Carbon::createFromFormat('Y-m-d H:i:s', $item->updated_at)->format('d.m.Y H:i'))
+                        component('SearchRow')
+                            ->with('title', str_limit($item->title, 80))
+                            ->with('route', route($item->type . '.show', [$item->slug]))
+                            ->with(
+                                'date',
+                                Carbon::createFromFormat('Y-m-d H:i:s', $item->updated_at)->format('d.m.Y H:i')
+                            )
                             ->with('image_alt', $item->imagePreset('small_square'))
                             ->with('body', str_limit(strip_tags($item->vars()->body() ?? '&nbsp;'), 300))
                             ->with('badge', $item->comments->count())
@@ -129,24 +141,32 @@ class SearchController extends Controller
                 } elseif ($active_search == 'destination') {
                     $parent = $item->parent()->first();
                     $search_results->push(
-                        component('SearchRow')->with('title', ($parent ? $parent->name.' › ' : '').$item->name)
+                        component('SearchRow')
+                            ->with('title', ($parent ? $parent->name . ' › ' : '') . $item->name)
                             ->with('route', route('destination.showSlug', [$item->slug]))
                             ->with('image_alt', Image::getRandom($item->id))
                     );
                 } elseif ($active_search == 'user') {
                     $search_results->push(
-                        component('SearchRow')->with('title', str_limit($item->name, 80))
-                            ->with('route', ($item->name != 'Tripi külastaja' ? route('user.show', [$item]) : false))
-                            ->with('arc', component('UserImage')
-                                ->with('rank', $item->rank * 90)
-                                ->with('image', $item->imagePreset('xsmall_square'))
+                        component('SearchRow')
+                            ->with('title', str_limit($item->name, 80))
+                            ->with('route', $item->name != 'Tripi külastaja' ? route('user.show', [$item]) : false)
+                            ->with(
+                                'arc',
+                                component('UserImage')
+                                    ->with('rank', $item->rank * 90)
+                                    ->with('image', $item->imagePreset('xsmall_square'))
                             )
                     );
                 } else {
                     $search_results->push(
-                        component('SearchRow')->with('title', str_limit($item->title, 80))
-                            ->with('route', route($item->type.'.show', [$item->slug]))
-                            ->with('date', Carbon::createFromFormat('Y-m-d H:i:s', $item->updated_at)->format('d.m.Y H:i'))
+                        component('SearchRow')
+                            ->with('title', str_limit($item->title, 80))
+                            ->with('route', route($item->type . '.show', [$item->slug]))
+                            ->with(
+                                'date',
+                                Carbon::createFromFormat('Y-m-d H:i:s', $item->updated_at)->format('d.m.Y H:i')
+                            )
                             ->with('image', $item->user->imagePreset('xsmall_square'))
                             ->with('image_title', $item->user->name)
                             ->with('body', str_limit(strip_tags($item->vars()->body() ?? '&nbsp;'), 300))
@@ -156,14 +176,15 @@ class SearchController extends Controller
             }
         }
 
-        $tag = component('Tag')
-            ->is('white');
+        $tag = component('Tag')->is('white');
 
         if ($sort_order == 'updated_at') {
-            $tag->with('route', route('search.results.type', [$active_search, 'q='.$q.'&sort_order=relevance']))
+            $tag
+                ->with('route', route('search.results.type', [$active_search, 'q=' . $q . '&sort_order=relevance']))
                 ->with('title', trans('search.results.relevance_first'));
         } else {
-            $tag->with('route', route('search.results.type', [$active_search, 'q='.$q.'&sort_order=updated_at']))
+            $tag
+                ->with('route', route('search.results.type', [$active_search, 'q=' . $q . '&sort_order=updated_at']))
                 ->with('title', trans('search.results.newest_first'));
         }
 
@@ -175,47 +196,59 @@ class SearchController extends Controller
             ->with('background_color', 'background-gray')
             ->with('container_background_color', 'background-white')
             ->with('column_class', 'col-10')
-            ->with('header', region('Header', collect()
-                ->push(
-                    component('Form')
-                        ->with('method', 'get')
-                        ->with('route', route('search.results.type', [$active_search, 'sort_order='.$sort_order]))
-                        ->with('fields',
-                            collect()->push(
-                                component('FormSearchField')->with('name', 'q')
-                                    ->with('placeholder', trans('frontpage.index.search.title'))
-                                    ->with('value', $q)
-                            )
+            ->with(
+                'header',
+                region(
+                    'Header',
+                    collect()
+                        ->push(
+                            component('Form')
+                                ->with('method', 'get')
+                                ->with(
+                                    'route',
+                                    route('search.results.type', [$active_search, 'sort_order=' . $sort_order])
+                                )
+                                ->with(
+                                    'fields',
+                                    collect()->push(
+                                        component('FormSearchField')
+                                            ->with('name', 'q')
+                                            ->with('placeholder', trans('frontpage.index.search.title'))
+                                            ->with('value', $q)
+                                    )
+                                )
                         )
+                        ->push(
+                            component('Meta')
+                                ->is('center')
+                                ->with('items', collect()->push($tag))
+                        )
+                        ->push(component('HeaderTabs')->with('tabs', $tabs_component))
                 )
-                ->push(
-                    component('Meta')
-                        ->is('center')
-                        ->with('items', collect()->push($tag))
-                )
-                ->push(component('HeaderTabs')
-                    ->with('tabs', $tabs_component)
-                )
-            ))
-            ->with('content', collect()
-                ->push(component('Search')->with('items', $search_results))
-                ->push(region('Paginator', $data['paginate']))
-                ->push(component('Promo')->with('promo', 'body'))
+            )
+            ->with(
+                'content',
+                collect()
+                    ->push(component('Search')->with('items', $search_results))
+                    ->push(region('Paginator', $data['paginate']))
+                    ->push(component('Promo')->with('promo', 'body'))
             )
             ->with('footer', region('Footer'))
             ->render();
     }
 
-    protected function findSearchableIds($find, $types, $limit, $keyword_detailed, $keyword, $sort_order = 'relevance', $count_only = false)
-    {
-        $sort_order_types = [
-            'relevance',
-            'created_at',
-            'updated_at',
-            'id',
-        ];
+    protected function findSearchableIds(
+        $find,
+        $types,
+        $limit,
+        $keyword_detailed,
+        $keyword,
+        $sort_order = 'relevance',
+        $count_only = false
+    ) {
+        $sort_order_types = ['relevance', 'created_at', 'updated_at', 'id'];
 
-        if (! in_array($sort_order, $sort_order_types, true)) {
+        if (!in_array($sort_order, $sort_order_types, true)) {
             $sort_order = 'relevance';
         }
 
@@ -223,7 +256,7 @@ class SearchController extends Controller
             'items' => null,
             'paginate' => null,
             'item_ids' => [],
-            'count' => 0,
+            'count' => 0
         ];
 
         $rank_higher_where_not = null;
@@ -251,22 +284,30 @@ class SearchController extends Controller
 
         $data['paginate'] = Searchable::select([
             $item_id_key,
-            ($sort_order == 'relevance' ?
-                DB::raw('MATCH (`title`, `body`) AGAINST ('.DB::getPdo()->quote($keyword_detailed).' IN BOOLEAN MODE) AS `relevance`') :
-                DB::raw('0 AS `relevance`')
-            ),
-            ($rank_higher_where_not ?
-                DB::raw('IF(`'.$rank_higher_where_not.'` IS NULL, 100, 0) AS `sum_up_relevance`') :
-                DB::raw('0 AS `sum_up_relevance`')
-            ),
-        ])->distinct()
+            $sort_order == 'relevance'
+                ? DB::raw(
+                    'MATCH (`title`, `body`) AGAINST (' .
+                        DB::getPdo()->quote($keyword_detailed) .
+                        ' IN BOOLEAN MODE) AS `relevance`'
+                )
+                : DB::raw('0 AS `relevance`'),
+            $rank_higher_where_not
+                ? DB::raw('IF(`' . $rank_higher_where_not . '` IS NULL, 100, 0) AS `sum_up_relevance`')
+                : DB::raw('0 AS `sum_up_relevance`')
+        ])
+            ->distinct()
             ->where(function ($query) use ($keyword_detailed, $keyword) {
-                $query->whereRaw('MATCH (`title`, `body`) AGAINST ('.DB::getPdo()->quote($keyword_detailed).' IN BOOLEAN MODE)');
+                $query->whereRaw(
+                    'MATCH (`title`, `body`) AGAINST (' . DB::getPdo()->quote($keyword_detailed) . ' IN BOOLEAN MODE)'
+                );
 
                 if ($keyword && $keyword != '') {
-                    $query->orWhereRaw('MATCH (`title`, `body`) AGAINST ('.DB::getPdo()->quote($keyword).' IN BOOLEAN MODE)');
+                    $query->orWhereRaw(
+                        'MATCH (`title`, `body`) AGAINST (' . DB::getPdo()->quote($keyword) . ' IN BOOLEAN MODE)'
+                    );
                 }
-            })->whereNotNull($item_id_key);
+            })
+            ->whereNotNull($item_id_key);
 
         if ($find == 'user') {
             $data['paginate'] = $data['paginate']->whereNull('content_type')->whereNull('destination_id');
@@ -295,9 +336,9 @@ class SearchController extends Controller
             $data['count'] = $data['paginate']->total();
         }
 
-        if ($data['count'] && ! $count_only) {
+        if ($data['count'] && !$count_only) {
             foreach ($data['paginate'] as &$item) {
-                if ($item->$item_id_key && ! in_array($item->$item_id_key, $data['item_ids'], true)) {
+                if ($item->$item_id_key && !in_array($item->$item_id_key, $data['item_ids'], true)) {
                     $data['item_ids'][] = $item->$item_id_key;
                 }
             }
@@ -306,7 +347,7 @@ class SearchController extends Controller
                 $data['items'] = Content::whereIn('id', $data['item_ids']);
 
                 $with = ['user', 'user.images', 'comments'];
-                if ((! is_array($types) && $types == 'flight') || (is_array($types) && in_array('flight', $types))) {
+                if ((!is_array($types) && $types == 'flight') || (is_array($types) && in_array('flight', $types))) {
                     $with[] = 'images';
                 }
 
@@ -314,13 +355,12 @@ class SearchController extends Controller
             } elseif ($find == 'destination' && count($data['item_ids'])) {
                 $data['items'] = Destination::whereIn('id', $data['item_ids']);
             } elseif ($find == 'user' && count($data['item_ids'])) {
-                $data['items'] = User::whereIn('id', $data['item_ids'])
-                    ->with('images');
+                $data['items'] = User::whereIn('id', $data['item_ids'])->with('images');
             }
 
             if (isset($data['items']) && $data['items']) {
                 $data['items'] = $data['items']
-                    ->orderBy(DB::raw('FIELD(`id`, '.implode(',', $data['item_ids']).')', 'ASC'))
+                    ->orderBy(DB::raw('FIELD(`id`, ' . implode(',', $data['item_ids']) . ')', 'ASC'))
                     ->get();
             }
         }
@@ -357,8 +397,8 @@ class SearchController extends Controller
                 $keys = rtrim($keys, '+- ');
                 $keys = trim($keys, '+- ');
 
-                $keyword_detailed[] = ''.$detailed_prefix.$keys.($count == count($keyword_array) ? '*' : '').'';
-                $keyword[] = '('.$prefix.$keys.($count == count($keyword_array) ? '*' : '').')';
+                $keyword_detailed[] = '' . $detailed_prefix . $keys . ($count == count($keyword_array) ? '*' : '') . '';
+                $keyword[] = '(' . $prefix . $keys . ($count == count($keyword_array) ? '*' : '') . ')';
             }
         }
         $keyword = trim(mb_strtolower(implode(' ', $keyword)));
@@ -375,11 +415,35 @@ class SearchController extends Controller
         }
 
         if (is_string($type) && $type == 'destination') {
-            $data = $this->findSearchableIds('destination', null, $limit, $keyword_detailed, $keyword, $sort_order, $count_only);
+            $data = $this->findSearchableIds(
+                'destination',
+                null,
+                $limit,
+                $keyword_detailed,
+                $keyword,
+                $sort_order,
+                $count_only
+            );
         } elseif (is_string($type) && $type == 'user') {
-            $data = $this->findSearchableIds('user', null, $limit, $keyword_detailed, $keyword, $sort_order, $count_only);
+            $data = $this->findSearchableIds(
+                'user',
+                null,
+                $limit,
+                $keyword_detailed,
+                $keyword,
+                $sort_order,
+                $count_only
+            );
         } else {
-            $data = $this->findSearchableIds('content', $type, $limit, $keyword_detailed, $keyword, $sort_order, $count_only);
+            $data = $this->findSearchableIds(
+                'content',
+                $type,
+                $limit,
+                $keyword_detailed,
+                $keyword,
+                $sort_order,
+                $count_only
+            );
         }
 
         if ($count_only) {
@@ -411,22 +475,22 @@ class SearchController extends Controller
                         $response['category'] = 'destination';
                     }
 
-                    if (! isset($item['title']) && isset($item['name'])) {
+                    if (!isset($item['title']) && isset($item['name'])) {
                         $parent = $item->parent()->first();
-                        $response['title'] = ($parent ? $parent->name.' › ' : '').$item['name'];
+                        $response['title'] = ($parent ? $parent->name . ' › ' : '') . $item['name'];
                     } else {
                         $response['title'] = str_limit($item['title'], 65);
                     }
 
                     $response['badge'] = '';
                     if (isset($item['type'])) {
-                        $response['route'] = route($item['type'].'.show', $item['slug']);
+                        $response['route'] = route($item['type'] . '.show', $item['slug']);
 
                         if ($item['type'] != 'flight') {
                             //$response['badge'] = $item->comments->count();
                             //$response['badge_color'] = 'red';
                         } else {
-                            $response['badge'] = ($item['price'] ? $item['price'].'€' : null);
+                            $response['badge'] = $item['price'] ? $item['price'] . '€' : null;
                             $response['badge_color'] = 'red';
                         }
                     } elseif ($type == 'destinations') {
@@ -435,14 +499,14 @@ class SearchController extends Controller
                         $response['route'] = route('user.show', $item['id']);
                     }
 
-                    if (! isset($contents[$response['category']])) {
+                    if (!isset($contents[$response['category']])) {
                         $contents[$response['category']] = [
                             'title' => '',
-                            'items' => [],
+                            'items' => []
                         ];
                     }
 
-                    $contents[$response['category']]['title'] = trans('search.tab.'.$response['category']);
+                    $contents[$response['category']]['title'] = trans('search.tab.' . $response['category']);
                     if ($response['category'] == 'destination') {
                         $contents[$response['category']]['icon'] = 'icon-pin';
                     } elseif ($response['category'] == 'flight') {
@@ -458,12 +522,12 @@ class SearchController extends Controller
 
         $results_count = round($forum['count'] + $flight['count'] + $destinations['count']);
 
-        return array_merge($contents,
-                ['attributes' => [
-                    'message' => $results_count ? trans('search.results.all') : trans('search.results.noresults_frontpage'),
-                    'total' => $results_count,
-                    'route' => route('search.results', ['q='.urlencode($keyword)]),
-                ],
-            ]);
+        return array_merge($contents, [
+            'attributes' => [
+                'message' => $results_count ? trans('search.results.all') : trans('search.results.noresults_frontpage'),
+                'total' => $results_count,
+                'route' => route('search.results', ['q=' . urlencode($keyword)])
+            ]
+        ]);
     }
 }

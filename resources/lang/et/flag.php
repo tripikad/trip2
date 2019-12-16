@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     'content.good.flag.title' => 'Märkisid postituse meeldivaks',
     'content.good.unflag.title' => 'Mõtlesid ringi',
 
@@ -12,6 +11,5 @@ return [
     'comment.good.unflag.title' => 'Mõtlesid ringi',
 
     'comment.bad.flag.title' => 'Märkisid kommentaari ebameeldivaks',
-    'comment.bad.unflag.title' => 'Mõtlesid ringi',
-
+    'comment.bad.unflag.title' => 'Mõtlesid ringi'
 ];

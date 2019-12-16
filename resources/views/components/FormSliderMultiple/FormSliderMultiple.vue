@@ -53,10 +53,7 @@ export default {
         this.$watch(
             vm => [vm.value, vm.value2, vm.min, vm.max],
             ([value, value2, min, max]) => {
-                this.values = [
-                    value < min ? min : value,
-                    value2 > max ? max : value2
-                ]
+                this.values = [value < min ? min : value, value2 > max ? max : value2]
             },
             { immediate: true }
         )

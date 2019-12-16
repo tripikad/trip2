@@ -15,13 +15,12 @@ class FeedTest extends BrowserKitTestCase
     {
         $contents = factory(Content::class, 15)->create([
             'user_id' => factory(User::class)->create()->id,
-            'type' => 'news',
+            'type' => 'news'
         ]);
 
         // Testing Footer
 
-        $this
-            ->visit('/')
+        $this->visit('/')
             ->click(trans('menu.footer-social.newsfeed'))
             ->seePageIs('index.atom');
 
@@ -34,13 +33,12 @@ class FeedTest extends BrowserKitTestCase
     {
         $contents = factory(Content::class, 15)->create([
             'user_id' => factory(User::class)->create()->id,
-            'type' => 'flight',
+            'type' => 'flight'
         ]);
 
         // Testing Footer
 
-        $this
-            ->visit('/')
+        $this->visit('/')
             ->click(trans('menu.footer-social.flightfeed'))
             ->seePageIs('lendude_sooduspakkumised/rss');
 

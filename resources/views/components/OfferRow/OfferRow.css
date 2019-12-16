@@ -1,12 +1,10 @@
-@import 'variables';
-
 .OfferRow {
     display: flex;
     cursor: pointer;
 }
 
 .OfferRow:hover {
-    opacity: $opacity-lg;
+    opacity: $opacity-xl;
 }
 
 .OfferRow__image {
@@ -49,5 +47,14 @@
 .OfferRow__metaSecondary {
     color: $white;
     font: $font-text-md;
-    opacity: 0.5;
+    opacity: $opacity-md;
+}
+
+.OfferRow--unpublished {
+    opacity: $opacity-sm;
+    cursor: default;
+}
+
+.OfferRow--unpublished:hover {
+    opacity: $opacity-sm;
 }

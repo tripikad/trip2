@@ -28,12 +28,12 @@ class MessageTest extends BrowserKitTestCase
 
         $message = factory(Message::class)->create([
             'user_id_from' => $user1->id,
-            'user_id_to' => $user2->id,
+            'user_id_to' => $user2->id
         ]);
 
         $this->actingAs($user3)
             ->visit("user/$user1->id")
-            ->dontSeeLink(trans('menu.user.message'), 'user/'.$user1->id.'/messages')
+            ->dontSeeLink(trans('menu.user.message'), 'user/' . $user1->id . '/messages')
             ->get("user/$user1->id/messages/$user2->id")
             ->seeStatusCode(401);
     }
@@ -58,7 +58,7 @@ class MessageTest extends BrowserKitTestCase
         $this->seeInDatabase('messages', [
             'user_id_from' => $user1->id,
             'user_id_to' => $user2->id,
-            'body' => 'Hola',
+            'body' => 'Hola'
         ]);
 
         // Sender going back to messages page
@@ -89,7 +89,7 @@ class MessageTest extends BrowserKitTestCase
         $this->seeInDatabase('messages', [
             'user_id_from' => $user2->id,
             'user_id_to' => $user1->id,
-            'body' => 'Ciao',
+            'body' => 'Ciao'
         ]);
 
         // Sender receiving a reply
@@ -112,13 +112,13 @@ class MessageTest extends BrowserKitTestCase
         factory(Message::class)->create([
             'user_id_from' => $user1->id,
             'user_id_to' => $user3->id,
-            'body' => 'Hola',
+            'body' => 'Hola'
         ]);
 
         factory(Message::class)->create([
             'user_id_from' => $user2->id,
             'user_id_to' => $user3->id,
-            'body' => 'Ciao',
+            'body' => 'Ciao'
         ]);
 
         $this->actingAs($user3)

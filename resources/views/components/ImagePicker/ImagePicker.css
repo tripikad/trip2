@@ -1,5 +1,3 @@
-@import "variables";
-
 .ImagePicker {
     position: fixed;
     background: rgba(0, 0, 0, 0.8);
@@ -12,24 +10,24 @@
     z-index: 10001;
 }
 
-    .ImagePicker__close {
-        position: fixed;
-        top: $margin-xs;
-        right: $margin-sm;
-        color: $white;
-        font-size: 2rem;
-    }
+.ImagePicker__close {
+    position: fixed;
+    top: $margin-xs;
+    right: $margin-sm;
+    color: $white;
+    font-size: 2rem;
+}
 
-    .ImagePicker__card {
-        margin-top: $margin-sm;
-    }
+.ImagePicker__card {
+    margin-top: $margin-sm;
+}
 
-    .ImagePicker__image {
-        width: 100%;
-        margin-bottom: $margin-xxs;
-    }
+.ImagePicker__image {
+    width: 100%;
+    margin-bottom: $margin-xxs;
+}
 
-    .ImagePicker__title {
-        font: $font-text-sm;
-        color: $white;
-    }
+.ImagePicker__title {
+    font: $font-text-sm;
+    color: $white;
+}

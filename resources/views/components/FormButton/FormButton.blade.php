@@ -5,4 +5,10 @@ $disabled = $disabled ?? false;
 
 @endphp
 
-<input class="FormButton {{ $isclasses }}" type="submit" value="{{ $title }}" @if($disabled) disabled @endif>
+<input
+  class="FormButton {{ $isclasses }}"
+  type="submit"
+  value="{{ $title }}"
+  @if($disabled) disabled @endif
+  dusk="{{ $title ? slug($title) : '' }}"
+>

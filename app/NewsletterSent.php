@@ -11,12 +11,7 @@ class NewsletterSent extends Model
     public $timestamps = false;
     protected $dates = ['started_at', 'ended_at'];
 
-    protected $appends = [
-        'newsletter_type_num',
-        'sent_num',
-        'sending_num',
-        'subscriptions_num',
-    ];
+    protected $appends = ['newsletter_type_num', 'sent_num', 'sending_num', 'subscriptions_num'];
 
     // Relations
 
@@ -52,7 +47,8 @@ class NewsletterSent extends Model
 
     public function sending_count()
     {
-        return $this->sent()->selectRaw('sent_id, count(*) as aggregate')
+        return $this->sent()
+            ->selectRaw('sent_id, count(*) as aggregate')
             ->where('sending', 0);
     }
 
@@ -83,7 +79,7 @@ class NewsletterSent extends Model
 
     private function getCountRelation($relation)
     {
-        if (! array_key_exists($relation, $this->relations)) {
+        if (!array_key_exists($relation, $this->relations)) {
             $this->load($relation);
         }
 
@@ -95,6 +91,6 @@ class NewsletterSent extends Model
             $related = null;
         }
 
-        return ($related) ? (int) $related->aggregate : 0;
+        return $related ? (int) $related->aggregate : 0;
     }
 }

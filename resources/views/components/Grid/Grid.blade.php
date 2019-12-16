@@ -6,7 +6,7 @@ $rows = round(collect($items)->count() / $cols, PHP_ROUND_HALF_DOWN);
 $widths = $widths ?? 'repeat('. $cols .', 1fr)';
 $heights = $heights ?? 'repeat('. $rows .', auto)';
 
-$spacer = style_vars()->spacer;
+$spacer = styles('spacer');
 
 $gap_map = ['sm' => 1, 'md' => 2, 'lg' => 3];
 
@@ -16,7 +16,7 @@ if (isset($gap) && is_string($gap) && $gap_map[$gap]) {
 else if (isset($gap) && !is_string($gap)) {
   $gap_string = 'calc('. $gap .' * '. $spacer .')';
 } else {
-  $gap_string = '';
+  $gap_string = 'calc('. $gap_map['sm'] .' * '. $spacer .')';
 }
 
 @endphp

@@ -16,7 +16,10 @@ class CreateAliasesTable extends Migration
             $table->increments('id');
             $table->integer('aliasable_id')->index();
             $table->string('aliasable_type', 25)->index();
-            $table->string('route_type', 20)->nullable()->index();
+            $table
+                ->string('route_type', 20)
+                ->nullable()
+                ->index();
             $table->string('path');
         });
     }

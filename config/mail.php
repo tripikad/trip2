@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Mail Driver
@@ -56,7 +55,7 @@ return [
 
     'from' => [
         'address' => 'trip@trip.ee',
-        'name' => 'Trip.ee',
+        'name' => 'Trip.ee'
     ],
 
     /*
@@ -127,9 +126,6 @@ return [
     'markdown' => [
         'theme' => 'default',
 
-        'paths' => [
-            resource_path('views/vendor/mail'),
-        ],
-    ],
-
+        'paths' => [resource_path('views/vendor/mail')]
+    ]
 ];

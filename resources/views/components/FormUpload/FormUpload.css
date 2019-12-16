@@ -1,5 +1,3 @@
-@import "variables";
-
 .FormUpload {
     border: $border-dotted-gray-md;
     border-radius: $border-radius-md;
@@ -8,6 +6,6 @@
     font: $font-text-lg;
 }
 
-    .FormUpload--hidden {
-        display: none;
-    }
+.FormUpload--hidden {
+    display: none;
+}

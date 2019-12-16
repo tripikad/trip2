@@ -1,5 +1,3 @@
-@import 'variables';
-
 .Form__field {
     margin-bottom: $margin-md;
     line-height: 1em;

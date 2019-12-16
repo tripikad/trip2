@@ -9,16 +9,10 @@ class DestinationHeader
         $parents = $destination->getAncestors();
         $childrens = $destination->getImmediateDescendants()->sortBy('name');
 
-        $body = $destination->description
-            ? $destination->vars()->description
-            : '';
+        $body = $destination->description ? $destination->vars()->description : '';
         if ($body && $destination->user) {
             $body .=
-                ' (<a href="' .
-                route('user.show', [$destination->user]) .
-                '">' .
-                $destination->user->name .
-                '</a>)';
+                ' (<a href="' . route('user.show', [$destination->user]) . '">' . $destination->user->name . '</a>)';
         }
 
         return component('HeaderLight')
@@ -48,16 +42,8 @@ class DestinationHeader
                             ->with(
                                 'items',
                                 collect()
-                                    ->push(
-                                        region(
-                                            'DestinationHeaderAbout',
-                                            $destination,
-                                            $user
-                                        )
-                                    )
-                                    ->push(
-                                        region('DestinationMap', $destination)
-                                    )
+                                    ->push(region('DestinationHeaderAbout', $destination, $user))
+                                    ->push(region('DestinationMap', $destination))
                             )
                     )
                     ->pushWhen(
@@ -66,24 +52,11 @@ class DestinationHeader
                             ->is('semitransparent')
                             ->is('responsive')
                             ->is('narrow')
-                            ->with(
-                                'body',
-                                format_body($destination->description)
-                            )
+                            ->with('body', format_body($destination->description))
                     )
-                    ->pushWhen(
-                        $destination->user,
-                        region('UserRow', $destination->user)
-                    )
+                    ->pushWhen($destination->user, region('UserRow', $destination->user))
                     ->br()
-                    ->pushWhen(
-                        $childrens->count(),
-                        region(
-                            'DestinationChildrenTitle',
-                            $destination,
-                            $childrens
-                        )
-                    )
+                    ->pushWhen($childrens->count(), region('DestinationChildrenTitle', $destination, $childrens))
                     ->pushWhen(
                         $childrens->count(),
                         component('Flex')
@@ -97,12 +70,7 @@ class DestinationHeader
                                         ->is('white')
                                         ->is('large')
                                         ->with('title', $children->name)
-                                        ->with(
-                                            'route',
-                                            route('destination.showSlug', [
-                                                $children->slug
-                                            ])
-                                        );
+                                        ->with('route', route('destination.showSlug', [$children->slug]));
                                 })
                             )
                     )
@@ -114,10 +82,7 @@ class DestinationHeader
                             ->is('small')
                             ->is('narrow')
                             ->with('title', trans('content.action.edit.title'))
-                            ->with(
-                                'route',
-                                route('destination.edit', [$destination])
-                            )
+                            ->with('route', route('destination.edit', [$destination]))
                     )
             );
     }

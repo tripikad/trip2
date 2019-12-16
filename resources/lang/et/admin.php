@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     'content.index.title' => 'Peidetud sisu',
 
     'image.index.title' => 'Toimetuse pildid',
@@ -10,6 +9,5 @@ return [
 
     'image.create.submit.title' => 'Lisa',
 
-    'image.store.info' => 'Pilt :filename on lisatud',
-
+    'image.store.info' => 'Pilt :filename on lisatud'
 ];

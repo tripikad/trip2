@@ -1,5 +1,3 @@
-@import "variables";
-
 .Paginator {
     width: 100%;
     display: block;
@@ -8,7 +6,6 @@
 }
 
 .Paginator__item {
-
     display: inline-block;
     margin-right: $margin-sm;
     margin-top: $margin-sm;

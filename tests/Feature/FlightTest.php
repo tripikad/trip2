@@ -30,7 +30,7 @@ class FlightTest extends BrowserKitTestCase
                 'title' => 'Hello flight title',
                 'body' => 'Hello flight body',
                 'type' => 'flight',
-                'status' => 1,
+                'status' => 1
             ]);
 
         $content = Content::whereTitle('Hello flight title')->first();
@@ -50,7 +50,7 @@ class FlightTest extends BrowserKitTestCase
                 'title' => 'Hola flight titulo',
                 'body' => 'Hola flight cuerpo',
                 'type' => 'flight',
-                'status' => 1,
+                'status' => 1
             ]);
     }
 
@@ -60,11 +60,11 @@ class FlightTest extends BrowserKitTestCase
         $regular_user_viewing_flight = factory(User::class)->create();
 
         $this->actingAs($admin_user_creating_flight)
-                ->visit('odavad-lennupiletid')
-                ->click(trans('content.flight.create.title'))
-                ->type('Hello flight title', 'title')
-                ->type('Hello flight body', 'body')
-                ->press(trans('content.create.submit.title'));
+            ->visit('odavad-lennupiletid')
+            ->click(trans('content.flight.create.title'))
+            ->type('Hello flight title', 'title')
+            ->type('Hello flight body', 'body')
+            ->press(trans('content.create.submit.title'));
 
         $content = Content::whereTitle('Hello flight title')->first();
 
@@ -82,11 +82,11 @@ class FlightTest extends BrowserKitTestCase
         $admin_user_creating_flight = factory(User::class)->create(['role' => 'admin']);
 
         $this->actingAs($admin_user_creating_flight)
-                ->visit('odavad-lennupiletid')
-                ->click(trans('content.flight.create.title'))
-                ->type('Hello flight title', 'title')
-                ->type('Hello flight body', 'body')
-                ->press(trans('content.create.submit.title'));
+            ->visit('odavad-lennupiletid')
+            ->click(trans('content.flight.create.title'))
+            ->type('Hello flight title', 'title')
+            ->type('Hello flight body', 'body')
+            ->press(trans('content.create.submit.title'));
 
         $content = Content::whereTitle('Hello flight title')->first();
 

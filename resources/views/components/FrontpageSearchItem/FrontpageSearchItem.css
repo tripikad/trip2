@@ -1,5 +1,3 @@
-@import "variables";
-
 .FrontpageSearchItem {
     float: left;
     width: 100%;
@@ -9,43 +7,43 @@
     font-size: $font-size-sm;
 }
 
-    .FrontpageSearchItem__badge {
-        display: inline-block;
-        width: auto;
-        margin-left: $padding-xxs;
-        color: $white;
-        height: 18px;
-        padding: 0 $padding-xxs;
-        border-radius: 20px;
-        min-width: 20px;
-        line-height: 20px;
-        font-size: 10px;
-        text-align: center;
-        position: relative;
-        top: -2px;
-        font-weight: $font-weight-semibold;
-    }
+.FrontpageSearchItem__badge {
+    display: inline-block;
+    width: auto;
+    margin-left: $padding-xxs;
+    color: $white;
+    height: 18px;
+    padding: 0 $padding-xxs;
+    border-radius: 20px;
+    min-width: 20px;
+    line-height: 20px;
+    font-size: 10px;
+    text-align: center;
+    position: relative;
+    top: -2px;
+    font-weight: $font-weight-semibold;
+}
 
-        .FrontpageSearchItem__badge--orange {
-            background: $orange;
-        }
+.FrontpageSearchItem__badge--orange {
+    background: $orange;
+}
 
-        .FrontpageSearchItem__badge--blue {
-            background: $blue;
-        }
+.FrontpageSearchItem__badge--blue {
+    background: $blue;
+}
 
-        .FrontpageSearchItem__badge--red {
-            background: $red;
-        }
+.FrontpageSearchItem__badge--red {
+    background: $red;
+}
 
-        .FrontpageSearchItem__badge--green {
-            background: $green;
-        }
+.FrontpageSearchItem__badge--green {
+    background: $green;
+}
 
-        .FrontpageSearchItem__badge--purple {
-            background: $purple;
-        }
+.FrontpageSearchItem__badge--purple {
+    background: $purple;
+}
 
-        .FrontpageSearchItem__badge--yellow {
-            background: $yellow-dark;
-        }
+.FrontpageSearchItem__badge--yellow {
+    background: $yellow-dark;
+}

@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | PDO Fetch Style
@@ -45,45 +44,43 @@ return [
     */
 
     'connections' => [
-
         'trip' => [
-            'driver'    => 'mysql',
-            'host'      => env('DB_HOST1', 'localhost'),
-            'database'  => env('DB_DATABASE1', 'forge'),
-            'username'  => env('DB_USERNAME1', 'forge'),
-            'password'  => env('DB_PASSWORD1', ''),
-            'charset'   => 'utf8',
+            'driver' => 'mysql',
+            'host' => env('DB_HOST1', 'localhost'),
+            'database' => env('DB_DATABASE1', 'forge'),
+            'username' => env('DB_USERNAME1', 'forge'),
+            'password' => env('DB_PASSWORD1', ''),
+            'charset' => 'utf8',
             'collation' => 'utf8_unicode_ci',
-            'prefix'    => '',
-            'strict'    => false,
+            'prefix' => '',
+            'strict' => false
         ],
 
         'trip2' => [
-            'driver'    => 'mysql',
-            'host'      => env('DB_HOST2', 'localhost'),
-            'port'      => env('DB_PORT2', 3306),
-            'database'  => env('DB_DATABASE2', 'forge'),
-            'username'  => env('DB_USERNAME2', 'forge'),
-            'password'  => env('DB_PASSWORD2', ''),
-            'charset'   => 'utf8',
+            'driver' => 'mysql',
+            'host' => env('DB_HOST2', 'localhost'),
+            'port' => env('DB_PORT2', 3306),
+            'database' => env('DB_DATABASE2', 'forge'),
+            'username' => env('DB_USERNAME2', 'forge'),
+            'password' => env('DB_PASSWORD2', ''),
+            'charset' => 'utf8',
             'collation' => 'utf8_unicode_ci',
-            'prefix'    => '',
-            'strict'    => false,
+            'prefix' => '',
+            'strict' => false
         ],
 
         'remote_staging' => [
-            'driver'    => 'mysql',
-            'host'      => env('REMOTE_STAGING_DB_HOST', ''),
-            'port'      => env('REMOTE_STAGING_DB_PORT', ''),
-            'database'  => env('REMOTE_STAGING_DB_DATABASE', ''),
-            'username'  => env('REMOTE_STAGING_DB_USERNAME', ''),
-            'password'  => env('REMOTE_STAGING_DB_PASSWORD', ''),
-            'charset'   => 'utf8',
+            'driver' => 'mysql',
+            'host' => env('REMOTE_STAGING_DB_HOST', ''),
+            'port' => env('REMOTE_STAGING_DB_PORT', ''),
+            'database' => env('REMOTE_STAGING_DB_DATABASE', ''),
+            'username' => env('REMOTE_STAGING_DB_USERNAME', ''),
+            'password' => env('REMOTE_STAGING_DB_PASSWORD', ''),
+            'charset' => 'utf8',
             'collation' => 'utf8_unicode_ci',
-            'prefix'    => '',
-            'strict'    => false,
-        ],
-
+            'prefix' => '',
+            'strict' => false
+        ]
     ],
 
     /*
@@ -111,11 +108,10 @@ return [
     */
 
     'redis' => [
-
         'client' => 'predis',
 
         'options' => [
-            'cluster' => 'redis',
+            'cluster' => 'redis'
         ],
 
         'clusters' => [
@@ -124,19 +120,17 @@ return [
                     'host' => env('REDIS_HOST', '127.0.0.1'),
                     'password' => env('REDIS_PASSWORD', null),
                     'port' => env('REDIS_PORT', 6379),
-                    'database' => 0,
-                ],
+                    'database' => 0
+                ]
             ],
             'session' => [
                 [
                     'host' => env('REDIS_HOST', '127.0.0.1'),
                     'password' => env('REDIS_PASSWORD', null),
                     'port' => env('REDIS_PORT', 6379),
-                    'database' => 1,
-                ],
-            ],
-        ],
-
-    ],
-
+                    'database' => 1
+                ]
+            ]
+        ]
+    ]
 ];

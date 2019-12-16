@@ -1,21 +1,13 @@
 <template>
-
     <div v-show="open" class="PromoBar" :class="isclasses">
-
         <div class="PromoBar__titleWrapper">
-            
             <div class="PromoBar__title">
-
                 {{ title }}
-
             </div>
 
             <a class="PromoBar__route" :href="route">
-              
                 {{ route_title }}
-            
             </a>
-
         </div>
 
         <!--div
@@ -31,9 +23,7 @@
             </component>
 
         </div-->
-
     </div>
-
 </template>
 
 <script>

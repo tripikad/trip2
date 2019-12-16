@@ -1,7 +1,4 @@
-@import "variables";
-
 .Promo {
-
     position: relative;
     display: block;
     width: 100%;
@@ -9,8 +6,7 @@
     overflow: hidden;
 }
 
-    .Promo iframe {
-
-        float: left;
-        width: 100%;
-    }
+.Promo iframe {
+    float: left;
+    width: 100%;
+}

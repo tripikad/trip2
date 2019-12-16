@@ -1,6 +1,5 @@
-@import "variables";
-@import "codemirror/lib/codemirror.css";
-@import "codemirror/theme/neo.css";
+@import 'codemirror/lib/codemirror.css';
+@import 'codemirror/theme/neo.css';
 
 .Editor {
     background: $white;
@@ -13,93 +12,92 @@
     overflow: scroll;
 }
 
-    .Editor__wrapper {
-        background: $white;
-        position: absolute;
-        left: 0;
-        top: 0;
-        right: 0;
-        height: auto;
-        padding: $padding-xxl $padding-lg $padding-lg $padding-lg;
-        padding: $padding-xxl $padding-md $padding-md $padding-md ?if $mobile;
-    }
+.Editor__wrapper {
+    background: $white;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    height: auto;
+    padding: $padding-xxl $padding-lg $padding-lg $padding-lg;
+    padding: $padding-xxl $padding-md $padding-md $padding-md ?if $mobile;
+}
 
-    .Editor__toolbar {
-        position: fixed;
-        top: 0;
-        right: 0;
-        left: 0;
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: $margin-md;
-        padding: $padding-md $padding-lg;
-        padding: $padding-md ?if $mobile;
-        box-shadow: $box-shadow-bottom;
-        z-index: 10000;
-        background: $white;
-    }
+.Editor__toolbar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: $margin-md;
+    padding: $padding-md $padding-lg;
+    padding: $padding-md ?if $mobile;
+    box-shadow: $box-shadow-bottom;
+    z-index: 10000;
+    background: $white;
+}
 
-    .Editor__toolbarLeft {
-        display: flex;
-        overflow-x: scroll;
-        margin-right: $margin-sm;
-    }
+.Editor__toolbarLeft {
+    display: flex;
+    overflow-x: scroll;
+    margin-right: $margin-sm;
+}
 
-    .Editor__tool {
-        font: $font-code-sm;
-        color: $gray;
-        margin-right: $margin-sm;
-        cursor: pointer;
-    }
+.Editor__tool {
+    font: $font-code-sm;
+    color: $gray;
+    margin-right: $margin-sm;
+    cursor: pointer;
+}
 
-    .Editor__tool:hover {
-        color: $gray-dark;
-    }
+.Editor__tool:hover {
+    color: $gray-dark;
+}
 
-    .Editor__content {
-        display: flex;
-        display: block ?if $mobile;
-    }
+.Editor__content {
+    display: flex;
+    display: block ?if $mobile;
+}
 
-    .Editor__source {
-        width: 50%;
-        width: 100% ?if $mobile;
-        margin-right: $margin-sm;
-    }
+.Editor__source {
+    width: 50%;
+    width: 100% ?if $mobile;
+    margin-right: $margin-sm;
+}
 
-    .Editor__target {
-        width: 50%;
-        width: 100% ?if $mobile;
-        margin-top: $margin-xxs;
-        margin-top: $margin-lg ?if $mobile;
-        margin-left: $margin-sm;
-        margin-left: 0 ?if $mobile;
-    }
+.Editor__target {
+    width: 50%;
+    width: 100% ?if $mobile;
+    margin-top: $margin-xxs;
+    margin-top: $margin-lg ?if $mobile;
+    margin-left: $margin-sm;
+    margin-left: 0 ?if $mobile;
+}
 
-    .CodeMirror {
-        height: auto !important;
-        font: $font-code-sm !important;
-        line-height: $line-height-lg !important;
-    }
+.CodeMirror {
+    height: auto !important;
+    font: $font-code-sm !important;
+    line-height: $line-height-lg !important;
+}
 
-    .CodeMirror-cursor {
-      border-left: 1px solid $black !important;
-      border-right: none !important;
-      background: none !important;
-      z-index: 0 !important;
-    }
+.CodeMirror-cursor {
+    border-left: 1px solid $black !important;
+    border-right: none !important;
+    background: none !important;
+    z-index: 0 !important;
+}
 
-    .cm-s-neo.CodeMirror {
-        background-color: transparent !important;
-    }
+.cm-s-neo.CodeMirror {
+    background-color: transparent !important;
+}
 
-    .cm-link {
-        text-decoration: none;
-        color: $gray;
-    }
+.cm-link {
+    text-decoration: none;
+    color: $gray;
+}
 
-    .cm-string,
-    .cm-url {
-        color: $gray;
-    }
-
+.cm-string,
+.cm-url {
+    color: $gray;
+}

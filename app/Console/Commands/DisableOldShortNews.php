@@ -15,7 +15,9 @@ class DisableOldShortNews extends Command
     {
         $this->line('Changing status for old short news');
 
-        Content::where('type', 'shortnews')->where('created_at', '<', self::FROM_DATE)->update(['status' => 0]);
+        Content::where('type', 'shortnews')
+            ->where('created_at', '<', self::FROM_DATE)
+            ->update(['status' => 0]);
 
         $this->line('Done');
     }

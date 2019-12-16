@@ -6,7 +6,12 @@
 
         <div class="NewsletterComposer__item" v-for="(item, key) in items" :key="key">
             <div class="NewsletterComposer__item-left">
-                <textarea name="body[]" class="FormTextarea__textarea" :placeholder="content_placeholder" v-model="item.body"></textarea>
+                <textarea
+                    name="body[]"
+                    class="FormTextarea__textarea"
+                    :placeholder="content_placeholder"
+                    v-model="item.body"
+                ></textarea>
 
                 <div class="NewsletterComposer__visible">
                     <div class="NewsletterComposer__visibleLeft">
@@ -16,7 +21,7 @@
                             name="visible_from[]"
                             class="FormTextfield__input"
                             :placeholder="visible_from_placeholder"
-                        >
+                        />
                     </div>
                     <div class="NewsletterComposer__visibleRight">
                         <input
@@ -25,13 +30,25 @@
                             name="visible_to[]"
                             class="FormTextfield__input"
                             :placeholder="visible_to_placeholder"
-                        >
+                        />
                     </div>
                 </div>
             </div>
             <div class="NewsletterComposer__item-right">
-                <button @click="cloneItem(item, key)" type="button" class="NewsletterComposer__button NewsletterComposer__button-clone">+</button>
-                <button @click="removeItem(key)" type="button" class="NewsletterComposer__button NewsletterComposer__button-remove">×</button>
+                <button
+                    @click="cloneItem(item, key)"
+                    type="button"
+                    class="NewsletterComposer__button NewsletterComposer__button-clone"
+                >
+                    +
+                </button>
+                <button
+                    @click="removeItem(key)"
+                    type="button"
+                    class="NewsletterComposer__button NewsletterComposer__button-remove"
+                >
+                    ×
+                </button>
             </div>
         </div>
     </div>
@@ -61,11 +78,7 @@ export default {
             new_item.visible_from = ''
             new_item.visible_to = ''
 
-            this.items.splice(
-                parseInt(key + 1),
-                0,
-                new_item
-            )
+            this.items.splice(parseInt(key + 1), 0, new_item)
         },
 
         removeItem: function(key) {

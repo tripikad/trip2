@@ -1,5 +1,3 @@
-@import 'variables';
-
 .DestinationFacts__key {
     font: $font-text-md;
     color: $black;

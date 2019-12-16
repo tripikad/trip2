@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Styleguide;
 
+use App\Http\Controllers\Controller;
 use App\Content;
-use Illuminate\Support\Facades\Storage;
 
-class ExperimentsGridController extends Controller
+class GridController extends Controller
 {
     public function index()
     {
@@ -16,7 +16,7 @@ class ExperimentsGridController extends Controller
             ->with(
                 'content',
                 collect()
-                    ->push(region('ExperimentalMenu'))
+                    ->push(region('StyleguideMenu'))
                     ->push(component('Title')->with('title', 'Grids'))
                     ->push(
                         component('Title')
@@ -124,10 +124,7 @@ class ExperimentsGridController extends Controller
                         $photos->take(4)->map(function ($photo) {
                             return component('ExperimentalCard')
                                 ->with('title', $photo->vars()->shortTitle)
-                                ->with(
-                                    'background',
-                                    $photo->imagePreset('medium')
-                                );
+                                ->with('background', $photo->imagePreset('medium'));
                         })
                     )
             )
@@ -153,10 +150,7 @@ class ExperimentsGridController extends Controller
                         $photos->take(6)->map(function ($photo) {
                             return component('ExperimentalCard')
                                 ->with('title', $photo->vars()->shortTitle)
-                                ->with(
-                                    'background',
-                                    $photo->imagePreset('medium')
-                                );
+                                ->with('background', $photo->imagePreset('medium'));
                         })
                     )
             );
@@ -193,10 +187,7 @@ class ExperimentsGridController extends Controller
                         $photos->map(function ($photo) {
                             return component('ExperimentalCard')
                                 ->with('title', $photo->vars()->shortTitle)
-                                ->with(
-                                    'background',
-                                    $photo->imagePreset('medium')
-                                );
+                                ->with('background', $photo->imagePreset('medium'));
                         })
                     )
             );

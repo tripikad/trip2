@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Default Filesystem Disk
@@ -42,27 +41,26 @@ return [
     */
 
     'disks' => [
-
         'local' => [
             'driver' => 'local',
-            'root' => storage_path('app'),
+            'root' => storage_path('app')
         ],
 
         'root' => [
             'driver' => 'local',
-            'root' => base_path(),
+            'root' => base_path()
         ],
 
         'resources' => [
             'driver' => 'local',
-            'root' => base_path('resources'),
+            'root' => base_path('resources')
         ],
 
         'ftp' => [
             'driver' => 'ftp',
             'host' => 'ftp.example.com',
             'username' => 'your-username',
-            'password' => 'your-password',
+            'password' => 'your-password'
 
             // Optional FTP Settings...
             // 'port'     => 21,
@@ -77,7 +75,7 @@ return [
             'key' => 'your-key',
             'secret' => 'your-secret',
             'region' => 'your-region',
-            'bucket' => 'your-bucket',
+            'bucket' => 'your-bucket'
         ],
 
         'rackspace' => [
@@ -87,9 +85,7 @@ return [
             'container' => 'your-container',
             'endpoint' => 'https://identity.api.rackspacecloud.com/v2.0/',
             'region' => 'IAD',
-            'url_type' => 'publicURL',
-        ],
-
-    ],
-
+            'url_type' => 'publicURL'
+        ]
+    ]
 ];

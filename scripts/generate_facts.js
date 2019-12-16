@@ -21,32 +21,19 @@ const makeFloat = str => {
 }
 
 const destinationData = destinations.map(data => {
-    const country = countries.geonames.filter(
-        c => c.countryCode == data.countryCode
-    )[0]
+    const country = countries.geonames.filter(c => c.countryCode == data.countryCode)[0]
     const dialcode = dialcodes.filter(c => c.countryCode == data.code)[0]
     return {
         id: data.id,
         english_name: data.name,
         type: data.type,
-        timezone:
-            data.timezone && data.timezone.gmtOffset
-                ? data.timezone.gmtOffset
-                : false,
-        country_code2:
-            data.countryCode !== undefined ? data.countryCode : false,
-        country_code3:
-            data.countryCode !== undefined && iso2to3(data.countryCode)
-                ? iso2to3(data.countryCode)
-                : false,
+        timezone: data.timezone && data.timezone.gmtOffset ? data.timezone.gmtOffset : false,
+        country_code2: data.countryCode !== undefined ? data.countryCode : false,
+        country_code3: data.countryCode !== undefined && iso2to3(data.countryCode) ? iso2to3(data.countryCode) : false,
         geoname_id: data.geonameId !== undefined ? data.geonameId : false,
         capital: country && country.capital ? country.capital : '',
-        area:
-            data.type == 'country' && country && country.areaInSqKm
-                ? makeFloat(country.areaInSqKm)
-                : false,
-        currency_code:
-            country && country.currencyCode ? country.currencyCode : '',
+        area: data.type == 'country' && country && country.areaInSqKm ? makeFloat(country.areaInSqKm) : false,
+        currency_code: country && country.currencyCode ? country.currencyCode : '',
         population: data.population !== undefined ? data.population : false,
         lat: makeFloat(data.lat),
         lon: makeFloat(data.lng),
@@ -67,11 +54,7 @@ if (process.argv[2] == '--json') {
         'country_code2' => '${d.country_code2}',
         'country_code3' => '${d.country_code3}',
         'geoname_id' => ${d.geoname_id},
-        'capital' => ${
-            typeof d.capital == 'boolean'
-                ? d.capital
-                : `'${d.capital.replace(`'`, '')}'`
-        },
+        'capital' => ${typeof d.capital == 'boolean' ? d.capital : `'${d.capital.replace(`'`, '')}'`},
         'currency_code' => '${d.currency_code}',
         'population' => ${d.population},
         'area' => ${d.area},

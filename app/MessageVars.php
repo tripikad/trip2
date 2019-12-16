@@ -21,9 +21,7 @@ class MessageVars
 
         $message = '%s does not respond to the "%s" property or method.';
 
-        throw new Exception(
-            sprintf($message, static::class, $property)
-        );
+        throw new Exception(sprintf($message, static::class, $property));
     }
 
     public function title()

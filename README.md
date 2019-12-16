@@ -1,4 +1,4 @@
-## Installation
+## Installation .
 
 ### Start
 
@@ -269,29 +269,36 @@ Modifiers
 
 #### Style variables in CSS
 
-Variables are located in `/resources/views/styles/variables.json` and `/resources/views/styles/variables.css` and can be imported as
+Variables are located in `/resources/views/styles/styles.js`
+
+For CSS, the variables are automatically available:
 
 ```scss
-@import 'variables' // Resolves to ./resources/views/styles/variables.json|css
-    .Component {
+.Component {
     height: $spacer;
 }
 ```
 
 #### Style variables in PHP
 
-Variables in `/resources/views/styles/variables.json` can be used in Blade templates:
+Variables in `/resources/views/styles/styles.js` are exported to `config/styles.php` during fontent build time and can can be used in PHP files and Blade templates using `styles()` helper:
 
 ```blade
-{{ style_vars()->spacer }}
+<div style="height: {{ styles('spacer') }}">
 ```
 
 #### Style variables in Vue
 
-Variables in `/resources/views/styles/variables.json` can be used in Vue templates:
+Variables in `/resources/views/styles/variables.json` can be used in Vue templates like this:
+
+```vue
+<div :style="{ height: $styles.spacer }">
+```
+
+and in methods like this
 
 ```js
-this.$style_vars.spacer
+this.$styles.spacer
 ```
 
 #### Fonts
@@ -382,3 +389,11 @@ layout('One')->cached(false);
 #### Making a layout
 
 At the time of writing there is no helper command to create a layout .
+
+## Backend arcitecture
+
+### Models
+
+See the [PR](pull/1934) for entity-relationship diagram:
+
+[graph.png](https://github.com/tripikad/trip2/blob/96e4c22fca273759990300a8a52a217d7607a57a/graph.png?raw=true)

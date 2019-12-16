@@ -47,7 +47,7 @@ class UserTest extends BrowserKitTestCase
                 'contact_facebook' => 'http://facebook.com',
                 'contact_instagram' => 'http://instagram.com',
                 'contact_twitter' => 'http://twitter.com',
-                'contact_homepage' => 'http://calavera.com',
+                'contact_homepage' => 'http://calavera.com'
             ]);
     }
 
@@ -57,7 +57,7 @@ class UserTest extends BrowserKitTestCase
 
         $this->actingAs($user_editing_profile)
             ->visit("user/$user_editing_profile->id/edit")
-            ->attach(storage_path().'/tests/test.jpg', 'file')
+            ->attach(storage_path() . '/tests/test.jpg', 'file')
             ->press(trans('user.edit.submit'))
             ->seePageIs("user/$user_editing_profile->id");
 
@@ -65,14 +65,14 @@ class UserTest extends BrowserKitTestCase
 
         // Check original file exists and clean up
 
-        $filepath = config('imagepresets.original.path').$filename;
+        $filepath = config('imagepresets.original.path') . $filename;
         $this->assertTrue(file_exists($filepath));
         unlink($filepath);
 
         // See thumbnails exist and clean up
 
         foreach (['large', 'medium', 'small', 'small_square', 'xsmall_square'] as $preset) {
-            $filepath = config("imagepresets.presets.$preset.path").$filename;
+            $filepath = config("imagepresets.presets.$preset.path") . $filename;
             $this->assertTrue(file_exists($filepath));
             unlink($filepath);
         }

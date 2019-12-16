@@ -13,26 +13,10 @@ class FormatDescriptionTest extends TestCase
     public function test_description_formatting_is_removed()
     {
         $cases = [
-            [
-                ' Hello ',
-                'Hello',
-                'Output should be trimmed from extra spacing in the beginning and in the end',
-            ],
-            [
-                'Hello <a href="http://google.com">Google</a>',
-                'Hello Google',
-                'HTML links should be removed',
-            ],
-            [
-                'Hello [Google](http://google.com)',
-                'Hello Google',
-                'Markdown links should be removed',
-            ],
-            [
-                "\nHello\rGoogle\t",
-                'Hello Google',
-                'Newlines and tabs should be removed',
-            ],
+            [' Hello ', 'Hello', 'Output should be trimmed from extra spacing in the beginning and in the end'],
+            ['Hello <a href="http://google.com">Google</a>', 'Hello Google', 'HTML links should be removed'],
+            ['Hello [Google](http://google.com)', 'Hello Google', 'Markdown links should be removed'],
+            ["\nHello\rGoogle\t", 'Hello Google', 'Newlines and tabs should be removed']
         ];
 
         foreach ($cases as $case) {
@@ -42,24 +26,16 @@ class FormatDescriptionTest extends TestCase
 
     public function test_description_images_are_removed()
     {
-        $image = Image::create(['filename' => str_random(6).'.jpg']);
+        $image = Image::create(['filename' => str_random(6) . '.jpg']);
 
         $cases = [
+            ['Hello [[' . $image->id . ']]', 'Hello', 'Existing image references should be removed'],
             [
-                'Hello [['.$image->id.']]',
+                'Hello [[[' . $image->id . ']]](http://google.com)',
                 'Hello',
-                'Existing image references should be removed',
+                'Existing linked image references should be removed'
             ],
-            [
-                'Hello [[['.$image->id.']]](http://google.com)',
-                'Hello',
-                'Existing linked image references should be removed',
-            ],
-            [
-                'Hello [[0]]',
-                'Hello [[0]]',
-                'Non-existing image references should be kept',
-            ],
+            ['Hello [[0]]', 'Hello [[0]]', 'Non-existing image references should be kept']
         ];
 
         foreach ($cases as $case) {

@@ -15,7 +15,19 @@ class Content extends Model
 
     // Setup
 
-    protected $fillable = ['user_id', 'type', 'title', 'body', 'url', 'image', 'status', 'start_at', 'end_at', 'duration', 'price'];
+    protected $fillable = [
+        'user_id',
+        'type',
+        'title',
+        'body',
+        'url',
+        'image',
+        'status',
+        'start_at',
+        'end_at',
+        'duration',
+        'price'
+    ];
 
     protected $dates = ['created_at', 'updated_at', 'start_at', 'end_at'];
 
@@ -38,12 +50,15 @@ class Content extends Model
 
     public function views()
     {
-        return $this->morphMany('App\Activity', 'activity')->selectRaw('activity_id, count(*) as count')->where('type', 'view')->groupBy('activity_id');
+        return $this->morphMany('App\Activity', 'activity')
+            ->selectRaw('activity_id, count(*) as count')
+            ->where('type', 'view')
+            ->groupBy('activity_id');
     }
 
     public function getViewsCountAttribute()
     {
-        if (! $this->views->count()) {
+        if (!$this->views->count()) {
             return 0;
         } else {
             return $this->views->first()->count;
@@ -90,7 +105,10 @@ class Content extends Model
     public function getDestinationParent()
     {
         if ($this->destinations->first()) {
-            return $this->destinations->first()->parent()->first();
+            return $this->destinations
+                ->first()
+                ->parent()
+                ->first();
         }
     }
 
@@ -108,10 +126,10 @@ class Content extends Model
         $image = null;
 
         if ($this->image) {
-            $image = config('imagepresets.presets.small.path').$this->image;
+            $image = config('imagepresets.presets.small.path') . $this->image;
         }
 
-        if (! file_exists($image)) {
+        if (!file_exists($image)) {
             $image = config('imagepresets.image.none');
         }
 
@@ -133,7 +151,7 @@ class Content extends Model
     public function getImageIdAttribute()
     {
         if ($image = $this->images()->first()) {
-            return '[['.$image->id.']]';
+            return '[[' . $image->id . ']]';
         }
     }
 
@@ -142,30 +160,46 @@ class Content extends Model
         $actions = [];
 
         if (auth()->user()) {
-            $status = auth()->user()->follows()->where([
-                'followable_id' => $this->id,
-                'followable_type' => 'App\Content',
-            ])->first() ? 0 : 1;
+            $status = auth()
+                ->user()
+                ->follows()
+                ->where([
+                    'followable_id' => $this->id,
+                    'followable_type' => 'App\Content'
+                ])
+                ->first()
+                ? 0
+                : 1;
 
             $actions['follow'] = [
                 'title' => trans("content.action.follow.$status.title"),
                 'route' => route('follow.follow.content', [$this->type, $this, $status]),
-                'method' => 'PUT',
+                'method' => 'PUT'
             ];
         }
 
-        if (auth()->user() && auth()->user()->hasRoleOrOwner('admin', $this->user->id)) {
+        if (
+            auth()->user() &&
+            auth()
+                ->user()
+                ->hasRoleOrOwner('admin', $this->user->id)
+        ) {
             $actions['edit'] = [
                 'title' => trans('content.action.edit.title'),
-                'route' => route('content.edit', ['type' => $this->type, 'id' => $this]),
+                'route' => route('content.edit', ['type' => $this->type, 'id' => $this])
             ];
         }
 
-        if (auth()->user() && auth()->user()->hasRole('admin')) {
+        if (
+            auth()->user() &&
+            auth()
+                ->user()
+                ->hasRole('admin')
+        ) {
             $actions['status'] = [
                 'title' => trans("content.action.status.$this->status.title"),
-                'route' => route('content.status', [$this->type, $this, (1 - $this->status)]),
-                'method' => 'PUT',
+                'route' => route('content.status', [$this->type, $this, 1 - $this->status]),
+                'method' => 'PUT'
             ];
         }
 
@@ -195,14 +229,13 @@ class Content extends Model
         }
 
         return [
-
             'good' => [
                 'value' => count($goods),
                 'flaggable' => Auth::check(),
                 'flaggable_type' => 'content',
                 'flaggable_id' => $this->id,
                 'flag_type' => 'good',
-                'active' => $good_active,
+                'active' => $good_active
             ],
             'bad' => [
                 'value' => count($bads),
@@ -210,8 +243,8 @@ class Content extends Model
                 'flaggable_type' => 'content',
                 'flaggable_id' => $this->id,
                 'flag_type' => 'bad',
-                'active' => $bad_active,
-            ],
+                'active' => $bad_active
+            ]
         ];
     }
 
@@ -229,8 +262,8 @@ class Content extends Model
     {
         return [
             'slug' => [
-                'source' => 'title',
-            ],
+                'source' => 'title'
+            ]
         ];
     }
 
@@ -251,18 +284,18 @@ class Content extends Model
             'comments.user',
             'destinations',
             'topics',
-            'unread_content',
+            'unread_content'
         ];
 
         return $query
             ->whereType($type)
             ->whereStatus(1)
             ->orderBy($order, 'desc')
-            ->with(
-                array_merge($withs, $additional_eager)
-            )
+            ->with(array_merge($withs, $additional_eager))
             ->when($destination, function ($query) use ($destination) {
-                $destinations = Destination::find($destination)->descendantsAndSelf()->pluck('id');
+                $destinations = Destination::find($destination)
+                    ->descendantsAndSelf()
+                    ->pluck('id');
 
                 return $query
                     ->join('content_destination', 'content_destination.content_id', '=', 'contents.id')
@@ -282,15 +315,7 @@ class Content extends Model
 
     public function scopeGetLatestItems($query, $type, $take = 5, $order = 'created_at', array $additional_eager = [])
     {
-        $eager = [
-            'images',
-            'user',
-            'user.images',
-            'comments',
-            'comments.user',
-            'destinations',
-            'topics',
-        ];
+        $eager = ['images', 'user', 'user.images', 'comments', 'comments.user', 'destinations', 'topics'];
 
         if (count($additional_eager)) {
             $eager = array_merge($eager, $additional_eager);
@@ -341,7 +366,7 @@ class Content extends Model
                 'destinations',
                 'topics'
             )
-            ->when(! $user || ! $user->hasRole('admin'), function ($query) use ($user) {
+            ->when(!$user || !$user->hasRole('admin'), function ($query) use ($user) {
                 return $query->whereStatus(1);
             })
             ->first();

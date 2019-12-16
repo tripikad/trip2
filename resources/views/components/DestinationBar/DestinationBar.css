@@ -1,5 +1,3 @@
-@import "variables";
-
 .DestinationBar {
     background: $yellow;
     display: flex;
@@ -8,27 +6,27 @@
     padding: 0 calc($spacer * 1.5);
 }
 
-    .DestinationBar__parents {
-        color: $white;
-        display: flex;
-        font: $font-heading-md;
-        align-items: center;
-        opacity: $opacity-md;
-    }
+.DestinationBar__parents {
+    color: $white;
+    display: flex;
+    font: $font-heading-md;
+    align-items: center;
+    opacity: $opacity-md;
+}
 
-    .DestinationBar__parents > div {
-        margin-right: $margin-xs;
-    }
+.DestinationBar__parents > div {
+    margin-right: $margin-xs;
+}
 
-    .DestinationBar__title {
-        color: $white;
-        font: $font-heading-lg;
-        margin-top: calc($margin-xxs * -1);
-    }
+.DestinationBar__title {
+    color: $white;
+    font: $font-heading-lg;
+    margin-top: calc($margin-xxs * -1);
+}
 
-    .DestinationBar__title:hover {
-        color: $white-hover;
-    }
+.DestinationBar__title:hover {
+    color: $white-hover;
+}
 
 .DestinationBar--yellow {
     background: $yellow; /* default; */

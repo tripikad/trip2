@@ -1,5 +1,3 @@
-@import "variables";
-
 .Arc > svg {
     stroke: $cyan;
 }

@@ -33,7 +33,7 @@ class ExpatTest extends BrowserKitTestCase
                 'title' => 'Hello expat title',
                 'body' => 'Hello expat body',
                 'type' => 'expat',
-                'status' => 1,
+                'status' => 1
             ]);
 
         $content = Content::whereTitle('Hello expat title')->first();
@@ -53,7 +53,7 @@ class ExpatTest extends BrowserKitTestCase
                 'title' => 'Hola expat titulo',
                 'body' => 'Hola expat cuerpo',
                 'type' => 'expat',
-                'status' => 1,
+                'status' => 1
             ]);
     }
 

@@ -31,7 +31,7 @@ class BlogTest extends BrowserKitTestCase
                 'title' => 'Hello blog title',
                 'body' => 'Hello blog body',
                 'type' => 'blog',
-                'status' => 1,
+                'status' => 1
             ]);
 
         $content = Content::whereTitle('Hello blog title')->first();
@@ -51,7 +51,7 @@ class BlogTest extends BrowserKitTestCase
                 'title' => 'Hola blog titulo',
                 'body' => 'Hola blog cuerpo',
                 'type' => 'blog',
-                'status' => 1,
+                'status' => 1
             ]);
     }
 

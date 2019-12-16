@@ -15,8 +15,7 @@ class FollowTest extends BrowserKitTestCase
     {
         $user1 = factory(User::class)->create(['verified' => true]);
 
-        $this->visit("user/$user1->id")
-            ->dontSee(trans('user.show.menu.follow'));
+        $this->visit("user/$user1->id")->dontSee(trans('user.show.menu.follow'));
 
         // Return 401
 
@@ -48,19 +47,19 @@ class FollowTest extends BrowserKitTestCase
 
         $content = factory(Content::class)->create([
             'user_id' => $user1->id,
-            'title' => 'Buenos dias',
+            'title' => 'Buenos dias'
         ]);
 
         // Follow a post
 
         $this->actingAs($user2)
-            ->visit(config('sluggable.contentTypeMapping')[$content->type].'/'.$content->slug)
+            ->visit(config('sluggable.contentTypeMapping')[$content->type] . '/' . $content->slug)
             ->press(trans('content.action.follow.1.title'))
-            ->seePageIs(config('sluggable.contentTypeMapping')[$content->type].'/'.$content->slug)
+            ->seePageIs(config('sluggable.contentTypeMapping')[$content->type] . '/' . $content->slug)
             ->seeInDatabase('follows', [
                 'user_id' => $user2->id,
                 'followable_id' => $content->id,
-                'followable_type' => 'App\Content',
+                'followable_type' => 'App\Content'
             ]);
 
         // See followed post
@@ -70,18 +69,18 @@ class FollowTest extends BrowserKitTestCase
             ->click(trans('menu.user.follow'))
             ->seePageIs("user/$user2->id/follows")
             ->click('Buenos dias')
-            ->seePageIs(config('sluggable.contentTypeMapping')[$content->type].'/'.$content->slug);
+            ->seePageIs(config('sluggable.contentTypeMapping')[$content->type] . '/' . $content->slug);
 
         // Unfollow post
 
         $this->actingAs($user2)
-            ->visit(config('sluggable.contentTypeMapping')[$content->type].'/'.$content->slug)
+            ->visit(config('sluggable.contentTypeMapping')[$content->type] . '/' . $content->slug)
             ->press(trans('content.action.follow.0.title'))
-            ->seePageIs(config('sluggable.contentTypeMapping')[$content->type].'/'.$content->slug)
+            ->seePageIs(config('sluggable.contentTypeMapping')[$content->type] . '/' . $content->slug)
             ->missingFromDatabase('follows', [
                 'user_id' => $user2->id,
                 'followable_id' => $content->id,
-                'followable_type' => 'App\Content',
+                'followable_type' => 'App\Content'
             ]);
 
         // Do not see unfollowed post

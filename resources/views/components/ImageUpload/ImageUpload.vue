@@ -1,12 +1,5 @@
 <template>
-
-    <div
-        class="ImageUpload dropzone"
-        ref="dropzone"
-        :class="isclasses"
-    >
-    </div>
-
+    <div class="ImageUpload dropzone" ref="dropzone" :class="isclasses"></div>
 </template>
 
 <script>
@@ -31,8 +24,7 @@ export default {
             headers: {
                 'X-CSRF-TOKEN': this.$globalProps.token
             },
-            dictDefaultMessage: this.$globalProps
-                .imageUploadTitle,
+            dictDefaultMessage: this.$globalProps.imageUploadTitle,
             success: (file, res) => {
                 this.$events.$emit('imageupload.created')
                 if (this.reload === 'true') {

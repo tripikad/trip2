@@ -19,7 +19,7 @@ class ImageController extends Controller
                     'title' => str_limit($image->filename, 20),
                     'small' => $image->preset('small_square'),
                     'large' => $image->preset('large'),
-                    'id' => "[[$image->id]]",
+                    'id' => "[[$image->id]]"
                 ];
             });
 
@@ -33,7 +33,7 @@ class ImageController extends Controller
         $maxfilesize = config('site.maxfilesize') * 1024;
 
         $this->validate($request, [
-            'image' => "required|image|max:$maxfilesize",
+            'image' => "required|image|max:$maxfilesize"
         ]);
 
         $filename = Image::storeImageFile($request->file('image'));

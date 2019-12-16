@@ -1,28 +1,25 @@
-@import "variables";
-
 .FlightRow {
     display: flex;
 }
 
-    .FlightRow__left {
-        display: flex;
-        display: none ?if $mobile;
-        align-items: top;
-        padding-right: $padding-sm;
-    }
+.FlightRow__left {
+    display: flex;
+    display: none ?if $mobile;
+    align-items: top;
+    padding-right: $padding-sm;
+}
 
-    .FlightRow__right {
-        display: flex;
-        align-items: center;
-    }
+.FlightRow__right {
+    display: flex;
+    align-items: center;
+}
 
-    .FlightRow__title {
-        color: $blue;
-        font: $font-heading-lg;
-        margin-bottom: $margin-xxs;
-    }
+.FlightRow__title {
+    color: $blue;
+    font: $font-heading-lg;
+    margin-bottom: $margin-xxs;
+}
 
-    .FlightRow__title:hover {
-        color: $blue-hover;
-    }
-
+.FlightRow__title:hover {
+    color: $blue-hover;
+}

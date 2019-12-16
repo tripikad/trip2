@@ -1,5 +1,3 @@
-@import 'variables';
-
 .Body {
     font: $font-text-md;
     line-height: $line-height-lg;

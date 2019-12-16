@@ -1,48 +1,45 @@
-@import "variables";
+.EditorSmall__toolbar {
+    margin-bottom: $margin-xs;
+}
 
-    .EditorSmall__toolbar {
-        margin-bottom: $margin-xs;
-    }
+.EditorSmall__button {
+    background: none;
+    border: none;
+    font: $font-text-xs;
+    justify-content: center;
+    padding: $padding-xs;
+    color: $gray;
+    cursor: pointer;
+}
 
-    .EditorSmall__button {
-        background: none;
-        border: none;
-        font: $font-text-xs;
-        justify-content: center;
-        padding: $padding-xs;
-        color: $gray;
-        cursor: pointer;
-    }
+.EditorSmall__button:hover {
+    color: $gray-hover;
+}
 
-    .EditorSmall__button:hover {
-        color: $gray-hover;
-    }
+.EditorSmall__body {
+    border-radius: $border-radius-md;
+    border: $border-gray-md;
+    padding: $padding-md;
+    outline: none;
+    width: 100%;
+    height: calc($spacer * 30);
+    overflow-y: scroll;
+}
 
-    .EditorSmall__body {
-        border-radius: $border-radius-md;
-        border: $border-gray-md;
-        padding: $padding-md;
-        outline: none;
-        width: 100%;
-        height: calc($spacer * 30);
-        overflow-y: scroll;
-    }
+.EditorSmall__body img {
+    width: auto;
+    max-width: 100%;
+    height: auto;
+}
 
-    .EditorSmall__body img {
-        width: auto;
-        max-width: 100%;
-        height: auto;
-    }
-
-    .EditorSmall__source {
-        font: $font-code-sm;
-        line-height: $line-height-lg;
-        border-radius: $border-radius-md;
-        border: $border-gray-md;
-        padding: $padding-md;
-        outline: none;
-        width: 100%;
-        height: calc($spacer * 30);
-        overflow-y: scroll;
-    }
-
+.EditorSmall__source {
+    font: $font-code-sm;
+    line-height: $line-height-lg;
+    border-radius: $border-radius-md;
+    border: $border-gray-md;
+    padding: $padding-md;
+    outline: none;
+    width: 100%;
+    height: calc($spacer * 30);
+    overflow-y: scroll;
+}

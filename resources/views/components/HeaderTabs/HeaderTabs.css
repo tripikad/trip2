@@ -1,5 +1,3 @@
-@import "variables";
-
 ul.HeaderTabs {
     font: $font-text-md;
     list-style: none;
@@ -14,11 +12,11 @@ ul.HeaderTabs {
     top: $padding-sm ?if $mobile;
 }
 
-    ul.HeaderTabs * {
-        transition: all 0.15s linear;
-    }
+ul.HeaderTabs * {
+    transition: all 0.15s linear;
+}
 
-    li.HeaderTabs__item {
-        width: auto;
-        display: inline-flex;
-    }
+li.HeaderTabs__item {
+    width: auto;
+    display: inline-flex;
+}

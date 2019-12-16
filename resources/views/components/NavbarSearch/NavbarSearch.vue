@@ -1,16 +1,7 @@
 <template>
-
-    <div class="NavbarSearch" :class="[ isclasses, { 'NavbarSearch--active': active }]">
-
+    <div class="NavbarSearch" :class="[isclasses, { 'NavbarSearch--active': active }]">
         <div class="NavbarSearch__icon">
-
-            <component
-                :is="'Icon'"
-                icon="icon-search"
-                :size="size"
-                @click.native="active = ! active"
-            ></component>
-
+            <component :is="'Icon'" icon="icon-search" :size="size" @click.native="active = !active"></component>
         </div>
 
         <input
@@ -22,10 +13,8 @@
             v-focus="active"
             v-if="active"
             @click="active = true"
-        >
-
+        />
     </div>
-
 </template>
 
 <script>

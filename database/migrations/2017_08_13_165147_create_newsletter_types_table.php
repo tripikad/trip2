@@ -17,7 +17,10 @@ class CreateNewsletterTypesTable extends Migration
         Schema::create('newsletter_types', function (Blueprint $table) {
             $table->increments('id');
             $table->string('subject'); // Mis toimus Tripis möödunud nädalal? | Pole Sind ammu näinud | Leidsime Sulle sobiva Lennupakkumise sihtkohta %destination_name
-            $table->string('type', 50)->nullable()->index(); // flight | weekly | long_time_ago
+            $table
+                ->string('type', 50)
+                ->nullable()
+                ->index(); // flight | weekly | long_time_ago
             $table->integer('send_days_after')->nullable(); // flight = NULL | Nädala uudiskiri = 7 | Pole ammu näinud = 30?
             $table->boolean('check_user_active_at')->default(false); // Pole ammu näinud = true
             $table->timestamp('last_sent_at')->nullable();

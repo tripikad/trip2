@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Styleguide;
 
-use App\Content;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
+use App\Content;
 
-class ExperimentsIconsController extends Controller
+class IconsController extends Controller
 {
     public function index()
     {
@@ -16,7 +17,7 @@ class ExperimentsIconsController extends Controller
             ->with(
                 'content',
                 collect()
-                    ->push(region('ExperimentalMenu'))
+                    ->push(region('StyleguideMenu'))
                     ->push(component('Title')->with('title', 'Icons'))
                     ->push(
                         component('Code')
@@ -30,14 +31,9 @@ class ExperimentsIconsController extends Controller
 
     private function svgFiles()
     {
-        return collect(Storage::disk('resources')->files('/views/svg'))->map(
-            function ($file) {
-                return str_limit(
-                    file_get_contents(Storage::disk('resources')->path($file)),
-                    200
-                );
-            }
-        );
+        return collect(Storage::disk('resources')->files('/views/svg'))->map(function ($file) {
+            return str_limit(file_get_contents(Storage::disk('resources')->path($file)), 200);
+        });
     }
 
     private function svgComponents()
@@ -51,15 +47,10 @@ class ExperimentsIconsController extends Controller
                     ->push(
                         component('Code')
                             ->is('gray')
-                            ->with(
-                                'code',
-                                $file . "\n\n" . $this->svgFiles()[$index]
-                            )
+                            ->with('code', $file . "\n\n" . $this->svgFiles()[$index])
                     )
                     ->merge(
-                        collect(['sm', 'md', 'lg', 'xl', ''])->map(function (
-                            $size
-                        ) use ($file) {
+                        collect(['sm', 'md', 'lg', 'xl'])->map(function ($size) use ($file) {
                             return '<div class="StyleIcon">' .
                                 component('Icon')
                                     ->with('size', $size)

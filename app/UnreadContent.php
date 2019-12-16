@@ -7,9 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class UnreadContent extends Model
 {
     public $timestamps = false;
-    protected $dates = [
-        'read_at',
-    ];
+    protected $dates = ['read_at'];
 
     public function content()
     {
@@ -24,7 +22,7 @@ class UnreadContent extends Model
         // To avoid 99999 unread issue - quick fix - can be removed 2-3 weeks after live merge
         $unread_data = [
             'count' => 0,
-            'first_comment_id' => null,
+            'first_comment_id' => null
         ];
 
         if ($this->content) {
@@ -43,7 +41,7 @@ class UnreadContent extends Model
                             $content_unread = false;
                         }
 
-                        if (! $unread_data['first_comment_id']) {
+                        if (!$unread_data['first_comment_id']) {
                             $unread_data['first_comment_id'] = $comment->id;
                         }
 
@@ -62,7 +60,7 @@ class UnreadContent extends Model
 
         $unread_data = [
             'count' => 0,
-            'first_comment_id' => null,
+            'first_comment_id' => null
         ];
 
         if ($unread_content && auth()->check()) {
@@ -78,7 +76,7 @@ class UnreadContent extends Model
                         $content_unread = false;
                     }
 
-                    if (! $unread_data['first_comment_id']) {
+                    if (!$unread_data['first_comment_id']) {
                         $unread_data['first_comment_id'] = $comment->id;
                     }
 

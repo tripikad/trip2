@@ -3,7 +3,6 @@
 use Monolog\Handler\StreamHandler;
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Default Log Channel
@@ -35,20 +34,20 @@ return [
     'channels' => [
         'stack' => [
             'driver' => 'stack',
-            'channels' => ['daily'],
+            'channels' => ['daily']
         ],
 
         'single' => [
             'driver' => 'single',
             'path' => storage_path('logs/laravel.log'),
-            'level' => 'debug',
+            'level' => 'debug'
         ],
 
         'daily' => [
             'driver' => 'daily',
             'path' => storage_path('logs/laravel.log'),
             'level' => 'debug',
-            'days' => 7,
+            'days' => 7
         ],
 
         'slack' => [
@@ -56,26 +55,25 @@ return [
             'url' => env('LOG_SLACK_WEBHOOK_URL'),
             'username' => 'Laravel Log',
             'emoji' => ':boom:',
-            'level' => 'critical',
+            'level' => 'critical'
         ],
 
         'stderr' => [
             'driver' => 'monolog',
             'handler' => StreamHandler::class,
             'with' => [
-                'stream' => 'php://stderr',
-            ],
+                'stream' => 'php://stderr'
+            ]
         ],
 
         'syslog' => [
             'driver' => 'syslog',
-            'level' => 'debug',
+            'level' => 'debug'
         ],
 
         'errorlog' => [
             'driver' => 'errorlog',
-            'level' => 'debug',
-        ],
-    ],
-
+            'level' => 'debug'
+        ]
+    ]
 ];

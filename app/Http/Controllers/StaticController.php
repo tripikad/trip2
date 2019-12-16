@@ -14,7 +14,6 @@ class StaticController extends Controller
         $loggedUser = request()->user();
 
         return layout('Two')
-
             ->with('title', $post->vars()->title)
             ->with('head_title', $post->vars()->title)
             ->with('head_description', $post->vars()->description)
@@ -23,22 +22,25 @@ class StaticController extends Controller
             ->with('background', component('BackgroundMap'))
             ->with('color', 'gray')
 
-            ->with('header', region(
-                'StaticHeader',
-                collect()
-                ->push(component('Title')->with('title', $post->vars()->title))
-            ))
+            ->with(
+                'header',
+                region('StaticHeader', collect()->push(component('Title')->with('title', $post->vars()->title)))
+            )
 
             ->with(
                 'content',
                 collect()
-                ->push(component('Body')->is('responsive')->with('body', $post->vars()->body))
-                ->pushWhen(
-                    $loggedUser && $loggedUser->hasRoleOrOwner('admin', $post->user->id),
-                    component('MetaLink')
-                        ->with('title', trans('content.action.edit.title'))
-                        ->with('route', route('static.edit', [$post]))
-                )
+                    ->push(
+                        component('Body')
+                            ->is('responsive')
+                            ->with('body', $post->vars()->body)
+                    )
+                    ->pushWhen(
+                        $loggedUser && $loggedUser->hasRoleOrOwner('admin', $post->user->id),
+                        component('MetaLink')
+                            ->with('title', trans('content.action.edit.title'))
+                            ->with('route', route('static.edit', [$post]))
+                    )
             )
 
             ->with('footer', region('FooterLight'))
@@ -48,7 +50,9 @@ class StaticController extends Controller
 
     public function showId($id)
     {
-        $slug = collect(config('static.slugs'))->flip()->get($id);
+        $slug = collect(config('static.slugs'))
+            ->flip()
+            ->get($id);
 
         return redirect()->route('static.show', [$slug]);
     }
@@ -58,44 +62,35 @@ class StaticController extends Controller
         $static = Content::findOrFail($id);
 
         return layout('Two')
-
-            ->with('header', region(
-                'StaticHeader',
-                collect()
-                ->push(
-                    component('Title')
-                    ->with('title', $static->vars()->title)
-                )
-            ))
+            ->with(
+                'header',
+                region('StaticHeader', collect()->push(component('Title')->with('title', $static->vars()->title)))
+            )
 
             ->with(
                 'content',
-                collect()
-                ->push(
+                collect()->push(
                     component('Form')
-                    ->with('route', route('static.update', [$static]))
-                    ->with(
-                        'fields',
-                        collect()
-                        ->push(
-                            component('FormTextfield')
-                            ->is('large')
-                            ->with('title', trans('content.static.edit.field.title.title'))
-                            ->with('name', 'title')
-                            ->with('value', old('title', $static->title))
+                        ->with('route', route('static.update', [$static]))
+                        ->with(
+                            'fields',
+                            collect()
+                                ->push(
+                                    component('FormTextfield')
+                                        ->is('large')
+                                        ->with('title', trans('content.static.edit.field.title.title'))
+                                        ->with('name', 'title')
+                                        ->with('value', old('title', $static->title))
+                                )
+                                ->push(
+                                    component('FormTextarea')
+                                        ->with('title', trans('content.static.edit.field.body.title'))
+                                        ->with('name', 'body')
+                                        ->with('value', old('body', $static->body))
+                                        ->with('rows', 20)
+                                )
+                                ->push(component('FormButton')->with('title', trans('content.edit.submit.title')))
                         )
-                        ->push(
-                            component('FormTextarea')
-                            ->with('title', trans('content.static.edit.field.body.title'))
-                            ->with('name', 'body')
-                            ->with('value', old('body', $static->body))
-                            ->with('rows', 20)
-                        )
-                        ->push(
-                            component('FormButton')
-                            ->with('title', trans('content.edit.submit.title'))
-                        )
-                    )
                 )
             )
 
@@ -110,17 +105,16 @@ class StaticController extends Controller
 
         $rules = [
             'title' => 'required',
-            'body' => 'required',
+            'body' => 'required'
         ];
 
         $this->validate(request(), $rules);
 
         $static->update([
             'title' => request()->title,
-            'body' => request()->body,
+            'body' => request()->body
         ]);
 
-        return redirect()
-            ->route('static.show', collect(config('static.slugs'))->flip()[$static->id]);
+        return redirect()->route('static.show', collect(config('static.slugs'))->flip()[$static->id]);
     }
 }

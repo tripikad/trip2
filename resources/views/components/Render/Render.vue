@@ -16,9 +16,7 @@ export default {
                 this.$options.staticRenderFns = []
                 this._staticTrees = []
                 for (var i in template.staticRenderFns) {
-                    this.$options.staticRenderFns.push(
-                        template.staticRenderFns[i]
-                    )
+                    this.$options.staticRenderFns.push(template.staticRenderFns[i])
                 }
             },
             { immediate: true }

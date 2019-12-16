@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     'register.title' => 'Register',
     'register.field.name.title' => 'Username',
     'register.field.email.title' => 'E-mail',
@@ -53,6 +52,5 @@ return [
 
     'reset.email.subject' => 'Resetting your password',
     'reset.email.body.line1' => 'Please visit the link below to set your new password',
-    'reset.email.body.line2' => 'Note: if you have not requested the password reset, you can safely ignore this e-mail',
-
+    'reset.email.body.line2' => 'Note: if you have not requested the password reset, you can safely ignore this e-mail'
 ];

@@ -40,28 +40,15 @@ class ForumPost
                             component('MetaLink')
                                 ->is('cyan')
                                 ->with('title', $post->user->vars()->name)
-                                ->with(
-                                    'route',
-                                    route('user.show', [$post->user])
-                                )
+                                ->with('route', route('user.show', [$post->user]))
                         )
-                        ->push(
-                            component('MetaLink')->with(
-                                'title',
-                                $post->vars()->created_at
-                            )
-                        )
+                        ->push(component('MetaLink')->with('title', $post->vars()->created_at))
                         ->merge(
                             $post->destinations->map(function ($destination) {
                                 return component('Tag')
                                     ->is('orange')
                                     ->with('title', $destination->name)
-                                    ->with(
-                                        'route',
-                                        route('destination.showSlug', [
-                                            $destination->slug
-                                        ])
-                                    );
+                                    ->with('route', route('destination.showSlug', [$destination->slug]));
                             })
                         )
                         ->merge(
@@ -79,122 +66,54 @@ class ForumPost
                         ->push(
                             component('Flag')
                                 ->is('green')
-                                ->with(
-                                    'route',
-                                    route('flag.toggle', [
-                                        'content',
-                                        $post,
-                                        'good'
-                                    ])
-                                )
-                                ->with(
-                                    'value',
-                                    $post->vars()->flagCount('good')
-                                )
-                                ->with(
-                                    'flagged',
-                                    $user
-                                        ? $user
-                                            ->vars()
-                                            ->hasFlaggedContent($post, 'good')
-                                        : false
-                                )
+                                ->with('route', route('flag.toggle', ['content', $post, 'good']))
+                                ->with('value', $post->vars()->flagCount('good'))
+                                ->with('flagged', $user ? $user->vars()->hasFlaggedContent($post, 'good') : false)
                                 ->with('icon', 'icon-thumb-up')
-                                ->with(
-                                    'flagtitle',
-                                    trans('flag.content.good.flag.title')
-                                )
-                                ->with(
-                                    'unflagtitle',
-                                    trans('flag.content.good.unflag.title')
-                                )
+                                ->with('flagtitle', trans('flag.content.good.flag.title'))
+                                ->with('unflagtitle', trans('flag.content.good.unflag.title'))
                         )
                         ->push(
                             component('Flag')
                                 ->is('red')
-                                ->with(
-                                    'route',
-                                    route('flag.toggle', [
-                                        'content',
-                                        $post,
-                                        'bad'
-                                    ])
-                                )
+                                ->with('route', route('flag.toggle', ['content', $post, 'bad']))
                                 ->with('value', $post->vars()->flagCount('bad'))
-                                ->with(
-                                    'flagged',
-                                    $user
-                                        ? $user
-                                            ->vars()
-                                            ->hasFlaggedContent($post, 'bad')
-                                        : false
-                                )
+                                ->with('flagged', $user ? $user->vars()->hasFlaggedContent($post, 'bad') : false)
                                 ->with('icon', 'icon-thumb-down')
-                                ->with(
-                                    'flagtitle',
-                                    trans('flag.content.bad.flag.title')
-                                )
-                                ->with(
-                                    'unflagtitle',
-                                    trans('flag.content.bad.unflag.title')
-                                )
+                                ->with('flagtitle', trans('flag.content.bad.flag.title'))
+                                ->with('unflagtitle', trans('flag.content.bad.unflag.title'))
                         )
                         ->pushWhen(
-                            $user &&
-                                $user->hasRoleOrOwner('admin', $post->user->id),
+                            $user && $user->hasRoleOrOwner('admin', $post->user->id),
                             component('MetaLink')
                                 ->is('green')
-                                ->with(
-                                    'title',
-                                    trans('content.action.edit.title')
-                                )
+                                ->with('title', trans('content.action.edit.title'))
                                 ->with('route', route($editRoute, [$post]))
                         )
                         ->pushWhen(
                             $user && $user->hasRole('admin'),
                             component('Form')
-                                ->with(
-                                    'route',
-                                    route('content.status', [
-                                        $post->type,
-                                        $post,
-                                        1 - $post->status
-                                    ])
-                                )
+                                ->with('route', route('content.status', [$post->type, $post, 1 - $post->status]))
                                 ->with(
                                     'fields',
                                     collect()->push(
                                         component('FormLink')
                                             ->is('pink')
-                                            ->with(
-                                                'title',
-                                                trans(
-                                                    "content.action.status.$post->status.title"
-                                                )
-                                            )
+                                            ->with('title', trans("content.action.status.$post->status.title"))
                                     )
                                 )
                         )
                         ->pushWhen(
                             $user,
                             component('Form')
-                                ->with(
-                                    'route',
-                                    route('follow.follow.content', [
-                                        $post->type,
-                                        $post,
-                                        $followStatus
-                                    ])
-                                )
+                                ->with('route', route('follow.follow.content', [$post->type, $post, $followStatus]))
                                 ->with('method', 'PUT')
                                 ->with(
                                     'fields',
                                     collect()->push(
                                         component('FormLink')->with(
                                             'title',
-                                            trans(
-                                                "content.action.follow.$followStatus.title"
-                                            )
+                                            trans("content.action.follow.$followStatus.title")
                                         )
                                     )
                                 )

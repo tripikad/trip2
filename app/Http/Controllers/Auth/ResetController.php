@@ -35,44 +35,58 @@ class ResetController extends Controller
             ->with('color', 'gray')
             ->with('background', component('BackgroundMap'))
             ->with('header', region('StaticHeader'))
-            ->with('top', collect()
-                ->push(component('Title')
-                    ->is('center')
-                    ->is('large')
-                    ->with('title', trans('auth.reset.apply.title'))
-                )
-                ->push('&nbsp;')
-                ->push(component('Title')
-                    ->is('center')
-                    ->is('small')
-                    ->with('title', trans('auth.reset.apply.subtitle'))
+            ->with(
+                'top',
+                collect()
+                    ->push(
+                        component('Title')
+                            ->is('center')
+                            ->is('large')
+                            ->with('title', trans('auth.reset.apply.title'))
+                    )
+                    ->push('&nbsp;')
+                    ->push(
+                        component('Title')
+                            ->is('center')
+                            ->is('small')
+                            ->with('title', trans('auth.reset.apply.subtitle'))
+                    )
+            )
+            ->with(
+                'content',
+                collect()->push(
+                    component('Form')
+                        ->with('route', route('reset.apply.submit'))
+                        ->with(
+                            'fields',
+                            collect()
+                                ->push(Honeypot::generate('full_name', 'time'))
+                                ->push(
+                                    component('FormTextfield')
+                                        ->is('large')
+                                        ->with('title', trans('auth.reset.apply.field.email.title'))
+                                        ->with('name', 'email')
+                                )
+                                ->push(
+                                    component('FormButton')
+                                        ->is('wide')
+                                        ->is('large')
+                                        ->with('title', trans('auth.reset.apply.submit.title'))
+                                )
+                        )
                 )
             )
-            ->with('content', collect()
-                ->push(component('Form')
-                    ->with('route', route('reset.apply.submit'))
-                    ->with('fields', collect()
-                        ->push(Honeypot::generate('full_name', 'time'))
-                        ->push(component('FormTextfield')
-                            ->is('large')
-                            ->with('title', trans('auth.reset.apply.field.email.title'))
-                            ->with('name', 'email')
-                        )
-                        ->push(component('FormButton')
-                            ->is('wide')
-                            ->is('large')
-                            ->with('title', trans('auth.reset.apply.submit.title'))
-                        )
-                ))
+            ->with(
+                'bottom',
+                collect()->push(
+                    component('MetaLink')->with(
+                        'title',
+                        trans('auth.reset.login.title', [
+                            'link' => format_link(route('login.form'), trans('auth.reset.login.link.title'))
+                        ])
+                    )
+                )
             )
-            ->with('bottom', collect()->push(component('MetaLink')
-                ->with('title', trans('auth.reset.login.title', [
-                    'link' => format_link(
-                        route('login.form'),
-                        trans('auth.reset.login.link.title')
-                    ),
-                ]))
-            ))
             ->with('footer', region('FooterLight'))
             ->render();
     }
@@ -80,7 +94,7 @@ class ResetController extends Controller
     public function passwordForm($token = null)
     {
         if (is_null($token)) {
-            throw new NotFoundHttpException;
+            throw new NotFoundHttpException();
         }
 
         // return view('pages.auth.reset.password')->with('token', $token);
@@ -90,42 +104,54 @@ class ResetController extends Controller
             ->with('color', 'gray')
             ->with('background', component('BackgroundMap'))
             ->with('header', region('StaticHeader'))
-            ->with('top', collect()
-                ->push(component('Title')
-                    ->is('center')
-                    ->is('large')
-                    ->with('title', trans('auth.reset.password.title'))
+            ->with(
+                'top',
+                collect()->push(
+                    component('Title')
+                        ->is('center')
+                        ->is('large')
+                        ->with('title', trans('auth.reset.password.title'))
                 )
             )
-            ->with('content', collect()
-                ->push(component('Form')
-                    ->with('route', route('reset.password.submit'))
-                    ->with('fields', collect()
-                        ->push(component('FormTextfield')
-                            ->is('large')
-                            ->with('title', trans('auth.reset.password.field.email.title'))
-                            ->with('name', 'email')
+            ->with(
+                'content',
+                collect()->push(
+                    component('Form')
+                        ->with('route', route('reset.password.submit'))
+                        ->with(
+                            'fields',
+                            collect()
+                                ->push(
+                                    component('FormTextfield')
+                                        ->is('large')
+                                        ->with('title', trans('auth.reset.password.field.email.title'))
+                                        ->with('name', 'email')
+                                )
+                                ->push(
+                                    component('FormPassword')
+                                        ->is('large')
+                                        ->with('title', trans('auth.reset.password.field.password.title'))
+                                        ->with('name', 'password')
+                                )
+                                ->push(
+                                    component('FormPassword')
+                                        ->is('large')
+                                        ->with('title', trans('auth.reset.password.field.password_confirmation.title'))
+                                        ->with('name', 'password_confirmation')
+                                )
+                                ->push(
+                                    component('FormHidden')
+                                        ->with('name', 'token')
+                                        ->with('value', $token)
+                                )
+                                ->push(
+                                    component('FormButton')
+                                        ->is('wide')
+                                        ->is('large')
+                                        ->with('title', trans('auth.reset.password.submit.title'))
+                                )
                         )
-                        ->push(component('FormPassword')
-                            ->is('large')
-                            ->with('title', trans('auth.reset.password.field.password.title'))
-                            ->with('name', 'password')
-                        )
-                        ->push(component('FormPassword')
-                            ->is('large')
-                            ->with('title', trans('auth.reset.password.field.password_confirmation.title'))
-                            ->with('name', 'password_confirmation')
-                        )
-                        ->push(component('FormHidden')
-                            ->with('name', 'token')
-                            ->with('value', $token)
-                        )
-                        ->push(component('FormButton')
-                            ->is('wide')
-                            ->is('large')
-                            ->with('title', trans('auth.reset.password.submit.title'))
-                        )
-                ))
+                )
             )
             ->with('footer', region('FooterLight'))
             ->render();
@@ -135,15 +161,15 @@ class ResetController extends Controller
     {
         $this->validate($request, [
             'email' => 'required|email',
-            'full_name'   => 'honeypot',
-            'time'   => 'required|honeytime:2',
+            'full_name' => 'honeypot',
+            'time' => 'required|honeytime:2'
         ]);
 
         $response = Password::sendResetLink($request->only('email'));
 
         if ($response == Password::INVALID_USER) {
             Log::info('User tried to reset password, but e-mail was invalid', [
-                'email' =>  $request->email,
+                'email' => $request->email
             ]);
 
             return redirect()
@@ -151,20 +177,22 @@ class ResetController extends Controller
                 ->withErrors(['email' => trans($response)]);
         }
 
-        $user = User::where('email', $request->email)->take(1)->first();
+        $user = User::where('email', $request->email)
+            ->take(1)
+            ->first();
 
         if ($user) {
             Mail::to($user->email, $user->name)->queue(new ResetPassword($user));
         }
 
         Log::info('Password reset request has been submitted', [
-            'email' =>  $request->email,
+            'email' => $request->email
         ]);
 
         //if ($response == Password::RESET_LINK_SENT)
         return redirect()
-                ->back()
-                ->with('info', trans($response));
+            ->back()
+            ->with('info', trans($response));
     }
 
     protected function getEmailSubject()

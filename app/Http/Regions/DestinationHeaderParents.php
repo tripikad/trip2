@@ -24,10 +24,7 @@ class DestinationHeaderParents
                             ->is('large')
                             ->is('white')
                             ->with('title', ' ‹ &nbsp;' . $title)
-                            ->with(
-                                'route',
-                                route('destination.showSlug', [$parent->slug])
-                            );
+                            ->with('route', route('destination.showSlug', [$parent->slug]));
                     })
                 )
         );

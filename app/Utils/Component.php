@@ -74,7 +74,20 @@ class Component
 
     public function renderVue($vueComponent)
     {
+        $errors = session()->get('errors')
+            ? json_encode(
+                collect(
+                    session()
+                        ->get('errors')
+                        ->getBag('default')
+                        ->messages()
+                )->keys(),
+                JSON_HEX_APOS
+            )
+            : null;
+
         $props = $this->with
+            ->putWhen($errors, 'errors', $errors)
             ->map(function ($value, $key) {
                 $value = json_encode($value, JSON_HEX_APOS);
 
@@ -111,19 +124,9 @@ class Component
         }
 
         $name = "components.$this->component.$this->component";
-        $bladeName = resource_path(
-            "views/components/$this->component/$this->component.blade.php"
-        );
-        $vueName = resource_path(
-            "views/components/$this->component/$this->component.vue"
-        );
-        $suffixedVueName = resource_path(
-            'views/components/' .
-                $this->component .
-                '/' .
-                $this->component .
-                'Vue.vue'
-        );
+        $bladeName = resource_path("views/components/$this->component/$this->component.blade.php");
+        $vueName = resource_path("views/components/$this->component/$this->component.vue");
+        $suffixedVueName = resource_path('views/components/' . $this->component . '/' . $this->component . 'Vue.vue');
 
         if ($this->vue && is_file($suffixedVueName)) {
             return $this->renderVue($this->component . 'Vue');

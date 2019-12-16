@@ -1,8 +1,8 @@
 <?php
 
 return [
-
-    'index.about' => 'Trip.ee on reisihuviliste kogukond, keda ühendab reisipisik ning huvi kaugete maade ja kultuuride vastu.',
+    'index.about' =>
+        'Trip.ee on reisihuviliste kogukond, keda ühendab reisipisik ning huvi kaugete maade ja kultuuride vastu.',
 
     'index.search.title' => 'Kuhu sa soovid minna?',
     'index.search.destination.title' => 'Sisesta sihtkoht',
@@ -32,6 +32,5 @@ return [
 
     'index.about.title' => 'Loe täpsemalt, mis on Trip.ee',
     'index.about.register' => 'Liitu Trip.ee-ga',
-    'index.about.login' => 'Logi sisse',
-
+    'index.about.login' => 'Logi sisse'
 ];

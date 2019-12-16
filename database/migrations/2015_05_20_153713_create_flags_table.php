@@ -14,14 +14,24 @@ class CreateFlagsTable extends Migration
     {
         Schema::create('flags', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->unsigned()->index();
-            $table->integer('flaggable_id')->unsigned()->index();
+            $table
+                ->integer('user_id')
+                ->unsigned()
+                ->index();
+            $table
+                ->integer('flaggable_id')
+                ->unsigned()
+                ->index();
             $table->string('flaggable_type', 25)->index();
             $table->string('flag_type', 20);
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users')
-                ->onUpdate('cascade')->onDelete('cascade');
+            $table
+                ->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
         });
     }
 
