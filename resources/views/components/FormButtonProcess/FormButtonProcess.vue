@@ -31,11 +31,9 @@ export default {
         onClick(e) {
             e.preventDefault()
             if (this.processing === false) {
-                this.processing = true
                 document.getElementById(this.id).submit()
+                this.processing = true
             }
-
-            return false
         }
     }
 }
