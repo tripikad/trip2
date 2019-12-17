@@ -7,10 +7,7 @@
             :value="processing ? processingtitle : title"
             @click.once="onClick"
             :disabled="processing"
-            v-if="!processing"
         />
-
-        <div v-if="processing" class="FormButtonProcess" :class="isclasses">{{ processingtitle }}</div>
     </div>
 </template>
 
@@ -31,8 +28,8 @@ export default {
         onClick(e) {
             e.preventDefault()
             if (this.processing === false) {
-                document.getElementById(this.id).submit()
                 this.processing = true
+                document.getElementById(this.id).submit()
             }
         }
     }
