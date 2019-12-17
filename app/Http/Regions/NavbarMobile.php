@@ -29,6 +29,11 @@ class NavbarMobile
                 'title' => trans('menu.header.news'),
                 'route' => route('news.index')
             ])
+            // @LAUNCH remove this check
+            ->putWhen($user && $user->hasRole('superuser'), 'offer', [
+                'title' => trans('menu.header.offer'),
+                'route' => route('offer.index')
+            ])
             ->toArray();
     }
 
@@ -63,12 +68,12 @@ class NavbarMobile
                 'route' => route('internal.index')
             ])
             ->pushWhen($user && $user->company, [
-                'title' => trans('menu.offer.admin.company.index'),
-                'route' => route('offer.admin.company.index')
+                'title' => trans('menu.company.index'),
+                'route' => route('company.index')
             ])
             ->pushWhen($user && $user->hasRole('superuser'), [
-                'title' => trans('menu.offer.admin.index'),
-                'route' => route('offer.admin.index')
+                'title' => trans('menu.company.admin.index'),
+                'route' => route('company.admin.index')
             ])
             ->pushWhen($user, [
                 'title' => trans('menu.auth.logout'),

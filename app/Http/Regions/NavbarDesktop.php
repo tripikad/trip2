@@ -25,6 +25,12 @@ class NavbarDesktop
                 'title' => trans('menu.header.news'),
                 'route' => route('news.index')
             ])
+            // @LAUNCH Remove this check
+            ->putWhen($user && $user->hasRole('superuser'), 'offer', [
+                'title' => trans('menu.header.offer'),
+                'new' => trans('menu.header.new'),
+                'route' => route('offer.index')
+            ])
             ->toArray();
     }
 
@@ -59,12 +65,12 @@ class NavbarDesktop
                 'route' => route('internal.index')
             ])
             ->pushWhen($user && $user->company, [
-                'title' => trans('menu.offer.admin.company.index'),
-                'route' => route('offer.admin.company.index')
+                'title' => trans('menu.company.index'),
+                'route' => route('company.index')
             ])
             ->pushWhen($user && $user->hasRole('superuser'), [
-                'title' => trans('menu.offer.admin.index'),
-                'route' => route('offer.admin.index')
+                'title' => trans('menu.company.admin.index'),
+                'route' => route('company.admin.index')
             ])
             ->pushWhen($user, [
                 'title' => trans('menu.auth.logout'),

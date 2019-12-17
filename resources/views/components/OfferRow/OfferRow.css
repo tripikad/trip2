@@ -28,6 +28,7 @@
 
 .OfferRow__price {
     color: $yellow-light;
+    white-space: nowrap;
 }
 
 .OfferRow__meta {
@@ -50,9 +51,19 @@
     opacity: $opacity-md;
 }
 
+.OfferRow__metaPrimarySmall {
+    color: $white;
+    font: $font-text-sm;
+}
+
+.OfferRow__metaSecondarySmall {
+    color: $white;
+    font: $font-text-sm;
+    opacity: $opacity-md;
+}
+
 .OfferRow--unpublished {
     opacity: $opacity-sm;
-    cursor: default;
 }
 
 .OfferRow--unpublished:hover {

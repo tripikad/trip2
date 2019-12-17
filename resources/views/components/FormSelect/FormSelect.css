@@ -1,8 +1,20 @@
+.FormSelect__header {
+    display: flex;
+}
+
 .FormSelect__label {
     color: $gray;
     display: block;
     font: $font-heading-sm;
     line-height: $line-height-md;
+    margin-bottom: $margin-sm;
+}
+
+.FormSelect__description {
+    color: $gray-light;
+    font: $font-heading-sm;
+    line-height: $line-height-md;
+    margin-left: $margin-xs;
     margin-bottom: $margin-sm;
 }
 
@@ -21,8 +33,13 @@
 .multiselect__tags {
     font: $font-text-sm !important;
     border: 2px solid $gray-light !important;
+    border-radius: $border-radius-md !important;
+    padding: 11px 40px 4px 14px !important;
 }
-
+.multiselect__input {
+    ppadding: 4px 0 0 8px !important;
+    font: $font-text-md !important;
+}
 .FormSelect--blue .multiselect__tags {
     background: $blue !important;
     border: 2px solid $white !important;
@@ -34,7 +51,8 @@
     border: 1px solid $orange !important;
     border-radius: $border-radius-lg !important;
     color: $orange !important;
-    padding: 1px 22px 0 10px !important;
+    padding: 0 22px 0 10px !important;
+    margin-bottom: 6px !important;
 }
 
 .multiselect__tag span {
@@ -53,11 +71,17 @@
     color: $orange !important;
 }
 
+.multiselect__select {
+    margin-top: 8px !important;
+}
 .multiselect__content {
     font: $font-text-sm;
     border: 2px solid $gray-light !important;
 }
 
+.multiselect__element span {
+    color: $gray-dark !important;
+}
 .FormSelect--blue .multiselect__content {
     border: 2px solid $white !important;
     border-top: none !important;

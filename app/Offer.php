@@ -2,6 +2,8 @@
 
 namespace App;
 
+use Cache;
+
 use Illuminate\Database\Eloquent\Model;
 use Jenssegers\Date\Date;
 
@@ -18,12 +20,14 @@ class Offer extends Model
 
     protected $appends = [
         'price',
+        'price_formatted',
         'style_formatted',
         'start_at_formatted',
         'end_at_formatted',
         'duration_formatted',
         'coordinates',
-        'image'
+        'image',
+        'route'
     ];
 
     protected $hidden = ['created_at', 'updated_at'];
@@ -56,12 +60,36 @@ class Offer extends Model
     public function getPriceAttribute($value)
     {
         if ($this->style == 'package') {
-            return $this->data->hotels[0]->price . '€';
+            return collect($this->data->hotels)
+                ->pluck('price')
+                ->map(function ($p) {
+                    return only_numbers($p);
+                })
+                ->filter(function ($p) {
+                    return !empty($p);
+                })
+                ->min();
         }
         if ($this->style !== 'package' && $this->data->price) {
             return $this->data->price;
         }
-        return '0€';
+        return '';
+    }
+
+    public function getPriceFormattedAttribute()
+    {
+        if ($this->price) {
+            if ($this->style == 'package') {
+                return trans('site.price.starting', [
+                    'price' => $this->price,
+                    'currency' => config('site.currency.eur')
+                ]);
+            }
+            return trans('site.price', [
+                'price' => $this->price,
+                'currency' => config('site.currency.eur')
+            ]);
+        }
     }
 
     public function getStyleFormattedAttribute()
@@ -84,7 +112,7 @@ class Offer extends Model
 
     public function getStartAtFormattedAttribute()
     {
-        return Date::parse($this->start_at)->format('j. M Y');
+        return Date::parse($this->start_at)->format('j. M');
     }
 
     public function getEndAtFormattedAttribute()
@@ -99,16 +127,26 @@ class Offer extends Model
             ->vars()
             ->coordinates();
     }
+
     public function getImageAttribute()
     {
-        $image = $this->endDestinations
-            ->first()
-            ->content()
-            ->latest()
-            ->whereType('photo')
-            ->whereStatus(1)
-            ->first();
+        // Cache image to avoid N+1 query problem
+        // Eager loading via many intermediates is
+        // more complicated
+        return Cache::remember('offer_image_' . $this->id, 10, function () {
+            $image = $this->endDestinations
+                ->first()
+                ->content()
+                ->latest()
+                ->whereType('photo')
+                ->whereStatus(1)
+                ->first();
+            return $image ? $image->imagePreset('small_square') : '';
+        });
+    }
 
-        return $image ? $image->imagePreset('small_square') : '';
+    public function getRouteAttribute()
+    {
+        return route('offer.show', [$this->id]);
     }
 }

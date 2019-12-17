@@ -36,6 +36,14 @@ class Component
         return $this;
     }
 
+    public function __call($method, $parameters)
+    {
+        $with = str_after($method, 'with');
+        $this->with->put(strtolower(snake_case($with)), $parameters ? $parameters[0] : null);
+
+        return $this;
+    }
+
     public function when($condition)
     {
         $this->when = $condition;
@@ -96,21 +104,25 @@ class Component
             ->implode(' ');
 
         $component =
-            '<fade><component is="' .
+            '<transition appear name="Fade"><component is="' .
             $vueComponent .
             '" isclasses="' .
             $this->generateIsClasses() .
             '" ' .
             $props .
-            ' ></component></fade>';
+            ' ></component></transition>';
 
-        if ($this->with->has('height')) {
+        $height = $this->with->get('height');
+
+        if ($height) {
             return '<div style="min-height:' .
                 'var(--' .
                 $vueComponent .
-                '--height, ' .
+                '--height, calc(' .
+                styles('spacer') .
+                ' * ' .
                 $this->with->get('height') .
-                ')">' .
+                '))">' .
                 $component .
                 '</div>';
         }

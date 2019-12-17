@@ -65,6 +65,6 @@ return [
     'admin.content' => 'Unpublished content',
     'admin.sponsored' => 'Sponsored articles',
 
-    'offer.admin.company.index' => 'Add new offer',
-    'offer.admin.index' => 'Admin offers'
+    'company.index' => 'Add new offer',
+    'company.admin.index' => 'Admin offers'
 ];

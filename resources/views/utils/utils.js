@@ -1,3 +1,6 @@
+import { format, endOfWeek, endOfMonth, addMonths, getMonth, subMonths, addSeconds } from 'date-fns'
+import { et } from 'date-fns/locale'
+
 export const intersection = (arr1, arr2) => arr1.filter(n => arr2.includes(n))
 
 export const chunk = (arr, length) =>
@@ -6,6 +9,17 @@ export const chunk = (arr, length) =>
     }).map((_, n) => arr.slice(n * length, n * length + length))
 
 export const unique = arr => [...new Set(arr)]
+
+// https://stackoverflow.com/a/39903069
+
+export const uniqueFilter = (arr, getter = d => d) =>
+    arr.filter((set => f => !set.has(getter(f)) && set.add(getter(f)))(new Set()))
+
+export const toObject = arr =>
+    arr.reduce((acc, el) => {
+        acc[el[0]] = el[1]
+        return acc
+    }, {})
 
 export const parseSheets = data => {
     return data.feed.entry.map(entry => {
@@ -92,3 +106,50 @@ export const slug = text => {
         .replace(/^-+/, '')
         .replace(/-+$/, '')
 }
+
+export const formatCurrency = value => {
+    return `${value}€`
+}
+
+export const titleCase = string =>
+    string
+        .split(' ')
+        .map(([h, ...t]) => h.toUpperCase() + t.join('').toLowerCase())
+        .join(' ')
+
+export const localizedFormat = (date, dateFormat) => format(date, dateFormat, { locale: et })
+
+export const localizedEndOfWeek = date => endOfWeek(date, { locale: et })
+
+// Seasons
+
+const seasons = [[12, 1, 2], [3, 4, 5], [6, 7, 8], [9, 10, 11]]
+
+export const seasonNames = ['Talv', 'Kevad', 'Suvi', 'Sügis']
+
+export const getSeason = date => {
+    // getMonths returns 0 as Jan, 1 as Feb
+    // so we make it more human-readable
+    const month = getMonth(date) + 1
+    // Find out to which subarray the month number belongs
+    return seasons.findIndex(season => season.includes(month))
+}
+
+export const getMonthsToSeasonEnd = date => {
+    const season = getSeason(date)
+    return 2 - seasons[season].findIndex(month => month == getMonth(date) + 1)
+}
+
+export const seasonRange = (date = new Date(), length = 4) =>
+    Array.from({ length })
+        .map((_, i) => i * 3)
+        .map(season => {
+            const endDate = endOfMonth(addMonths(addMonths(date, getMonthsToSeasonEnd(date)), season))
+            const startDate = addSeconds(subMonths(endDate, 3), 1)
+            return [startDate, endDate]
+        })
+
+export const formatSeasonRange = range =>
+    range.map(([_, endDate]) => {
+        return `${seasonNames[getSeason(endDate)]} ${format(endDate, 'yyyy')}`
+    })

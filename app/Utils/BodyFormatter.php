@@ -70,7 +70,7 @@ class BodyFormatter
 
                 return component('Dotmap')
                     ->is('center')
-                    ->with('height', '300px')
+                    ->with('height', 25)
                     ->with('lines', $airports)
                     ->with('mediumdots', $airports->withoutLast())
                     ->with('largedots', [$airports->last()])

@@ -4,10 +4,12 @@ return [
     'header.v1' => 'Vana Trip',
     'header.v2' => 'Testi uut Trippi',
 
+    'header.new' => 'Uus',
     'header.home' => 'Trip.ee',
     'header.news' => 'Uudised',
     'header.flights' => 'Lennupakkumised',
     'header.travelmates' => 'Reisikaaslased',
+    'header.offer' => 'Reisipakkumised',
     'header.forum' => 'Foorum',
     'header.photos' => 'Pildid',
     'header.blogs' => 'Blogi',
@@ -23,7 +25,7 @@ return [
 
     'footer.news' => 'Uudised',
     'footer.flights' => 'Lennupakkumised',
-    'footer.offers' => 'Pakkumised',
+    'footer.offer' => 'Reisipakkumised',
     'footer.travelmates' => 'Reisikaaslased',
     'footer.blogs' => 'Reisiblogid',
     'footer.photos' => 'Reisipildid',
@@ -69,6 +71,6 @@ return [
     'admin.newsletter' => 'Uudiskirjad',
     'admin.static' => 'Muuda - :title',
 
-    'offer.admin.company.index' => 'Reisipakkumiste lisamine',
-    'offer.admin.index' => 'Reisipakkumiste haldus'
+    'company.index' => 'Halda reisipakkumisi',
+    'company.admin.index' => 'Halda reisifirmasid'
 ];

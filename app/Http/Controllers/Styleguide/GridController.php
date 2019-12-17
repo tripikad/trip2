@@ -24,14 +24,14 @@ class GridController extends Controller
                             ->with('title', 'Flex')
                     )
                     ->merge($this->row($photos))
-                    ->br()
+                    ->spacer()
                     ->push(
                         component('Title')
                             ->is('small')
                             ->with('title', 'FlexGrid')
                     )
                     ->merge($this->flexGrid($photos))
-                    ->br()
+                    ->spacer()
                     ->push(
                         component('Title')
                             ->is('small')

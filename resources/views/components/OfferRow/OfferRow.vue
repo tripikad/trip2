@@ -1,14 +1,14 @@
 <template>
-    <a :href="route" class="OfferRow" :class="isclasses" :dusk="slugTitle">
+    <a :href="route" class="OfferRow" target="_blank" :class="isclasses" :dusk="slugTitle">
         <img class="OfferRow__image" :src="offer.image || './photos/image_blank.png'" />
         <div class="OfferRow__content">
             <div class="OfferRow__title">
-                {{ offer.title }} al.
-                <span class="OfferRow__price">{{ offer.price }}</span>
+                {{ offer.title }}
+                <span class="OfferRow__price">{{ offer.price_formatted }}</span>
             </div>
             <div class="OfferRow__meta">
                 <tag
-                    v-for="(destination, i) in offer.end_destinations"
+                    v-for="(destination, i) in offer.end_destinations.slice(0, 1)"
                     :key="i"
                     :title="destination.name"
                     isclasses="Tag--white"
@@ -16,7 +16,6 @@
                 <div class="OfferRow__metaPrimary">{{ offer.duration_formatted }}</div>
                 <div class="OfferRow__metaSecondary">{{ offer.start_at_formatted }} → {{ offer.end_at_formatted }}</div>
                 <div v-if="offer.user.name" class="OfferRow__metaPrimary">{{ offer.user.name }}</div>
-                <div v-if="offer.data.guide" class="OfferRow__metaSecondary">{{ offer.data.guide }}</div>
             </div>
         </div>
     </a>

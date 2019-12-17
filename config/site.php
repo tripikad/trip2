@@ -12,6 +12,6 @@ return [
     'allowAllTags' => ['content/flight', 'content/news'],
 
     'currency' => [
-        'symbol' => '€'
+        'eur' => '€'
     ]
 ];

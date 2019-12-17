@@ -22,70 +22,103 @@ class OfferImport extends Command
 
     public function handle()
     {
-        $sheet_id = '1TLEDlvDC_06gy75IhNAyXaUjt-9oOT2XOqW2LEpycHE';
-        $offers = google_sheet($sheet_id);
+        // @LAUNCH Remove
 
-        $startDestination = Destination::where('name', 'Tallinn')->first();
-        $moreDestination = Destination::where('name', 'Barcelona')->first();
+        if ($this->confirm('This command imports new offers. Do you want to continue?')) {
+            $sheet_id = '1TLEDlvDC_06gy75IhNAyXaUjt-9oOT2XOqW2LEpycHE';
+            $offers = google_sheet($sheet_id);
 
-        $this->info("\nImporting content\n");
+            $startDestination = Destination::where('name', 'Tallinn')->first();
 
-        $offers->each(function ($o) use ($startDestination, $moreDestination) {
-            $this->line($o->title);
+            $this->info("\nImporting content\n");
 
-            $endDestination = Destination::where('name', $o->destination)->first();
+            $offers->each(function ($o) use ($startDestination) {
+                $this->line($o->title);
 
-            $user = User::findOrFail($o->userid);
-            $user->update(['company' => true]);
+                $endDestination = Destination::where('name', $o->destination)->first();
 
-            $data = [
-                'user_id' => $o->userid,
-                'title' => $o->title,
-                'style' => $o->style,
-                'start_at' => Carbon::now()->addMonth(),
-                'end_at' => Carbon::now()
-                    ->addMonth()
-                    ->addWeek(),
+                $user = User::findOrFail($o->userid);
+                $user->update(['company' => true]);
 
-                'data' => [
-                    'price' => $o->style == 'package' ? '' : $o->price,
-                    'guide' => $o->guide,
-                    'size' => $o->people,
-                    'accommodation' => '',
-                    'included' => $o->included,
-                    'extras' => '',
-                    'description' => '',
-                    'flights' => false,
-                    'transfer' => false,
-                    'hotels' => [
-                        [
-                            'name' => $o->hotel,
-                            'type' => $o->hoteltype,
-                            'rating' => 5,
-                            'price' => $o->style == 'package' ? '1000' : ''
+                $start_at = Carbon::createFromFormat('d.m.Y', trim($o->from));
+                $end_at = Carbon::createFromFormat('d.m.Y', trim($o->to));
+
+                $data = [
+                    'user_id' => $o->userid,
+                    'title' => $o->title,
+                    'style' => $o->style,
+                    'start_at' => $start_at,
+                    'end_at' => $end_at,
+                    'data' => [
+                        'price' => $o->style == 'package' ? '' : $o->price,
+                        'guide' => $o->guide,
+                        'size' => $o->people,
+                        'description' => $o->description,
+                        'url' => $o->url,
+                        'accommodation' => $o->accommodation
+                            ? '- ' . collect(explode(',', $o->accommodation))->implode("\n- ")
+                            : '',
+                        'included' => $o->included ? '- ' . collect(explode(',', $o->included))->implode("\n- ") : '',
+                        'notincluded' => $o->notincluded
+                            ? '- ' . collect(explode(',', $o->notincluded))->implode("\n- ")
+                            : '',
+                        'extras' => $o->extras ? '- ' . collect(explode(',', $o->extras))->implode("\n- ") : '',
+                        'flights' => false,
+                        'transfer' => false,
+                        'hotels' => [
+                            [
+                                'name' => $o->hotel,
+                                'type' => $o->hoteltype,
+                                'rating' => intval(only_numbers($o->hotelrating)),
+                                'price' => $o->style == 'package' ? $o->hotelprice : ''
+                            ],
+                            [
+                                'name' => $o->hotel . ' Economy',
+                                'type' => $o->hoteltype,
+                                'rating' => intval(only_numbers($o->hotelrating)) + 1,
+                                'price' => $o->style == 'package' ? '200' : ''
+                            ],
+                            [
+                                'name' => $o->hotel . ' Lux',
+                                'type' => $o->hoteltype,
+                                'rating' => intval(only_numbers($o->hotelrating)) - 2,
+                                'price' => $o->style == 'package' ? '1000' : ''
+                            ],
+                            [
+                                'name' => $o->hotel . ' Deluxe Plus',
+                                'type' => $o->hoteltype,
+                                'rating' => intval(only_numbers($o->hotelrating)) + 2,
+                                'price' => $o->style == 'package' ? '3500' : ''
+                            ],
+                            [
+                                'name' => $o->hotel . ' Millionaire Suite',
+                                'type' => $o->hoteltype,
+                                'rating' => intval(only_numbers($o->hotelrating)) + 3,
+                                'price' => $o->style == 'package' ? '10000' : ''
+                            ]
                         ]
-                    ]
-                ],
-                'status' => $o->status
-            ];
+                    ],
+                    'status' => $o->status
+                ];
 
-            $offer = Offer::create(
-                collect($data)
-                    ->put('id', $o->id)
-                    ->toArray()
-            );
+                $offer = Offer::create(
+                    collect($data)
+                        ->put('id', $o->id)
+                        ->toArray()
+                );
 
-            $offer->startDestinations()->attach(
-                collect([$startDestination->id])->mapWithKeys(function ($key) {
-                    return [$key => ['type' => 'start']];
-                })
-            );
+                $offer->startDestinations()->attach(
+                    collect([$startDestination->id])->mapWithKeys(function ($key) {
+                        return [$key => ['type' => 'start']];
+                    })
+                );
 
-            $offer->endDestinations()->attach(
-                collect([$endDestination->id, $moreDestination->id])->mapWithKeys(function ($key) {
-                    return [$key => ['type' => 'end']];
-                })
-            );
-        });
+                $offer->endDestinations()->attach(
+                    collect([$endDestination->id])->mapWithKeys(function ($key) {
+                        return [$key => ['type' => 'end']];
+                    })
+                );
+            });
+        }
     }
 }

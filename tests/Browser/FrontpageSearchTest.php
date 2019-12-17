@@ -12,6 +12,8 @@ class FrontpageSearchTest extends DuskTestCase
 {
     public function test_anybody_can_search_in_frontpage()
     {
+        $this->markTestSkipped();
+
         $regular_user = factory(User::class)->create();
 
         $content = factory(Content::class)->create([

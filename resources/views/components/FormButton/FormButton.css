@@ -29,7 +29,8 @@
 
 .FormButton--large {
     font: $font-heading-md;
-    padding: calc($padding-sm * 1.25) $padding-lg;
+    /* @TODO2 Adjust form field size instead or fix height */
+    padding: calc($spacer * 0.95) $padding-lg;
 }
 
 .FormButton[disabled] {

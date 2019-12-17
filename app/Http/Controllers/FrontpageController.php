@@ -185,7 +185,14 @@ class FrontpageController extends Controller
                     ->push(component('Promo')->with('promo', 'footer'))
             )
 
-            ->with('footer', region('Footer'))
+            ->with(
+                'footer',
+                collect()
+                    ->push(region('FrontpageOfferSection'))
+                    ->push(region('Footer'))
+                    ->render()
+                    ->implode('')
+            )
 
             ->render();
     }
