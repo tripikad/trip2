@@ -98,11 +98,13 @@ $factory->define(Offer::class, function ($faker) {
             'size' => '',
             'accommodation' => '',
             'included' => '',
+            'notincluded' => '',
             'extras' => '',
             'description' => '',
             'flights' => true,
             'transfer' => true,
-            'hotels' => []
+            'hotels' => [],
+            'url' => ''
         ]
     ];
 });

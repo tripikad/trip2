@@ -3,6 +3,7 @@
 $isclasses = $isclasses ?? '';
 $title = $title ?? '';
 $route = $route ?? '';
+$external = $external ?? false;
 
 @endphp
 
@@ -10,20 +11,20 @@ $route = $route ?? '';
 
     @if ($route)
 
-    <a href="{{ $route }}">
+    <a href="{{ $route }}" @if($external) target="_blank" @endif>
 
-    @endif
+        @endif
 
         <h2 class="Title__title">
 
-        {!! $title !!}
+            {!! $title !!}
 
         </h2>
 
-    @if ($route)
-    
+        @if ($route)
+
     </a>
-    
+
     @endif
 
 </div>

@@ -11,98 +11,69 @@ use App\Destination;
 
 class OffersAdminTest extends DuskTestCase
 {
-    public function test_unlogged_users_can_not_access_offer_admin()
+    protected $company_one;
+    protected $company_two;
+    protected $company_three;
+
+    protected $other_company;
+
+    protected $destination_tierra;
+    protected $destination_sol;
+    protected $destination_universo;
+
+    protected $super_user;
+    protected $admin_user;
+    protected $regular_user;
+
+    public function setUp()
     {
-        $this->browse(function (Browser $browser) {
-            $browser
-                ->visit('/offer/admin')
-                ->assertSourceHas('Pead esmalt sisse logima')
-                ->assertSourceMissing('Kõik reisipakkumised')
-                ->assertSourceMissing('Lisa seiklusreis')
-                ->visit('/offer/admin/company')
-                ->assertSourceHas('Pead esmalt sisse logima')
-                ->assertSourceMissing('Reisipakkumiste lisamine')
-                ->assertSourceMissing('Lisa seiklusreis');
-        });
-    }
+        parent::setUp();
 
-    public function test_regular_users_can_not_access_offer_admin()
-    {
-        $regular_user = factory(User::class)->create();
+        $this->company_one = factory(User::class)->create(['company' => true]);
+        $this->company_two = factory(User::class)->create(['company' => true]);
+        $this->company_three = factory(User::class)->create(['company' => true]);
 
-        $this->browse(function (Browser $browser) use ($regular_user) {
-            $browser
-                ->loginAs($regular_user)
-                ->visit('/offer/admin')
-                ->assertSourceHas('Õigused puuduvad')
-                ->assertSourceMissing('Kõik reisipakkumised')
-                ->assertSourceMissing('Lisa seiklusreis')
-                ->visit('/offer/admin/company')
-                ->assertSourceHas('Õigused puuduvad')
-                ->assertSourceMissing('Minu reisipakkumised')
-                ->assertSourceMissing('Lisa seiklusreis');
-        });
+        $this->destination_tierra = factory(Destination::class)->create(['name' => 'Tierra']);
+        $this->destination_sol = factory(Destination::class)->create(['name' => 'Sol']);
+        $this->destination_universo = factory(Destination::class)->create(['name' => 'Universo']);
 
-        $regular_user->delete();
-    }
+        $this->other_company = factory(User::class)->create(['company' => true]);
 
-    public function test_admin_users_can_not_access_offer_admin()
-    {
-        $admin_user = factory(User::class)->create(['role' => 'admin']);
-
-        $this->browse(function (Browser $browser) use ($admin_user) {
-            $browser
-                ->loginAs($admin_user)
-                ->visit('/offer/admin')
-                ->assertSourceHas('Õigused puuduvad')
-                ->assertSourceMissing('Kõik reisipakkumised')
-                ->assertSourceMissing('Lisa seiklusreis')
-                ->visit('/offer/admin/company')
-                ->assertSourceHas('Õigused puuduvad')
-                ->assertSourceMissing('Minu reisipakkumised')
-                ->assertSourceMissing('Lisa seiklusreis');
-        });
-
-        $admin_user->delete();
+        $this->regular_user = factory(User::class)->create();
+        $this->admin_user = factory(User::class)->create(['role' => 'admin']);
+        $this->super_user = factory(User::class)->create(['role' => 'superuser']);
     }
 
     public function test_company_can_not_add_offer_without_required_fields()
     {
-        $company = factory(User::class)->create(['company' => true]);
-
-        $this->browse(function (Browser $browser) use ($company) {
+        $this->browse(function (Browser $browser) {
             $browser
-                ->loginAs($company)
-                ->visit('/offer/admin/company')
-                ->assertSourceHas('Reisipakkumiste lisamine')
+                ->loginAs($this->company_one)
+                ->visit('/company')
+                ->assertSee('Halda reisipakkumisi')
                 ->click(dusk('Lisa paketireis'))
                 ->assertPathIs('/offer/admin/create/package')
                 ->scrollToBottom()
                 ->pause(1000)
                 ->click(dusk('Lisa paketireis'))
                 ->assertPathIs('/offer/admin/create/package')
-                ->assertSourceHas('Väli nimega "Pealkiri" on kohustuslik')
-                ->assertSourceHas('Väli nimega "Reisi sihtkohad" on kohustuslik');
+                ->assertSee('Väli nimega "Pealkiri" on kohustuslik')
+                ->assertSee('Väli nimega "Reisi sihtkohad" on kohustuslik');
         });
-
-        $company->delete();
     }
 
     public function test_company_can_add_published_package_offer()
     {
-        $company = factory(User::class)->create(['company' => true]);
-
-        $destination1 = factory(Destination::class)->create(['name' => 'Tierra']);
-        $destination2 = factory(Destination::class)->create(['name' => 'Sol']);
-
-        $this->browse(function (Browser $browser) use ($company) {
+        $this->browse(function (Browser $browser) {
             $browser
-                ->loginAs($company)
-                ->visit('/offer/admin/company')
-                ->assertSourceHas('Reisipakkumiste lisamine')
+                ->loginAs($this->company_two)
+                ->visit('/company')
+                ->assertSee('Halda reisipakkumisi')
                 ->click(dusk('Lisa paketireis'))
                 ->click(dusk('Pakkumine on avalikustatud'))
                 ->type(dusk('Pealkiri'), 'Playa Bonita para Mamacita')
+                ->type(dusk('Reisi alguskuupäev'), '01.01.2100')
+                ->type(dusk('Reisi lõppkuupäev'), '01.02.2100')
                 ->click(dusk('Reisi alguskoht'))
                 ->keys(dusk('Reisi alguskoht'), 'Tierra', '{enter}')
                 ->click(dusk('Reisi sihtkohad'))
@@ -110,98 +81,142 @@ class OffersAdminTest extends DuskTestCase
                 ->click(dusk('Transfeer hinna sees'))
                 ->type(dusk('Hotelli nimi 1'), 'Hotel El Dorado')
                 ->type(dusk('Hotelli hind 1'), '2000')
+                ->type(dusk('Hotelli nimi 2'), 'El Sueño Hotel')
+                ->type(dusk('Hotelli hind 2'), '1987')
                 ->scrollToBottom()
-                ->pause(1000)
+                ->pause(500)
                 ->click(dusk('Lisa paketireis'))
-                ->assertPathIs('/offer/admin/company')
-                ->assertSourceHas('Playa Bonita para Mamacita')
-                ->assertSourceHas('2000€')
-                ->assertSourceHas('Sol');
+                ->assertPathIs('/company')
+                ->pause(500)
+                ->assertSee('Playa Bonita para Mamacita')
+                ->assertSee('1987€')
+                ->assertSee('Sol');
         });
 
         // Assert users can see the offer without being logged in
-
-        $offer = Offer::whereTitle('Playa Bonita para Mamacita')->first();
-
-        $this->browse(function (Browser $browser) use ($company, $offer) {
-            $browser
-                ->logout()
-                ->visit('/offer')
-                ->pause(500)
-                ->click(dusk('Playa Bonita para Mamacita'))
-                ->assertPathIs("/offer/$offer->id")
-                ->assertSourceHas('2000€')
-                ->assertSourceHas('Paketireis');
-        });
-
-        // Cleanup
-
-        $destination1->delete();
-        $destination2->delete();
-        $offer->delete();
-        $company->delete();
-
-        $this->assertTrue(Offer::whereTitle('Playa Bonita para Mamacita')->first() == null);
-        $this->assertTrue(User::whereName($company->name)->first() == null);
+        // @LAUNCH Uncomment this
+        // $this->browse(function (Browser $browser) {
+        //     $browser
+        //         ->visit('/logout')
+        //         ->visit('/offer')
+        //         ->pause(500)
+        //         ->click(dusk('Playa Bonita para Mamacita'))
+        //         ->pause(500)
+        //         ->assertSee('Playa Bonita para Mamacita')
+        //         ->assertSee('1987€');
+        // });
     }
 
     public function test_company_can_add_unpublished_adventure_offer()
     {
-        $company = factory(User::class)->create(['company' => true]);
-
-        $destination1 = factory(Destination::class)->create(['name' => 'Sol']);
-        $destination2 = factory(Destination::class)->create(['name' => 'Universo']);
-
-        $this->browse(function (Browser $browser) use ($company) {
+        $this->browse(function (Browser $browser) {
             $browser
-                ->loginAs($company)
-                ->visit('/offer/admin/company')
-                ->assertSourceHas('Reisipakkumiste lisamine')
+                ->loginAs($this->company_three)
+                ->visit('/company')
+                ->assertSee('Halda reisipakkumisi')
                 ->click(dusk('Lisa seiklusreis'))
-                ->pause(1000)
-                ->type(dusk('Pealkiri'), 'Montaña alta para gringo')
-                ->click(dusk('Reisi alguskoht'))
-                ->keys(dusk('Reisi alguskoht'), 'Sol', '{enter}')
+                ->pause(300)
+                ->click(dusk('Pakkumine on avalikustatud'))
+                ->type(dusk('Pealkiri'), 'Montaña super-alta para gringo')
+                ->type(dusk('Pakkumise hind'), '3456')
+                ->type(dusk('Link reisi koduleheküljele'), 'http://google.es')
+                ->type(dusk('Reisi alguskuupäev'), '01.03.2100')
+                ->type(dusk('Reisi lõppkuupäev'), '01.04.2100')
+                ->keys(dusk('Reisi alguskoht'), 'Sol', '{tab}')
                 ->click(dusk('Reisi sihtkohad'))
-                ->keys(dusk('Reisi sihtkohad'), 'Universo', '{enter}')
-                ->scrollToBottom()
-                ->pause(1000)
+                ->keys(dusk('Reisi sihtkohad'), 'Universo', '{tab}')
                 ->click(dusk('Lisa seiklusreis'))
-                ->assertPathIs('/offer/admin/company')
-                ->assertSourceHas('Montaña alta para gringo')
-                ->assertSourceHas('Universo');
+                ->assertPathIs('/company')
+                ->assertSee('Montaña super-alta para gringo')
+                ->assertSee('Universo');
         });
 
-        $offer = Offer::whereTitle('Montaña alta para gringo')->first();
+        $offer = Offer::whereTitle('Montaña super-alta para gringo')->first();
 
-        // Assert company does not not see it's own unpublished content
-        // @TODO2 Give ability to preview
+        // Assert company sees its own unpublished content
 
-        $this->browse(function (Browser $browser) use ($company, $offer) {
+        // @LAUNCH
+        // $this->browse(function (Browser $browser) use ($offer) {
+        //     $browser
+        //         ->loginAs($this->company_three)
+        //         ->visit("/offer/$offer->id")
+        //         ->assertSee('Montaña super-alta para gringo')
+        //         ->assertSee('See reisipakkumine pole avalikustatud');
+        // });
+
+        // Assert superuser sees unpublished content
+
+        $this->browse(function (Browser $browser) use ($offer) {
             $browser
-                ->loginAs($company)
+                ->loginAs($this->super_user)
                 ->visit("/offer/$offer->id")
-                ->assertSourceHas('Suure tõenäosusega on lehekülg liigutatud teise kohta')
-                ->assertSourceMissing('Montaña alta para gringo');
+                ->assertSee('Montaña super-alta para gringo')
+                ->assertSee('See reisipakkumine pole avalikustatud');
         });
 
-        // Assert companies do not see each other unpublished offers
+        // Assert other company do not see other company unpublished offer
 
-        $other_company = factory(User::class)->create(['company' => true]);
-
-        $this->browse(function (Browser $browser) use ($other_company) {
+        $this->browse(function (Browser $browser) use ($offer) {
             $browser
-                ->loginAs($other_company)
-                ->visit('/offer/admin/company')
-                ->assertSourceMissing('Montaña alta para gringo');
+                ->loginAs($this->other_company)
+                ->visit("/offer/$offer->id")
+                ->assertSee('Õigused puuduvad')
+                ->assertDontSee('Montaña super-alta para gringo');
         });
 
-        // Cleanup
+        // Assert regular user do not unpublished offer
 
-        $destination1->delete();
-        $destination2->delete();
-        $offer->delete();
-        $company->delete();
-        $other_company->delete();
+        $regular_user = factory(User::class)->create();
+
+        $this->browse(function (Browser $browser) use ($offer) {
+            $browser
+                ->loginAs($this->regular_user)
+                ->visit("/offer/$offer->id")
+                ->assertSee('Õigused puuduvad')
+                ->assertDontSee('Montaña super-alta para gringo');
+        });
+
+        // Assert admin user do not see unpublished offer
+
+        $this->browse(function (Browser $browser) use ($offer) {
+            $browser
+                ->loginAs($this->admin_user)
+                ->visit("/offer/$offer->id")
+                ->assertSee('Õigused puuduvad')
+                ->assertDontSee('Montaña super-alta para gringo');
+        });
+
+        $this->browse(function (Browser $browser) use ($offer) {
+            $browser
+                ->logout()
+                ->visit('/')
+                ->visit("/offer/$offer->id")
+                ->assertSee('Pead esmalt sisse logima')
+                ->assertDontSee('Montaña super-alta para gringo');
+        });
+    }
+
+    public function tearDown()
+    {
+        if ($offer_first = Offer::whereTitle('Playa Bonita para Mamacita')->first()) {
+            $offer_first->delete();
+        }
+
+        if ($offer_first = Offer::whereTitle('Montaña super-alta para gringo')->first()) {
+            $offer_first->delete();
+        }
+
+        $this->company_one->delete();
+        $this->company_two->delete();
+        $this->company_three->delete();
+
+        $this->destination_tierra->delete();
+        $this->destination_sol->delete();
+        $this->destination_universo->delete();
+
+        $this->other_company->delete();
+        $this->regular_user->delete();
+        $this->admin_user->delete();
+        $this->super_user->delete();
     }
 }

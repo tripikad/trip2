@@ -1,6 +1,7 @@
 @php
 
 $title = $title ?? '';
+$description = $description ?? '';
 $name = $name ?? '';
 $value = $value ?? '';
 $rows = $rows ?? 8;
@@ -12,23 +13,24 @@ $disabled = $disabled ?? false;
 
 <div class="FormTextarea {{ $isclasses }} {{ $errors->first($name) ? 'FormTextfield--error' : ''}}">
 
-    @if ($title)
+    <div class="FormTextfield__header">
 
-        <label for="{{ $name }}" class="FormTextarea__label">{{ $title }}</label>
-    
-    @endif
+        @if ($title)
 
-    <textarea
-        class="FormTextarea__textarea"
-        id={{ $name }}
-        name="{{ $name }}"
-        rows="{{ $rows }}"
-        cols="{{ $cols }} "
-        placeholder="{{ $placeholder }}"
-        dusk="{{ slug($title) }}"
-        @if($disabled)
-          disabled
+        <label for="{{ $name }}" class="FormTextfield__label">{{ $title }}</label>
+
         @endif
-    >{{ $value }}</textarea>
+
+        @if ($description)
+
+        <div class="FormTextfield__description">{{ $description }}</div>
+
+        @endif
+
+    </div>
+
+    <textarea class="FormTextarea__textarea" id={{ $name }} name="{{ $name }}" rows="{{ $rows }}" cols="{{ $cols }} "
+        placeholder="{{ $placeholder }}" dusk="{{ slug($title) }}" @if($disabled) disabled
+        @endif>{{ $value }}</textarea>
 
 </div>

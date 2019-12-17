@@ -18,6 +18,7 @@
         "d3-geo": "^1.11.8",
         "d3-scale": "^1.0.6",
         "d3-shape": "^1.2.0",
+        "date-fns": "^2.8.1",
         "dropzone": "^5.1.1",
         "lodash.unescape": "^4.0.1",
         "pell": "^1.0.4",

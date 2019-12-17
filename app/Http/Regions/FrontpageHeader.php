@@ -26,7 +26,7 @@ class FrontpageHeader
             ->with(
                 'search',
                 component('FrontpageSearch')
-                    ->with('height', '50px')
+                    ->with('height', 5)
                     ->with('route', route('destination.showSlug', [0]))
                     ->with('placeholder', trans('frontpage.index.search.title'))
                     ->with('options', $destinations)

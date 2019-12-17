@@ -16,7 +16,8 @@ class BookingTest extends BrowserKitTestCase
 {
     use DatabaseTransactions;
 
-    public function test_anoymous_user_can_see_offers()
+    // @LAUNCH Rework this
+    public function test_anoymous_user_can_see_offers_but_can_not_yet_book()
     {
         Mail::fake();
 
@@ -24,7 +25,7 @@ class BookingTest extends BrowserKitTestCase
         $offer = factory(Offer::class)->create(['user_id' => $company->id]);
 
         $this->visit("/offer/$offer->id")
-            ->dontSee('Broneeri reis')
+            ->dontSee('Broneeri reis Tripis')
             ->dontSee('Telefon');
 
         Mail::assertNotQueued(CreateBooking::class);
@@ -36,7 +37,7 @@ class BookingTest extends BrowserKitTestCase
 
         $superuser = factory(User::class)->create(['role' => 'superuser']);
         $company = factory(User::class)->create(['company' => true]);
-        $offer = factory(Offer::class)->create(['user_id' => $company->id]);
+        $offer = factory(Offer::class)->create(['user_id' => $company->id, 'style' => 'package']);
 
         $this->actingAs($superuser)
             ->visit("/offer/$offer->id")

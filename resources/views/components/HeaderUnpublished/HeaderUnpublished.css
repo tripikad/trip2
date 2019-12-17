@@ -7,3 +7,11 @@
     color: $pink-dark;
     font: $font-heading-sm;
 }
+
+.HeaderUnpublished--gray {
+    background: $gray-light;
+}
+
+.HeaderUnpublished--gray .HeaderUnpublished__title {
+    color: $gray;
+}

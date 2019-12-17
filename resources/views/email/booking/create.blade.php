@@ -8,6 +8,8 @@
 
 {{ trans('offer.book.email.id') }}: {{ $booking->id }}
 
+{{ trans('offer.book.email.hotel') }}: {{ $booking->data->hotel }}
+
 {{ trans('offer.book.email.name') }}: {{ $booking->data->name }}
 
 {{ trans('offer.book.email.email') }}: <a href="mailto:{{ $booking->data->email }}">{{ $booking->data->email }}</a>

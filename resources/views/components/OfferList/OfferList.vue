@@ -1,166 +1,179 @@
 <template>
     <div class="OfferList" :class="isclasses">
-        <dotmap :largedots="filteredOfferList.map(o => o.coordinates)" />
+        <Dotmap :largedots="filteredOffers.map(o => o.coordinates)" isclasses="Dotmap--center" />
+
         <form-slider-multiple
             isclasses="FormSliderMultiple--yellow"
-            :value="activePriceFrom"
-            @input="value => (activePriceFrom = value)"
-            :value2="activePriceTo"
-            @input2="value2 => (activePriceTo = value2)"
+            :value="filterState.minPrice"
+            @input="price => (filterState.minPrice = price)"
+            :value2="filterState.maxPrice"
+            @input2="price => (filterState.maxPrice = price)"
             :min="minPrice"
             :max="maxPrice"
             :step="step"
-            suffix="€"
+            :suffix="suffix"
         />
+
         <div class="OfferList__filters">
-            <form-select :options="styles" v-model="activeStyle" isclasses="FormSelect--blue" />
-            <form-select :options="destinations" v-model="activeDestination" isclasses="FormSelect--blue" />
-            <form-select :options="companies" v-model="activeCompany" isclasses="FormSelect--blue" />
-            <a :style="{ opacity: !notFiltered ? 1 : 0.25 }" @click="handleClearFilters">
-                <div class="Button Button--cyan">
-                    <div class="Button__title">Kõik</div>
-                </div>
-            </a>
+            <form-buttons v-model="filterState.date" :items="dateOptions" isclasses="FormButtons--blue" />
+
+            <div class="OfferList__filtersRow">
+                <form-select :options="filterOptions.style" v-model="filterState.style" isclasses="FormSelect--blue" />
+                <form-select
+                    :options="filterOptions.company"
+                    v-model="filterState.company"
+                    isclasses="FormSelect--blue"
+                />
+                <form-select
+                    :options="filterOptions.destination"
+                    v-model="filterState.destination"
+                    isclasses="FormSelect--blue"
+                />
+            </div>
+            <div>
+                <ButtonVue
+                    title="Näita kõiki reise"
+                    @click.native.prevent="resetFilterState"
+                    isclasses="Button--small Button--cyan Button--narrow"
+                    :style="{ opacity: offers.length == 0 || offers.length == filteredOffers.length ? 0 : 1 }"
+                />
+            </div>
         </div>
-        <div class="OfferList__offers">
-            <OfferRow v-for="(offer, i) in filteredOfferList" :key="i" :offer="offer" :route="offer.route" />
-        </div>
+
+        <transition-group name="Fade" class="OfferList__offers">
+            <OfferRow v-for="offer in filteredOffers" :key="offer.id" :offer="offer" :route="offer.route" />
+        </transition-group>
+
+        <ButtonVue v-if="nextPageUrl" @click.native.prevent="getData" title="Gimme data" />
     </div>
 </template>
 
 <script>
-import { parseSheets, unique } from '../../utils/utils'
+import { uniqueFilter, toObject, seasonRange, formatSeasonRange } from '../../utils/utils'
+import { filters } from './OfferList'
 
 export default {
     props: {
         isclasses: { default: '' },
-        route: { default: '' }
+        route: { default: '' },
+        suffix: { default: '' }
     },
     data: () => ({
         offers: [],
-        id: '1TLEDlvDC_06gy75IhNAyXaUjt-9oOT2XOqW2LEpycHE',
-        activeCompany: -1,
-        activeDestination: -1,
-        activeStyle: -1,
-        activePriceFrom: 0,
-        activePriceTo: 0,
-        priceRange: 1000,
-        round: 10,
-        step: 50
+        nextPageUrl: null,
+        filterState: toObject(filters.map(({ key, defaultState }) => [key, 0])),
+        minPrice: 0,
+        maxPrice: 0,
+        dateOptions: ['Kõik kuupäevad', ...formatSeasonRange(seasonRange(new Date()))],
+        step: 100
     }),
     computed: {
-        minPrice() {
-            if (this.offers.length) {
-                const price = Math.min(...this.offers.map(o => this.convertToNumber(o.price)))
-                return Math.floor(price / this.round) * this.round
-            }
-            return 0
-        },
-        maxPrice() {
-            if (this.offers.length) {
-                const price = Math.max(...this.offers.map(o => this.convertToNumber(o.price)))
-                return Math.ceil(price / this.round) * this.round
-            }
-            return 100
-        },
-        notFiltered() {
-            return (
-                this.activeCompany == -1 &&
-                this.activeDestination == -1 &&
-                this.activeStyle == -1 &&
-                this.activePriceFrom == this.minPrice &&
-                this.activePriceTo == this.maxPrice
+        filterOptions() {
+            return toObject(
+                filters
+                    .map(({ key, defaultTitle, getId, getTitle }) => {
+                        if (getTitle) {
+                            const options = uniqueFilter(this.offers, getId)
+                                .map(o => ({
+                                    id: getId(o),
+                                    name: getTitle(o)
+                                }))
+                                .sort((a, b) => a > b)
+                            // We return [key,value] pairs that will be
+                            // coverted to { key: value } object by toObject()
+                            return [key, [{ id: 0, name: defaultTitle }, ...options]]
+                        }
+                        return null
+                    })
+                    .filter(f => f)
             )
         },
-        companies() {
-            return [
-                { id: -1, name: 'Kõik firmad' },
-                ...unique(this.offers.map(o => o.user.name)).map((name, id) => ({
-                    id,
-                    name
-                }))
-            ]
-        },
-        destinations() {
-            return [
-                { id: -1, name: 'Kõik sihtkohad' },
-                ...unique(this.offers.map(o => o.end_destinations[0].name)).map((name, id) => ({
-                    id,
-                    name
-                }))
-            ]
-        },
-        styles() {
-            return [
-                { id: -1, name: 'Kõik reisistiilid' },
-                ...unique(this.offers.map(o => o.style)).map((name, id) => ({
-                    id,
-                    name
-                }))
-            ]
-        },
-        filteredOfferList() {
-            return this.offers
-                .filter(o => {
-                    if (this.activeCompany > -1) {
-                        return o.user.name == this.getById(this.companies, this.activeCompany, 'name')
-                    }
-                    return true
-                })
-                .filter(o => {
-                    if (this.activeDestination > -1) {
-                        return (
-                            o.end_destinations[0].name ==
-                            this.getById(this.destinations, this.activeDestination, 'name')
-                        )
-                    }
-                    return true
-                })
-                .filter(o => {
-                    if (this.activeStyle > -1) {
-                        return o.style == this.getById(this.styles, this.activeStyle, 'name')
-                    }
-                    return true
-                })
-                .filter(o => {
-                    return (
-                        this.convertToNumber(o.price) >= this.activePriceFrom &&
-                        this.convertToNumber(o.price) <= this.activePriceTo
-                    )
-                })
+        filteredOffers() {
+            return filters.reduce(
+                (data, { key, getId, compare }) =>
+                    data.filter(d => {
+                        // If current filter is not enabled
+                        // do not filter the data item d,
+                        // pass it through
+
+                        if (this.filterState[key] == 0) {
+                            return true
+                        }
+
+                        // Get the id from the data item
+                        // and compare it with current filter
+                        // active state
+
+                        return compare(d, this.filterState[key])
+                    }),
+                this.offers
+            )
         }
     },
     methods: {
-        convertToNumber(num) {
-            return parseFloat(String(num).replace(/[^0-9.]/g, ''))
-        },
-        getById(data, id, key) {
-            if (data.length) {
-                return data.filter(d => d.id == id)[0][key]
+        getPriceRange() {
+            if (this.offers.length) {
+                const round = 10
+                const prices = this.offers.map(o => parseFloat(o.price))
+
+                return [Math.min(...prices), Math.max(...prices)].map(price => Math.ceil(price / this.step) * this.step)
             }
-            return null
+            return [0, 0]
         },
-        handleClearFilters() {
-            this.activeCompany = -1
-            this.activeDestination = -1
-            this.activeStyle = -1
-            this.activePriceFrom = this.minPrice
-            this.activePriceTo = this.maxPrice
+        getData() {
+            if (this.nextPageUrl) {
+                this.$http.get(this.nextPageUrl).then(({ data }) => {
+                    this.offers = [...this.offers, ...data.data]
+
+                    this.nextPageUrl = data.next_page_url ? data.next_page_url : null
+
+                    // Set min and max prices for the price range silder
+
+                    const [minPrice, maxPrice] = this.getPriceRange()
+                    this.minPrice = minPrice
+                    this.maxPrice = maxPrice
+                })
+            }
+        },
+        resetFilterState() {
+            filters.forEach(({ key, getTitle }) => {
+                if (getTitle !== null) {
+                    this.filterState[key] = 0
+                }
+            })
+
+            this.filterState.minPrice = this.minPrice
+            this.filterState.maxPrice = this.maxPrice
+            this.filterState.date = 0
         }
     },
     mounted() {
-        if (this.route) {
-            fetch(this.route)
-                .then(res => res.json())
-                .then(res => {
-                    this.offers = res
-                    this.activePriceFrom = this.minPrice
-                    this.activePriceTo =
-                        this.maxPrice < this.minPrice + this.priceRange
-                            ? this.minPrice + this.priceRange
-                            : this.maxPrice
-                })
-        }
+        // Axios returns the response with "data" property
+        // It contains the "data" property (again) and pager
+        // information from Laravel paged JSON response
+
+        this.$http.get(this.route).then(({ data }) => {
+            // Set the actual data from the response as offers
+
+            this.offers = data.data
+
+            // Set the next page url so getData() method can
+            // fetch the data for subsequent pages
+
+            this.nextPageUrl = data.next_page_url
+
+            // Set min and max prices for the price range silder
+
+            const [minPrice, maxPrice] = this.getPriceRange()
+
+            this.minPrice = minPrice
+            this.maxPrice = maxPrice
+
+            // Set default min and max price
+
+            this.filterState.minPrice = minPrice
+            this.filterState.maxPrice = maxPrice
+        })
     }
 }
 </script>

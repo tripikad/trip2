@@ -1,6 +1,12 @@
 <?php
 
 return [
+    'required' => 'Kohustuslik',
+    'suggested' => 'Soovituslik',
+
+    'price' => ':price:currency',
+    'price.starting' => 'al :price:currency',
+
     'link.read.more' => 'Loe edasi',
 
     'content.latest.posts' => 'Viimased postitused',

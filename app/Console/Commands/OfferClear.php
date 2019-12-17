@@ -20,6 +20,8 @@ class OfferClear extends Command
 
     public function handle()
     {
+        // @LAUNCH Remove
+
         if ($this->confirm('This command removes all offer content. Do you want to continue?')) {
             DB::table('offers')->truncate();
             DB::table('bookings')->truncate();

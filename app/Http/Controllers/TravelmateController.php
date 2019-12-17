@@ -90,8 +90,14 @@ class TravelmateController extends Controller
                     ->push(component('Promo')->with('promo', 'footer'))
             )
 
-            ->with('footer', region('Footer'))
-
+            ->with(
+                'footer',
+                collect()
+                    ->push(region('OfferSection'))
+                    ->push(region('FooterLight'))
+                    ->render()
+                    ->implode('')
+            )
             ->render();
     }
 
@@ -222,8 +228,14 @@ class TravelmateController extends Controller
                     ->push(component('Promo')->with('promo', 'footer'))
             )
 
-            ->with('footer', region('Footer'))
-
+            ->with(
+                'footer',
+                collect()
+                    ->push(region('OfferSection'))
+                    ->push(region('FooterLight'))
+                    ->render()
+                    ->implode('')
+            )
             ->render();
     }
 

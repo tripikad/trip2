@@ -51,6 +51,14 @@
     background: $gray-light-hover;
 }
 
+.Button--blue {
+    background: $blue;
+}
+
+.Button--blue:hover {
+    background: $blue-hover;
+}
+
 .Button--facebook {
     background: $facebook;
 }

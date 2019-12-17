@@ -19,6 +19,84 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Features
+    |--------------------------------------------------------------------------
+    |
+    | You can enable or disable various Clockwork features here. Some features
+    | accept additional configuration (eg. slow query threshold for database).
+    |
+    */
+
+    'features' => [
+        // Cache usage stats and cache queries including results
+        'cache' => [
+            'enabled' => env('CLOCKWORK_CACHE_ENABLED', true),
+
+            // Collect cache queries including results (high performance impact with a high number of queries)
+            'collect_queries' => env('CLOCKWORK_CACHE_QUERIES', true)
+        ],
+
+        // Database usage stats and queries
+        'database' => [
+            'enabled' => env('CLOCKWORK_DATABASE_ENABLED', true),
+
+            // Collect database queries (high performance impact with a very high number of queries)
+            'collect_queries' => env('CLOCKWORK_DATABASE_COLLECT_QUERIES', true),
+
+            // Query execution time threshold in miliseconds after which the query will be marked as slow
+            'slow_threshold' => env('CLOCKWORK_DATABASE_SLOW_THRESHOLD', 100),
+
+            // Collect only slow database queries
+            'slow_only' => env('CLOCKWORK_DATABASE_SLOW_ONLY', false),
+
+            // Detect and report duplicate (N+1) queries
+            'detect_duplicate_queries' => env('CLOCKWORK_DATABASE_DETECT_DUPLICATE_QUERIES', true)
+        ],
+
+        // Sent emails
+        'emails' => [
+            'enabled' => env('CLOCKWORK_EMAILS_ENABLED', true)
+        ],
+
+        // Dispatched events
+        'events' => [
+            'enabled' => env('CLOCKWORK_EVENTS_ENABLED', true),
+
+            // Ignored events (framework events are ignored by default)
+            'ignored_events' => [
+                // App\Events\UserRegistered::class,
+                // 'user.registered'
+            ]
+        ],
+
+        // Laravel log (you can still log directly to Clockwork with laravel log disabled)
+        'log' => [
+            'enabled' => env('CLOCKWORK_LOG_ENABLED', true)
+        ],
+
+        // Dispatched queue jobs
+        'queue' => [
+            'enabled' => env('CLOCKWORK_QUEUE_ENABLED', true)
+        ],
+
+        // Redis commands
+        'redis' => [
+            'enabled' => env('CLOCKWORK_REDIS_ENABLED', true)
+        ],
+
+        // Routes list
+        'routes' => [
+            'enabled' => env('CLOCKWORK_ROUTES_ENABLED', false)
+        ],
+
+        // Rendered views including passed data (high performance impact with large amount of data passed to views)
+        'views' => [
+            'enabled' => env('CLOCKWORK_VIEWS_ENABLED', false)
+        ]
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Enable web UI
     |--------------------------------------------------------------------------
     |
@@ -28,7 +106,7 @@ return [
     |
     */
 
-    'web' => env('CLOCKWORK_WEB', false),
+    'web' => env('CLOCKWORK_WEB', true),
 
     'web_dark_theme' => env('CLOCKWORK_WEB_DARK_THEME', false),
 
@@ -64,6 +142,9 @@ return [
     'storage' => env('CLOCKWORK_STORAGE', 'files'),
 
     'storage_files_path' => env('CLOCKWORK_STORAGE_FILES_PATH', storage_path('clockwork')),
+
+    // Compress the metadata files using gzip, trading a little bit of performance for lower disk usage
+    'storage_files_compress' => env('CLOCKWORK_STORAGE_FILES_COMPRESS', false),
 
     'storage_sql_database' => env('CLOCKWORK_STORAGE_SQL_DATABASE', storage_path('clockwork.sqlite')),
     'storage_sql_table' => env('CLOCKWORK_STORAGE_SQL_TABLE', 'clockwork'),
@@ -103,22 +184,6 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Filter collected data
-    |--------------------------------------------------------------------------
-    |
-    | You can filter collected data by specifying what you don't want to collect
-    | here.
-    |
-    */
-
-    'filter' => [
-        'cacheQueries', // collecting cache queries in cache-heavy might have a negative performance impact and use a lot of disk space
-        'routes', // collecting routes data on every request might use a lot of disk space
-        'viewsData' // collecting views data, including all variables passed to the view on every request might use a lot of disk space
-    ],
-
-    /*
-    |--------------------------------------------------------------------------
     | Disable data collection for certain URIs
     |--------------------------------------------------------------------------
     |
@@ -128,8 +193,8 @@ return [
     */
 
     'filter_uris' => [
-        '/__clockwork/.*', // disable collecting data for clockwork-web assets
-        '/horizon/.*' // disable collecting data for Laravel Horizon requests
+        '/horizon/.*', // Laravel Horizon requests
+        '/telescope/.*' // Laravel Telescope requests
     ],
 
     /*
@@ -147,20 +212,51 @@ return [
     |
     */
 
-    'collect_stack_traces' => env('CLOCKWORK_COLLECT_STACK_TRACES', true),
+    'stack_traces' => [
+        // Enable or disable collecting of stack traces, when disabled only caller file and line number is collected
+        'enabled' => env('CLOCKWORK_STACK_TRACES_ENABLED', true),
+
+        // List of vendor names to skip when determining caller, common vendor are automatically added
+        'skip_vendors' => [
+            // 'phpunit'
+        ],
+
+        // List of namespaces to skip when determining caller
+        'skip_namespaces' => [
+            // 'Laravel'
+        ],
+
+        // List of class names to skip when determining caller
+        'skip_classes' => [
+            // App\CustomLog::class
+        ],
+
+        // Limit of frames to be collected
+        'limit' => env('CLOCKWORK_STACK_TRACES_LIMIT', 10)
+    ],
 
     /*
     |--------------------------------------------------------------------------
-    | Ignored events
+    | Serialization
     |--------------------------------------------------------------------------
     |
-    | Array of event names that will be ignored when collecting data for the "events" tab.
-    | By default all framework-specific events are also ignored, set to false to log
-    | all possible fired events.
+    | Configure how Clockwork serializes the collected data.
+    | Depth limits how many levels of multi-level arrays and objects have
+    | extended serialization (rest uses simple serialization).
+    | Blackbox allows you to specify classes which contents should be never
+    | serialized (eg. a service container class).
+    | Lowering depth limit and adding classes to blackbox lowers the memory
+    | usage and processing time.
     |
     */
 
-    'ignored_events' => [],
+    'serialization_depth' => env('CLOCKWORK_SERIALIZATION_DEPTH', 10),
+
+    'serialization_blackbox' => [
+        \Illuminate\Container\Container::class,
+        \Illuminate\Foundation\Application::class,
+        \Laravel\Lumen\Application::class
+    ],
 
     /*
     |--------------------------------------------------------------------------

@@ -6,10 +6,12 @@
                 :key="i"
                 class="FormButtons__button"
                 :class="i == activeIndex ? 'FormButtons__button--active' : ''"
-                @click="activeIndex = i"
-            >
-                {{ item }}
-            </div>
+                @click="
+                    activeIndex = i
+                    $emit('input', activeIndex)
+                "
+                v-html="item"
+            ></div>
         </div>
         <input v-model="activeIndex" v-show="false" type="text" :name="name" />
     </div>

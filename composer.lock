@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "357533c00ccd85589f8d9c94cec80130",
+    "content-hash": "068e6ea078d9e4237858281c0a7b983e",
     "packages": [
         {
             "name": "andreasindal/laravel-markdown",
@@ -1289,16 +1289,16 @@
         },
         {
             "name": "itsgoingd/clockwork",
-            "version": "v3.1.4",
+            "version": "v4.0.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/itsgoingd/clockwork.git",
-                "reference": "529b6f9e2ce487b900213cf1d0694d0aebd5977f"
+                "reference": "0803cd5e410f1f4bdb544c346021b87faf76c4c6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/itsgoingd/clockwork/zipball/529b6f9e2ce487b900213cf1d0694d0aebd5977f",
-                "reference": "529b6f9e2ce487b900213cf1d0694d0aebd5977f",
+                "url": "https://api.github.com/repos/itsgoingd/clockwork/zipball/0803cd5e410f1f4bdb544c346021b87faf76c4c6",
+                "reference": "0803cd5e410f1f4bdb544c346021b87faf76c4c6",
                 "shasum": ""
             },
             "require": {
@@ -1343,7 +1343,7 @@
                 "profiling",
                 "slim"
             ],
-            "time": "2019-03-21T20:24:39+00:00"
+            "time": "2019-11-25T21:07:52+00:00"
         },
         {
             "name": "jakub-onderka/php-console-color",

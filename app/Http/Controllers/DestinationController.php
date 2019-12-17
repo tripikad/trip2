@@ -37,47 +37,64 @@ class DestinationController extends Controller
             ->filter()
             ->values();
 
-        return layout('Offer')
-            ->with('color', 'yellow')
-            ->with('header', region('OfferHeader'))
-            ->with(
-                'top',
+        return layout('Full')
+            ->withHeadRobots('noindex')
+            ->withTransparency(true)
+            ->withTitle(trans('offer.index'))
+            ->withItems(
                 collect()
                     ->push(
-                        component('Title')
-                            ->is('white')
-                            ->is('large')
-                            ->is('center')
-                            ->with('title', 'Sihtkohad')
+                        component('Section')
+                            ->withPadding(2)
+                            ->withTag('header')
+                            ->withBackground('yellow')
+                            ->withItems(collect()->push(region('NavbarLight')))
                     )
-                    ->br()
                     ->push(
-                        component('Dotmap')
-                            ->with('height', '300px')
-                            ->is('center')
-                            ->with('areas', $areas)
-                            ->with('smalldots', $dots)
+                        component('Section')
+                            ->withPadding(2)
+                            ->withBackground('yellow')
+                            ->withWidth(styles('tablet-width'))
+                            ->withItems(
+                                collect()
+                                    ->push(
+                                        component('Title')
+                                            ->is('white')
+                                            ->is('large')
+                                            ->is('center')
+                                            ->with('title', 'Sihtkohad')
+                                    )
+                                    ->spacer()
+                                    ->push(
+                                        component('Dotmap')
+                                            ->is('center')
+                                            ->with('areas', $areas)
+                                            ->with('smalldots', $dots)
+                                    )
+                                    ->push(
+                                        component('Grid')
+                                            ->with('cols', 3)
+                                            ->with('gap', 3)
+                                            ->with('widths', '5fr 3fr 3fr')
+                                            ->with(
+                                                'items',
+                                                $continents->map(function ($d) {
+                                                    return component('Title')
+                                                        ->is('white')
+                                                        ->with('title', str_replace('ja Okeaania', '', $d->name))
+                                                        ->with('route', route('destination.showSlug', [$d->slug]));
+                                                })
+                                            )
+                                    )
+                            )
+                    )
+                    ->push(
+                        component('Section')
+                            ->withTag('footer')
+                            ->withBackground('yellow')
+                            ->withItems(collect()->push(region('FooterLight', '')))
                     )
             )
-            ->with(
-                'content',
-                collect()->push(
-                    component('Grid')
-                        ->with('cols', 3)
-                        ->with('gap', 3)
-                        ->with('widths', '5fr 3fr 3fr')
-                        ->with(
-                            'items',
-                            $continents->map(function ($d) {
-                                return component('Title')
-                                    ->is('white')
-                                    ->with('title', str_replace('ja Okeaania', '', $d->name))
-                                    ->with('route', route('destination.showSlug', [$d->slug]));
-                            })
-                        )
-                )
-            )
-            ->with('footer', region('FooterLight', ''))
             ->render();
     }
 

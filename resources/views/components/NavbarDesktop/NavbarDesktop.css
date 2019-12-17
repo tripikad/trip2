@@ -12,10 +12,21 @@
     color: $gray;
     font: $font-heading-sm;
     white-space: nowrap;
+    display: flex;
+    align-items: center;
 }
 
 .NavbarDesktop__link:hover {
     color: $gray-hover;
+}
+
+.NavbarDesktop__linkBadge {
+    background: $blue-hover;
+    color: $white;
+    padding: 0 $padding-xs;
+    font: $font-text-xs;
+    margin-left: $margin-xs;
+    border-radius: $border-radius-md;
 }
 
 .NavbarDesktop__userImage {

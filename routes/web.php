@@ -367,12 +367,6 @@ Route::get('styleguide/components', 'Styleguide\ComponentsController@index')->na
 
 Route::get('experiments', 'ExperimentsController@index')->name('experiments.index');
 
-Route::get('experiments/destinations', 'ExperimentsController@destinationIndex')->name('experiments.destination.index');
-
-Route::get('experiments/user/{id?}', 'ExperimentsController@userIndex')->name('experiments.user.index');
-
-Route::post('experiments/store', 'ExperimentsController@store')->name('experiments.store');
-
 // Registration
 
 Route::get('register', [
@@ -502,6 +496,36 @@ Route::get('lendude_sooduspakkumised/rss', [
     'as' => 'flight.feed'
 ]);
 
+// Companies
+
+Route::get('company', 'CompanyController@index')
+    ->name('company.index')
+    ->middleware('company');
+
+Route::get('company/admin', 'CompanyController@adminIndex')
+    ->name('company.admin.index')
+    ->middleware('role:superuser');
+
+Route::get('company/{id}', 'CompanyController@show')->name('company.show');
+
+Route::get('company/create', 'CompanyController@create')
+    ->name('company.create')
+    ->middleware('role:superuser');
+
+Route::post('company/store', 'CompanyController@store')
+    ->name('company.store')
+    ->middleware('role:superuser');
+
+Route::get('company/{id}/edit', 'CompanyController@edit')
+    ->name('company.edit')
+    ->middleware('role:superuser,userowner')
+    ->middleware('company');
+
+Route::put('company/{id}/update', 'CompanyController@update')
+    ->name('company.update')
+    ->middleware('role:superuser,userowner')
+    ->middleware('company');
+
 // Offers
 
 Route::get('offer', 'OfferController@index')->name('offer.index');
@@ -512,14 +536,6 @@ Route::get('offer/{id}', 'OfferController@show')->name('offer.show');
 
 // Offers admin
 
-Route::get('offer/admin', 'OfferAdminController@index')
-    ->name('offer.admin.index')
-    ->middleware('role:superuser');
-
-Route::get('offer/admin/company', 'OfferAdminController@companyIndex')
-    ->name('offer.admin.company.index')
-    ->middleware('company');
-
 Route::get('offer/admin/create/{style}', 'OfferAdminController@create')
     ->name('offer.admin.create')
     ->middleware('company')
@@ -529,11 +545,22 @@ Route::post('offer/admin/store', 'OfferAdminController@store')
     ->name('offer.admin.store')
     ->middleware('company');
 
+Route::get('offer/{id}/edit', 'OfferAdminController@edit')
+    ->name('offer.admin.edit')
+    ->middleware('company');
+
+Route::put('offer/{id}/update', 'OfferAdminController@update')
+    ->name('offer.admin.update')
+    ->middleware('company');
+
 // Bookings
 
 Route::post('booking/{id}', 'BookingController@create')
+    // @LAUNCH remove this control
     ->middleware('role:superuser')
     ->name('booking.create');
+
+Route::get('booking/{id}/goto', 'BookingController@goto')->name('booking.goto');
 
 // Legacy user paths
 
