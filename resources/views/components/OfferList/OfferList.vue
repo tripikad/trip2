@@ -116,7 +116,9 @@ export default {
                 const round = 10
                 const prices = this.offers.map(o => parseFloat(o.price))
 
-                return [Math.min(...prices), Math.max(...prices)].map(price => Math.ceil(price / this.step) * this.step)
+                return [Math.min(...prices), Math.max(...prices)].map(
+                    (price, i) => Math[['floor', 'ceil'][i]](price / this.step) * this.step
+                )
             }
             return [0, 0]
         },
