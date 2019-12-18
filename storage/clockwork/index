@@ -2950,3 +2950,11 @@
 1576664138-9695-2146971254,1576664138.9166,GET,/offer,"App\Http\Controllers\OfferController@index",200,53.390979766846
 1576664141-0709-2105340685,1576664140.9609,GET,/api/countrydots,"App\Http\Controllers\ApiController@countrydots",200,110.53395271301
 1576664141-9758-1244238371,1576664140.9617,GET,/offer/json,"App\Http\Controllers\OfferController@indexJson",200,1014.4770145416
+1576682416-6986-79390514,1576682415.4957,GET,/odavad-lennupiletid,"App\Http\Controllers\FlightController@index",200,1205.6360244751
+1576682422-8984-414241669,1576682422.512,GET,/foorum/uldfoorum,"App\Http\Controllers\ForumController@forumIndex",200,386.82293891907
+1576682423-4873-644676287,1576682423.4208,GET,/foorum/photos/map.png,,404,67.273139953613
+1576682485-1977-173286646,1576682484.7712,GET,/odavad-lennupiletid,"App\Http\Controllers\FlightController@index",200,427.02102661133
+1576682485-3597-1237336491,1576682485.0021,GET,/odavad-lennupiletid,"App\Http\Controllers\FlightController@index",200,358.0060005188
+1576682486-0818-1056452092,1576682485.9922,GET,/offer,"App\Http\Controllers\OfferController@index",200,90.091943740845
+1576682489-9965-1321350882,1576682489.6573,GET,/api/countrydots,"App\Http\Controllers\ApiController@countrydots",200,339.87402915955
+1576682490-1323-378782133,1576682489.6935,GET,/offer/json,"App\Http\Controllers\OfferController@indexJson",200,439.19920921326
