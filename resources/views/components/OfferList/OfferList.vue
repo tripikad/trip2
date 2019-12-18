@@ -17,8 +17,9 @@
         <div class="OfferList__filters">
             <form-buttons v-model="filterState.date" :items="dateOptions" isclasses="FormButtons--blue" />
 
+            <form-buttons :items="filterOptions.style" v-model="filterState.style" isclasses="FormButtons--blue" />
+
             <div class="OfferList__filtersRow">
-                <form-select :options="filterOptions.style" v-model="filterState.style" isclasses="FormSelect--blue" />
                 <form-select
                     :options="filterOptions.company"
                     v-model="filterState.company"
@@ -40,6 +41,7 @@
             </div>
         </div>
 
+        {{ filterState }}
         <transition-group name="Fade" class="OfferList__offers">
             <OfferRow v-for="offer in filteredOffers" :key="offer.id" :offer="offer" :route="offer.route" />
         </transition-group>
