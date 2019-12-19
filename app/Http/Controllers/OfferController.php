@@ -106,6 +106,8 @@ class OfferController extends Controller
       ->with('head_image_width', 1200)
       ->with('head_image_height', 670)
       ->withTitle($offer->title . ' ' . $offer->price_formatted)
+      ->withHeadTitle($offer->title . ' ' . $offer->price_formatted)
+      ->withHeadDescription($offer->start_at_formatted . ' → ' . $offer->end_at_formatted)
       ->withItems(
         collect()
           ->pushWhen(
