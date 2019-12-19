@@ -15,9 +15,17 @@
         />
 
         <div class="OfferList__filters">
-            <form-buttons v-model="filterState.date" :items="dateOptions" isclasses="FormButtons--blue" />
+            <form-buttons
+                v-model="filterState.date"
+                :items="dateOptions"
+                isclasses="FormButtons--blue FormButtons--wide"
+            />
 
-            <form-buttons :items="filterOptions.style" v-model="filterState.style" isclasses="FormButtons--blue" />
+            <form-buttons
+                :items="filterOptions.style"
+                v-model="filterState.style"
+                isclasses="FormButtons--blue FormButtons--wide"
+            />
 
             <div class="OfferList__filtersRow">
                 <form-select
@@ -32,6 +40,7 @@
                 />
             </div>
             <div>
+                <!-- @TODO2 translate title -->
                 <ButtonVue
                     title="Näita kõiki reise"
                     @click.native.prevent="resetFilterState"
@@ -41,7 +50,6 @@
             </div>
         </div>
 
-        {{ filterState }}
         <transition-group name="Fade" class="OfferList__offers">
             <OfferRow v-for="offer in filteredOffers" :key="offer.id" :offer="offer" :route="offer.route" />
         </transition-group>
@@ -66,7 +74,8 @@ export default {
         filterState: toObject(filters.map(({ key, defaultState }) => [key, 0])),
         minPrice: 0,
         maxPrice: 0,
-        dateOptions: ['Kõik kuupäevad', ...formatSeasonRange(seasonRange(new Date()))],
+        // @TODO2 translate title
+        dateOptions: ['Kõik aastaajad', ...formatSeasonRange(seasonRange(new Date()))],
         step: 100
     }),
     computed: {

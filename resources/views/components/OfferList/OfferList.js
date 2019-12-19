@@ -7,6 +7,7 @@ const seasons = seasonRange(new Date())
 export const filters = [
     {
         key: 'company',
+        // @TODO2 translate title
         defaultTitle: 'Kõik reisifirmad',
         defaultState: 0,
         getId: o => o.user.id,
@@ -15,6 +16,7 @@ export const filters = [
     },
     {
         key: 'style',
+        // @TODO2 translate title
         defaultTitle: 'Kõik reisistiilid',
         getId: o => o.style,
         getTitle: o => o.style_formatted,
@@ -22,6 +24,7 @@ export const filters = [
     },
     {
         key: 'destination',
+        // @TODO2 translate title
         defaultTitle: 'Kõik sihtkohad',
         getId: o => o.end_destinations[0].id,
         getTitle: o => o.end_destinations[0].name,

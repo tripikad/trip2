@@ -8,11 +8,14 @@
 
 .OfferList__filters > * {
     margin-bottom: $margin-md;
+    width: 100%;
 }
 
 .OfferList__filtersRow {
     display: flex;
     display: block ?if $tablet;
+    width: 100%;
+    justify-content: center;
 }
 
 .OfferList__filtersRow > * {

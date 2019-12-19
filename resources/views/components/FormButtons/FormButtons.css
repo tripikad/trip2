@@ -13,7 +13,7 @@
     justify-content: center;
     font: $font-heading-sm;
     line-height: $line-height-sm;
-    padding: 0 calc($spacer * 2);
+    padding: 0 calc($spacer * 1.5);
     text-align: center;
     border-right: 2px solid $gray;
     border-right: none ?if $tablet;
@@ -51,4 +51,12 @@
 /* @TODO2 Convert to variable */
 .FormButtons--blue .FormButtons__button--active {
     background: rgba(0, 0, 0, 0.25);
+}
+
+.FormButtons--wide {
+    width: 100%;
+}
+
+.FormButtons--wide .FormButtons__button {
+    flex: 1;
 }
