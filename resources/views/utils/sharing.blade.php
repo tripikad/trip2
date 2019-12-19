@@ -1,7 +1,9 @@
 <title>{{ config('site.name') }} | @yield('title')</title>
 <meta name="description" content="@yield('head_description')">
 <meta property="og:title" content="@yield('head_title')">
+<meta property="twitter:title" content="@yield('head_title')">
 <meta property="og:description" content="@yield('head_description')">
+<meta property="twitter:description" content="@yield('head_description')">
 <meta property="og:image" content="@yield('head_image')">
 <meta property="og:image:width" content="@yield('head_image_width')">
 <meta property="og:image:height" content="@yield('head_image_height')">
