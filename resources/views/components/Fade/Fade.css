@@ -1,12 +1,12 @@
 .Fade-enter-active {
-    transition: all 0.3s ease-in;
+  transition: all 0.3s ease-in;
 }
 
 .Fade-leave-active {
-    transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
 }
 
 .Fade-enter,
 .Fade-leave-to {
-    opacity: 0;
+  opacity: 0;
 }

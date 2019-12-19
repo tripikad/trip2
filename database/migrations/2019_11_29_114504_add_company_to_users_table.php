@@ -6,27 +6,27 @@ use Illuminate\Database\Migrations\Migration;
 
 class AddCompanyToUsersTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
-    {
-        Schema::table('users', function (Blueprint $table) {
-            $table->boolean('company')->default(false);
-        });
-    }
+  /**
+   * Run the migrations.
+   *
+   * @return void
+   */
+  public function up()
+  {
+    Schema::table('users', function (Blueprint $table) {
+      $table->boolean('company')->default(false);
+    });
+  }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn(['company']);
-        });
-    }
+  /**
+   * Reverse the migrations.
+   *
+   * @return void
+   */
+  public function down()
+  {
+    Schema::table('users', function (Blueprint $table) {
+      $table->dropColumn(['company']);
+    });
+  }
 }

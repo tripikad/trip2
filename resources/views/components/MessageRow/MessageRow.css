@@ -1,13 +1,13 @@
 .MessageRow {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .MessageRow__user {
-    margin-right: $margin-sm;
+  margin-right: $margin-sm;
 }
 
 .MessageRow__title {
-    font: $font-text-md;
-    color: $gray;
+  font: $font-text-md;
+  color: $gray;
 }

@@ -1,17 +1,17 @@
 .HeaderUnpublished {
-    background: $pink;
-    padding: calc($spacer * 1.5);
+  background: $pink;
+  padding: calc($spacer * 1.5);
 }
 
 .HeaderUnpublished__title {
-    color: $pink-dark;
-    font: $font-heading-sm;
+  color: $pink-dark;
+  font: $font-heading-sm;
 }
 
 .HeaderUnpublished--gray {
-    background: $gray-light;
+  background: $gray-light;
 }
 
 .HeaderUnpublished--gray .HeaderUnpublished__title {
-    color: $gray;
+  color: $gray;
 }

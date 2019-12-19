@@ -1,25 +1,25 @@
 .ForumRow {
-    display: flex;
+  display: flex;
 }
 
 .ForumRow__left {
-    display: flex;
-    align-items: flex-start;
-    padding-right: $padding-sm;
+  display: flex;
+  align-items: flex-start;
+  padding-right: $padding-sm;
 }
 
 .ForumRow__right {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .ForumRow__title {
-    color: $gray-dark;
-    font: $font-heading-md;
-    margin-bottom: $margin-xxxs;
-    line-height: $line-height-md;
+  color: $gray-dark;
+  font: $font-heading-md;
+  margin-bottom: $margin-xxxs;
+  line-height: $line-height-md;
 }
 
 .ForumRow__title:hover {
-    color: $gray-dark-hover;
+  color: $gray-dark-hover;
 }

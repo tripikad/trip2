@@ -1,30 +1,30 @@
 .Flex {
-    display: flex;
+  display: flex;
 }
 
 .Flex > * {
-    margin-right: $margin-md;
-    margin-right: var(--gap);
-    margin-right: 0 ?if $tablet;
+  margin-right: $margin-md;
+  margin-right: var(--gap);
+  margin-right: 0 ?if $tablet;
 }
 
 .Flex > *:last-child {
-    margin-right: 0;
+  margin-right: 0;
 }
 
 .Flex__wrap {
-    flex-wrap: wrap;
+  flex-wrap: wrap;
 }
 
 .Flex--responsive {
-    flex-direction: column ?if $mobile;
+  flex-direction: column ?if $mobile;
 }
 
 .Flex--responsive > * {
-    margin-right: 0 ?if $tablet;
-    margin-bottom: $margin-md ?if $tablet;
-    margin-bottom: var(--gap) ?if $tablet;
+  margin-right: 0 ?if $tablet;
+  margin-bottom: $margin-md ?if $tablet;
+  margin-bottom: var(--gap) ?if $tablet;
 }
 .Flex--responsive > *:last-child {
-    margin-bottom: 0;
+  margin-bottom: 0;
 }

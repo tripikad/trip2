@@ -10,182 +10,182 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class AdminTest extends BrowserKitTestCase
 {
-    use DatabaseTransactions;
+  use DatabaseTransactions;
 
-    public function test_unlogged_or_regular_user_can_see_admin_menu()
-    {
-        $user1 = factory(User::class)->create([
-            'verified' => 'true',
-            'role' => 'regular'
-        ]);
+  public function test_unlogged_or_regular_user_can_see_admin_menu()
+  {
+    $user1 = factory(User::class)->create([
+      'verified' => 'true',
+      'role' => 'regular'
+    ]);
 
-        // Unlogged user
+    // Unlogged user
 
-        $this->visit('/')->dontSee(trans('menu.auth.admin'));
+    $this->visit('/')->dontSee(trans('menu.auth.admin'));
 
-        // Regular user
+    // Regular user
 
-        $this->actingAs($user1)
-            ->visit('/')
-            ->dontSee(trans('menu.auth.admin'));
+    $this->actingAs($user1)
+      ->visit('/')
+      ->dontSee(trans('menu.auth.admin'));
+  }
+
+  public function test_unlogged_or_regular_user_can_not_see_images()
+  {
+    // Unlogged user
+
+    $response = $this->call('GET', 'admin/image');
+    $this->assertEquals(401, $response->status());
+
+    // Regular user
+
+    $user1 = factory(User::class)->create([
+      'verified' => 'true',
+      'role' => 'regular'
+    ]);
+
+    $response = $this->actingAs($user1)->call('GET', 'admin/image');
+    $this->assertEquals(401, $response->status());
+  }
+
+  public function test_admin_user_can_see_images()
+  {
+    $user1 = factory(User::class)->create([
+      'verified' => 'true',
+      'role' => 'admin'
+    ]);
+
+    $this->actingAs($user1)
+      ->visit('internal')
+      ->seeLink(trans('menu.admin.image'))
+      ->click(trans('menu.admin.image'))
+      ->seePageIs('admin/image')
+      ->see(trans('admin.image.index.title'));
+  }
+
+  public function test_admin_user_can_post_photos()
+  {
+    $user1 = factory(User::class)->create(['role' => 'admin']);
+
+    $this->actingAs($user1)
+      ->visit('admin/image')
+      ->attach(storage_path() . '/tests/test.jpg', 'image')
+      ->press(trans('admin.image.create.submit.title'))
+      ->seePageIs('admin/image');
+
+    $filename = $this->getLatestImageFilename($user1->user_id);
+
+    // Check original file exists
+
+    $filepath = config('imagepresets.original.path') . $filename;
+    $this->assertTrue(file_exists($filepath));
+    unlink($filepath);
+
+    // See thumbnails exist
+
+    foreach (['large', 'medium', 'small', 'small_square', 'xsmall_square'] as $preset) {
+      $filepath = config("imagepresets.presets.$preset.path") . $filename;
+      $this->assertTrue(file_exists($filepath));
+      unlink($filepath);
     }
+  }
 
-    public function test_unlogged_or_regular_user_can_not_see_images()
-    {
-        // Unlogged user
+  public function test_unlogged_or_regular_user_can_not_see_unpublished_content()
+  {
+    // Unlogged user
 
-        $response = $this->call('GET', 'admin/image');
-        $this->assertEquals(401, $response->status());
+    $response = $this->call('GET', 'admin/content');
+    $this->assertEquals(401, $response->status());
 
-        // Regular user
+    // Regular user
 
-        $user1 = factory(User::class)->create([
-            'verified' => 'true',
-            'role' => 'regular'
-        ]);
+    $user1 = factory(User::class)->create([
+      'verified' => 'true',
+      'role' => 'regular'
+    ]);
 
-        $response = $this->actingAs($user1)->call('GET', 'admin/image');
-        $this->assertEquals(401, $response->status());
-    }
+    $response = $this->actingAs($user1)->call('GET', 'admin/content');
+    $this->assertEquals(401, $response->status());
+  }
 
-    public function test_admin_user_can_see_images()
-    {
-        $user1 = factory(User::class)->create([
-            'verified' => 'true',
-            'role' => 'admin'
-        ]);
+  public function test_admin_user_can_see_unpublished_content()
+  {
+    $user1 = factory(User::class)->create([
+      'verified' => 'true',
+      'role' => 'admin'
+    ]);
 
-        $this->actingAs($user1)
-            ->visit('internal')
-            ->seeLink(trans('menu.admin.image'))
-            ->click(trans('menu.admin.image'))
-            ->seePageIs('admin/image')
-            ->see(trans('admin.image.index.title'));
-    }
+    $user2 = factory(User::class)->create([
+      'verified' => 'true',
+      'role' => 'admin'
+    ]);
 
-    public function test_admin_user_can_post_photos()
-    {
-        $user1 = factory(User::class)->create(['role' => 'admin']);
+    $content1 = factory(Content::class)->create([
+      'user_id' => $user2->id,
+      'title' => 'Hello unpublished',
+      'type' => 'forum',
+      'status' => 0
+    ]);
 
-        $this->actingAs($user1)
-            ->visit('admin/image')
-            ->attach(storage_path() . '/tests/test.jpg', 'image')
-            ->press(trans('admin.image.create.submit.title'))
-            ->seePageIs('admin/image');
+    $this->actingAs($user1)
+      ->visit('internal')
+      ->seeLink(trans('menu.admin.content'))
+      ->click(trans('menu.admin.content'))
+      ->seePageIs('admin/content')
+      ->see(trans('admin.content.index.title'))
+      ->seeLink('Hello unpublished')
+      ->click('Hello unpublished')
+      ->seePageIs(config('sluggable.contentTypeMapping')[$content1->type] . '/' . $content1->slug)
+      ->see('Hello unpublished');
+  }
 
-        $filename = $this->getLatestImageFilename($user1->user_id);
+  public function test_unlogged_or_regular_user_can_not_see_internal_forum()
+  {
+    // Unlogged user
 
-        // Check original file exists
+    $response = $this->call('GET', 'internal');
+    $this->assertEquals(401, $response->status());
 
-        $filepath = config('imagepresets.original.path') . $filename;
-        $this->assertTrue(file_exists($filepath));
-        unlink($filepath);
+    // Regular user
 
-        // See thumbnails exist
+    $user1 = factory(User::class)->create([
+      'verified' => 'true',
+      'role' => 'regular'
+    ]);
 
-        foreach (['large', 'medium', 'small', 'small_square', 'xsmall_square'] as $preset) {
-            $filepath = config("imagepresets.presets.$preset.path") . $filename;
-            $this->assertTrue(file_exists($filepath));
-            unlink($filepath);
-        }
-    }
+    $response = $this->actingAs($user1)->call('GET', 'internal');
+    $this->assertEquals(401, $response->status());
+  }
 
-    public function test_unlogged_or_regular_user_can_not_see_unpublished_content()
-    {
-        // Unlogged user
+  public function test_admin_user_can_see_internal_forum()
+  {
+    $user1 = factory(User::class)->create([
+      'verified' => 'true',
+      'role' => 'admin'
+    ]);
 
-        $response = $this->call('GET', 'admin/content');
-        $this->assertEquals(401, $response->status());
+    $user2 = factory(User::class)->create([
+      'verified' => 'true',
+      'role' => 'admin'
+    ]);
 
-        // Regular user
+    $content1 = factory(Content::class)->create([
+      'user_id' => $user2->id,
+      'title' => 'Hello internal',
+      'type' => 'internal'
+    ]);
 
-        $user1 = factory(User::class)->create([
-            'verified' => 'true',
-            'role' => 'regular'
-        ]);
+    $this->actingAs($user1)
+      ->visit('internal')
+      ->see(trans('content.internal.index.title'))
+      ->seeLink('Hello internal')
+      ->click('Hello internal')
+      ->seePageIs("internal/$content1->id")
+      ->see('Hello internal');
+  }
 
-        $response = $this->actingAs($user1)->call('GET', 'admin/content');
-        $this->assertEquals(401, $response->status());
-    }
-
-    public function test_admin_user_can_see_unpublished_content()
-    {
-        $user1 = factory(User::class)->create([
-            'verified' => 'true',
-            'role' => 'admin'
-        ]);
-
-        $user2 = factory(User::class)->create([
-            'verified' => 'true',
-            'role' => 'admin'
-        ]);
-
-        $content1 = factory(Content::class)->create([
-            'user_id' => $user2->id,
-            'title' => 'Hello unpublished',
-            'type' => 'forum',
-            'status' => 0
-        ]);
-
-        $this->actingAs($user1)
-            ->visit('internal')
-            ->seeLink(trans('menu.admin.content'))
-            ->click(trans('menu.admin.content'))
-            ->seePageIs('admin/content')
-            ->see(trans('admin.content.index.title'))
-            ->seeLink('Hello unpublished')
-            ->click('Hello unpublished')
-            ->seePageIs(config('sluggable.contentTypeMapping')[$content1->type] . '/' . $content1->slug)
-            ->see('Hello unpublished');
-    }
-
-    public function test_unlogged_or_regular_user_can_not_see_internal_forum()
-    {
-        // Unlogged user
-
-        $response = $this->call('GET', 'internal');
-        $this->assertEquals(401, $response->status());
-
-        // Regular user
-
-        $user1 = factory(User::class)->create([
-            'verified' => 'true',
-            'role' => 'regular'
-        ]);
-
-        $response = $this->actingAs($user1)->call('GET', 'internal');
-        $this->assertEquals(401, $response->status());
-    }
-
-    public function test_admin_user_can_see_internal_forum()
-    {
-        $user1 = factory(User::class)->create([
-            'verified' => 'true',
-            'role' => 'admin'
-        ]);
-
-        $user2 = factory(User::class)->create([
-            'verified' => 'true',
-            'role' => 'admin'
-        ]);
-
-        $content1 = factory(Content::class)->create([
-            'user_id' => $user2->id,
-            'title' => 'Hello internal',
-            'type' => 'internal'
-        ]);
-
-        $this->actingAs($user1)
-            ->visit('internal')
-            ->see(trans('content.internal.index.title'))
-            ->seeLink('Hello internal')
-            ->click('Hello internal')
-            ->seePageIs("internal/$content1->id")
-            ->see('Hello internal');
-    }
-
-    public function getLatestImageFilename($user_id)
-    {
-        return Image::latest('id')->first()->filename;
-    }
+  public function getLatestImageFilename($user_id)
+  {
+    return Image::latest('id')->first()->filename;
+  }
 }

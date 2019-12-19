@@ -6,35 +6,35 @@ use Illuminate\Database\Migrations\Migration;
 
 class RemoveDestinationsFromOfferTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
-    {
-        Schema::table('offers', function (Blueprint $table) {
-            $table->dropColumn('start_destination_id');
-            $table->dropColumn('end_destination_id');
-        });
-    }
+  /**
+   * Run the migrations.
+   *
+   * @return void
+   */
+  public function up()
+  {
+    Schema::table('offers', function (Blueprint $table) {
+      $table->dropColumn('start_destination_id');
+      $table->dropColumn('end_destination_id');
+    });
+  }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::table('offers', function (Blueprint $table) {
-            $table
-                ->integer('start_destination_id')
-                ->unsigned()
-                ->index();
-            $table
-                ->integer('end_destination_id')
-                ->unsigned()
-                ->index();
-        });
-    }
+  /**
+   * Reverse the migrations.
+   *
+   * @return void
+   */
+  public function down()
+  {
+    Schema::table('offers', function (Blueprint $table) {
+      $table
+        ->integer('start_destination_id')
+        ->unsigned()
+        ->index();
+      $table
+        ->integer('end_destination_id')
+        ->unsigned()
+        ->index();
+    });
+  }
 }
