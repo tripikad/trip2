@@ -19,10 +19,11 @@ class OfferController extends Controller
     }
 
     return layout('Full')
-      ->withHeadRobots('noindex')
       ->withTransparency(true)
       ->withTitle(trans('offer.index'))
       ->with('head_image', request()->root() . '/photos/offer_social.png')
+      ->with('head_image_width', 1200)
+      ->with('head_image_height', 670)
       ->withItems(
         collect()
           ->push(
@@ -101,10 +102,12 @@ class OfferController extends Controller
       $offer->data->description || $offer->data->included || $offer->data->notincluded || $offer->data->extras;
 
     return layout('Full')
-      // @LAUNCH
-      ->withHeadRobots('noindex')
-      ->with('head_image', './photos/offer_social.png')
-      ->withTitle($offer->title)
+      ->with('head_image', request()->root() . '/photos/offer_social.png')
+      ->with('head_image_width', 1200)
+      ->with('head_image_height', 670)
+      ->withTitle($offer->title . ' ' . $offer->price_formatted)
+      ->withHeadTitle($offer->title . ' ' . $offer->price_formatted)
+      ->withHeadDescription($offer->start_at_formatted . ' → ' . $offer->end_at_formatted)
       ->withItems(
         collect()
           ->pushWhen(

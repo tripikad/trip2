@@ -4,6 +4,8 @@ $title = $title ?? '';
 $head_title = $head_title ?? '';
 $head_description = $head_description ?? '';
 $head_image = $head_image ?? '';
+$head_image_width = $head_image_width ?? '';
+$head_image_height = $head_image_height ?? '';
 $head_robots = $head_robots ?? '';
 $color = $color ?? '';
 $background = $background ?? '';
@@ -24,6 +26,8 @@ $narrow = $narrow ?? false;
 @section('head_title', $head_title)
 @section('head_description', $head_description)
 @section('head_image', $head_image)
+@section('head_image_width', $head_image_width)
+@section('head_image_height', $head_image_height)
 @section('head_robots', $head_robots)
 
 @section('color', $color)
