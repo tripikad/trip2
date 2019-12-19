@@ -1,33 +1,33 @@
 .ImagePicker {
-    position: fixed;
-    background: rgba(0, 0, 0, 0.8);
-    top: 0;
-    bottom: 0;
-    right: 0;
-    padding: $padding-md;
-    width: calc($spacer * 17);
-    overflow-y: scroll;
-    z-index: 10001;
+  position: fixed;
+  background: rgba(0, 0, 0, 0.8);
+  top: 0;
+  bottom: 0;
+  right: 0;
+  padding: $padding-md;
+  width: calc($spacer * 17);
+  overflow-y: scroll;
+  z-index: 10001;
 }
 
 .ImagePicker__close {
-    position: fixed;
-    top: $margin-xs;
-    right: $margin-sm;
-    color: $white;
-    font-size: 2rem;
+  position: fixed;
+  top: $margin-xs;
+  right: $margin-sm;
+  color: $white;
+  font-size: 2rem;
 }
 
 .ImagePicker__card {
-    margin-top: $margin-sm;
+  margin-top: $margin-sm;
 }
 
 .ImagePicker__image {
-    width: 100%;
-    margin-bottom: $margin-xxs;
+  width: 100%;
+  margin-bottom: $margin-xxs;
 }
 
 .ImagePicker__title {
-    font: $font-text-sm;
-    color: $white;
+  font: $font-text-sm;
+  color: $white;
 }

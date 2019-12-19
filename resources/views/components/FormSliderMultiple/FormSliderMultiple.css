@@ -1,34 +1,34 @@
 @import 'vue-slider-component/theme/default.css';
 
 .FormSliderMultiple__labels {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .FormSliderMultiple__label {
-    font: $font-text-sm;
-    color: $gray;
+  font: $font-text-sm;
+  color: $gray;
 }
 .vue-slider-dot-tooltip-text {
-    font: $font-text-sm;
-    color: $white;
-    line-height: 0;
+  font: $font-text-sm;
+  color: $white;
+  line-height: 0;
 }
 
 .FormSliderMultiple--yellow .vue-slider-dot-tooltip-text {
-    color: $black;
-    opacity: 0.5;
+  color: $black;
+  opacity: 0.5;
 }
 
 .FormSliderMultiple--yellow .vue-slider-dot-tooltip-inner {
-    background-color: $yellow-light;
-    border-color: $yellow-light;
+  background-color: $yellow-light;
+  border-color: $yellow-light;
 }
 
 .FormSliderMultiple--yellow .vue-slider-process {
-    background-color: $yellow;
+  background-color: $yellow;
 }
 
 .FormSliderMultiple--yellow .vue-slider-rail {
-    background-color: $gray-light;
+  background-color: $gray-light;
 }

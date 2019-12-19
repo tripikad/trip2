@@ -1,62 +1,62 @@
 .FormButtons {
-    display: inline-flex;
-    display: block ?if $tablet;
-    align-items: center;
-    border-radius: $border-radius-md;
-    border: 2px solid $gray;
-    overflow: hidden;
+  display: inline-flex;
+  display: block ?if $tablet;
+  align-items: center;
+  border-radius: $border-radius-md;
+  border: 2px solid $gray;
+  overflow: hidden;
 }
 
 .FormButtons__button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font: $font-heading-sm;
-    line-height: $line-height-sm;
-    padding: 0 calc($spacer * 1.5);
-    text-align: center;
-    border-right: 2px solid $gray;
-    border-right: none ?if $tablet;
-    border-bottom: 2px solid $gray ?if $tablet;
-    color: $gray-dark;
-    cursor: pointer;
-    /* @TODO2 Remove this hack */
-    height: calc($spacer * 4.58);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font: $font-heading-sm;
+  line-height: $line-height-sm;
+  padding: 0 calc($spacer * 1.5);
+  text-align: center;
+  border-right: 2px solid $gray;
+  border-right: none ?if $tablet;
+  border-bottom: 2px solid $gray ?if $tablet;
+  color: $gray-dark;
+  cursor: pointer;
+  /* @TODO2 Remove this hack */
+  height: calc($spacer * 4.58);
 }
 
 .FormButtons__button:last-child {
-    border: none;
+  border: none;
 }
 
 .FormButtons__button--active {
-    background: $gray-light;
+  background: $gray-light;
 }
 
 .FormButtons--blue {
-    border: 2px solid $white;
+  border: 2px solid $white;
 }
 .FormButtons--blue .FormButtons__button {
-    border-right: 2px solid $white;
-    border-right: 0 ?if $tablet;
-    border-bottom: 2px solid $white ?if $tablet;
+  border-right: 2px solid $white;
+  border-right: 0 ?if $tablet;
+  border-bottom: 2px solid $white ?if $tablet;
 }
 
 .FormButtons--blue .FormButtons__button:last-child {
-    border: 0;
+  border: 0;
 }
 
 .FormButtons--blue .FormButtons__button {
-    color: $white;
+  color: $white;
 }
 /* @TODO2 Convert to variable */
 .FormButtons--blue .FormButtons__button--active {
-    background: rgba(0, 0, 0, 0.25);
+  background: rgba(0, 0, 0, 0.25);
 }
 
 .FormButtons--wide {
-    width: 100%;
+  width: 100%;
 }
 
 .FormButtons--wide .FormButtons__button {
-    flex: 1;
+  flex: 1;
 }

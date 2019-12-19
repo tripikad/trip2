@@ -1,25 +1,25 @@
 .FormRadio {
-    display: flex;
-    display: block ?if $tablet;
+  display: flex;
+  display: block ?if $tablet;
 }
 
 .FormRadio__option {
-    display: flex;
-    margin-right: $margin-sm;
-    margin-right: 0 ?if $tablet;
-    margin-bottom: $margin-sm ?if $tablet;
+  display: flex;
+  margin-right: $margin-sm;
+  margin-right: 0 ?if $tablet;
+  margin-bottom: $margin-sm ?if $tablet;
 }
 
 .FormRadio__option:last-child {
-    margin-right: 0;
+  margin-right: 0;
 }
 
 .FormRadio__input {
-    display: block;
-    margin-right: $margin-xs;
+  display: block;
+  margin-right: $margin-xs;
 }
 
 .FormRadio__label {
-    font: $font-heading-sm;
-    color: $gray;
+  font: $font-heading-sm;
+  color: $gray;
 }

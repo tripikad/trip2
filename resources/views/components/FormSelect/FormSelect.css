@@ -1,110 +1,110 @@
 .FormSelect__header {
-    display: flex;
+  display: flex;
 }
 
 .FormSelect__label {
-    color: $gray;
-    display: block;
-    font: $font-heading-sm;
-    line-height: $line-height-md;
-    margin-bottom: $margin-sm;
+  color: $gray;
+  display: block;
+  font: $font-heading-sm;
+  line-height: $line-height-md;
+  margin-bottom: $margin-sm;
 }
 
 .FormSelect__description {
-    color: $gray-light;
-    font: $font-heading-sm;
-    line-height: $line-height-md;
-    margin-left: $margin-xs;
-    margin-bottom: $margin-sm;
+  color: $gray-light;
+  font: $font-heading-sm;
+  line-height: $line-height-md;
+  margin-left: $margin-xs;
+  margin-bottom: $margin-sm;
 }
 
 .multiselect__content {
-    overflow: auto;
+  overflow: auto;
 }
 
 .multiselect__option--highlight {
-    background: $orange !important;
+  background: $orange !important;
 }
 
 .multiselect__option--highlight::after {
-    content: none !important;
+  content: none !important;
 }
 
 .multiselect__tags {
-    font: $font-text-sm !important;
-    border: 2px solid $gray-light !important;
-    border-radius: $border-radius-md !important;
-    padding: 11px 40px 4px 14px !important;
+  font: $font-text-sm !important;
+  border: 2px solid $gray-light !important;
+  border-radius: $border-radius-md !important;
+  padding: 11px 40px 4px 14px !important;
 }
 .multiselect__input {
-    ppadding: 4px 0 0 8px !important;
-    font: $font-text-md !important;
+  ppadding: 4px 0 0 8px !important;
+  font: $font-text-md !important;
 }
 .FormSelect--blue .multiselect__tags {
-    background: $blue !important;
-    border: 2px solid $white !important;
+  background: $blue !important;
+  border: 2px solid $white !important;
 }
 
 .multiselect__tag {
-    font: $font-text-xs !important;
-    background: none !important;
-    border: 1px solid $orange !important;
-    border-radius: $border-radius-lg !important;
-    color: $orange !important;
-    padding: 0 22px 0 10px !important;
-    margin-bottom: 6px !important;
+  font: $font-text-xs !important;
+  background: none !important;
+  border: 1px solid $orange !important;
+  border-radius: $border-radius-lg !important;
+  color: $orange !important;
+  padding: 0 22px 0 10px !important;
+  margin-bottom: 6px !important;
 }
 
 .multiselect__tag span {
-    color: $orange !important;
+  color: $orange !important;
 }
 
 .FormSelect--blue .multiselect__tag span {
-    color: $blue !important;
+  color: $blue !important;
 }
 
 .multiselect__tag-icon:hover {
-    background: none !important;
+  background: none !important;
 }
 
 .multiselect__tag-icon::after {
-    color: $orange !important;
+  color: $orange !important;
 }
 
 .multiselect__select {
-    margin-top: 8px !important;
+  margin-top: 8px !important;
 }
 .multiselect__content {
-    font: $font-text-sm;
-    border: 2px solid $gray-light !important;
+  font: $font-text-sm;
+  border: 2px solid $gray-light !important;
 }
 
 .multiselect__element span {
-    color: $gray-dark !important;
+  color: $gray-dark !important;
 }
 .FormSelect--blue .multiselect__content {
-    border: 2px solid $white !important;
-    border-top: none !important;
+  border: 2px solid $white !important;
+  border-top: none !important;
 }
 
 .FormSelect--blue .multiselect__input {
-    background: $blue !important;
-    color: $white !important;
+  background: $blue !important;
+  color: $white !important;
 }
 
 .FormSelect--blue .multiselect__input::placeholder {
-    color: $white !important;
-    opacity: $opacity-md !important;
+  color: $white !important;
+  opacity: $opacity-md !important;
 }
 
 .FormSelect--blue .multiselect__select:before {
-    border-color: $white transparent transparent !important;
+  border-color: $white transparent transparent !important;
 }
 
 .FormSelect--error .multiselect__tags {
-    border: 2px solid $red !important;
+  border: 2px solid $red !important;
 }
 
 .FormSelect--error .FormSelect__label {
-    color: $red;
+  color: $red;
 }

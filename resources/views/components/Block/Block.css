@@ -1,29 +1,29 @@
 .Block__title {
-    margin-bottom: $margin-md;
+  margin-bottom: $margin-md;
 }
 
 .Block__contentItem {
-    margin-bottom: $margin-md;
+  margin-bottom: $margin-md;
 }
 
 .Block__contentItem:last-child {
-    margin-bottom: 0;
+  margin-bottom: 0;
 }
 
 .Block--gray {
-    background: $gray-lighter;
-    padding: $padding-md;
-    padding: $padding-sm ?if $mobile;
+  background: $gray-lighter;
+  padding: $padding-md;
+  padding: $padding-sm ?if $mobile;
 }
 
 .Block--border {
-    border: $border-gray-md;
-    border-radius: $border-radius-md;
-    padding: $padding-md;
-    padding: $padding-sm ?if $mobile;
+  border: $border-gray-md;
+  border-radius: $border-radius-md;
+  padding: $padding-md;
+  padding: $padding-sm ?if $mobile;
 }
 
 .Block--inset {
-    margin-left: $margin-xxl;
-    margin-left: 0 ?if $mobile;
+  margin-left: $margin-xxl;
+  margin-left: 0 ?if $mobile;
 }

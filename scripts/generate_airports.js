@@ -43,12 +43,12 @@ var routes = baby.parse(fs.readFileSync(__dirname + '/data/routes.csv').toString
 var airports = baby.parse(fs.readFileSync(__dirname + '/data/airports.csv').toString(), { header: false }).data
 
 const makeFloat = str => {
-    const f = parseFloat(str)
-    return Number.isNaN(f) ? str : f
+  const f = parseFloat(str)
+  return Number.isNaN(f) ? str : f
 }
 
 const cleanName = name => {
-    return name.split('/')[1].replace('_', ' ')
+  return name.split('/')[1].replace('_', ' ')
 }
 
 // We find all the unique airport codes that exist in the routes database
@@ -57,8 +57,8 @@ const cleanName = name => {
 var airportKeys = []
 
 routes.forEach(route => {
-    airportKeys.push(route[2]) // Source airport IATA code
-    airportKeys.push(route[4]) // Destination airport IATA code
+  airportKeys.push(route[2]) // Source airport IATA code
+  airportKeys.push(route[4]) // Destination airport IATA code
 })
 
 airportKeys = _.uniq(airportKeys)
@@ -67,35 +67,35 @@ airportKeys = _.uniq(airportKeys)
 // airport codes array
 
 airports = airports
-    .filter(airport => {
-        return (
-            airport[6] && // Lat
-            airport[7] && // Lon
-            airportKeys.indexOf(airport[4]) !== -1
-        ) // Airport IATA code
-    })
-    .map(airport => {
-        return {
-            iata: airport[4],
-            city:
-                airport[11] && !String(airport[11]).includes('\\')
-                    ? cleanName(airport[11]).replace("'", '')
-                    : airport[2].replace("'", ''),
-            country: airport[3].replace("'", ''),
-            lat: makeFloat(airport[6]),
-            lon: makeFloat(airport[7])
-        }
-    })
+  .filter(airport => {
+    return (
+      airport[6] && // Lat
+      airport[7] && // Lon
+      airportKeys.indexOf(airport[4]) !== -1
+    ) // Airport IATA code
+  })
+  .map(airport => {
+    return {
+      iata: airport[4],
+      city:
+        airport[11] && !String(airport[11]).includes('\\')
+          ? cleanName(airport[11]).replace("'", '')
+          : airport[2].replace("'", ''),
+      country: airport[3].replace("'", ''),
+      lat: makeFloat(airport[6]),
+      lon: makeFloat(airport[7])
+    }
+  })
 
 console.log('<?php return [')
 
 console.log(
-    airports
-        .map(
-            airport =>
-                `['iata' => '${airport.iata}','city' => '${airport.city}','lat' => ${airport.lat},'lon' => ${airport.lon}],`
-        )
-        .join('')
+  airports
+    .map(
+      airport =>
+        `['iata' => '${airport.iata}','city' => '${airport.city}','lat' => ${airport.lat},'lon' => ${airport.lon}],`
+    )
+    .join('')
 )
 
 console.log('];\n')

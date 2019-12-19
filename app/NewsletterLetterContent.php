@@ -6,14 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class NewsletterLetterContent extends Model
 {
-    // Setup
+  // Setup
 
-    protected $dates = ['created_at', 'updated_at'];
+  protected $dates = ['created_at', 'updated_at'];
 
-    public function vars()
-    {
-        return new NewsletterLetterContentVars($this);
-    }
+  public function vars()
+  {
+    return new NewsletterLetterContentVars($this);
+  }
 
-    // Relations
+  // Relations
 }

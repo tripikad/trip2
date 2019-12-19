@@ -1,40 +1,40 @@
 .TravelmateStart {
-    border: $border-gray-md;
-    border-radius: $border-radius-md;
+  border: $border-gray-md;
+  border-radius: $border-radius-md;
 }
 
 .TravelmateStart__fields {
-    display: flex;
-    display: block ?if $mobile;
+  display: flex;
+  display: block ?if $mobile;
 }
 
 .TravelmateStart__field {
-    padding: $padding-xs $padding-sm;
-    color: $gray;
-    border-right: $border-gray-md;
-    border-right: none ?if $mobile;
-    border-bottom: $border-gray-md ?if $mobile;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    justify-content: flex-start ?if $mobile;
-    align-items: center;
-    width: 100%;
-    font: $font-text-sm;
-    cursor: pointer;
+  padding: $padding-xs $padding-sm;
+  color: $gray;
+  border-right: $border-gray-md;
+  border-right: none ?if $mobile;
+  border-bottom: $border-gray-md ?if $mobile;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  justify-content: flex-start ?if $mobile;
+  align-items: center;
+  width: 100%;
+  font: $font-text-sm;
+  cursor: pointer;
 }
 
 .TravelmateStart__field:last-child {
-    border-right: none;
-    border-bottom: none ?if $mobile;
+  border-right: none;
+  border-bottom: none ?if $mobile;
 }
 
 .TravelmateStart__field:hover {
-    background-color: $gray-lighter-hover;
+  background-color: $gray-lighter-hover;
 }
 
 .TravelmateStart__field.TravelmateStart--active,
 .TravelmateStart__field.TravelmateStart--active:hover {
-    background-color: $gray;
-    color: $white;
+  background-color: $gray;
+  color: $white;
 }

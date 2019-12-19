@@ -1,22 +1,22 @@
 .Badge {
-    background: $red;
-    align-items: center;
-    border-radius: $border-radius-lg;
-    display: inline-flex;
-    font: $font-text-xs;
-    justify-content: center;
-    padding: calc($spacer / 2) calc($spacer / 1.5) calc($spacer / 4) calc($spacer / 1.5);
+  background: $red;
+  align-items: center;
+  border-radius: $border-radius-lg;
+  display: inline-flex;
+  font: $font-text-xs;
+  justify-content: center;
+  padding: calc($spacer / 2) calc($spacer / 1.5) calc($spacer / 4) calc($spacer / 1.5);
 }
 
 .Badge__title {
-    font: $font-text-xs;
-    color: $white;
+  font: $font-text-xs;
+  color: $white;
 }
 
 .Badge--white {
-    background: $white;
+  background: $white;
 }
 
 .Badge--white .Badge__title {
-    color: $green;
+  color: $green;
 }

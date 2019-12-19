@@ -1,13 +1,13 @@
 <?php
 
 return [
-    'tab.forum' => 'Forum posts',
-    'tab.destination' => 'Destinations',
-    'tab.user' => 'Users',
-    'tab.blog' => 'Blogs',
-    'tab.news' => 'News',
-    'tab.flight' => 'Flightoffers',
+  'tab.forum' => 'Forum posts',
+  'tab.destination' => 'Destinations',
+  'tab.user' => 'Users',
+  'tab.blog' => 'Blogs',
+  'tab.news' => 'News',
+  'tab.flight' => 'Flightoffers',
 
-    'results.noresults' => 'No results found',
-    'results.all' => 'All results'
+  'results.noresults' => 'No results found',
+  'results.all' => 'All results'
 ];
