@@ -19,6 +19,7 @@
 }
 
 .OfferList__filtersRow > * {
+    flex: 1;
     margin-right: $margin-sm;
     margin-right: 0 ?if $tablet;
     margin-bottom: $margin-md ?if $tablet;
@@ -30,4 +31,8 @@
 
 .OfferList__offers > * {
     margin-bottom: $margin-lg;
+}
+
+.OfferList__filtersReset {
+    text-align: center;
 }

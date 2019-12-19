@@ -39,7 +39,7 @@
                     isclasses="FormSelect--blue"
                 />
             </div>
-            <div>
+            <div class="OfferList__filtersReset">
                 <!-- @TODO2 translate title -->
                 <ButtonVue
                     title="Näita kõiki reise"
@@ -53,8 +53,8 @@
         <transition-group name="Fade" class="OfferList__offers">
             <OfferRow v-for="offer in filteredOffers" :key="offer.id" :offer="offer" :route="offer.route" />
         </transition-group>
-
-        <ButtonVue v-if="nextPageUrl" @click.native.prevent="getData" title="Gimme data" />
+        <!-- @TODO2 Translate title -->
+        <ButtonVue v-if="nextPageUrl" @click.native.prevent="getData" title="Näita hilisemaid reise" />
     </div>
 </template>
 
