@@ -161,7 +161,7 @@ return [
     |
     */
 
-    'storage_expiration' => env('CLOCKWORK_STORAGE_EXPIRATION', 60 * 24 * 1),
+    'storage_expiration' => env('CLOCKWORK_STORAGE_EXPIRATION', 10),
 
     /*
     |--------------------------------------------------------------------------

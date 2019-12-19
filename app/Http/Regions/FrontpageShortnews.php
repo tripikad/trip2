@@ -13,8 +13,9 @@ class FrontpageShortnews
                     ->with('route', route('shortnews.index'))
             )
             ->push(
-                component('Grid4')
-                    ->with('gutter', true)
+                component('FlexGrid')
+                    ->with('gap', 1)
+                    ->with('cols', 4)
                     ->with(
                         'items',
                         $news->map(function ($new) {
