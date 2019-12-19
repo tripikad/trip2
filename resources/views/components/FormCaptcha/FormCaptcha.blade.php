@@ -8,4 +8,4 @@
     {!! app('captcha')->renderFooterJS(config('app.locale')) !!}
 @endpush
 
-@endif
+@endif`
