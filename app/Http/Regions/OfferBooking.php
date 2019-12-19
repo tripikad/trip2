@@ -10,6 +10,7 @@ class OfferBooking
             ->withRoute(route('booking.create', $id))
             ->withFields(
                 collect()
+                    ->push(component('FormCaptcha'))
                     ->push(
                         component('Title')
                             ->is('small')

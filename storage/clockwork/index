@@ -2763,3 +2763,8 @@
 1576758686-9134-2034552672,1576758685.8571,GET,/,"App\Http\Controllers\FrontpageController@index",200,1056.713104248
 1576758687-8564-1466938015,1576758687.7497,GET,/api/countrydots,"App\Http\Controllers\ApiController@countrydots",200,107.23090171814
 1576758687-9741-907322680,1576758687.7653,GET,/offer/json,"App\Http\Controllers\OfferController@indexJson",200,216.02201461792
+1576758797-1542-1230393773,1576758796.6953,GET,/offer,"App\Http\Controllers\RedirectController@redirectAlias",404,459.6631526947
+1576758798-8122-673442551,1576758798.7561,GET,/offer,"App\Http\Controllers\RedirectController@redirectAlias",404,56.615114212036
+1576758800-4054-2141031338,1576758798.7568,GET,/,"App\Http\Controllers\FrontpageController@index",200,1649.0349769592
+1576758800-3994-1257370708,1576758797.968,GET,/,"App\Http\Controllers\FrontpageController@index",200,2432.1010112762
+1576758802-3536-315293871,1576758801.99,GET,/offer,"App\Http\Controllers\RedirectController@redirectAlias",404,364.24493789673

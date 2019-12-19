@@ -15,10 +15,19 @@
         />
 
         <div class="OfferList__filters">
-            <form-buttons v-model="filterState.date" :items="dateOptions" isclasses="FormButtons--blue" />
+            <form-buttons
+                v-model="filterState.date"
+                :items="dateOptions"
+                isclasses="FormButtons--blue FormButtons--wide"
+            />
+
+            <form-buttons
+                :items="filterOptions.style"
+                v-model="filterState.style"
+                isclasses="FormButtons--blue FormButtons--wide"
+            />
 
             <div class="OfferList__filtersRow">
-                <form-select :options="filterOptions.style" v-model="filterState.style" isclasses="FormSelect--blue" />
                 <form-select
                     :options="filterOptions.company"
                     v-model="filterState.company"
@@ -30,7 +39,8 @@
                     isclasses="FormSelect--blue"
                 />
             </div>
-            <div>
+            <div class="OfferList__filtersReset">
+                <!-- @TODO2 translate title -->
                 <ButtonVue
                     title="Näita kõiki reise"
                     @click.native.prevent="resetFilterState"
@@ -43,8 +53,8 @@
         <transition-group name="Fade" class="OfferList__offers">
             <OfferRow v-for="offer in filteredOffers" :key="offer.id" :offer="offer" :route="offer.route" />
         </transition-group>
-
-        <ButtonVue v-if="nextPageUrl" @click.native.prevent="getData" title="Gimme data" />
+        <!-- @TODO2 Translate title -->
+        <ButtonVue v-if="nextPageUrl" @click.native.prevent="getData" title="Näita hilisemaid reise" />
     </div>
 </template>
 
@@ -64,7 +74,8 @@ export default {
         filterState: toObject(filters.map(({ key, defaultState }) => [key, 0])),
         minPrice: 0,
         maxPrice: 0,
-        dateOptions: ['Kõik kuupäevad', ...formatSeasonRange(seasonRange(new Date()))],
+        // @TODO2 translate title
+        dateOptions: ['Kõik aastaajad', ...formatSeasonRange(seasonRange(new Date()))],
         step: 100
     }),
     computed: {
@@ -116,7 +127,9 @@ export default {
                 const round = 10
                 const prices = this.offers.map(o => parseFloat(o.price))
 
-                return [Math.min(...prices), Math.max(...prices)].map(price => Math.ceil(price / this.step) * this.step)
+                return [Math.min(...prices), Math.max(...prices)].map(
+                    (price, i) => Math[['floor', 'ceil'][i]](price / this.step) * this.step
+                )
             }
             return [0, 0]
         },

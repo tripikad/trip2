@@ -21,7 +21,7 @@
 }
 
 .FormAccordion__button:hover {
-    background: $gray-lighter;
+    background: $gray-light;
 }
 
 .FormAccordion__button--active {

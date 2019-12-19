@@ -92,7 +92,7 @@ const lineHeights = {
     'line-height-xs': '100%',
     'line-height-sm': '120%',
     'line-height-md': '135%',
-    'line-height-lg': '150%',
+    'line-height-lg': '145%',
     'line-height-xl': '200%',
     'line-height-xxl': '220%'
 }
@@ -244,7 +244,7 @@ const borders = {
     'border-gray-sm': `1px solid ${colors['gray-light']}`,
     'border-gray-md': `2px solid  ${colors['gray-light']}`,
     'border-gray-lg': `4px solid ${colors['gray-light']}`,
-    'border-green-md': `2px solid  ${colors['gray-green']}`,
+    'border-green-md': `2px solid  ${colors['green']}`,
     'border-white-md': `2px solid  ${colors['white']}`,
     'border-dotted-gray-md': `2px dotted ${colors['gray-light']}`
 }

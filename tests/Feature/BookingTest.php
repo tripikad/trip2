@@ -24,7 +24,7 @@ class BookingTest extends BrowserKitTestCase
         $company = factory(User::class)->create(['company' => true]);
         $offer = factory(Offer::class)->create(['user_id' => $company->id]);
 
-        $this->visit("/offer/$offer->id")
+        $this->visit("/reisipakkumised/$offer->id")
             ->dontSee('Broneeri reis Tripis')
             ->dontSee('Telefon');
 
@@ -40,13 +40,13 @@ class BookingTest extends BrowserKitTestCase
         $offer = factory(Offer::class)->create(['user_id' => $company->id, 'style' => 'package']);
 
         $this->actingAs($superuser)
-            ->visit("/offer/$offer->id")
+            ->visit("/reisipakkumised/$offer->id")
             ->see('Broneeri reis')
             ->type('Ramon Alcazar', 'name')
             ->type('ramon@alcazar.es', 'email')
             ->type('+12345678', 'phone')
             ->press('Broneeri reis')
-            ->seePageIs('/offer');
+            ->seePageIs('/reisipakkumised');
 
         // Verify the booking was saved to a database
 

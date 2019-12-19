@@ -13,7 +13,7 @@
     margin-right: $margin-sm;
     margin-right: var(--gap);
     margin-right: 0 ?if $tablet;
-    margin-bottom: $margin-sm ?if $tablet;
+    margin-bottom: $margin-sm;
     margin-bottom: var(--gap) ?if $tablet;
 }
 
