@@ -50,7 +50,7 @@ $items_collection = items($items ?? null);
         --gap: {{ $gap_value }};
         padding: {{ $inner_padding }}; 
         align-items: {{ $align }};
-        width: {{ $width_value }};
+        max-width: {{ $width_value }};
         background: {{ $inner_background_color }};
         opacity: {{ $opacity }};
         margin-top: {{ $margin_top }};

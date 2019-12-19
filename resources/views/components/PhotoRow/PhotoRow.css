@@ -1,35 +1,35 @@
 .PhotoRow {
-    position: relative;
-    background: $gray-light;
-    min-height: 11.25vw;
-    min-height: 100vw ?if $tablet;
+  position: relative;
+  background: $gray-light;
+  min-height: 11.25vw;
+  min-height: 100vw ?if $tablet;
 }
 
 .PhotoRow__row {
-    display: flex;
-    display: block ?if $tablet;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  display: block ?if $tablet;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
 }
 
 .PhotoRow__subRow {
-    display: flex;
+  display: flex;
 }
 
 .PhotoRow__actions {
-    align-items: center;
-    display: flex;
-    height: 100%;
-    justify-content: center;
-    left: 0;
-    pointer-events: none;
-    position: absolute;
-    top: 0;
-    width: 100%;
+  align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  left: 0;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  width: 100%;
 }
 
 .PhotoRow__action {
-    pointer-events: auto;
-    margin: 0 $margin-xs;
+  pointer-events: auto;
+  margin: 0 $margin-xs;
 }

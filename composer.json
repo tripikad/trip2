@@ -9,6 +9,7 @@
     "type": "project",
     "require": {
         "php": "^7.0.0",
+        "albertcht/invisible-recaptcha": "^1.9",
         "andreasindal/laravel-markdown": "^1.1",
         "baum/baum": "~1.1",
         "cviebrock/eloquent-sluggable": "^4.0",

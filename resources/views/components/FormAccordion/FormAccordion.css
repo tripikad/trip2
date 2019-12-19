@@ -1,50 +1,50 @@
 .FormAccordion {
-    border-radius: $border-radius-md;
-    border: 2px solid $gray-light;
-    overflow: hidden;
+  border-radius: $border-radius-md;
+  border: 2px solid $gray-light;
+  overflow: hidden;
 }
 
 .FormAccordion__button {
-    display: flex;
-    align-items: center;
-    font: $font-heading-sm;
-    line-height: $line-height-sm;
-    padding: 0 calc($spacer * 2);
-    border-bottom: 2px solid $gray-light;
-    color: $gray-dark;
-    cursor: pointer;
-    /* @TODO2 Remove this hack */
-    min-height: calc($spacer * 4.58);
+  display: flex;
+  align-items: center;
+  font: $font-heading-sm;
+  line-height: $line-height-sm;
+  padding: 0 calc($spacer * 2);
+  border-bottom: 2px solid $gray-light;
+  color: $gray-dark;
+  cursor: pointer;
+  /* @TODO2 Remove this hack */
+  min-height: calc($spacer * 4.58);
 }
 .FormAccordion__button:last-child {
-    border: none;
+  border: none;
 }
 
 .FormAccordion__button:hover {
-    background: $gray-lighter;
+  background: $gray-light;
 }
 
 .FormAccordion__button--active {
-    background: $gray-lighter;
+  background: $gray-lighter;
 }
 
 .FormAccordion__button:last-child {
-    border: 0;
+  border: 0;
 }
 
 .FormAccordion--blue {
-    border: 2px solid $white;
+  border: 2px solid $white;
 }
 
 .FormAccordion--blue .FormAccordion__button {
-    color: $white;
+  color: $white;
 }
 /* @TODO2 Convert to variable */
 .FormAccordion--blue .FormAccordion__button--active {
-    background: rgba(0, 0, 0, 0.25);
+  background: rgba(0, 0, 0, 0.25);
 }
 .FormAccordion--large .FormAccordion__button {
-    min-height: calc($spacer * 7);
-    padding-top: $padding-md;
-    padding-bottom: $padding-md;
+  min-height: calc($spacer * 7);
+  padding-top: $padding-md;
+  padding-bottom: $padding-md;
 }

@@ -8,132 +8,114 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 
 const WriteFilesPlugin = class WriteFiles {
-    apply(compiler) {
-        compiler.hooks.emit.tapAsync('WriteFiles', (compilation, callback) => {
-            const manifest = {}
-            compilation.chunks.forEach((chunk, i) => {
-                chunk.files.forEach(asset => {
-                    if (path.extname(asset) === '.js') {
-                        manifest.js = asset
-                    }
-                    if (path.extname(asset) === '.css') {
-                        manifest.css = asset
-                    }
-                    if (path.extname(asset) === '.svg') {
-                        manifest.svg = asset
-                    }
-                })
-            })
-            fs.writeFileSync(
-                path.join(__dirname, 'public/manifest.json'),
-                JSON.stringify(manifest)
-            )
-            const stylesOutput = `<?php
-
-return [
-${Object.entries(require('./resources/views/styles/styles'))
-    .map(
-        ([key, value]) =>
-            `      '${key}' => '${String(value).replace(/'/g, '"')}'`
-    )
-    .join(',\n')}
-];
-`
-            fs.writeFileSync(
-                path.join(__dirname, 'config/styles.php'),
-                stylesOutput
-            )
-
-            callback()
+  apply(compiler) {
+    compiler.hooks.emit.tapAsync('WriteFiles', (compilation, callback) => {
+      const manifest = {}
+      compilation.chunks.forEach((chunk, i) => {
+        chunk.files.forEach(asset => {
+          if (path.extname(asset) === '.js') {
+            manifest.js = asset
+          }
+          if (path.extname(asset) === '.css') {
+            manifest.css = asset
+          }
+          if (path.extname(asset) === '.svg') {
+            manifest.svg = asset
+          }
         })
-    }
+      })
+      fs.writeFileSync(path.join(__dirname, 'public/manifest.json'), JSON.stringify(manifest))
+
+      callback()
+    })
+  }
 }
 
 module.exports = {
-    entry: {
-        main: './resources/views/main.js'
-    },
-    output: {
-        path: path.resolve(__dirname, './public/dist'),
-        publicPath: '/dist/',
-        filename: '[name].[chunkhash:6].js',
-        chunkFilename: 'main.[name].[chunkhash:6].js'
-    },
-    module: {
-        rules: [
-            {
-                test: /\.vue$/,
-                loader: 'vue-loader'
-            },
-            {
-                test: /\.js$/,
-                loader: 'babel-loader',
-                exclude: /node_modules/
-            },
-            {
-                test: /\.css$/,
-                use: [
-                    MiniCssExtractPlugin.loader,
-                    {
-                        loader: 'css-loader',
-                        options: { importLoaders: 1 }
-                    },
-                    'postcss-loader'
-                ]
-            },
-            {
-                test: /\.svg$/,
-                use: [
-                    {
-                        loader: 'svg-sprite-loader',
-                        options: {
-                            extract: true,
-                            spriteFilename: '[chunkname].svg'
-                        }
-                    },
-                    'svgo-loader'
-                ]
-            },
-            {
-                test: /\.(ttf|woff|woff2|eot)$/,
-                loader: 'file-loader',
-                options: {
-                    name: '[name].[ext]'
-                }
-            }
+  entry: {
+    main: './resources/views/main.js'
+  },
+  output: {
+    path: path.resolve(__dirname, './public/dist'),
+    publicPath: '/dist/',
+    filename: '[name].[chunkhash:6].js',
+    chunkFilename: 'main.[name].[chunkhash:6].js'
+  },
+  module: {
+    rules: [
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader'
+      },
+      {
+        test: /\.js$/,
+        loader: 'babel-loader',
+        exclude: /node_modules/
+      },
+      {
+        test: /\.css$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: { importLoaders: 1 }
+          },
+          'postcss-loader'
         ]
-    },
-    plugins: [
-        //new CleanWebpackPlugin('./public/dist'),
-        new VueLoaderPlugin(),
-        new MiniCssExtractPlugin({
-            filename: '[name].[contenthash:6].css'
-        }),
-        new SpriteLoaderPlugin(),
-        new WriteFilesPlugin()
-    ],
-    resolve: {
-        alias: {
-            vue$: 'vue/dist/vue.esm.js'
+      },
+      {
+        test: /\.svg$/,
+        use: [
+          {
+            loader: 'svg-sprite-loader',
+            options: {
+              extract: true,
+              spriteFilename: '[chunkname].svg'
+            }
+          },
+          'svgo-loader'
+        ]
+      },
+      {
+        test: /\.(ttf|woff|woff2|eot)$/,
+        loader: 'file-loader',
+        options: {
+          name: '[name].[ext]'
         }
-    },
-    performance: {
-        hints: false
-    },
-    devtool: '#eval-source-map',
-    stats: { entrypoints: false }
+      }
+    ]
+  },
+  plugins: [
+    //new CleanWebpackPlugin('./public/dist'),
+    new VueLoaderPlugin(),
+    new MiniCssExtractPlugin({
+      filename: '[name].[contenthash:6].css'
+    }),
+    new SpriteLoaderPlugin(),
+    new WriteFilesPlugin()
+  ],
+  resolve: {
+    alias: {
+      vue$: 'vue/dist/vue.esm.js'
+    }
+  },
+  performance: {
+    hints: false
+  },
+  devtool: '#eval-source-map',
+  stats: { entrypoints: false }
 }
 
 if (process.env.NODE_ENV === 'production') {
-    module.exports.devtool = ''
-    module.exports.optimization = {
-        minimizer: [
-            new UglifyJsPlugin({
-                sourceMap: false,
-                cache: true,
-                parallel: true
-            }),
-            new OptimizeCSSAssetsPlugin()
-        ]
-    }
+  module.exports.devtool = ''
+  module.exports.optimization = {
+    minimizer: [
+      new UglifyJsPlugin({
+        sourceMap: false,
+        cache: true,
+        parallel: true
+      }),
+      new OptimizeCSSAssetsPlugin()
+    ]
+  }
 }

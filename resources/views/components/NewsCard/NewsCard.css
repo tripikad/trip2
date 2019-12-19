@@ -1,20 +1,20 @@
 .NewsCard__image {
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: 0;
-    max-width: 100%;
-    overflow: hidden;
-    padding-bottom: 56%;
-    position: relative;
-    margin-bottom: $margin-sm;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 0;
+  max-width: 100%;
+  overflow: hidden;
+  padding-bottom: 56%;
+  position: relative;
+  margin-bottom: $margin-sm;
 }
 
 .NewsCard__title {
-    color: $blue;
-    font: $font-heading-md;
-    margin-bottom: $margin-xxs;
+  color: $blue;
+  font: $font-heading-md;
+  margin-bottom: $margin-xxs;
 }
 
 .NewsCard__title:hover {
-    color: $blue-hover;
+  color: $blue-hover;
 }

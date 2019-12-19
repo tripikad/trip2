@@ -18,10 +18,10 @@ require.context('./svg', true, /\.svg$/)
 const requireComponent = require.context('./components', true, /\.vue$/)
 
 requireComponent.keys().forEach(filePath => {
-    const componentConfig = requireComponent(filePath)
-    // Get the filename from full file path and strip the .vue extension
-    const componentName = filePath.match(/[-_\w]+[.][\w]+$/i)[0].split('.')[0]
-    Vue.component(componentName, componentConfig.default || componentConfig)
+  const componentConfig = requireComponent(filePath)
+  // Get the filename from full file path and strip the .vue extension
+  const componentName = filePath.match(/[-_\w]+[.][\w]+$/i)[0].split('.')[0]
+  Vue.component(componentName, componentConfig.default || componentConfig)
 })
 
 // Set up cookies
@@ -45,22 +45,22 @@ Vue.prototype.$styles = require('./styles/styles')
 // Set up Axios
 
 Vue.prototype.$http = axios.create({
-    headers: {
-        'X-CSRF-TOKEN': globalProps.token,
-        'X-Requested-With': 'XMLHttpRequest'
-    }
+  headers: {
+    'X-CSRF-TOKEN': globalProps.token,
+    'X-Requested-With': 'XMLHttpRequest'
+  }
 })
 
 // Create a Vue instance
 
 new Vue({
-    el: '#app',
+  el: '#app',
 
-    mounted() {
-        if (this.$globalProps.info) {
-            this.$events.$emit('alert', {
-                title: globalProps.info
-            })
-        }
+  mounted() {
+    if (this.$globalProps.info) {
+      this.$events.$emit('alert', {
+        title: globalProps.info
+      })
     }
+  }
 })

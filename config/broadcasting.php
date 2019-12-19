@@ -1,7 +1,7 @@
 <?php
 
 return [
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Default Broadcaster
     |--------------------------------------------------------------------------
@@ -12,9 +12,9 @@ return [
     |
     */
 
-    'default' => env('BROADCAST_DRIVER', 'pusher'),
+  'default' => env('BROADCAST_DRIVER', 'pusher'),
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Broadcast Connections
     |--------------------------------------------------------------------------
@@ -25,21 +25,21 @@ return [
     |
     */
 
-    'connections' => [
-        'pusher' => [
-            'driver' => 'pusher',
-            'key' => env('PUSHER_KEY'),
-            'secret' => env('PUSHER_SECRET'),
-            'app_id' => env('PUSHER_APP_ID')
-        ],
+  'connections' => [
+    'pusher' => [
+      'driver' => 'pusher',
+      'key' => env('PUSHER_KEY'),
+      'secret' => env('PUSHER_SECRET'),
+      'app_id' => env('PUSHER_APP_ID')
+    ],
 
-        'redis' => [
-            'driver' => 'redis',
-            'connection' => 'default'
-        ],
+    'redis' => [
+      'driver' => 'redis',
+      'connection' => 'default'
+    ],
 
-        'log' => [
-            'driver' => 'log'
-        ]
+    'log' => [
+      'driver' => 'log'
     ]
+  ]
 ];

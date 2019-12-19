@@ -1,50 +1,50 @@
 .FormButton {
-    -webkit-appearance: none;
-    -webkit-border-radius: 0;
-    align-items: center;
-    background: $green;
-    border-radius: $border-radius-md;
-    border: none;
-    color: $white;
-    display: inline-flex;
-    display: block ?if $mobile;
-    font: $font-heading-sm;
-    line-height: $line-height-xs;
-    justify-content: center;
-    padding: $padding-sm $padding-lg;
-    width: 100% ?if $mobile;
+  -webkit-appearance: none;
+  -webkit-border-radius: 0;
+  align-items: center;
+  background: $green;
+  border-radius: $border-radius-md;
+  border: none;
+  color: $white;
+  display: inline-flex;
+  display: block ?if $mobile;
+  font: $font-heading-sm;
+  line-height: $line-height-xs;
+  justify-content: center;
+  padding: $padding-sm $padding-lg;
+  width: 100% ?if $mobile;
 }
 
 .FormButton:hover {
-    background: $green-hover;
+  background: $green-hover;
 }
 
 .FormButton--hidden {
-    display: none;
+  display: none;
 }
 
 .FormButton--wide {
-    width: 100%;
+  width: 100%;
 }
 
 .FormButton--large {
-    font: $font-heading-md;
-    /* @TODO2 Adjust form field size instead or fix height */
-    padding: calc($spacer * 0.95) $padding-lg;
+  font: $font-heading-md;
+  /* @TODO2 Adjust form field size instead or fix height */
+  padding: calc($spacer * 0.95) $padding-lg;
 }
 
 .FormButton[disabled] {
-    opacity: $opacity-md;
+  opacity: $opacity-md;
 }
 
 .FormButton[disabled]:hover {
-    background: $green;
+  background: $green;
 }
 
 .FormButton--orange {
-    background: $orange;
+  background: $orange;
 }
 
 .FormButton--orange:hover {
-    background: $orange-hover;
+  background: $orange-hover;
 }

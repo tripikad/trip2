@@ -25,6 +25,7 @@
         <link rel="stylesheet" href="{{ dist('css') }}">
         <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
         <!-- TradeDoubler site verification 2960089 -->
+        @yield('captcha')
     </head>
     <body>
         @include('utils.svg')

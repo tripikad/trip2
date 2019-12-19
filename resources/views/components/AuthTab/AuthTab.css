@@ -1,28 +1,28 @@
 .AuthTab {
-    background: $white;
-    height: $height-md;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  background: $white;
+  height: $height-md;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .AuthTab__title {
-    color: $blue;
-    font: $font-heading-md;
+  color: $blue;
+  font: $font-heading-md;
 }
 
 .AuthTab--facebook {
-    background: $facebook;
+  background: $facebook;
 }
 
 .AuthTab--facebook .AuthTab__title {
-    color: white;
+  color: white;
 }
 
 .AuthTab--google {
-    background: $google;
+  background: $google;
 }
 
 .AuthTab--google .AuthTab__title {
-    color: white;
+  color: white;
 }

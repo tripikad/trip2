@@ -1,38 +1,38 @@
 .PlaceholderPromo {
-    height: $height-xl;
-    opacity: $opacity-lg;
-    background: $gray-dark;
-    position: relative;
-    height: 0;
-    overflow: hidden;
-    padding-top: calc(2.5 / 4 * 100%);
-    background-color: #gray-dark;
+  height: $height-xl;
+  opacity: $opacity-lg;
+  background: $gray-dark;
+  position: relative;
+  height: 0;
+  overflow: hidden;
+  padding-top: calc(2.5 / 4 * 100%);
+  background-color: #gray-dark;
 }
 
 .PlaceholderPromo--sm {
-    padding-top: calc(0.6 / 4 * 100%);
-    padding-top: calc(2.5 / 4 * 100%) ?if $tablet;
+  padding-top: calc(0.6 / 4 * 100%);
+  padding-top: calc(2.5 / 4 * 100%) ?if $tablet;
 }
 
 .PlaceholderPromo--lg {
-    padding-top: calc(0.7 / 4 * 100%);
-    padding-top: calc(2.5 / 4 * 100%) ?if $tablet;
+  padding-top: calc(0.7 / 4 * 100%);
+  padding-top: calc(2.5 / 4 * 100%) ?if $tablet;
 }
 
 .PlaceholderPromo--xl {
-    padding-top: calc(4 / 3 * 100%);
-    padding-top: calc(2.5 / 4 * 100%) ?if $tablet;
+  padding-top: calc(4 / 3 * 100%);
+  padding-top: calc(2.5 / 4 * 100%) ?if $tablet;
 }
 
 .PlaceholderPromo .PlaceholderPromo__title {
-    color: $white;
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    font: $font-code-md;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  color: $white;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  font: $font-code-md;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

@@ -1,48 +1,48 @@
 .BlockTitle {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .BlockTitle__title {
-    color: $green;
-    font: $font-heading-xs;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+  color: $green;
+  font: $font-heading-xs;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 a .BlockTitle__title:hover {
-    color: $green-hover;
+  color: $green-hover;
 }
 
 .BlockTitle__link {
-    margin-left: $margin-xs;
+  margin-left: $margin-xs;
 }
 
 .BlockTitle--yellow .BlockTitle__title {
-    color: $yellow;
+  color: $yellow;
 }
 
 .BlockTitle--yellow a .BlockTitle__title:hover {
-    color: $yellow-hover;
+  color: $yellow-hover;
 }
 
 .BlockTitle--cyan .BlockTitle__title {
-    color: $cyan;
+  color: $cyan;
 }
 
 .BlockTitle--cyan a .BlockTitle__title:hover {
-    color: $cyan-hover;
+  color: $cyan-hover;
 }
 
 .BlockTitle--white .BlockTitle__title {
-    color: $white;
+  color: $white;
 }
 
 .BlockTitle--white a .BlockTitle__title:hover {
-    color: $white;
-    opacity: $opacity-lg;
+  color: $white;
+  opacity: $opacity-lg;
 }
 
 .BlockTitle--white svg > * {
-    fill: $white;
+  fill: $white;
 }

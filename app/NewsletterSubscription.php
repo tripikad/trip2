@@ -6,24 +6,24 @@ use Illuminate\Database\Eloquent\Model;
 
 class NewsletterSubscription extends Model
 {
-    // Setup
+  // Setup
 
-    protected $dates = ['last_sent_at', 'created_at', 'updated_at'];
+  protected $dates = ['last_sent_at', 'created_at', 'updated_at'];
 
-    // Relations
+  // Relations
 
-    public function sents()
-    {
-        return $this->hasMany('App\NewsletterSentSubscriber', 'subscription_id', 'id');
-    }
+  public function sents()
+  {
+    return $this->hasMany('App\NewsletterSentSubscriber', 'subscription_id', 'id');
+  }
 
-    public function user()
-    {
-        return $this->hasOne('App\User', 'id', 'user_id');
-    }
+  public function user()
+  {
+    return $this->hasOne('App\User', 'id', 'user_id');
+  }
 
-    public function newsletter_type()
-    {
-        return $this->hasOne('App\NewsletterType', 'id', 'newsletter_type_id');
-    }
+  public function newsletter_type()
+  {
+    return $this->hasOne('App\NewsletterType', 'id', 'newsletter_type_id');
+  }
 }

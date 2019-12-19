@@ -1,7 +1,7 @@
 <?php
 
 return [
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Enable Clockwork
     |--------------------------------------------------------------------------
@@ -15,9 +15,9 @@ return [
     |
     */
 
-    'enable' => env('CLOCKWORK_ENABLE', null),
+  'enable' => env('CLOCKWORK_ENABLE', null),
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Features
     |--------------------------------------------------------------------------
@@ -27,75 +27,75 @@ return [
     |
     */
 
-    'features' => [
-        // Cache usage stats and cache queries including results
-        'cache' => [
-            'enabled' => env('CLOCKWORK_CACHE_ENABLED', true),
+  'features' => [
+    // Cache usage stats and cache queries including results
+    'cache' => [
+      'enabled' => env('CLOCKWORK_CACHE_ENABLED', true),
 
-            // Collect cache queries including results (high performance impact with a high number of queries)
-            'collect_queries' => env('CLOCKWORK_CACHE_QUERIES', true)
-        ],
-
-        // Database usage stats and queries
-        'database' => [
-            'enabled' => env('CLOCKWORK_DATABASE_ENABLED', true),
-
-            // Collect database queries (high performance impact with a very high number of queries)
-            'collect_queries' => env('CLOCKWORK_DATABASE_COLLECT_QUERIES', true),
-
-            // Query execution time threshold in miliseconds after which the query will be marked as slow
-            'slow_threshold' => env('CLOCKWORK_DATABASE_SLOW_THRESHOLD', 100),
-
-            // Collect only slow database queries
-            'slow_only' => env('CLOCKWORK_DATABASE_SLOW_ONLY', false),
-
-            // Detect and report duplicate (N+1) queries
-            'detect_duplicate_queries' => env('CLOCKWORK_DATABASE_DETECT_DUPLICATE_QUERIES', true)
-        ],
-
-        // Sent emails
-        'emails' => [
-            'enabled' => env('CLOCKWORK_EMAILS_ENABLED', true)
-        ],
-
-        // Dispatched events
-        'events' => [
-            'enabled' => env('CLOCKWORK_EVENTS_ENABLED', true),
-
-            // Ignored events (framework events are ignored by default)
-            'ignored_events' => [
-                // App\Events\UserRegistered::class,
-                // 'user.registered'
-            ]
-        ],
-
-        // Laravel log (you can still log directly to Clockwork with laravel log disabled)
-        'log' => [
-            'enabled' => env('CLOCKWORK_LOG_ENABLED', true)
-        ],
-
-        // Dispatched queue jobs
-        'queue' => [
-            'enabled' => env('CLOCKWORK_QUEUE_ENABLED', true)
-        ],
-
-        // Redis commands
-        'redis' => [
-            'enabled' => env('CLOCKWORK_REDIS_ENABLED', true)
-        ],
-
-        // Routes list
-        'routes' => [
-            'enabled' => env('CLOCKWORK_ROUTES_ENABLED', false)
-        ],
-
-        // Rendered views including passed data (high performance impact with large amount of data passed to views)
-        'views' => [
-            'enabled' => env('CLOCKWORK_VIEWS_ENABLED', false)
-        ]
+      // Collect cache queries including results (high performance impact with a high number of queries)
+      'collect_queries' => env('CLOCKWORK_CACHE_QUERIES', true)
     ],
 
-    /*
+    // Database usage stats and queries
+    'database' => [
+      'enabled' => env('CLOCKWORK_DATABASE_ENABLED', true),
+
+      // Collect database queries (high performance impact with a very high number of queries)
+      'collect_queries' => env('CLOCKWORK_DATABASE_COLLECT_QUERIES', true),
+
+      // Query execution time threshold in miliseconds after which the query will be marked as slow
+      'slow_threshold' => env('CLOCKWORK_DATABASE_SLOW_THRESHOLD', 100),
+
+      // Collect only slow database queries
+      'slow_only' => env('CLOCKWORK_DATABASE_SLOW_ONLY', false),
+
+      // Detect and report duplicate (N+1) queries
+      'detect_duplicate_queries' => env('CLOCKWORK_DATABASE_DETECT_DUPLICATE_QUERIES', true)
+    ],
+
+    // Sent emails
+    'emails' => [
+      'enabled' => env('CLOCKWORK_EMAILS_ENABLED', true)
+    ],
+
+    // Dispatched events
+    'events' => [
+      'enabled' => env('CLOCKWORK_EVENTS_ENABLED', true),
+
+      // Ignored events (framework events are ignored by default)
+      'ignored_events' => [
+        // App\Events\UserRegistered::class,
+        // 'user.registered'
+      ]
+    ],
+
+    // Laravel log (you can still log directly to Clockwork with laravel log disabled)
+    'log' => [
+      'enabled' => env('CLOCKWORK_LOG_ENABLED', true)
+    ],
+
+    // Dispatched queue jobs
+    'queue' => [
+      'enabled' => env('CLOCKWORK_QUEUE_ENABLED', true)
+    ],
+
+    // Redis commands
+    'redis' => [
+      'enabled' => env('CLOCKWORK_REDIS_ENABLED', true)
+    ],
+
+    // Routes list
+    'routes' => [
+      'enabled' => env('CLOCKWORK_ROUTES_ENABLED', false)
+    ],
+
+    // Rendered views including passed data (high performance impact with large amount of data passed to views)
+    'views' => [
+      'enabled' => env('CLOCKWORK_VIEWS_ENABLED', false)
+    ]
+  ],
+
+  /*
     |--------------------------------------------------------------------------
     | Enable web UI
     |--------------------------------------------------------------------------
@@ -106,11 +106,11 @@ return [
     |
     */
 
-    'web' => env('CLOCKWORK_WEB', true),
+  'web' => env('CLOCKWORK_WEB', true),
 
-    'web_dark_theme' => env('CLOCKWORK_WEB_DARK_THEME', false),
+  'web_dark_theme' => env('CLOCKWORK_WEB_DARK_THEME', false),
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Enable data collection, when Clockwork is disabled
     |--------------------------------------------------------------------------
@@ -121,9 +121,9 @@ return [
     |
     */
 
-    'collect_data_always' => env('CLOCKWORK_COLLECT_DATA_ALWAYS', false),
+  'collect_data_always' => env('CLOCKWORK_COLLECT_DATA_ALWAYS', false),
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Metadata storage
     |--------------------------------------------------------------------------
@@ -139,17 +139,17 @@ return [
     |
     */
 
-    'storage' => env('CLOCKWORK_STORAGE', 'files'),
+  'storage' => env('CLOCKWORK_STORAGE', 'files'),
 
-    'storage_files_path' => env('CLOCKWORK_STORAGE_FILES_PATH', storage_path('clockwork')),
+  'storage_files_path' => env('CLOCKWORK_STORAGE_FILES_PATH', storage_path('clockwork')),
 
-    // Compress the metadata files using gzip, trading a little bit of performance for lower disk usage
-    'storage_files_compress' => env('CLOCKWORK_STORAGE_FILES_COMPRESS', false),
+  // Compress the metadata files using gzip, trading a little bit of performance for lower disk usage
+  'storage_files_compress' => env('CLOCKWORK_STORAGE_FILES_COMPRESS', false),
 
-    'storage_sql_database' => env('CLOCKWORK_STORAGE_SQL_DATABASE', storage_path('clockwork.sqlite')),
-    'storage_sql_table' => env('CLOCKWORK_STORAGE_SQL_TABLE', 'clockwork'),
+  'storage_sql_database' => env('CLOCKWORK_STORAGE_SQL_DATABASE', storage_path('clockwork.sqlite')),
+  'storage_sql_table' => env('CLOCKWORK_STORAGE_SQL_TABLE', 'clockwork'),
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Metadata expiration
     |--------------------------------------------------------------------------
@@ -161,9 +161,9 @@ return [
     |
     */
 
-    'storage_expiration' => env('CLOCKWORK_STORAGE_EXPIRATION', 60 * 24 * 7),
+  'storage_expiration' => env('CLOCKWORK_STORAGE_EXPIRATION', 0),
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Authentication
     |--------------------------------------------------------------------------
@@ -178,11 +178,11 @@ return [
     |
     */
 
-    'authentication' => env('CLOCKWORK_AUTHENTICATION', false),
+  'authentication' => env('CLOCKWORK_AUTHENTICATION', false),
 
-    'authentication_password' => env('CLOCKWORK_AUTHENTICATION_PASSWORD', 'VerySecretPassword'),
+  'authentication_password' => env('CLOCKWORK_AUTHENTICATION_PASSWORD', 'VerySecretPassword'),
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Disable data collection for certain URIs
     |--------------------------------------------------------------------------
@@ -192,12 +192,12 @@ return [
     |
     */
 
-    'filter_uris' => [
-        '/horizon/.*', // Laravel Horizon requests
-        '/telescope/.*' // Laravel Telescope requests
-    ],
+  'filter_uris' => [
+    '/horizon/.*', // Laravel Horizon requests
+    '/telescope/.*' // Laravel Telescope requests
+  ],
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Enable collecting of stack traces
     |--------------------------------------------------------------------------
@@ -212,30 +212,30 @@ return [
     |
     */
 
-    'stack_traces' => [
-        // Enable or disable collecting of stack traces, when disabled only caller file and line number is collected
-        'enabled' => env('CLOCKWORK_STACK_TRACES_ENABLED', true),
+  'stack_traces' => [
+    // Enable or disable collecting of stack traces, when disabled only caller file and line number is collected
+    'enabled' => env('CLOCKWORK_STACK_TRACES_ENABLED', true),
 
-        // List of vendor names to skip when determining caller, common vendor are automatically added
-        'skip_vendors' => [
-            // 'phpunit'
-        ],
-
-        // List of namespaces to skip when determining caller
-        'skip_namespaces' => [
-            // 'Laravel'
-        ],
-
-        // List of class names to skip when determining caller
-        'skip_classes' => [
-            // App\CustomLog::class
-        ],
-
-        // Limit of frames to be collected
-        'limit' => env('CLOCKWORK_STACK_TRACES_LIMIT', 10)
+    // List of vendor names to skip when determining caller, common vendor are automatically added
+    'skip_vendors' => [
+      // 'phpunit'
     ],
 
-    /*
+    // List of namespaces to skip when determining caller
+    'skip_namespaces' => [
+      // 'Laravel'
+    ],
+
+    // List of class names to skip when determining caller
+    'skip_classes' => [
+      // App\CustomLog::class
+    ],
+
+    // Limit of frames to be collected
+    'limit' => env('CLOCKWORK_STACK_TRACES_LIMIT', 10)
+  ],
+
+  /*
     |--------------------------------------------------------------------------
     | Serialization
     |--------------------------------------------------------------------------
@@ -250,15 +250,15 @@ return [
     |
     */
 
-    'serialization_depth' => env('CLOCKWORK_SERIALIZATION_DEPTH', 10),
+  'serialization_depth' => env('CLOCKWORK_SERIALIZATION_DEPTH', 10),
 
-    'serialization_blackbox' => [
-        \Illuminate\Container\Container::class,
-        \Illuminate\Foundation\Application::class,
-        \Laravel\Lumen\Application::class
-    ],
+  'serialization_blackbox' => [
+    \Illuminate\Container\Container::class,
+    \Illuminate\Foundation\Application::class,
+    \Laravel\Lumen\Application::class
+  ],
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Register helpers
     |--------------------------------------------------------------------------
@@ -268,9 +268,9 @@ return [
     |
     */
 
-    'register_helpers' => env('CLOCKWORK_REGISTER_HELPERS', true),
+  'register_helpers' => env('CLOCKWORK_REGISTER_HELPERS', true),
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Send Headers for AJAX request
     |--------------------------------------------------------------------------
@@ -282,11 +282,11 @@ return [
     |
     */
 
-    'headers' => [
-        // 'Accept' => 'application/vnd.com.whatever.v1+json',
-    ],
+  'headers' => [
+    // 'Accept' => 'application/vnd.com.whatever.v1+json',
+  ],
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Server-Timing
     |--------------------------------------------------------------------------
@@ -301,5 +301,5 @@ return [
     |
     */
 
-    'server_timing' => env('CLOCKWORK_SERVER_TIMING', 10)
+  'server_timing' => env('CLOCKWORK_SERVER_TIMING', 10)
 ];

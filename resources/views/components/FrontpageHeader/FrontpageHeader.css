@@ -1,19 +1,19 @@
 .FrontpageHeader {
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    padding-bottom: $padding-lg;
-    padding-top: $padding-md;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding-bottom: $padding-lg;
+  padding-top: $padding-md;
 }
 
 .FrontpageHeader__content {
-    margin-top: $margin-xl;
-    display: flex;
-    justify-content: center;
+  margin-top: $margin-xl;
+  display: flex;
+  justify-content: center;
 }
 
 .FrontpageHeader__search {
-    margin-bottom: $margin-xl;
-    width: 50%;
-    width: 100% ?if $tablet;
+  margin-bottom: $margin-xl;
+  width: 50%;
+  width: 100% ?if $tablet;
 }

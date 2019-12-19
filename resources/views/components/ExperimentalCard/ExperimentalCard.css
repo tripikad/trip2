@@ -1,21 +1,21 @@
 .ExperimentalCard {
-    background-repeat: no-repeat;
-    background-size: cover;
-    position: relative;
-    height: 100%;
-    padding: $padding-md;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  height: 100%;
+  padding: $padding-md;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .ExperimentalCard__title {
-    color: $white;
-    font: $font-heading-md;
-    text-shadow: $text-shadow-md;
-    text-align: center;
+  color: $white;
+  font: $font-heading-md;
+  text-shadow: $text-shadow-md;
+  text-align: center;
 }
 
 .ExperimentalCard__title:hover {
-    color: $white-hover;
+  color: $white-hover;
 }

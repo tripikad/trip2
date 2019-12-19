@@ -1,13 +1,13 @@
 .StatCard {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .StatCard__icon {
-    margin-right: $margin-sm;
+  margin-right: $margin-sm;
 }
 
 .StatCard__title {
-    font: $font-heading-md;
-    color: $white;
+  font: $font-heading-md;
+  color: $white;
 }

@@ -7,8 +7,8 @@ Route::get('/', 'FrontpageController@index')->name('frontpage.index');
 // Content status
 
 Route::post('content/{type}/{id}/status/{status}', 'ContentController@status')
-    ->name('content.status')
-    ->middleware('role:admin');
+  ->name('content.status')
+  ->middleware('role:admin');
 
 // News
 
@@ -17,20 +17,20 @@ Route::get('uudised', 'NewsController@index')->name('news.index');
 Route::get('uudised/{slug}', 'NewsController@show')->name('news.show');
 
 Route::get('news/create', 'NewsController@create')
-    ->name('news.create')
-    ->middleware('role:admin');
+  ->name('news.create')
+  ->middleware('role:admin');
 
 Route::post('news/store', 'NewsController@store')
-    ->name('news.store')
-    ->middleware('role:admin');
+  ->name('news.store')
+  ->middleware('role:admin');
 
 Route::get('news/{id}/edit', 'NewsController@edit')
-    ->name('news.edit')
-    ->middleware('role:admin');
+  ->name('news.edit')
+  ->middleware('role:admin');
 
 Route::put('news/{id}/update', 'NewsController@update')
-    ->name('news.update')
-    ->middleware('role:admin');
+  ->name('news.update')
+  ->middleware('role:admin');
 
 // Shortnews
 
@@ -45,20 +45,20 @@ Route::get('odavad-lennupiletid', 'FlightController@index')->name('flight.index'
 Route::get('odavad-lennupiletid/{slug}', 'FlightController@show')->name('flight.show');
 
 Route::get('flight/create', 'FlightController@create')
-    ->name('flight.create')
-    ->middleware('role:admin');
+  ->name('flight.create')
+  ->middleware('role:admin');
 
 Route::post('flight/store', 'FlightController@store')
-    ->name('flight.store')
-    ->middleware('role:admin');
+  ->name('flight.store')
+  ->middleware('role:admin');
 
 Route::get('flight/{id}/edit', 'FlightController@edit')
-    ->name('flight.edit')
-    ->middleware('role:admin');
+  ->name('flight.edit')
+  ->middleware('role:admin');
 
 Route::put('flight/{id}/update', 'FlightController@update')
-    ->name('flight.update')
-    ->middleware('role:admin');
+  ->name('flight.update')
+  ->middleware('role:admin');
 
 // Travelmates
 
@@ -67,20 +67,20 @@ Route::get('reisikaaslased', 'TravelmateController@index')->name('travelmate.ind
 Route::get('reisikaaslased/{slug}', 'TravelmateController@show')->name('travelmate.show');
 
 Route::get('travelmate/create', 'TravelmateController@create')
-    ->name('travelmate.create')
-    ->middleware('role:regular');
+  ->name('travelmate.create')
+  ->middleware('role:regular');
 
 Route::post('travelmate/store', 'TravelmateController@store')
-    ->name('travelmate.store')
-    ->middleware('role:regular');
+  ->name('travelmate.store')
+  ->middleware('role:regular');
 
 Route::get('travelmate/{id}/edit', 'TravelmateController@edit')
-    ->name('travelmate.edit')
-    ->middleware('role:admin,contentowner');
+  ->name('travelmate.edit')
+  ->middleware('role:admin,contentowner');
 
 Route::put('travelmate/{id}/update', 'TravelmateController@update')
-    ->name('travelmate.update')
-    ->middleware('role:admin,contentowner');
+  ->name('travelmate.update')
+  ->middleware('role:admin,contentowner');
 
 // Forum
 
@@ -101,69 +101,69 @@ Route::get('foorum/elu-valimaal/{slug}', 'ForumController@show')->name('expat.sh
 Route::get('foorum/vaba-teema/{slug}', 'ForumController@show')->name('misc.show');
 
 Route::get('forum/create/{type}', 'ForumController@create')
-    ->name('forum.create')
-    ->middleware('role:regular');
+  ->name('forum.create')
+  ->middleware('role:regular');
 
 Route::post('forum/store', 'ForumController@store')
-    ->name('forum.store')
-    ->middleware('role:regular');
+  ->name('forum.store')
+  ->middleware('role:regular');
 
 Route::get('forum/{id}/edit', 'ForumController@edit')
-    ->name('forum.edit')
-    ->middleware('role:admin,contentowner');
+  ->name('forum.edit')
+  ->middleware('role:admin,contentowner');
 
 Route::put('forum/{id}/update', 'ForumController@update')
-    ->name('forum.update')
-    ->middleware('role:admin,contentowner');
+  ->name('forum.update')
+  ->middleware('role:admin,contentowner');
 
 // Static
 
 Route::get('{slug}', 'StaticController@show')
-    ->name('static.show')
-    ->where(
-        'slug',
-        '(' .
-            collect(config('static.slugs'))
-                ->keys()
-                ->implode('|') .
-            ')'
-    );
+  ->name('static.show')
+  ->where(
+    'slug',
+    '(' .
+      collect(config('static.slugs'))
+        ->keys()
+        ->implode('|') .
+      ')'
+  );
 
 Route::get('static/{id}', 'StaticController@showId')->name('static.show.id');
 
 Route::get('static/{id}/edit', 'StaticController@edit')
-    ->name('static.edit')
-    ->middleware('role:superuser');
+  ->name('static.edit')
+  ->middleware('role:superuser');
 
 Route::post('static/{id}/update', 'StaticController@update')
-    ->name('static.update')
-    ->middleware('role:superuser');
+  ->name('static.update')
+  ->middleware('role:superuser');
 
 // Newsletter
 
 Route::get('newsletter/list', 'NewsletterController@index')
-    ->name('newsletter.index')
-    ->middleware('role:superuser');
+  ->name('newsletter.index')
+  ->middleware('role:superuser');
 
 Route::get('newsletter/view/{id}', 'NewsletterController@view')
-    ->name('newsletter.view')
-    ->middleware('role:superuser');
+  ->name('newsletter.view')
+  ->middleware('role:superuser');
 
 Route::get('newsletter/edit/{id}', 'NewsletterController@edit')
-    ->name('newsletter.edit')
-    ->middleware('role:superuser');
+  ->name('newsletter.edit')
+  ->middleware('role:superuser');
 
 Route::post('newsletter/store/{id}', 'NewsletterController@store')
-    ->name('newsletter.store')
-    ->middleware('role:superuser');
+  ->name('newsletter.store')
+  ->middleware('role:superuser');
 
 Route::get('newsletter/preview/{id}', 'NewsletterController@preview')
-    ->name('newsletter.preview')
-    ->middleware('role:superuser');
+  ->name('newsletter.preview')
+  ->middleware('role:superuser');
 
 Route::get('newsletter/preview_sent/{id}', 'NewsletterController@preview_sent')
-    ->name('newsletter.preview_sent')
-    ->middleware('role:superuser');
+  ->name('newsletter.preview_sent')
+  ->middleware('role:superuser');
 
 Route::post('newsletter/subscribe/{id}', 'NewsletterController@subscribe')->name('newsletter.subscribe');
 
@@ -176,46 +176,46 @@ Route::get('reisikirjad', 'BlogController@index')->name('blog.index');
 Route::get('reisikirjad/{slug}', 'BlogController@show')->name('blog.show');
 
 Route::get('blog/create', 'BlogController@create')
-    ->name('blog.create')
-    ->middleware('role:regular');
+  ->name('blog.create')
+  ->middleware('role:regular');
 
 Route::post('blog/store', 'BlogController@store')
-    ->name('blog.store')
-    ->middleware('role:regular');
+  ->name('blog.store')
+  ->middleware('role:regular');
 
 Route::get('blog/{id}/edit', 'BlogController@edit')
-    ->name('blog.edit')
-    ->middleware('role:admin,contentowner');
+  ->name('blog.edit')
+  ->middleware('role:admin,contentowner');
 
 Route::put('blog/{id}/update', 'BlogController@update')
-    ->name('blog.update')
-    ->middleware('role:admin,contentowner');
+  ->name('blog.update')
+  ->middleware('role:admin,contentowner');
 
 // Internal
 
 Route::get('internal', 'InternalController@index')
-    ->name('internal.index')
-    ->middleware('role:admin');
+  ->name('internal.index')
+  ->middleware('role:admin');
 
 Route::get('internal/{id}', 'InternalController@show')
-    ->name('internal.show')
-    ->middleware('role:admin');
+  ->name('internal.show')
+  ->middleware('role:admin');
 
 Route::get('internal/create', 'InternalController@create')
-    ->name('internal.create')
-    ->middleware('role:admin');
+  ->name('internal.create')
+  ->middleware('role:admin');
 
 Route::post('internal/store', 'InternalController@store')
-    ->name('internal.store')
-    ->middleware('role:admin');
+  ->name('internal.store')
+  ->middleware('role:admin');
 
 Route::get('internal/{id}/edit', 'InternalController@edit')
-    ->name('internal.edit')
-    ->middleware('role:admin');
+  ->name('internal.edit')
+  ->middleware('role:admin');
 
 Route::post('internal/{id}/update', 'InternalController@update')
-    ->name('internal.update')
-    ->middleware('role:admin');
+  ->name('internal.update')
+  ->middleware('role:admin');
 
 // Photo
 
@@ -224,12 +224,12 @@ Route::get('reisipildid', 'PhotoController@index')->name('photo.index');
 Route::get('photo/id/{id}', 'PhotoController@show')->name('photo.show');
 
 Route::get('photo/create', 'PhotoController@create')
-    ->name('photo.create')
-    ->middleware('role:regular');
+  ->name('photo.create')
+  ->middleware('role:regular');
 
 Route::post('photo/store', 'PhotoController@store')
-    ->name('photo.store')
-    ->middleware('role:regular');
+  ->name('photo.store')
+  ->middleware('role:regular');
 
 // Content redirects
 
@@ -240,28 +240,28 @@ Route::get('content/{type}/{id}', 'ContentController@redirectShow')->name('conte
 // Comments
 
 Route::get('comment/{id}/edit', 'CommentController@edit')
-    ->name('comment.edit')
-    ->middleware('role:admin,commentowner');
+  ->name('comment.edit')
+  ->middleware('role:admin,commentowner');
 
 // User
 
 Route::get('user/{id}', 'UserController@show')->name('user.show');
 
 Route::get('user/{id}/edit', 'UserController@edit')
-    ->name('user.edit')
-    ->middleware('role:superuser,userowner');
+  ->name('user.edit')
+  ->middleware('role:superuser,userowner');
 
 Route::put('user/{id}/update', 'UserController@update')
-    ->name('user.update')
-    ->middleware('role:superuser,userowner');
+  ->name('user.update')
+  ->middleware('role:superuser,userowner');
 
 Route::get('user/{id}/destinations', 'UserController@destinationsEdit')
-    ->middleware('role:superuser,userowner')
-    ->name('user.destinations.edit');
+  ->middleware('role:superuser,userowner')
+  ->name('user.destinations.edit');
 
 Route::put('user/{id}/destinations', 'UserController@destinationsStore')
-    ->middleware('role:superuser,userowner')
-    ->name('user.destinations.store');
+  ->middleware('role:superuser,userowner')
+  ->name('user.destinations.store');
 
 // User photos
 
@@ -270,26 +270,26 @@ Route::get('user/{id}/photo', 'PhotoController@userIndex')->name('photo.user');
 // Messages
 
 Route::get('user/{id}/messages', 'MessageController@index')
-    ->name('message.index')
-    ->middleware('role:superuser,userowner');
+  ->name('message.index')
+  ->middleware('role:superuser,userowner');
 
 Route::get('user/{id}/messages/{id2}', 'MessageController@indexWith')
-    ->name('message.index.with')
-    ->middleware('role:superuser,userowner');
+  ->name('message.index.with')
+  ->middleware('role:superuser,userowner');
 
 Route::post('message/{id}/to/{id2}', 'MessageController@store')
-    ->name('message.store')
-    ->middleware('role:superuser,userowner');
+  ->name('message.store')
+  ->middleware('role:superuser,userowner');
 
 // Follows
 
 Route::get('user/{id}/follows', 'ForumController@followIndex')
-    ->name('follow.index')
-    ->middleware('role:admin,userowner');
+  ->name('follow.index')
+  ->middleware('role:admin,userowner');
 
 Route::put('content/{type}/{id}/follow/{status}', 'FollowController@followContent')
-    ->name('follow.follow.content')
-    ->middleware('role:regular');
+  ->name('follow.follow.content')
+  ->middleware('role:regular');
 
 // Destination
 
@@ -309,35 +309,35 @@ Route::get('search/{token}', 'SearchController@search')->name('search.results.ty
 // Image
 
 Route::post('image', 'ImageController@store')
-    ->name('image.store')
-    ->middleware('role:regular');
+  ->name('image.store')
+  ->middleware('role:regular');
 
 // Destination
 
 Route::get('destination/{id}/edit', 'DestinationController@edit')
-    ->name('destination.edit')
-    ->middleware('role:admin');
+  ->name('destination.edit')
+  ->middleware('role:admin');
 Route::post('destination/{id}/update', 'DestinationController@update')
-    ->name('destination.update')
-    ->middleware('role:admin');
+  ->name('destination.update')
+  ->middleware('role:admin');
 
 // Admin
 
 Route::get('admin/content', 'AdminController@unpublishedIndex')
-    ->name('admin.content.index')
-    ->middleware('role:admin');
+  ->name('admin.content.index')
+  ->middleware('role:admin');
 
 Route::get('admin/image', 'AdminController@imageIndex')
-    ->name('admin.image.index')
-    ->middleware('role:admin');
+  ->name('admin.image.index')
+  ->middleware('role:admin');
 
 Route::get('image/index', 'ImageController@index')
-    ->name('image.index')
-    ->middleware('role:admin');
+  ->name('image.index')
+  ->middleware('role:admin');
 
 Route::get('statistics', 'StatisticsController@index')
-    ->name('statistics.index')
-    ->middleware('role:superuser');
+  ->name('statistics.index')
+  ->middleware('role:superuser');
 
 // Utils
 
@@ -370,195 +370,195 @@ Route::get('experiments', 'ExperimentsController@index')->name('experiments.inde
 // Registration
 
 Route::get('register', [
-    'middleware' => 'guest',
-    'uses' => 'Auth\RegistrationController@form',
-    'as' => 'register.form'
+  'middleware' => 'guest',
+  'uses' => 'Auth\RegistrationController@form',
+  'as' => 'register.form'
 ]);
 
 Route::post('register', [
-    'middleware' => 'guest',
-    'uses' => 'Auth\RegistrationController@submit',
-    'as' => 'register.submit'
+  'middleware' => 'guest',
+  'uses' => 'Auth\RegistrationController@submit',
+  'as' => 'register.submit'
 ]);
 
 Route::get('register/confirm/{token}', [
-    'uses' => 'Auth\RegistrationController@confirm',
-    'as' => 'register.confirm'
+  'uses' => 'Auth\RegistrationController@confirm',
+  'as' => 'register.confirm'
 ]);
 
 // Login and logout
 
 Route::get('login', [
-    'middleware' => 'guest',
-    'uses' => 'Auth\LoginController@form',
-    'as' => 'login.form'
+  'middleware' => 'guest',
+  'uses' => 'Auth\LoginController@form',
+  'as' => 'login.form'
 ]);
 
 Route::post('login', [
-    'middleware' => 'guest',
-    'uses' => 'Auth\LoginController@submit',
-    'as' => 'login.submit'
+  'middleware' => 'guest',
+  'uses' => 'Auth\LoginController@submit',
+  'as' => 'login.submit'
 ]);
 
 Route::get('logout', [
-    'middleware' => 'auth',
-    'uses' => 'Auth\LoginController@logout',
-    'as' => 'login.logout'
+  'middleware' => 'auth',
+  'uses' => 'Auth\LoginController@logout',
+  'as' => 'login.logout'
 ]);
 
 // Facebook login
 
 Route::get('redirect/facebook', [
-    'middleware' => 'guest',
-    'uses' => 'SocialController@facebookRedirect',
-    'as' => 'facebook.redirect'
+  'middleware' => 'guest',
+  'uses' => 'SocialController@facebookRedirect',
+  'as' => 'facebook.redirect'
 ]);
 
 Route::get('facebook', [
-    'uses' => 'SocialController@facebook',
-    'as' => 'facebook'
+  'uses' => 'SocialController@facebook',
+  'as' => 'facebook'
 ]);
 
 // Google+ login
 
 Route::get('redirect/google', [
-    'middleware' => 'guest',
-    'uses' => 'SocialController@googleRedirect',
-    'as' => 'google.redirect'
+  'middleware' => 'guest',
+  'uses' => 'SocialController@googleRedirect',
+  'as' => 'google.redirect'
 ]);
 
 Route::get('google', [
-    'uses' => 'SocialController@google',
-    'as' => 'google'
+  'uses' => 'SocialController@google',
+  'as' => 'google'
 ]);
 
 // Password reset
 
 Route::get('reset/apply', [
-    'uses' => 'Auth\ResetController@applyForm',
-    'as' => 'reset.apply.form'
+  'uses' => 'Auth\ResetController@applyForm',
+  'as' => 'reset.apply.form'
 ]);
 
 Route::post('reset/apply', [
-    'uses' => 'Auth\ResetController@postEmail',
-    'as' => 'reset.apply.submit'
+  'uses' => 'Auth\ResetController@postEmail',
+  'as' => 'reset.apply.submit'
 ]);
 
 Route::get('reset/password/{token}', [
-    'uses' => 'Auth\ResetController@passwordForm',
-    'as' => 'reset.password.form'
+  'uses' => 'Auth\ResetController@passwordForm',
+  'as' => 'reset.password.form'
 ]);
 
 Route::post('reset/password', [
-    'uses' => 'Auth\ResetController@reset',
-    'as' => 'reset.password.submit'
+  'uses' => 'Auth\ResetController@reset',
+  'as' => 'reset.password.submit'
 ]);
 
 // Flags
 
 Route::get('flag/{flaggable_type}/{flaggable_id}/{flag_type}', [
-    'middleware' => 'role:regular',
-    'uses' => 'FlagController@toggle',
-    'as' => 'flag.toggle'
+  'middleware' => 'role:regular',
+  'uses' => 'FlagController@toggle',
+  'as' => 'flag.toggle'
 ]);
 
 // Comments
 
 Route::post('content/{type}/{id}/comment', [
-    'middleware' => 'role:regular',
-    'uses' => 'CommentController@store',
-    'as' => 'comment.store'
+  'middleware' => 'role:regular',
+  'uses' => 'CommentController@store',
+  'as' => 'comment.store'
 ]);
 
 Route::post('comment/{id}', [
-    'middleware' => 'role:admin,commentowner',
-    'uses' => 'CommentController@update',
-    'as' => 'comment.update'
+  'middleware' => 'role:admin,commentowner',
+  'uses' => 'CommentController@update',
+  'as' => 'comment.update'
 ]);
 
 Route::put('comment/{id}/status/{status}', [
-    'middleware' => 'role:admin',
-    'uses' => 'CommentController@status',
-    'as' => 'comment.status'
+  'middleware' => 'role:admin',
+  'uses' => 'CommentController@status',
+  'as' => 'comment.status'
 ]);
 
 // Atom feeds
 
 Route::get('index.atom', [
-    'middleware' => 'throttle:60,1',
-    'uses' => 'FeedController@newsFeed',
-    'as' => 'news.feed'
+  'middleware' => 'throttle:60,1',
+  'uses' => 'FeedController@newsFeed',
+  'as' => 'news.feed'
 ]);
 
 Route::get('lendude_sooduspakkumised/rss', [
-    'middleware' => 'throttle:60,1',
-    'uses' => 'FeedController@flightFeed',
-    'as' => 'flight.feed'
+  'middleware' => 'throttle:60,1',
+  'uses' => 'FeedController@flightFeed',
+  'as' => 'flight.feed'
 ]);
 
 // Companies
 
 Route::get('company', 'CompanyController@index')
-    ->name('company.index')
-    ->middleware('company');
+  ->name('company.index')
+  ->middleware('company');
 
 Route::get('company/admin', 'CompanyController@adminIndex')
-    ->name('company.admin.index')
-    ->middleware('role:superuser');
+  ->name('company.admin.index')
+  ->middleware('role:superuser');
 
 Route::get('company/{id}', 'CompanyController@show')->name('company.show');
 
 Route::get('company/create', 'CompanyController@create')
-    ->name('company.create')
-    ->middleware('role:superuser');
+  ->name('company.create')
+  ->middleware('role:superuser');
 
 Route::post('company/store', 'CompanyController@store')
-    ->name('company.store')
-    ->middleware('role:superuser');
+  ->name('company.store')
+  ->middleware('role:superuser');
 
 Route::get('company/{id}/edit', 'CompanyController@edit')
-    ->name('company.edit')
-    ->middleware('role:superuser,userowner')
-    ->middleware('company');
+  ->name('company.edit')
+  ->middleware('role:superuser,userowner')
+  ->middleware('company');
 
 Route::put('company/{id}/update', 'CompanyController@update')
-    ->name('company.update')
-    ->middleware('role:superuser,userowner')
-    ->middleware('company');
+  ->name('company.update')
+  ->middleware('role:superuser,userowner')
+  ->middleware('company');
 
 // Offers
 
-Route::get('offer', 'OfferController@index')->name('offer.index');
+Route::get('reisipakkumised', 'OfferController@index')->name('offer.index');
+
+Route::get('reisipakkumised/{id}', 'OfferController@show')->name('offer.show');
 
 Route::get('offer/json', 'OfferController@indexJson')->name('offer.index.json');
-
-Route::get('offer/{id}', 'OfferController@show')->name('offer.show');
 
 // Offers admin
 
 Route::get('offer/admin/create/{style}', 'OfferAdminController@create')
-    ->name('offer.admin.create')
-    ->middleware('company')
-    ->where('style', '(' . collect(config('offer.styles'))->implode('|') . ')');
+  ->name('offer.admin.create')
+  ->middleware('company')
+  ->where('style', '(' . collect(config('offer.styles'))->implode('|') . ')');
 
 Route::post('offer/admin/store', 'OfferAdminController@store')
-    ->name('offer.admin.store')
-    ->middleware('company');
+  ->name('offer.admin.store')
+  ->middleware('company');
 
 Route::get('offer/{id}/edit', 'OfferAdminController@edit')
-    ->name('offer.admin.edit')
-    ->middleware('company');
+  ->name('offer.admin.edit')
+  ->middleware('company');
 
 Route::put('offer/{id}/update', 'OfferAdminController@update')
-    ->name('offer.admin.update')
-    ->middleware('company');
+  ->name('offer.admin.update')
+  ->middleware('company');
 
 // Bookings
 
 Route::post('booking/{id}', 'BookingController@create')
-    // @LAUNCH remove this control
-    ->middleware('role:superuser')
-    ->name('booking.create');
+  // @LAUNCH remove this control
+  ->middleware('role:superuser')
+  ->name('booking.create');
 
 Route::get('booking/{id}/goto', 'BookingController@goto')->name('booking.goto');
 
@@ -599,15 +599,15 @@ Route::get('content/category/{part1}/{part2}/{part3?}/{part4?}', 'RedirectContro
 Route::get('content/{blurb}/category/{part1}/{part2}/{part3?}/{part4?}', 'RedirectController@redirectCategoryBlurb');
 
 Route::get(
-    'sein/term/{id}/{a?}/{b?}/{c?}/{d?}/{e?}/{f?}/{g?}/{h?}/{i?}/{j?}/{k?}/{l?}/{m?}/{n?}',
-    'RedirectController@redirectTaxonomy'
+  'sein/term/{id}/{a?}/{b?}/{c?}/{d?}/{e?}/{f?}/{g?}/{h?}/{i?}/{j?}/{k?}/{l?}/{m?}/{n?}',
+  'RedirectController@redirectTaxonomy'
 );
 
 // Legacy content paths
 
 Route::get(
-    'node/{id}/{a?}/{b?}/{c?}/{d?}/{e?}/{f?}/{g?}/{h?}/{i?}/{j?}/{k?}/{l?}/{m?}/{n?}',
-    'RedirectController@redirectNode'
+  'node/{id}/{a?}/{b?}/{c?}/{d?}/{e?}/{f?}/{g?}/{h?}/{i?}/{j?}/{k?}/{l?}/{m?}/{n?}',
+  'RedirectController@redirectNode'
 );
 
 Route::get('node/view/{id}', 'RedirectController@redirectNode');
