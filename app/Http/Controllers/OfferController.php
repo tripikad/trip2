@@ -105,7 +105,7 @@ class OfferController extends Controller
       ->with('head_image', request()->root() . '/photos/offer_social.png')
       ->with('head_image_width', 1200)
       ->with('head_image_height', 670)
-      ->withTitle($offer->title)
+      ->withTitle($offer->title . ' ' . $offer->price_formatted)
       ->withItems(
         collect()
           ->pushWhen(
