@@ -4,11 +4,6 @@ import axios from 'axios'
 
 // Require CSS files
 
-
-
-
-
-
 require.context('./styles', true, /\.css$/)
 require.context('./components', true, /\.css$/)
 require.context('./layouts', true, /\.css$/)
