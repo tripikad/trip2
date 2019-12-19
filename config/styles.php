@@ -45,13 +45,8 @@ return [
   'facebook' => '#3b5998',
   'twitter' => '#00aced',
   'google' => '#dd4b39',
-<<<<<<< HEAD
   'font-family' => 'Sailec',
   'font-family-code' => 'Cousine',
-=======
-  'font-family' => '"Sailec"',
-  'font-family-code' => '"Cousine"',
->>>>>>> origin/offer-social
   'font-size-xs' => '13px',
   'font-size-sm' => '14px',
   'font-size-md' => '16px',
@@ -65,7 +60,6 @@ return [
   'font-weight-bold' => 'bold',
   'line-height-xs' => '100%',
   'line-height-sm' => '120%',
-<<<<<<< HEAD
   'line-height-md' => '135%',
   'line-height-lg' => '145%',
   'line-height-xl' => '200%',
@@ -83,25 +77,6 @@ return [
   'font-heading-xxxl' => 'bold 64px / 100% Sailec, sans-serif',
   'font-code-sm' => 'normal 14px / 135% Cousine, monospace',
   'font-code-md' => 'normal 16px /  135% Cousine, monospace',
-=======
-  'line-height-md' => '130%',
-  'line-height-lg' => '170%',
-  'line-height-xl' => '200%',
-  'line-height-xxl' => '220%',
-  'font-text-xs' => 'normal 13px / 170% "Sailec", sans-serif',
-  'font-text-sm' => 'normal 14px / 170% "Sailec", sans-serif',
-  'font-text-md' => 'normal 16px / 170% "Sailec", sans-serif',
-  'font-text-lg' => 'normal 19px / 170% "Sailec", sans-serif',
-  'font-heading-xs' => '600 14px / 170% "Sailec", sans-serif',
-  'font-heading-sm' => '600 16px / 170% "Sailec", sans-serif',
-  'font-heading-md' => '600 19px / 170% "Sailec", sans-serif',
-  'font-heading-lg' => '600 21px / 130% "Sailec", sans-serif',
-  'font-heading-xl' => 'bold 30px / 120% "Sailec", sans-serif',
-  'font-heading-xxl' => 'bold 48px / 100% "Sailec", sans-serif',
-  'font-heading-xxxl' => 'bold 64px / 100% "Sailec", sans-serif',
-  'font-code-sm' => 'normal 14px / 130% "Cousine", monospace',
-  'font-code-md' => 'normal 16px / 130% "Cousine", monospace',
->>>>>>> origin/offer-social
   'padding-xxxs' => 'calc(12px / 4)',
   'padding-xxs' => 'calc(12px / 3)',
   'padding-xs' => 'calc(12px / 2)',
@@ -116,19 +91,11 @@ return [
   'padding-top-md' => 'calc(12px * 2) 0 0 0',
   'padding-top-lg' => 'calc(12px * 3) 0 0 0',
   'padding-top-xl' => 'calc(12px * 5) 0 0 0',
-<<<<<<< HEAD
   'padding-right-xs' => 'calc(12px / 2) 0 0',
   'padding-right-sm' => '12px 0 0',
   'padding-right-md' => 'calc(12px * 2) 0 0',
   'padding-right-lg' => 'calc(12px * 3) 0 0',
   'padding-right-xl' => 'calc(12px * 5) 0 0',
-=======
-  'padding-right-xs' => '0 calc(12px / 2) 0 0',
-  'padding-right-sm' => '0 12px 0 0',
-  'padding-right-md' => '0 calc(12px * 2) 0 0',
-  'padding-right-lg' => '0 calc(12px * 3) 0 0',
-  'padding-right-xl' => '0 calc(12px * 5) 0 0',
->>>>>>> origin/offer-social
   'padding-bottom-xs' => '0 0 calc(12px / 2) 0',
   'padding-bottom-sm' => '0 0 12px 0',
   'padding-bottom-md' => '0 0 calc(12px * 2) 0',
@@ -163,19 +130,11 @@ return [
   'margin-top-md' => 'calc(12px * 2) 0 0 0',
   'margin-top-lg' => 'calc(12px * 3) 0 0 0',
   'margin-top-xl' => 'calc(12px * 5) 0 0 0',
-<<<<<<< HEAD
   'margin-right-xs' => 'calc(12px / 2) 0 0',
   'margin-right-sm' => '12px 0 0',
   'margin-right-md' => 'calc(12px * 2) 0 0',
   'margin-right-lg' => 'calc(12px * 3) 0 0',
   'margin-right-xl' => 'calc(12px * 5) 0 0',
-=======
-  'margin-right-xs' => '0 calc(12px / 2) 0 0',
-  'margin-right-sm' => '0 12px 0 0',
-  'margin-right-md' => '0 calc(12px * 2) 0 0',
-  'margin-right-lg' => '0 calc(12px * 3) 0 0',
-  'margin-right-xl' => '0 calc(12px * 5) 0 0',
->>>>>>> origin/offer-social
   'margin-bottom-xs' => '0 0 calc(12px / 2) 0',
   'margin-bottom-sm' => '0 0 12px 0',
   'margin-bottom-md' => '0 0 calc(12px * 2) 0',
@@ -215,17 +174,10 @@ return [
   'height-xxxl' => 'calc(12px * 24)',
   'height-xxxxl' => 'calc(12px * 32)',
   'border-gray-sm' => '1px solid hsl(204, 6%, 83%)',
-<<<<<<< HEAD
   'border-gray-md' => '2px solid  hsl(204, 6%, 83%)',
   'border-gray-lg' => '4px solid hsl(204, 6%, 83%)',
   'border-green-md' => '2px solid  hsl(105, 52%, 58%)',
   'border-white-md' => '2px solid  hsl(0, 0%, 100%)',
-=======
-  'border-gray-md' => '2px solid hsl(204, 6%, 83%)',
-  'border-gray-lg' => '4px solid hsl(204, 6%, 83%)',
-  'border-green-md' => '2px solid hsl(105, 52%, 58%)',
-  'border-white-md' => '2px solid hsl(0, 0%, 100%)',
->>>>>>> origin/offer-social
   'border-dotted-gray-md' => '2px dotted hsl(204, 6%, 83%)',
   'border-radius-md' => '3px',
   'border-radius-lg' => '12px',
@@ -242,11 +194,7 @@ return [
   'mobile' => 'media (max-width: 22em)',
   'tablet' => 'media (max-width: 48em)',
   'desktop' => 'media (max-width: 62em)',
-<<<<<<< HEAD
   'largedesktop' => 'media (max-width:74em)',
-=======
-  'largedesktop' => 'media (max-width: 74em)',
->>>>>>> origin/offer-social
   'ie' => 'media (-ms-high-contrast: none), (-ms-high-contrast: active)',
   'opacity-xxs' => '0.05',
   'opacity-xs' => '0.1',
