@@ -528,11 +528,11 @@ Route::put('company/{id}/update', 'CompanyController@update')
 
 // Offers
 
-Route::get('offer', 'OfferController@index')->name('offer.index');
+Route::get('reisipakkumised', 'OfferController@index')->name('offer.index');
+
+Route::get('reisipakkumised/{id}', 'OfferController@show')->name('offer.show');
 
 Route::get('offer/json', 'OfferController@indexJson')->name('offer.index.json');
-
-Route::get('offer/{id}', 'OfferController@show')->name('offer.show');
 
 // Offers admin
 

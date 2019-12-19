@@ -139,7 +139,7 @@ class OffersAdminTest extends DuskTestCase
         // $this->browse(function (Browser $browser) use ($offer) {
         //     $browser
         //         ->loginAs($this->company_three)
-        //         ->visit("/offer/$offer->id")
+        //         ->visit("/reisipakkumised/$offer->id")
         //         ->assertSee('Montaña super-alta para gringo')
         //         ->assertSee('See reisipakkumine pole avalikustatud');
         // });
@@ -149,7 +149,7 @@ class OffersAdminTest extends DuskTestCase
         $this->browse(function (Browser $browser) use ($offer) {
             $browser
                 ->loginAs($this->super_user)
-                ->visit("/offer/$offer->id")
+                ->visit("/reisipakkumised/$offer->id")
                 ->assertSee('Montaña super-alta para gringo')
                 ->assertSee('See reisipakkumine pole avalikustatud');
         });
@@ -159,7 +159,7 @@ class OffersAdminTest extends DuskTestCase
         $this->browse(function (Browser $browser) use ($offer) {
             $browser
                 ->loginAs($this->other_company)
-                ->visit("/offer/$offer->id")
+                ->visit("/reisipakkumised/$offer->id")
                 ->assertSee('Õigused puuduvad')
                 ->assertDontSee('Montaña super-alta para gringo');
         });
@@ -171,7 +171,7 @@ class OffersAdminTest extends DuskTestCase
         $this->browse(function (Browser $browser) use ($offer) {
             $browser
                 ->loginAs($this->regular_user)
-                ->visit("/offer/$offer->id")
+                ->visit("/reisipakkumised/$offer->id")
                 ->assertSee('Õigused puuduvad')
                 ->assertDontSee('Montaña super-alta para gringo');
         });
@@ -181,7 +181,7 @@ class OffersAdminTest extends DuskTestCase
         $this->browse(function (Browser $browser) use ($offer) {
             $browser
                 ->loginAs($this->admin_user)
-                ->visit("/offer/$offer->id")
+                ->visit("/reisipakkumised/$offer->id")
                 ->assertSee('Õigused puuduvad')
                 ->assertDontSee('Montaña super-alta para gringo');
         });
@@ -190,7 +190,7 @@ class OffersAdminTest extends DuskTestCase
             $browser
                 ->logout()
                 ->visit('/')
-                ->visit("/offer/$offer->id")
+                ->visit("/reisipakkumised/$offer->id")
                 ->assertSee('Pead esmalt sisse logima')
                 ->assertDontSee('Montaña super-alta para gringo');
         });
