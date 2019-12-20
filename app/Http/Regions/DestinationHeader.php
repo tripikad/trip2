@@ -35,15 +35,12 @@ class DestinationHeader
         collect()
           ->push(region('DestinationHeaderParents', $parents))
           ->push(
-            component('Flex')
-              ->with('align', 'flex-start')
-              ->with('justify', 'space-between')
-              ->with(
-                'items',
-                collect()
-                  ->push(region('DestinationHeaderAbout', $destination, $user))
-                  ->push(region('DestinationMap', $destination))
-              )
+            component('FlexGrid')->with(
+              'items',
+              collect()
+                ->push(region('DestinationHeaderAbout', $destination, $user))
+                ->push(region('DestinationMap', $destination))
+            )
           )
           ->pushWhen(
             $destination->description,
