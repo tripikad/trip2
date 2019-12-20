@@ -3,12 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Content;
+use App\Destination;
 
 class ExperimentsController extends Controller
 {
-  public function index()
+  public function index($id = null)
   {
-    $photos = Content::getLatestPagedItems('photo', 5 * 20);
+    $destination = $id ? Destination::findOrFail($id) : null;
+
+    $photos = Content::getLatestPagedItems('photo', 5 * 20, $id);
     $loggedUser = request()->user();
 
     return layout('Full')
@@ -30,7 +33,7 @@ class ExperimentsController extends Controller
                   ->push(
                     component('Title')
                       ->is('large')
-                      ->withTitle(trans('content.photo.index.title'))
+                      ->withTitle(trans('content.photo.index.title') . ($destination ? ": $destination->name" : ''))
                   )
                   ->pushWhen(
                     $loggedUser && $loggedUser->hasRole('regular'),

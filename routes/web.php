@@ -365,7 +365,7 @@ Route::get('styleguide/components', 'Styleguide\ComponentsController@index')->na
 
 // Experiments
 
-Route::get('experiments', 'ExperimentsController@index')->name('experiments.index');
+Route::get('experiments/{id?}', 'ExperimentsController@index')->name('experiments.index');
 
 // Registration
 
