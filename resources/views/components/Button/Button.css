@@ -59,6 +59,22 @@
   background: $blue-hover;
 }
 
+.Button--pink {
+  background: $pink;
+}
+
+.Button--pink .Button__title {
+  color: $red;
+}
+
+.Button--pink:hover {
+  background: $pink;
+}
+
+.Button--pink:hover .Button__title {
+  color: $red-dark;
+}
+
 .Button--facebook {
   background: $facebook;
 }

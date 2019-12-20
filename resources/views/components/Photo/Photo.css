@@ -1,3 +1,10 @@
 .Photo__image {
   display: block;
 }
+.Photo--dimmed {
+  opacity: $opacity-xs;
+}
+.Photo--dimmed:hover {
+  opacity: $opacity-lg;
+  transition: $transition-md;
+}

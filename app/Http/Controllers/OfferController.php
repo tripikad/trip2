@@ -193,7 +193,7 @@ class OfferController extends Controller
                   ->spacer(3)
               )
           )
-          ->push(region('PhotoSection', $photos))
+          ->push(region('OfferPhotoSection', $photos))
           ->pushWhen(
             $hasContent,
             component('Section')

@@ -17,11 +17,40 @@ class PhotoSection
           ->withScroll(true)
           ->withResponsive(false)
           ->withItems(
-            $photos->map(function ($image) {
+            $photos->map(function ($photo) {
               return component('Photo')
                 ->vue()
-                ->withImage($image->imagePreset('small_square'))
-                ->withLargeImage($image->imagePreset('large'));
+                ->is($photo->status ? '' : 'dimmed')
+                ->withImage($photo->imagePreset('small_square'))
+                ->withLargeImage($photo->imagePreset('large'))
+                ->withMeta(
+                  component('Flex')
+                    ->withAlign('center')
+                    ->withItems(
+                      collect()
+                        ->push(
+                          component('Title')
+                            ->is('smallest')
+                            ->is('blue')
+                            ->withTitle($photo->user->name)
+                            ->withRoute(route('user.show', [$photo->user]))
+                            ->withExternal(true)
+                        )
+                        ->push(
+                          component('Title')
+                            ->is('smallest')
+                            ->is('white')
+                            ->withTitle($photo->title)
+                        )
+                        ->push(
+                          component('PublishButton')
+                            ->withPublished($photo->status)
+                            ->withPublishRoute(route('content.status', [$photo->type, $photo, 1]))
+                            ->withUnpublishRoute(route('content.status', [$photo->type, $photo, 0]))
+                        )
+                    )
+                    ->render()
+                );
             })
           )
       );
