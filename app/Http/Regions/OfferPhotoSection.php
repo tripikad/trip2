@@ -18,7 +18,7 @@ class OfferPhotoSection
           ->withResponsive(false)
           ->withItems(
             $photos->map(function ($photo) {
-              return component('Photo')->withImage($photo->imagePreset('small_square'));
+              return component('Photo')->withPhoto($photo->imagePreset('small_square'));
             })
           )
       );

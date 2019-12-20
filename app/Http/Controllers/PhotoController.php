@@ -34,6 +34,7 @@ class PhotoController extends Controller
               ->withAlign('center')
               ->withItems(
                 collect()
+                  ->spacer(2)
                   ->push(
                     component('Title')
                       ->is('large')
@@ -138,6 +139,7 @@ class PhotoController extends Controller
               ->withAlign('center')
               ->withItems(
                 collect()
+                  ->spacer(2)
                   ->push(
                     component('Title')
                       ->is('large')
@@ -248,26 +250,7 @@ class PhotoController extends Controller
         )
       )
 
-      ->with(
-        'top',
-        collect()->push(
-          component('PhotoResponsive')->with(
-            'content',
-            component('PhotoCard')
-              ->with('small', $photo->imagePreset('large'))
-              ->with('large', $photo->imagePreset('large'))
-              ->with(
-                'meta',
-                trans('content.photo.meta', [
-                  'title' => $photo->vars()->title,
-                  'username' => $photo->user->vars()->name,
-                  'created_at' => $photo->vars()->created_at
-                ])
-              )
-              ->with('auto_show', true)
-          )
-        )
-      )
+      ->with('top', collect()->push(component('Photo')->withPhoto($photo->imagePreset('large'))))
 
       ->with('footer', region('FooterLight'))
 
