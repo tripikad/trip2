@@ -17,7 +17,7 @@
 }
 
 .Flex--responsive {
-  flex-direction: column ?if $mobile;
+  flex-direction: column ?if $tablet;
 }
 
 .Flex--responsive > * {
