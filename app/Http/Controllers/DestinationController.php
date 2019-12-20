@@ -133,33 +133,6 @@ class DestinationController extends Controller
       ->with('header', region('DestinationHeader', $destination, $loggedUser))
 
       ->with('top', collect()->pushWhen($photos->count(), region('PhotoSection', $photos, $loggedUser)))
-      // ->with(
-      //   'top',
-      //   region(
-      //     'PhotoRow',
-      //     $photos->count() ? $photos : collect(),
-      //     collect()
-      //       ->pushWhen(
-      //         $photos->count(),
-      //         component('Button')
-      //           ->is('transparent')
-      //           ->with('title', trans('content.photo.more'))
-      //           ->with(
-      //             'route',
-      //             route('photo.index', [
-      //               'destination' => $destination->id
-      //             ])
-      //           )
-      //       )
-      //       ->pushWhen(
-      //         $loggedUser && $loggedUser->hasRole('regular'),
-      //         component('Button')
-      //           ->is('transparent')
-      //           ->with('title', trans('content.photo.create.title'))
-      //           ->with('route', route('photo.create'))
-      //       )
-      //   )
-      // )
 
       ->with(
         'content',

@@ -53,30 +53,7 @@ class UserController extends Controller
 
       ->with('header', region('UserHeader', $user))
 
-      ->with(
-        'top',
-        $photos->count() || ($loggedUser && $user->id == $loggedUser->id)
-          ? region(
-            'PhotoRow',
-            $photos->count() ? $photos : collect(),
-            collect()
-              ->pushWhen(
-                $photos->count(),
-                component('Button')
-                  ->is('transparent')
-                  ->with('title', trans('content.photo.more'))
-                  ->with('route', route('photo.user', [$user]))
-              )
-              ->pushWhen(
-                $loggedUser && $user->id == $loggedUser->id,
-                component('Button')
-                  ->is($photos->count() ? 'transparent' : 'cyan')
-                  ->with('title', trans('content.photo.create.title'))
-                  ->with('route', route('photo.create'))
-              )
-          )
-          : ''
-      )
+      ->with('top', collect()->pushWhen($photos->count(), region('PhotoSection', $photos, $loggedUser)))
 
       ->with(
         'content',

@@ -15,12 +15,7 @@ class DestinationPhotoSectionHeader
             component('BlockTitle')
               ->is('white')
               ->with('title', trans('frontpage.index.photo.title'))
-              ->with(
-                'route',
-                route('photo.index', [
-                  'destination' => $destination->id
-                ])
-              )
+              ->with('route', route('photo.index', [$destination->id]))
           )
           ->pushWhen(
             $loggedUser && $loggedUser->hasRole('regular'),

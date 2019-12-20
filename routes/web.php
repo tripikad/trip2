@@ -219,7 +219,7 @@ Route::post('internal/{id}/update', 'InternalController@update')
 
 // Photo
 
-Route::get('reisipildid', 'PhotoController@index')->name('photo.index');
+Route::get('reisipildid/{id?}', 'PhotoController@index')->name('photo.index');
 
 Route::get('photo/id/{id}', 'PhotoController@show')->name('photo.show');
 
