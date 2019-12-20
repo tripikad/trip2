@@ -5,7 +5,7 @@
   position: fixed;
   right: 0;
   top: 0;
-  z-index: 7;
+  z-index: 100000;
 }
 
 .PhotoFullscreen__photo {

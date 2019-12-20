@@ -7,6 +7,7 @@ class PhotoSection
   public function render($photos)
   {
     return component('Section')
+      ->withHeight(15)
       ->withBackground('gray-darker')
       ->withMargin(0)
       ->withWidth('100%')
@@ -17,7 +18,10 @@ class PhotoSection
           ->withResponsive(false)
           ->withItems(
             $photos->map(function ($image) {
-              return component('Image')->withImage($image->imagePreset('small_square'));
+              return component('Photo')
+                ->vue()
+                ->withImage($image->imagePreset('small_square'))
+                ->withLargeImage($image->imagePreset('large'));
             })
           )
       );

@@ -140,6 +140,8 @@ class Component
     $vueName = resource_path("views/components/$this->component/$this->component.vue");
     $suffixedVueName = resource_path('views/components/' . $this->component . '/' . $this->component . 'Vue.vue');
 
+    // @TODO2 Simplify this logic
+
     if ($this->vue && is_file($suffixedVueName)) {
       return $this->renderVue($this->component . 'Vue');
     }
