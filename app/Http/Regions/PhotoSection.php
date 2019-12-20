@@ -4,7 +4,7 @@ namespace App\Http\Regions;
 
 class PhotoSection
 {
-  public function render($photos)
+  public function render($photos, $loggedUser)
   {
     return component('Section')
       ->withHeight(15)
@@ -17,7 +17,7 @@ class PhotoSection
           ->withScroll(true)
           ->withResponsive(false)
           ->withItems(
-            $photos->map(function ($photo) {
+            $photos->map(function ($photo) use ($loggedUser) {
               return component('Photo')
                 ->vue()
                 ->is($photo->status ? '' : 'dimmed')
@@ -25,7 +25,7 @@ class PhotoSection
                 ->withLargeImage($photo->imagePreset('large'))
                 ->withMeta(
                   component('Flex')
-                    ->withAlign('center')
+                    ->withJustify('center')
                     ->withItems(
                       collect()
                         ->push(
@@ -42,7 +42,8 @@ class PhotoSection
                             ->is('white')
                             ->withTitle($photo->title)
                         )
-                        ->push(
+                        ->pushWhen(
+                          $loggedUser && $loggedUser->hasRole('admin'),
                           component('PublishButton')
                             ->withPublished($photo->status)
                             ->withPublishRoute(route('content.status', [$photo->type, $photo, 1]))
