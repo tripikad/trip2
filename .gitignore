@@ -16,3 +16,4 @@ public/dist
 public/manifest.json
 
 storage/clockwork/index
+storage/debugbar/*

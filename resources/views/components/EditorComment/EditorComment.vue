@@ -24,7 +24,7 @@
 import pell from 'pell'
 import TurndownService from 'turndown'
 
-let turndownService = new TurndownService({ headingStyle: 'atx' })
+const turndownService = new TurndownService({ headingStyle: 'atx' })
 
 export default {
   props: {

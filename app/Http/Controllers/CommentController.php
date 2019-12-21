@@ -89,7 +89,7 @@ class CommentController extends Controller
                   component('EditorComment')
                     ->with('title', trans('comment.edit.body.title'))
                     ->with('name', 'body')
-                    ->with('value', old('body', $comment->body))
+                    ->with('value', old('body', $comment->vars()->body))
                 )
                 ->push(component('FormButton')->with('title', trans('comment.edit.submit.title')))
             )
