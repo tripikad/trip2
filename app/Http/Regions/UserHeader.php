@@ -293,6 +293,8 @@ class UserHeader
               ->with('justify', 'center')
               ->with('items', $this->prepareActionsForUser($user, $loggedUser))
           )
+          ->spacer()
+          ->push(region('UserPhotoSectionHeader', $user))
       );
   }
 }

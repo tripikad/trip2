@@ -4,7 +4,7 @@ namespace App\Http\Regions;
 
 class DestinationHeader
 {
-  public function render($destination, $user)
+  public function render($destination, $loggedUser)
   {
     $parents = $destination->getAncestors();
     $childrens = $destination->getImmediateDescendants()->sortBy('name');
@@ -34,14 +34,23 @@ class DestinationHeader
         'content',
         collect()
           ->push(region('DestinationHeaderParents', $parents))
+          ->pushWhen(
+            $loggedUser && $loggedUser->hasRole('admin'),
+            component('Button')
+              ->is('small')
+              ->is('narrow')
+              ->with('title', trans('content.action.edit.title'))
+              ->with('route', route('destination.edit', [$destination]))
+          )
           ->push(
             component('FlexGrid')->with(
               'items',
               collect()
-                ->push(region('DestinationHeaderAbout', $destination, $user))
+                ->push(region('DestinationHeaderAbout', $destination, $loggedUser))
                 ->push(region('DestinationMap', $destination))
             )
           )
+
           ->pushWhen(
             $destination->description,
             component('Body')
@@ -50,13 +59,14 @@ class DestinationHeader
               ->is('narrow')
               ->with('body', format_body($destination->description))
           )
+
           ->pushWhen($destination->user, region('UserRow', $destination->user))
           ->spacer()
           ->pushWhen($childrens->count(), region('DestinationChildrenTitle', $destination, $childrens))
           ->pushWhen(
             $childrens->count(),
             component('Flex')
-              ->is('wrap')
+              ->withWrap(true)
               ->with('gap', 0.5)
               ->is('large')
               ->with(
@@ -72,14 +82,8 @@ class DestinationHeader
           )
           ->spacer()
           ->push(region('DestinationStat', $destination))
-          ->pushWhen(
-            $user && $user->hasRole('admin'),
-            component('Button')
-              ->is('small')
-              ->is('narrow')
-              ->with('title', trans('content.action.edit.title'))
-              ->with('route', route('destination.edit', [$destination]))
-          )
+          ->spacer()
+          ->push(region('DestinationPhotoSectionHeader', $loggedUser, $destination))
       );
   }
 }

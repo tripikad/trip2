@@ -18,7 +18,7 @@ class FrontpageController extends Controller
     $news = Content::getLatestItems('news', 6, 'id');
     $shortNews = Content::getLatestItems('shortnews', 4, 'id');
     $blogs = Content::getLatestItems('blog', 3, 'id');
-    $photos = Content::getLatestItems('photo', 9, 'id');
+    $photos = Content::getLatestItems('photo', 12, 'id');
     $travelmates = Content::getLatestItems('travelmate', 5, 'id');
 
     $destinations = Cache::remember('destinations_with_slug', 30, function () {
@@ -133,27 +133,10 @@ class FrontpageController extends Controller
         'shortNews',
         collect()
           ->merge(region('FrontpageShortnews', $shortNews))
-          ->push(
-            component('BlockTitle')
-              ->with('title', trans('frontpage.index.photo.title'))
-              ->with('route', route('photo.index'))
-          )
+          ->push(region('FrontpagePhotoSectionHeader', $loggedUser))
       )
 
-      ->with(
-        'bottom2',
-        region(
-          'PhotoRow',
-          $photos,
-          collect()->pushWhen(
-            $loggedUser && $loggedUser->hasRole('regular'),
-            component('Button')
-              ->is('transparent')
-              ->with('title', trans('content.photo.create.title'))
-              ->with('route', route('photo.create'))
-          )
-        )
-      )
+      ->with('bottom2', region('PhotoSection', $photos, $loggedUser)->render())
 
       ->with(
         'bottom3',

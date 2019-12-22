@@ -219,7 +219,7 @@ Route::post('internal/{id}/update', 'InternalController@update')
 
 // Photo
 
-Route::get('reisipildid', 'PhotoController@index')->name('photo.index');
+Route::get('reisipildid/{id?}', 'PhotoController@index')->name('photo.index');
 
 Route::get('photo/id/{id}', 'PhotoController@show')->name('photo.show');
 
@@ -365,7 +365,7 @@ Route::get('styleguide/components', 'Styleguide\ComponentsController@index')->na
 
 // Experiments
 
-Route::get('experiments', 'ExperimentsController@index')->name('experiments.index');
+Route::get('experiments/{id?}', 'ExperimentsController@index')->name('experiments.index');
 
 // Registration
 
