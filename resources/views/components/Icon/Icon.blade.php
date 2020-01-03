@@ -2,7 +2,7 @@
 
 $icon = $icon ?? '';
 $size = $size ?? 'md';
-$size_map = ['sm' => 14, 'md' => 18, 'lg' => 26, 'xl' => 36 ];
+$size_map = ['sm' => 14, 'md' => 18, 'lg' => 26, 'xl' => 36, 'xxl' => 48 ];
 
 @endphp
 
