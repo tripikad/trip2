@@ -12,7 +12,7 @@ class CompanyAdminTable
 {
   private function getMonthlyStat($user_id)
   {
-    return Collection::times(3, function ($item, $month) use ($user_id) {
+    return Collection::times(5, function ($item, $month) use ($user_id) {
       $table = (new Offer())->getTable();
 
       return Offer::select(
@@ -46,12 +46,13 @@ class CompanyAdminTable
           $counts->count() ? $counts[0] : 0
         ];
       })
+      ->reverse()
       ->fromPairs();
   }
 
   public function render($companies)
   {
-    dd($this->getMonthlyStat(12));
+    //dd($this->getMonthlyStat(12));
 
     return component('Table')
       ->is('white')
@@ -59,10 +60,10 @@ class CompanyAdminTable
         $companies->map(function ($company) {
           return collect()
             ->put('Name', $company->name)
+            ->merge($this->getMonthlyStat($company->id))
             ->put(
               'Action',
               component('Button')
-                ->is('orange')
                 ->is('small')
                 ->is('narrow')
                 ->with('title', trans('company.index.edit'))
