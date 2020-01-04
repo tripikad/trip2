@@ -193,6 +193,7 @@ class ForumController extends Controller
     if (!$forum) {
       abort(404);
     }
+
     $forum->vars()->add_view;
 
     $comments = Comment::where('content_id', $forum->id)
