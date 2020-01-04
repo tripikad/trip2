@@ -50,7 +50,7 @@ class Content extends Model
 
   public function views()
   {
-      return $this->hasOne('App\Viewable', 'viewable_id', 'id');
+    return $this->hasOne('App\Viewable', 'viewable_id', 'id');
 
     /*return $this->morphMany('App\Activity', 'activity')
       ->selectRaw('activity_id, count(*) as count')

@@ -67,32 +67,32 @@ class ContentVars
     return count($this->content->comments);
   }
 
-    public function add_view()
-    {
-        $user = auth()->user();
-        $activity_id = (int) $this->content->id;
-        $activity_type = DB::getPdo()->quote('App\Content');
-        $ip = request()->ip();
-        $table_name = with(new Viewable())->getTable();
-        $value = 1;
+  public function add_view()
+  {
+    $user = auth()->user();
+    $activity_id = (int) $this->content->id;
+    $activity_type = DB::getPdo()->quote('App\Content');
+    $ip = request()->ip();
+    $table_name = with(new Viewable())->getTable();
+    $value = 1;
 
-        if (!$ip && !$user) {
-            return false;
-        }
+    if (!$ip && !$user) {
+      return false;
+    }
 
-        $cache_key = 'content_' . $activity_id . '_' . ($user ? $user->id : $ip);
+    $cache_key = 'content_' . $activity_id . '_' . ($user ? $user->id : $ip);
 
-        if (! Cache::get($cache_key)) {
-            DB::select(
-                "INSERT INTO `$table_name` (`viewable_id`, `viewable_type`, `count`) 
+    if (!Cache::get($cache_key)) {
+      DB::select(
+        "INSERT INTO `$table_name` (`viewable_id`, `viewable_type`, `count`) 
                 VALUES ($activity_id, $activity_type, $value) 
                 ON DUPLICATE KEY UPDATE 
                 `count`=`count` + 1"
-            );
+      );
 
-            Cache::put($cache_key, 1, config('cache.viewable.content'));
-        }
+      Cache::put($cache_key, 1, config('cache.viewable.content'));
     }
+  }
 
   /*public function add_view_OLD()
   {
