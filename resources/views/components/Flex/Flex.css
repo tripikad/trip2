@@ -12,12 +12,20 @@
   margin-right: 0;
 }
 
-.Flex__wrap {
+.Flex--wrap {
   flex-wrap: wrap;
 }
 
 .Flex--responsive {
-  flex-direction: column ?if $mobile;
+  flex-direction: column ?if $tablet;
+}
+
+.Flex--wrap.Flex--responsive {
+  flex-direction: row ?if $tablet;
+}
+
+.Flex.Flex--wrap > * {
+  margin-right: var(--gap) ?if $tablet;
 }
 
 .Flex--responsive > * {
