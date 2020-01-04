@@ -50,18 +50,20 @@ class Content extends Model
 
   public function views()
   {
-    return $this->morphMany('App\Activity', 'activity')
+      return $this->hasOne('App\Viewable', 'viewable_id', 'id');
+
+    /*return $this->morphMany('App\Activity', 'activity')
       ->selectRaw('activity_id, count(*) as count')
       ->where('type', 'view')
-      ->groupBy('activity_id');
+      ->groupBy('activity_id');*/
   }
 
   public function getViewsCountAttribute()
   {
-    if (!$this->views->count()) {
+    if (!$this->views) {
       return 0;
     } else {
-      return $this->views->first()->count;
+      return $this->views->count;
     }
   }
 
