@@ -11,44 +11,102 @@ use App\Destination;
 
 class PhotoController extends Controller
 {
-  public function index()
+  public function index($destinationId = null)
   {
+    $destination = $destinationId ? Destination::findOrFail($destinationId) : null;
+
+    $photos = Content::getLatestPagedItems('photo', 5 * 20, $destinationId);
     $loggedUser = request()->user();
 
-    $destinationId = Request::get('destination');
-
-    $destinationTitle = $destinationId ? ': ' . Destination::findOrFail($destinationId)->name : '';
-
-    $photos = Content::getLatestPagedItems('photo', 89, $destinationId);
-
-    return layout('Two')
-      ->with(
-        'header',
-        region(
-          'StaticHeader',
-          collect()
-            ->push(
-              component('Title')
-                ->is('large')
-                ->with('title', trans('content.photo.index.title') . $destinationTitle)
+    return layout('Full')
+      ->withItems(
+        collect()
+          ->push(
+            component('Section')
+              ->withPadding(2)
+              ->withTag('header')
+              ->withItems(collect()->push(region('NavbarDark')))
+          )
+          ->push(
+            component('Section')
+              ->withPadding(2)
+              ->withGap(1)
+              ->withAlign('center')
+              ->withItems(
+                collect()
+                  ->spacer(2)
+                  ->push(
+                    component('Title')
+                      ->is('large')
+                      ->withTitle(trans('content.photo.index.title') . ($destination ? ": $destination->name" : ''))
+                  )
+                  ->pushWhen(
+                    $loggedUser && $loggedUser->hasRole('regular'),
+                    component('Button')
+                      ->is('narrow')
+                      ->with('title', trans('content.photo.create.title'))
+                      ->with('route', route('photo.create'))
+                  )
+                  ->spacer()
+              )
+          )
+          ->push(
+            component('Section')->withItems(
+              collect()->push(
+                component('Grid')
+                  ->withCols(5)
+                  ->withItems(
+                    $photos->map(function ($photo) use ($loggedUser) {
+                      return component('Photo')
+                        ->vue()
+                        ->withImage($photo->imagePreset('small_square'))
+                        ->withLargeImage($photo->imagePreset('large'))
+                        ->withMeta(
+                          component('Flex')
+                            ->withJustify('center')
+                            ->withItems(
+                              collect()
+                                ->push(
+                                  component('Title')
+                                    ->is('smallest')
+                                    ->is('blue')
+                                    ->withTitle($photo->user->name)
+                                    ->withRoute(route('user.show', [$photo->user]))
+                                    ->withExternal(true)
+                                )
+                                ->push(
+                                  component('Title')
+                                    ->is('smallest')
+                                    ->is('white')
+                                    ->withTitle($photo->title)
+                                )
+                                ->pushWhen(
+                                  $loggedUser && $loggedUser->hasRole('admin'),
+                                  component('PublishButton')
+                                    ->withPublished($photo->status)
+                                    ->withPublishRoute(route('content.status', [$photo->type, $photo, 1]))
+                                    ->withUnpublishRoute(route('content.status', [$photo->type, $photo, 0]))
+                                )
+                            )
+                            ->render()
+                        );
+                    })
+                  )
+              )
             )
-            ->pushWhen(
-              $loggedUser && $loggedUser->hasRole('regular'),
-              component('Button')
-                ->is('narrow')
-                ->with('title', trans('content.photo.create.title'))
-                ->with('route', route('photo.create'))
-            )
-            ->push(' ')
-        )
+          )
+          ->push(
+            component('Section')
+              ->withPadding(2)
+              ->withItems(region('Paginator', $photos))
+          )
+          ->push(
+            component('Section')
+              ->withPadding(2)
+              ->withTag('footer')
+              ->withItems(region('FooterLight'))
+          )
       )
-
-      ->with('top', collect()->push(region('PhotoRow', $photos)))
-
-      ->with('content', collect()->push(region('Paginator', $photos)))
-
-      ->with('footer', region('FooterLight'))
-
       ->render();
   }
 
@@ -57,7 +115,6 @@ class PhotoController extends Controller
     $loggedUser = request()->user();
 
     $user = User::findOrFail($id);
-    $userTitle = ': ' . $user->vars()->name;
 
     $photos = $user
       ->contents()
@@ -66,34 +123,95 @@ class PhotoController extends Controller
       ->latest()
       ->simplePaginate(89);
 
-    return layout('Two')
-      ->with(
-        'header',
-        region(
-          'StaticHeader',
-          collect()
-            ->push(
-              component('Title')
-                ->is('large')
-                ->with('title', trans('content.photo.index.title') . $userTitle)
+    return layout('Full')
+      ->withItems(
+        collect()
+          ->push(
+            component('Section')
+              ->withPadding(2)
+              ->withTag('header')
+              ->withItems(collect()->push(region('NavbarDark')))
+          )
+          ->push(
+            component('Section')
+              ->withPadding(2)
+              ->withGap(1)
+              ->withAlign('center')
+              ->withItems(
+                collect()
+                  ->spacer(2)
+                  ->push(
+                    component('Title')
+                      ->is('large')
+                      ->withTitle(trans('content.photo.index.title') . ": $user->name")
+                  )
+                  ->pushWhen(
+                    $loggedUser && $loggedUser->hasRole('regular'),
+                    component('Button')
+                      ->is('narrow')
+                      ->with('title', trans('content.photo.create.title'))
+                      ->with('route', route('photo.create'))
+                  )
+                  ->spacer()
+              )
+          )
+          ->push(
+            component('Section')->withItems(
+              collect()->push(
+                component('Grid')
+                  ->withCols(5)
+                  ->withItems(
+                    $photos->map(function ($photo) use ($loggedUser) {
+                      return component('Photo')
+                        ->vue()
+                        ->withImage($photo->imagePreset('small_square'))
+                        ->withLargeImage($photo->imagePreset('large'))
+                        ->withMeta(
+                          component('Flex')
+                            ->withJustify('center')
+                            ->withItems(
+                              collect()
+                                ->push(
+                                  component('Title')
+                                    ->is('smallest')
+                                    ->is('blue')
+                                    ->withTitle($photo->user->name)
+                                    ->withRoute(route('user.show', [$photo->user]))
+                                    ->withExternal(true)
+                                )
+                                ->push(
+                                  component('Title')
+                                    ->is('smallest')
+                                    ->is('white')
+                                    ->withTitle($photo->title)
+                                )
+                                ->pushWhen(
+                                  $loggedUser && $loggedUser->hasRole('admin'),
+                                  component('PublishButton')
+                                    ->withPublished($photo->status)
+                                    ->withPublishRoute(route('content.status', [$photo->type, $photo, 1]))
+                                    ->withUnpublishRoute(route('content.status', [$photo->type, $photo, 0]))
+                                )
+                            )
+                            ->render()
+                        );
+                    })
+                  )
+              )
             )
-            ->pushWhen(
-              $loggedUser && $loggedUser->hasRole('regular'),
-              component('Button')
-                ->is('narrow')
-                ->with('title', trans('content.photo.create.title'))
-                ->with('route', route('photo.create'))
-            )
-            ->push(' ')
-        )
+          )
+          ->push(
+            component('Section')
+              ->withPadding(2)
+              ->withItems(region('Paginator', $photos))
+          )
+          ->push(
+            component('Section')
+              ->withPadding(2)
+              ->withTag('footer')
+              ->withItems(region('FooterLight'))
+          )
       )
-
-      ->with('top', collect()->push(region('PhotoRow', $photos)))
-
-      ->with('content', collect()->push(region('Paginator', $photos)))
-
-      ->with('footer', region('FooterLight'))
-
       ->render();
   }
 
@@ -132,26 +250,7 @@ class PhotoController extends Controller
         )
       )
 
-      ->with(
-        'top',
-        collect()->push(
-          component('PhotoResponsive')->with(
-            'content',
-            component('PhotoCard')
-              ->with('small', $photo->imagePreset('large'))
-              ->with('large', $photo->imagePreset('large'))
-              ->with(
-                'meta',
-                trans('content.photo.meta', [
-                  'title' => $photo->vars()->title,
-                  'username' => $photo->user->vars()->name,
-                  'created_at' => $photo->vars()->created_at
-                ])
-              )
-              ->with('auto_show', true)
-          )
-        )
-      )
+      ->with('top', collect()->push(component('Photo')->withPhoto($photo->imagePreset('large'))))
 
       ->with('footer', region('FooterLight'))
 

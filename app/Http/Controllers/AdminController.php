@@ -124,11 +124,7 @@ class AdminController extends Controller
                 'content',
                 $chunk->map(function ($image) {
                   return collect()
-                    ->push(
-                      component('PhotoCard')
-                        ->with('small', $image->preset('xsmall_square'))
-                        ->with('large', $image->preset('large'))
-                    )
+                    ->push(component('Photo')->withPhoto($image->preset('small_square')))
                     ->push(
                       component('FormTextfield')
                         ->with('value', "[[$image->id]]")
