@@ -57,6 +57,14 @@ class OfferController extends Controller
           )
           ->push(
             component('Section')
+              ->withBackground('blue')
+              ->withAlign('center')
+              ->withPadding(2)
+              ->withItems(component('Promo')->with('promo', 'body'))
+          )
+          ->push(region('OfferCompanyPromo'))
+          ->push(
+            component('Section')
               ->withTag('footer')
               ->withBackground('blue')
               ->withItems(collect()->push(region('FooterLight', '')))
@@ -261,6 +269,13 @@ class OfferController extends Controller
                   ->withTitle(trans('offer.show.goto'))
                   ->withRoute(route('booking.goto', [$id]))
               )
+          )
+          ->push(
+            component('Section')
+              ->withBackground('blue')
+              ->withAlign('center')
+              ->withPadding(2)
+              ->withItems(component('Promo')->with('promo', 'body'))
           )
           ->push(
             component('Section')
