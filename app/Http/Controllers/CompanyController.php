@@ -106,15 +106,7 @@ class CompanyController extends Controller
                       ->with('route', route('company.create', ['redirect' => 'company.admin.index']))
                   )
                   ->spacer(2)
-                  ->push(
-                    component('Grid')
-                      ->withCols(4)
-                      ->withItems(
-                        $companies->map(function ($company) {
-                          return region('CompanyCard', $company);
-                        })
-                      )
-                  )
+                  ->push(region('CompanyAdminTable', $companies))
                   ->spacer(4)
                   ->push(
                     component('Title')
