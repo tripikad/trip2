@@ -3,11 +3,7 @@
 return [
   'index' => 'Reisipakkumised',
   'index.company.title' => 'Tahad siia oma reisifirma<br>pakkumisi lisada?',
-<<<<<<< HEAD
   'index.company.description' => 'Kirjuta **:email** ja me võtame sinuga ühendust.',
-=======
-  'index.company.description' => 'Kirjuta :email ja me võtame sinuga ühendust.',
->>>>>>> master
   'show.back' => 'Kõik reisipakkumised',
   'show.book' => 'Broneeri reis Tripis',
   'show.book.title' => 'Broneeri reis',
