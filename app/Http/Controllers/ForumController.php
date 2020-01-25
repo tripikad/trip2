@@ -262,6 +262,7 @@ class ForumController extends Controller
         'content',
         collect()
           ->push(region('ForumPost', $forum, 'forum.edit'))
+          ->push(component('CommentInset')->with('content', region('PaginatorExtended', $comments)))
           ->pushWhen(
             $comments->total() > 1,
             component('BlockHorizontal')
