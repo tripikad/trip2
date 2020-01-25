@@ -31,7 +31,7 @@ class Content extends Model
 
   protected $dates = ['created_at', 'updated_at', 'start_at', 'end_at'];
 
-  protected $appends = ['body_filtered', 'image_id', 'views_count', 'views_count_old'];
+  protected $appends = ['body_filtered', 'image_id', 'views_count'];
 
   // Relations
 
