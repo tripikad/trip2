@@ -5,7 +5,9 @@ namespace App\Console\Commands;
 use App\Content;
 use App\Viewable;
 use Illuminate\Console\Command;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
+use Symfony\Component\Console\Helper\ProgressBar;
 
 class ConvertViewables extends Command
 {
@@ -26,19 +28,39 @@ class ConvertViewables extends Command
     DB::disableQueryLog();
     $content_type = 'App\Content';
 
-    Content::whereIn('type', $this->forum_types)->chunk(200, function ($contents) use ($content_type) {
+      $count = Content::whereIn('type', $this->forum_types)->count();
+      $progressBar = new ProgressBar($this->output, $count);
+      $progressBar->start();
+
+    Content::whereIn('type', $this->forum_types)
+        ->orderBy('id', 'DESC')
+        ->chunk(100, function ($contents) use ($content_type, $progressBar) {
+
+        $data = new Collection();
       foreach ($contents as $content) {
-        $views_count = $content->views_count;
+        $views_count = $content->views_count_old;
+
         if ($views_count) {
-          Viewable::create([
+            $data->push([
+                'viewable_id' => $content->id,
+                'viewable_type' => $content_type,
+                'count' => $views_count
+            ]);
+
+          /*Viewable::create([
             'viewable_id' => $content->id,
             'viewable_type' => $content_type,
             'count' => $views_count
-          ]);
+          ]);*/
         }
       }
+
+        Viewable::insert($data->toArray());
+
+        $progressBar->advance(100);
     });
 
+      $progressBar->finish();
     $this->info("\nDONE!\n");
   }
 }

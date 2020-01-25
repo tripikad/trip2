@@ -31,7 +31,7 @@ class Content extends Model
 
   protected $dates = ['created_at', 'updated_at', 'start_at', 'end_at'];
 
-  protected $appends = ['body_filtered', 'image_id', 'views_count'];
+  protected $appends = ['body_filtered', 'image_id', 'views_count', 'views_count_old'];
 
   // Relations
 
@@ -51,11 +51,6 @@ class Content extends Model
   public function views()
   {
     return $this->hasOne('App\Viewable', 'viewable_id', 'id');
-
-    /*return $this->morphMany('App\Activity', 'activity')
-      ->selectRaw('activity_id, count(*) as count')
-      ->where('type', 'view')
-      ->groupBy('activity_id');*/
   }
 
   public function getViewsCountAttribute()
@@ -66,6 +61,24 @@ class Content extends Model
       return $this->views->count;
     }
   }
+
+    /*todo: remove after update*/
+    public function viewsOld()
+    {
+        return $this->morphMany('App\Activity', 'activity')
+          ->selectRaw('activity_id, count(*) as count')
+          ->where('type', 'view')
+          ->groupBy('activity_id');
+    }
+
+    public function getViewsCountOldAttribute()
+    {
+        if (!$this->viewsOld->count()) {
+            return 0;
+        } else {
+            return $this->viewsOld->first()->count;
+        }
+    }
 
   public function user()
   {
