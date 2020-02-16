@@ -1,27 +1,27 @@
 .background-gray {
-  background-color: $gray-lighter;
+    background-color: $gray-lighter;
 }
 
 .background-white {
-  background-color: $white;
+    background-color: $white;
 }
 
 .background-cyan {
-  background-color: $cyan-dark;
+    background-color: $cyan-dark;
 }
 
 .background-yellow {
-  background-color: $yellow;
+    background-color: $yellow;
 }
 
 .background-orange-dark {
-  background-color: $red-dark;
+    background-color: $red-dark;
 }
 
 .background-orange {
-  background-color: $orange;
+    background-color: $orange;
 }
 
 .background-blue {
-  background-color: $blue;
+    background-color: $blue;
 }

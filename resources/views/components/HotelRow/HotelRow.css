@@ -1,45 +1,45 @@
 .HotelRow {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font: $font-text-md;
-  width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font: $font-text-md;
+    width: 100%;
 }
 
 .HotelRow__nameAndDetails {
-  overflow: hidden;
+    overflow: hidden;
 }
 .HotelRow__details {
-  display: flex;
-  align-items: center;
+    display: flex;
+    align-items: center;
 }
 
 .HotelRow__details > * {
-  margin-right: $margin-xs;
+    margin-right: $margin-xs;
 }
 
 .HotelRow__name {
-  color: $gray;
+    color: $gray;
 }
 
 .HotelRow__rating {
-  color: $gray-light;
-  font: $font-text-sm;
-  mix-blend-mode: multiply;
+    color: $gray-light;
+    font: $font-text-sm;
+    mix-blend-mode: multiply;
 }
 
 .HotelRow__type {
-  color: $gray-light;
-  font: $font-text-sm;
-  mix-blend-mode: multiply;
+    color: $gray-light;
+    font: $font-text-sm;
+    mix-blend-mode: multiply;
 }
 
 .HotelRow__url {
-  color: $green;
-  font: $font-text-sm;
+    color: $green;
+    font: $font-text-sm;
 }
 
 .HotelRow__price {
-  font: $font-heading-xl;
-  color: $yellow;
+    font: $font-heading-xl;
+    color: $yellow;
 }

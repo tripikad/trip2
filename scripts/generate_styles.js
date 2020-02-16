@@ -7,8 +7,8 @@ const stylesOutput = `<?php
 
 return [
 ${Object.entries(styles)
-  .map(([key, value]) => `      '${key}' => '${String(value).replace(/'/g, '"')}'`)
-  .join(',\n')}
+    .map(([key, value]) => `      '${key}' => '${String(value).replace(/'/g, '"')}'`)
+    .join(',\n')}
 ];
 `
 writeFileSync(join(__dirname, '../config/styles.php'), stylesOutput)

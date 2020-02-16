@@ -1,6 +1,6 @@
 <?php
 
 return [
-  'previous' => 'Eelmine',
-  'next' => 'Järgmine'
+    'previous' => 'Eelmine',
+    'next' => 'Järgmine'
 ];

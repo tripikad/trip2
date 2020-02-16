@@ -1,34 +1,34 @@
 .Paginator {
-  width: 100%;
-  display: block;
-  text-align: center;
-  margin-top: -$margin-sm;
+    width: 100%;
+    display: block;
+    text-align: center;
+    margin-top: -$margin-sm;
 }
 
 .Paginator__item {
-  display: inline-block;
-  margin-right: $margin-sm;
-  margin-top: $margin-sm;
+    display: inline-block;
+    margin-right: $margin-sm;
+    margin-top: $margin-sm;
 }
 
 .Paginator__button {
-  display: inline-block;
-  padding: $padding-sm $padding-md;
-  background: $gray-light;
-  border-radius: $border-radius-md;
-  font: $font-text-md;
-  line-height: $line-height-xs;
-  color: $gray;
+    display: inline-block;
+    padding: $padding-sm $padding-md;
+    background: $gray-light;
+    border-radius: $border-radius-md;
+    font: $font-text-md;
+    line-height: $line-height-xs;
+    color: $gray;
 }
 
 .Paginator__button:hover {
-  background: $gray-light-hover;
+    background: $gray-light-hover;
 }
 
 .Paginator__item:last-child {
-  margin-right: 0;
+    margin-right: 0;
 }
 
 .Paginator__button--disabled {
-  opacity: $opacity-sm;
+    opacity: $opacity-sm;
 }

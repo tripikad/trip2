@@ -1,7 +1,7 @@
 <?php
 
 return [
-  /*
+    /*
     |--------------------------------------------------------------------------
     | PDO Fetch Style
     |--------------------------------------------------------------------------
@@ -12,9 +12,9 @@ return [
     |
     */
 
-  'fetch' => PDO::FETCH_CLASS,
+    'fetch' => PDO::FETCH_CLASS,
 
-  /*
+    /*
     |--------------------------------------------------------------------------
     | Default Database Connection Name
     |--------------------------------------------------------------------------
@@ -25,9 +25,9 @@ return [
     |
     */
 
-  'default' => env('DB_CONNECTION', 'mysql'),
+    'default' => env('DB_CONNECTION', 'mysql'),
 
-  /*
+    /*
     |--------------------------------------------------------------------------
     | Database Connections
     |--------------------------------------------------------------------------
@@ -43,47 +43,47 @@ return [
     |
     */
 
-  'connections' => [
-    'trip' => [
-      'driver' => 'mysql',
-      'host' => env('DB_HOST1', 'localhost'),
-      'database' => env('DB_DATABASE1', 'forge'),
-      'username' => env('DB_USERNAME1', 'forge'),
-      'password' => env('DB_PASSWORD1', ''),
-      'charset' => 'utf8',
-      'collation' => 'utf8_unicode_ci',
-      'prefix' => '',
-      'strict' => false
+    'connections' => [
+        'trip' => [
+            'driver' => 'mysql',
+            'host' => env('DB_HOST1', 'localhost'),
+            'database' => env('DB_DATABASE1', 'forge'),
+            'username' => env('DB_USERNAME1', 'forge'),
+            'password' => env('DB_PASSWORD1', ''),
+            'charset' => 'utf8',
+            'collation' => 'utf8_unicode_ci',
+            'prefix' => '',
+            'strict' => false
+        ],
+
+        'trip2' => [
+            'driver' => 'mysql',
+            'host' => env('DB_HOST2', 'localhost'),
+            'port' => env('DB_PORT2', 3306),
+            'database' => env('DB_DATABASE2', 'forge'),
+            'username' => env('DB_USERNAME2', 'forge'),
+            'password' => env('DB_PASSWORD2', ''),
+            'charset' => 'utf8',
+            'collation' => 'utf8_unicode_ci',
+            'prefix' => '',
+            'strict' => false
+        ],
+
+        'remote_staging' => [
+            'driver' => 'mysql',
+            'host' => env('REMOTE_STAGING_DB_HOST', ''),
+            'port' => env('REMOTE_STAGING_DB_PORT', ''),
+            'database' => env('REMOTE_STAGING_DB_DATABASE', ''),
+            'username' => env('REMOTE_STAGING_DB_USERNAME', ''),
+            'password' => env('REMOTE_STAGING_DB_PASSWORD', ''),
+            'charset' => 'utf8',
+            'collation' => 'utf8_unicode_ci',
+            'prefix' => '',
+            'strict' => false
+        ]
     ],
 
-    'trip2' => [
-      'driver' => 'mysql',
-      'host' => env('DB_HOST2', 'localhost'),
-      'port' => env('DB_PORT2', 3306),
-      'database' => env('DB_DATABASE2', 'forge'),
-      'username' => env('DB_USERNAME2', 'forge'),
-      'password' => env('DB_PASSWORD2', ''),
-      'charset' => 'utf8',
-      'collation' => 'utf8_unicode_ci',
-      'prefix' => '',
-      'strict' => false
-    ],
-
-    'remote_staging' => [
-      'driver' => 'mysql',
-      'host' => env('REMOTE_STAGING_DB_HOST', ''),
-      'port' => env('REMOTE_STAGING_DB_PORT', ''),
-      'database' => env('REMOTE_STAGING_DB_DATABASE', ''),
-      'username' => env('REMOTE_STAGING_DB_USERNAME', ''),
-      'password' => env('REMOTE_STAGING_DB_PASSWORD', ''),
-      'charset' => 'utf8',
-      'collation' => 'utf8_unicode_ci',
-      'prefix' => '',
-      'strict' => false
-    ]
-  ],
-
-  /*
+    /*
     |--------------------------------------------------------------------------
     | Migration Repository Table
     |--------------------------------------------------------------------------
@@ -94,9 +94,9 @@ return [
     |
     */
 
-  'migrations' => 'migrations',
+    'migrations' => 'migrations',
 
-  /*
+    /*
     |--------------------------------------------------------------------------
     | Redis Databases
     |--------------------------------------------------------------------------
@@ -107,30 +107,30 @@ return [
     |
     */
 
-  'redis' => [
-    'client' => 'predis',
+    'redis' => [
+        'client' => 'predis',
 
-    'options' => [
-      'cluster' => 'redis'
-    ],
+        'options' => [
+            'cluster' => 'redis'
+        ],
 
-    'clusters' => [
-      'default' => [
-        [
-          'host' => env('REDIS_HOST', '127.0.0.1'),
-          'password' => env('REDIS_PASSWORD', null),
-          'port' => env('REDIS_PORT', 6379),
-          'database' => 0
+        'clusters' => [
+            'default' => [
+                [
+                    'host' => env('REDIS_HOST', '127.0.0.1'),
+                    'password' => env('REDIS_PASSWORD', null),
+                    'port' => env('REDIS_PORT', 6379),
+                    'database' => 0
+                ]
+            ],
+            'session' => [
+                [
+                    'host' => env('REDIS_HOST', '127.0.0.1'),
+                    'password' => env('REDIS_PASSWORD', null),
+                    'port' => env('REDIS_PORT', 6379),
+                    'database' => 1
+                ]
+            ]
         ]
-      ],
-      'session' => [
-        [
-          'host' => env('REDIS_HOST', '127.0.0.1'),
-          'password' => env('REDIS_PASSWORD', null),
-          'port' => env('REDIS_PORT', 6379),
-          'database' => 1
-        ]
-      ]
     ]
-  ]
 ];

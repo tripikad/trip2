@@ -1,49 +1,49 @@
 .FrontpageSearchItem {
-  float: left;
-  width: 100%;
-  color: $blue;
-  padding-left: calc($padding-sm * 4);
-  margin-top: $padding-xs;
-  font-size: $font-size-sm;
+    float: left;
+    width: 100%;
+    color: $blue;
+    padding-left: calc($padding-sm * 4);
+    margin-top: $padding-xs;
+    font-size: $font-size-sm;
 }
 
 .FrontpageSearchItem__badge {
-  display: inline-block;
-  width: auto;
-  margin-left: $padding-xxs;
-  color: $white;
-  height: 18px;
-  padding: 0 $padding-xxs;
-  border-radius: 20px;
-  min-width: 20px;
-  line-height: 20px;
-  font-size: 10px;
-  text-align: center;
-  position: relative;
-  top: -2px;
-  font-weight: $font-weight-semibold;
+    display: inline-block;
+    width: auto;
+    margin-left: $padding-xxs;
+    color: $white;
+    height: 18px;
+    padding: 0 $padding-xxs;
+    border-radius: 20px;
+    min-width: 20px;
+    line-height: 20px;
+    font-size: 10px;
+    text-align: center;
+    position: relative;
+    top: -2px;
+    font-weight: $font-weight-semibold;
 }
 
 .FrontpageSearchItem__badge--orange {
-  background: $orange;
+    background: $orange;
 }
 
 .FrontpageSearchItem__badge--blue {
-  background: $blue;
+    background: $blue;
 }
 
 .FrontpageSearchItem__badge--red {
-  background: $red;
+    background: $red;
 }
 
 .FrontpageSearchItem__badge--green {
-  background: $green;
+    background: $green;
 }
 
 .FrontpageSearchItem__badge--purple {
-  background: $purple;
+    background: $purple;
 }
 
 .FrontpageSearchItem__badge--yellow {
-  background: $yellow-dark;
+    background: $yellow-dark;
 }

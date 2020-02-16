@@ -1,36 +1,36 @@
 @font-face {
-  font-family: 'Sailec';
-  src: url('../fonts/Bold.eot');
-  src: url('../fonts/Bold.eot?#iefix') format('embedded-opentype'), url('../fonts/Bold.woff2') format('woff2'),
-    url('../fonts/Bold.woff') format('woff'), url('../fonts/Bold.ttf') format('truetype');
-  font-weight: bold;
-  font-style: normal;
+    font-family: 'Sailec';
+    src: url('../fonts/Bold.eot');
+    src: url('../fonts/Bold.eot?#iefix') format('embedded-opentype'), url('../fonts/Bold.woff2') format('woff2'),
+        url('../fonts/Bold.woff') format('woff'), url('../fonts/Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
 }
 
 @font-face {
-  font-family: 'Sailec';
-  src: url('../fonts/Regular.eot');
-  src: url('../fonts/Regular.eot?#iefix') format('embedded-opentype'), url('../fonts/Regular.woff2') format('woff2'),
-    url('../fonts/Regular.woff') format('woff'), url('../fonts/Regular.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
+    font-family: 'Sailec';
+    src: url('../fonts/Regular.eot');
+    src: url('../fonts/Regular.eot?#iefix') format('embedded-opentype'), url('../fonts/Regular.woff2') format('woff2'),
+        url('../fonts/Regular.woff') format('woff'), url('../fonts/Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
 }
 
 @font-face {
-  font-family: 'Sailec-RegularItalic';
-  src: url('../fonts/RegularItalic.eot');
-  src: url('../fonts/RegularItalic.eot?#iefix') format('embedded-opentype'),
-    url('../fonts/RegularItalic.woff2') format('woff2'), url('../fonts/RegularItalic.woff') format('woff'),
-    url('../fonts/RegularItalic.ttf') format('truetype');
-  font-weight: bold;
-  font-style: italic;
+    font-family: 'Sailec-RegularItalic';
+    src: url('../fonts/RegularItalic.eot');
+    src: url('../fonts/RegularItalic.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/RegularItalic.woff2') format('woff2'), url('../fonts/RegularItalic.woff') format('woff'),
+        url('../fonts/RegularItalic.ttf') format('truetype');
+    font-weight: bold;
+    font-style: italic;
 }
 
 @font-face {
-  font-family: 'Sailec';
-  src: url('../fonts/Medium.eot');
-  src: url('../fonts/Medium.eot?#iefix') format('embedded-opentype'), url('../fonts/Medium.woff2') format('woff2'),
-    url('../fonts/Medium.woff') format('woff'), url('../fonts/Medium.ttf') format('truetype');
-  font-weight: 600;
-  font-style: normal;
+    font-family: 'Sailec';
+    src: url('../fonts/Medium.eot');
+    src: url('../fonts/Medium.eot?#iefix') format('embedded-opentype'), url('../fonts/Medium.woff2') format('woff2'),
+        url('../fonts/Medium.woff') format('woff'), url('../fonts/Medium.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
 }

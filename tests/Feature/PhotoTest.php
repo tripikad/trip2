@@ -9,47 +9,47 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class PhotoTest extends BrowserKitTestCase
 {
-  use DatabaseTransactions;
+    use DatabaseTransactions;
 
-  public function test_regular_user_can_upload_photo()
-  {
-    $regular_user_uploading_photo = factory(User::class)->create();
+    public function test_regular_user_can_upload_photo()
+    {
+        $regular_user_uploading_photo = factory(User::class)->create();
 
-    $this->actingAs($regular_user_uploading_photo)
-      ->visit('reisipildid')
-      ->click(trans('content.photo.create.title'))
-      ->seePageIs('photo/create')
-      ->attach(storage_path() . '/tests/test.jpg', 'file')
-      ->type('Hello photo title', 'title')
-      ->press(trans('content.create.submit.title'))
-      ->seePageIs('reisipildid')
-      ->seeInDatabase('contents', [
-        'user_id' => $regular_user_uploading_photo->id,
-        'title' => 'Hello photo title',
-        'type' => 'photo',
-        'status' => 1
-      ]);
+        $this->actingAs($regular_user_uploading_photo)
+            ->visit('reisipildid')
+            ->click(trans('content.photo.create.title'))
+            ->seePageIs('photo/create')
+            ->attach(storage_path() . '/tests/test.jpg', 'file')
+            ->type('Hello photo title', 'title')
+            ->press(trans('content.create.submit.title'))
+            ->seePageIs('reisipildid')
+            ->seeInDatabase('contents', [
+                'user_id' => $regular_user_uploading_photo->id,
+                'title' => 'Hello photo title',
+                'type' => 'photo',
+                'status' => 1
+            ]);
 
-    $photo = Content::whereTitle('Hello photo title')->first();
-    $filename = $photo->images()->first()->filename;
+        $photo = Content::whereTitle('Hello photo title')->first();
+        $filename = $photo->images()->first()->filename;
 
-    // Check original file exists and clean up
+        // Check original file exists and clean up
 
-    $filepath = config('imagepresets.original.path') . $filename;
+        $filepath = config('imagepresets.original.path') . $filename;
 
-    $this->assertTrue(file_exists($filepath));
-    unlink($filepath);
+        $this->assertTrue(file_exists($filepath));
+        unlink($filepath);
 
-    // Check thumbnails exist and clean up
+        // Check thumbnails exist and clean up
 
-    foreach (['large', 'medium', 'small', 'small_square', 'xsmall_square'] as $preset) {
-      $filepath = config("imagepresets.presets.$preset.path") . $filename;
-      $this->assertTrue(file_exists($filepath));
-      unlink($filepath);
+        foreach (['large', 'medium', 'small', 'small_square', 'xsmall_square'] as $preset) {
+            $filepath = config("imagepresets.presets.$preset.path") . $filename;
+            $this->assertTrue(file_exists($filepath));
+            unlink($filepath);
+        }
     }
-  }
 
-  /*
+    /*
     public function test_regular_user_cannot_edit_other_user_photo()
     {
         $creator_user = factory(User::class)->create();

@@ -1,14 +1,14 @@
 .FormCheckbox {
-  display: flex;
-  align-items: baseline;
+    display: flex;
+    align-items: baseline;
 }
 
 .FormCheckbox__label {
-  color: $gray;
-  font: $font-heading-sm;
-  margin-left: $margin-sm;
+    color: $gray;
+    font: $font-heading-sm;
+    margin-left: $margin-sm;
 }
 
 .FormCheckbox__checkbox {
-  font-size: calc($spacer * 10);
+    font-size: calc($spacer * 10);
 }

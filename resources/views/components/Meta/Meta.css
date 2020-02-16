@@ -1,27 +1,27 @@
 .Meta {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  line-height: $line-height-lg;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    line-height: $line-height-lg;
 }
 
 .Meta--center {
-  justify-content: center;
+    justify-content: center;
 }
 
 .Meta,
 .Meta > * {
-  display: inline-block ?if $ie;
+    display: inline-block ?if $ie;
 }
 
 .Meta__item {
-  margin-right: $margin-xs;
+    margin-right: $margin-xs;
 }
 
 .Meta__item:last-child {
-  margin-right: 0;
+    margin-right: 0;
 }
 
 .Meta--large {
-  line-height: $line-height-xl;
+    line-height: $line-height-xl;
 }

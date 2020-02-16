@@ -1,4 +1,4 @@
-## Installation.
+## Installation
 
 ### Start
 
@@ -99,11 +99,11 @@ valet restart
 
 2. Run
 
-   ```
-   php artisan dusk:update --detect
-   ```
+    ```
+    php artisan dusk:update --detect
+    ```
 
-   If you want to run Dusk tests with previous version of Chrome you will need specify a version of Dusk update. Read more here https://github.com/staudenmeir/dusk-updater
+    If you want to run Dusk tests with previous version of Chrome you will need specify a version of Dusk update. Read more here https://github.com/staudenmeir/dusk-updater
 
 3. Make sure the `FULL_BASE_URL` in `.env` file points to the local Laravel URL of your development environment
 
@@ -224,10 +224,10 @@ To show a component use a `component()` helper:
 
 ```php
 component('MyComponent')
-  ->is('small') // Optional CSS modifier, adds a MyComponent--small class
-  ->is('red') // Modifiers can be chained
-  ->with('data1', 'Hello') // Passing a variable, similar to view()->with()
-  ->with('data2', 'World'); // Variables can be chained
+    ->is('small') // Optional CSS modifier, adds a MyComponent--small class
+    ->is('red') // Modifiers can be chained
+    ->with('data1', 'Hello') // Passing a variable, similar to view()->with()
+    ->with('data2', 'World'); // Variables can be chained
 ```
 
 If there are both Blade and Vue components with the same name, Blade is preferred. You can request a Vue template by chaining a `->vue()` method.
@@ -290,7 +290,7 @@ For CSS, the variables are automatically available:
 
 ```scss
 .Component {
-  height: $spacer;
+    height: $spacer;
 }
 ```
 
@@ -326,8 +326,8 @@ Also, it's recommended to reduce contrast and use lighter font colors:
 
 ```scss
 .Component__title {
-  font: $font-heading-lg;
-  color: $gray-dark;
+    font: $font-heading-lg;
+    color: $gray-dark;
 }
 ```
 
@@ -337,8 +337,8 @@ Use the `$font-text-xs | $font-text-sm | $font-text-md | $font-text-lg` variable
 
 ```scss
 .Component__description {
-  font: $font-text-md; // The recommended body size
-  color: $gray-dark; // For reduced contrast
+    font: $font-text-md; // The recommended body size
+    color: $gray-dark; // For reduced contrast
 }
 ```
 
@@ -390,9 +390,9 @@ To show a component use a `layout()` helper:
 
 ```php
 layout('One')
-  ->with('data1', 'Hello') // Passing a variable
-  ->with('data2', 'World') // Variables can be chained
-  ->render(); // At the time of writing the final render() is required
+    ->with('data1', 'Hello') // Passing a variable
+    ->with('data2', 'World') // Variables can be chained
+    ->render(); // At the time of writing the final render() is required
 ```
 
 By default layout() adds HTTP cache headers for 10 minutes. To disable this, add

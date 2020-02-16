@@ -6,41 +6,41 @@ use Exception;
 
 class MessageVars
 {
-  protected $message;
+    protected $message;
 
-  public function __construct(Message $message)
-  {
-    $this->message = $message;
-  }
-
-  public function __get($property)
-  {
-    if (method_exists($this, $property)) {
-      return call_user_func([$this, $property]);
+    public function __construct(Message $message)
+    {
+        $this->message = $message;
     }
 
-    $message = '%s does not respond to the "%s" property or method.';
+    public function __get($property)
+    {
+        if (method_exists($this, $property)) {
+            return call_user_func([$this, $property]);
+        }
 
-    throw new Exception(sprintf($message, static::class, $property));
-  }
+        $message = '%s does not respond to the "%s" property or method.';
 
-  public function title()
-  {
-    return str_limit($this->attributes['body'], 30);
-  }
+        throw new Exception(sprintf($message, static::class, $property));
+    }
 
-  public function body()
-  {
-    return format_body($this->message->body);
-  }
+    public function title()
+    {
+        return str_limit($this->attributes['body'], 30);
+    }
 
-  public function created_at()
-  {
-    return format_date($this->message->created_at);
-  }
+    public function body()
+    {
+        return format_body($this->message->body);
+    }
 
-  public function updated_at()
-  {
-    return format_date($this->message->created_at);
-  }
+    public function created_at()
+    {
+        return format_date($this->message->created_at);
+    }
+
+    public function updated_at()
+    {
+        return format_date($this->message->created_at);
+    }
 }

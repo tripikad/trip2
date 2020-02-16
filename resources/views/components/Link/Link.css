@@ -1,50 +1,50 @@
 .Link {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
 .Link__title {
-  color: $gray;
-  font: $font-text-md;
+    color: $gray;
+    font: $font-text-md;
 }
 
 .Link__title:hover {
-  color: $gray-hover;
+    color: $gray-hover;
 }
 
 .Link__icon {
-  margin-left: $margin-xs;
+    margin-left: $margin-xs;
 }
 
 .Link__icon svg {
-  fill: $gray;
+    fill: $gray;
 }
 
 .Link--large .Link__title {
-  font: $font-heading-md;
+    font: $font-heading-md;
 }
 
 .Link--blue .Link__title {
-  color: $blue;
+    color: $blue;
 }
 
 .Link--blue .Link__title:hover {
-  color: $blue-hover;
+    color: $blue-hover;
 }
 
 .Link--white .Link__title {
-  color: $white;
+    color: $white;
 }
 
 .Link--white .Link__title:hover {
-  color: $white-hover;
+    color: $white-hover;
 }
 
 .Link--white .Link__icon svg {
-  fill: $white;
+    fill: $white;
 }
 
 .Link--semitransparent {
-  opacity: $opacity-md;
+    opacity: $opacity-md;
 }

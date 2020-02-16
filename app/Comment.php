@@ -7,111 +7,111 @@ use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
 {
-  // Setup
+    // Setup
 
-  protected $fillable = ['user_id', 'content_id', 'body', 'status'];
+    protected $fillable = ['user_id', 'content_id', 'body', 'status'];
 
-  protected $appends = ['title', 'body_filtered'];
+    protected $appends = ['title', 'body_filtered'];
 
-  protected $touches = ['content'];
+    protected $touches = ['content'];
 
-  // Relations
+    // Relations
 
-  public function content()
-  {
-    return $this->belongsTo('App\Content');
-  }
-
-  public function user()
-  {
-    return $this->belongsTo('App\User');
-  }
-
-  public function flags()
-  {
-    return $this->morphMany('App\Flag', 'flaggable');
-  }
-
-  // V1
-
-  public function getActions()
-  {
-    $actions = [];
-
-    if (
-      auth()->user() &&
-      auth()
-        ->user()
-        ->hasRoleOrOwner('admin', $this->user->id)
-    ) {
-      $actions['edit'] = [
-        'title' => trans('comment.action.edit.title'),
-        'route' => route('comment.edit', [$this])
-      ];
+    public function content()
+    {
+        return $this->belongsTo('App\Content');
     }
 
-    if (
-      auth()->user() &&
-      auth()
-        ->user()
-        ->hasRole('admin')
-    ) {
-      $actions['status'] = [
-        'title' => trans("comment.action.status.$this->status.title"),
-        'route' => route('comment.status', [$this, 1 - $this->status]),
-        'method' => 'PUT'
-      ];
+    public function user()
+    {
+        return $this->belongsTo('App\User');
     }
 
-    return $actions;
-  }
+    public function flags()
+    {
+        return $this->morphMany('App\Flag', 'flaggable');
+    }
 
-  public function getFlags()
-  {
-    $goods = $this->flags->where('flag_type', 'good');
-    $bads = $this->flags->where('flag_type', 'bad');
+    // V1
 
-    $good_active = null;
-    $bad_active = null;
+    public function getActions()
+    {
+        $actions = [];
 
-    if (Auth::check()) {
-      foreach ($goods as $good) {
-        if ($good->user_id == Auth::user()->id) {
-          $good_active = 1;
+        if (
+            auth()->user() &&
+            auth()
+                ->user()
+                ->hasRoleOrOwner('admin', $this->user->id)
+        ) {
+            $actions['edit'] = [
+                'title' => trans('comment.action.edit.title'),
+                'route' => route('comment.edit', [$this])
+            ];
         }
-      }
 
-      foreach ($bads as $bad) {
-        if ($bad->user_id == Auth::user()->id) {
-          $bad_active = 1;
+        if (
+            auth()->user() &&
+            auth()
+                ->user()
+                ->hasRole('admin')
+        ) {
+            $actions['status'] = [
+                'title' => trans("comment.action.status.$this->status.title"),
+                'route' => route('comment.status', [$this, 1 - $this->status]),
+                'method' => 'PUT'
+            ];
         }
-      }
+
+        return $actions;
     }
 
-    return [
-      'good' => [
-        'value' => count($this->flags->where('flag_type', 'good')),
-        'flaggable' => Auth::check(),
-        'flaggable_type' => 'comment',
-        'flaggable_id' => $this->id,
-        'flag_type' => 'good',
-        'return' => '#comment-' . $this->id,
-        'active' => $good_active
-      ],
-      'bad' => [
-        'value' => count($this->flags->where('flag_type', 'bad')),
-        'flaggable' => Auth::check(),
-        'flaggable_type' => 'comment',
-        'flaggable_id' => $this->id,
-        'flag_type' => 'bad',
-        'return' => '#comment-' . $this->id,
-        'active' => $bad_active
-      ]
-    ];
-  }
+    public function getFlags()
+    {
+        $goods = $this->flags->where('flag_type', 'good');
+        $bads = $this->flags->where('flag_type', 'bad');
 
-  public function vars()
-  {
-    return new CommentVars($this);
-  }
+        $good_active = null;
+        $bad_active = null;
+
+        if (Auth::check()) {
+            foreach ($goods as $good) {
+                if ($good->user_id == Auth::user()->id) {
+                    $good_active = 1;
+                }
+            }
+
+            foreach ($bads as $bad) {
+                if ($bad->user_id == Auth::user()->id) {
+                    $bad_active = 1;
+                }
+            }
+        }
+
+        return [
+            'good' => [
+                'value' => count($this->flags->where('flag_type', 'good')),
+                'flaggable' => Auth::check(),
+                'flaggable_type' => 'comment',
+                'flaggable_id' => $this->id,
+                'flag_type' => 'good',
+                'return' => '#comment-' . $this->id,
+                'active' => $good_active
+            ],
+            'bad' => [
+                'value' => count($this->flags->where('flag_type', 'bad')),
+                'flaggable' => Auth::check(),
+                'flaggable_type' => 'comment',
+                'flaggable_id' => $this->id,
+                'flag_type' => 'bad',
+                'return' => '#comment-' . $this->id,
+                'active' => $bad_active
+            ]
+        ];
+    }
+
+    public function vars()
+    {
+        return new CommentVars($this);
+    }
 }

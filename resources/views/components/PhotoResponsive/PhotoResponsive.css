@@ -1,12 +1,12 @@
 .PhotoResponsive {
-  width: 100%;
-  display: block;
-  text-align: center;
+    width: 100%;
+    display: block;
+    text-align: center;
 }
 
 .PhotoResponsive img {
-  width: auto;
-  max-width: 100%;
-  height: auto;
-  display: inline-block;
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    display: inline-block;
 }

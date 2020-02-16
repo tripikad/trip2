@@ -6,31 +6,31 @@ use Exception;
 
 class TopicVars
 {
-  protected $topic;
+    protected $topic;
 
-  public function __construct(Topic $topic)
-  {
-    $this->topic = $topic;
-  }
-
-  public function __get($property)
-  {
-    if (method_exists($this, $property)) {
-      return call_user_func([$this, $property]);
+    public function __construct(Topic $topic)
+    {
+        $this->topic = $topic;
     }
 
-    $message = '%s does not respond to the "%s" property or method.';
+    public function __get($property)
+    {
+        if (method_exists($this, $property)) {
+            return call_user_func([$this, $property]);
+        }
 
-    throw new Exception(sprintf($message, static::class, $property));
-  }
+        $message = '%s does not respond to the "%s" property or method.';
 
-  public function name()
-  {
-    return $this->topic->name;
-  }
+        throw new Exception(sprintf($message, static::class, $property));
+    }
 
-  public function shortName()
-  {
-    return str_limit($this->topic->name, 12);
-  }
+    public function name()
+    {
+        return $this->topic->name;
+    }
+
+    public function shortName()
+    {
+        return str_limit($this->topic->name, 12);
+    }
 }
