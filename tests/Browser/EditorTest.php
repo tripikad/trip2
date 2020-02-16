@@ -22,7 +22,7 @@ class EditorTest extends DuskTestCase
                     ->click('textarea[readonly=readonly]') // @todo rework click target
                     ->pause(200) // Loading the editor
                     ->keys('.Editor__source textarea', 'A')
-                    ->pause(5000) // Waiting for ajax-based preview
+                    ->pause(6000) // Waiting for ajax-based preview
                     ->assertSeeIn('.Editor__target', 'A')
                     ->click('.Editor__toolPicker')
                     ->pause(200) // Loading the image picker
