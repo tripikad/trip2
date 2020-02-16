@@ -16,7 +16,7 @@ class BookingTest extends BrowserKitTestCase
 {
     use DatabaseTransactions;
 
-    // @LAUNCH Rework this
+    // @LAUNCH Rework this test
     public function test_anoymous_user_can_see_offers_but_can_not_yet_book()
     {
         Mail::fake();

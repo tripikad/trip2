@@ -29,8 +29,7 @@ class NavbarMobile
                 'title' => trans('menu.header.news'),
                 'route' => route('news.index')
             ])
-            // @LAUNCH remove this check
-            ->putWhen($user && $user->hasRole('superuser'), 'offer', [
+            ->putWhen(env('OFFERS_LAUNCH', false), 'offer', [
                 'title' => trans('menu.header.offer'),
                 'route' => route('offer.index')
             ])

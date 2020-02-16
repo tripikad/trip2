@@ -94,17 +94,17 @@ class OffersAdminTest extends DuskTestCase
         });
 
         // Assert users can see the offer without being logged in
-        // @LAUNCH Uncomment this
-        // $this->browse(function (Browser $browser) {
-        //     $browser
-        //         ->visit('/logout')
-        //         ->visit('/offer')
-        //         ->pause(500)
-        //         ->click(dusk('Playa Bonita para Mamacita'))
-        //         ->pause(500)
-        //         ->assertSee('Playa Bonita para Mamacita')
-        //         ->assertSee('1987€');
-        // });
+
+        $this->browse(function (Browser $browser) {
+            $browser
+                ->visit('/logout')
+                ->visit('/offer')
+                ->pause(500)
+                ->click(dusk('Playa Bonita para Mamacita'))
+                ->pause(500)
+                ->assertSee('Playa Bonita para Mamacita')
+                ->assertSee('1987€');
+        });
     }
 
     public function test_company_can_add_unpublished_adventure_offer()
@@ -135,14 +135,13 @@ class OffersAdminTest extends DuskTestCase
 
         // Assert company sees its own unpublished content
 
-        // @LAUNCH
-        // $this->browse(function (Browser $browser) use ($offer) {
-        //     $browser
-        //         ->loginAs($this->company_three)
-        //         ->visit("/reisipakkumised/$offer->id")
-        //         ->assertSee('Montaña super-alta para gringo')
-        //         ->assertSee('See reisipakkumine pole avalikustatud');
-        // });
+        $this->browse(function (Browser $browser) use ($offer) {
+            $browser
+                ->loginAs($this->company_three)
+                ->visit("/reisipakkumised/$offer->id")
+                ->assertSee('Montaña super-alta para gringo')
+                ->assertSee('See reisipakkumine pole avalikustatud');
+        });
 
         // Assert superuser sees unpublished content
 

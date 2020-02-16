@@ -142,8 +142,6 @@ class CompanyController extends Controller
         $loggedUser = request()->user();
 
         return layout('Full')
-            // @LAUNCH Remove
-            ->withHeadRobots('noindex')
             ->withTransparency(true)
             ->withTitle(trans('offer.index'))
             ->withItems(

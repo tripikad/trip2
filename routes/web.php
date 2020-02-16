@@ -555,10 +555,7 @@ Route::put('offer/{id}/update', 'OfferAdminController@update')
 
 // Bookings
 
-Route::post('booking/{id}', 'BookingController@create')
-    // @LAUNCH remove this control
-    ->middleware('role:superuser')
-    ->name('booking.create');
+Route::post('booking/{id}', 'BookingController@create')->name('booking.create');
 
 Route::get('booking/{id}/goto', 'BookingController@goto')->name('booking.goto');
 

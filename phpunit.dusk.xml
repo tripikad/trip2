@@ -27,5 +27,6 @@
         <env name="IMAGE_DRIVER" value="gd"/>
         <env name="MAIL_DRIVER" value="array"/>
         <env name="BCRYPT_ROUNDS" value="4"/>
+        <env name="OFFERS_LAUNCH" value="true"/>
     </php>
 </phpunit>

@@ -8,10 +8,7 @@ class FrontpageOfferSection
 {
     public function render()
     {
-        // @LAUNCH
-        $loggedUser = request()->user();
-
-        if ($loggedUser && $loggedUser->hasRole('superuser')) {
+        if (env('OFFERS_LAUNCH', false)) {
             $adventureOffers = Offer::public()
                 ->orderBy('start_at')
                 ->with(['user:id,name', 'startDestinations', 'endDestinations'])
