@@ -1,8 +1,8 @@
 .Form__field {
-  margin-bottom: $margin-md;
-  line-height: 1em;
+    margin-bottom: $margin-md;
+    line-height: 1em;
 }
 
 .Form__field:last-child {
-  margin-bottom: 0;
+    margin-bottom: 0;
 }

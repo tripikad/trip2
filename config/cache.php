@@ -1,23 +1,23 @@
 <?php
 
 return [
-  'headers' => [
-    'default' => 60 * 10
-  ],
+    'headers' => [
+        'default' => 60 * 10
+    ],
 
-  'destination' => [
-    'getPopular' => 30 // minutes
-  ],
+    'destination' => [
+        'getPopular' => 30 // minutes
+    ],
 
-  'feed' => [
-    'atom' => 60 * 10
-  ],
+    'feed' => [
+        'atom' => 60 * 10
+    ],
 
-  'viewable' => [
-    'content' => 60 //minutes
-  ],
+    'viewable' => [
+        'content' => 60 //minutes
+    ],
 
-  /*
+    /*
     |--------------------------------------------------------------------------
     | Default Cache Store
     |--------------------------------------------------------------------------
@@ -28,9 +28,9 @@ return [
     |
     */
 
-  'default' => env('CACHE_DRIVER', 'file'),
+    'default' => env('CACHE_DRIVER', 'file'),
 
-  /*
+    /*
     |--------------------------------------------------------------------------
     | Cache Stores
     |--------------------------------------------------------------------------
@@ -41,44 +41,44 @@ return [
     |
     */
 
-  'stores' => [
-    'apc' => [
-      'driver' => 'apc'
-    ],
+    'stores' => [
+        'apc' => [
+            'driver' => 'apc'
+        ],
 
-    'array' => [
-      'driver' => 'array'
-    ],
+        'array' => [
+            'driver' => 'array'
+        ],
 
-    'database' => [
-      'driver' => 'database',
-      'table' => 'cache',
-      'connection' => null
-    ],
+        'database' => [
+            'driver' => 'database',
+            'table' => 'cache',
+            'connection' => null
+        ],
 
-    'file' => [
-      'driver' => 'file',
-      'path' => storage_path('framework/cache')
-    ],
+        'file' => [
+            'driver' => 'file',
+            'path' => storage_path('framework/cache')
+        ],
 
-    'memcached' => [
-      'driver' => 'memcached',
-      'servers' => [
-        [
-          'host' => '127.0.0.1',
-          'port' => 11211,
-          'weight' => 100
+        'memcached' => [
+            'driver' => 'memcached',
+            'servers' => [
+                [
+                    'host' => '127.0.0.1',
+                    'port' => 11211,
+                    'weight' => 100
+                ]
+            ]
+        ],
+
+        'redis' => [
+            'driver' => 'redis',
+            'connection' => 'default'
         ]
-      ]
     ],
 
-    'redis' => [
-      'driver' => 'redis',
-      'connection' => 'default'
-    ]
-  ],
-
-  /*
+    /*
     |--------------------------------------------------------------------------
     | Cache Key Prefix
     |--------------------------------------------------------------------------
@@ -89,5 +89,5 @@ return [
     |
     */
 
-  'prefix' => ''
+    'prefix' => ''
 ];

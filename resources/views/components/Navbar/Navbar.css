@@ -1,43 +1,43 @@
 .Navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: $height-md;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: $height-md;
 }
 
 .Navbar__logo {
-  margin-left: calc($spacer * -4.5);
-  margin-top: calc($spacer * 2);
+    margin-left: calc($spacer * -4.5);
+    margin-top: calc($spacer * 2);
 }
 
 .Navbar__sitename {
-  display: none;
+    display: none;
 }
 
 .Navbar--white .Navbar__logo svg {
-  fill: $white;
+    fill: $white;
 }
 
 .Navbar__right {
-  display: flex;
-  align-items: center;
+    display: flex;
+    align-items: center;
 }
 
 .Navbar__search {
-  display: block;
-  display: none ?if $tablet;
+    display: block;
+    display: none ?if $tablet;
 }
 
 .Navbar__search svg {
-  fill: $gray-light;
+    fill: $gray-light;
 }
 
 .Navbar__desktop {
-  display: block;
-  display: none ?if $tablet;
+    display: block;
+    display: none ?if $tablet;
 }
 
 .Navbar__mobile {
-  display: block ?if $tablet;
-  display: none;
+    display: block ?if $tablet;
+    display: none;
 }

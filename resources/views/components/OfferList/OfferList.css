@@ -1,38 +1,38 @@
 .OfferList__filters {
-  margin: $margin-md 0 $margin-md 0;
-  display: flex;
-  display: block ?if $tablet;
-  flex-direction: column;
-  align-items: center;
+    margin: $margin-md 0 $margin-md 0;
+    display: flex;
+    display: block ?if $tablet;
+    flex-direction: column;
+    align-items: center;
 }
 
 .OfferList__filters > * {
-  margin-bottom: $margin-md;
-  width: 100%;
+    margin-bottom: $margin-md;
+    width: 100%;
 }
 
 .OfferList__filtersRow {
-  display: flex;
-  display: block ?if $tablet;
-  width: 100%;
-  justify-content: center;
+    display: flex;
+    display: block ?if $tablet;
+    width: 100%;
+    justify-content: center;
 }
 
 .OfferList__filtersRow > * {
-  flex: 1;
-  margin-right: $margin-sm;
-  margin-right: 0 ?if $tablet;
-  margin-bottom: $margin-md ?if $tablet;
+    flex: 1;
+    margin-right: $margin-sm;
+    margin-right: 0 ?if $tablet;
+    margin-bottom: $margin-md ?if $tablet;
 }
 
 .OfferList__filtersRow > *:last-child {
-  margin: 0;
+    margin: 0;
 }
 
 .OfferList__offers > * {
-  margin-bottom: $margin-lg;
+    margin-bottom: $margin-lg;
 }
 
 .OfferList__filtersReset {
-  text-align: center;
+    text-align: center;
 }

@@ -9,22 +9,22 @@ use Illuminate\Support\ServiceProvider;
 
 class DuskServiceProvider extends ServiceProvider
 {
-  /**
-   * Register the Dusk's browser macros.
-   *
-   * @return void
-   */
-  public function boot()
-  {
-    Browser::macro('scrollToId', function ($id = null) {
-      $this->script("document.getElementById('$id').scrollIntoView();");
+    /**
+     * Register the Dusk's browser macros.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        Browser::macro('scrollToId', function ($id = null) {
+            $this->script("document.getElementById('$id').scrollIntoView();");
 
-      return $this;
-    });
+            return $this;
+        });
 
-    Browser::macro('scrollToBottom', function ($title = null) {
-      $this->script('window.scrollTo(0, 9999999)');
-      return $this;
-    });
-  }
+        Browser::macro('scrollToBottom', function ($title = null) {
+            $this->script('window.scrollTo(0, 9999999)');
+            return $this;
+        });
+    }
 }

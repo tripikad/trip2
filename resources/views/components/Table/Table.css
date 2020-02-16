@@ -1,34 +1,34 @@
 .Table {
-  border-collapse: collapse;
-  width: 100%;
+    border-collapse: collapse;
+    width: 100%;
 }
 
 .Table__header {
-  text-align: left;
-  vertical-align: top;
-  font: $font-text-md;
-  color: $gray;
-  padding: $padding-xs;
-  opacity: $opacity-md;
+    text-align: left;
+    vertical-align: top;
+    font: $font-text-md;
+    color: $gray;
+    padding: $padding-xs;
+    opacity: $opacity-md;
 }
 
 .Table__row {
-  text-align: left;
-  vertical-align: top;
+    text-align: left;
+    vertical-align: top;
 }
 
 .Table__cell {
-  border-top: 1px solid $gray-light;
-  font: $font-text-md;
-  padding: $padding-xs;
-  color: $gray;
+    border-top: 1px solid $gray-light;
+    font: $font-text-md;
+    padding: $padding-xs;
+    color: $gray;
 }
 
 .Table--white .Table__header {
-  color: $white;
+    color: $white;
 }
 
 .Table--white .Table__cell {
-  color: $white;
-  border-color: $white;
+    color: $white;
+    border-color: $white;
 }

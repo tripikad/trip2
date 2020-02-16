@@ -1,13 +1,13 @@
 .DestinationFacts__key {
-  font: $font-text-md;
-  color: $black;
-  opacity: $opacity-md;
-  padding: $padding-xs 0;
-  min-width: calc($spacer * 9);
+    font: $font-text-md;
+    color: $black;
+    opacity: $opacity-md;
+    padding: $padding-xs 0;
+    min-width: calc($spacer * 9);
 }
 
 .DestinationFacts__value {
-  font: $font-text-md;
-  color: $white;
-  padding: $padding-xs 0;
+    font: $font-text-md;
+    color: $white;
+    padding: $padding-xs 0;
 }

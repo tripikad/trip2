@@ -1,12 +1,12 @@
 .Grid {
-  display: grid;
-  display: block ?if $tablet;
+    display: grid;
+    display: block ?if $tablet;
 }
 
 .Grid__item {
-  margin-bottom: $margin-sm ?if $tablet;
+    margin-bottom: $margin-sm ?if $tablet;
 }
 
 .Grid__item:last-child {
-  margin-bottom: 0;
+    margin-bottom: 0;
 }
