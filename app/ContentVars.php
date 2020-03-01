@@ -94,47 +94,6 @@ class ContentVars
         }
     }
 
-    /*public function add_view_OLD()
-  {
-    $user = auth()->user();
-
-    $table_name = with(new Activity())->getTable();
-    $ip = request()->ip();
-
-    if (mb_strlen($ip) == 0) {
-      $ip = 'N/A';
-    }
-
-    $ip = DB::getPdo()->quote($ip);
-
-    $activity_id = (int) $this->content->id;
-    $activity_type = DB::getPdo()->quote('App\Content');
-    $type = DB::getPdo()->quote('view');
-    $value = 1;
-
-    if ($user) {
-      $user_id = (int) $user->id;
-    } else {
-      $user_id = null;
-    }
-
-    $created_at = DB::getPdo()->quote(Carbon::now()->format('Y-m-d H:i:s'));
-    $updated_at = DB::getPdo()->quote(Carbon::now()->format('Y-m-d H:i:s'));
-
-    DB::select(
-      "INSERT INTO `$table_name` (`ip`, `activity_id`, `activity_type`, `type`, `value`, `user_id`, `created_at`, `updated_at`) 
-        VALUES ($ip, $activity_id, $activity_type, $type, $value, " .
-        ($user_id ?? 'null') .
-        ", $created_at, $updated_at) 
-        ON DUPLICATE KEY UPDATE 
-        `value`=`value` + 1,
-        " .
-        ($user_id ? '`user_id`=VALUES(`user_id`), ' : '') .
-        '
-        `updated_at`=VALUES(`updated_at`)'
-    );
-  }*/
-
     public function update_content_read()
     {
         $user = auth()->user();

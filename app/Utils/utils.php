@@ -75,6 +75,7 @@ function format_body($body)
         ->markdown()
         ->externalLinks()
         ->images()
+        ->replaceQuotes()
         ->format();
 }
 

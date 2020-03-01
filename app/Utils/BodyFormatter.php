@@ -191,6 +191,13 @@ class BodyFormatter
         return $this;
     }
 
+    public function replaceQuotes()
+    {
+        $this->body = str_replace('&quot;', "\"", $this->body);
+
+        return $this;
+    }
+
     public function trim()
     {
         $this->body = trim($this->body);
