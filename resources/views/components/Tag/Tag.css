@@ -1,87 +1,87 @@
 .Tag {
-  align-items: center;
-  border: 1px solid $gray;
-  border-radius: $border-radius-lg;
-  display: inline-flex;
-  font: $font-text-xs;
-  line-height: $line-height-xs;
-  justify-content: center;
-  padding: calc($spacer / 4) calc($spacer / 2);
-  transition: $transition-md;
+    align-items: center;
+    border: 1px solid $gray;
+    border-radius: $border-radius-lg;
+    display: inline-flex;
+    font: $font-text-xs;
+    line-height: $line-height-xs;
+    justify-content: center;
+    padding: calc($spacer / 4) calc($spacer / 2);
+    transition: $transition-md;
 }
 
 .Tag__title {
-  color: $gray;
-  white-space: nowrap;
+    color: $gray;
+    white-space: nowrap;
 }
 
 .Tag__title:hover {
-  color: $gray-hover;
+    color: $gray-hover;
 }
 
 .Tag--orange {
-  border: 1px solid $orange-dark;
+    border: 1px solid $orange-dark;
 }
 
 .Tag--orange .Tag__title {
-  color: $orange-dark;
+    color: $orange-dark;
 }
 
 .Tag--orange.Tag--filled .Tag__title {
-  color: $white;
+    color: $white;
 }
 
 .Tag--orange .Tag__title:hover {
-  color: $orange-dark-hover;
+    color: $orange-dark-hover;
 }
 
 .Tag--orange.Tag--filled .Tag__title:hover {
-  color: $white;
+    color: $white;
 }
 
 .Tag--red {
-  border: 1px solid $red;
-  background: $red;
+    border: 1px solid $red;
+    background: $red;
 }
 
 .Tag--red:hover {
-  background: $red-hover;
+    background: $red-hover;
 }
 
 .Tag--red .Tag__title {
-  color: $white;
+    color: $white;
 }
 
 .Tag--green {
-  border: 1px solid $green;
-  background: $green;
+    border: 1px solid $green;
+    background: $green;
 }
 
 .Tag--green:hover {
-  border: 1px solid $green-hover;
-  background: $green-hover;
+    border: 1px solid $green-hover;
+    background: $green-hover;
 }
 
 .Tag--green .Tag__title {
-  color: $white;
+    color: $white;
 }
 
 .Tag--white {
-  border: 1px solid $white;
-  background: rgba(0, 0, 0, 0.05);
+    border: 1px solid $white;
+    background: rgba(0, 0, 0, 0.05);
 }
 
 .Tag--white:hover {
-  border: 1px solid $white;
-  background: rgba(0, 0, 0, 0.1);
+    border: 1px solid $white;
+    background: rgba(0, 0, 0, 0.1);
 }
 
 .Tag--white .Tag__title {
-  color: $white;
+    color: $white;
 }
 
 .Tag--large {
-  font: $font-text-md;
-  padding: $padding-xxs $padding-sm;
-  border-radius: $border-radius-xl;
+    font: $font-text-md;
+    padding: $padding-xxs $padding-sm;
+    border-radius: $border-radius-xl;
 }

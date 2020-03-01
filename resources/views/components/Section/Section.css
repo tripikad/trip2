@@ -1,20 +1,20 @@
 .Section {
-  display: flex;
-  justify-content: center;
-  background-size: cover;
-  background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .Section__items {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 
 .Section__items > * {
-  margin-bottom: $spacer;
-  margin-bottom: var(--gap);
+    margin-bottom: $spacer;
+    margin-bottom: var(--gap);
 }
 
 .Section__items > *:last-child {
-  margin-bottom: 0;
+    margin-bottom: 0;
 }

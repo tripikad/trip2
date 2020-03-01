@@ -1,30 +1,30 @@
 .UserImage {
-  position: relative;
+    position: relative;
 }
 
 .UserImage__image {
-  border-radius: 50%;
-  width: 100%;
-  height: 100%;
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
 }
 
 .UserImage__arcRank,
 .UserImage__arcReminder {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
 }
 
 .UserImage__arcRank svg {
-  stroke: $cyan;
+    stroke: $cyan;
 }
 
 .UserImage__arcReminder svg {
-  stroke: $gray-light;
+    stroke: $gray-light;
 }
 
 .UserImage--dark .UserImage__arcRank svg {
-  stroke: $cyan-dark;
+    stroke: $cyan-dark;
 }

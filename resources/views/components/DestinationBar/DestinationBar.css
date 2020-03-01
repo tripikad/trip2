@@ -1,45 +1,45 @@
 .DestinationBar {
-  background: $yellow;
-  display: flex;
-  height: calc($spacer * 6);
-  align-items: center;
-  padding: 0 calc($spacer * 1.5);
+    background: $yellow;
+    display: flex;
+    height: calc($spacer * 6);
+    align-items: center;
+    padding: 0 calc($spacer * 1.5);
 }
 
 .DestinationBar__parents {
-  color: $white;
-  display: flex;
-  font: $font-heading-md;
-  align-items: center;
-  opacity: $opacity-md;
+    color: $white;
+    display: flex;
+    font: $font-heading-md;
+    align-items: center;
+    opacity: $opacity-md;
 }
 
 .DestinationBar__parents > div {
-  margin-right: $margin-xs;
+    margin-right: $margin-xs;
 }
 
 .DestinationBar__title {
-  color: $white;
-  font: $font-heading-lg;
-  margin-top: calc($margin-xxs * -1);
+    color: $white;
+    font: $font-heading-lg;
+    margin-top: calc($margin-xxs * -1);
 }
 
 .DestinationBar__title:hover {
-  color: $white-hover;
+    color: $white-hover;
 }
 
 .DestinationBar--yellow {
-  background: $yellow; /* default; */
+    background: $yellow; /* default; */
 }
 
 .DestinationBar--purple {
-  background: $purple;
+    background: $purple;
 }
 
 .DestinationBar--red {
-  background: $red;
+    background: $red;
 }
 
 .DestinationBar--green {
-  background: $green;
+    background: $green;
 }

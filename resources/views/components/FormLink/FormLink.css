@@ -1,53 +1,53 @@
 .FormLink {
-  background: none;
-  border: none;
-  color: $gray;
-  cursor: pointer;
-  font: $font-text-sm;
-  padding: 0 $padding-xs;
-  border-radius: $border-radius-md;
-  cursor: pointer;
-  transition: $transition-md;
+    background: none;
+    border: none;
+    color: $gray;
+    cursor: pointer;
+    font: $font-text-sm;
+    padding: 0 $padding-xs;
+    border-radius: $border-radius-md;
+    cursor: pointer;
+    transition: $transition-md;
 }
 
 .FormLink {
-  color: $gray;
+    color: $gray;
 }
 
 .FormLink:hover {
-  color: $gray-hover;
+    color: $gray-hover;
 }
 
 .FormLink--white {
-  color: $white;
+    color: $white;
 }
 
 .FormLink--white:hover {
-  color: $white-hover;
+    color: $white-hover;
 }
 
 .FormLink--green {
-  color: $green;
+    color: $green;
 }
 
 .FormLink--green:hover {
-  color: $white;
-  background: $green;
+    color: $white;
+    background: $green;
 }
 
 .FormLink--pink {
-  color: $pink-dark;
+    color: $pink-dark;
 }
 
 .FormLink--pink:hover {
-  background: $pink;
+    background: $pink;
 }
 
 .FormLink--pink.FormLink--filled {
-  color: $pink-dark;
-  background: $pink;
+    color: $pink-dark;
+    background: $pink;
 }
 
 .FormLink--pink.FormLink--filled:hover {
-  background: $pink-hover;
+    background: $pink-hover;
 }

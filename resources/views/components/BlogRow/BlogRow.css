@@ -1,17 +1,17 @@
 .BlogRow {
-  display: flex;
-  align-items: center;
-  flex-direction: column ?if $mobile;
-  text-align: center ?if $mobile;
+    display: flex;
+    align-items: center;
+    flex-direction: column ?if $mobile;
+    text-align: center ?if $mobile;
 }
 
 .BlogRow__user {
-  margin-right: $margin-sm;
-  margin-bottom: $margin-sm ?if $mobile;
+    margin-right: $margin-sm;
+    margin-bottom: $margin-sm ?if $mobile;
 }
 
 .BlogRow__title {
-  font: $font-heading-lg;
-  color: $gray-dark;
-  margin-bottom: $margin-sm ?if $mobile;
+    font: $font-heading-lg;
+    color: $gray-dark;
+    margin-bottom: $margin-sm ?if $mobile;
 }

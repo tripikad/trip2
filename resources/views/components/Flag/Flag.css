@@ -1,62 +1,62 @@
 .Flag {
-  display: flex;
-  align-items: baseline;
-  padding-top: calc($spacer / 2);
+    display: flex;
+    align-items: baseline;
+    padding-top: calc($spacer / 2);
 }
 
 .Flag__icon {
-  margin-right: $margin-xxs;
+    margin-right: $margin-xxs;
 }
 
 .Flag__icon:hover {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .Flag__icon svg {
-  fill: $gray-light;
+    fill: $gray-light;
 }
 
 .Flag__value {
-  font: $font-text-sm;
-  color: $gray;
-  margin-right: $margin-xxs;
+    font: $font-text-sm;
+    color: $gray;
+    margin-right: $margin-xxs;
 }
 
 .Flag--green.Flag--unflagged .Flag__icon svg,
 .Flag--red.Flag--unflagged .Flag__icon svg {
-  fill: $gray;
+    fill: $gray;
 }
 
 .Flag--green.Flag--unflagged .Flag__icon:hover svg,
 .Flag--red.Flag--unflagged .Flag__icon:hover svg {
-  fill: $gray-hover;
+    fill: $gray-hover;
 }
 
 .Flag--green.Flag--unflagged .Flag__value,
 .Flag--red.Flag--unflagged .Flag__value {
-  color: $gray;
+    color: $gray;
 }
 
 .Flag--green .Flag__icon svg {
-  fill: $green;
+    fill: $green;
 }
 
 .Flag--green .Flag__icon:hover svg {
-  fill: $green-hover;
+    fill: $green-hover;
 }
 
 .Flag--green .Flag__value {
-  color: $green;
+    color: $green;
 }
 
 .Flag--red .Flag__icon svg {
-  fill: $red;
+    fill: $red;
 }
 
 .Flag--red .Flag__icon:hover svg {
-  fill: $red-hover;
+    fill: $red-hover;
 }
 
 .Flag--red .Flag__value {
-  color: $red;
+    color: $red;
 }

@@ -7,26 +7,26 @@ use App\Destination;
 
 class ExperimentsController extends Controller
 {
-  public function index()
-  {
-    $data = collect()->push(
-      collect()
-        ->put('a', 'ahaa')
-        ->put('b', 'bebee')
-    );
+    public function index()
+    {
+        $data = collect()->push(
+            collect()
+                ->put('a', 'ahaa')
+                ->put('b', 'bebee')
+        );
 
-    return layout('Full')
-      ->withItems(
-        collect()->push(
-          component('Section')
-            ->withBackground('blue')
+        return layout('Full')
             ->withItems(
-              component('Table')
-                ->is('white')
-                ->withItems($data)
+                collect()->push(
+                    component('Section')
+                        ->withBackground('blue')
+                        ->withItems(
+                            component('Table')
+                                ->is('white')
+                                ->withItems($data)
+                        )
+                )
             )
-        )
-      )
-      ->render();
-  }
+            ->render();
+    }
 }

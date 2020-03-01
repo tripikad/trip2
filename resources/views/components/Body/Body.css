@@ -1,54 +1,54 @@
 .Body {
-  font: $font-text-md;
-  line-height: $line-height-lg;
+    font: $font-text-md;
+    line-height: $line-height-lg;
 }
 
 .Body,
 .Body * {
-  color: $gray-dark;
+    color: $gray-dark;
 }
 
 .Body p {
-  margin-bottom: $margin-md;
+    margin-bottom: $margin-md;
 }
 
 .Body p:last-child {
-  margin-bottom: 0;
+    margin-bottom: 0;
 }
 
 .Body h1,
 .Body h2,
 .Body h3 {
-  margin: $margin-sm 0 $margin-sm 0;
-  font: $font-heading-lg;
+    margin: $margin-sm 0 $margin-sm 0;
+    font: $font-heading-lg;
 }
 
 .Body h4 {
-  margin: $margin-sm 0 $margin-sm 0;
-  font: $font-heading-md;
-  color: $gray;
+    margin: $margin-sm 0 $margin-sm 0;
+    font: $font-heading-md;
+    color: $gray;
 }
 
 .Body a,
 .Body a:link,
 .Body a:active {
-  color: $blue;
-  text-decoration: underline;
-  word-wrap: break-word;
-  word-break: break-word;
+    color: $blue;
+    text-decoration: underline;
+    word-wrap: break-word;
+    word-break: break-word;
 }
 
 .Body a:hover {
-  color: $blue-hover;
+    color: $blue-hover;
 }
 
 .Body ul {
-  padding-left: $padding-md;
-  margin: $margin-md 0;
+    padding-left: $padding-md;
+    margin: $margin-md 0;
 }
 
 .Body ul li {
-  list-style-type: disc;
+    list-style-type: disc;
 }
 
 /*
@@ -57,131 +57,131 @@
 }
 */
 .Body ol {
-  list-style-type: none;
-  position: relative;
-  margin: $margin-md 0;
+    list-style-type: none;
+    position: relative;
+    margin: $margin-md 0;
 }
 
 .Body ol li {
-  counter-increment: step-counter;
-  margin: 0 0 calc($spacer / 1.5) calc($spacer * 2.25);
+    counter-increment: step-counter;
+    margin: 0 0 calc($spacer / 1.5) calc($spacer * 2.25);
 }
 
 .Body ol li::before {
-  padding-top: calc($spacer * 0.2);
-  background-color: $gray;
-  border-radius: $border-radius-xxl;
-  color: $white;
-  content: counter(step-counter);
-  font: $font-text-sm;
-  height: calc($spacer * 1.75);
-  left: 0;
-  position: absolute;
-  text-align: center;
-  width: calc($spacer * 1.75);
+    padding-top: calc($spacer * 0.2);
+    background-color: $gray;
+    border-radius: $border-radius-xxl;
+    color: $white;
+    content: counter(step-counter);
+    font: $font-text-sm;
+    height: calc($spacer * 1.75);
+    left: 0;
+    position: absolute;
+    text-align: center;
+    width: calc($spacer * 1.75);
 }
 
 .Body blockquote {
-  padding-left: $padding-md;
-  border-left: $border-gray-lg;
-  font: $font-text-lg;
-  line-height: $line-height-lg;
-  margin-bottom: $margin-md;
-  color: $gray-light;
+    padding-left: $padding-md;
+    border-left: $border-gray-lg;
+    font: $font-text-lg;
+    line-height: $line-height-lg;
+    margin-bottom: $margin-md;
+    color: $gray-light;
 }
 
 .Body img {
-  width: 100%;
+    width: 100%;
 }
 
 .Body p img {
-  margin-bottom: $margin-xxs;
+    margin-bottom: $margin-xxs;
 }
 
 .Body table {
-  width: 100%;
-  border: 1px solid $gray-light;
-  border-collapse: collapse;
-  margin: $margin-md 0;
+    width: 100%;
+    border: 1px solid $gray-light;
+    border-collapse: collapse;
+    margin: $margin-md 0;
 }
 
 .Body th,
 .Body tr {
-  border-bottom: 1px solid $gray-light;
-  text-align: left;
-  vertical-align: top;
+    border-bottom: 1px solid $gray-light;
+    text-align: left;
+    vertical-align: top;
 }
 
 .Body th {
-  background: $gray-light;
-  font: $font-heading-sm;
+    background: $gray-light;
+    font: $font-heading-sm;
 }
 
 .Body th,
 .Body td {
-  padding: $padding-xs;
-  border-right: 1px solid #;
+    padding: $padding-xs;
+    border-right: 1px solid #;
 }
 
 .Body hr {
-  border-top: 1px solid $gray-light;
-  border: 0;
-  height: 0;
-  margin: $margin-md 0;
+    border-top: 1px solid $gray-light;
+    border: 0;
+    height: 0;
+    margin: $margin-md 0;
 }
 
 .Body > .FlightCalendar {
-  margin-bottom: $margin-md;
+    margin-bottom: $margin-md;
 }
 
 .Body > .Youtube {
-  margin-bottom: $margin-md;
+    margin-bottom: $margin-md;
 }
 
 .Body > .Vimeo {
-  margin-bottom: $margin-md;
+    margin-bottom: $margin-md;
 }
 
 .Body--responsive {
-  font-family: $font-family;
-  font-size: responsive;
-  line-height: $line-height-lg;
-  max-font-size: $font-size-lg;
-  min-font-size: $font-size-md;
+    font-family: $font-family;
+    font-size: responsive;
+    line-height: $line-height-lg;
+    max-font-size: $font-size-lg;
+    min-font-size: $font-size-md;
 }
 
 .Body--small {
-  font-size: $font-size-sm;
+    font-size: $font-size-sm;
 }
 
 .Body--white,
 .Body--white * {
-  color: $white;
+    color: $white;
 }
 
 .Body--white a,
 .Body--white a:link,
 .Body--white a:active {
-  color: $white;
+    color: $white;
 }
 
 .Body--gray,
 .Body--gray * {
-  color: $gray;
+    color: $gray;
 }
 
 .Body--red,
 .Body--red * {
-  color: $red;
+    color: $red;
 }
 
 .Body--semitransparent,
 .Body--semitransparent * {
-  opacity: $opacity-lg;
-  color: $black;
+    opacity: $opacity-lg;
+    color: $black;
 }
 
 .Body--narrow {
-  padding-right: $margin-xxxl;
-  padding-right: 0 ?if $tablet;
+    padding-right: $margin-xxxl;
+    padding-right: 0 ?if $tablet;
 }

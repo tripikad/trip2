@@ -1,32 +1,32 @@
 .HeaderLight {
-  padding-top: $padding-md;
+    padding-top: $padding-md;
 }
 
 .HeaderLight__content {
-  margin-top: $margin-xl;
-  margin-left: $margin-xl;
-  margin-left: 0 ?if $tablet;
-  margin-bottom: $margin-md;
+    margin-top: $margin-xl;
+    margin-left: $margin-xl;
+    margin-left: 0 ?if $tablet;
+    margin-bottom: $margin-md;
 }
 
 .HeaderLight__contentItem {
-  margin-bottom: $margin-md;
+    margin-bottom: $margin-md;
 }
 
 .HeaderLight__contentItem:last-child {
-  margin-bottom: 0;
+    margin-bottom: 0;
 }
 
 .HeaderLight__meta {
-  margin-top: $margin-md;
+    margin-top: $margin-md;
 }
 
 .HeaderLight__meta2 {
-  margin-top: $margin-md;
+    margin-top: $margin-md;
 }
 
 .HeaderLight__title {
-  color: $gray-dark;
-  font: $font-heading-xxl;
-  font: $font-heading-xl ?if $mobile;
+    color: $gray-dark;
+    font: $font-heading-xxl;
+    font: $font-heading-xl ?if $mobile;
 }

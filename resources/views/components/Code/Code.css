@@ -1,13 +1,13 @@
 .Code {
-  white-space: pre-wrap;
-  word-wrap: normal;
-  line-height: $line-height-lg;
-  color: $gray;
-  font-family: $font-family-code;
-  font-size: $font-size-sm;
+    white-space: pre-wrap;
+    word-wrap: normal;
+    line-height: $line-height-lg;
+    color: $gray;
+    font-family: $font-family-code;
+    font-size: $font-size-sm;
 }
 
 .Code--gray {
-  background: $gray-light;
-  padding: calc($spacer * 1.5);
+    background: $gray-light;
+    padding: calc($spacer * 1.5);
 }

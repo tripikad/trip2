@@ -1,22 +1,22 @@
 .StyleSpacing {
-  display: flex;
-  min-height: calc($spacer * 10);
+    display: flex;
+    min-height: calc($spacer * 10);
 }
 
 .StyleSpacing__example {
-  display: flex;
-  justify-content: flex-end;
-  padding-right: $padding-sm;
-  overflow: auto;
-  width: calc($spacer * 10);
+    display: flex;
+    justify-content: flex-end;
+    padding-right: $padding-sm;
+    overflow: auto;
+    width: calc($spacer * 10);
 }
 
 .StyleSpacing__example > div {
-  border: 1px solid $gray;
-  background: $gray-lighter;
+    border: 1px solid $gray;
+    background: $gray-lighter;
 }
 
 .StyleSpacing__title {
-  font: $font-code-sm;
-  color: $gray;
+    font: $font-code-sm;
+    color: $gray;
 }

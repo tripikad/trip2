@@ -1,13 +1,13 @@
 <?php
 
 return [
-  'content.index.title' => 'Peidetud sisu',
+    'content.index.title' => 'Peidetud sisu',
 
-  'image.index.title' => 'Toimetuse pildid',
+    'image.index.title' => 'Toimetuse pildid',
 
-  'image.create.file.title' => 'Vali pilt mida lisada',
+    'image.create.file.title' => 'Vali pilt mida lisada',
 
-  'image.create.submit.title' => 'Lisa',
+    'image.create.submit.title' => 'Lisa',
 
-  'image.store.info' => 'Pilt :filename on lisatud'
+    'image.store.info' => 'Pilt :filename on lisatud'
 ];

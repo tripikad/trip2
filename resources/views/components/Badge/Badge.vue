@@ -1,16 +1,16 @@
 <template>
-  <div class="Badge" :class="isclasses">
-    <div class="Badge__title">
-      {{ title }}
+    <div class="Badge" :class="isclasses">
+        <div class="Badge__title">
+            {{ title }}
+        </div>
     </div>
-  </div>
 </template>
 
 <script>
 export default {
-  props: {
-    isclasses: { default: '' },
-    title: { default: '' }
-  }
+    props: {
+        isclasses: { default: '' },
+        title: { default: '' }
+    }
 }
 </script>

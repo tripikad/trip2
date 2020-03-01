@@ -22,6 +22,8 @@ jobs:
           mysql --host 127.0.0.1 --port ${{ job.services.mysql.ports['3306'] }} -uroot -ppassword -e "SHOW DATABASES"
           echo mysql port: ${{ job.services.mysql.ports['3306'] }}
       - uses: actions/checkout@v1
+      - name: Set PHP version to PHP 7.3
+        run: sudo update-alternatives --set php /usr/bin/php7.3 > /dev/null
       - uses: actions/setup-node@v1
       - name: Copy .env
         run: php -r "file_exists('.env') || copy('.env.example', '.env');"

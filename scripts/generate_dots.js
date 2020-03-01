@@ -6,8 +6,8 @@ const countries = require(__dirname + '/data/countries.json')
 const facts = require(__dirname + '/data/trip_facts.json')
 
 const iso3toId = iso3 => {
-  const destination = facts.filter(f => f.type == 'country').find(f => f.country_code3 === iso3)
-  return destination ? destination.id : 0
+    const destination = facts.filter(f => f.type == 'country').find(f => f.country_code3 === iso3)
+    return destination ? destination.id : 0
 }
 
 // Starting dot generation
@@ -20,55 +20,55 @@ let dots = []
 // Loop over world Y-axis
 
 for (let lat = 80; lat > -80; lat -= step) {
-  // Loop over world X-axis
+    // Loop over world X-axis
 
-  for (let lon = -180 + step * 5; lon < 180 + step * 5; lon += step) {
-    // Set up a square polygon with dot coordinates in the center
+    for (let lon = -180 + step * 5; lon < 180 + step * 5; lon += step) {
+        // Set up a square polygon with dot coordinates in the center
 
-    const box = turf.polygon([
-      [
-        [lon - halfStep, lat + halfStep],
-        [lon + halfStep, lat + halfStep],
-        [lon + halfStep, lat - halfStep],
-        [lon - halfStep, lat - halfStep],
-        [lon - halfStep, lat + halfStep]
-      ]
-    ])
+        const box = turf.polygon([
+            [
+                [lon - halfStep, lat + halfStep],
+                [lon + halfStep, lat + halfStep],
+                [lon + halfStep, lat - halfStep],
+                [lon - halfStep, lat - halfStep],
+                [lon - halfStep, lat + halfStep]
+            ]
+        ])
 
-    // Set up the dot to be generated as a GeoJSON object
-    // for easier debuggability with tools like geojson.io
+        // Set up the dot to be generated as a GeoJSON object
+        // for easier debuggability with tools like geojson.io
 
-    const dot = turf.point([lon, lat])
+        const dot = turf.point([lon, lat])
 
-    dot.properties.countries = []
+        dot.properties.countries = []
 
-    // Loop over countries to find the intersection with our
-    // square. If there is an intersection, add the country to
-    // the dot.properties.countries array
+        // Loop over countries to find the intersection with our
+        // square. If there is an intersection, add the country to
+        // the dot.properties.countries array
 
-    countries.features
-      .filter(country => country.properties.name !== 'Antarctica')
-      .forEach(country => {
-        if (country.geometry.type === 'Polygon') {
-          const intersection = turf.intersect(box, turf.polygon(country.geometry.coordinates))
-          if (intersection !== null) {
-            dot.properties.countries.push(iso3toId(country.id))
-          }
+        countries.features
+            .filter(country => country.properties.name !== 'Antarctica')
+            .forEach(country => {
+                if (country.geometry.type === 'Polygon') {
+                    const intersection = turf.intersect(box, turf.polygon(country.geometry.coordinates))
+                    if (intersection !== null) {
+                        dot.properties.countries.push(iso3toId(country.id))
+                    }
+                }
+                if (country.geometry.type === 'MultiPolygon') {
+                    country.geometry.coordinates.forEach(polygon => {
+                        const intersection = turf.intersect(box, turf.polygon(polygon))
+                        if (intersection !== null) {
+                            dot.properties.countries.push(iso3toId(country.id))
+                        }
+                    })
+                }
+            })
+
+        if (dot.properties.countries.length > 0) {
+            dots.push(dot)
         }
-        if (country.geometry.type === 'MultiPolygon') {
-          country.geometry.coordinates.forEach(polygon => {
-            const intersection = turf.intersect(box, turf.polygon(polygon))
-            if (intersection !== null) {
-              dot.properties.countries.push(iso3toId(country.id))
-            }
-          })
-        }
-      })
-
-    if (dot.properties.countries.length > 0) {
-      dots.push(dot)
     }
-  }
 }
 
 // Generate the PHP array output
@@ -84,9 +84,9 @@ console.log('<?php return [')
 // })
 
 console.log(
-  dots
-    .map(dot => `[${dot.geometry.coordinates[0]},${dot.geometry.coordinates[1]},[${dot.properties.countries}]],`)
-    .join('')
+    dots
+        .map(dot => `[${dot.geometry.coordinates[0]},${dot.geometry.coordinates[1]},[${dot.properties.countries}]],`)
+        .join('')
 )
 
 console.log('];')

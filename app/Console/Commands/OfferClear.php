@@ -9,27 +9,27 @@ use App\User;
 
 class OfferClear extends Command
 {
-  protected $signature = 'offer:clear';
+    protected $signature = 'offer:clear';
 
-  protected $description = 'Clears all offers';
+    protected $description = 'Clears all offers';
 
-  public function __construct()
-  {
-    parent::__construct();
-  }
-
-  public function handle()
-  {
-    // @LAUNCH Remove
-
-    if ($this->confirm('This command removes all offer content. Do you want to continue?')) {
-      DB::table('offers')->truncate();
-      DB::table('bookings')->truncate();
-      DB::table('offer_destination')->truncate();
-
-      $user = User::whereCompany(true)->update(['company' => false]);
-
-      $this->info("\nOffer content cleared\n");
+    public function __construct()
+    {
+        parent::__construct();
     }
-  }
+
+    public function handle()
+    {
+        // @LAUNCH Remove
+
+        if ($this->confirm('This command removes all offer content. Do you want to continue?')) {
+            DB::table('offers')->truncate();
+            DB::table('bookings')->truncate();
+            DB::table('offer_destination')->truncate();
+
+            $user = User::whereCompany(true)->update(['company' => false]);
+
+            $this->info("\nOffer content cleared\n");
+        }
+    }
 }
