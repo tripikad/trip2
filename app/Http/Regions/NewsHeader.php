@@ -52,14 +52,16 @@ class NewsHeader
                             $new->destinations->map(function ($tag) {
                                 return component('Tag')
                                     ->is('white')
-                                    ->with('title', $tag->vars()->shortName);
+                                    ->with('title', $tag->vars()->shortName)
+                                    ->with('route', route('destination.showSlug', [$tag->slug]));
                             })
                         )
                         ->merge(
                             $new->topics->map(function ($tag) {
                                 return component('MetaLink')
                                     ->is('white')
-                                    ->with('title', $tag->vars()->shortName);
+                                    ->with('title', $tag->vars()->shortName)
+                                    ->with('route', route('news.index', ['topic' => $tag]));
                             })
                         )
                         ->pushWhen(
