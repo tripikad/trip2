@@ -24,6 +24,7 @@
         ">
         <link rel="stylesheet" href="{{ dist('css') }}">
         <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
+        <script data-ad-client="ca-pub-7068052549547391" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
         <!-- TradeDoubler site verification 2960089 -->
         @yield('captcha')
     </head>
@@ -50,6 +51,7 @@
         @include('utils.facebook')
         @include('utils.googleTag')
         @include('utils.analytics')
+        {{--@include('utils.adsense')--}}
         {{--@include('utils.hotjar')--}}
         {{--@include('utils.viglink')--}}
         @stack('scripts')
