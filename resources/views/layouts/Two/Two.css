@@ -70,8 +70,6 @@
 
 .Two__sidebarItem {
     margin-bottom: $margin-md;
-    display: flex;
-    justify-content: center;
 }
 
 .Two__sidebarItem:last-child {
