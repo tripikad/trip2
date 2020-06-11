@@ -1,0 +1,23 @@
+.PollList__question {
+
+    color: $blue;
+}
+
+.PollList__font_page {
+
+    background-color: $gray-lighter;
+}
+
+.PollList__delete {
+
+    cursor: pointer;
+    border-radius: 3px;
+    color: white;
+    border: 0;
+    background-color: #FF5050;
+}
+
+.PollList__delete:hover {
+
+    background-color: red;
+}

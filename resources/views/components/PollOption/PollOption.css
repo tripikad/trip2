@@ -1,0 +1,20 @@
+
+.PollOption__label {
+    color: $gray;
+    display: block;
+    font: $font-heading-sm;
+    line-height: $line-height-md;
+    margin-bottom: $margin-sm;
+}
+
+.PollOption__option {
+    display: flex;
+    display: block ?if $mobile;
+    align-items: center;
+}
+
+.PollOption__delete {
+    cursor: pointer;
+    margin: 0 $margin-sm 0 $margin-sm;
+    margin: 0 0 $margin-sm 0 ?if $mobile;
+}
