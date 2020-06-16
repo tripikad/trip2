@@ -76,15 +76,24 @@ class PollController extends Controller
             return response()->json(null, 404);
         }
 
-        if ($this->userHasAnswered($poll, $request)) {
-            return response()->json([
-                'poll' => $poll,
-                'results' => $poll->getFormattedResults()
-            ]);
+        $today = Carbon::today();
+        if ($poll->active
+            && $poll->start_date <= $today->format('Y-m-d')
+            && ($poll->end_date >= $today->format('Y-m-d') || $poll->end_date === null)) {
+
+            if ($this->userHasAnswered($poll, $request)) {
+                return response()->json([
+                    'poll' => $poll,
+                    'results' => $poll->getFormattedResults()
+                ]);
+            } else {
+                $poll->loadMissing('poll_options');
+                return response()->json([
+                    'poll' => $poll
+                ]);
+            }
         } else {
-            return response()->json([
-                'poll' => $poll
-            ]);
+            return response()->json(null, 404);
         }
     }
 

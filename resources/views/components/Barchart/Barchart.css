@@ -12,7 +12,7 @@
 .Barchart__title {
     width: 100%;
     font: $font-text-md;
-    color: $gray;
+    color: $gray!important;
     font-weight: 600;
     display: flex;
     justify-content: flex-start;
@@ -26,7 +26,7 @@
 }
 
 .Barchart__bar {
-    background: rgba(55, 160, 235, .2);
+    background: rgba(55, 160, 235, .3);
     max-width: 500px;
     width: 100%;
     position: relative;
@@ -34,7 +34,6 @@
     display: flex;
     align-items: center;
     font: $font-heading-sm;
-    color: $white;
     border-radius: $border-radius-md;
     white-space: nowrap;
 }
@@ -46,26 +45,11 @@
     align-items: center;
     border-radius: $border-radius-md;
     white-space: nowrap;
-
 }
 
 .Barchart__percent {
     font: $font-heading-sm;
-    color: $white;
+    color: $white!important;
     font-weight: bold;
     padding-left: $padding-sm;
-}
-
-.Barchart--black .Barchart__bar {
-    color: $black;
-}
-
-.Barchart--block .Barchart__item {
-    display: block;
-}
-
-.Barchart--block .Barchart__title {
-    text-align: left;
-    display: block;
-    width: 100%;
 }

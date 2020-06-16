@@ -1,7 +1,15 @@
 .Poll__container {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.Poll__body {
     background: #f1f2f3;
     padding: 18px $margin-sm $margin-sm $margin-sm;
     border-radius: 3px;
+    max-width: 400px;
+    width: 100%;
 }
 
 .Poll__submitting {
@@ -10,7 +18,7 @@
 
 .Poll__title {
     font: $font-heading-md;
-    color: $gray;
+    color: $gray-dark;
     text-align: center;
     font-weight: bold;
     border-bottom: 1px solid rgba(128, 128, 128, .2);
