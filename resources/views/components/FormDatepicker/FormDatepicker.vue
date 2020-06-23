@@ -10,6 +10,7 @@
             :clearable="true"
             :noHeader="true"
             :locale="locale"
+            :disabled="disabled"
         />
 
     </div>
@@ -26,7 +27,8 @@
             title: { default: '' },
             value: { default: null },
             placeholder: { default: '' },
-            errors: { default: () => [] }
+            errors: { default: () => [] },
+            disabled: { default: false },
         },
 
         data: function () {
