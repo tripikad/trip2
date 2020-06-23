@@ -6,13 +6,11 @@ use Illuminate\Console\Command;
 use Carbon\Carbon;
 
 use App\Offer;
-use App\User;
 use App\Destination;
-use PhpParser\Node\Scalar\String_;
 
 class ReisiparadiisSync extends Command
 {
-    const USER_ID = 7311682; //reisiparadiis user ID
+    protected $user_id = null;
 
     protected $signature = 'reisiparadiis:sync';
 
@@ -36,6 +34,7 @@ class ReisiparadiisSync extends Command
     public function __construct()
     {
         parent::__construct();
+        $this->user_id = env('REISIPARADIIS_USER_ID');
         $token = env('REISIPARADIIS_TOKEN');
         $this->endpoint = str_replace('[TOKEN]', $token, $this->endpoint);
         $this->startDestination = Destination::where('name', 'Tallinn')->first();
@@ -136,7 +135,7 @@ class ReisiparadiisSync extends Command
                         }
 
                         $res = [
-                            'user_id' => self::USER_ID,
+                            'user_id' => $this->user_id,
                             'title' => $data['title'],
                             'style' => 'package',
                             'start_at' => $start,
