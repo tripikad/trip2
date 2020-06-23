@@ -98,6 +98,28 @@ class BodyFormatter
         return $this;
     }
 
+    public function polls()
+    {
+        $pollsPattern = '/\[\[poll:([0-9]+)\]\]/';
+
+        if (preg_match_all($pollsPattern, $this->body, $matches)) {
+            if (isset($matches[1]) && $matches[1] && is_array($matches[1])) {
+                $id = intval($matches[1][0]);
+
+                $component = component('Poll')
+                    ->with('id', $id);
+
+                $this->body = str_replace(
+                    "[[poll:{$id}]]",
+                    $component,
+                    $this->body
+                );
+            }
+        }
+
+        return $this;
+    }
+
     public function images()
     {
         $imagePattern = '/\[\[([0-9]+)\]\]/';

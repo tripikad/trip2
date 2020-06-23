@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import VueCookie from 'vue-cookie'
 import axios from 'axios'
+import moment from 'moment'
+import VueDatePicker from '@mathieustan/vue-datepicker';
+import '@mathieustan/vue-datepicker/dist/vue-datepicker.min.css';
 
 // Require CSS files
 
@@ -23,6 +26,8 @@ requireComponent.keys().forEach(filePath => {
     const componentName = filePath.match(/[-_\w]+[.][\w]+$/i)[0].split('.')[0]
     Vue.component(componentName, componentConfig.default || componentConfig)
 })
+
+Vue.use(VueDatePicker);
 
 // Set up cookies
 
@@ -50,6 +55,8 @@ Vue.prototype.$http = axios.create({
         'X-Requested-With': 'XMLHttpRequest'
     }
 })
+
+Vue.prototype.$moment = moment
 
 // Create a Vue instance
 

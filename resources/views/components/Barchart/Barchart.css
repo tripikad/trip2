@@ -1,0 +1,55 @@
+.Barchart {
+    display: flex;
+    flex-direction: column;
+}
+
+.Barchart__item {
+    margin-bottom: $margin-sm;
+    display: flex;
+    flex-direction: column;
+}
+
+.Barchart__title {
+    width: 100%;
+    font: $font-text-md;
+    color: $gray!important;
+    font-weight: 600;
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 2px;
+    font-size: 17px;
+    line-height: 135%;
+}
+
+.Barchart__row:last-child {
+    margin-bottom: 0;
+}
+
+.Barchart__bar {
+    background: rgba(55, 160, 235, .3);
+    max-width: 500px;
+    width: 100%;
+    position: relative;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    font: $font-heading-sm;
+    border-radius: $border-radius-md;
+    white-space: nowrap;
+}
+
+.Barchart__line {
+    background: $blue;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    border-radius: $border-radius-md;
+    white-space: nowrap;
+}
+
+.Barchart__percent {
+    font: $font-heading-sm;
+    color: $white!important;
+    font-weight: bold;
+    padding-left: $padding-sm;
+}

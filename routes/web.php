@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+
 // Frontpage
 
 Route::get('/', 'FrontpageController@index')->name('frontpage.index');
@@ -561,6 +563,36 @@ Route::post('booking/{id}', 'BookingController@create')
     ->name('booking.create');
 
 Route::get('booking/{id}/goto', 'BookingController@goto')->name('booking.goto');
+
+// Polls
+
+Route::get('polls', 'PollController@index')
+    ->name('poll.index')
+    ->middleware('role:admin');
+
+Route::get('poll/create', 'PollController@create')
+    ->name('poll.create')
+    ->middleware('role:admin');
+
+Route::post('poll/store', 'PollController@store')
+    ->name('poll.store')
+    ->middleware('role:admin');
+
+Route::get('poll/{poll}/edit', 'PollController@edit')
+    ->name('poll.edit')
+    ->middleware('role:admin');
+
+Route::post('poll/{poll}/update', 'PollController@update')
+    ->name('poll.update')
+    ->middleware('role:admin');
+
+Route::get('poll/{poll}/show', 'PollController@show')
+    ->name('poll.show')
+    ->middleware('role:admin');
+
+Route::post('poll/{poll}/delete', 'PollController@delete')
+    ->name('poll.delete')
+    ->middleware('role:admin');
 
 // Legacy user paths
 
