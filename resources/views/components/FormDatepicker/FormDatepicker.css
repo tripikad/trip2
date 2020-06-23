@@ -1,0 +1,25 @@
+.FormDatepicker__label {
+    color: $gray;
+    display: block;
+    font: $font-heading-sm;
+    line-height: $line-height-md;
+    margin-bottom: $margin-sm;
+}
+
+.vd-wrapper {
+
+    border: $border-gray-md;
+    border-radius: $border-radius-md;
+    color: $gray-dark;
+    font: $font-text-md;
+    padding: $padding-sm;
+    width: 100%;
+}
+
+.FormDatepicker--error .vd-wrapper {
+    color: $red;
+}
+
+.FormDatepicker--error .vd-wrapper {
+    border-color: $red;
+}

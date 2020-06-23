@@ -5,10 +5,8 @@ namespace App\Http\Controllers;
 use App\Poll;
 use App\PollOption;
 use Carbon\Carbon;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Auth as Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -75,12 +73,12 @@ class PollController extends Controller
                         ->push(component('Grid2')
                             ->with('gutter', true)
                             ->with('items', collect()
-                                ->push(component('FormTextfield')
+                                ->push(component('FormDatepicker')
                                     ->with('title', trans('poll.start_date'))
                                     ->with('name', 'start_date')
                                     ->with('value', old('start_date'))
                                 )
-                                ->push(component('FormTextfield')
+                                ->push(component('FormDatepicker')
                                     ->with('title', trans('poll.end_date'))
                                     ->with('name', 'end_date')
                                     ->with('value', old('end_date'))
@@ -153,13 +151,13 @@ class PollController extends Controller
                         ->push(component('Grid2')
                             ->with('gutter', true)
                             ->with('items', collect()
-                                ->push(component('FormTextfield')
+                                ->push(component('FormDatepicker')
                                     ->with('title', trans('poll.start_date'))
                                     ->with('name', 'start_date')
                                     ->with('value', $answered ? $poll->start_date->format('Y-m-d') : old('start_date', $poll->start_date->format('Y-m-d')))
                                     ->with('disabled', $answered ? true : false)
                                 )
-                                ->push(component('FormTextfield')
+                                ->push(component('FormDatepicker')
                                     ->with('title', trans('poll.end_date'))
                                     ->with('name', 'end_date')
                                     ->with('value', old('end_date', $poll->end_date ? $poll->end_date->format('Y-m-d') : null))
@@ -209,14 +207,14 @@ class PollController extends Controller
         if ($poll && $poll->answered) {
             $postValues['start_date'] = $poll->start_date;
             $rules = [
-                'end_date' => 'sometimes|date_format:Y-m-d|after_or_equal:start_date'
+                'end_date' => 'sometimes|date_format:d.m.Y|after_or_equal:start_date'
             ];
         } else {
             $postValues['poll_fields'] = array_filter($postValues['poll_fields']);
             $rules = [
                 'question' => 'required',
-                'start_date' => 'required|date_format:Y-m-d',
-                'end_date' => 'sometimes|date_format:Y-m-d|after_or_equal:start_date',
+                'start_date' => 'required|date|date_format:d.m.Y',
+                'end_date' => 'sometimes|date|date_format:d.m.Y|after_or_equal:start_date',
                 'poll_fields' => 'required|array|min:2'
             ];
         }
@@ -224,11 +222,12 @@ class PollController extends Controller
         $attribute_names = [
             'question' => trans('poll.question'),
             'start_date' => trans('poll.start_date'),
-            'end_date' => trans('poll.start_date'),
+            'end_date' => trans('poll.end_date'),
         ];
 
         $messages = [
             'poll_fields.required' => trans('poll.validation.options_required'),
+            'poll_fields.min' => trans('poll.validation.options_required'),
             'end_date.after_or_equal' => trans('poll.validation.end_date_invalid'),
         ];
 
@@ -258,8 +257,8 @@ class PollController extends Controller
 
         $poll = new Poll();
         $poll->question = $postValues['question'];
-        $poll->start_date = $postValues['start_date'];
-        $poll->end_date = ($postValues['end_date'] && $postValues['end_date'] !== '') ? $postValues['end_date'] : null;
+        $poll->start_date = Carbon::createFromFormat('d.m.Y', $postValues['start_date']);
+        $poll->end_date = $postValues['end_date'] ? Carbon::createFromFormat('d.m.Y', $postValues['end_date']) : null;
         $poll->anonymous = isset($postValues['anonymous']) && $postValues['anonymous'];
         $poll->front_page = isset($postValues['front_page']) && $postValues['front_page'];
         $poll->active = isset($postValues['active']) && $postValues['active'];
@@ -290,13 +289,13 @@ class PollController extends Controller
         $hasResults = $poll->results->count();
         $postValues = $request->post();
 
-        $poll->end_date = ($postValues['end_date'] && $postValues['end_date'] !== '') ? $postValues['end_date'] : null;
+        $poll->end_date = $postValues['end_date'] ? Carbon::createFromFormat('d.m.Y', $postValues['end_date']) : null;
         $poll->front_page = isset($postValues['front_page']) && $postValues['front_page'];
         $poll->active = isset($postValues['active']) && $postValues['active'];
 
         if (!$hasResults) {
             $poll->question = $postValues['question'];
-            $poll->start_date = $postValues['start_date'];
+            $poll->start_date = Carbon::createFromFormat('d.m.Y', $postValues['start_date']);
             $poll->anonymous = isset($postValues['anonymous']) && $postValues['anonymous'];
         }
 

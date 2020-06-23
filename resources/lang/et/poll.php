@@ -22,7 +22,7 @@ return [
     ],
     'validation' => [
         'options_required' => 'Vähemalt 2 valikut on nõutud',
-        'end_date_invalid' => 'Vale lõpp aeg'
+        'end_date_invalid' => 'Lõpp kuupäev peab olema suurem/võrdne algusest'
     ],
     'results' => 'Tulemused',
 
