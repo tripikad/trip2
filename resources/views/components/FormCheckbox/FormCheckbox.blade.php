@@ -3,6 +3,7 @@
 	$name = $name ?? '';
 	$value = $value ?? '';
 	$title = $title ?? '';
+	$disabled = $disabled ?? false;
 
 @endphp
 <div class="FormCheckbox {{ $isclasses }}">
@@ -14,6 +15,7 @@
         @if ($value) checked @endif
         class="FormCheckbox__checkbox" 
         dusk="{{ slug($title) }}"
+        @if ($disabled) disabled="disabled" @endif
     >
 
     <label for="{{ $name }}" class="FormCheckbox__label">{{ $title }}</label>

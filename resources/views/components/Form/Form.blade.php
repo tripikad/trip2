@@ -13,6 +13,7 @@ $files = $files ?? false;
     action="{{ $route }}"
     method="POST"
     accept-charset="utf-8"
+    autocomplete="off"
     @if ($files) enctype="multipart/form-data" @endif
 >
 

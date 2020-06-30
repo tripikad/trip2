@@ -51,6 +51,11 @@ class InternalController extends Controller
                     ->with('route', route('newsletter.index'))
             );
         }
+        $navBar
+            ->pushWhen($loggedUser && $loggedUser->hasRole('admin'), component('Link')
+                ->with('title', trans('poll.title'))
+                ->with('route', route('poll.index'))
+            );
 
         return layout('Two')
             ->with('background', component('BackgroundMap'))

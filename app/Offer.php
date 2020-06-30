@@ -9,9 +9,9 @@ use Jenssegers\Date\Date;
 
 class Offer extends Model
 {
-    protected $fillable = ['id', 'status', 'style', 'user_id', 'title', 'body', 'data', 'start_at', 'end_at'];
+    protected $fillable = ['id', 'status', 'style', 'user_id', 'title', 'body', 'data', 'start_at', 'end_at', 'ext_id', 'ext_date_time'];
 
-    protected $dates = ['start_at', 'end_at', 'created_at', 'updated_at'];
+    protected $dates = ['start_at', 'end_at', 'created_at', 'updated_at', 'ext_date_time'];
 
     protected $casts = [
         'data' => 'object',
