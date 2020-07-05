@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class NewsletterSentSubscriber extends Model
 {
-    // Setup
+    protected $table = 'newsletter_sent_subscribers';
 
     protected $dates = ['started_at', 'ended_at'];
 

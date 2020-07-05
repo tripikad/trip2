@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class NewsletterType extends Model
 {
-    // Setup
+    protected $table = 'newsletter_types';
 
     protected $dates = ['last_sent_at', 'send_at', 'created_at', 'updated_at'];
 

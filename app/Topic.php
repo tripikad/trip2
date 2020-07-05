@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Topic extends Model
 {
-    // Setup
+    protected $table = 'topics';
 
     public $timestamps = false;
 

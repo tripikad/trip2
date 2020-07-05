@@ -6,8 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class PollOption extends Model
 {
-    protected $fillable = ['poll_id', 'name'];
     protected $table = 'poll_options';
+
+    protected $fillable = ['poll_id', 'name'];
 
     public $timestamps = false;
 

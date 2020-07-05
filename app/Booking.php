@@ -3,10 +3,11 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Jenssegers\Date\Date;
 
 class Booking extends Model
 {
+    protected $table = 'bookings';
+
     protected $fillable = ['booking_id', 'user_id', 'data'];
 
     protected $casts = [

@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class UnreadContent extends Model
 {
+    protected $table = 'unread_contents';
+
     public $timestamps = false;
     protected $dates = ['read_at'];
 

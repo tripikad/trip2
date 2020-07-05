@@ -13,7 +13,7 @@ class Content extends Model
 
     const FLIGHT_IMAGE_DATE = '2019-08-15';
 
-    // Setup
+    protected $table = 'contents';
 
     protected $fillable = [
         'user_id',
@@ -59,24 +59,6 @@ class Content extends Model
             return 0;
         } else {
             return $this->views->count;
-        }
-    }
-
-    /*todo: remove after update*/
-    public function viewsOld()
-    {
-        return $this->morphMany('App\Activity', 'activity')
-            ->selectRaw('activity_id, count(*) as count')
-            ->where('type', 'view')
-            ->groupBy('activity_id');
-    }
-
-    public function getViewsCountOldAttribute()
-    {
-        if (!$this->viewsOld->count()) {
-            return 0;
-        } else {
-            return $this->viewsOld->first()->count;
         }
     }
 
