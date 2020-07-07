@@ -33,8 +33,7 @@
         "roumen/feed": "~2.10",
         "roumen/sitemap": "^2.6",
         "symfony/yaml": "^4.0",
-        "wpb/string-blade-compiler": "2.*@dev",
-        "symfony/debug": "4.4.8"
+        "wpb/string-blade-compiler": "2.*@dev"
     },
     "require-dev": {
         "filp/whoops": "~2.0",
