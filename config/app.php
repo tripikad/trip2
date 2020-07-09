@@ -158,16 +158,13 @@ return [
         Ipunkt\LaravelAnalytics\AnalyticsServiceProvider::class,
         Roumen\Feed\FeedServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
-        Laravelista\Ekko\EkkoServiceProvider::class,
         Jenssegers\Date\DateServiceProvider::class,
-        //GrahamCampbell\HTMLMin\HTMLMinServiceProvider::class,
         HTMLMin\HTMLMin\HTMLMinServiceProvider::class,
         Cviebrock\EloquentSluggable\ServiceProvider::class,
         Indal\Markdown\MarkdownServiceProvider::class,
 
         Msurguy\Honeypot\HoneypotServiceProvider::class,
         Roumen\Sitemap\SitemapServiceProvider::class,
-        //Eduardokum\LaravelMailAutoEmbed\Providers\LaravelMailAutoEmbedServiceProvider::class,
         Eduardokum\LaravelMailAutoEmbed\ServiceProvider::class,
         Clockwork\Support\Laravel\ClockworkServiceProvider::class,
 
@@ -236,7 +233,6 @@ return [
         'HTMLMin' => HTMLMin\HTMLMin\Facades\HTMLMin::class,
         'Feed' => Roumen\Feed\Feed::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
-        'Ekko' => Laravelista\Ekko\Facades\Ekko::class,
         'Honeypot' => Msurguy\Honeypot\HoneypotFacade::class,
         'Markdown' => Indal\Markdown\Facade::class
     ]

@@ -2,19 +2,19 @@
 
 return [
     'headers' => [
-        'default' => 60 * 10
+        'default' => 36000
     ],
 
     'destination' => [
-        'getPopular' => 30 // minutes
+        'getPopular' => 1800 // 30 minutes
     ],
 
     'feed' => [
-        'atom' => 60 * 10
+        'atom' => 36000
     ],
 
     'viewable' => [
-        'content' => 60 //minutes
+        'content' => 3600 //seconds
     ],
 
     /*

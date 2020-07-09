@@ -10,6 +10,8 @@ class Destination extends Baum\Node
 {
     use Sluggable, SlugHelper;
 
+    protected $table = 'destinations';
+
     public $timestamps = false;
 
     public function content()

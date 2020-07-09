@@ -15,7 +15,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 {
     use Authenticatable, CanResetPassword, Notifiable;
 
-    // Setup
+    protected $table = 'users';
 
     protected $fillable = [
         'name',
@@ -110,7 +110,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         $last_online = Cache::get('uio-' . $this->id, '0000-00-00 00:00:00');
 
         if ($last_online == '0000-00-00 00:00:00' || $force) {
-            $expires_at = Carbon::now()->addMinutes($this->update_active_at_minutes);
+            $expires_at = Carbon::now()->addSeconds($this->update_active_at_minutes * 60);
 
             // uio - user is online :)
             $now = Carbon::now();

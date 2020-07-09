@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class PollResult extends Model
 {
     protected $table = 'poll_results';
+
     public $timestamps = false;
 
     public function poll()

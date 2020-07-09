@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class NewsletterLetterContent extends Model
 {
-    // Setup
+    protected $table = 'newsletter_letter_contents';
 
     protected $dates = ['created_at', 'updated_at'];
 
