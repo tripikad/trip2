@@ -12,7 +12,7 @@
         "albertcht/invisible-recaptcha": "^1.9",
         "andreasindal/laravel-markdown": "^1.1",
         "baum/baum": "~1.1",
-        "cviebrock/eloquent-sluggable": "^4.0",
+        "cviebrock/eloquent-sluggable": "^4.8",
         "doctrine/dbal": "^2.6",
         "eduardokum/laravel-mail-auto-embed": "^1.0",
         "fideloper/proxy": "^4.0",
