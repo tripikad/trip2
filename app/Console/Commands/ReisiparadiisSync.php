@@ -26,7 +26,7 @@ class ReisiparadiisSync extends Command
         'Sharjah' => 'Dubai',
         'Tenerife North' => 'Tenerife',
         'Tenerife Sur' => 'Tenerife',
-        'Incekum - Alanya' => 'Alanya',
+        'Incekum - Alanya' => 'Alanya'
     ];
 
     protected $startDestination = null;
@@ -54,7 +54,10 @@ class ReisiparadiisSync extends Command
         $hotels = $data['hotels'];
         $additionalData = $hotels[0];
         $city = $this->getCity($additionalData['linn']);
-        $endDestinations[] = Destination::whereIn('name', [$data['destination'], $city])->get()->pluck('id')->toArray();
+        $endDestinations[] = Destination::whereIn('name', [$data['destination'], $city])
+            ->get()
+            ->pluck('id')
+            ->toArray();
 
         return $endDestinations;
     }
@@ -88,7 +91,7 @@ class ReisiparadiisSync extends Command
             }, collect())
             ->toArray();
 
-        while($this->endpage) {
+        while ($this->endpage) {
             $endpoint = str_replace('[PAGE]', $this->endpage, $this->endpoint);
 
             try {
@@ -130,7 +133,7 @@ class ReisiparadiisSync extends Command
                                 'name' => $hotel['hotelli_nimi'],
                                 'type' => $hotel['toatuup'],
                                 'rating' => $this->getHotelRatingFromName($hotel['hotelli_nimi']),
-                                'price' => (String)$hotel['hind']
+                                'price' => (string) $hotel['hind']
                             ];
                         }
 
@@ -159,9 +162,7 @@ class ReisiparadiisSync extends Command
                             ]
                         ];
 
-                        $offer = Offer::create(
-                            collect($res)->toArray()
-                        );
+                        $offer = Offer::create(collect($res)->toArray());
 
                         $offer->startDestinations()->attach(
                             collect([$this->startDestination->id])->mapWithKeys(function ($key) {
@@ -176,12 +177,11 @@ class ReisiparadiisSync extends Command
                         );
                     }
 
-                    $this->endpage ++;
+                    $this->endpage++;
                 } else {
                     $this->endpage = null;
                     break;
                 }
-
             } catch (\Exception $exeption) {
                 $this->endpage = null;
                 $this->error($exeption->getMessage());
@@ -196,6 +196,5 @@ class ReisiparadiisSync extends Command
         }
 
         $this->info("\nDONE\n");
-
     }
 }

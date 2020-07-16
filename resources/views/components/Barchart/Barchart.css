@@ -12,7 +12,7 @@
 .Barchart__title {
     width: 100%;
     font: $font-text-md;
-    color: $gray!important;
+    color: $gray !important;
     font-weight: 600;
     display: flex;
     justify-content: flex-start;
@@ -26,7 +26,7 @@
 }
 
 .Barchart__bar {
-    background: rgba(55, 160, 235, .3);
+    background: rgba(55, 160, 235, 0.3);
     max-width: 500px;
     width: 100%;
     position: relative;
@@ -49,7 +49,7 @@
 
 .Barchart__percent {
     font: $font-heading-sm;
-    color: $white!important;
+    color: $white !important;
     font-weight: bold;
     padding-left: $padding-sm;
 }

@@ -14,5 +14,4 @@ class PollResult extends Model
     {
         return $this->belongsTo('App\Poll', 'poll_id', 'id');
     }
-
 }

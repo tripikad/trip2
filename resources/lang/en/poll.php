@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     'title' => 'Polls',
     'question' => 'Question',
     'start_date' => 'Start date',
@@ -25,5 +24,4 @@ return [
         'end_date_invalid' => 'Invalid End date'
     ],
     'results' => 'Results'
-
 ];
