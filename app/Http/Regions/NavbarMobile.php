@@ -52,15 +52,15 @@ class NavbarMobile
             ])
             ->pushWhen($user, [
                 'title' => trans('menu.header.user'),
-                'route' => route('user.show', [$user])
+                'route' => $user ? route('user.show', [$user]) : null
             ])
             ->pushWhen($user, [
                 'title' => trans('menu.header.edit'),
-                'route' => route('user.edit', [$user])
+                'route' => $user ? route('user.edit', [$user]) : null
             ])
             ->pushWhen($user, [
                 'title' => trans('menu.user.message'),
-                'route' => route('message.index', [$user]),
+                'route' => $user ? route('message.index', [$user]) : null,
                 'badge' => $user ? $user->unreadMessagesCount() : ''
             ])
             ->pushWhen($user && $user->hasRole('admin'), [

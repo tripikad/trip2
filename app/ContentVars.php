@@ -6,6 +6,7 @@ use DB;
 use Exception;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Str;
 
 class ContentVars
 {
@@ -39,7 +40,7 @@ class ContentVars
 
     public function shortTitle()
     {
-        return str_limit($this->content->title, 60);
+        return Str::limit($this->content->title, 60);
     }
 
     public function body()
@@ -49,7 +50,7 @@ class ContentVars
 
     public function description()
     {
-        return str_limit(format_description($this->content->body), 200);
+        return Str::limit(format_description($this->content->body), 200);
     }
 
     public function created_at()

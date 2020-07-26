@@ -68,7 +68,7 @@ class GenerateSitemap extends Command
         });
 
         // Generate content sitemap
-        Content::whereNotIn('type', ['internal'])
+        Content::whereNotIn('type', ['internal', 'page'])
             ->where('status', 1)
             ->orderBy('id', 'asc')
             ->chunk(config('sitemap.items_per_sitemap'), function ($contents) use ($sitemap, &$sitemapCounter) {
@@ -78,9 +78,9 @@ class GenerateSitemap extends Command
                         $content->updated_at == '0000-00-00 00:00:00' ||
                         strstr($content->updated_at, '-0001');
 
-                    if ($content->type == 'static') {
+                    if ($content->type === 'static') {
                         $sitemap->add(
-                            route($content->type . '.' . $content->id),
+                            route('static.show.id', ['id' => $content->id]),
                             $check_updated_at ? $content->created_at : $content->updated_at
                         );
                     } else {

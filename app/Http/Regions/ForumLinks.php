@@ -38,7 +38,7 @@ class ForumLinks
                 component('Link')
                     ->is('large')
                     ->with('title', trans('menu.user.follow'))
-                    ->with('route', route('follow.index', [$user]))
+                    ->with('route', $user ? route('follow.index', [$user]) : null)
             )
             ->pushWhen(
                 $user && $user->hasRole('admin'),

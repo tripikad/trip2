@@ -3,6 +3,7 @@
 namespace App;
 
 use Exception;
+use Illuminate\Support\Str;
 
 class MessageVars
 {
@@ -26,7 +27,7 @@ class MessageVars
 
     public function title()
     {
-        return str_limit($this->attributes['body'], 30);
+        return Str::limit($this->attributes['body'], 30);
     }
 
     public function body()

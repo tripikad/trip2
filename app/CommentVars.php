@@ -3,6 +3,7 @@
 namespace App;
 
 use Exception;
+use Illuminate\Support\Str;
 
 class CommentVars
 {
@@ -26,7 +27,7 @@ class CommentVars
 
     public function title()
     {
-        return str_limit(strip_tags($this->comment->body), 30);
+        return Str::limit(strip_tags($this->comment->body), 30);
     }
 
     public function body()

@@ -153,10 +153,8 @@ return [
         Laravel\Tinker\TinkerServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
-        Baum\Providers\BaumServiceProvider::class,
-        Wpb\StringBladeCompiler\StringBladeCompilerServiceProvider::class,
+        /*Wpb\StringBladeCompiler\StringBladeCompilerServiceProvider::class,*/
         Ipunkt\LaravelAnalytics\AnalyticsServiceProvider::class,
-        Roumen\Feed\FeedServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
         Jenssegers\Date\DateServiceProvider::class,
         HTMLMin\HTMLMin\HTMLMinServiceProvider::class,
@@ -164,7 +162,6 @@ return [
         Indal\Markdown\MarkdownServiceProvider::class,
 
         Msurguy\Honeypot\HoneypotServiceProvider::class,
-        Roumen\Sitemap\SitemapServiceProvider::class,
         Eduardokum\LaravelMailAutoEmbed\ServiceProvider::class,
         Clockwork\Support\Laravel\ClockworkServiceProvider::class,
 
@@ -231,7 +228,6 @@ return [
         'Analytics' => Ipunkt\LaravelAnalytics\AnalyticsFacade::class,
         'Date' => Jenssegers\Date\Date::class,
         'HTMLMin' => HTMLMin\HTMLMin\Facades\HTMLMin::class,
-        'Feed' => Roumen\Feed\Feed::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'Honeypot' => Msurguy\Honeypot\HoneypotFacade::class,
         'Markdown' => Indal\Markdown\Facade::class

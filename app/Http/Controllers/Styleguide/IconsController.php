@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Styleguide;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use App\Content;
+use Illuminate\Support\Str;
 
 class IconsController extends Controller
 {
@@ -32,7 +33,7 @@ class IconsController extends Controller
     private function svgFiles()
     {
         return collect(Storage::disk('resources')->files('/views/svg'))->map(function ($file) {
-            return str_limit(file_get_contents(Storage::disk('resources')->path($file)), 200);
+            return Str::limit(file_get_contents(Storage::disk('resources')->path($file)), 200);
         });
     }
 

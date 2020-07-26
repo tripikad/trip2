@@ -3,6 +3,7 @@
 namespace App;
 
 use Exception;
+use Illuminate\Support\Str;
 
 class UserVars
 {
@@ -26,7 +27,7 @@ class UserVars
 
     public function name()
     {
-        return str_limit($this->user->name, 30);
+        return Str::limit($this->user->name, 30);
     }
 
     public function description()

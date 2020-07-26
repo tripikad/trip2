@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Image;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ImageController extends Controller
 {
@@ -16,7 +17,7 @@ class ImageController extends Controller
             ->get()
             ->map(function ($image) {
                 return [
-                    'title' => str_limit($image->filename, 20),
+                    'title' => Str::limit($image->filename, 20),
                     'small' => $image->preset('small_square'),
                     'large' => $image->preset('large'),
                     'id' => "[[$image->id]]"
