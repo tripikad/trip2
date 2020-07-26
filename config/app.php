@@ -160,6 +160,7 @@ return [
         HTMLMin\HTMLMin\HTMLMinServiceProvider::class,
         Cviebrock\EloquentSluggable\ServiceProvider::class,
         Indal\Markdown\MarkdownServiceProvider::class,
+        Baum\BaumServiceProvider::class,
 
         Msurguy\Honeypot\HoneypotServiceProvider::class,
         Eduardokum\LaravelMailAutoEmbed\ServiceProvider::class,
