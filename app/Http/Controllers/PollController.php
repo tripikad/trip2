@@ -18,25 +18,31 @@ class PollController extends Controller
         $items = Poll::orderBy('id', 'DESC')->get();
 
         return layout('Two')
-            ->with('header', region('Header', collect()
-                ->push(component('Title')
-                    ->is('white')
-                    ->with('title', trans('poll.title'))
-                    ->with('route', route('poll.index'))
+            ->with(
+                'header',
+                region(
+                    'Header',
+                    collect()->push(
+                        component('Title')
+                            ->is('white')
+                            ->with('title', trans('poll.title'))
+                            ->with('route', route('poll.index'))
+                    )
                 )
-            ))
-            ->with('content', collect()
-                ->push(
-                    component('PollList')
-                        ->with('items', $items)
-                )
-                ->push(region('Paginator', $pollPaginator))
+            )
+            ->with(
+                'content',
+                collect()
+                    ->push(component('PollList')->with('items', $items))
+                    ->push(region('Paginator', $pollPaginator))
             )
 
-            ->with('sidebar', collect()
-                ->push(component('Button')
-                    ->with('title', trans('poll.add.new'))
-                    ->with('route', route('poll.create'))
+            ->with(
+                'sidebar',
+                collect()->push(
+                    component('Button')
+                        ->with('title', trans('poll.add.new'))
+                        ->with('route', route('poll.create'))
                 )
             )
 
@@ -51,68 +57,87 @@ class PollController extends Controller
     public function create(Request $request)
     {
         return layout('Two')
-            ->with('header', region('Header', collect()
-                ->push(component('Title')
-                    ->is('white')
-                    ->with('title', trans('poll.title'))
-                    ->with('route', route('poll.index'))
-                )
-            ))
-            ->with('content', collect()
-                ->push(component('Title')
-                    ->with('title', trans('poll.add.title'))
-                )
-                ->push(component('Form')
-                    ->with('route', route('poll.store'))
-                    ->with('fields', collect()
-                        ->push(component('FormTextfield')
-                            ->with('title', trans('poll.question'))
-                            ->with('name', 'question')
-                            ->with('value', old('question'))
-                        )
-                        ->push(component('Grid2')
-                            ->with('gutter', true)
-                            ->with('items', collect()
-                                ->push(component('FormDatepicker')
-                                    ->with('title', trans('poll.start_date'))
-                                    ->with('name', 'start_date')
-                                    ->with('value', old('start_date'))
-                                )
-                                ->push(component('FormDatepicker')
-                                    ->with('title', trans('poll.end_date'))
-                                    ->with('name', 'end_date')
-                                    ->with('value', old('end_date'))
-                                )
-                            )
-                        )
-                        ->push(component('PollOption')
-                            ->with('label', trans('poll.options'))
-                            ->with('name', 'poll_fields')
-                            ->with('options', old('poll_fields') ? old('poll_fields') : [])
-                            ->with('add_option_label', trans('poll.option.add'))
-                            ->with('option_placeholder', trans('poll.option.title'))
-                        )
-                        ->push(component('FormCheckbox')
-                            ->with('title', trans('poll.anonymous'))
-                            ->with('name', 'anonymous')
-                            ->with('value', old('anonymous'))
-                        )
-                        ->push(component('FormCheckbox')
-                            ->with('title', trans('poll.show_on_frontpage'))
-                            ->with('name', 'front_page')
-                            ->with('value', old('front_page'))
-                        )
-                        ->push(component('FormCheckbox')
-                            ->with('title', trans('poll.active'))
-                            ->with('name', 'active')
-                            ->with('value', old('active'))
-                        )
-                        ->push(component('FormButton')
-                            ->is('large')
-                            ->with('title', trans('general.save'))
-                        )
+            ->with(
+                'header',
+                region(
+                    'Header',
+                    collect()->push(
+                        component('Title')
+                            ->is('white')
+                            ->with('title', trans('poll.title'))
+                            ->with('route', route('poll.index'))
                     )
                 )
+            )
+            ->with(
+                'content',
+                collect()
+                    ->push(component('Title')->with('title', trans('poll.add.title')))
+                    ->push(
+                        component('Form')
+                            ->with('route', route('poll.store'))
+                            ->with(
+                                'fields',
+                                collect()
+                                    ->push(
+                                        component('FormTextfield')
+                                            ->with('title', trans('poll.question'))
+                                            ->with('name', 'question')
+                                            ->with('value', old('question'))
+                                    )
+                                    ->push(
+                                        component('Grid2')
+                                            ->with('gutter', true)
+                                            ->with(
+                                                'items',
+                                                collect()
+                                                    ->push(
+                                                        component('FormDatepicker')
+                                                            ->with('title', trans('poll.start_date'))
+                                                            ->with('name', 'start_date')
+                                                            ->with('value', old('start_date'))
+                                                    )
+                                                    ->push(
+                                                        component('FormDatepicker')
+                                                            ->with('title', trans('poll.end_date'))
+                                                            ->with('name', 'end_date')
+                                                            ->with('value', old('end_date'))
+                                                    )
+                                            )
+                                    )
+                                    ->push(
+                                        component('PollOption')
+                                            ->with('label', trans('poll.options'))
+                                            ->with('name', 'poll_fields')
+                                            ->with('options', old('poll_fields') ? old('poll_fields') : [])
+                                            ->with('add_option_label', trans('poll.option.add'))
+                                            ->with('option_placeholder', trans('poll.option.title'))
+                                    )
+                                    ->push(
+                                        component('FormCheckbox')
+                                            ->with('title', trans('poll.anonymous'))
+                                            ->with('name', 'anonymous')
+                                            ->with('value', old('anonymous'))
+                                    )
+                                    ->push(
+                                        component('FormCheckbox')
+                                            ->with('title', trans('poll.show_on_frontpage'))
+                                            ->with('name', 'front_page')
+                                            ->with('value', old('front_page'))
+                                    )
+                                    ->push(
+                                        component('FormCheckbox')
+                                            ->with('title', trans('poll.active'))
+                                            ->with('name', 'active')
+                                            ->with('value', old('active'))
+                                    )
+                                    ->push(
+                                        component('FormButton')
+                                            ->is('large')
+                                            ->with('title', trans('general.save'))
+                                    )
+                            )
+                    )
             )
             ->with('footer', region('FooterLight'))
             ->render();
@@ -128,72 +153,119 @@ class PollController extends Controller
         $answered = $poll->answered;
 
         return layout('Two')
-            ->with('header', region('Header', collect()
-                ->push(component('Title')
-                    ->is('white')
-                    ->with('title', trans('poll.title'))
-                    ->with('route', route('poll.index'))
-                )
-            ))
-            ->with('content', collect()
-                ->push(component('Title')
-                    ->with('title', trans('poll.edit.title'))
-                )
-                ->push(component('Form')
-                    ->with('route', route('poll.update', ['poll' => $poll->id]))
-                    ->with('fields', collect()
-                        ->push(component('FormTextfield')
-                            ->with('title', trans('poll.question'))
-                            ->with('name', 'question')
-                            ->with('value', $answered ? $poll->question : old('question', $poll->question))
-                            ->with('disabled', $answered ? true : false)
-                        )
-                        ->push(component('Grid2')
-                            ->with('gutter', true)
-                            ->with('items', collect()
-                                ->push(component('FormDatepicker')
-                                    ->with('title', trans('poll.start_date'))
-                                    ->with('name', 'start_date')
-                                    ->with('value', $answered ? $poll->start_date->format('Y-m-d') : old('start_date', $poll->start_date->format('Y-m-d')))
-                                    ->with('disabled', $answered ? true : false)
-                                )
-                                ->push(component('FormDatepicker')
-                                    ->with('title', trans('poll.end_date'))
-                                    ->with('name', 'end_date')
-                                    ->with('value', old('end_date', $poll->end_date ? $poll->end_date->format('Y-m-d') : null))
-                                )
-                            )
-                        )
-                        ->push(component('PollOption')
-                            ->with('label', trans('poll.options'))
-                            ->with('name', 'poll_fields')
-                            ->with('options', $answered ? $poll->poll_options->pluck('name')->toArray() : old('poll_fields') ?? $poll->poll_options->pluck('name')->toArray())
-                            ->with('add_option_label', trans('poll.option.add'))
-                            ->with('option_placeholder', trans('poll.option.title'))
-                            ->with('disabled', $answered ? true : false)
-                        )
-                        ->push(component('FormCheckbox')
-                            ->with('title', trans('poll.anonymous'))
-                            ->with('name', 'anonymous')
-                            ->with('value', $answered ? $poll->anonymous : old('anonymous', $poll->anonymous))
-                            ->with('disabled', $answered ? true : false)
-                        )
-                        ->push(component('FormCheckbox')
-                            ->with('title', trans('poll.show_on_frontpage'))
-                            ->with('name', 'front_page')
-                            ->with('value', old('front_page', $poll->front_page))
-                        )
-                        ->push(component('FormCheckbox')
-                            ->with('title', trans('poll.active'))
-                            ->with('name', 'active')
-                            ->with('value', old('active', $poll->active))
-                        )
-                        ->push(component('FormButton')
-                            ->is('large')
-                            ->with('title', trans('general.save'))
-                        )
+            ->with(
+                'header',
+                region(
+                    'Header',
+                    collect()->push(
+                        component('Title')
+                            ->is('white')
+                            ->with('title', trans('poll.title'))
+                            ->with('route', route('poll.index'))
                     )
                 )
+            )
+            ->with(
+                'content',
+                collect()
+                    ->push(component('Title')->with('title', trans('poll.edit.title')))
+                    ->push(
+                        component('Form')
+                            ->with('route', route('poll.update', ['poll' => $poll->id]))
+                            ->with(
+                                'fields',
+                                collect()
+                                    ->push(
+                                        component('FormTextfield')
+                                            ->with('title', trans('poll.question'))
+                                            ->with('name', 'question')
+                                            ->with(
+                                                'value',
+                                                $answered ? $poll->question : old('question', $poll->question)
+                                            )
+                                            ->with('disabled', $answered ? true : false)
+                                    )
+                                    ->push(
+                                        component('Grid2')
+                                            ->with('gutter', true)
+                                            ->with(
+                                                'items',
+                                                collect()
+                                                    ->push(
+                                                        component('FormDatepicker')
+                                                            ->with('title', trans('poll.start_date'))
+                                                            ->with('name', 'start_date')
+                                                            ->with(
+                                                                'value',
+                                                                $answered
+                                                                    ? $poll->start_date->format('Y-m-d')
+                                                                    : old(
+                                                                        'start_date',
+                                                                        $poll->start_date->format('Y-m-d')
+                                                                    )
+                                                            )
+                                                            ->with('disabled', $answered ? true : false)
+                                                    )
+                                                    ->push(
+                                                        component('FormDatepicker')
+                                                            ->with('title', trans('poll.end_date'))
+                                                            ->with('name', 'end_date')
+                                                            ->with(
+                                                                'value',
+                                                                old(
+                                                                    'end_date',
+                                                                    $poll->end_date
+                                                                        ? $poll->end_date->format('Y-m-d')
+                                                                        : null
+                                                                )
+                                                            )
+                                                    )
+                                            )
+                                    )
+                                    ->push(
+                                        component('PollOption')
+                                            ->with('label', trans('poll.options'))
+                                            ->with('name', 'poll_fields')
+                                            ->with(
+                                                'options',
+                                                $answered
+                                                    ? $poll->poll_options->pluck('name')->toArray()
+                                                    : old('poll_fields') ??
+                                                        $poll->poll_options->pluck('name')->toArray()
+                                            )
+                                            ->with('add_option_label', trans('poll.option.add'))
+                                            ->with('option_placeholder', trans('poll.option.title'))
+                                            ->with('disabled', $answered ? true : false)
+                                    )
+                                    ->push(
+                                        component('FormCheckbox')
+                                            ->with('title', trans('poll.anonymous'))
+                                            ->with('name', 'anonymous')
+                                            ->with(
+                                                'value',
+                                                $answered ? $poll->anonymous : old('anonymous', $poll->anonymous)
+                                            )
+                                            ->with('disabled', $answered ? true : false)
+                                    )
+                                    ->push(
+                                        component('FormCheckbox')
+                                            ->with('title', trans('poll.show_on_frontpage'))
+                                            ->with('name', 'front_page')
+                                            ->with('value', old('front_page', $poll->front_page))
+                                    )
+                                    ->push(
+                                        component('FormCheckbox')
+                                            ->with('title', trans('poll.active'))
+                                            ->with('name', 'active')
+                                            ->with('value', old('active', $poll->active))
+                                    )
+                                    ->push(
+                                        component('FormButton')
+                                            ->is('large')
+                                            ->with('title', trans('general.save'))
+                                    )
+                            )
+                    )
             )
             ->with('footer', region('FooterLight'))
             ->render();
@@ -222,13 +294,13 @@ class PollController extends Controller
         $attribute_names = [
             'question' => trans('poll.question'),
             'start_date' => trans('poll.start_date'),
-            'end_date' => trans('poll.end_date'),
+            'end_date' => trans('poll.end_date')
         ];
 
         $messages = [
             'poll_fields.required' => trans('poll.validation.options_required'),
             'poll_fields.min' => trans('poll.validation.options_required'),
-            'end_date.after_or_equal' => trans('poll.validation.end_date_invalid'),
+            'end_date.after_or_equal' => trans('poll.validation.end_date_invalid')
         ];
 
         $validator = Validator::make($postValues, $rules, $messages);
@@ -274,8 +346,7 @@ class PollController extends Controller
 
         $this->updateFrontPagePoll($poll);
 
-        return redirect()
-            ->route('poll.index');
+        return redirect()->route('poll.index');
     }
 
     /**
@@ -314,8 +385,7 @@ class PollController extends Controller
 
         $this->updateFrontPagePoll($poll);
 
-        return redirect()
-            ->route('poll.index');
+        return redirect()->route('poll.index');
     }
 
     /**
@@ -326,29 +396,35 @@ class PollController extends Controller
     public function show(Poll $poll, Request $request)
     {
         $content = collect()
-            ->push(component('Title')
-                ->with('title', $poll->question)
+            ->push(component('Title')->with('title', $poll->question))
+            ->push(
+                component('Barchart')
+                    ->is('black')
+                    ->with('items', $poll->getFormattedResults())
             )
-            ->push(component('Barchart')
-                ->is('black')
-                ->with('items', $poll->getFormattedResults())
-            )
-            ->push(component('Title')
+            ->push(
+                component('Title')
                     ->is('small')
                     ->with('title', trans('poll.answered') . ': ' . $poll->answered)
             )
-            ->push(component('Button')
-                ->with('title', trans('general.back'))
-                ->with('route', route('poll.index'))
+            ->push(
+                component('Button')
+                    ->with('title', trans('general.back'))
+                    ->with('route', route('poll.index'))
             );
 
         return layout('One')
-            ->with('header', region('Header', collect()
-                ->push(component('Title')
-                    ->is('white')
-                    ->with('title', trans('poll.results'))
+            ->with(
+                'header',
+                region(
+                    'Header',
+                    collect()->push(
+                        component('Title')
+                            ->is('white')
+                            ->with('title', trans('poll.results'))
+                    )
                 )
-            ))
+            )
             ->with('content', $content)
             ->with('footer', region('FooterLight'))
             ->render();
@@ -364,8 +440,6 @@ class PollController extends Controller
     {
         $poll->delete();
 
-        return redirect()
-            ->route('poll.index');
+        return redirect()->route('poll.index');
     }
 }
-

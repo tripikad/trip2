@@ -19,11 +19,17 @@ class PollController extends Controller
     {
         if ($poll->anonymous) {
             $ip = $request->ip();
-            $poll_results = $poll->results()->where('ip_address', $ip)->first();
+            $poll_results = $poll
+                ->results()
+                ->where('ip_address', $ip)
+                ->first();
             return $poll_results ? true : false;
         } else {
             $user_id = Auth::user()->id;
-            $poll_results = $poll->results()->where('user_id', $user_id)->first();
+            $poll_results = $poll
+                ->results()
+                ->where('user_id', $user_id)
+                ->first();
             return $poll_results ? true : false;
         }
     }
@@ -38,9 +44,8 @@ class PollController extends Controller
         $poll = Poll::where('front_page', true)
             ->where('active', true)
             ->where('start_date', '<=', $today->format('Y-m-d'))
-            ->where(function($q) use ($today) {
-                $q->where('end_date', '>=', $today->format('Y-m-d'))
-                    ->orWhere('end_date', null);
+            ->where(function ($q) use ($today) {
+                $q->where('end_date', '>=', $today->format('Y-m-d'))->orWhere('end_date', null);
             })
             ->with('poll_options')
             ->first();
@@ -77,10 +82,11 @@ class PollController extends Controller
         }
 
         $today = Carbon::today();
-        if ($poll->active
-            && $poll->start_date <= $today->format('Y-m-d')
-            && ($poll->end_date >= $today->format('Y-m-d') || $poll->end_date === null)) {
-
+        if (
+            $poll->active &&
+            $poll->start_date <= $today->format('Y-m-d') &&
+            ($poll->end_date >= $today->format('Y-m-d') || $poll->end_date === null)
+        ) {
             if ($this->userHasAnswered($poll, $request)) {
                 return response()->json([
                     'poll' => $poll,
@@ -113,13 +119,16 @@ class PollController extends Controller
             return response()->json(null, 403);
         }
 
-        $value = (int)$request->post('value');
+        $value = (int) $request->post('value');
 
         if (!$value) {
             return response()->json(null, 404);
         }
 
-        $poll_option = $poll->poll_options()->where('id', $value)->first();
+        $poll_option = $poll
+            ->poll_options()
+            ->where('id', $value)
+            ->first();
         if (!$poll_option) {
             return response()->json(null, 403);
         }
@@ -136,7 +145,7 @@ class PollController extends Controller
 
         $result->save();
 
-        $poll->answered ++;
+        $poll->answered++;
         $poll->save();
         $poll->refresh();
 
@@ -146,4 +155,3 @@ class PollController extends Controller
         ]);
     }
 }
-

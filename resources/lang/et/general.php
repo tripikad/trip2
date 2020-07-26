@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     'yes' => 'Jah',
     'no' => 'Ei',
     'edit' => 'Muuda',
