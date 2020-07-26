@@ -11,6 +11,7 @@ use App\Destination;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 
 class SearchController extends Controller
 {
@@ -115,27 +116,27 @@ class SearchController extends Controller
                 if ($active_search == 'flight') {
                     $search_results->push(
                         component('SearchRow')
-                            ->with('title', str_limit($item->title, 80))
+                            ->with('title', Str::limit($item->title, 80))
                             ->with('route', route($item->type . '.show', [$item->slug]))
                             ->with(
                                 'date',
                                 Carbon::createFromFormat('Y-m-d H:i:s', $item->updated_at)->format('d.m.Y H:i')
                             )
                             ->with('image_alt', $item->imagePreset('small_square'))
-                            ->with('body', str_limit(strip_tags($item->vars()->body() ?? '&nbsp;'), 300))
+                            ->with('body', Str::limit(strip_tags($item->vars()->body() ?? '&nbsp;'), 300))
                             ->with('badge', $item->price ? $item->price . '€' : null)
                     );
                 } elseif ($active_search == 'news') {
                     $search_results->push(
                         component('SearchRow')
-                            ->with('title', str_limit($item->title, 80))
+                            ->with('title', Str::limit($item->title, 80))
                             ->with('route', route($item->type . '.show', [$item->slug]))
                             ->with(
                                 'date',
                                 Carbon::createFromFormat('Y-m-d H:i:s', $item->updated_at)->format('d.m.Y H:i')
                             )
                             ->with('image_alt', $item->imagePreset('small_square'))
-                            ->with('body', str_limit(strip_tags($item->vars()->body() ?? '&nbsp;'), 300))
+                            ->with('body', Str::limit(strip_tags($item->vars()->body() ?? '&nbsp;'), 300))
                             ->with('badge', $item->comments->count())
                     );
                 } elseif ($active_search == 'destination') {
@@ -149,7 +150,7 @@ class SearchController extends Controller
                 } elseif ($active_search == 'user') {
                     $search_results->push(
                         component('SearchRow')
-                            ->with('title', str_limit($item->name, 80))
+                            ->with('title', Str::limit($item->name, 80))
                             ->with('route', $item->name != 'Tripi külastaja' ? route('user.show', [$item]) : false)
                             ->with(
                                 'arc',
@@ -161,7 +162,7 @@ class SearchController extends Controller
                 } else {
                     $search_results->push(
                         component('SearchRow')
-                            ->with('title', str_limit($item->title, 80))
+                            ->with('title', Str::limit($item->title, 80))
                             ->with('route', route($item->type . '.show', [$item->slug]))
                             ->with(
                                 'date',
@@ -169,7 +170,7 @@ class SearchController extends Controller
                             )
                             ->with('image', $item->user->imagePreset('xsmall_square'))
                             ->with('image_title', $item->user->name)
-                            ->with('body', str_limit(strip_tags($item->vars()->body() ?? '&nbsp;'), 300))
+                            ->with('body', Str::limit(strip_tags($item->vars()->body() ?? '&nbsp;'), 300))
                             ->with('badge', $item->comments->count())
                     );
                 }
@@ -479,7 +480,7 @@ class SearchController extends Controller
                         $parent = $item->parent()->first();
                         $response['title'] = ($parent ? $parent->name . ' › ' : '') . $item['name'];
                     } else {
-                        $response['title'] = str_limit($item['title'], 65);
+                        $response['title'] = Str::limit($item['title'], 65);
                     }
 
                     $response['badge'] = '';

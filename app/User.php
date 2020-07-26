@@ -10,6 +10,7 @@ use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Notifications\Notifiable as Notifiable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use Illuminate\Support\Str;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
@@ -59,7 +60,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         parent::boot();
 
         static::creating(function ($user) {
-            $user->registration_token = str_random(30);
+            $user->registration_token = Str::random(30);
         });
     }
 

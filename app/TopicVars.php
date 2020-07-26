@@ -3,6 +3,7 @@
 namespace App;
 
 use Exception;
+use Illuminate\Support\Str;
 
 class TopicVars
 {
@@ -31,6 +32,6 @@ class TopicVars
 
     public function shortName()
     {
-        return str_limit($this->topic->name, 12);
+        return Str::limit($this->topic->name, 12);
     }
 }

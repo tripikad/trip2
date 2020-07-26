@@ -2,6 +2,8 @@
 
 namespace App\Utils;
 
+use Illuminate\Support\Str;
+
 class Layout
 {
     protected $name;
@@ -24,8 +26,8 @@ class Layout
 
     public function __call($method, $parameters)
     {
-        $with = str_after($method, 'with');
-        $this->with->put(strtolower(snake_case($with)), $parameters ? $parameters[0] : null);
+        $with = Str::after($method, 'with');
+        $this->with->put(strtolower(Str::snake($with)), $parameters ? $parameters[0] : null);
         return $this;
     }
 

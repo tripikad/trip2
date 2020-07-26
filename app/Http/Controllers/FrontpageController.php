@@ -107,7 +107,7 @@ class FrontpageController extends Controller
                                     component('Link')
                                         ->is('large')
                                         ->with('title', trans('menu.user.follow'))
-                                        ->with('route', route('follow.index', [$loggedUser]))
+                                        ->with('route', $loggedUser ? route('follow.index', [$loggedUser]) : null)
                                 )
                                 ->pushWhen(
                                     $loggedUser && $loggedUser->hasRole('admin'),

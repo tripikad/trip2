@@ -6,7 +6,7 @@ class NavbarDesktop
 {
     protected function prepareLinks()
     {
-        $user = request()->user();
+        $user = auth()->user();
 
         return collect()
             ->put('flight', [
@@ -36,7 +36,7 @@ class NavbarDesktop
 
     protected function prepareSublinks()
     {
-        $user = request()->user();
+        $user = auth()->user() ?? false;
 
         return collect()
             ->pushWhen(!$user, [
@@ -49,15 +49,15 @@ class NavbarDesktop
             ])
             ->pushWhen($user, [
                 'title' => trans('menu.user.profile'),
-                'route' => route('user.show', [$user])
+                'route' => $user ? route('user.show', [$user]) : null
             ])
             ->pushWhen($user, [
                 'title' => trans('menu.user.edit.profile'),
-                'route' => route('user.edit', [$user])
+                'route' => $user ? route('user.edit', [$user]) : null
             ])
             ->pushWhen($user, [
                 'title' => trans('menu.user.message'),
-                'route' => route('message.index', [$user]),
+                'route' => $user ? route('message.index', [$user]) : null,
                 'badge' => $user ? $user->unreadMessagesCount() : ''
             ])
             ->pushWhen($user && $user->hasRole('admin'), [

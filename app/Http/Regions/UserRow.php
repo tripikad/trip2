@@ -14,7 +14,7 @@ class UserRow
                 collect()
                     ->push(
                         component('UserImage')
-                            ->with('route', route('user.show', [$user]))
+                            ->with('route', $user ? route('user.show', [$user]) : null)
                             ->with('image', $user ? $user->imagePreset('small_square') : '')
                             ->with('rank', $user ? $user->vars()->rank : '')
                     )

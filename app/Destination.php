@@ -14,6 +14,12 @@ class Destination extends Baum\Node
 
     public $timestamps = false;
 
+    protected $parentColumnName = 'parent_id';
+    protected $leftColumnName = 'lft';
+    protected $rightColumnName = 'rgt';
+    protected $depthColumnName = 'depth';
+    protected $orderColumnName = 'name';
+
     public function content()
     {
         return $this->belongsToMany('App\Content');

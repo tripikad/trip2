@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Support\Str;
 use Lang;
 use Exception;
 
@@ -32,7 +33,7 @@ class DestinationVars
 
     public function shortName()
     {
-        return str_limit($this->destination->name, 17);
+        return Str::limit($this->destination->name, 17);
     }
 
     public function description()

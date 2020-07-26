@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Str;
 use Log;
 use URL;
 use Auth;
@@ -94,7 +95,7 @@ class SocialController extends Controller
             'email' => $user->email,
             'verified' => 1,
             'role' => 'regular',
-            'password' => str_random(30)
+            'password' => Str::random(30)
         ]);
 
         switch ($provider) {
