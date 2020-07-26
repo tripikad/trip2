@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Support\Str;
 use Imageconv;
 use Illuminate\Database\Eloquent\Model;
 
@@ -78,7 +79,7 @@ class Image extends Model
 
         //create random name
         if (!$filename) {
-            $filename = 'image_' . strtolower(str_random(4));
+            $filename = 'image_' . strtolower(Str::random(4));
         }
 
         $filename = self::checkIfExists($path, $filename, $ext);
@@ -104,7 +105,7 @@ class Image extends Model
 
         if (!$new_filename) {
             $img_name = self::getImageName($filename);
-            $filename = $img_name . '_' . strtolower(str_random(4)) . '.' . $ext;
+            $filename = $img_name . '_' . strtolower(Str::random(4)) . '.' . $ext;
         }
 
         $filename = self::getImageName($filename);
