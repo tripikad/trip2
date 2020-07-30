@@ -18,8 +18,8 @@ const locale = {
         ordinal: n => `${n}º`,
         buttonValidate: 'Ok',
         buttonCancel: 'Tühista',
-        rangeHeaderText: '%d kuni %d',
-    },
-};
+        rangeHeaderText: '%d kuni %d'
+    }
+}
 
-export default locale;
+export default locale

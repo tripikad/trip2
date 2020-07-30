@@ -21,7 +21,10 @@ class CreatePollsTable extends Migration
             $table->boolean('active')->default(false);
             $table->boolean('anonymous')->default(true);
             $table->boolean('front_page')->default(false);
-            $table->integer('answered')->default(0)->index();
+            $table
+                ->integer('answered')
+                ->default(0)
+                ->index();
             $table->timestamps();
         });
     }

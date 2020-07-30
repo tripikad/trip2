@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     'yes' => 'Yes',
     'no' => 'No',
     'edit' => 'Edit',

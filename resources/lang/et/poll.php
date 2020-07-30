@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     'title' => 'Küsitlused',
     'question' => 'Küsimus',
     'start_date' => 'Algus',
@@ -24,6 +23,5 @@ return [
         'options_required' => 'Vähemalt 2 valikut on nõutud',
         'end_date_invalid' => 'Lõpp kuupäev peab olema suurem/võrdne algusest'
     ],
-    'results' => 'Tulemused',
-
+    'results' => 'Tulemused'
 ];

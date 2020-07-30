@@ -48,7 +48,7 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\VerifyCsrfToken::class,
             \App\Http\Middleware\XssProtection::class,
             \App\Http\Middleware\LoggedCookie::class,
-            'bindings',
+            'bindings'
         ]
     ];
 

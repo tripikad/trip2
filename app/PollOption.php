@@ -21,5 +21,4 @@ class PollOption extends Model
     {
         return $this->hasMany('App\PollResult', 'poll_option_id', 'id');
     }
-
 }
