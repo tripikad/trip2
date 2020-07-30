@@ -12,10 +12,7 @@ class Poll extends Model
 
     public $timestamps = true;
 
-    protected $appends = [
-        'start_date_formatted',
-        'end_date_formatted'
-    ];
+    protected $appends = ['start_date_formatted', 'end_date_formatted'];
 
     public function poll_options()
     {
@@ -49,11 +46,10 @@ class Poll extends Model
             $results = $option->results;
             $data[] = [
                 'title' => $option->name,
-                'value' => $total > 0 ? round($results->count() / $total * 100) : 0
+                'value' => $total > 0 ? round(($results->count() / $total) * 100) : 0
             ];
         }
 
         return $data;
     }
-
 }

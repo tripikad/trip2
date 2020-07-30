@@ -14,7 +14,10 @@ class CreateExtFieldsToOffersTable extends Migration
     public function up()
     {
         Schema::table('offers', function (Blueprint $table) {
-            $table->string('ext_id', 255)->nullable()->index();
+            $table
+                ->string('ext_id', 255)
+                ->nullable()
+                ->index();
             $table->dateTime('ext_date_time')->nullable();
 
             $table->unique(['ext_id']);
