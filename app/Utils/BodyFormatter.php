@@ -104,16 +104,18 @@ class BodyFormatter
 
         if (preg_match_all($pollsPattern, $this->body, $matches)) {
             if (isset($matches[1]) && $matches[1] && is_array($matches[1])) {
-                $id = intval($matches[1][0]);
+                foreach ($matches[1] as $poll_id) {
+                    $id = intval($poll_id);
 
-                $component = component('Poll')
-                    ->with('id', $id);
+                    $component = component('Poll')
+                        ->with('id', $id);
 
-                $this->body = str_replace(
-                    "[[poll:{$id}]]",
-                    $component,
-                    $this->body
-                );
+                    $this->body = str_replace(
+                        "[[poll:{$id}]]",
+                        $component,
+                        $this->body
+                    );
+                }
             }
         }
 
