@@ -34,19 +34,19 @@ $footer = $footer ?? '';
 
     <div class="margin-top-negative-md">
         
-        <div class="container">
+        <div class="container-lg">
 
-            <div class="row row-center padding-bottom-sm">
+            <div class="row padding-bottom-sm justify-content-md-center">
 
-                <div class="col-10">
+                <div class="col-10 mx-auto">
 
                     @foreach ($top as $top_item)
                     
-                    <div @if (!$loop->last) class="margin-bottom-sm" @endif>
+                        <div @if (!$loop->last) class="margin-bottom-sm" @endif>
 
-                        {!! $top_item !!}
-                            
-                    </div>
+                            {!! $top_item !!}
+
+                        </div>
 
                     @endforeach
 
@@ -62,11 +62,11 @@ $footer = $footer ?? '';
 
     <div class="padding-top-md padding-bottom-lg">
 
-        <div class="container">
+        <div class="container-lg">
 
-            <div class="row row-center">
+            <div class="row justify-content-md-center px-sm-4 px-md-0">
 
-                <div class="col-7-tablet padding-right-sm-mobile-none">
+                <div class="col-md-7 col-12">
 
                 @foreach ($content as $content_item)
                 
@@ -80,7 +80,7 @@ $footer = $footer ?? '';
 
                 </div>
 
-                <div class="col-3-tablet padding-top-none-mobile-md padding-left-sm-mobile-none">
+                <div class="col-md-3 col-12 d-none d-sm-block padding-top-none-mobile-md">
 
                 @foreach ($sidebar as $sidebar_item)
                 
@@ -104,21 +104,21 @@ $footer = $footer ?? '';
 
     <div class="padding-top-md-mobile-none padding-bottom-md">
 
-        <div class="container">
+        <div class="container-lg">
 
-            <div class="row row-center">
+            <div class="row">
 
-                <div class="col-10">
+                <div class="col-12 mx-auto justify-content-md-center">
 
-                @foreach ($bottom1 as $bottom_item)
-                
-                    <div @if (!$loop->last) class="margin-bottom-lg" @endif>
+                    @foreach ($bottom1 as $bottom_item)
 
-                        {!! $bottom_item !!}
-                            
-                    </div>
-                        
-                @endforeach
+                        <div @if (!$loop->last) class="margin-bottom-lg" @endif>
+
+                            {!! $bottom_item !!}
+
+                        </div>
+
+                    @endforeach
 
                 </div>
 
@@ -133,11 +133,11 @@ $footer = $footer ?? '';
 
     <div class="padding-top-md-mobile-none padding-bottom-md">
 
-        <div class="container">
+        <div class="container-lg">
 
-            <div class="row row-center">
+            <div class="row">
 
-                <div class="col-10">
+                <div class="col-12 mx-auto">
 
                     @foreach ($shortNews as $news)
 
@@ -170,11 +170,11 @@ $footer = $footer ?? '';
 
     <div class="background-gray padding-top-lg padding-bottom-md">
 
-        <div class="container">
+        <div class="container-lg">
 
-            <div class="row row-center">
+            <div class="row">
 
-                <div class="col-10">
+                <div class="col-12 mx-auto">
 
                 @foreach ($bottom3 as $bottom_item)
                 

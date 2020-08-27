@@ -11,17 +11,13 @@ $navbar_mobile = $navbar_mobile ?? '';
 
 <div class="Navbar {{ $isclasses }}">
     
-    <div class="Navbar__left">
+    <div class="Navbar__logo">
 
         <a href="{{ $route }}">
 
-            <h1 class="Navbar__logo">
+            {!! $logo !!}
 
-                {!! $logo !!}
-
-                <div class="Navbar__sitename">{{ $sitename }}</div>
-
-            </h1>
+            <span class="Navbar__sitename">{{ $sitename }}</span>
 
         </a>
         

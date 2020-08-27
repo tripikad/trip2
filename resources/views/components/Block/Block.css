@@ -25,5 +25,5 @@
 
 .Block--inset {
     margin-left: $margin-xxl;
-    margin-left: 0 ?if $mobile;
+    margin-left: 0 ?if $tablet;
 }

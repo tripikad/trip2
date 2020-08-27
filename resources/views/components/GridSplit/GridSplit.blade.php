@@ -2,14 +2,14 @@
 
 $left_content = $left_content ?? [];
 $right_content = $right_content ?? [];
-$left_col = $left_col ?? 7;
+$left_col = $left_col ?? 8;
 $right_col = $right_col ?? 4;
 
 @endphp
 
 <div class="row row-between">
 
-    <div class="col-{{ $left_col }} col-{{ $left_col }}-tablet">
+    <div class="col-md-{{ $left_col }} col-12 col-{{ $left_col }}-tablet">
 
     @foreach ($left_content as $left_content_item)
     
@@ -23,7 +23,7 @@ $right_col = $right_col ?? 4;
 
     </div>
 
-    <div class="col-{{ $right_col }} col-{{ $right_col }}-tablet padding-top-none-mobile-md">
+    <div class="col-md-{{ $right_col }} col-12 col-{{ $right_col }}-tablet padding-top-none-tablet-md">
 
     @foreach ($right_content as $right_content_item)
     

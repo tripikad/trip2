@@ -13,7 +13,7 @@ $search = $search ?? '';
       rgba(0, 0, 0, 0.1),
       rgba(0, 0, 0, 0.2)
     ), url({{ $background }});">
-    <div class="container">
+    <div class="container-lg">
         <div class="FrontpageHeader__navbar">
             {!! $navbar !!}
         </div>

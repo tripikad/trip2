@@ -6,7 +6,7 @@
 }
 
 .Navbar__logo {
-    margin-left: calc($spacer * -4.5);
+    margin-left: calc($spacer * -1);
     margin-top: calc($spacer * 2);
 }
 

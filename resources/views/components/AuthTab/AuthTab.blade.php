@@ -3,19 +3,20 @@
     $route = $route ?? '';
 @endphp
 
-@if($route)
-    <a href="{{ $route }}">
-@endif
+<div class="AuthTab {{ $isclasses }}">
 
-        <div class="AuthTab {{ $isclasses }}">
+    @if($route)
+        <a href="{{ $route }}">
+    @endif
 
-            <div class="AuthTab__title">
+    <span class="AuthTab__title">
 
-                {{ $title }}
+        {{ $title }}
 
-            </div>
+    </span>
 
-        </div>
-@if($route)
-    </a>
-@endif
+    @if($route)
+        </a>
+    @endif
+
+</div>
