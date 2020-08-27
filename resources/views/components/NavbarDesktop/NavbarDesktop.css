@@ -50,7 +50,7 @@
 .NavbarDesktop__arrowWrapper {
     display: flex;
     justify-content: flex-end;
-    padding-right: $padding-xl;
+    padding-right: $padding-md;
 }
 
 .NavbarDesktop__arrow {
