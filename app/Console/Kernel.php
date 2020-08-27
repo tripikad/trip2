@@ -19,7 +19,7 @@ class Kernel extends ConsoleKernel
 
         $schedule->command('search:index --optimize')->dailyAt('05:55');
 
-        $schedule->command('reisiparadiis:sync')->dailyAt('03:00');
+        //$schedule->command('reisiparadiis:sync')->dailyAt('03:00');
 
         //$schedule->command('newsletter:send --check-newsletters')
         //    ->cron('*/10 * * * *');
