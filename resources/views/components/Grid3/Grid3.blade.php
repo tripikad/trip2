@@ -7,12 +7,12 @@ $gutter = $gutter ?? false;
 
 @foreach (collect($items)->chunk(3) as $row)
     
-<div class="row">
+<div class="row @if (!$gutter) no-gutters @endif">
     
     @foreach ($row as $item)
 
     <div
-        class="col-4 show-mobile-desktop margin-bottom-sm
+        class="col-md-4 col-12 show-mobile-desktop margin-bottom-sm
         @if ($gutter) padding-right-sm-mobile-none @endif
     ">
 
@@ -33,7 +33,7 @@ $gutter = $gutter ?? false;
     @foreach ($row as $item)
 
     <div
-        class="col-6 show-tablet margin-bottom-sm
+        class="col-md-6 col-12 show-tablet margin-bottom-sm
         @if ($gutter) padding-right-sm-mobile-none @endif
     ">
 

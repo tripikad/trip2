@@ -160,6 +160,11 @@
     padding-top: $padding-md ?if $mobile;
 }
 
+.padding-top-none-tablet-md {
+    padding-top: 0;
+    padding-top: $padding-md ?if $tablet;
+}
+
 /* Margins */
 
 .margin-top-xs {

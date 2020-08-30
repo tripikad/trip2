@@ -68,7 +68,7 @@ $narrow = $narrow ?? false;
     @endif
 ">
 
-    <div class="container">
+    <div class="container-lg">
 
         <div class="Two__contentInnerContainer">
 
@@ -150,7 +150,7 @@ $narrow = $narrow ?? false;
 
 <div class="Two__bottomOuterContainer">
 
-    <section class="container">
+    <section class="container-lg">
 
         @foreach ($bottom as $bottom_item)
         

@@ -23,7 +23,7 @@
 
 .Comment--inset {
     margin-left: $margin-xxl;
-    margin-left: 0 ?if $mobile;
+    margin-left: $margin-sm ?if $tablet;
 }
 
 .Comment__right {
