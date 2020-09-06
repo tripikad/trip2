@@ -80,7 +80,7 @@ $footer = $footer ?? '';
 
                 </div>
 
-                <div class="col-md-3 col-12 d-none d-sm-block padding-top-none-mobile-md">
+                <div class="col-md-3 col-12 padding-top-none-mobile-md">
 
                 @foreach ($sidebar as $sidebar_item)
                 
