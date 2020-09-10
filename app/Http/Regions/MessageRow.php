@@ -24,6 +24,6 @@ class MessageRow
                     ->with('size', 32)
                     ->with('border', 3)
             )
-            ->with('route', route('message.index.with', [$user, $message->withUser]));
+            ->with('route', route('message.index.with', [$user->id, $message->withUser->id]));
     }
 }
