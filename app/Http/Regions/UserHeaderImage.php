@@ -32,7 +32,7 @@ class UserHeaderImage
                         component('Button')
                             ->is('cyan')
                             ->with('title', trans('user.show.message.create'))
-                            ->with('route', route('message.index.with', [$loggedUser->id, $user->id]))
+                            ->with('route', $loggedUser ? route('message.index.with', [$loggedUser->id, $user->id]) : null)
                     )
                 )
             );
