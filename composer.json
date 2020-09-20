@@ -10,12 +10,12 @@
     "require": {
         "php": "^7.4",
         "albertcht/invisible-recaptcha": "^1.9",
-        "andreasindal/laravel-markdown": "^3.1",
         "baum/baum": "~2.0",
         "cviebrock/eloquent-sluggable": "^6.0",
         "doctrine/dbal": "^2.6",
         "eduardokum/laravel-mail-auto-embed": "^1.0",
         "fideloper/proxy": "^4.4",
+        "graham-campbell/markdown": "^13.1",
         "guzzlehttp/guzzle": "^6.3",
         "htmlmin/htmlmin": "^7.0",
         "intervention/image": "^2.5",
@@ -38,7 +38,7 @@
     "require-dev": {
         "filp/whoops": "~2.0",
         "fzaninotto/faker": "~1.4",
-        "laravel/browser-kit-testing": "^4.0",
+        "laravel/browser-kit-testing": "^5.1",
         "laravel/dusk": "^5.0.0",
         "mockery/mockery": "~1.0",
         "nunomaduro/collision": "^2.0",

@@ -2,7 +2,7 @@
 
 namespace App\Utils;
 
-use Markdown;
+use GrahamCampbell\Markdown\Facades\Markdown;
 use App\Image;
 use Symfony\Component\Yaml\Yaml;
 
@@ -17,7 +17,7 @@ class BodyFormatter
 
     public function markdown()
     {
-        $this->body = Markdown::parse($this->body);
+        $this->body = Markdown::convertToHtml($this->body);
 
         return $this;
     }
@@ -151,7 +151,7 @@ class BodyFormatter
                 $cleanedMatch = preg_replace_callback(
                     '/-\s+(.+)/',
                     function ($matches) {
-                        return "- '" . format_body($matches[1]) . "'";
+                        return "- " . format_body($matches[1]);
                     },
                     $cleanedMatch
                 );

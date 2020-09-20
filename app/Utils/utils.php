@@ -92,6 +92,17 @@ function format_description($body)
         ->format();
 }
 
+function format_comment($body)
+{
+    return (new Utils\BodyFormatter($body))
+        ->youtube()
+        ->vimeo()
+        ->markdown()
+        ->externalLinks()
+        ->replaceQuotes()
+        ->format();
+}
+
 function format_date($date)
 {
     if ($date->isToday()) {

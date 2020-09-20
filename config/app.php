@@ -159,7 +159,6 @@ return [
         Jenssegers\Date\DateServiceProvider::class,
         HTMLMin\HTMLMin\HTMLMinServiceProvider::class,
         Cviebrock\EloquentSluggable\ServiceProvider::class,
-        Indal\Markdown\MarkdownServiceProvider::class,
         Baum\BaumServiceProvider::class,
 
         Msurguy\Honeypot\HoneypotServiceProvider::class,
@@ -231,6 +230,6 @@ return [
         'HTMLMin' => HTMLMin\HTMLMin\Facades\HTMLMin::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'Honeypot' => Msurguy\Honeypot\HoneypotFacade::class,
-        'Markdown' => Indal\Markdown\Facade::class
+        'Markdown' => GrahamCampbell\Markdown\Facades\Markdown::class
     ]
 ];
