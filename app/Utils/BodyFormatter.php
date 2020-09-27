@@ -36,6 +36,22 @@ class BodyFormatter
         return $this;
     }
 
+    public function formatLinks()
+    {
+        $pattern = '/<a.*?<\/a>(*SKIP)(*F)|(http|https):\/\/\S+/';
+
+        $this->body = preg_replace_callback(
+            $pattern,
+            function ($matches) {
+                $match = str_replace('</p>', '', $matches[0]);
+                return '<a href="' . $match . '" target="_blank">' . $match . '</a>';
+            },
+            $this->body
+        );
+
+        return $this;
+    }
+
     public function externalLinks()
     {
         if (
@@ -80,20 +96,6 @@ class BodyFormatter
             },
             $this->body
         );
-        // if (preg_match_all($flightmapPattern, $this->body, $matches)) {
-        //     dd($matches);
-        //     $const airports
-        //     foreach ($matches[1] as $match) {
-        //         dump($match);
-        //         // if ($image = Image::find($match)) {
-        //         //     $this->body = str_replace(
-        //         //         "[[$image->id]]",
-        //         //         '<img src="' . $image->preset('large') . '" />',
-        //         //         $this->body
-        //         //     );
-        //         // }
-        //     }
-        // }
 
         return $this;
     }
@@ -175,13 +177,23 @@ class BodyFormatter
 
     public function youtube()
     {
-        $pattern =
-            '/\s*[a-zA-Z\/\/:\.]*youtu(be.com\/watch\?v=|.be\/)([a-zA-Z0-9\-_]+)([a-zA-Z0-9\/\*\-\_\?\&\;\%\=\.]*)/i';
+        $markdown_pattern = '#<a(.*?)(?:href="https?://)?(?:www\.)?(?:youtu\.be/|youtube\.com(?:/embed/|/v/|/watch?.*?v=))([\w\-]{10,12}).*<\/a>#x';
+        $plain_link_pattern = '~(?:https?://)?(?:www\.)?(?:youtu\.be/|youtube\.com/(?:(?:watch)?\?(?:.*&)?vi?=|(?:embed|vi?|user)/))([^?&"\'>\s]+)(?![^<]*>)\S*~';
 
         $this->body = preg_replace_callback(
-            $pattern,
+            $markdown_pattern,
             function ($matches) {
-                return component('Youtube')->with('id', $matches[2]);
+                if (isset($matches[2]))
+                    return component('Youtube')->with('id', $matches[2]);
+            },
+            $this->body
+        );
+
+        $this->body = preg_replace_callback(
+            $plain_link_pattern,
+            function ($matches) {
+                if (isset($matches[1]))
+                    return component('Youtube')->with('id', $matches[1]);
             },
             $this->body
         );

@@ -36,6 +36,11 @@ class CommentVars
         return format_comment(strip_tags($this->comment->body));
     }
 
+    public function edit_body()
+    {
+        return format_comment_edit(strip_tags($this->comment->body));
+    }
+
     public function created_at()
     {
         return format_date($this->comment->created_at);
