@@ -38,7 +38,7 @@ class BodyFormatter
 
     public function formatLinks()
     {
-        $pattern = '/<a.*?<\/a>(*SKIP)(*F)|(http|https):\/\/\S+/';
+        $pattern = '/(<a.*?<\/a>|<img.*?\/>)(*SKIP)(*F)|(http|https):\/\/\S+/';
 
         $this->body = preg_replace_callback(
             $pattern,
