@@ -530,7 +530,7 @@ class ForumController extends Controller
                                         component('EditorComment')
                                             ->with('title', trans('content.forum.edit.field.body.title'))
                                             ->with('name', 'body')
-                                            ->with('value', old('body', $forum->body))
+                                            ->with('value', old('body', $forum->vars()->forum_content_body_edit))
                                             ->with('rows', 20)
                                     )
                                     ->pushWhen(

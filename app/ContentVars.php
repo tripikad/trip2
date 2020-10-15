@@ -48,6 +48,16 @@ class ContentVars
         return format_body($this->content->body);
     }
 
+    public function forum_content_body()
+    {
+        return format_comment(strip_tags($this->content->body));
+    }
+
+    public function forum_content_body_edit()
+    {
+        return format_comment_edit(strip_tags($this->content->body));
+    }
+
     public function description()
     {
         return Str::limit(format_description($this->content->body), 200);

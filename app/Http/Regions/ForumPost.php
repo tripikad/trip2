@@ -124,7 +124,7 @@ class ForumPost
                 'body',
                 component('Body')
                     ->is('responsive')
-                    ->with('body', $post->vars()->body)
+                    ->with('body', $post->vars()->forum_content_body)
             );
     }
 }

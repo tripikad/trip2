@@ -32,7 +32,13 @@ class CommentVars
 
     public function body()
     {
-        return format_body($this->comment->body);
+        //return format_body($this->comment->body);
+        return format_comment(strip_tags($this->comment->body));
+    }
+
+    public function edit_body()
+    {
+        return format_comment_edit(strip_tags($this->comment->body));
     }
 
     public function created_at()

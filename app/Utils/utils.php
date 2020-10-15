@@ -71,9 +71,9 @@ function format_body($body)
         ->flightmap()
         ->polls()
         ->calendar()
+        ->markdown()
         ->youtube()
         ->vimeo()
-        ->markdown()
         ->externalLinks()
         ->images()
         ->replaceQuotes()
@@ -89,6 +89,29 @@ function format_description($body)
         ->images()
         ->plain()
         ->trim()
+        ->format();
+}
+
+function format_comment($body)
+{
+    return (new Utils\BodyFormatter($body))
+        ->markdown()
+        ->youtube()
+        ->vimeo()
+        ->formatLinks()
+        ->externalLinks()
+        ->replaceQuotes()
+        ->format();
+}
+
+function format_comment_edit($body)
+{
+    return (new Utils\BodyFormatter($body))
+        ->markdown()
+        ->vimeo()
+        ->formatLinks()
+        ->externalLinks()
+        ->replaceQuotes()
         ->format();
 }
 
