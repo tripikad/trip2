@@ -10,6 +10,7 @@
             <meta name="robots" content="noindex">
         @endif
         <meta name="google-site-verification" content="GJ69HgdyknrZZGmanskWCP9TqPNDJGR5OshtRDwZHJ0" />
+        <meta name="csrf_token" content="{{csrf_token()}}" />
         <meta id="globalprops" name="globalprops" content="
             {{
                 rawurlencode(json_encode([
