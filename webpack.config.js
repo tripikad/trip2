@@ -64,6 +64,16 @@ module.exports = {
         ]
       },
       {
+        test: /\.scss$/i,
+        use: [
+          MiniCssExtractPlugin.loader,
+          // Translates CSS into CommonJS
+          'css-loader',
+          // Compiles Sass to CSS
+          'sass-loader',
+        ],
+      },
+      {
         test: /\.svg$/,
         use: [
           {
