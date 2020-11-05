@@ -147,17 +147,23 @@ function backToAnchor($anchor)
 
 function dist($type)
 {
-    $path = public_path('manifest.json');
+    $path = public_path('/dist/manifest.json');
+    $manifest = null;
     if (is_file($path)) {
         $manifest = json_decode(file_get_contents($path), true);
-    } else {
-        $manifest = [
-            'js' => 'main.js',
-            'css' => 'main.css',
-            'svg' => 'main.svg'
-        ];
+    } else
+        return null;
+
+    switch ($type) {
+        case "css":
+            return $manifest['main.css'];
+        case "js":
+            return $manifest['main.js'];
+        case "svg":
+            return $manifest['main.svg'];
     }
-    return '/dist/' . (is_array($manifest[$type]) ? $manifest[$type][0] : $manifest[$type]);
+
+    return null;
 }
 
 function format_link($route, $title, $blank = false)
