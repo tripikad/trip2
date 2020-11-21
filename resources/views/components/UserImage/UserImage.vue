@@ -17,11 +17,11 @@
             />
 
             <div class="UserImage__arcRank">
-                <component :is="'Arc'" startangle="0" :endangle="rank" :size="size" :border="border"></component>
+                <component :is="'Arc'" startangle="0" :endangle="parseInt(rank) * 90" :size="size" :border="border"></component>
             </div>
 
             <div class="UserImage__arcReminder">
-                <component :is="'Arc'" :startangle="rank" endangle="360" :size="size" :border="border"></component>
+                <component :is="'Arc'" :startangle="parseInt(rank) * 90" endangle="360" :size="size" :border="border"></component>
             </div>
         </a>
     </div>

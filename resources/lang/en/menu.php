@@ -17,6 +17,7 @@ return [
     'header.edit' => 'Edit profile',
 
     'auth.register' => 'Register',
+    'auth.register_business' => 'Register business user',
     'auth.login' => 'Login',
     'auth.admin' => 'Administer',
     'auth.logout' => 'Logout',

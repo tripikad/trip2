@@ -55,7 +55,7 @@ class ResetController extends Controller
             ->with(
                 'content',
                 collect()->push(
-                    component('Form')
+                    component('Form2')
                         ->with('route', route('reset.apply.submit'))
                         ->with(
                             'fields',
@@ -116,7 +116,7 @@ class ResetController extends Controller
             ->with(
                 'content',
                 collect()->push(
-                    component('Form')
+                    component('Form2')
                         ->with('route', route('reset.password.submit'))
                         ->with(
                             'fields',

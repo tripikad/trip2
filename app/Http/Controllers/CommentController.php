@@ -83,7 +83,7 @@ class CommentController extends Controller
             ->with(
                 'content',
                 collect()->push(
-                    component('Form')
+                    component('Form2')
                         ->with('route', route('comment.update', [$comment]))
                         ->with(
                             'fields',

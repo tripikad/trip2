@@ -1,1 +1,95 @@
 $spacer: 12px;
+
+$color-white: #ffffff;
+$color-gray: #6c747a;
+$color-gray-light: hsl(204, 6%, 83%);
+$color-gray-lighter: hsl(204, 6%, 95%);
+$color-gray-dark: hsl(204, 6%, 35%);
+$color-dark-gray: #545a5f;
+$color-blue: #37a0eb;
+$color-green: #78cc5c;
+$color-green-dark: #288f18;
+$color-orange: #ff9b3d;
+$color-purple: #8b84d7;
+$color-red: #ed6464;
+
+
+$color-white-hover:  hsla(0, 0%, 100%, 0.9);
+$color-green-hover: #5bba3b;
+$color-gray-hover: hsl(204, 6%, 73%);
+$color-blue-hover: hsl(205, 82%, 47%);
+
+
+$opacity-xxs: 0.05;
+$opacity-xs: 0.1;
+$opacity-sm: 0.3;
+$opacity-md: 0.5;
+$opacity-lg: 0.7;
+$opacity-xl: 0.9;
+
+$font-heading-xs: 600 14px / 145% Sailec, sans-serif;
+$font-heading-sm: 600 16px / 145% Sailec, sans-serif;
+$font-heading-md: 600 19px / 145% Sailec, sans-serif;
+$font-heading-lg: 600 21px / 135% Sailec, sans-serif;
+$font-heading-xl: bold 30px / 120% Sailec, sans-serif;
+$font-heading-xxl: bold 48px / 100% Sailec, sans-serif;
+$font-heading-xxxl: bold 64px / 100% Sailec, sans-serif;
+
+$font-text-xs: normal 13px / 145% Sailec, sans-serif;
+$font-text-sm: normal 14px / 145% Sailec, sans-serif;
+$font-text-md: normal 16px / 145% Sailec, sans-serif;
+$font-text-lg: normal 19px / 145% Sailec, sans-serif;
+
+$line-height-xs: 100%;
+$line-height-sm: 120%;
+$line-height-md: 135%;
+$line-height-lg: 150%;
+$line-height-xl: 200%;
+$line-height-xxl: 220%;
+
+$border-radius-md: 3px;
+$border-radius-lg: $spacer;
+$border-radius-xl: calc(#{$spacer} * 1.5);
+$border-radius-xxl: calc(#{$spacer} * 100);
+
+$border-gray-md: 2px solid  hsl(204, 6%, 83%);
+
+$padding-xxxs: calc(#{$spacer} / 4);
+$padding-xxs: calc(#{$spacer} / 3);
+$padding-xs: calc(#{$spacer} / 2);
+$padding-sm: $spacer;
+$padding-md: calc(#{$spacer} * 2);
+$padding-lg: calc(#{$spacer} * 3);
+$padding-xl: calc(#{$spacer} * 5);
+$padding-xxl: calc(#{$spacer} * 7);
+$padding-xxxl: calc(#{$spacer} * 16);
+
+$margin-xxxs: calc(#{$spacer} / 4);
+$margin-xxs: calc(#{$spacer} / 3);
+$margin-xs: calc(#{$spacer} / 2);
+$margin-sm: $spacer;
+$margin-md: calc(#{$spacer} * 2);
+$margin-lg: calc(#{$spacer} * 3);
+$margin-xl: calc(#{$spacer} * 5);
+$margin-xxl: calc(#{$spacer} * 7);
+$margin-xxxl: calc(#{$spacer} * 16);
+
+$width-xxs: calc(#{$spacer} / 2);
+$width-xs: $spacer;
+$width-sm: calc(#{$spacer} * 2);
+$width-md: calc(#{$spacer} * 4);
+$width-lg: calc(#{$spacer} * 6);
+$width-xl: calc(#{$spacer} * 12);
+$width-xxl: calc(#{$spacer} * 15);
+$width-xxxl: calc(#{$spacer} * 24);
+$width-xxxxl: calc(#{$spacer} * 32);
+
+$height-xxs: calc(#{$spacer} / 2);
+$height-xs: $spacer;
+$height-sm: calc(#{$spacer} * 2);
+$height-md: calc(#{$spacer} * 4);
+$height-lg: calc(#{$spacer} * 6);
+$height-xl: calc(#{$spacer} * 12);
+$height-xxl: calc(#{$spacer} * 15);
+$height-xxxl: calc(#{$spacer} * 24);
+$height-xxxxl: calc(#{$spacer} * 32);

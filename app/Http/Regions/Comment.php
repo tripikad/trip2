@@ -57,7 +57,7 @@ class Comment
                         )
                         ->pushWhen(
                             $user && $user->hasRole('admin'),
-                            component('Form')
+                            component('Form2')
                                 ->with('route', route('comment.status', [$comment, 1 - $comment->status]))
                                 ->with('method', 'PUT')
                                 ->with(

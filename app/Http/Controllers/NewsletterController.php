@@ -226,7 +226,7 @@ class NewsletterController extends Controller
             ->with(
                 'content',
                 collect()->push(
-                    component('Form')
+                    component('Form2')
                         ->with('route', route('newsletter.store', [$newsletter]))
                         ->with('id', 'FlightNewsletterSubscribeForm')
                         ->with(

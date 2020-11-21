@@ -12,7 +12,7 @@ class Filter
         $currentPage = 1,
         $type = ''
     ) {
-        return component('Form')
+        return component('Form2')
             ->with('route', route('utils.filter'))
             ->with(
                 'fields',

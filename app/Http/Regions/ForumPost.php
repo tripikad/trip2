@@ -92,7 +92,7 @@ class ForumPost
                         )
                         ->pushWhen(
                             $user && $user->hasRole('admin'),
-                            component('Form')
+                            component('Form2')
                                 ->with('route', route('content.status', [$post->type, $post, 1 - $post->status]))
                                 ->with(
                                     'fields',
@@ -105,7 +105,7 @@ class ForumPost
                         )
                         ->pushWhen(
                             $user,
-                            component('Form')
+                            component('Form2')
                                 ->with('route', route('follow.follow.content', [$post->type, $post, $followStatus]))
                                 ->with('method', 'PUT')
                                 ->with(

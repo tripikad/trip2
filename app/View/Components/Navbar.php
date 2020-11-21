@@ -1,0 +1,128 @@
+<?php
+
+namespace App\View\Components;
+
+use Illuminate\View\Component;
+use Illuminate\View\View;
+
+class Navbar extends Component
+{
+    public $user;
+    public string $mode;
+    public array $menuLinks = [];
+    public array $userLinks = [];
+
+    private function getMenuLinks()
+    {
+        $user = $this->user;
+
+        return collect()
+            ->put('flight', [
+                'title' => trans('menu.header.flights'),
+                'route' => route('flight.index')
+            ])
+            ->put('travelmate', [
+                'title' => trans('menu.header.travelmates'),
+                'route' => route('travelmate.index')
+            ])
+            ->put('forum', [
+                'title' => trans('menu.header.forum'),
+                'route' => route('forum.index')
+            ])
+            ->put('news', [
+                'title' => trans('menu.header.news'),
+                'route' => route('news.index')
+            ])
+            // @LAUNCH Remove this check
+            ->putWhen($user && $user->hasRole('superuser'), 'offer', [
+                'title' => trans('menu.header.offer'),
+                'new' => trans('menu.header.new'),
+                'route' => route('offer.index')
+            ])
+            ->toArray();
+    }
+
+    private function getUserLinks()
+    {
+        $user = $this->user;
+
+        return collect()
+            ->pushWhen(!$user, [
+                'title' => trans('menu.auth.login'),
+                'route' => route('login.form')
+            ])
+            ->pushWhen(!$user, [
+                'title' => trans('menu.auth.register'),
+                'route' => route('register.form')
+            ])
+            ->pushWhen(!$user, [
+                'title' => trans('menu.auth.register_business'),
+                'route' => route('register_business.form')
+            ])
+            ->pushWhen($user, [
+                'title' => trans('menu.user.profile'),
+                'route' => $user ? route('user.show', [$user]) : null
+            ])
+            ->pushWhen($user, [
+                'title' => trans('menu.user.edit.profile'),
+                'route' => $user ? route('user.edit', [$user]) : null
+            ])
+            ->pushWhen($user, [
+                'title' => trans('menu.user.message'),
+                'route' => $user ? route('message.index', [$user]) : null,
+                'badge' => $user ? $user->unreadMessagesCount() : ''
+            ])
+            ->pushWhen($user && $user->hasRole('admin'), [
+                'title' => trans('menu.auth.admin'),
+                'route' => route('internal.index')
+            ])
+            ->pushWhen($user && $user->company, [
+                'title' => trans('menu.company.index'),
+                'route' => route('company.index')
+            ])
+            ->pushWhen($user && $user->hasRole('superuser'), [
+                'title' => trans('menu.company.admin.index'),
+                'route' => route('company.admin.index')
+            ])
+            ->pushWhen($user, [
+                'title' => trans('menu.auth.logout'),
+                'route' => route('login.logout')
+            ])
+            ->toArray();
+    }
+
+    /**
+     * Create a new component instance.
+     *
+     * @param string $mode
+     */
+    public function __construct(string $mode = 'dark')
+    {
+        $this->user = auth()->user();
+        $this->mode = $mode;
+        $this->menuLinks = $this->getMenuLinks();
+        $this->userLinks = $this->getUserLinks();
+
+        if ($this->user) {
+            $this->user->unreadMessages = $this->user->unreadMessagesCount();
+            $this->user->image = $this->user->imagePreset('xsmall_square');
+        }
+    }
+
+    /**
+     * Get the view / contents that represent the component.
+     *
+     * @return View|string
+     */
+    public function render()
+    {
+        $title = trans('menu.header.my');
+        $route = route('login.form');
+
+        return view('components.Navbar', [
+            'title' => $title,
+            'route' => $route,
+            'svg' => $this->mode === 'dark' ? '#tripee_logo_dark' : '#tripee_logo'
+        ]);
+    }
+}

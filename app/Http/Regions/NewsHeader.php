@@ -74,7 +74,7 @@ class NewsHeader
                         )
                         ->pushWhen(
                             $user && $user->hasRole('admin'),
-                            component('Form')
+                            component('Form2')
                                 ->with('route', route('content.status', [$new->type, $new, 1 - $new->status]))
                                 ->with(
                                     'fields',

@@ -1,0 +1,89 @@
+@import "../../variables";
+
+.FormTextField {
+
+    &__header {
+        display: flex;
+    }
+
+    &__label {
+        color: $color-gray;
+        display: block;
+        font: $font-heading-sm;
+        line-height: $line-height-md;
+        margin-bottom: $margin-sm;
+    }
+
+    &__description {
+        color: $color-gray-light;
+        font: $font-heading-sm;
+        line-height: $line-height-md;
+        margin-left: $margin-xs;
+        margin-bottom: $margin-sm;
+    }
+
+    &__field {
+
+        display: flex;
+        align-items: center;
+    }
+
+    &_prefix {
+
+        color: $color-gray-light;
+        font: $font-heading-sm;
+        margin-right: $margin-sm;
+    }
+
+    &__suffix {
+
+        color: $color-gray-light;
+        font: $font-heading-sm;
+        margin-left: $margin-xs;
+    }
+
+    &__input {
+
+        border-radius: $border-radius-md;
+        border: $border-gray-md;
+        color: $color-gray-dark;
+        font: $font-text-md;
+        padding: $padding-sm;
+        width: 100%;
+
+        &::placeholder {
+
+            color: $color-gray-light;
+        }
+    }
+
+    &--large {
+
+        .FormTextField__input {
+            font: $font-heading-lg;
+            padding: $padding-md $padding-sm;
+        }
+    }
+
+    :disabled {
+
+        opacity: $opacity-md;
+    }
+
+    &--hidden {
+
+        display: none;
+    }
+
+    &--error {
+
+        .FormTextField__label {
+
+            color: $color-red;
+        }
+
+        .FormTextField__input {
+            border-color: $color-red;
+        }
+    }
+}

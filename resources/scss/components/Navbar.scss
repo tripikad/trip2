@@ -1,0 +1,48 @@
+@import "../../scss/variables";
+
+.Navbar {
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: $height-md;
+
+    &__logo {
+
+        margin-left: calc(#{$spacer} * -1);
+        margin-top: calc(#{$spacer} * 2);
+
+        svg {
+
+            width: 200px;
+            height: 150px;
+            fill: $color-white;
+        }
+    }
+
+    &__sitename {
+
+        display: none;
+    }
+
+    &__right {
+
+        display: flex;
+        align-items: center;
+    }
+
+    &__search {
+
+        display: block;
+
+        /*svg {
+
+            fill: $color-gray-light;
+        }*/
+
+        @media (max-width: 768px) {
+
+            display: none;
+        }
+    }
+}

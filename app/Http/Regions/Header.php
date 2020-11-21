@@ -6,7 +6,7 @@ class Header
 {
     public function render($content = [], $background = '/photos/header3.jpg', $is = '')
     {
-        return component('Header')
+        return component('HeaderMain')
             ->is($is)
             ->with('background', $background)
             ->with(

@@ -1,4 +1,4 @@
-.FormTextfield__header {
+/*.FormTextfield__header {
     display: flex;
 }
 
@@ -67,4 +67,4 @@
 
 .FormTextfield--error .FormTextfield__input {
     border-color: $red;
-}
+}*/

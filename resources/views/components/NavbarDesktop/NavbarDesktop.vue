@@ -1,5 +1,5 @@
 <template>
-    <nav class="NavbarDesktop" :class="isclasses">
+    <nav class="NavbarDesktop d-none d-md-block" :class="isclasses">
         <div class="NavbarDesktop__links">
             <a v-for="(link, index) in links" :key="index" :href="link.route">
                 <div @clickaway="submenuOpen = false" class="NavbarDesktop__link">
@@ -17,13 +17,17 @@
 
                 <div v-if="user" :class="{ active: isActive }" @click="onClick" class="NavbarDesktop__userImage">
                     <component
-                        v-if="user.badge"
+                        v-if="user.unreadMessageCount"
                         :is="'Badge'"
                         class="NavbarDesktop__badge"
-                        :title="user.badge"
-                    ></component>
+                        :title="user.unreadMessageCount">
+                    </component>
 
-                    <component :is="'UserImage'" route="javascript:;" :image="user.image" :rank="user.rank">
+                    <component
+                        :is="'UserImage'"
+                        route="javascript:;"
+                        :image="user.image"
+                        :rank="user.rank">
                     </component>
                 </div>
             </div>
@@ -67,7 +71,11 @@ export default {
         sublinks: { default: '' },
         user: { default: '' },
         route: { default: '' },
-        title: { default: '' }
+        title: { default: '' },
+        /*user: {
+            type: Object,
+            default: null,
+        }*/
     },
 
     methods: {
@@ -77,12 +85,7 @@ export default {
         },
         onClick: function() {
             this.isActive = !this.isActive
-
-            if (this.isActive) {
-                this.submenuOpen = true
-            } else {
-                this.submenuOpen = false
-            }
+            this.submenuOpen = this.isActive;
         }
     },
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Company;
 use Hash;
 use Carbon\Carbon;
 
@@ -11,6 +12,16 @@ use App\Offer;
 
 class CompanyController extends Controller
 {
+    public function profile($slug)
+    {
+        $company = Company::whereSlug($slug);
+        if (!$company) {
+            abort(404);
+        }
+
+        return view('pages.company.profile');
+    }
+
     public function index()
     {
         $loggedUser = request()->user();
@@ -174,7 +185,7 @@ class CompanyController extends Controller
                             ->withInnerPadding(2)
                             ->withWidth(styles('tablet-width'))
                             ->withItems(
-                                component('Form')
+                                component('Form2')
                                     ->with('route', route('company.store'))
                                     ->with('files', true)
                                     ->with(
@@ -365,7 +376,7 @@ class CompanyController extends Controller
                             ->withInnerPadding(2)
                             ->withWidth(styles('tablet-width'))
                             ->withItems(
-                                component('Form')
+                                component('Form2')
                                     ->with('route', route('company.update', [$user]))
                                     ->with('method', 'PUT')
                                     ->with('files', true)

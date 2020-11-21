@@ -203,7 +203,7 @@ class SearchController extends Controller
                     'Header',
                     collect()
                         ->push(
-                            component('Form')
+                            component('Form2')
                                 ->with('method', 'get')
                                 ->with(
                                     'route',

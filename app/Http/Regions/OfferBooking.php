@@ -6,7 +6,7 @@ class OfferBooking
 {
     public function render($id, $name, $email, $offer)
     {
-        return component('Form')
+        return component('Form2')
             ->withRoute(route('booking.create', $id))
             ->withFields(
                 collect()

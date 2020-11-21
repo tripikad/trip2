@@ -1,0 +1,19 @@
+@import "../../variables";
+
+.FormErrorSection {
+
+    background: $color-red;
+    padding: calc(#{$spacer} * 1.5);
+
+    &__title {
+
+        color: $color-white;
+        font: $font-heading-sm;
+        margin-bottom: $margin-xs;
+
+        &:last-child {
+
+            margin-bottom: 0;
+        }
+    }
+}

@@ -19,6 +19,7 @@ return [
     'header.edit' => 'Muuda profiili',
 
     'auth.register' => 'Registreeri',
+    'auth.register_business' => 'Registreeri ärikasutaja',
     'auth.login' => 'Logi sisse',
     'auth.admin' => 'Toimetus',
     'auth.logout' => 'Logi välja',

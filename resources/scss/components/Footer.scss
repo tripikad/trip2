@@ -1,0 +1,160 @@
+@import "../../scss/variables";
+
+.Footer {
+
+    background-size: cover;
+    padding: $padding-xxl 0 $padding-lg 0;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/photos/footer.jpg');
+
+    @media (max-width: 576px) {
+
+        padding: $padding-xl 0 $padding-lg 0;
+    }
+
+    &__wrapper {
+
+        display: flex;
+        justify-content: center;
+        margin-bottom: $margin-xxl;
+
+        @media (max-width: 768px) {
+
+            flex-direction: column;
+        }
+    }
+
+    &__col {
+
+        flex-shrink: 0;
+        width: 25%;
+
+        @media (max-width: 768px) {
+
+            width: inherit;
+            text-align: center
+        }
+    }
+
+    &__tripLogo {
+
+        width: 100px;
+        height: 25px;
+        fill: $color-white;
+    }
+
+    &__link {
+
+        color: white;
+        font: $font-heading-sm;
+        padding: $padding-xs 0;
+
+        @media (max-width: 576px) {
+
+            padding: $padding-sm 0
+        }
+
+        &:hover {
+
+            color: $color-white-hover;
+        }
+    }
+
+    &__social {
+
+        display: flex;
+        justify-content: center;
+        text-align: center;
+
+        @media (max-width: 768px) {
+
+            flex-direction: column;
+            justify-content: left
+        }
+    }
+
+    &__socialLink {
+
+        color: white;
+        font: $font-heading-sm;
+        margin-right: $padding-md;
+        padding: $padding-xs;
+        line-height: $line-height-xxl;
+
+        &:hover {
+
+            color: $color-white-hover;
+        }
+    }
+
+    &__socialIcon {
+
+        margin-right: $margin-sm;
+
+        @media (max-width: 768px) {
+
+            display: none
+        }
+
+        &:last-child {
+
+            margin-right: 0;
+        }
+
+        svg {
+
+            width: 18px;
+            height: 18px;
+            fill: $color-white;
+        }
+    }
+
+    &__licence {
+
+        color: $color-white;
+        opacity: $opacity-md;
+        font: $font-text-md;
+        height: $height-md;
+        margin-top: $margin-lg;
+        text-align: center;
+    }
+
+    &--light {
+
+        background: $color-white;
+
+        .Footer__tripLogo {
+
+            fill: $color-dark-gray;
+        }
+
+        .Footer__link {
+
+            color: $color-gray;
+
+            &:hover {
+
+                color: $color-gray-hover;
+            }
+        }
+
+        .Footer__socialLink {
+
+            color: $color-gray;
+
+            &:hover {
+
+                color: $color-gray-hover;
+            }
+        }
+
+        .Footer__licence {
+
+            color: $color-gray;
+        }
+
+        .Footer__socialIcon svg {
+
+            fill: $color-gray;
+        }
+    }
+}

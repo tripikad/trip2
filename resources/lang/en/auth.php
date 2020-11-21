@@ -2,7 +2,9 @@
 
 return [
     'register.title' => 'Register',
+    'register.business_user.title' => 'Register business user',
     'register.field.name.title' => 'Username',
+    'register.field.company_name.title' => 'Company name',
     'register.field.email.title' => 'E-mail',
     'register.field.password.title' => 'Password',
     'register.field.password_confirmation.title' => 'Confirm password',

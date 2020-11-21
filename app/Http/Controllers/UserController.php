@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Company;
 use Hash;
 use App\User;
 use App\Image;
@@ -150,7 +151,7 @@ class UserController extends Controller
             ->with(
                 'content',
                 collect()->push(
-                    component('Form')
+                    component('Form2')
                         ->with('route', route('user.update', [$user]))
                         ->with('method', 'PUT')
                         ->with('files', true)
@@ -402,7 +403,7 @@ class UserController extends Controller
             ->with(
                 'content',
                 collect()->push(
-                    component('Form')
+                    component('Form2')
                         ->with('route', route('user.destinations.store', [$user]))
                         ->with('method', 'PUT')
                         ->with(

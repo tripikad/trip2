@@ -47,6 +47,10 @@ class NavbarDesktop
                 'title' => trans('menu.auth.register'),
                 'route' => route('register.form')
             ])
+            ->pushWhen(!$user, [
+                'title' => trans('menu.auth.register_business'),
+                'route' => route('register_business.form')
+            ])
             ->pushWhen($user, [
                 'title' => trans('menu.user.profile'),
                 'route' => $user ? route('user.show', [$user]) : null
@@ -81,7 +85,11 @@ class NavbarDesktop
 
     public function render($color = '')
     {
-        $user = request()->user();
+        $user = auth()->user();
+        if ($user) {
+            $user->unreadMessages = $user->unreadMessagesCount();
+            $user->image = $user->imagePreset('xsmall_square');
+        }
 
         return collect()
             ->push(
@@ -91,16 +99,18 @@ class NavbarDesktop
                     ->with('sublinks', $this->prepareSublinks())
                     ->with('title', trans('menu.header.my'))
                     ->with('route', route('login.form'))
-                    ->with(
+                    ->with('user', $user ?? null)
+
+                    /*->with(
                         'user',
                         $user
                             ? collect()
                                 ->put('title', $user->vars()->name)
                                 ->put('image', $user->imagePreset('xsmall_square'))
-                                ->put('badge', $user->unreadMessagesCount())
+                                ->put('unreadMessageCount', $user->unreadMessagesCount())
                                 ->put('rank', $user->vars()->rank)
                             : ''
-                    )
+                    )*/
                     ->render()
             )
             ->implode('');

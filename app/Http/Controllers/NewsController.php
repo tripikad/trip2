@@ -192,7 +192,7 @@ class NewsController extends Controller
                 collect()
                     ->push(component('Title')->with('title', trans('content.news.create.title')))
                     ->push(
-                        component('Form')
+                        component('Form2')
                             ->with('route', route('news.store'))
                             ->with(
                                 'fields',
@@ -332,7 +332,7 @@ class NewsController extends Controller
                 collect()
                     ->push(component('Title')->with('title', trans('content.news.edit.title')))
                     ->push(
-                        component('Form')
+                        component('Form2')
                             ->with('route', route('news.update', [$news]))
                             ->with('method', 'PUT')
                             ->with(

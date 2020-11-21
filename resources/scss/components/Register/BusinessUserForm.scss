@@ -1,0 +1,20 @@
+@import "../../variables";
+
+.register-business-user-form {
+
+    background: #fff;
+    max-width: 74em;
+    width: 32em;
+    padding: calc(#{$spacer} * 2);
+
+    &__field {
+
+        margin-bottom: calc(#{$spacer} * 2);
+        line-height: 1em;
+    }
+
+    &__submit-button {
+
+        padding-top: calc(#{$spacer});
+    }
+}

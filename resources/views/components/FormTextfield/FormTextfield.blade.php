@@ -12,30 +12,30 @@ $disabled = $disabled ?? false;
 
 @endphp
 
-<div class="FormTextfield {{ $isclasses }} {{ $errors->first($name) ? 'FormTextfield--error' : ''}}">
+<div class="FormTextField {{ $isclasses }} {{ $errors->first($name) ? 'FormTextField--error' : ''}}">
 
 
-    <div class="FormTextfield__header">
+    <div class="FormTextField__header">
 
         @if ($title)
 
-        <label for="{{ $name }}" class="FormTextfield__label">{{ $title }}</label>
+        <label for="{{ $name }}" class="FormTextField__label">{{ $title }}</label>
 
         @endif
 
         @if ($description)
 
-        <div class="FormTextfield__description">{{ $description }}</div>
+        <div class="FormTextField__description">{{ $description }}</div>
 
         @endif
 
     </div>
 
-    <div class="FormTextfield__field">
+    <div class="FormTextField__field">
 
         @if ($prefix)
 
-        <div class="FormTextfield__prefix">
+        <div class="FormTextField__prefix">
 
             {{ $prefix }}
 
@@ -43,13 +43,13 @@ $disabled = $disabled ?? false;
 
         @endif
 
-        <input class="FormTextfield__input" id="{{ $name }}" name="{{ $name }}" type="text" size="{{ $size }}"
+        <input class="FormTextField__input" id="{{ $name }}" name="{{ $name }}" type="text" size="{{ $size }}"
             value="{{ $value }}" placeholder="{{ $placeholder }}" dusk="{{ slug($title) }}" @if($disabled) disabled
             @endif>
 
         @if ($suffix)
 
-        <div class="FormTextfield__suffix">
+        <div class="FormTextField__suffix">
 
             {{ $suffix }}
 

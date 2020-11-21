@@ -70,7 +70,7 @@ class StaticController extends Controller
             ->with(
                 'content',
                 collect()->push(
-                    component('Form')
+                    component('Form2')
                         ->with('route', route('static.update', [$static]))
                         ->with(
                             'fields',

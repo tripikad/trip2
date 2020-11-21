@@ -39,15 +39,16 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         'description',
         'notify_message',
         'notify_follow',
-        'company'
+        'company',
+        'company_id'
     ];
 
     protected $hidden = ['password', 'remember_token'];
 
     protected $dates = ['created_at', 'updated_at', 'active_at'];
 
-    protected $casts = [
-        'company' => 'boolean'
+    protected $with = [
+        'company'
     ];
 
     /**
@@ -106,6 +107,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->hasMany('App\Booking');
     }
 
+    public function company()
+    {
+        return $this->hasOne('App\Company', 'id', 'company_id');
+    }
+
     public function update_active_at($force = false, $return = false)
     {
         $last_online = Cache::get('uio-' . $this->id, '0000-00-00 00:00:00');
@@ -144,6 +150,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     {
         $this->remember_token = $token;
         $this->save();
+    }
+
+    public function unreadMessages()
+    {
+        return $this->hasMany('App\Message', 'user_id_to')
+            ->where('read', '0');
     }
 
     public function unreadMessagesCount()

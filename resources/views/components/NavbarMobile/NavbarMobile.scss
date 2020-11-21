@@ -1,0 +1,97 @@
+@import "../../../scss/variables";
+
+.NavbarMobile {
+
+    position: relative;
+    z-index: 10000;
+
+    &__menuIcon {
+
+        cursor: pointer;
+    }
+
+    svg {
+
+        fill: $color-gray;
+    }
+
+    &__userImage {
+
+        margin-left: $margin-sm;
+        display: flex;
+        align-items: center;
+    }
+
+    &__badge {
+
+        margin-right: $margin-xs;
+    }
+
+    &__menu {
+
+        align-items: flex-start;
+        background: $color-green;
+        bottom: 0;
+        left: 0;
+        padding: $padding-md;
+        position: fixed;
+        right: 0;
+        top: 0;
+        z-index: 10000;
+        overflow-y: scroll;
+    }
+
+    &__header {
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__search svg {
+
+        fill: $color-white;
+    }
+
+    &__closeIcon {
+
+        cursor: pointer;
+
+        svg {
+
+            fill: $color-white;
+        }
+    }
+
+    &__links {
+
+        padding: $padding-sm;
+    }
+
+    &__sublinkWrapper {
+
+        padding: $padding-sm;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__sublinkTitle {
+
+        color: $color-white;
+        font: $font-text-lg;
+        text-align: center;
+    }
+
+    &__sublinkBadge {
+
+        margin-left: $margin-sm;
+    }
+
+    &--white {
+
+        .NavbarMobile__menuIcon svg {
+            fill: $color-white;
+        }
+    }
+}

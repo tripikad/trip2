@@ -383,6 +383,18 @@ Route::post('register', [
     'as' => 'register.submit'
 ]);
 
+Route::get('register_business', [
+    'middleware' => 'guest',
+    'uses' => 'Auth\RegistrationController@businessForm',
+    'as' => 'register_business.form'
+]);
+
+Route::post('register_business', [
+    'middleware' => 'guest',
+    'uses' => 'Auth\RegistrationController@submitBusinessUser',
+    'as' => 'register_business_user.submit'
+]);
+
 Route::get('register/confirm/{token}', [
     'uses' => 'Auth\RegistrationController@confirm',
     'as' => 'register.confirm'
@@ -499,6 +511,10 @@ Route::get('lendude_sooduspakkumised/rss', [
 ]);
 
 // Companies
+
+Route::get('firma/{slug}', 'CompanyController@profile')
+    ->name('company.profile');
+
 
 Route::get('company', 'CompanyController@index')
     ->name('company.index')

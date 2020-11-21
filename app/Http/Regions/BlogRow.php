@@ -56,7 +56,7 @@ class BlogRow
                         )
                         ->pushWhen(
                             $loggedUser && $loggedUser->hasRole('admin'),
-                            component('Form')
+                            component('Form2')
                                 ->with('route', route('content.status', [$blog->type, $blog, 1 - $blog->status]))
                                 ->with(
                                     'fields',

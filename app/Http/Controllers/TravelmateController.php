@@ -178,7 +178,7 @@ class TravelmateController extends Controller
                                 )
                                 ->pushWhen(
                                     $user && $user->hasRole('admin'),
-                                    component('Form')
+                                    component('Form2')
                                         ->with(
                                             'route',
                                             route('content.status', [
@@ -283,7 +283,7 @@ class TravelmateController extends Controller
                 collect()
                     ->push(component('Title')->with('title', trans('content.travelmate.create.title')))
                     ->push(
-                        component('Form')
+                        component('Form2')
                             ->with('route', route('travelmate.store'))
                             ->with(
                                 'fields',
@@ -405,7 +405,7 @@ class TravelmateController extends Controller
                 collect()
                     ->push(component('Title')->with('title', trans('content.travelmate.edit.title')))
                     ->push(
-                        component('Form')
+                        component('Form2')
                             ->with('route', route('travelmate.update', [$travelmate]))
                             ->with('method', 'PUT')
                             ->with(

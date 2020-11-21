@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Company;
 use Log;
 use Hash;
 use Mail;
@@ -15,6 +16,11 @@ use App\Http\Controllers\NewsletterController;
 
 class RegistrationController extends Controller
 {
+    public function businessForm()
+    {
+        return view('pages.register.business_user');
+    }
+
     public function form()
     {
         //return view('pages.auth.register');
@@ -64,7 +70,7 @@ class RegistrationController extends Controller
             ->with(
                 'content',
                 collect()->push(
-                    component('Form')
+                    component('Form2')
                         ->with('route', route('register.submit'))
                         ->with(
                             'fields',
@@ -141,7 +147,46 @@ class RegistrationController extends Controller
 
         Mail::to($user->email, $user->name)->queue(new ConfirmRegistration($user));
 
-        Log::info('New user registered', [
+        Log::info('New business user registered', [
+            'name' => $user->name,
+            'link' => route('user.show', [$user])
+        ]);
+
+        return redirect()
+            ->route('login.form')
+            ->with('info', trans('auth.register.sent.info'));
+    }
+
+    public function submitBusinessUser(Request $request)
+    {
+        $this->validate($request, [
+            'name' => 'required|max:64|unique:users',
+            'company_name' => 'required|max:64|unique:companies,name',
+            'email' => 'required|email|max:64|unique:users',
+            'password' => 'required|min:6|required_with:password_confirmation|same:password_confirmation',
+            'password_confirmation' => 'required|min:6',
+            'full_name' => 'honeypot',
+            //'time' => 'required|honeytime:3'
+        ]);
+
+        $userFields = [
+            'name' => $request->post('name'),
+            'email' => $request->post('email'),
+            'password' => Hash::make($request->get('password')),
+            'role' => 'regular'
+        ];
+
+        $company = new Company;
+        $company->name = $request->post('company_name');
+        $company->type = 'vacation_package';
+        $company->save();
+
+        $userFields['company_id'] = $company->id;
+
+        $user = User::create($userFields);
+        Mail::to($user->email)->queue(new ConfirmRegistration($user));
+
+        Log::info('New business user registered', [
             'name' => $user->name,
             'link' => route('user.show', [$user])
         ]);

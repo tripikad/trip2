@@ -1,5 +1,5 @@
 <template>
-    <div class="NavbarMobile" :class="isclasses">
+    <div class="NavbarMobile d-md-none d-lg-none d-xl-none" :class="isclasses">
         <div class="NavbarMobile__menuIcon" v-show="!menuOpen" @click.prevent="menuOpen = true">
             <component :is="'Icon'" v-if="!user" icon="icon-menu" size="lg"> </component>
 
@@ -62,9 +62,21 @@ export default {
 
     props: {
         isclasses: { default: '' },
+        user: { default: '' },
         links: { default: '' },
         sublinks: { default: '' },
-        user: { default: '' }
+        /*links: {
+            type: Object,
+            default: () => {}
+        },
+        sublinks: {
+            type: Array,
+            default: () => []
+        },*/
+        /*user: {
+            type: Object,
+            default: null,
+        }*/
     },
 
     data() {
