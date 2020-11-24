@@ -8,7 +8,7 @@ use Illuminate\View\View;
 class Navbar extends Component
 {
     public $user;
-    public string $mode;
+    public string $type;
     public array $menuLinks = [];
     public array $userLinks = [];
 
@@ -46,60 +46,83 @@ class Navbar extends Component
     {
         $user = $this->user;
 
-        return collect()
-            ->pushWhen(!$user, [
-                'title' => trans('menu.auth.login'),
-                'route' => route('login.form')
-            ])
-            ->pushWhen(!$user, [
-                'title' => trans('menu.auth.register'),
-                'route' => route('register.form')
-            ])
-            ->pushWhen(!$user, [
-                'title' => trans('menu.auth.register_business'),
-                'route' => route('register_business.form')
-            ])
-            ->pushWhen($user, [
-                'title' => trans('menu.user.profile'),
-                'route' => $user ? route('user.show', [$user]) : null
-            ])
-            ->pushWhen($user, [
-                'title' => trans('menu.user.edit.profile'),
-                'route' => $user ? route('user.edit', [$user]) : null
-            ])
-            ->pushWhen($user, [
-                'title' => trans('menu.user.message'),
-                'route' => $user ? route('message.index', [$user]) : null,
-                'badge' => $user ? $user->unreadMessagesCount() : ''
-            ])
-            ->pushWhen($user && $user->hasRole('admin'), [
-                'title' => trans('menu.auth.admin'),
-                'route' => route('internal.index')
-            ])
-            ->pushWhen($user && $user->company, [
-                'title' => trans('menu.company.index'),
-                'route' => route('company.index')
-            ])
-            ->pushWhen($user && $user->hasRole('superuser'), [
-                'title' => trans('menu.company.admin.index'),
-                'route' => route('company.admin.index')
-            ])
-            ->pushWhen($user, [
-                'title' => trans('menu.auth.logout'),
-                'route' => route('login.logout')
-            ])
-            ->toArray();
+        if (!$user) {
+            return collect()
+                ->push([
+                    'title' => trans('menu.auth.login'),
+                    'route' => route('login.form')
+                ])
+                ->push([
+                    'title' => trans('menu.auth.register'),
+                    'route' => route('register.form')
+                ])
+                ->push([
+                    'title' => trans('menu.auth.register_business'),
+                    'route' => route('register_business.form')
+                ])
+                ->toArray();
+        } else {
+
+            if ($user->company) {
+                return collect()
+                    ->push([
+                        'title' => trans('menu.user.profile'),
+                        'route' => route('company.profile', [$user->company])
+                    ])
+                    ->push([
+                        'title' => $user->company->name,
+                        'route' => route('company.page', ['slug' => $user->company->slug])
+                    ])
+                    ->push([
+                        'title' => trans('menu.auth.logout'),
+                        'route' => route('login.logout')
+                    ])->toArray();
+            } else {
+                return collect()
+                    ->push([
+                        'title' => trans('menu.user.profile'),
+                        'route' => route('user.show', [$user])
+                    ])
+                    ->push([
+                        'title' => trans('menu.user.edit.profile'),
+                        'route' => route('user.edit', [$user])
+                    ])
+                    ->push([
+                        'title' => trans('menu.user.message'),
+                        'route' => route('message.index', [$user]),
+                        'badge' => $user->unreadMessagesCount()
+                    ])
+                    ->pushWhen($user && $user->hasRole('admin'), [
+                        'title' => trans('menu.auth.admin'),
+                        'route' => route('internal.index')
+                    ])
+                    /** todo: make previous company -> is_company */
+                    /*->pushWhen($user && $user->company, [
+                        'title' => trans('menu.company.index'),
+                        'route' => route('company.index')
+                    ])*/
+                    ->pushWhen($user && $user->hasRole('superuser'), [
+                        'title' => trans('menu.company.admin.index'),
+                        'route' => route('company.admin.index')
+                    ])
+                    ->push([
+                        'title' => trans('menu.auth.logout'),
+                        'route' => route('login.logout')
+                    ])
+                    ->toArray();
+            }
+        }
     }
 
     /**
      * Create a new component instance.
      *
-     * @param string $mode
+     * @param string $type
      */
-    public function __construct(string $mode = 'dark')
+    public function __construct(string $type = 'dark')
     {
         $this->user = auth()->user();
-        $this->mode = $mode;
+        $this->type = $type;
         $this->menuLinks = $this->getMenuLinks();
         $this->userLinks = $this->getUserLinks();
 
@@ -122,7 +145,7 @@ class Navbar extends Component
         return view('components.Navbar', [
             'title' => $title,
             'route' => $route,
-            'svg' => $this->mode === 'dark' ? '#tripee_logo_dark' : '#tripee_logo'
+            'svg' => $this->type === 'dark' ? '#tripee_logo_dark' : '#tripee_logo'
         ]);
     }
 }

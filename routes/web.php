@@ -257,6 +257,10 @@ Route::put('user/{id}/update', 'UserController@update')
     ->name('user.update')
     ->middleware('role:superuser,userowner');
 
+Route::post('user/{id}/update_company', 'UserController@updateCompany')
+    ->name('user.update_company')
+    ->middleware('role:superuser,userowner');
+
 Route::get('user/{id}/destinations', 'UserController@destinationsEdit')
     ->middleware('role:superuser,userowner')
     ->name('user.destinations.edit');
@@ -512,8 +516,17 @@ Route::get('lendude_sooduspakkumised/rss', [
 
 // Companies
 
-Route::get('firma/{slug}', 'CompanyController@profile')
-    ->name('company.profile');
+Route::get('firma/{slug}', 'CompanyController@page')
+    ->name('company.page');
+
+Route::get('company/{company}/profile', 'CompanyController@profile')
+    ->name('company.profile')
+    ->middleware('companyOwner');
+
+Route::get('company/{company}/edit_profile', 'CompanyController@editProfile')
+    ->name('company.edit_profile')
+    ->middleware('companyOwner');
+
 
 
 Route::get('company', 'CompanyController@index')

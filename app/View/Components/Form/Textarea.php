@@ -5,28 +5,19 @@ namespace App\View\Components\Form;
 use Illuminate\View\Component;
 use Illuminate\View\View;
 
-class TextField extends Component
+class Textarea extends Component
 {
     public string $label;
     public string $name;
-    public string $type;
+    public int $rows;
     public ?string $value;
     public string $placeholder;
 
-    /**
-     * Create a new component instance.
-     *
-     * @param $label
-     * @param $name
-     * @param string $type
-     * @param string|null $value
-     * @param string $placeholder
-     */
-    public function __construct($label, $name, $type = 'text', $value = null, $placeholder = '')
+    public function __construct($label, $name, $rows = 6, $value = null, $placeholder = '')
     {
         $this->label = $label;
         $this->name = $name;
-        $this->type = $type;
+        $this->rows = $rows;
         $this->value = $value;
         $this->placeholder = $placeholder;
     }
@@ -38,6 +29,6 @@ class TextField extends Component
      */
     public function render()
     {
-        return view('components.Form.TextField');
+        return view('components.Form.Textarea');
     }
 }

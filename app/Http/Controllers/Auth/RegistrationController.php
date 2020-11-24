@@ -147,7 +147,7 @@ class RegistrationController extends Controller
 
         Mail::to($user->email, $user->name)->queue(new ConfirmRegistration($user));
 
-        Log::info('New business user registered', [
+        Log::info('New user registered', [
             'name' => $user->name,
             'link' => route('user.show', [$user])
         ]);

@@ -39,7 +39,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         'description',
         'notify_message',
         'notify_follow',
-        'company',
+        'is_company',
         'company_id'
     ];
 
@@ -237,7 +237,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public function isCompany()
     {
-        return $this->company;
+        return $this->is_company;
     }
 
     public function destinationHaveBeen()

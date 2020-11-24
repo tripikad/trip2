@@ -6,7 +6,7 @@ $content = $content ?? [];
 
 @endphp
 
-<div class="Header {{ $isclasses }}" 
+<div class="HeaderMain {{ $isclasses }}"
     style="background-image: linear-gradient(
       rgba(0, 0, 0, 0.3),
       rgba(0, 0, 0, 0.1),
@@ -16,17 +16,17 @@ $content = $content ?? [];
 ">
     <div class="container">
 
-        <div class="Header__navbar">
+        <div class="HeaderMain__navbar">
 
             {!! $navbar !!}
             
         </div>
 
-        <div class="Header__content">
+        <div class="HeaderMain__content">
 
             @foreach ($content as $content_item)
         
-            <div class="Header__contentItem">
+            <div class="HeaderMain__contentItem">
 
                 {!! $content_item !!}
                     

@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Company;
 use Hash;
 use App\User;
 use App\Image;
 use App\Destination;
 use App\NewsletterType;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -16,6 +16,10 @@ class UserController extends Controller
         $types = ['forum', 'travelmate', 'buysell'];
 
         $user = User::findOrFail($id);
+
+        if ($user->company) {
+            return redirect()->route('company.page', ['slug' => $user->company->slug]);
+        }
 
         $loggedUser = request()->user();
 
@@ -118,6 +122,11 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::findOrFail($id);
+
+        if ($user->company) {
+            return redirect()->route('company.edit_profile', ['company' => $user->company]);
+        }
+
         $weekly_newsletter = NewsletterType::where('type', 'weekly')
             ->with('user_subscriptions')
             ->where('active', 1)
@@ -489,6 +498,60 @@ class UserController extends Controller
                 'flag_type' => 'wantstogo'
             ]);
         });
+
+        return redirect()
+            ->route('user.show', [$user])
+            ->with('info', trans('user.update.info'));
+    }
+
+    public function updateCompany($id, Request $request)
+    {
+        $user = User::findorFail($id);
+        $company = $user->company;
+        $maxfilesize = config('site.maxfilesize') * 1024;
+
+        $rules = [
+            'company_name' => 'required|max:64|unique:companies,name,' . $company->id,
+            'email' => 'required|unique:users,email,' . $user->id,
+            'password' => 'sometimes|confirmed|min:6',
+            'password_confirmation' => 'required_with:password|same:password',
+            'description' => 'min:2',
+            'facebook' => 'url',
+            'homepage' => 'url',
+            'file' => "image|max:$maxfilesize"
+        ];
+
+        $this->validate($request, $rules);
+
+        $user->update([
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'description' => $request->description,
+            'contact_facebook' => $request->facebook,
+            //'contact_instagram' => $request->instagram,
+            //'contact_twitter' => $request->twitter,
+            'contact_homepage' => $request->homepage
+        ]);
+
+        $company->slug = null;
+        $company->update([
+            'name' => $request->company_name
+        ]);
+
+        if ($request->hasFile('logo')) {
+            $filename =
+                'picture-' .
+                $user->id .
+                '.' .
+                $request
+                    ->file('logo')
+                    ->getClientOriginalExtension();
+
+            $filename = Image::storeImageFile($request->file('logo'), $filename);
+
+            $user->images()->delete();
+            $user->images()->create(['filename' => $filename]);
+        }
 
         return redirect()
             ->route('user.show', [$user])

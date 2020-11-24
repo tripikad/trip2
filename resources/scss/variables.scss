@@ -53,6 +53,7 @@ $border-radius-xl: calc(#{$spacer} * 1.5);
 $border-radius-xxl: calc(#{$spacer} * 100);
 
 $border-gray-md: 2px solid  hsl(204, 6%, 83%);
+$border-dotted-gray-md: 2px dotted hsl(204, 6%, 83%);
 
 $padding-xxxs: calc(#{$spacer} / 4);
 $padding-xxs: calc(#{$spacer} / 3);

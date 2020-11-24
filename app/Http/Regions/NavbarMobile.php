@@ -67,7 +67,7 @@ class NavbarMobile
                 'title' => trans('menu.auth.admin'),
                 'route' => route('internal.index')
             ])
-            ->pushWhen($user && $user->company, [
+            ->pushWhen($user && $user->is_company, [
                 'title' => trans('menu.company.index'),
                 'route' => route('company.index')
             ])

@@ -69,6 +69,7 @@ class Kernel extends HttpKernel
         'company' => \App\Http\Middleware\Company::class,
         'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
-        'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class
+        'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        'companyOwner' => \App\Http\Middleware\CompanyOwner::class,
     ];
 }

@@ -7,14 +7,20 @@ use Illuminate\View\View;
 
 class Header extends Component
 {
+    private $user;
+    public string $type;
+    public string $navBarType;
+
     /**
      * Create a new component instance.
      *
-     * @return void
+     * @param string $type
      */
-    public function __construct()
+    public function __construct($type = 'main', $navBarType = 'white')
     {
-        //
+        $this->user = auth()->user();
+        $this->type = $type;
+        $this->navBarType = $navBarType;
     }
 
     /**

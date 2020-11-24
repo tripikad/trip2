@@ -1,4 +1,4 @@
-<div class="Navbar Navbar--{{$mode}}">
+<div class="Navbar Navbar--{{$type}}">
     <div class="Navbar__logo">
         <a href="{{ route('frontpage.index') }}">
             <svg>
@@ -10,13 +10,13 @@
     <div class="Navbar__right">
         <div class="Navbar__search">
             <navbar-search
-                    isclasses="NavbarSearch--{{$mode}}">
+                    isclasses="NavbarSearch--{{$type}}">
             </navbar-search>
         </div>
 
         <div class="Navbar__desktop">
             <navbar-desktop
-                    isclasses="NavbarDesktop--{{$mode}}"
+                    isclasses="NavbarDesktop--{{$type}}"
                     :title="{{json_encode($title)}}"
                     :route="{{json_encode($route)}}"
                     :user="{{ $user ? json_encode($user) : 'null' }}"
@@ -26,7 +26,7 @@
         </div>
 
         <div class="Navbar__mobile">
-            <navbar-mobile isclasses="NavbarMobile--{{$mode}}"
+            <navbar-mobile isclasses="NavbarMobile--{{$type}}"
                            :title="{{json_encode($title)}}"
                            :route="{{json_encode($route)}}"
                            :user="{{ $user ? json_encode($user) : 'null' }}"

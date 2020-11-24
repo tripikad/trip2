@@ -1,12 +1,22 @@
 @import "../../variables";
 
-.FormTextField {
+.FormTextarea {
 
     &__header {
         display: flex;
     }
 
     &__label {
+
+        color: $color-gray;
+        display: block;
+        font: $font-heading-sm;
+        line-height: $line-height-md;
+        margin-bottom: $margin-sm;
+    }
+
+    &__label {
+
         color: $color-gray;
         display: block;
         font: $font-heading-sm;
@@ -15,6 +25,7 @@
     }
 
     &__description {
+
         color: $color-gray-light;
         font: $font-heading-sm;
         line-height: $line-height-md;
@@ -22,68 +33,37 @@
         margin-bottom: $margin-sm;
     }
 
-    &__field {
-
-        display: flex;
-        align-items: center;
-    }
-
-    &_prefix {
-
-        color: $color-gray-light;
-        font: $font-heading-sm;
-        margin-right: $margin-sm;
-    }
-
-    &__suffix {
-
-        color: $color-gray-light;
-        font: $font-heading-sm;
-        margin-left: $margin-xs;
-    }
-
-    &__input {
+    &__textarea {
 
         border-radius: $border-radius-md;
         border: $border-gray-md;
-        color: $color-gray-dark;
         font: $font-text-md;
         padding: $padding-sm;
         width: 100%;
+        color: $color-gray-dark;
 
         &::placeholder {
 
             color: $color-gray-light;
         }
 
-        &:disabled {
+        &:read-only {
 
+            background: $color-gray-lighter;
+            color: $color-gray;
             opacity: $opacity-md;
         }
     }
 
-    &--large {
+    &--borderless {
 
-        .FormTextField__input {
-            font: $font-heading-lg;
-            padding: $padding-md $padding-sm;
+        .FormTextarea__textarea {
+            border: none;
         }
     }
 
     &--hidden {
 
         display: none;
-    }
-
-    &--error {
-
-        .FormTextField__label {
-
-            color: $color-red;
-        }
-
-        .FormTextField__input {
-            border-color: $color-red;
-        }
     }
 }

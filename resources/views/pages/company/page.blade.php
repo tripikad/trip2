@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class="page-company-profile">
+    <div class="page-company-page">
         <x-header
                 type="light"
                 navBarType="dark">
@@ -11,4 +11,4 @@
 
         <x-footer type="light"/>
     </div>
-@endsection
+@endsection<?php

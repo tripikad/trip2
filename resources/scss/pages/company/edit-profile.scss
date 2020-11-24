@@ -1,0 +1,70 @@
+@import "../../variables";
+
+.company-edit-profile {
+
+    height: 100%;
+    width: 100%;
+    background-color: $color-gray-lighter;
+    position: relative;
+
+    &__navigation {
+
+        padding-top: calc(#{$spacer} * 2);
+        margin-bottom: calc(#{$spacer} * 5);
+    }
+
+    &__header {
+
+        font: $font-heading-xxl;
+        color: $color-dark-gray;
+        text-align: center;
+        margin-bottom: calc(#{$spacer} * 2);
+        line-height: $line-height-md;
+
+        @media (max-width: 768px) {
+
+            font: $font-heading-xl;
+            line-height: $line-height-lg;
+        }
+    }
+
+    &__form-container {
+
+        display: flex;
+        justify-content: center;
+        position: relative;
+        padding: calc(#{$spacer} * 2) 0;
+        margin-bottom: $spacer;
+
+        &__form {
+
+            padding: 0 $spacer;
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            flex-direction: column;
+            align-items: center;
+        }
+    }
+
+    &__eula-container {
+
+        display: flex;
+        justify-content: center;
+        max-width: 74em;
+        width: 100%;
+        padding-bottom: calc(#{$spacer} * 3);
+
+        &__eula_link {
+
+            padding: 0 calc(#{$spacer} * 2);
+            font: $font-text-sm;
+            color: $color-gray;
+
+            a {
+
+                color: $color-blue;
+            }
+        }
+    }
+}

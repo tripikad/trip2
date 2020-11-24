@@ -12,6 +12,8 @@ class Company extends Model
 
     protected $table = 'companies';
 
+    protected $fillable = ['name'];
+
     protected $dates = ['created_at', 'updated_at'];
 
     public function sluggable(): array

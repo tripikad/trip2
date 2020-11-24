@@ -3,24 +3,60 @@
 namespace App\Http\Controllers;
 
 use App\Company;
+use App\Http\Requests\Request;
 use Hash;
 use Carbon\Carbon;
 
 use App\User;
 use App\Image;
 use App\Offer;
+use Illuminate\View\View;
 
 class CompanyController extends Controller
 {
-    public function profile($slug)
+    /**
+     * @param $slug
+     * @return View
+     */
+    public function page($slug)
     {
-        $company = Company::whereSlug($slug);
+        $company = Company::whereSlug($slug)->first();
         if (!$company) {
             abort(404);
         }
 
-        return view('pages.company.profile');
+        $company->loadMissing('user');
+        return view('pages.company.profile', [
+            'company' => $company
+        ]);
     }
+
+    /**
+     * @param Company $company
+     * @return View
+     */
+    public function profile(Company $company)
+    {
+        $company->loadMissing('user');
+        return view('pages.company.profile', [
+            'company' => $company
+        ]);
+    }
+
+    /**
+     * @param Company $company
+     * @return View
+     */
+    public function editProfile(Company $company)
+    {
+        $company->loadMissing('user');
+        return view('pages.company.edit-profile', [
+            'user' => $company->user,
+            'company' => $company
+        ]);
+    }
+
+
 
     public function index()
     {

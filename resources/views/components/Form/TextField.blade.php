@@ -12,10 +12,10 @@
                id="{{ $name }}"
                name="{{ $name }}"
                type="{{ $type }}"
-               value="{{ $value ?? old($name) }}"
+               value="{{ old($name, $value) }}"
                placeholder="{{ $placeholder }}"
                spellcheck="false"
-               @if($disabled) disabled @endif />
+               {{$attributes}}/>
 
     </div>
 
