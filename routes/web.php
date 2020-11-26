@@ -341,6 +341,10 @@ Route::get('statistics', 'StatisticsController@index')
     ->name('statistics.index')
     ->middleware('role:superuser');
 
+// Campaigns
+Route::get('kampaania', 'CampaignController@index')
+    ->name('campaign.index');
+
 // Utils
 
 Route::get('utils/alert', 'UtilsController@alert')->name('utils.alert');
