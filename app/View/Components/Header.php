@@ -15,6 +15,7 @@ class Header extends Component
      * Create a new component instance.
      *
      * @param string $type
+     * @param string $navBarType
      */
     public function __construct($type = 'main', $navBarType = 'white')
     {

@@ -6,5 +6,42 @@
     width: 100%;
     position: relative;
 
+    &__header {
 
+        background: $color-gray-light;
+    }
+
+    &__navigation {
+
+        padding-top: calc(#{$spacer} * 2);
+        margin-bottom: calc(#{$spacer} * 5);
+    }
+
+    &__header-content {
+
+        margin-top: calc(#{$spacer} * 5);
+        margin-left: calc(#{$spacer} * 5);
+        margin-bottom: calc(#{$spacer} * 2);
+
+        @media (max-width: 768px) {
+
+            margin-top: calc(#{$spacer} * 2);
+            margin-left: calc(#{$spacer} * 2);
+        }
+    }
+
+    &__heading {
+
+        font: $font-heading-xxl;
+        color: $color-dark-gray;
+        text-align: left;
+        margin-bottom: calc(#{$spacer} * 5);
+        line-height: $line-height-md;
+
+        @media (max-width: 768px) {
+
+            font: $font-heading-xl;
+            line-height: $line-height-lg;
+        }
+    }
 }

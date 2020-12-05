@@ -13,28 +13,28 @@
                     <h3 class="page-company-page__heading">{{$company->name}}</h3>
                     <table class="page-company-page__info-table">
                         <tbody>
-                            <tr>
-                                <td class="page-company-page__info-table__key">Asukoht</td>
-                                <td class="page-company-page__info-table__value">Saaremaa, Kuressaare, Paide tn 34-22</td>
-                            </tr>
-                            <tr>
-                                <td class="page-company-page__info-table__key">Koduleht</td>
-                                <td class="page-company-page__info-table__value">
-                                    <a href="https://www.google.com" target="_blank">https://www.google.com</a>
-                                </td>
-                            </tr>
+                        <tr>
+                            <td class="page-company-page__info-table__key">Asukoht</td>
+                            <td class="page-company-page__info-table__value">Saaremaa, Kuressaare, Paide tn 34-22</td>
+                        </tr>
+                        <tr>
+                            <td class="page-company-page__info-table__key">Koduleht</td>
+                            <td class="page-company-page__info-table__value">
+                                <a href="https://www.google.com" target="_blank">https://www.google.com</a>
+                            </td>
+                        </tr>
                         </tbody>
                     </table>
 
                     <div class="page-company-page__tabs">
                         <ul>
-                            <li class="page-company-page__tabs--active">
-                                <a href="#">
+                            <li>
+                                <a href="{{route('company.page', ['slug' => $company->slug])}}">
                                     Tutvustus
                                 </a>
                             </li>
-                            <li>
-                                <a href="{{route('company.packages', ['slug' => $company->slug])}}">
+                            <li class="page-company-page__tabs--active">
+                                <a href="#">
                                     Pakkumised
                                     <span class="page-company-page__tabs__count">12</span>
                                 </a>
@@ -49,7 +49,7 @@
         <div class="container page-company-page__content">
             <div class="row">
                 <div class="col-md-8 col-12">
-                    {!! nl2br($user->description) !!}
+                    Packages GRID
                 </div>
                 <div class="col-md-4 col-12 mt-5 mt-md-0">
                     <div class="page-company-page__image">

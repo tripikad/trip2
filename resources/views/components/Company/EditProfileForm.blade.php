@@ -1,5 +1,5 @@
 <form {{ $attributes->merge(['class' => 'CompanyEditProfileForm']) }}
-      action="{{ route('user.update_company', ['id' => $user->id]) }}"
+      action="{{ route('company.update_profile', [$company]) }}"
       method="POST"
       autocomplete="off"
       enctype="multipart/form-data"

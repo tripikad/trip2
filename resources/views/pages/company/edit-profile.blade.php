@@ -2,26 +2,51 @@
 
 @section('content')
 
-    <div class="company-edit-profile">
-        <x-body-background-map/>
+    <div class="page-company-profile">
+        <div class="page-company-profile__header">
+            <div class="container">
+                <div class="page-company-profile__navigation">
+                    <x-navbar/>
+                </div>
 
-        <div class="container company-edit-profile__navigation">
-            <x-navbar/>
+                <div class="page-company-profile__header-content">
+                    <h3 class="page-company-profile__heading">{{$company->name}}</h3>
+
+                    <div class="page-company-page__tabs">
+                        <ul>
+                            <li>
+                                <a href="{{route('company.profile', [$company])}}">
+                                    Pakkumised
+                                    <span class="page-company-page__tabs__count">12</span>
+                                </a>
+                            </li>
+                            <li class="page-company-page__tabs--active">
+                                <a href="#">
+                                    Minu info
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <h2 class="company-edit-profile__header">
-            {{trans('menu.user.edit.profile')}}
-        </h2>
+        <div class="container page-company-page__content">
+            <div class="row">
+                <div class="col-12">
 
-        <x-form.error-section/>
+                    <x-form.error-section/>
 
-        <div class="company-edit-profile__form-container">
-            <div class="company-edit-profile__form-container__form">
+                    <div class="company-edit-profile__form-container">
+                        <div class="company-edit-profile__form-container__form">
 
-                <x-company.edit-profile-form
-                        :company="$company"
-                        :user="$user"/>
+                            <x-company.edit-profile-form
+                                    :company="$company"
+                                    :user="$user"/>
 
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 

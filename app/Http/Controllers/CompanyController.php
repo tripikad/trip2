@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Company;
-use App\Http\Requests\Request;
 use Hash;
 use Carbon\Carbon;
-
 use App\User;
 use App\Image;
 use App\Offer;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
 class CompanyController extends Controller
@@ -26,8 +27,9 @@ class CompanyController extends Controller
         }
 
         $company->loadMissing('user');
-        return view('pages.company.profile', [
-            'company' => $company
+        return view('pages.company.page', [
+            'company' => $company,
+            'user' => $company->user
         ]);
     }
 
@@ -39,7 +41,8 @@ class CompanyController extends Controller
     {
         $company->loadMissing('user');
         return view('pages.company.profile', [
-            'company' => $company
+            'company' => $company,
+            'user' => $company->user
         ]);
     }
 
@@ -51,10 +54,116 @@ class CompanyController extends Controller
     {
         $company->loadMissing('user');
         return view('pages.company.edit-profile', [
+            'company' => $company,
+            'user' => $company->user
+        ]);
+    }
+
+    /**
+     * @param Company $company
+     * @param Request $request
+     * @return RedirectResponse
+     * @throws ValidationException
+     */
+    public function updateProfile(Company $company, Request $request)
+    {
+        $user = $company->user;
+        $maxFileSize = config('site.maxfilesize') * 1024;
+
+        $rules = [
+            'company_name' => 'required|max:64|unique:companies,name,' . $company->id,
+            'email' => 'required|unique:users,email,' . $user->id,
+            'password' => 'sometimes|confirmed|min:6',
+            'password_confirmation' => 'required_with:password|same:password',
+            'description' => 'min:2',
+            'facebook' => 'url',
+            'homepage' => 'url',
+            'file' => "image|max:$maxFileSize"
+        ];
+
+        $this->validate($request, $rules);
+
+        $data = [
+            'email' => $request->email,
+            'description' => $request->description,
+            'contact_facebook' => $request->facebook,
+            'contact_homepage' => $request->homepage
+        ];
+
+        if ($request->password) {
+            $data['password'] = Hash::make($request->password);
+        }
+
+        $user->update($data);
+
+        $company->slug = null;
+        $company->update([
+            'name' => $request->company_name
+        ]);
+
+        if ($request->hasFile('logo')) {
+            $filename =
+                'picture-' .
+                $user->id .
+                '.' .
+                $request
+                    ->file('logo')
+                    ->getClientOriginalExtension();
+
+            $filename = Image::storeImageFile($request->file('logo'), $filename);
+
+            $user->images()->delete();
+            $user->images()->create(['filename' => $filename]);
+        }
+
+        return redirect()
+            ->route('company.page', ['slug' => $company->slug])
+            ->with('info', trans('user.update.info'));
+    }
+
+    /**
+     * @param Company $company
+     * @return View
+     */
+    public function addPackage(Company $company)
+    {
+        $company->loadMissing('user');
+        return view('pages.company.new-package', [
+            'company' => $company,
+            'user' => $company->user
+        ]);
+    }
+
+    /**
+     * @param $slug
+     * @return View
+     */
+    public function packages($slug)
+    {
+        $company = Company::whereSlug($slug)->first();
+        if (!$company) {
+            abort(404);
+        }
+
+        $company->loadMissing('user');
+        return view('pages.company.packages', [
+            'company' => $company,
+            'user' => $company->user
+        ]);
+    }
+
+    /**
+     * @param Company $company
+     * @return View
+     */
+    /*public function editProfile(Company $company)
+    {
+        $company->loadMissing('user');
+        return view('pages.company.edit-profile-OLD', [
             'user' => $company->user,
             'company' => $company
         ]);
-    }
+    }*/
 
 
 
