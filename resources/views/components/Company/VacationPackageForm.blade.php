@@ -6,11 +6,55 @@
 >
     {{ csrf_field() }}
 
-    {{--User info--}}
+    <div class="CompanyVacationPackageForm__subtitle">
+        Üldinfo
+    </div>
 
+    <div class="CompanyVacationPackageForm__field">
+        <x-form.text-field
+                label="Pakkumise nimetus"
+                name="email"
+                value="{{ old('email', $company->name) }}"/>
+    </div>
+
+    <div class="row CompanyVacationPackageForm__field">
+        <div class="col-md-6 col-12">
+            <x-form.text-field
+                    label="Algus"
+                    name="email"
+                    value="{{ old('email', $company->name) }}"/>
+        </div>
+
+        <div class="col-md-6 col-12">
+            <x-form.text-field
+                    label="Lõpp"
+                    name="email"
+                    value="{{ old('email', $company->name) }}"/>
+        </div>
+    </div>
+
+    <div class="row CompanyVacationPackageForm__field">
+        <div class="col-md-6 col-12">
+            <x-form.text-field
+                    label="Hind alates €"
+                    name="email"
+                    value="{{ old('email', $company->name) }}"/>
+        </div>
+    </div>
+
+    <div class="CompanyVacationPackageForm__field">
+        <x-form.textarea
+                label="Kirjeldus"
+                name="email"
+                value="{{ old('email', $company->name) }}"/>
+    </div>
+
+    <div class="CompanyVacationPackageForm__subtitle">
+        Omadused
+    </div>
 
     <div class="CompanyEditProfileForm__submit-button">
         <x-form.submit-button
-                title="{{ trans('company.edit.submit') }}"/>
+                title="{{ trans('Lisa') }}"/>
     </div>
 </form>
