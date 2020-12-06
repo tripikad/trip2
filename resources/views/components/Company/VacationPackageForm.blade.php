@@ -43,10 +43,11 @@
     </div>
 
     <div class="CompanyVacationPackageForm__field">
-        <x-form.textarea
-                label="Kirjeldus"
-                name="email"
-                value="{{ old('email', $company->name) }}"/>
+        <text-editor
+                label="Sisu"
+                name="description"
+                value="{{ old('description', '<p>Some text here</p>') }}">
+        </text-editor>
     </div>
 
     <div class="CompanyVacationPackageForm__subtitle">

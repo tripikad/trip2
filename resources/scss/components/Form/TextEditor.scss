@@ -1,0 +1,47 @@
+@import "../../variables";
+
+.FormTextEditor {
+
+    .quillWrapper {
+
+        border-radius: $border-radius-md;
+        border: $border-gray-md;
+        color: $color-gray-dark;
+        font: $font-text-md;
+        width: 100%;
+
+        .ql-toolbar.ql-snow {
+
+            border: 0;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .ql-container.ql-snow {
+
+            border: 0;
+
+            .ql-editor {
+
+                min-height: 400px;
+            }
+        }
+    }
+
+    &--hidden {
+
+        display: none;
+    }
+
+    &--error {
+
+        .FormTextField__label {
+
+            color: $color-red;
+        }
+
+        .quillWrapper {
+
+            border-color: $color-red;
+        }
+    }
+}
