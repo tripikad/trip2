@@ -25,15 +25,8 @@
 
                 </div>
                 <div class="col-md-3 col-12 mt-5 mt-md-0">
-
-                    <div id="div-gpt-ad-1465761439447-0" class="Promo"></div>
-
-                    <div class="page-company-page__image">
-
-
-<!--                        <img src="https://www.worldwideinsure.com/travel-blog/wp-content/uploads/2017/12/Hotel-Room-Image-by-Megha01-CC0.jpg" class=""/>
-                        <span class="page-company-page__image__gallery">Galerii</span>-->
-                    </div>
+                    <x-ads id="{{config('promo.sidebar_small.id2')}}"/>
+                    <x-ads id="{{config('promo.sidebar_large.id2')}}"/>
                 </div>
             </div>
         </div>
