@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Support\Facades\Session;
 use Log;
 use Auth;
 use Honeypot;
@@ -150,9 +151,10 @@ class LoginController extends Controller
     public function logout()
     {
         Auth::logout();
+        Session::flush();
 
         return redirect()
-            ->back()
+            ->route('frontpage.index')
             ->with('info', trans('auth.login.logout.info'));
     }
 

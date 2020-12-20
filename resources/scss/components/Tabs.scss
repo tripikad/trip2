@@ -1,0 +1,66 @@
+@import "../../scss/variables";
+
+.Tabs {
+
+    font-family: $font-family-sailec;
+    list-style: none;
+    width: 100%;
+    display: flex;
+    top: calc(#{$spacer} * 3);
+    flex-wrap: wrap;
+
+    &__tab {
+
+        width: auto;
+        display: inline-flex;
+        max-height: 60px;
+        height: 100%;
+
+        a {
+
+            color: $white;
+            padding: calc(#{$spacer} * 1.5);
+            display: block;
+            font-weight: 600;
+            font-size: 16px;
+            line-height: 24px;
+
+            @media (max-width: 576px) {
+
+                font-size: 14px;
+                line-height: 20px;
+            }
+        }
+
+        &--active {
+
+            background: $white;
+
+            a {
+
+                color: $blue;
+            }
+        }
+
+        &:hover {
+
+            background: $white;
+
+            a {
+
+                color: $blue;
+            }
+        }
+
+        &__count {
+
+            width: 25px;
+            height: 22px;
+            background: $gray;
+            border-radius: 30px;
+            color: $white;
+            padding: 3px 6px;
+            margin-left: calc(#{$spacer} / 4);
+        }
+    }
+}

@@ -1,0 +1,84 @@
+@import "../../variables";
+
+.CompanyVacationPackageItem {
+
+    display: flex;
+    width: 100%;
+    margin-bottom: calc(#{$spacer} * 2);
+
+    &__image {
+
+        display: flex;
+        justify-content: flex-start;
+
+        img {
+
+            max-width: 100px;
+            width: 100%;
+            max-height: 70px;
+            height: 100%;
+        }
+    }
+
+    &__content {
+
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        justify-content: flex-end;
+        margin-left: calc(#{$spacer} * 2);
+
+        &__title {
+
+            font: $font-heading-lg;
+
+            a {
+
+                color: $color-blue;
+
+                &:hover {
+
+                    color: $color-blue-hover;
+                }
+            }
+        }
+
+        &__description {
+
+            font: $font-text-md;
+        }
+
+        &__meta {
+
+            display: flex;
+            width: 100%;
+            align-items: center;
+
+            &__until {
+
+                font: $font-text-xs;
+                color: $color-gray;
+            }
+
+            &__edit-btn {
+
+                background: $color-green;
+                border-radius: $border-radius-md;
+                margin-left: calc(#{$spacer});
+                padding: 0 6px;
+                font: $font-text-xs;
+                line-height: $line-height-lg;
+
+                &:hover {
+
+                    background: $color-green-hover;
+                }
+
+                a {
+
+                    color: $color-white;
+                }
+            }
+        }
+    }
+}

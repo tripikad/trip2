@@ -1,0 +1,14 @@
+@import "../../variables";
+
+.page-vp-show {
+
+    width: 100%;
+
+    &__navigation {
+
+        padding-top: calc(#{$spacer} * 2);
+        margin-bottom: calc(#{$spacer} * 5);
+    }
+
+
+}

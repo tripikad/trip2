@@ -27,3 +27,7 @@
 .Alert__closeIcon svg {
     fill: $gray-dark;
 }
+
+.Alert--error {
+    border-color: $red;
+}

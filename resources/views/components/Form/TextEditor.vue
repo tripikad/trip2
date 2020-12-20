@@ -1,10 +1,14 @@
 <template>
     <div class="FormTextEditor" :class="{ 'FormTextEditor--error': isError, [isclasses]: true }">
         <div class="FormTextField__header">
-            <label :for="name" class="FormTextField__label">{{ label }}</label>
+            <label :for="name" class="FormTextField__label">{{ title }}</label>
         </div>
 
-        <vue-editor v-model="content" :id="name" spellcheck="false"/>
+        <vue-editor
+            v-model="content"
+            :id="name"
+            @input="$emit('input', $event)"
+            spellcheck="false"/>
     </div>
 </template>
 
@@ -14,7 +18,7 @@
         props: {
             isclasses: { default: '' },
             name: { default: '' },
-            label: { default: '' },
+            title: { default: '' },
             value: { default: '' },
             errors: { default: () => [] },
             disabled: { default: false },

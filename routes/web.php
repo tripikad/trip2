@@ -534,6 +534,21 @@ Route::get('company/{company}/add_package', 'CompanyController@addPackage')
     ->name('company.add_package')
     ->middleware('companyOwner');
 
+Route::get('company/{company}/edit_package/{package}', 'CompanyController@editPackage')
+    ->name('company.edit_package')
+    ->middleware('companyOwner');
+
+Route::post('company/{company}/add_package', 'CompanyController@storePackage')
+    ->name('company.store_package')
+    ->middleware('companyOwner');
+
+Route::post('company/{company}/edit_package/{package}', 'CompanyController@updatePackage')
+    ->name('company.update_package')
+    ->middleware('companyOwner');
+
+
+
+/* Offers logic */
 
 Route::get('company', 'CompanyController@index')
     ->name('company.index')
@@ -598,6 +613,11 @@ Route::post('booking/{id}', 'BookingController@create')
     ->name('booking.create');
 
 Route::get('booking/{id}/goto', 'BookingController@goto')->name('booking.goto');
+
+//Vacation packages
+
+Route::get('puhkepaketid', 'VacationPackageController@index')->name('vacation_package.index');
+
 
 // Polls
 

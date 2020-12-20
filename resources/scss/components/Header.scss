@@ -3,19 +3,17 @@
 .Header {
 
     padding-top: $padding-md;
-    padding-bottom: $padding-lg;
     position: relative;
     width: 100%;
 
     @media (max-width: 576px) {
 
-        padding-bottom: $padding-sm;
+        //padding-bottom: $padding-sm;
     }
 
     &__content {
 
         margin-top: $margin-xl;
-        margin-left: $margin-xl;
         margin-right: calc(#{$spacer} * 10);
 
         @media (max-width: 768px) {

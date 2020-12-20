@@ -4,7 +4,7 @@
 
     <div class="page-company-profile">
         <div class="page-company-profile__header">
-            <div class="container">
+            <div class="container-lg">
                 <div class="page-company-profile__navigation">
                     <x-navbar/>
                 </div>

@@ -4,7 +4,7 @@
 
     <div class="page-company-profile">
         <div class="page-company-profile__header">
-            <div class="container">
+            <div class="container-lg">
                 <div class="page-company-profile__navigation">
                     <x-navbar/>
                 </div>
@@ -34,7 +34,7 @@
         <div class="container page-company-page__content">
             <div class="row">
                 <div class="col-md-8 col-12">
-                    Pakkumised
+                    <x-company.vacation-package-list :company="$company"/>
                 </div>
                 <div class="col-md-4 col-12 mt-5 mt-md-0">
                     <button-vue

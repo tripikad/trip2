@@ -33,6 +33,11 @@ class Navbar extends Component
                 'title' => trans('menu.header.news'),
                 'route' => route('news.index')
             ])
+            ->put('vacation_package', [
+                'title' => trans('Puhkusepaketid'),
+                'route' => route('vacation_package.index'),
+                'new' => trans('menu.header.new'),
+            ])
             // @LAUNCH Remove this check
             ->putWhen($user && $user->hasRole('superuser'), 'offer', [
                 'title' => trans('menu.header.offer'),
@@ -55,10 +60,6 @@ class Navbar extends Component
                 ->push([
                     'title' => trans('menu.auth.register'),
                     'route' => route('register.form')
-                ])
-                ->push([
-                    'title' => trans('menu.auth.register_business'),
-                    'route' => route('register_business.form')
                 ])
                 ->toArray();
         } else {

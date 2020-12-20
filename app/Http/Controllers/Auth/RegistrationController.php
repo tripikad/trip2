@@ -39,7 +39,13 @@ class RegistrationController extends Controller
                             ->is('large')
                             ->with('title', trans('auth.register.title'))
                     )
-                    ->push('&nbsp;')
+                    ->push(
+                        component('BlockTitle')
+                            ->with('title', trans('auth.register.business_user.title'))
+                            ->with('route', route('register_business.form'))
+                            ->is('blue')
+                            ->is('center')
+                    )
                     ->push(
                         component('Title')
                             ->is('center')

@@ -29,5 +29,10 @@ class Company extends Model
     {
         return $this->hasOne('App\User', 'company_id', 'id');
     }
+
+    public function vacationPackages()
+    {
+        return $this->hasMany('App\VacationPackage');
+    }
 }
 

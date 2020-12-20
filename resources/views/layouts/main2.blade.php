@@ -34,9 +34,13 @@
 
     <div id="app">
         @yield('content')
+        <alert></alert>
     </div>
 
     <script defer src="{{ dist('js') }}"></script>
+    @include('utils.promo')
+    @include('utils.facebook')
+    @include('utils.analytics')
     @stack('scripts')
 </body>
 </html>

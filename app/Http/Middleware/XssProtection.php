@@ -12,7 +12,7 @@ class XssProtection
             return $next($request);
         }
 
-        $input = $request->except('body');
+        $input = $request->except(['body', 'description']);
 
         array_walk_recursive($input, function (&$input) {
             $input = strip_tags($input);

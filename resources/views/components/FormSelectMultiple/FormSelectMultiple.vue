@@ -43,6 +43,7 @@ export default {
     props: {
         isclasses: { default: '' },
         errors: { default: () => [] },
+        error: { default: '' },
         title: { default: '' },
         description: { default: '' },
         name: { default: '' },
@@ -66,7 +67,7 @@ export default {
 
     methods: {
         onInput(value) {
-            this.returnValue = value
+            this.returnValue = value.map(val => val.id)
             this.$emit('input', this.returnValue)
         }
     },
@@ -87,7 +88,7 @@ export default {
         this.localValue = this.value.map(value => {
             // We convert the id's from the input value prop
             // to full collection, this is what Vue-Multiselect expects
-            var option = this.options.find(option => option.id === value)
+            const option = this.options.find(option => option.id === value)
             return { id: value, name: option.name }
         })
         // We assign the local collection to return value

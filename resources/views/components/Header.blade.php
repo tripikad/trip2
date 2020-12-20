@@ -1,5 +1,5 @@
 <header {{ $attributes->merge(['class' => 'Header Header--' . $type]) }}>
-    <div class="container">
+    <div class="container-lg">
 
         <x-navbar type="{{$navBarType}}"/>
 

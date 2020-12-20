@@ -3,13 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Company;
+use App\VacationPackage;
+use App\VacationPackageCategory;
 use Hash;
 use Carbon\Carbon;
 use App\User;
 use App\Image;
 use App\Offer;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
@@ -40,6 +45,7 @@ class CompanyController extends Controller
     public function profile(Company $company)
     {
         $company->loadMissing('user');
+        $company->loadMissing('vacationPackages');
         return view('pages.company.profile', [
             'company' => $company,
             'user' => $company->user
@@ -128,17 +134,145 @@ class CompanyController extends Controller
     public function addPackage(Company $company)
     {
         $company->loadMissing('user');
-        return view('pages.company.new-package', [
+        $categories = VacationPackageCategory::select('id', 'name')
+            ->orderBy('name')
+            ->get();
+
+        return view('pages.company.vacation-package-form', [
             'company' => $company,
-            'user' => $company->user
+            'user' => $company->user,
+            'package' => null,
+            'categoryOptions' => $categories,
+            'submitRoute' => route('company.store_package', $company),
+            'title' => 'Lisa uus pakkumine'
         ]);
     }
 
     /**
-     * @param $slug
+     * @param Company $company
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function storePackage(Company $company, Request $request)
+    {
+        $rules = [
+            'name' => 'required',
+            'link' => 'required|url',
+            'startDate' => 'required|date',
+            'endDate' => 'required|date',
+            'price' => 'required|numeric',
+            'description' => 'required',
+            'category' => 'required|array|min:1'
+        ];
+
+        $validator = Validator::make($request->post(), $rules);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'errors' => $validator->errors()->getMessageBag()->all(),
+                'keys' => $validator->errors()->keys(),
+            ], 422);
+        }
+
+        $package = new VacationPackage();
+        $package->company_id = $company->id;
+        $package->name = $request->post('name');
+        $package->start_date = $request->post('startDate');
+        $package->end_date = $request->post('endDate');
+        $package->price = $request->post('price');
+        $package->description = $request->post('description');
+        $package->link = $request->post('link');
+        $package->save();
+
+        $package->vacationPackageCategories()->attach(request()->category);
+
+        Session::flash(
+            'info', trans('Uus pakkumine loodud')
+        );
+
+        return response()->json([
+            'success' => true,
+            'route' => route('company.profile', ['company' => $company])
+        ]);
+    }
+
+    /**
+     * @param Company $company
+     * @param VacationPackage $package
      * @return View
      */
-    public function packages($slug)
+    public function editPackage(Company $company, VacationPackage $package)
+    {
+        $company->loadMissing('user');
+        $categories = VacationPackageCategory::select('id', 'name')
+            ->orderBy('name')
+            ->get();
+
+        return view('pages.company.vacation-package-form', [
+            'company' => $company,
+            'user' => $company->user,
+            'package' => $package,
+            'categoryOptions' => $categories,
+            'submitRoute' => route('company.update_package', [$company, $package]),
+            'title' => 'Muuda pakkumist'
+        ]);
+    }
+
+    /**
+     * @param Company $company
+     * @param VacationPackage $package
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function updatePackage(Company $company, VacationPackage $package, Request $request)
+    {
+        $rules = [
+            'name' => 'required',
+            'link' => 'required|url',
+            'startDate' => 'required|date',
+            'endDate' => 'required|date',
+            'price' => 'required|numeric',
+            'description' => 'required',
+            'category' => 'required|array|min:1'
+        ];
+
+        $validator = Validator::make($request->post(), $rules);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'errors' => $validator->errors()->getMessageBag()->all(),
+                'keys' => $validator->errors()->keys(),
+            ], 422);
+        }
+
+        $package->slug = null;
+        $package->name = $request->post('name');
+        $package->start_date = $request->post('startDate');
+        $package->end_date = $request->post('endDate');
+        $package->price = $request->post('price');
+        $package->description = $request->post('description');
+        $package->link = $request->post('link');
+        $package->save();
+
+        //todo: return onlu IDs from multiselect vue component
+        //$catIds = array_map(function($o) { return $o['id']; }, request()->category);
+        $package->vacationPackageCategories()->sync(request()->category);
+
+        Session::flash(
+            'info', trans('Pakkumine salvestatud')
+        );
+
+        return response()->json([
+            'success' => true,
+            'route' => route('company.profile', ['company' => $company])
+        ]);
+    }
+
+    /**
+     * @param string $slug
+     * @return View
+     */
+    public function packages(string $slug)
     {
         $company = Company::whereSlug($slug)->first();
         if (!$company) {

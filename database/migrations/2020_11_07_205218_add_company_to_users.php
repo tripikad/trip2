@@ -14,7 +14,7 @@ class AddCompanyToUsers extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->unsignedInteger('company_id')->nullable();
+            $table->unsignedInteger('company_id')->nullable()->index();
             $table->foreign('company_id')
                 ->references('id')
                 ->on('companies')

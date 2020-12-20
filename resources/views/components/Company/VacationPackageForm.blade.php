@@ -1,8 +1,7 @@
 <form {{ $attributes->merge(['class' => 'CompanyVacationPackageForm']) }}
-      action="{{ route('company.update_profile', [$company]) }}"
+      action="{{ $submitRoute }}"
       method="POST"
       autocomplete="off"
-      enctype="multipart/form-data"
 >
     {{ csrf_field() }}
 
@@ -13,23 +12,31 @@
     <div class="CompanyVacationPackageForm__field">
         <x-form.text-field
                 label="Pakkumise nimetus"
-                name="email"
-                value="{{ old('email', $company->name) }}"/>
+                name="name"
+                value="{{ old('name') }}"/>
     </div>
 
     <div class="row CompanyVacationPackageForm__field">
         <div class="col-md-6 col-12">
-            <x-form.text-field
-                    label="Algus"
-                    name="email"
-                    value="{{ old('email', $company->name) }}"/>
+            <form-datepicker
+                    title="Algus"
+                    name="start_date"
+                    placeholder="Algus"
+                    value="{{ old('start_date') }}"
+                    disable-past-dates="true"
+                    errors="{{ $errors->count() ? json_encode($errors->keys()) : null}}">
+            </form-datepicker>
         </div>
 
         <div class="col-md-6 col-12">
-            <x-form.text-field
-                    label="Lõpp"
-                    name="email"
-                    value="{{ old('email', $company->name) }}"/>
+            <form-datepicker
+                    title="Lõpp"
+                    name="end_date"
+                    placeholder="lõpp"
+                    value="{{ old('end_date') }}"
+                    disable-past-dates="true"
+                    errors="{{ $errors->count() ? json_encode($errors->keys()) : null}}">
+            </form-datepicker>
         </div>
     </div>
 
@@ -37,17 +44,25 @@
         <div class="col-md-6 col-12">
             <x-form.text-field
                     label="Hind alates €"
-                    name="email"
-                    value="{{ old('email', $company->name) }}"/>
+                    name="price"
+                    value="{{ old('price') }}"/>
         </div>
     </div>
 
     <div class="CompanyVacationPackageForm__field">
         <text-editor
-                label="Sisu"
+                title="Sisu"
                 name="description"
-                value="{{ old('description', '<p>Some text here</p>') }}">
+                value="{{ old('description') }}"
+                errors="{{ $errors->count() ? json_encode($errors->keys()) : null}}">
         </text-editor>
+    </div>
+
+    <div class="CompanyVacationPackageForm__field">
+        <x-form.text-field
+                label="Link"
+                name="link"
+                value="{{ old('link') }}"/>
     </div>
 
     <div class="CompanyVacationPackageForm__subtitle">

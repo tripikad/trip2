@@ -4,6 +4,7 @@
 
         <VueDatePicker
             v-model="date"
+            @input="$emit('input', $event)"
             :name="name"
             :placeholder="placeholder"
             format="DD.MM.YYYY"
@@ -11,13 +12,12 @@
             :noHeader="true"
             :locale="locale"
             :disabled="disabled"
+            :minDate="this.disablePastDates ? new Date(new Date().setDate(new Date().getDate()-1)) : null"
         />
-
     </div>
 </template>
 
 <script>
-
     import locale from './locale/et';
 
     export default {
@@ -27,8 +27,9 @@
             title: { default: '' },
             value: { default: null },
             placeholder: { default: '' },
-            errors: { default: () => [] },
+            errors: { type: Array, default: () => [] },
             disabled: { default: false },
+            disablePastDates: { default: false }
         },
 
         data: function () {
