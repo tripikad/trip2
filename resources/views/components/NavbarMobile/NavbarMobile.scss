@@ -50,7 +50,7 @@
 
     &__search svg {
 
-        fill: $color-white;
+        fill: $white;
     }
 
     &__closeIcon {
@@ -59,7 +59,7 @@
 
         svg {
 
-            fill: $color-white;
+            fill: $white;
         }
     }
 
@@ -78,7 +78,7 @@
 
     &__sublinkTitle {
 
-        color: $color-white;
+        color: $white;
         font: $font-text-lg;
         text-align: center;
     }
@@ -91,7 +91,7 @@
     &--white {
 
         .NavbarMobile__menuIcon svg {
-            fill: $color-white;
+            fill: $white;
         }
     }
 }

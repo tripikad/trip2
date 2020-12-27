@@ -29,7 +29,7 @@
     &__linkBadge {
 
         background: $color-blue-hover;
-        color: $color-white;
+        color: $white;
         padding: 0 $padding-xs;
         font: $font-text-xs;
         margin-left: $margin-xs;
@@ -92,7 +92,7 @@
 
     &__sublinkTitle {
 
-        color: $color-white;
+        color: $white;
         font: $font-heading-sm;
     }
 
@@ -105,7 +105,7 @@
 
         .NavbarDesktop__link {
 
-            color: $color-white;
+            color: $white;
 
             &:hover {
 

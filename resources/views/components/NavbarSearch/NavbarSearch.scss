@@ -31,18 +31,18 @@
 
     &--white {
 
-        fill: $color-white;
+        fill: $white;
 
         .NavbarSearch__input {
 
-            color: $color-white;
+            color: $white;
         }
 
         .NavbarSearch__icon {
 
             svg {
 
-                fill: $color-white;
+                fill: $white;
             }
         }
     }

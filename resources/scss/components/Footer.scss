@@ -39,7 +39,7 @@
 
         width: 100px;
         height: 25px;
-        fill: $color-white;
+        fill: $white;
     }
 
     &__link {
@@ -104,13 +104,13 @@
 
             width: 18px;
             height: 18px;
-            fill: $color-white;
+            fill: $white;
         }
     }
 
     &__licence {
 
-        color: $color-white;
+        color: $white;
         opacity: $opacity-md;
         font: $font-text-md;
         height: $height-md;
@@ -120,7 +120,7 @@
 
     &--light {
 
-        background: $color-white;
+        background: $white;
 
         .Footer__tripLogo {
 
