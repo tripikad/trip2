@@ -12,7 +12,7 @@
 
     svg {
 
-        fill: $color-gray;
+        fill: $gray;
     }
 
     &__userImage {
@@ -30,7 +30,7 @@
     &__menu {
 
         align-items: flex-start;
-        background: $color-green;
+        background: $green;
         bottom: 0;
         left: 0;
         padding: $padding-md;

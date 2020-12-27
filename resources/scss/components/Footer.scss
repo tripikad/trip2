@@ -129,7 +129,7 @@
 
         .Footer__link {
 
-            color: $color-gray;
+            color: $gray;
 
             &:hover {
 
@@ -139,7 +139,7 @@
 
         .Footer__socialLink {
 
-            color: $color-gray;
+            color: $gray;
 
             &:hover {
 
@@ -149,12 +149,12 @@
 
         .Footer__licence {
 
-            color: $color-gray;
+            color: $gray;
         }
 
         .Footer__socialIcon svg {
 
-            fill: $color-gray;
+            fill: $gray;
         }
     }
 }

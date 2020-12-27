@@ -8,7 +8,7 @@
 
     &__label {
 
-        color: $color-gray;
+        color: $gray;
         display: block;
         font: $font-heading-sm;
         line-height: $line-height-md;
@@ -41,7 +41,7 @@
         &:read-only {
 
             background: $color-gray-lighter;
-            color: $color-gray;
+            color: $gray;
             opacity: $opacity-md;
         }
     }

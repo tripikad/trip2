@@ -13,7 +13,7 @@
     &__link {
 
         padding: $padding-sm;
-        color: $color-gray;
+        color: $gray;
         font: $font-heading-sm;
         white-space: nowrap;
         display: flex;
@@ -68,13 +68,13 @@
         height: 0;
         border-left: $width-xxs solid transparent;
         border-right: $width-xxs solid transparent;
-        border-bottom: $width-xxs solid $color-green;
+        border-bottom: $width-xxs solid $green;
     }
 
     &__sublinks {
 
         border-radius: $border-radius-md;
-        background: $color-green;
+        background: $green;
         padding: $padding-xs 0;
     }
 
