@@ -40,6 +40,20 @@
 
                 color: $blue;
             }
+
+            &.dark {
+
+                a {
+
+                    color: $blue;
+                }
+
+                .Tabs__tab__count {
+
+                    background: $lighter-gray;
+                    color: $gray;
+                }
+            }
         }
 
         &:hover {
@@ -59,8 +73,29 @@
             background: $gray;
             border-radius: 30px;
             color: $white;
-            padding: 3px 6px;
+            padding: 3px 10px;
             margin-left: calc(#{$spacer} / 4);
+        }
+
+        &.dark {
+
+            a {
+
+                color: $gray;
+            }
+
+            /*.Tabs__tab__count {
+
+                background: $lighter-gray;
+                color: $gray;
+            }*/
+        }
+    }
+
+    .Tabs__tab.Tabs__tab--active.dark {
+
+        a {
+            color: $blue;
         }
     }
 }

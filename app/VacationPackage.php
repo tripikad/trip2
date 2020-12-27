@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Cviebrock\EloquentSluggable\Sluggable as Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers as SlugHelper;
 use Illuminate\Database\Eloquent\Model;
@@ -15,6 +16,13 @@ class VacationPackage extends Model
     protected $fillable = ['name'];
 
     protected $dates = ['created_at', 'updated_at'];
+
+    protected $appends = ['status'];
+
+    protected $casts = [
+        'active' => 'boolean',
+        'data' => 'array'
+    ];
 
     protected $with = [
         'company'
@@ -52,6 +60,17 @@ class VacationPackage extends Model
         }
 
         return false;
+    }
+
+    public function getStatusAttribute()
+    {
+        if ($this->end_date < Carbon::today()->toDateString()) {
+            return 'expired';
+        } else if ($this->active === true) {
+            return 'active';
+        } else {
+            return 'draft';
+        }
     }
 }
 

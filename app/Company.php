@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Cviebrock\EloquentSluggable\Sluggable as Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers as SlugHelper;
 use Illuminate\Database\Eloquent\Model;
@@ -33,6 +34,20 @@ class Company extends Model
     public function vacationPackages()
     {
         return $this->hasMany('App\VacationPackage');
+    }
+
+    public function activeVacationPackages()
+    {
+        return $this->vacationPackages()
+            ->where('active', true)
+            ->where('end_date', '>=', Carbon::today()->toDateString());
+    }
+
+    public function canActivateVacationPackage()
+    {
+        $count = $this->activeVacationPackages()->count();
+
+        return $count < 5; //todo
     }
 }
 

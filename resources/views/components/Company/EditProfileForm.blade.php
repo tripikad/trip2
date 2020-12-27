@@ -49,10 +49,12 @@
                 value="{{ old('company_name', $company->name) }}"/>
     </div>
     <div class="CompanyEditProfileForm__field">
-        <x-form.textarea
-                label="{{ trans('company.description') }}"
+        <text-editor
+                title="Sisu"
                 name="description"
-                value="{{ old('description', $user->description) }}"/>
+                value="{{ old('description', $user->description) }}"
+                errors="{{ $errors->count() ? json_encode($errors->keys()) : null}}">
+        </text-editor>
     </div>
     <div class="CompanyEditProfileForm__field">
         <x-form.text-field

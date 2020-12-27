@@ -7,5 +7,9 @@ return [
     'edit' => 'Edit',
     'save' => 'Save',
     'back' => 'Back',
-    'delete' => 'Delete'
+    'delete' => 'Delete',
+
+    'notification' => [
+        'saved' => 'Saved'
+    ]
 ];

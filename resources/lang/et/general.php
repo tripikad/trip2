@@ -7,5 +7,9 @@ return [
     'edit' => 'Muuda',
     'save' => 'Salvesta',
     'back' => 'Tagasi',
-    'delete' => 'Kustuta'
+    'delete' => 'Kustuta',
+
+    'notification' => [
+        'saved' => 'Salvestatud'
+    ]
 ];

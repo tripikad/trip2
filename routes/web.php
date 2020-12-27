@@ -522,12 +522,16 @@ Route::get('company/{company}/profile', 'CompanyController@profile')
     ->name('company.profile')
     ->middleware('companyOwner');
 
-Route::post('company/{company}/update_profile', 'CompanyController@updateProfile')
-    ->name('company.update_profile')
+Route::post('company/{company}/package/{package}/active', 'CompanyController@setPackageActive')
+    ->name('company.package.active')
     ->middleware('companyOwner');
 
 Route::get('company/{company}/edit_profile', 'CompanyController@editProfile')
     ->name('company.edit_profile')
+    ->middleware('companyOwner');
+
+Route::post('company/{company}/update_profile', 'CompanyController@updateProfile')
+    ->name('company.update_profile')
     ->middleware('companyOwner');
 
 Route::get('company/{company}/add_package', 'CompanyController@addPackage')

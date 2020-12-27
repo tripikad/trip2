@@ -1,0 +1,36 @@
+@import "../../variables";
+
+.StatusTag {
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3px 6px;
+    border: 2px solid $gray;
+    border-radius: 30px;
+
+    &__title {
+
+        color: $gray;
+        font-family: $font-family-sailec;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 24px;
+        white-space: nowrap;
+
+        &:hover {
+
+            color: $dark-gray;
+        }
+    }
+
+    &--active {
+
+        border: 2px solid $green;
+
+        .StatusTag__title {
+
+            color: $green;
+        }
+    }
+}

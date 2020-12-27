@@ -4,6 +4,7 @@
             :title="$tab['title']"
             :route="$tab['route']"
             :active="$tab['active']"
-            :count="$tab['count']"/>
+            :count="$tab['count']"
+            class="{{$attributes['class']}}"/>
     @endforeach
 </ul>

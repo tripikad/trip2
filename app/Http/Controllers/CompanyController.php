@@ -22,9 +22,10 @@ class CompanyController extends Controller
 {
     /**
      * @param $slug
+     * @param Request $request
      * @return View
      */
-    public function page($slug)
+    public function page($slug, Request $request): View
     {
         $company = Company::whereSlug($slug)->first();
         if (!$company) {
@@ -32,36 +33,130 @@ class CompanyController extends Controller
         }
 
         $company->loadMissing('user');
+        $company->loadMissing('vacationPackages');
+        $routeName = $request->route()->getName();
+
+        $items = [
+            [
+                'title' => 'Tutvustus',
+                'route' => route('company.page', ['slug' => $company->slug]),
+                'active' => $routeName !== 'company.page' ? $routeName === 'company.page' : '#',
+                'count' => null
+            ],
+            [
+                'title' => 'Pakkumised',
+                'route' => $routeName !== 'company.packages' ? route('company.packages', ['slug' => $company->slug]) : '#',
+                'active' => $routeName === 'company.packages',
+                'count' => count($company->vacationPackages)
+            ]
+        ];
+
         return view('pages.company.page', [
             'company' => $company,
-            'user' => $company->user
+            'user' => $company->user,
+            'items' => $items
+        ]);
+    }
+
+    /**
+     * @param string $slug
+     * @param Request $request
+     * @return View
+     */
+    public function packages(string $slug, Request $request): View
+    {
+        $company = Company::whereSlug($slug)->first();
+        if (!$company) {
+            abort(404);
+        }
+
+        $company->loadMissing('user');
+        $company->loadMissing('activeVacationPackages');
+        $items = [
+            [
+                'title' => 'Tutvustus',
+                'route' => route('company.page', ['slug' => $company->slug]),
+                'active' => false,
+                'count' => null
+            ],
+            [
+                'title' => 'Pakkumised',
+                'route' => '#',
+                'active' => true,
+                'count' => count($company->activeVacationPackages)
+            ]
+        ];
+
+        return view('pages.company.packages', [
+            'company' => $company,
+            'user' => $company->user,
+            'packages' => $company->activeVacationPackages,
+            'items' => $items
         ]);
     }
 
     /**
      * @param Company $company
+     * @param Request $request
      * @return View
      */
-    public function profile(Company $company)
+    public function profile(Company $company, Request $request)
     {
         $company->loadMissing('user');
         $company->loadMissing('vacationPackages');
+        $routeName = $request->route()->getName();
+
+        $items = [
+            [
+                'title' => 'Pakkumised',
+                'route' => route('company.profile', ['company' => $company]),
+                'active' => $routeName !== 'company.profile' ? $routeName === 'company.profile' : '#',
+                'count' => count($company->vacationPackages)
+            ],
+            [
+                'title' => 'Minu info',
+                'route' => $routeName !== 'company.edit_profile' ? route('company.edit_profile', ['company' => $company]) : '#',
+                'active' => $routeName === 'company.edit_profile',
+                'count' => null
+            ]
+        ];
+
         return view('pages.company.profile', [
             'company' => $company,
-            'user' => $company->user
+            'user' => $company->user,
+            'items' => $items
         ]);
     }
 
     /**
      * @param Company $company
+     * @param Request $request
      * @return View
      */
-    public function editProfile(Company $company)
+    public function editProfile(Company $company, Request $request)
     {
         $company->loadMissing('user');
+        $routeName = $request->route()->getName();
+
+        $items = [
+            [
+                'title' => 'Pakkumised',
+                'route' => route('company.profile', ['company' => $company]),
+                'active' => $routeName !== 'company.profile' ? $routeName === 'company.profile' : '#',
+                'count' => count($company->vacationPackages)
+            ],
+            [
+                'title' => 'Minu info',
+                'route' => $routeName !== 'company.edit_profile' ? route('company.edit_profile', ['company' => $company]) : '#',
+                'active' => $routeName === 'company.edit_profile',
+                'count' => null
+            ]
+        ];
+
         return view('pages.company.edit-profile', [
             'company' => $company,
-            'user' => $company->user
+            'user' => $company->user,
+            'items' => $items
         ]);
     }
 
@@ -254,8 +349,6 @@ class CompanyController extends Controller
         $package->link = $request->post('link');
         $package->save();
 
-        //todo: return onlu IDs from multiselect vue component
-        //$catIds = array_map(function($o) { return $o['id']; }, request()->category);
         $package->vacationPackageCategories()->sync(request()->category);
 
         Session::flash(
@@ -269,21 +362,25 @@ class CompanyController extends Controller
     }
 
     /**
-     * @param string $slug
-     * @return View
+     * @param Company $company
+     * @param VacationPackage $package
+     * @return RedirectResponse
      */
-    public function packages(string $slug)
+    public function setPackageActive(Company $company, VacationPackage $package)
     {
-        $company = Company::whereSlug($slug)->first();
-        if (!$company) {
-            abort(404);
+        if ($package->active) {
+            $package->active = false;
+            $package->save();
+        } else {
+            //todo: check subscription
+            $package->active = true;
+            $package->save();
         }
 
-        $company->loadMissing('user');
-        return view('pages.company.packages', [
-            'company' => $company,
-            'user' => $company->user
-        ]);
+        return back()->with(
+            'info',
+            trans('general.notification.saved')
+        );
     }
 
     /**

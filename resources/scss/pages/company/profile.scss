@@ -8,7 +8,7 @@
 
     &__header {
 
-        background: $color-gray-light;
+        background: $lighter-gray;
     }
 
     &__navigation {
@@ -20,28 +20,34 @@
     &__header-content {
 
         margin-top: calc(#{$spacer} * 5);
-        margin-left: calc(#{$spacer} * 5);
-        margin-bottom: calc(#{$spacer} * 2);
+        font-family: $font-family-sailec;
 
-        @media (max-width: 768px) {
+        &__heading {
 
-            margin-top: calc(#{$spacer} * 2);
-            margin-left: calc(#{$spacer} * 2);
+            font-weight: bold;
+            font-size: 48px;
+            line-height: 48px;
+            text-align: left;
+            color: $dark-gray;
+            margin-left: $margin-xl;
+            margin-bottom: 72px;
+
+            @media (max-width: 768px) {
+
+                font-size: 24px;
+                line-height: 24px;
+                margin-left: calc(#{$spacer} * 3);
+                margin-top: calc(#{$spacer} * 2);
+                margin-bottom: calc(#{$spacer} * 3);
+            }
         }
     }
 
-    &__heading {
+    &__content {
 
-        font: $font-heading-xxl;
-        color: $color-dark-gray;
-        text-align: left;
-        margin-bottom: calc(#{$spacer} * 5);
-        line-height: $line-height-md;
+        font-family: $font-family-sailec;
+        padding: calc(#{$spacer} * 3) #{$spacer};
 
-        @media (max-width: 768px) {
 
-            font: $font-heading-xl;
-            line-height: $line-height-lg;
-        }
     }
 }

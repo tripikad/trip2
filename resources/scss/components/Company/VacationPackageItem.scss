@@ -4,7 +4,6 @@
 
     display: flex;
     width: 100%;
-    margin-bottom: calc(#{$spacer} * 2);
 
     &__image {
 
@@ -13,70 +12,90 @@
 
         img {
 
-            max-width: 100px;
+            max-width: 200px;
             width: 100%;
-            max-height: 70px;
+            max-height: 120px;
             height: 100%;
         }
     }
 
     &__content {
 
+        font-family: $font-family-sailec;
         display: flex;
         width: 100%;
         flex-direction: column;
-        justify-content: flex-end;
         margin-left: calc(#{$spacer} * 2);
+
+        &__tags {
+
+            display: flex;
+            width: 100%;
+            margin-bottom: 12px;
+        }
 
         &__title {
 
-            font: $font-heading-lg;
+            font-weight: bold;
+            font-size: 24px;
+            line-height: 30px;
+            margin-bottom: 12px;
 
             a {
 
-                color: $color-blue;
+                color: $dark-gray;
 
                 &:hover {
 
-                    color: $color-blue-hover;
+                    color: $gray;
                 }
             }
         }
 
-        &__description {
-
-            font: $font-text-md;
-        }
-
-        &__meta {
+        &__actions {
 
             display: flex;
             width: 100%;
             align-items: center;
+            flex-wrap: wrap;
 
-            &__until {
+            &__btn {
 
-                font: $font-text-xs;
-                color: $color-gray;
-            }
-
-            &__edit-btn {
-
-                background: $color-green;
-                border-radius: $border-radius-md;
-                margin-left: calc(#{$spacer});
-                padding: 0 6px;
-                font: $font-text-xs;
-                line-height: $line-height-lg;
+                font-weight: 500;
+                font-size: 14px;
+                line-height: 24px;
+                cursor: pointer;
+                margin-right: 12px;
+                background: none;
+                border: none;
+                outline: none;
 
                 &:hover {
 
-                    background: $color-green-hover;
+                    text-decoration: underline;
                 }
 
-                a {
+                &.active {
 
-                    color: $color-white;
+                    color: $green;
+                }
+
+                &.inactive {
+
+                    color: $red;
+                }
+
+                &.edit {
+
+                    a {
+
+                        color: $blue;
+                    }
+                }
+
+                &.delete {
+
+                    color: $blue;
                 }
             }
         }

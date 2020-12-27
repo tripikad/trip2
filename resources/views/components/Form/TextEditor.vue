@@ -9,6 +9,8 @@
             :id="name"
             @input="$emit('input', $event)"
             spellcheck="false"/>
+
+      <input type="hidden" :name=name :value="content"/>
     </div>
 </template>
 

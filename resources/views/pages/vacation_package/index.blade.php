@@ -12,7 +12,7 @@
 
         <div class="container page-vp-index__content">
             <div class="row">
-                <div class="col-md-9 col-12">
+                <div class="col-md-8 col-12">
                     @foreach ($packages->chunk(2) as $chunk)
                         <div class="row">
                             @foreach($chunk as $package)
@@ -34,11 +34,3 @@
         <x-footer/>
     </div>
 @endsection
-
-@push('scripts')
-    <script type="text/javascript">
-        googletag.cmd.push(function() {
-            googletag.display('div-gpt-ad-1465761439447-0');
-        });
-    </script>
-@endpush

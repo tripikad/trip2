@@ -2,10 +2,11 @@
 
 .CompanyEditProfileForm {
 
-    background: #fff;
-    max-width: 32em;
+    background: $white;
+    max-width: 48em;
     width: 100%;
     padding: calc(#{$spacer} * 2);
+    margin: 0 auto;
 
     &__subtitle {
 
