@@ -24,6 +24,6 @@ class BusinessUserForm extends Component
      */
     public function render()
     {
-        return view('components.register-business-user-form');
+        return view('components.Register.BusinessUserForm');
     }
 }
