@@ -47,7 +47,11 @@
 
         font-family: $font-family-sailec;
         padding: calc(#{$spacer} * 3) #{$spacer};
+    }
 
+    &__new-package-btn {
 
+        max-width: 288px;
+        margin: 0 auto 48px auto;
     }
 }

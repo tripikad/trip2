@@ -255,6 +255,16 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->flags->where('flag_type', 'good');
     }
 
+    public function subscription()
+    {
+        return $this->hasOne('App\Subscription', 'user_id', 'id');
+    }
+
+    public function activeSubscription()
+    {
+        return $this->subscription()->where('status', 'active');
+    }
+
     public function updateRanking()
     {
         $contents = $this->contents()

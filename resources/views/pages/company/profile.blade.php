@@ -17,15 +17,24 @@
 
         <div class="container page-company-profile__content">
             <div class="row">
-                <div class="col-md-9 col-12">
+                <div class="col-md-8 col-12">
                     <x-company.vacation-package-list :company="$company"/>
                 </div>
-                <div class="col-md-3 col-12 mt-5 mt-md-0">
-                    <button-vue route="{{route('company.add_package', [$company])}}"
+                <div class="col-md-4 col-12 mt-5 mt-md-0">
+                    <div class="page-company-profile__new-package-btn">
+                        <button-vue
+                                route="{{route('company.add_package', [$company])}}"
                                 title="Lisa uus pakkumine"/>
+                    </div>
 
-                    <x-ads id="{{config('promo.sidebar_small.id2')}}"/>
-                    <x-ads id="{{config('promo.sidebar_large.id2')}}"/>
+                    <div class="page-company-profile__plans">
+                        <vacation-package-subscription-plan/>
+                    </div>
+
+<!--                    <div>
+                        <x-ads id="{{config('promo.sidebar_small.id2')}}"/>
+                        <x-ads id="{{config('promo.sidebar_large.id2')}}"/>
+                    </div>-->
                 </div>
             </div>
         </div>

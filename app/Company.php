@@ -46,8 +46,17 @@ class Company extends Model
     public function canActivateVacationPackage()
     {
         $count = $this->activeVacationPackages()->count();
+        $subscription = $this->user->activeSubscription;
 
-        return $count < 5; //todo
+        //todo: temporary atm
+        return $count <= 2;
+
+        if (!$subscription) {
+            return false;
+        }
+
+        $plan = $subscription->plan;
+        return $count < (int)$plan->name; //plan name is number
     }
 }
 
