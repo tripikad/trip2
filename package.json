@@ -49,7 +49,7 @@
     "browser-sync": "^2.26.13",
     "clean-webpack-plugin": "^0.1.19",
     "cross-env": "^3.0.0",
-    "css-loader": "^2.1.0",
+    "css-loader": "^1.0.1",
     "eslint": "^4.19.1",
     "eslint-plugin-prettier": "^2.6.0",
     "eslint-plugin-vue": "^4.5.0",
