@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\VacationPackage;
 use App\VacationPackageCategory;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class VacationPackageController extends Controller
 {
@@ -52,6 +53,23 @@ class VacationPackageController extends Controller
         return view('pages.vacation_package.index', [
             'packages' => $packages,
             'categories' => $categories,
+        ]);
+    }
+
+    /**
+     * @param string $slug
+     * @param Request $request
+     * @return View
+     */
+    public function show(string $slug, Request $request): View
+    {
+        $package = VacationPackage::whereSlug($slug)->first();
+        if (!$package) {
+            abort(404);
+        }
+
+        return view('pages.vacation_package.show', [
+            'package' => $package
         ]);
     }
 }

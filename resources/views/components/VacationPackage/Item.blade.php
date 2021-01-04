@@ -8,7 +8,7 @@
             {{$package->getVacationPackageCategoryNames()}}
         </div>
         <div class="VacationPackageItem__meta__name">
-            <a href="#">{{$package->name}}</a>
+            <a href="{{route('vacation_package.show', ['slug' => $package->slug])}}">{{$package->name}}</a>
         </div>
         <div class="VacationPackageItem__meta__company">
             <div class="VacationPackageItem__meta__company__logo">

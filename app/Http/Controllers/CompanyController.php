@@ -341,6 +341,7 @@ class CompanyController extends Controller
      */
     public function updatePackage(Company $company, VacationPackage $package, Request $request)
     {
+        $request['category'] = json_decode($request['category'], true);
         $rules = [
             'name' => 'required',
             'link' => 'required|url',

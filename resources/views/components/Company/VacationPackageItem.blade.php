@@ -9,7 +9,7 @@
                     type="{{$package->status}}"/>
         </div>
         <div class="CompanyVacationPackageItem__content__title">
-            <a href="#">{{$package->name}}</a>
+            <a href="{{route('vacation_package.show', ['slug' => $package->slug])}}">{{$package->name}}</a>
         </div>
         <div class="CompanyVacationPackageItem__content__actions">
             @if ($package->canChangeStatus)

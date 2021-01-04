@@ -620,7 +620,8 @@ Route::get('booking/{id}/goto', 'BookingController@goto')->name('booking.goto');
 
 //Vacation packages
 
-Route::get('puhkepaketid', 'VacationPackageController@index')->name('vacation_package.index');
+Route::get('puhkusepaketid', 'VacationPackageController@index')->name('vacation_package.index');
+Route::get('puhkusepakett/{slug}', 'VacationPackageController@show')->name('vacation_package.show');
 
 
 // Polls
