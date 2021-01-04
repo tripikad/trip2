@@ -39,11 +39,11 @@ class Navbar extends Component
                 'new' => trans('menu.header.new'),
             ])
             // @LAUNCH Remove this check
-            ->putWhen($user && $user->hasRole('superuser'), 'offer', [
+            /*->putWhen($user && $user->hasRole('superuser'), 'offer', [
                 'title' => trans('menu.header.offer'),
                 'new' => trans('menu.header.new'),
                 'route' => route('offer.index')
-            ])
+            ])*/
             ->toArray();
     }
 

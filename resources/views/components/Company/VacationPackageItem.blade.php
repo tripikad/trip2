@@ -1,6 +1,6 @@
 <div {{ $attributes->merge(['class' => 'CompanyVacationPackageItem']) }}>
     <div class="CompanyVacationPackageItem__image">
-        <img src="https://www.worldwideinsure.com/travel-blog/wp-content/uploads/2017/12/Hotel-Room-Image-by-Megha01-CC0.jpg"/>
+        <img src="{{$package->small_image}}" alt=""/>
     </div>
     <div class="CompanyVacationPackageItem__content">
         <div class="CompanyVacationPackageItem__content__tags">

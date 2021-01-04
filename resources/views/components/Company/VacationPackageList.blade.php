@@ -5,7 +5,7 @@
         </div>
         @foreach($activePackages as $package)
             <div class="CompanyVPList__block__item">
-                <x-company.vacation-package-item :package="$package" asdf="asdf"/>
+                <x-company.vacation-package-item :package="$package"/>
             </div>
         @endforeach
     </div>

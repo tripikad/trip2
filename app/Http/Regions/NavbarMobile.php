@@ -30,10 +30,10 @@ class NavbarMobile
                 'route' => route('news.index')
             ])
             // @LAUNCH remove this check
-            ->putWhen($user && $user->hasRole('superuser'), 'offer', [
+            /*->putWhen($user && $user->hasRole('superuser'), 'offer', [
                 'title' => trans('menu.header.offer'),
                 'route' => route('offer.index')
-            ])
+            ])*/
             ->toArray();
     }
 

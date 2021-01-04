@@ -17,7 +17,12 @@ class VacationPackage extends Model
 
     protected $dates = ['created_at', 'updated_at'];
 
-    protected $appends = ['status'];
+    protected $appends = [
+        'status',
+        'small_image',
+        'medium_image',
+        'background_image'
+    ];
 
     protected $casts = [
         'active' => 'boolean',
@@ -25,7 +30,8 @@ class VacationPackage extends Model
     ];
 
     protected $with = [
-        'company'
+        'company',
+        'image'
     ];
 
     public function sluggable(): array
@@ -50,6 +56,29 @@ class VacationPackage extends Model
     public function vacationPackageCategories()
     {
         return $this->belongsToMany('App\VacationPackageCategory', 'vacation_package_category_map');
+    }
+
+    public function image()
+    {
+        return $this->hasOne('App\Image', 'id', 'image_id');
+    }
+
+    public function getSmallImageAttribute()
+    {
+        $image = $this->image;
+        return $image->preset('small');
+    }
+
+    public function getMediumImageAttribute()
+    {
+        $image = $this->image;
+        return $image->preset('medium');
+    }
+
+    public function getBackgroundImageAttribute()
+    {
+        $image = $this->image;
+        return $image->preset('background');
     }
 
     public function getVacationPackageCategoryNames()

@@ -293,6 +293,10 @@ class CompanyController extends Controller
         $package->description = $request->post('description');
         $package->link = $request->post('link');
         $package->image_id = $image->id;
+
+        //todo: activate after confirm
+        $package->active = true;
+
         $package->save();
 
         $package->vacationPackageCategories()->attach(request()->category);
