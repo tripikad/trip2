@@ -1,6 +1,7 @@
 <template>
     <form @submit.prevent="handleSubmit"
         class="CompanyVacationPackageForm"
+        enctype="multipart/form-data"
         :class="isclasses"
         method="POST"
         autocomplete="off"
@@ -73,7 +74,22 @@
         </div>
 
         <div class="CompanyVacationPackageForm__subtitle">
-            Omadused
+            Omadused (TODO)
+        </div>
+
+        <div>
+            ...
+        </div>
+
+        <div class="CompanyVacationPackageForm__subtitle">
+            Pilt
+        </div>
+
+        <div>
+            <ImageUpload
+                name="image"
+                :url="this.submitRoute"
+                :autoUpload="false"/>
         </div>
 
         <div class="CompanyEditProfileForm__submit-button">
@@ -88,8 +104,10 @@
 import TextField from "../Form/TextField.vue";
 import SubmitButton from "../Form/SubmitButton.vue";
 import FormSelectMultiple from "../FormSelectMultiple/FormSelectMultiple.vue";
+import ImageUpload from "../ImageUpload/ImageUpload.vue";
+
 export default {
-    components: {FormSelectMultiple, SubmitButton, TextField},
+    components: {ImageUpload, FormSelectMultiple, SubmitButton, TextField},
     props: {
         add: { default: true },
         isclasses: { default: '' },
@@ -101,6 +119,7 @@ export default {
         category: { default: () => [] },
         link: { default: '' },
         categoryOptions: { default: () => [] },
+        image: { default: null },
         disabled: { default: false },
         submitRoute: null
     },
@@ -114,6 +133,8 @@ export default {
                 description: this.description,
                 category: this.category,
                 link: this.link,
+                image: null,
+                imageId: null
             },
             submitting: false,
             success: false,
@@ -129,7 +150,23 @@ export default {
                 this.submitting = true;
                 this.success = false;
                 this.errors = {};
-                this.$http.post(this.submitRoute, this.fields).then(response => {
+
+                const formData = new FormData();
+                formData.append('name', this.fields.name);
+                formData.append('startDate', this.fields.startDate);
+                formData.append('endDate', this.fields.endDate);
+                formData.append('price', this.fields.price);
+                formData.append('description', this.fields.description);
+                formData.append('category', JSON.stringify(this.fields.category));
+                formData.append('link', this.fields.link);
+                formData.append('image', this.fields.image);
+                formData.append('imageId', this.fields.imageId);
+
+                this.$http.post(this.submitRoute, formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                }).then(response => {
                     this.fields = {};
                     this.success = true;
                     this.submitting = false;
@@ -143,12 +180,19 @@ export default {
                             title: errorTitle,
                             isType: 'error'
                         })
-
-                        //window.scroll(0, window.pageYOffset - 700)
                     }
                 });
             }
         },
+    },
+    mounted() {
+        this.$events.$on('imageupload.success', file => {
+            this.fields.image = file;
+        })
+
+        this.$events.$on('imageupload.remove_file', file => {
+            this.fields.image = null;
+        })
     }
 };
 </script>

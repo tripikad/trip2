@@ -58,5 +58,10 @@ class Company extends Model
         $plan = $subscription->plan;
         return $count < (int)$plan->name; //plan name is number
     }
+
+    public function images()
+    {
+        return $this->morphToMany('App\Image', 'imageable');
+    }
 }
 

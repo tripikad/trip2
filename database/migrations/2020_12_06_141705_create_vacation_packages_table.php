@@ -24,6 +24,7 @@ class CreateVacationPackagesTable extends Migration
             $table->boolean('active')->default(false);
             $table->text('description');
             $table->string('link');
+            $table->unsignedInteger('image_id')->index();
             $table->json('data')->nullable();
             $table->timestamps();
 
@@ -32,6 +33,11 @@ class CreateVacationPackagesTable extends Migration
                 ->references('id')
                 ->on('companies')
                 ->onDelete('cascade');
+
+            $table
+                ->foreign('image_id')
+                ->references('id')
+                ->on('images');
 
             $table->unique('slug');
         });

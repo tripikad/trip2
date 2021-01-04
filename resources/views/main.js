@@ -6,6 +6,7 @@ import VueDatePicker from '@mathieustan/vue-datepicker';
 import '@mathieustan/vue-datepicker/dist/vue-datepicker.min.css';
 import Vue2Editor from "vue2-editor";
 import "vue2-editor/dist/vue2-editor.css";
+import 'dropzone/dist/dropzone.css';
 
 // Require CSS files
 

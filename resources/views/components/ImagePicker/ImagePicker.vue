@@ -2,7 +2,7 @@
     <div class="ImagePicker" v-if="show">
         <div class="ImagePicker__close" @click="show = false">×</div>
 
-        <component :is="'ImageUpload'"></component>
+        <component :is="'ImageUpload'" :url="this.$globalProps.imageUploadRoute"></component>
 
         <div class="ImagePicker__card" v-for="(image, index) in images" :key="index" @click="onClick(image)">
             <img class="ImagePicker__image" :src="image.small" />
@@ -50,7 +50,7 @@ export default {
         this.$events.$on('imagepicker.hide', () => {
             this.show = false
         })
-        this.$events.$on('imageupload.created', () => {
+        this.$events.$on('imageupload.success', () => {
             this.getImages()
         })
     }

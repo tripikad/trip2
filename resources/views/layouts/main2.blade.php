@@ -20,7 +20,7 @@
                 'maxfilesize' => config('site.maxfilesize'),
                 'promo' => config('promo'),
                 'imageUploadRoute' => route('image.store'),
-                'imageUploadTitle' => trans('image.drop.title'),
+                'imageUploadTitle' => trans('site.dropzone.default'),
                 'imagePickerRoute' => route('image.index'),
                 'formatRoute' => route('utils.format')
             ]))

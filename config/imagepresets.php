@@ -20,6 +20,17 @@ return [
     ],
 
     'presets' => [
+        'background' => [
+            'on_the_fly' => false,
+            'operation' => 'resize',
+            'width' => 1920,
+            'height' => null,
+            'path' => $images_path . 'background/',
+            'displaypath' => $images_displaypath . 'background/',
+            'alt_displaypath' => $images_alt_displaypath . 'background/',
+            'quality' => 75
+        ],
+
         'large' => [
             'on_the_fly' => false,
             'operation' => 'resize',

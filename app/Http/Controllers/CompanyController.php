@@ -204,7 +204,7 @@ class CompanyController extends Controller
 
         if ($request->hasFile('logo')) {
             $filename =
-                'picture-' .
+                'company_logo-' .
                 $user->id .
                 '.' .
                 $request
@@ -250,6 +250,8 @@ class CompanyController extends Controller
      */
     public function storePackage(Company $company, Request $request)
     {
+        $maxFileSize = config('site.maxfilesize') * 1024;
+        $request['category'] = json_decode($request['category'], true);
         $rules = [
             'name' => 'required',
             'link' => 'required|url',
@@ -257,10 +259,11 @@ class CompanyController extends Controller
             'endDate' => 'required|date',
             'price' => 'required|numeric',
             'description' => 'required',
-            'category' => 'required|array|min:1'
+            'category' => 'required|array|min:1',
+            'image' => "required|image|max:$maxFileSize"
         ];
 
-        $validator = Validator::make($request->post(), $rules);
+        $validator = Validator::make($request->all(), $rules);
 
         if ($validator->fails()) {
             return response()->json([
@@ -268,6 +271,18 @@ class CompanyController extends Controller
                 'keys' => $validator->errors()->keys(),
             ], 422);
         }
+
+        $filename =
+            'vacation-package-' .
+            $company->id .
+            '.' .
+            $request
+                ->file('image')
+                ->getClientOriginalExtension();
+
+        $filename = Image::storeImageFile($request->file('image'), $filename);
+
+        $image = $company->images()->create(['filename' => $filename]);
 
         $package = new VacationPackage();
         $package->company_id = $company->id;
@@ -277,13 +292,14 @@ class CompanyController extends Controller
         $package->price = $request->post('price');
         $package->description = $request->post('description');
         $package->link = $request->post('link');
+        $package->image_id = $image->id;
         $package->save();
 
         $package->vacationPackageCategories()->attach(request()->category);
 
-        Session::flash(
+        /*Session::flash(
             'info', trans('Uus pakkumine loodud')
-        );
+        );*/
 
         return response()->json([
             'success' => true,
@@ -351,9 +367,9 @@ class CompanyController extends Controller
 
         $package->vacationPackageCategories()->sync(request()->category);
 
-        Session::flash(
+        /*Session::flash(
             'info', trans('Pakkumine salvestatud')
-        );
+        );*/
 
         return response()->json([
             'success' => true,

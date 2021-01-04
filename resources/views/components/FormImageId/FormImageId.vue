@@ -1,9 +1,9 @@
 <template>
-    <div class="FormTextfield" :class="isclasses">
-        <label :for="name" class="FormTextfield__label">{{ title }}</label>
+    <div class="FormTextField" :class="isclasses">
+        <label :for="name" class="FormTextField__label">{{ title }}</label>
 
         <input
-            class="FormTextfield__input"
+            class="FormTextField__input"
             :id="name"
             :name="name"
             type="text"

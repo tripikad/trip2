@@ -11,19 +11,19 @@ $disabled = $disabled ?? false;
 
 @endphp
 
-<div class="FormTextarea {{ $isclasses }} {{ $errors->first($name) ? 'FormTextfield--error' : ''}}">
+<div class="FormTextarea {{ $isclasses }} {{ $errors->first($name) ? 'FormTextField--error' : ''}}">
 
-    <div class="FormTextfield__header">
+    <div class="FormTextField__header">
 
         @if ($title)
 
-        <label for="{{ $name }}" class="FormTextfield__label">{{ $title }}</label>
+        <label for="{{ $name }}" class="FormTextField__label">{{ $title }}</label>
 
         @endif
 
         @if ($description)
 
-        <div class="FormTextfield__description">{{ $description }}</div>
+        <div class="FormTextField__description">{{ $description }}</div>
 
         @endif
 

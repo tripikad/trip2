@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use Imageconv;
 use Illuminate\Database\Eloquent\Model;
@@ -49,6 +50,12 @@ class Image extends Model
     public static function createImagePresets($path, $filename)
     {
         foreach (array_keys(config('imagepresets.presets')) as $preset) {
+            $folder = config("imagepresets.presets.$preset.path");
+
+            if (!File::exists($folder)) {
+                File::makeDirectory($folder, 0775, true, true);
+            }
+
             if (!config("imagepresets.presets.$preset.on_the_fly")) {
                 Imageconv::make($path . $filename)
                     ->{config("imagepresets.presets.$preset.operation")}(
