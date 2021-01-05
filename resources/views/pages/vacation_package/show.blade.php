@@ -20,7 +20,9 @@
 
         <div class="container page-vp-show__content">
             <div class="row">
-                TODO
+                <div>
+                    {!! $package->description !!}
+                </div>
             </div>
         </div>
 
