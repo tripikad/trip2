@@ -23,12 +23,12 @@ return [
         'background' => [
             'on_the_fly' => false,
             'operation' => 'resize',
-            'width' => 1920,
+            'width' => 1440,
             'height' => null,
             'path' => $images_path . 'background/',
             'displaypath' => $images_displaypath . 'background/',
             'alt_displaypath' => $images_alt_displaypath . 'background/',
-            'quality' => 75
+            'quality' => 100
         ],
 
         'large' => [

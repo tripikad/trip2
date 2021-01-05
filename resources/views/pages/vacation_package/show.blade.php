@@ -4,7 +4,7 @@
     <style>
         .vp-background-image {
             background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)), url({{$package->background_image}});
-            min-height: 350px;
+            min-height: 400px;
             height: 100%;
         }
     </style>
