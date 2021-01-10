@@ -37,6 +37,10 @@
         align-content: center;
         cursor: pointer;
 
+        &:hover {
+            border: 1px solid gray;
+        }
+
         &__status {
 
             display: flex;

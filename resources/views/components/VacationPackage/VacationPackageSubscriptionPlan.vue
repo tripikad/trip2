@@ -16,11 +16,8 @@
 
             <div class="VPSubscriptionPlan__plan">
                 <div class="VPSubscriptionPlan__plan__status">
-                    <div class="StatusTag StatusTag--active">
-                        <div class="StatusTag__title">
-                            Aktiivne
-                        </div>
-                    </div>
+                    <Tag title="aktiivne"
+                         isclasses="Tag--green Tag--large"/>
                 </div>
                 <div class="VPSubscriptionPlan__plan__info">
                     <div class="VPSubscriptionPlan__plan__info__name">
@@ -62,7 +59,9 @@
 
 <script>
 
+import Tag from "../Tag/Tag.vue";
 export default {
+    components: {Tag},
     props: {
         isclasses: {default: ''},
         plans: {default: () => []},
