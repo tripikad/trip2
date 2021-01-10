@@ -1,7 +1,47 @@
 $spacer: 12px;
 
+$blue: hsl(205, 82%, 57%);
+$blue-hover: hsl(205, 82%, 47%);
+$cyan-lighter: hsl(189, 46%, 92%);
+$cyan-light: hsl(190, 73%, 80%);
+$cyan: hsl(190, 73%, 59%);
+$cyan-hover: hsl(190, 73%, 49%);
+$cyan-dark: hsl(193, 100%, 34%);
+$green-dark: #288f18;
+$green: hsl(105, 52%, 58%);
+$green-hover: hsl(105, 52%, 48%);
+$orange-light: hsl(29, 100%, 82%);
+$orange: hsl(29, 100%, 62%);
+$orange-hover: hsl(29, 100%, 52%);
+$orange-dark: hsl(29, 100%, 48%);
+$purple: hsl(245, 51%, 68%);
+$purple-dark: hsl(245, 49%, 52%);
+$red: hsl(0, 79%, 66%);
+$red-hover: hsl(0, 79%, 56%);
+$red-dark: hsl(0, 56%, 54%);
+$red-darker: hsl(0, 53%, 45%);
+$yellow-light: hsl(45, 100%, 68%);
+$yellow: hsl(45, 100%, 48%);
+$yellow-hover: hsl(45, 100%, 38%);
+$yellow-dark: hsl(35, 100%, 32%);
+$pink-light: hsl(7, 100%, 96%);
+$pink: hsl(7, 72%, 89%);
+$pink-dark: hsl(7, 15%, 57%);
 $white: #ffffff;
-$orange: #FF9A3E;
+$white-hover: hsla(0, 0%, 100%, 0.9);
+$gray-lighter: hsl(204, 6%, 95%);
+$gray-lighter-hover: hsl(204, 6%, 75%);
+$gray-light: hsl(204, 6%, 83%);
+$gray-light-hover: hsl(204, 6%, 73%);
+$gray: hsl(204, 6%, 45%);
+$gray-hover: hsl(204, 6%, 35%);
+$gray-dark: hsl(204, 6%, 35%);
+$gray-dark-hover: hsl(204, 6%, 20%);
+$gray-darker: hsl(204, 6%, 25%);
+$gray-darker-hover: hsl(204, 6%, 15%);
+
+/*$orange: #FF9A3E;
+$orange-dark: #f57600;
 $blue: #36A1EB;
 $light-blue: #4AC9E3;
 $purple: #8B84D7;
@@ -11,24 +51,9 @@ $yellow: #FFCE33;
 $light-gray: #F7F9FA;
 $lighter-gray: #E1E7EB;
 $gray: #979DA1;
-$dark-gray: #444444;
-
-
-$color-gray-light: hsl(204, 6%, 83%);
-$color-gray-lighter: hsl(204, 6%, 95%);
-$color-gray-dark: hsl(204, 6%, 35%);
-$color-dark-gray: #545a5f;
-$color-green-dark: #288f18;
-
-
-$color-white-hover:  hsla(0, 0%, 100%, 0.9);
-$color-green-hover: #5bba3b;
-$color-gray-hover: hsl(204, 6%, 73%);
-$color-blue-hover: hsl(205, 82%, 47%);
-$color-yellow-hover: hsl(45, 100%, 38%);
+$dark-gray: #444444;*/
 
 $font-family-sailec: Sailec, sans-serif;
-
 
 $opacity-xxs: 0.05;
 $opacity-xs: 0.1;
@@ -36,6 +61,15 @@ $opacity-sm: 0.3;
 $opacity-md: 0.5;
 $opacity-lg: 0.7;
 $opacity-xl: 0.9;
+
+$font-size-xs: 13px;
+$font-size-sm: 14px;
+$font-size-md: 16px;
+$font-size-lg: 19px;
+$font-size-xl: 21px;
+$font-size-xxl: 30px;
+$font-size-xxxl: 48px;
+$font-size-xxxxl: 64px;
 
 $font-heading-xs: 600 14px / 145% Sailec, sans-serif;
 $font-heading-sm: 600 16px / 145% Sailec, sans-serif;

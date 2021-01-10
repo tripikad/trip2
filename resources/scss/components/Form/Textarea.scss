@@ -17,7 +17,7 @@
 
     &__description {
 
-        color: $color-gray-light;
+        color: $gray-light;
         font: $font-heading-sm;
         line-height: $line-height-md;
         margin-left: $margin-xs;
@@ -31,16 +31,16 @@
         font: $font-text-md;
         padding: $padding-sm;
         width: 100%;
-        color: $color-gray-dark;
+        color: $gray-dark;
 
         &::placeholder {
 
-            color: $color-gray-light;
+            color: $gray-light;
         }
 
         &:read-only {
 
-            background: $color-gray-lighter;
+            background: $gray-lighter;
             color: $gray;
             opacity: $opacity-md;
         }

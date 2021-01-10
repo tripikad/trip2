@@ -1,5 +1,3 @@
-@php $title = $title ?? ''; $route = $route ?? ''; @endphp
-
 <template>
     <div class="Tag" :class="isclasses">
         <a v-if="route" :href="route">

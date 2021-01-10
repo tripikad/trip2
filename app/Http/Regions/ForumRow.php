@@ -43,6 +43,7 @@ class ForumRow
                             $user && $user->hasRole('regular') && $forum->vars()->isNew,
                             component('Tag')
                                 ->is('red')
+                                ->is('filled')
                                 ->with('title', trans('content.show.isnew'))
                                 ->with('route', $route)
                         )
@@ -50,6 +51,7 @@ class ForumRow
                             $user && $user->hasRole('regular') && $unreadCommentCount,
                             component('Tag')
                                 ->is('red')
+                                ->is('filled')
                                 ->with(
                                     'title',
                                     trans_choice('content.show.newcomments', $unreadCommentCount, [

@@ -4,9 +4,9 @@
     </div>
     <div class="CompanyVacationPackageItem__content">
         <div class="CompanyVacationPackageItem__content__tags">
-            <x-vacation-package.status-tag
-                    title="{{trans('vacation_package.status.' . $package->status)}}"
-                    type="{{$package->status}}"/>
+            <x-tag
+                title="{{trans('vacation_package.status.' . $package->status)}}"
+                isclasses="{{$package->status === 'active' ? 'Tag--green' : ''}}"/>
         </div>
         <div class="CompanyVacationPackageItem__content__title">
             <a href="{{route('vacation_package.show', ['slug' => $package->slug])}}">{{$package->name}}</a>

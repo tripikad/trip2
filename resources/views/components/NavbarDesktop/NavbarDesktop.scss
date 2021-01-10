@@ -22,13 +22,13 @@
 
         &:hover {
 
-            color: $color-gray-hover;
+            color: $gray-hover;
         }
     }
 
     &__linkBadge {
 
-        background: $color-blue-hover;
+        background: $blue-hover;
         color: $white;
         padding: 0 $padding-xs;
         font: $font-text-xs;
@@ -86,7 +86,7 @@
 
         &:hover {
 
-            background: $color-green-dark;
+            background: $green-dark;
         }
     }
 
@@ -109,7 +109,7 @@
 
             &:hover {
 
-                color: $color-white-hover;
+                color: $white-hover;
             }
         }
     }

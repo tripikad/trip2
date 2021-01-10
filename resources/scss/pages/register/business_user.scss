@@ -4,7 +4,7 @@
 
     height: 100%;
     width: 100%;
-    background-color: $color-gray-lighter;
+    background-color: $gray-lighter;
     position: relative;
 
     &__navigation {
@@ -16,7 +16,7 @@
     &__header {
 
         font: $font-heading-xxl;
-        color: $color-dark-gray;
+        color: $gray-dark;
         text-align: center;
         margin-bottom: calc(#{$spacer} * 5);
         line-height: $line-height-md;
@@ -31,7 +31,7 @@
     &__sub-header {
 
         font: $font-heading-lg;
-        color: $color-dark-gray;
+        color: $gray-dark;
         text-align: center;
         padding-bottom: calc(#{$spacer} * 2);
 

@@ -43,7 +43,7 @@
         font-family: $font-family-sailec;
         font-size: 16px;
         line-height: 24px;
-        color: $dark-gray;
+        color: $gray-dark;
         padding: calc(#{$spacer} * 3) calc(#{$spacer} * 2) calc(#{$spacer} * 5) calc(#{$spacer} * 2);
 
         @media (max-width: 768px) {
@@ -65,7 +65,7 @@
             th {
 
                 width: 100px;
-                color: $dark-gray;
+                color: $gray-dark;
                 line-height: 36px;
             }
 
@@ -106,7 +106,7 @@
 
             &:hover {
 
-                background: $color-yellow-hover;
+                background: $yellow-hover;
             }
         }
     }

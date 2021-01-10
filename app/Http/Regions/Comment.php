@@ -32,6 +32,7 @@ class Comment
                                 $firstUnreadCommentId <= $comment->id,
                             component('Tag')
                                 ->is('red')
+                                ->is('filled')
                                 ->with('title', trans('comment.isnew'))
                         )
                         ->push(

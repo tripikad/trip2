@@ -5,7 +5,7 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    background: $light-gray;
+    background: $gray-lighter;
     padding: 24px;
     font-family: $font-family-sailec;
 
@@ -55,7 +55,7 @@
 
                 font-size: 24px;
                 line-height: 24px;
-                color: $dark-gray;
+                color: $gray-dark;
                 justify-content: center;
                 align-items: center;
                 display: flex;
@@ -70,7 +70,7 @@
 
             &__price {
 
-                border: 2px solid $lighter-gray;
+                border: 2px solid $gray-light;
                 border-radius: 30px;
                 display: flex;
                 justify-content: center;
