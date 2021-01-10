@@ -1,12 +1,12 @@
 <?php
 
-namespace App\View\Components\Company;
+namespace App\View\Components\VacationPackage;
 
 use App\VacationPackage;
 use Illuminate\View\Component;
 use Illuminate\View\View;
 
-class VacationPackageItem extends Component
+class GridItem extends Component
 {
     public VacationPackage $package;
 
@@ -27,6 +27,6 @@ class VacationPackageItem extends Component
      */
     public function render()
     {
-        return view('components.Company.VacationPackageItem');
+        return view('components.VacationPackage.GridItem');
     }
 }

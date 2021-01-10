@@ -1,22 +1,22 @@
-<form {{ $attributes->merge(['class' => 'CompanyVacationPackageForm']) }}
+<form {{ $attributes->merge(['class' => 'VacationPackageForm']) }}
       action="{{ $submitRoute }}"
       method="POST"
       autocomplete="off"
 >
     {{ csrf_field() }}
 
-    <div class="CompanyVacationPackageForm__subtitle">
+    <div class="VacationPackageForm__subtitle">
         Üldinfo
     </div>
 
-    <div class="CompanyVacationPackageForm__field">
+    <div class="VacationPackageForm__field">
         <x-form.text-field
                 label="Pakkumise nimetus"
                 name="name"
                 value="{{ old('name') }}"/>
     </div>
 
-    <div class="row CompanyVacationPackageForm__field">
+    <div class="row VacationPackageForm__field">
         <div class="col-md-6 col-12">
             <form-datepicker
                     title="Algus"
@@ -40,7 +40,7 @@
         </div>
     </div>
 
-    <div class="row CompanyVacationPackageForm__field">
+    <div class="row VacationPackageForm__field">
         <div class="col-md-6 col-12">
             <x-form.text-field
                     label="Hind alates €"
@@ -49,7 +49,7 @@
         </div>
     </div>
 
-    <div class="CompanyVacationPackageForm__field">
+    <div class="VacationPackageForm__field">
         <text-editor
                 title="Sisu"
                 name="description"
@@ -58,18 +58,14 @@
         </text-editor>
     </div>
 
-    <div class="CompanyVacationPackageForm__field">
+    <div class="VacationPackageForm__field">
         <x-form.text-field
                 label="Link"
                 name="link"
                 value="{{ old('link') }}"/>
     </div>
 
-    <div class="CompanyVacationPackageForm__subtitle">
-        Omadused
-    </div>
-
-    <div class="CompanyEditProfileForm__submit-button">
+    <div class="VacationPackageForm__submit-button">
         <x-form.submit-button
                 title="{{ trans('Lisa') }}"/>
     </div>

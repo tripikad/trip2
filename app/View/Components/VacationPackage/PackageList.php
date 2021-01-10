@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components\Company;
+namespace App\View\Components\VacationPackage;
 
 use App\Company;
 use Carbon\Carbon;
@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\View\Component;
 use Illuminate\View\View;
 
-class VacationPackageList extends Component
+class PackageList extends Component
 {
     public Collection $packages;
     public Company $company;
@@ -41,7 +41,7 @@ class VacationPackageList extends Component
             }
         }
 
-        return view('components.Company.VacationPackageList', [
+        return view('components.VacationPackage.PackageList', [
             'activePackages' => $activePackages,
             'draftPackages' => $draftPackages,
             'expiredPackages' => $expiredPackages

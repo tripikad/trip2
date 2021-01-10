@@ -1,13 +1,13 @@
 <?php
 
-namespace App\View\Components\Company;
+namespace App\View\Components\VacationPackage;
 
 use App\Company;
 use App\VacationPackage;
 use Illuminate\View\Component;
 use Illuminate\View\View;
 
-class VacationPackageForm extends Component
+class PackageForm extends Component
 {
     public Company $company;
     public ?VacationPackage $package;
@@ -25,7 +25,7 @@ class VacationPackageForm extends Component
      */
     public function render()
     {
-        return view('components.Company.VacationPackageForm', [
+        return view('components.VacationPackage.PackageForm', [
             'submitRoute' => $this->package && $this->package->id
                 ? route('company.update_package', ['company' => $this->company, 'package' => $this->package])
                 : route('company.store_package', ['company' => $this->company])

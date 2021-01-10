@@ -1,16 +1,16 @@
 <template>
     <form @submit.prevent="handleSubmit"
-        class="CompanyVacationPackageForm"
+        class="VacationPackageForm"
         enctype="multipart/form-data"
         :class="isclasses"
         method="POST"
         autocomplete="off"
     >
-        <div class="CompanyVacationPackageForm__subtitle">
+        <div class="VacationPackageForm__subtitle">
             Üldinfo
         </div>
 
-        <div class="CompanyVacationPackageForm__field">
+        <div class="VacationPackageForm__field">
             <text-field
                 v-model="fields.name"
                 name="name"
@@ -18,7 +18,7 @@
                 :errors="this.formatErrors()"/>
         </div>
 
-        <div class="row CompanyVacationPackageForm__field">
+        <div class="row VacationPackageForm__field">
             <div class="col-md-6 col-12">
                 <form-datepicker
                     v-model="fields.startDate"
@@ -37,7 +37,7 @@
             </div>
         </div>
 
-        <div class="row CompanyVacationPackageForm__field">
+        <div class="row VacationPackageForm__field">
             <div class="col-md-6 col-12">
                 <text-field
                     v-model="fields.price"
@@ -47,7 +47,7 @@
             </div>
         </div>
 
-        <div class="CompanyVacationPackageForm__field">
+        <div class="VacationPackageForm__field">
             <text-editor
                 v-model="fields.description"
                 title="Sisu"
@@ -55,7 +55,7 @@
                 :errors="this.formatErrors()"/>
         </div>
 
-        <div class="CompanyVacationPackageForm__field">
+        <div class="VacationPackageForm__field">
             <form-select-multiple
                 name="category"
                 title="Kategooria"
@@ -64,7 +64,7 @@
                 :errors="this.formatErrors()"/>
         </div>
 
-        <div class="CompanyVacationPackageForm__field">
+        <div class="VacationPackageForm__field">
             <text-field
                 v-model="fields.link"
                 name="link"
@@ -73,15 +73,7 @@
                 :errors="this.formatErrors()"/>
         </div>
 
-        <div class="CompanyVacationPackageForm__subtitle">
-            Omadused (TODO)
-        </div>
-
-        <div>
-            ...
-        </div>
-
-        <div class="CompanyVacationPackageForm__subtitle">
+        <div class="VacationPackageForm__subtitle">
             Pilt
         </div>
 
@@ -92,7 +84,7 @@
                 :autoUpload="false"/>
         </div>
 
-        <div class="CompanyEditProfileForm__submit-button">
+        <div class="VacationPackageForm__submit-button">
             <submit-button :title="add ? 'Lisa' : 'Muuda'"/>
         </div>
     </form>

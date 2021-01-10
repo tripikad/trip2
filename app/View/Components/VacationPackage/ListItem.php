@@ -6,7 +6,7 @@ use App\VacationPackage;
 use Illuminate\View\Component;
 use Illuminate\View\View;
 
-class Item extends Component
+class ListItem extends Component
 {
     public VacationPackage $package;
 
@@ -27,6 +27,6 @@ class Item extends Component
      */
     public function render()
     {
-        return view('components.VacationPackage.Item');
+        return view('components.VacationPackage.ListItem');
     }
 }

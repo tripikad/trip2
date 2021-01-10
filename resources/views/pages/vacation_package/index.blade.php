@@ -17,7 +17,7 @@
                         <div class="row">
                             @foreach($chunk as $package)
                                 <div class="col-md-6 page-vp-index__content__item">
-                                    <x-vacation-package.item :package="$package"/>
+                                    <x-vacation-package.griditem :package="$package"/>
                                 </div>
                             @endforeach
                         </div>

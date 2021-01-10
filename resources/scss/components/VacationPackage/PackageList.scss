@@ -1,0 +1,32 @@
+@import "../../variables";
+
+.VacationPackageList {
+    width: 100%;
+    padding: 0 $spacer;
+
+    &__block {
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        border-bottom: 2px solid $gray-lighter;
+        padding-top: $spacer * 2;
+
+        &--no-border {
+            border-bottom: 0;
+        }
+    }
+
+    &__title {
+        font-family: $font-family-sailec;
+        font-weight: bold;
+        font-size: 14px;
+        line-height: 14px;
+        text-transform: uppercase;
+        color: $gray;
+        margin-bottom: $spacer * 2;
+    }
+
+    &__item {
+        margin-bottom: $spacer * 2;
+    }
+}
