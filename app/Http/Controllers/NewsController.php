@@ -116,7 +116,7 @@ class NewsController extends Controller
             ->with('head_description', $new->vars()->description)
 
             // Temporarily disabled since og:image tag does not allow to select custom images in FB
-            //->with('head_image', $new->getHeadImage())
+            ->with('head_image', $new->getHeadImage())
 
             ->with('header', region('NewsHeader', $new))
 

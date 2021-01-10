@@ -11,6 +11,9 @@ require.context('./styles', true, /\.css$/)
 require.context('./components', true, /\.css$/)
 require.context('./layouts', true, /\.css$/)
 
+require.context('../scss', true, /\.scss$/)
+require.context('./components', true, /\.scss$/)
+
 // Require SVG files
 
 require.context('./svg', true, /\.svg$/)
