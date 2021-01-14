@@ -35,6 +35,6 @@ class Tab extends Component
      */
     public function render()
     {
-        return view('components.Tab');
+        return view('components.Tabs.Tab');
     }
 }

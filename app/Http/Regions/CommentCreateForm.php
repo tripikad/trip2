@@ -12,7 +12,7 @@ class CommentCreateForm
             ->with(
                 'content',
                 collect()->push(
-                    component('Form2')
+                    component('FormComponent')
                         ->with('route', route('comment.store', [$content->type, $content->id]))
                         ->with('id', 'CommentCreateForm')
                         ->with(

@@ -47,7 +47,7 @@ class OfferAdminController extends Controller
             ->with(
                 'content',
                 collect()->push(
-                    component('Form2')
+                    component('FormComponent')
                         ->with('route', route('offer.admin.store'))
                         ->with(
                             'fields',
@@ -336,7 +336,7 @@ class OfferAdminController extends Controller
             ->with(
                 'content',
                 collect()->push(
-                    component('Form2')
+                    component('FormComponent')
                         ->with('route', route('offer.admin.update', [$id]))
                         ->with('method', 'PUT')
                         ->with(

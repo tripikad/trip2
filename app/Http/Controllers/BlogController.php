@@ -158,7 +158,7 @@ class BlogController extends Controller
                 collect()
                     ->push(component('Title')->with('title', trans('content.blog.create.title')))
                     ->push(
-                        component('Form2')
+                        component('FormComponent')
                             ->with('route', route('blog.store'))
                             ->with(
                                 'fields',
@@ -258,7 +258,7 @@ class BlogController extends Controller
                 collect()
                     ->push(component('Title')->with('title', trans('content.blog.update.title')))
                     ->push(
-                        component('Form2')
+                        component('FormComponent')
                             ->with('route', route('blog.update', [$blog]))
                             ->with('method', 'PUT')
                             ->with(

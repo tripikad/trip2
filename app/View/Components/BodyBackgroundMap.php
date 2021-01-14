@@ -7,14 +7,16 @@ use Illuminate\View\View;
 
 class BodyBackgroundMap extends Component
 {
+    public string $svg = '#map';
+
     /**
      * Create a new component instance.
      *
-     * @return void
+     * @param string $svg
      */
-    public function __construct()
+    public function __construct($svg = '#map')
     {
-
+        $this->svg = $svg;
     }
 
     /**

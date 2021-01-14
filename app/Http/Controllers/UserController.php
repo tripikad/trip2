@@ -160,7 +160,7 @@ class UserController extends Controller
             ->with(
                 'content',
                 collect()->push(
-                    component('Form2')
+                    component('FormComponent')
                         ->with('route', route('user.update', [$user]))
                         ->with('method', 'PUT')
                         ->with('files', true)
@@ -412,7 +412,7 @@ class UserController extends Controller
             ->with(
                 'content',
                 collect()->push(
-                    component('Form2')
+                    component('FormComponent')
                         ->with('route', route('user.destinations.store', [$user]))
                         ->with('method', 'PUT')
                         ->with(

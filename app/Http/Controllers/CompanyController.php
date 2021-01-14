@@ -582,7 +582,7 @@ class CompanyController extends Controller
                             ->withInnerPadding(2)
                             ->withWidth(styles('tablet-width'))
                             ->withItems(
-                                component('Form2')
+                                component('FormComponent')
                                     ->with('route', route('company.store'))
                                     ->with('files', true)
                                     ->with(
@@ -773,7 +773,7 @@ class CompanyController extends Controller
                             ->withInnerPadding(2)
                             ->withWidth(styles('tablet-width'))
                             ->withItems(
-                                component('Form2')
+                                component('FormComponent')
                                     ->with('route', route('company.update', [$user]))
                                     ->with('method', 'PUT')
                                     ->with('files', true)

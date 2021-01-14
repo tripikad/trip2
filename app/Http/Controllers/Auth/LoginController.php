@@ -68,7 +68,7 @@ class LoginController extends Controller
             ->with(
                 'content',
                 collect()->push(
-                    component('Form2')
+                    component('FormComponent')
                         ->with('route', route('login.submit'))
                         ->with(
                             'fields',

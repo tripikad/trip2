@@ -76,7 +76,7 @@ class RegistrationController extends Controller
             ->with(
                 'content',
                 collect()->push(
-                    component('Form2')
+                    component('FormComponent')
                         ->with('route', route('register.submit'))
                         ->with(
                             'fields',

@@ -165,7 +165,7 @@ class InternalController extends Controller
                 collect()
                     ->push(component('Title')->with('title', trans('content.internal.create.title')))
                     ->push(
-                        component('Form2')
+                        component('FormComponent')
                             ->with('route', route('internal.store'))
                             ->with(
                                 'fields',
@@ -248,7 +248,7 @@ class InternalController extends Controller
                 collect()
                     ->push(component('Title')->with('title', trans('content.internal.edit.title')))
                     ->push(
-                        component('Form2')
+                        component('FormComponent')
                             ->with('route', route('internal.update', [$internal]))
                             ->with(
                                 'fields',

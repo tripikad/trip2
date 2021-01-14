@@ -312,7 +312,7 @@ class PhotoController extends Controller
                 collect()
                     ->push(component('Title')->with('title', trans('content.photo.create.title')))
                     ->push(
-                        component('Form2')
+                        component('FormComponent')
                             ->with('route', route('photo.store'))
                             ->with('files', true)
                             ->with(

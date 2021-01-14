@@ -130,7 +130,7 @@ class FlightNewsletterSubscribe
                     'content',
                     collect()
                         ->push(
-                            component('Form2')
+                            component('FormComponent')
                                 ->with('route', route('newsletter.subscribe', [$newsletter_type]))
                                 ->with('id', 'FlightNewsletterSubscribeForm')
                                 ->with('fields', $fields)

@@ -11,7 +11,7 @@ class MessageCreateForm
             ->with(
                 'content',
                 collect()->push(
-                    component('Form2')
+                    component('FormComponent')
                         ->with('route', route('message.store', [$user, $user_with]))
                         ->with(
                             'fields',

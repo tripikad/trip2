@@ -346,7 +346,7 @@ class ForumController extends Controller
                 collect()
                     ->push(component('Title')->with('title', trans('content.forum.create.title')))
                     ->push(
-                        component('Form2')
+                        component('FormComponent')
                             ->with('id', 'ForumCreateForm')
                             ->with('route', route('forum.store'))
                             ->with(
@@ -500,7 +500,7 @@ class ForumController extends Controller
                 collect()
                     ->push(component('Title')->with('title', trans('content.forum.edit.title')))
                     ->push(
-                        component('Form2')
+                        component('FormComponent')
                             ->with('route', route('forum.update', [$forum]))
                             ->with('method', 'PUT')
                             ->with(

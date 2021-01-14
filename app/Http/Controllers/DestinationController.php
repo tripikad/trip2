@@ -199,7 +199,7 @@ class DestinationController extends Controller
                 collect()
                     ->push(component('Title')->with('title', trans('content.destionation.edit.title')))
                     ->push(
-                        component('Form2')
+                        component('FormComponent')
                             ->with('route', route('destination.update', [$destination]))
                             ->with(
                                 'fields',

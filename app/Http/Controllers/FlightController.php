@@ -172,7 +172,7 @@ class FlightController extends Controller
                                     )
                                     ->pushWhen(
                                         $loggedUser && $loggedUser->hasRole('admin'),
-                                        component('Form2')
+                                        component('FormComponent')
                                             ->with(
                                                 'route',
                                                 route('content.status', [$flight->type, $flight, 1 - $flight->status])
@@ -289,7 +289,7 @@ class FlightController extends Controller
                 collect()
                     ->push(component('Title')->with('title', trans('content.flight.create.title')))
                     ->push(
-                        component('Form2')
+                        component('FormComponent')
                             ->with('route', route('flight.store'))
                             ->with(
                                 'fields',
@@ -405,7 +405,7 @@ class FlightController extends Controller
                 collect()
                     ->push(component('Title')->with('title', trans('content.flight.edit.title')))
                     ->push(
-                        component('Form2')
+                        component('FormComponent')
                             ->with('route', route('flight.update', [$flight]))
                             ->with('method', 'PUT')
                             ->with(
