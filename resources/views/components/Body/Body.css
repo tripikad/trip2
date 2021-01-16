@@ -120,7 +120,6 @@
 .Body th,
 .Body td {
     padding: $padding-xs;
-    border-right: 1px solid #;
 }
 
 .Body hr {
@@ -130,7 +129,7 @@
     margin: $margin-md 0;
 }
 
-.Body > .FlightCalendar {
+.Body > .FlightTimetable {
     margin-bottom: $margin-md;
 }
 

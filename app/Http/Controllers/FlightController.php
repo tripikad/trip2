@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\FlightCalendarService;
+use Illuminate\Http\JsonResponse;
 use Log;
-use Request;
+use Illuminate\Http\Request;
 use App\Image;
 use App\Topic;
 use App\Content;
@@ -485,5 +487,39 @@ class FlightController extends Controller
                     'title' => $flight->title
                 ])
             );
+    }
+
+    /**
+     * @param FlightCalendarService $service
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function getMonthData(FlightCalendarService $service, Request $request) : JsonResponse
+    {
+        $startDate = $request->get('startDate');
+        $endDate = $request->get('endDate');
+        $startCode = $request->get('startCode');
+        $endCode = $request->get('endCode');
+
+        //todo: validate?
+
+        return $service->getMonthData($startDate, $endDate, $startCode, $endCode);
+    }
+
+    /**
+     * @param FlightCalendarService $service
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function getDayData(FlightCalendarService $service, Request $request) : JsonResponse
+    {
+        $startDate = $request->get('startDate');
+        $startDate = $request->get('endDate');
+        $startCode = $request->get('startCode');
+        $endCode = $request->get('endCode');
+
+        return response()->json([
+            'success' => true
+        ]);
     }
 }

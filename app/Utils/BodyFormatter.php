@@ -143,7 +143,7 @@ class BodyFormatter
         return $this;
     }
 
-    public function calendar()
+    public function timetable()
     {
         $yamlPattern = '/(\[\[[\r\n].*[\r\n]\]\])/sU';
 
@@ -163,9 +163,38 @@ class BodyFormatter
                 if ($months = Yaml::parse($cleanedMatch)) {
                     $this->body = str_replace(
                         $match,
-                        component('FlightCalendar')
+                        component('FlightTimetable')
                             ->with('months', $months)
                             ->render(),
+                        $this->body
+                    );
+                }
+            }
+        }
+
+        return $this;
+    }
+
+    public function calendar()
+    {
+        $pollsPattern = '/\[\[calendar:([0-9]+)\]\]/';
+
+        if (preg_match_all($pollsPattern, $this->body, $matches)) {
+            if (isset($matches[1]) && $matches[1] && is_array($matches[1])) {
+                foreach ($matches[1] as $poll_id) {
+                    $id = intval($poll_id);
+
+                    $component = "
+<flight-calendar 
+    start-date='2021-09-43'
+    end-date='2021-09-43'
+    start-code='TLN'
+    end-code='HLI'>
+</flight-calendar>";
+
+                    $this->body = str_replace(
+                        "[[calendar:{$id}]]",
+                        $component,
                         $this->body
                     );
                 }

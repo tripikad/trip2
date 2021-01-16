@@ -62,6 +62,16 @@ Route::put('flight/{id}/update', 'FlightController@update')
     ->name('flight.update')
     ->middleware('role:admin');
 
+//flightcalendar API
+
+Route::get('flightcalendar/month', 'FlightController@getMonthData')
+    ->name('flightcalendar.month')
+    ->middleware('role:admin');
+
+Route::get('flightcalendar/day', 'FlightController@getDayData')
+    ->name('flightcalendar.day')
+    ->middleware('role:admin');
+
 // Travelmates
 
 Route::get('reisikaaslased', 'TravelmateController@index')->name('travelmate.index');
