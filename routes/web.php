@@ -66,11 +66,11 @@ Route::put('flight/{id}/update', 'FlightController@update')
 
 Route::get('flightcalendar/month', 'FlightController@getMonthData')
     ->name('flightcalendar.month')
-    ->middleware('role:admin');
+    ->middleware('throttle:60,1');
 
 Route::get('flightcalendar/day', 'FlightController@getDayData')
     ->name('flightcalendar.day')
-    ->middleware('role:admin');
+    ->middleware('throttle:60,1');
 
 // Travelmates
 

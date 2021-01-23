@@ -5,6 +5,8 @@ import moment from 'moment'
 import VueDatePicker from '@mathieustan/vue-datepicker';
 import '@mathieustan/vue-datepicker/dist/vue-datepicker.min.css';
 
+moment.locale('et');
+
 // Require CSS files
 
 require.context('./styles', true, /\.css$/)

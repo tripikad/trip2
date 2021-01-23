@@ -496,14 +496,14 @@ class FlightController extends Controller
      */
     public function getMonthData(FlightCalendarService $service, Request $request) : JsonResponse
     {
-        $startDate = $request->get('startDate');
-        $endDate = $request->get('endDate');
+        $startMonth = $request->get('startMonth');
+        $endMonth = $request->get('endMonth');
         $startCode = $request->get('startCode');
         $endCode = $request->get('endCode');
 
         //todo: validate?
 
-        return $service->getMonthData($startDate, $endDate, $startCode, $endCode);
+        return $service->getMonthData($startMonth, $endMonth, $startCode, $endCode);
     }
 
     /**

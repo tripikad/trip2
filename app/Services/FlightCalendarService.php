@@ -23,15 +23,15 @@ class FlightCalendarService
     }
 
     /**
-     * @param string $startDate
-     * @param string $endDate
+     * @param string $startMonth
+     * @param string $endMonth
      * @param string $startCode
      * @param string $endCode
      * @return JsonResponse
      */
-    public function getMonthData(string $startDate, string $endDate, string $startCode, string $endCode) : JsonResponse
+    public function getMonthData(string $startMonth, string $endMonth, string $startCode, string $endCode) : JsonResponse
     {
-        $url = self::ENDPOINT . 'browsequotes/v1.0/EE/EUR/ET/' . $startCode . '/' . $endCode . '/' . $startDate . '/' . $endDate;
+        $url = self::ENDPOINT . 'browsequotes/v1.0/EE/EUR/ET/' . $startCode . '/' . $endCode . '/' . $startMonth . '/' . $endMonth;
         $url .= '/?apiKey=' .env('FLIGHTCALENDAR_API_KEY');
 
         try {
@@ -46,14 +46,61 @@ class FlightCalendarService
             $status = $request ? $request->getStatusCode() : 500;
 
             if ($response && $status === 200) {
-                //$res = json_decode($response);
+                //$res = json_decode($response, true);
 
                 return response()->json([
-                    'status' => 'success',
-                    'items' => [
-                        '2021-01-10' => 142,
-                        '2021-01-11' => 455,
-                        '2021-01-17' => 275,
+                    'activeDate' => '2021-02-07',
+                    'data' => [
+                        '2021-01-28' => [
+                            'price' => 234,
+                            'dates' => [
+                                '2021-02-01' => 233,
+                                '2021-02-05' => 245,
+                                '2021-02-07' => 255,
+                            ]
+                        ],
+                        '2021-02-04' => [
+                            'price' => 223,
+                            'dates' => [
+                                '2021-02-06' => 233,
+                                '2021-02-08' => 245,
+                                '2021-02-12' => 223,
+                            ]
+                        ],
+                        '2021-02-05' => [
+                            'price' => 255,
+                            'dates' => [
+                                '2021-02-07' => 255,
+                                '2021-02-08' => 245,
+                                '2021-02-13' => 223,
+                            ]
+                        ],
+                        '2021-02-07' => [
+                            'price' => 212,
+                            'dates' => [
+                                '2021-02-11' => 278,
+                                '2021-02-12' => 245,
+                                '2021-02-21' => 212,
+                                '2021-02-26' => 267,
+                            ]
+                        ],
+                        '2021-02-19' => [
+                            'price' => 321,
+                            'dates' => [
+                                '2021-02-24' => 278,
+                                '2021-03-03' => 378,
+                                '2021-03-08' => 345,
+                                '2021-03-12' => 321,
+                            ]
+                        ],
+                        '2021-04-14' => [
+                            'price' => 223,
+                            'dates' => [
+                                '2021-04-17' => 233,
+                                '2021-04-20' => 245,
+                                '2021-04-29' => 223,
+                            ]
+                        ],
                     ]
                 ]);
             }

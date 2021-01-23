@@ -186,10 +186,10 @@ class BodyFormatter
 
                     $component = "
 <flight-calendar 
-    start-date='2021-09-43'
-    end-date='2021-09-43'
+    start-month='2021-02'
+    end-month='2021-03'
     start-code='TLN'
-    end-code='HLI'>
+    end-code='BKK'>
 </flight-calendar>";
 
                     $this->body = str_replace(

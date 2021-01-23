@@ -2,38 +2,156 @@
 
 .FlightCalendar {
     display: flex;
+    flex-direction: column;
     width: 100%;
+    font-family: $font-family-sailec;
+    padding: $spacer 0;
+
+    &__nav {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+
+        &__btn {
+            max-width: 40px;
+            min-height: 30px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+
+            button {
+                width: 100%;
+                cursor: pointer;
+            }
+        }
+    }
 
     &__month_name {
         font-weight: bold;
+        width: 100%;
+        text-align: center;
     }
 
     table {
         width: 100%;
         border-collapse: collapse;
         border-spacing: 0;
+        border: 0;
 
+        tr, th {
+            border: 0;
+        }
+
+        th {
+            background: none;
+            text-align: center;
+            font-size: 14px;
+        }
     }
 
     &__day {
-        background: #fff;
-        border: 1px solid #e4e7e7;
-        color: #cacccd;
+        vertical-align: middle;
+        text-align: center;
+        align-items: center;
+        background: $white;
+        border: 1px solid $gray-light;
+        color: $gray;
         width: calc(100% / 7);
         height: 60px;
         cursor: pointer;
+        position: relative;
+        font-size: 14px;
+        line-height: 14px;
+        font-weight: bold;
 
         &:hover {
-            background: #e4e7e7;
+            background: $gray-light;
+            color: $white;
+        }
+
+        &--no-date {
+            border: 0;
+            cursor: default;
+
+            &:hover {
+                background: none;
+            }
+        }
+
+        &--empty {
+            cursor: default;
+
+            &:hover {
+                background: $white;
+            }
         }
 
         &--selected {
-            background: #ff0b6d;
-            color: #fff;
+            background: $gray-light;
+            color: $white;
+            font-weight: bold;
+
+            &:hover {
+                background: $gray-light;
+            }
         }
 
         &--in-range {
-            background: rgba(255,11,109,.05);
+            background: $gray-lighter;
+
+            &:hover {
+                background: $gray-lighter;
+            }
+        }
+    }
+
+    &__day__number {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        font-size: 12px;
+        line-height: 12px;
+        color: $gray;
+        font-weight: normal;
+    }
+
+    &__book-btn {
+        align-items: center;
+        background: $green;
+        border-radius: 3px;
+        display: flex;
+        justify-content: center;
+        padding: $spacer calc(#{$spacer} * 3);
+        text-align: center;
+        cursor: pointer;
+        max-width: 250px;
+        width: 100%;
+        margin-top: $spacer;
+
+        &:hover {
+            background: $green-hover;
+        }
+
+        a, a:link {
+            color: $white;
+            text-decoration: none;
+
+            &:hover {
+                color: $white;
+            }
+        }
+    }
+
+    &__total-price {
+        span {
+            font-weight: bold;
+            color: $orange;
+        }
+    }
+
+    &__selected-dates {
+        span {
+            font-weight: bold;
         }
     }
 }
