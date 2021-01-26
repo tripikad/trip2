@@ -177,26 +177,30 @@ class BodyFormatter
 
     public function calendar()
     {
-        $pollsPattern = '/\[\[calendar:([0-9]+)\]\]/';
+        $calendarPattern = '/\[\[calendar:(\d{4}-\d{2};\d{4}-\d{2};[A-Za-z_-]+;[A-Za-z_-]+)\]\]/';
 
-        if (preg_match_all($pollsPattern, $this->body, $matches)) {
+        if (preg_match_all($calendarPattern, $this->body, $matches)) {
             if (isset($matches[1]) && $matches[1] && is_array($matches[1])) {
-                foreach ($matches[1] as $poll_id) {
-                    $id = intval($poll_id);
+                foreach ($matches[1] as $calData) {
+                    $data = explode(';', $calData);
+                    if ($data && is_array($data)) {
+                        $startMonth = $data[0];
+                        $endMonth = $data[1];
+                        $startCode = $data[2];
+                        $endCode = $data[3];
 
-                    $component = "
-<flight-calendar 
-    start-month='2021-02'
-    end-month='2021-03'
-    start-code='TLN'
-    end-code='BKK'>
-</flight-calendar>";
+                        $component = component('FlightCalendar')
+                            ->with('start-month', $startMonth)
+                            ->with('end-month', $endMonth)
+                            ->with('start-code', $startCode)
+                            ->with('end-code', $endCode);
 
-                    $this->body = str_replace(
-                        "[[calendar:{$id}]]",
-                        $component,
-                        $this->body
-                    );
+                        $this->body = str_replace(
+                            "[[calendar:{$calData}]]",
+                            $component,
+                            $this->body
+                        );
+                    }
                 }
             }
         }
