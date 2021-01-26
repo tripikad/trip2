@@ -55,7 +55,7 @@
         </div>
 
         <div class="FlightCalendar__book-btn" v-if="selectedStartPrice && selectedEndPrice">
-            <a href="#" target="_blank">
+            <a :href="getLinkSrc()" target="_blank">
                 Vaata pakkumist
             </a>
         </div>
@@ -176,6 +176,27 @@ export default {
             }
 
             return null
+        },
+        getLinkSrc: function() {
+            return 'https://www.skyscanner.net/g/referrals/v1/flights/day-view' +
+                '?adultsv2=1' +
+                '&associateid=API_B2B_19043_00001' +
+                '&cabinclass=economy' +
+                '&childrenv2=' +
+                '&currency=EUR' +
+                '&destination=' + this.endCode +
+                '&inboundDate=' + this.$moment(this.selectedEndDate, 'YYYY-MM-DD', true).format('YYYYMMDD') +
+                '&inboundaltsenabled=false' +
+                '&locale=en-GB' +
+                '&market=UK' +
+                '&origin=' + this.startCode +
+                '&outboundDate=' + this.$moment(this.selectedStartDate, 'YYYY-MM-DD', true).format('YYYYMMDD') +
+                '&outboundaltsenabled=false' +
+                '&preferdirects=false' +
+                '&preferflexible=false' +
+                '&rtn=1' +
+                '&showDirectDays=false' +
+                '&sortby=best'
         },
         setMonthDates: function() {
             if (!this.activeDate)
