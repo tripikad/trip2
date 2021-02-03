@@ -132,18 +132,26 @@ export default {
         },
         prevMonth: function() {
             this.activeDate = this.$moment(this.activeDate, 'YYYY-MM-DD', true).subtract(1, 'month').format('YYYY-MM-DD')
+            this.activeMonth = this.$moment(this.activeDate, 'YYYY-MM-DD', true).format('YYYY-MM')
+            if (this.$moment(this.activeDate, 'YYYY-MM-DD', true).format('YYYY-MM') < this.firstMonth) {
+                this.firstMonth = this.$moment(this.activeDate, 'YYYY-MM-DD', true).format('YYYY-MM')
+                this.requestStartMonth = this.firstMonth
+                this.requestEndMonth = this.firstMonth
+                this.getMonthData()
+            }
         },
         nextMonth: function() {
             this.activeDate = this.$moment(this.activeDate, 'YYYY-MM-DD', true).add(1, 'month').format('YYYY-MM-DD')
+            this.activeMonth = this.$moment(this.activeDate, 'YYYY-MM-DD', true).format('YYYY-MM')
             if (this.$moment(this.activeDate, 'YYYY-MM-DD', true).format('YYYY-MM') > this.lastMonth) {
-                this.lastMonth = this.activeDate
                 this.requestStartMonth = this.lastMonth
+                this.lastMonth = this.$moment(this.activeDate, 'YYYY-MM-DD', true).format('YYYY-MM')
                 this.requestEndMonth = this.lastMonth
                 this.getMonthData()
             }
         },
         showPrevMonthBtn: function() {
-            return this.activeDate > this.$moment(new Date(), 'YYYY-MM-DD', true).format('YYYY-MM-DD')
+            return this.activeMonth > this.$moment().format('YYYY-MM')
         },
         getDatePrice: function(date) {
             if (this.selectedStartDate) {
@@ -238,10 +246,11 @@ export default {
             this.$http.get(url)
                 .then(res => {
                     const data = res.data
-                    if (!this.activeDate)
+                    if (!this.activeDate) {
                         this.activeDate = data.activeDate
+                        this.activeMonth = this.$moment(this.activeDate, 'YYYY-MM-DD', true).format('YYYY-MM')
+                    }
 
-                    this.activeMonth = this.$moment(this.activeDate, 'YYYY-MM-DD', true).format('YYYY-MM')
                     this.data = Object.assign( {}, data.data, this.data);
                     this.loading = false
                 })
@@ -249,6 +258,23 @@ export default {
                     //console.log(error.message, 'error')
                 });
         },
+        async getSelectedDatesData() {
+            let url = '/flightcalendar/getLivePrice'
+            url += '?startDate=' + this.selectedStartDate
+            url += '&endDate=' + this.selectedEndDate
+            url += '&startCode=' + this.startCode
+            url += '&endCode=' + this.endCode
+
+            await this.$http.get(url)
+                .then(res => {
+                    const data = res.data
+
+                    //console.log(data, 'result')
+                })
+                .catch(error => {
+                    console.log(error.message, 'error2')
+                });
+        }
     },
     watch: {
         activeDate: function (newActiveDate, oldActiveDate) {

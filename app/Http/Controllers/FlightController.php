@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\FlightCalendarService;
+use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Log;
 use Illuminate\Http\Request;
@@ -492,34 +493,50 @@ class FlightController extends Controller
     /**
      * @param FlightCalendarService $service
      * @param Request $request
-     * @return JsonResponse
+     * @return JsonResponse|null
      */
-    public function getMonthData(FlightCalendarService $service, Request $request) : JsonResponse
+    public function getMonthData(FlightCalendarService $service, Request $request) : ?JsonResponse
     {
         $startMonth = $request->get('startMonth');
         $endMonth = $request->get('endMonth');
         $startCode = $request->get('startCode');
         $endCode = $request->get('endCode');
 
-        //todo: validate?
+        if ($startMonth && $endMonth && $startCode && $endCode) {
+            $startMonth = Carbon::createFromFormat('Y-m-d', $startMonth . '-01');
+            $endMonth = Carbon::createFromFormat('Y-m-d', $endMonth . '-01');
 
-        return $service->getMonthData($startMonth, $endMonth, $startCode, $endCode);
+            if ($startMonth->isValid() && $endMonth->isValid() && $startMonth <= $endMonth)
+                return $service->getMonthData($startMonth, $endMonth, $startCode, $endCode);
+
+            return null;
+        }
+
+        return null;
     }
 
     /**
      * @param FlightCalendarService $service
      * @param Request $request
-     * @return JsonResponse
+     * @return JsonResponse|null
      */
-    public function getDayData(FlightCalendarService $service, Request $request) : JsonResponse
+    public function getLivePrice(FlightCalendarService $service, Request $request) : ?JsonResponse
     {
         $startDate = $request->get('startDate');
-        $startDate = $request->get('endDate');
+        $endDate = $request->get('endDate');
         $startCode = $request->get('startCode');
         $endCode = $request->get('endCode');
 
-        return response()->json([
-            'success' => true
-        ]);
+        if ($startDate && $endDate && $startCode && $endCode) {
+            $startDate = Carbon::createFromFormat('Y-m-d', $startDate);
+            $endDate = Carbon::createFromFormat('Y-m-d', $endDate);
+
+            if ($startDate->isValid() && $endDate->isValid() && $startDate <= $endDate)
+                return $service->getLivePrice($startDate, $endDate, $startCode, $endCode);
+
+            return null;
+        }
+
+        return null;
     }
 }
