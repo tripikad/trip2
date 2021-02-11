@@ -127,6 +127,9 @@ export default {
             this.selectedEndPrice = undefined
         },
         onDateClick: function(date) {
+            this.price = undefined
+            this.hasError = undefined
+
             if (this.selectedStartDate && this.selectedEndDate) {
                 this.resetDates()
                 this.selectedStartDate = date
