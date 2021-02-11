@@ -2,10 +2,34 @@
 
 .FlightCalendar {
     display: flex;
-    flex-direction: column;
     width: 100%;
-    font-family: $font-family-sailec;
-    padding: $spacer 0;
+    flex-direction: column;
+    position: relative;
+
+    &__loading_container {
+        display: flex;
+        height: 100%;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        z-index: 100;
+        position: absolute;
+    }
+
+    &__loading {
+        background: #fff;
+        opacity: .3;
+        user-select: none;
+        pointer-events: none;
+    }
+
+    &__container {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        font-family: $font-family-sailec;
+        padding: $spacer 0;
+    }
 
     &__nav {
         display: flex;
@@ -65,8 +89,7 @@
         font-weight: bold;
 
         &:hover {
-            background: $gray-light;
-            color: $white;
+            background: $gray-lighter;
         }
 
         &--no-date {

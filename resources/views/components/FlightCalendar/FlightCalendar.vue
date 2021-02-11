@@ -1,23 +1,27 @@
 <template>
-    <div class="FlightCalendar" v-if="!loading">
-        <div class="FlightCalendar__nav">
-            <div class="FlightCalendar__nav__btn" v-if="showPrevMonthBtn()">
-                <button @click="prevMonth">
-                    <
-                </button>
-            </div>
-            <div class="FlightCalendar__month_name">
-                <span>{{$moment(activeDate, 'YYYY-MM-DD', true).format('MMMM YYYY')}}</span>
-            </div>
-            <div class="FlightCalendar__nav__btn FlightCalendar__nav__btn--right">
-                <button @click="nextMonth">
-                    >
-                </button>
-            </div>
+    <div class="FlightCalendar">
+        <div class="FlightCalendar__loading_container" v-if="loading">
+            <Loading :show="loading"/>
         </div>
+        <div class="FlightCalendar_container" :class="{ FlightCalendar__loading: loading }" v-if="activeDate">
+            <div class="FlightCalendar__nav">
+                <div class="FlightCalendar__nav__btn" v-if="showPrevMonthBtn()">
+                    <button @click="prevMonth">
+                        <
+                    </button>
+                </div>
+                <div class="FlightCalendar__month_name">
+                    <span>{{$moment(activeDate, 'YYYY-MM-DD', true).format('MMMM YYYY')}}</span>
+                </div>
+                <div class="FlightCalendar__nav__btn FlightCalendar__nav__btn--right">
+                    <button @click="nextMonth">
+                        >
+                    </button>
+                </div>
+            </div>
 
-        <table>
-            <thead>
+            <table>
+                <thead>
                 <tr>
                     <th>E</th>
                     <th>T</th>
@@ -27,14 +31,14 @@
                     <th>L</th>
                     <th>P</th>
                 </tr>
-            </thead>
-            <tbody>
+                </thead>
+                <tbody>
                 <tr v-for="(week, index) in monthDates" :key="index">
                     <td v-for="(date, index2) in week" :key="index2"
                         class="FlightCalendar__day"
                         :class="{
                             'FlightCalendar__day--no-date': !date,
-                            'FlightCalendar__day--empty': !getDatePrice(date),
+                            'FlightCalendar__day--empty': date < today,
                             'FlightCalendar__day--selected': date === selectedStartDate || date === selectedEndDate,
                             'FlightCalendar__day--in-range': date > selectedStartDate && date < selectedEndDate
                         }"
@@ -44,26 +48,32 @@
                         {{getDatePrice(date)}}
                     </td>
                 </tr>
-            </tbody>
-        </table>
+                </tbody>
+            </table>
 
-        <div class="FlightCalendar__total-price" v-if="selectedStartPrice && selectedEndPrice">
-            Hind kokku: <span>{{getTotalPrice()}}€</span>
-        </div>
-        <div class="FlightCalendar__selected-dates" v-if="selectedStartDate && selectedEndDate">
-            Kuupäevad: <span>{{this.$moment(this.selectedStartDate, 'YYYY-MM-DD', true).format('DD.MM.YYYY')}} - {{this.$moment(this.selectedEndDate, 'YYYY-MM-DD', true).format('DD.MM.YYYY')}}</span>
-        </div>
+            <div class="FlightCalendar__total-price" v-if="price">
+                Hind: <span>{{price}}€</span>
+            </div>
+            <div class="FlightCalendar__total-price" v-if="!price && hasError">
+                Hind: <span>Hinda ei leitud</span>
+            </div>
+            <div class="FlightCalendar__selected-dates" v-if="selectedStartDate">
+                Kuupäevad: <span>{{this.$moment(this.selectedStartDate, 'YYYY-MM-DD', true).format('DD.MM.YYYY')}} - {{this.selectedEndDate && this.$moment(this.selectedEndDate, 'YYYY-MM-DD', true).format('DD.MM.YYYY')}}</span>
+            </div>
 
-        <div class="FlightCalendar__book-btn" v-if="selectedStartPrice && selectedEndPrice">
-            <a :href="getLinkSrc()" target="_blank">
-                Vaata pakkumist
-            </a>
+            <div class="FlightCalendar__book-btn" v-if="selectedStartDate && selectedEndDate">
+                <a :href="getLinkSrc()" target="_blank">
+                    Vaata pakkumist
+                </a>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
+import Loading from '../Loading/Loading.vue';
 export default {
+    components: {Loading},
     props: {
         startMonth: {
             type: String,
@@ -91,6 +101,7 @@ export default {
         }
 
         return {
+            today: this.$moment(new Date(), 'YYYY-MM-DD', true).format('YYYY-MM-DD'),
             loading: true,
             firstMonth: start,
             lastMonth: end,
@@ -103,7 +114,9 @@ export default {
             selectedEndDate: undefined,
             selectedStartPrice: undefined,
             selectedEndPrice: undefined,
-            data: undefined
+            data: undefined,
+            price: undefined,
+            hasError: false
         }
     },
     methods: {
@@ -114,19 +127,32 @@ export default {
             this.selectedEndPrice = undefined
         },
         onDateClick: function(date) {
+            if (this.selectedStartDate && this.selectedEndDate) {
+                this.resetDates()
+                this.selectedStartDate = date
+                if (this.data[date]) {
+                    this.selectedStartPrice = this.data[date]['price']
+                }
+                return
+            }
+
             if (this.selectedStartDate && this.selectedStartDate === date) {
                 this.resetDates()
             } else {
                 if (!this.selectedStartDate) {
+                    this.selectedStartDate = date
                     if (this.data[date]) {
-                        this.selectedStartDate = date
                         this.selectedStartPrice = this.data[date]['price']
                     }
                 } else {
-                    if (this.data[this.selectedStartDate]['dates'][date]) {
+                    if (date < this.selectedStartDate) {
+                        this.selectedEndDate = this.selectedStartDate;
+                        this.selectedStartDate = date;
+                    } else {
                         this.selectedEndDate = date
-                        this.selectedEndPrice = this.data[this.selectedStartDate]['dates'][date]
                     }
+
+                    this.getSelectedDatesData()
                 }
             }
         },
@@ -155,7 +181,7 @@ export default {
         },
         getDatePrice: function(date) {
             if (this.selectedStartDate) {
-                if (this.selectedStartDate === date) {
+                if (this.selectedStartDate === date && this.data[date]) {
                     return this.data[date]['price'] + '€'
                 }
 
@@ -178,13 +204,13 @@ export default {
 
             return ''
         },
-        getTotalPrice: function() {
+        /*getTotalPrice: function() {
             if (this.selectedStartPrice && this.selectedEndPrice) {
                 return this.selectedEndPrice > this.selectedStartPrice ? this.selectedEndPrice : this.selectedStartPrice
             }
 
             return null
-        },
+        },*/
         getLinkSrc: function() {
             return 'https://www.skyscanner.net/g/referrals/v1/flights/day-view' +
                 '?adultsv2=1' +
@@ -237,6 +263,7 @@ export default {
             this.monthDates = weeks
         },
         getMonthData: function() {
+            this.loading = true;
             let url = '/flightcalendar/month'
             url += '?startMonth=' + this.requestStartMonth
             url += '&endMonth=' + this.requestEndMonth
@@ -255,10 +282,12 @@ export default {
                     this.loading = false
                 })
                 .catch(error => {
-                    //console.log(error.message, 'error')
+                    this.loading = false
                 });
         },
         async getSelectedDatesData() {
+            this.loading = true
+            this.price = undefined
             let url = '/flightcalendar/getLivePrice'
             url += '?startDate=' + this.selectedStartDate
             url += '&endDate=' + this.selectedEndDate
@@ -267,12 +296,17 @@ export default {
 
             await this.$http.get(url)
                 .then(res => {
-                    const data = res.data
+                    const price = res.data
+                    if (price)
+                        this.price = price
+                    else
+                        this.hasError = true
 
-                    //console.log(data, 'result')
+                    this.loading = false
                 })
                 .catch(error => {
-                    console.log(error.message, 'error2')
+                    this.loading = false
+                    this.hasError = true
                 });
         }
     },

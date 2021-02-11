@@ -107,7 +107,7 @@ class FlightCalendarService
             }
 
             $activeDate = array_key_first($data);
-            $minPrice = (int) $data[$activeDate]['price'];
+            /*$minPrice = (int) $data[$activeDate]['price'];
             foreach ($data as $dateString => $values) {
                 if ($activeDate !== $dateString) {
                     if ($minPrice > (int) $data[$dateString]['price']) {
@@ -115,7 +115,7 @@ class FlightCalendarService
                         $activeDate = $dateString;
                     }
                 }
-            }
+            }*/
 
             $response['activeDate'] = $activeDate;
             $response['data'] = $data;
