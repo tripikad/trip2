@@ -130,6 +130,9 @@ export default {
             this.price = undefined
             this.hasError = undefined
 
+            if (date < this.today)
+                return false
+
             if (this.selectedStartDate && this.selectedEndDate) {
                 this.resetDates()
                 this.selectedStartDate = date

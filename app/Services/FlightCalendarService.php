@@ -195,20 +195,24 @@ class FlightCalendarService
 
             if ($response && $status === 200) {
                 $result = json_decode($response, true);
-                if ($result['Status'] === 'UpdatesComplete') {
-                    if (!isset($result['Itineraries'][0])) {
-                        return false;
-                    }
-
-                    $itinerary = $result['Itineraries'][0];
-                    return [
-                        'url' => $itinerary['BookingDetailsLink']['Uri'],
-                        'body' => $itinerary['BookingDetailsLink']['Body']
-                    ];
-                } else {
+                if ($result['Status'] === 'UpdatesPending') {
                     return $this->_requestBookingDetailsData($locationUrl);
+                } else {
+                    if ($result['Status'] === 'UpdatesComplete') {
+                        if (!isset($result['Itineraries'][0])) {
+                            return false;
+                        }
+
+                        $itinerary = $result['Itineraries'][0];
+                        return [
+                            'url' => $itinerary['BookingDetailsLink']['Uri'],
+                            'body' => $itinerary['BookingDetailsLink']['Body']
+                        ];
+                    }
                 }
-            } else return false;
+            }
+
+            return false;
 
         } catch (ClientException $e) {
             return false;
