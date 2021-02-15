@@ -196,6 +196,7 @@ class FlightCalendarService
             if ($response && $status === 200) {
                 $result = json_decode($response, true);
                 if ($result['Status'] === 'UpdatesPending') {
+                    sleep(1);
                     return $this->_requestBookingDetailsData($locationUrl);
                 } else {
                     if ($result['Status'] === 'UpdatesComplete') {
