@@ -8,16 +8,16 @@
             >
                 <input type="hidden" name="_token" :value="csrf">
 
-                <div class="VacationPackageForm__field">
-                    <form-select
-                        v-model="fields.destination"
-                        title="Sihtkoht"
-                        name="destination"
-                        :options="destinations"/>
-                </div>
-
                 <div class="row VacationPackageForm__field">
-                    <div class="col-md-6 col-12">
+                    <div class="col-md-4 col-12">
+                        <form-select
+                            v-model="fields.destination"
+                            title="Sihtkoht"
+                            name="destination"
+                            :options="destinations"
+                            errors=""/>
+                    </div>
+                    <div class="col-md-4 col-12">
                         <form-datepicker
                             v-model="fields.startDate"
                             title="Algus"
@@ -28,7 +28,7 @@
                         </form-datepicker>
                     </div>
 
-                    <div class="col-md-6 col-12">
+                    <div class="col-md-4 col-12">
                         <form-datepicker
                             v-model="fields.endDate"
                             title="Lõpp"
@@ -52,61 +52,29 @@
                     Info
                 </div>
 
-                <div class="VacationPackageForm__field">
-                    <form-text-editor
-                        v-model="fields.description"
-                        title="Kirjeldus"
-                        name="description"
-                        class="VacationPackageForm__editor"
-                        errors="">
-                    </form-text-editor>
+                <div class="VacationPackageForm__tags">
+                    <div class="VacationPackageForm__tag" v-for="(tag, index) in tags"
+                         :class="{['VacationPackageForm__tag--active']: activeTab === tag.value}"
+                         @click="setActiveTab(tag.value)">
+                        {{tag.name}}
+                    </div>
                 </div>
 
-                <div class="VacationPackageForm__field">
+                <div class="VacationPackageForm__field" v-for="(tag, index) in tags"
+                     :class="{['VacationPackageForm__field--hidden']: activeTab !== tag.value}">
                     <form-text-editor
-                        v-model="fields.accommodation"
-                        title="Majutuse info"
-                        name="accommodation"
-                        errors="">
-                    </form-text-editor>
+                        v-model="fields[tag.value]"
+                        :name="tag.value"
+                        class="VacationPackageForm__editor"/>
                 </div>
 
-                <div class="VacationPackageForm__field">
-                    <form-text-editor
-                        v-model="fields.included"
-                        title="Pakkumine sisaldab"
-                        name="included"
-                        errors="">
-                    </form-text-editor>
-                </div>
-
-<!--                <div class="VacationPackageForm__field">
-                    <form-text-editor
-                        title="Pakkumine ei sisalda"
-                        name="description"
-                        value="{{ old('description') }}"
-                        errors="">
-                    </form-text-editor>
-                </div>
-
-                <div class="VacationPackageForm__field">
-                    <form-text-editor
-                        title="Lisatasu eest"
-                        name="description"
-                        errors="">
-                    </form-text-editor>
-                </div>
-
-                <div class="VacationPackageForm__field">
-                    <form-text-editor
-                        title="Lisainfo"
-                        name="description"
-                        errors="">
-                    </form-text-editor>
-                </div>-->
-
-                <div class="VacationPackageForm__submit-button">
-                    <button type="button" title="Lisa"/>
+                <div class="VacationPackageForm__buttons">
+                    <div class="Button Button--large Button--gray VacationPackageForm__back-button">
+                        <div class="Button__title">Tagasi</div>
+                    </div>
+                    <div class="Button Button--large VacationPackageForm__submit-button">
+                        <div class="Button__title">Salvesta</div>
+                    </div>
                 </div>
             </form>
 
@@ -140,6 +108,7 @@ export default {
     data() {
         return {
             csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+            activeTab: 'description',
             loading: false,
             destinations: [
                 {
@@ -153,6 +122,32 @@ export default {
                 {
                     id: 3,
                     name: 'Türgi'
+                }
+            ],
+            tags: [
+                {
+                    name: 'Kirjeldus',
+                    value: 'description'
+                },
+                {
+                    name: 'Majutus',
+                    value: 'accommodation'
+                },
+                {
+                    name: 'Sisaldab',
+                    value: 'included'
+                },
+                {
+                    name: 'Ei sisalda',
+                    value: 'excluded'
+                },
+                {
+                    name: 'Lisatasu eest',
+                    value: 'extra_fee'
+                },
+                {
+                    name: 'Lisainfo',
+                    value: 'extra_info'
                 }
             ],
             fields: {
@@ -173,6 +168,9 @@ export default {
         setLoading: function () {
             this.loading = !this.loading
         },
+        setActiveTab: function (tab) {
+            this.activeTab = tab
+        }
     },
 }
 </script>

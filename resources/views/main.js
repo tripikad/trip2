@@ -2,12 +2,12 @@ import Vue from 'vue'
 import VueCookie from 'vue-cookie'
 import axios from 'axios'
 import moment from 'moment'
-import VueDatePicker from '@mathieustan/vue-datepicker';
-import '@mathieustan/vue-datepicker/dist/vue-datepicker.min.css';
-import Vue2Editor from "vue2-editor";
-import "vue2-editor/dist/vue2-editor.css";
+import VueDatePicker from '@mathieustan/vue-datepicker'
+import '@mathieustan/vue-datepicker/dist/vue-datepicker.min.css'
+import Vue2Editor from "vue2-editor"
+import "vue2-editor/dist/vue2-editor.css"
 
-moment.locale('et');
+moment.locale('et')
 
 // Require CSS files
 
@@ -43,8 +43,8 @@ jsComponents.keys().forEach(filePath => {
     Vue.component(componentName, componentConfig.default || componentConfig)
 })*/
 
-Vue.use(VueDatePicker);
-Vue.use(Vue2Editor);
+Vue.use(VueDatePicker)
+Vue.use(Vue2Editor)
 
 // Set up cookies
 

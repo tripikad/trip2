@@ -2,7 +2,7 @@
 
 .VacationPackageForm {
     background: #fff;
-    max-width: 48em;
+    max-width: 60em;
     width: 100%;
     padding: calc(#{$spacer} * 2);
 
@@ -10,13 +10,13 @@
         color: $blue;
         font: $font-heading-lg;
         margin-bottom: calc(#{$spacer} * 2);
+        padding-top: #{$spacer};
 
         &--withTop {
             padding-top: calc(#{$spacer} * 2);
         }
 
         @media (max-width: 768px) {
-
             font: $font-heading-md;
         }
     }
@@ -24,22 +24,84 @@
     &__field {
         padding-bottom: calc(#{$spacer} * 2);
         line-height: 1em;
+
+        &--hidden {
+            display: none;
+        }
     }
 
     &__hotels {
         padding-bottom: 30px;
     }
 
-    &__submit-button {
-
-        padding-top: calc(#{$spacer});
-    }
-
     &__new_hotel {
         padding-bottom: 30px;
     }
 
-    &__field.VacationPackageForm__editor.ql-editor  {
-        min-height: 300px;
+    &__tags {
+        display: flex;
+        width: 100%;
+        padding-bottom: 24px;
+        overflow: auto;
+    }
+
+    &__tag {
+        display: flex;
+        flex: 1;
+        width: 100%;
+        margin-right: 10px;
+        border-bottom: 3px solid $gray-light;
+        font-family: $font-family-sailec;
+        font-size: $font-size-lg;
+        text-align: center;
+        justify-content: center;
+        color: $gray-light;
+        cursor: pointer;
+        transition: all .2s ease-in-out;
+        align-items: center;
+
+        &:hover {
+            border-bottom: 3px solid $green;
+            font-weight: bold;
+            color: $gray-dark;
+        }
+
+        &--active {
+            border-bottom: 3px solid $green;
+            font-weight: bold;
+            color: $gray-dark;
+        }
+    }
+
+    &__buttons {
+        display: flex;
+        width: 100%;
+        justify-content: flex-end;
+    }
+
+    &__submit-button {
+        display: flex;
+        padding-top: calc(#{$spacer});
+        background: $green;
+        color: $white;
+        max-width: 200px;
+        width: 100%;
+        justify-content: center;
+        padding-left: 20px;
+    }
+
+    &__back-button {
+        display: flex;
+        padding-top: calc(#{$spacer});
+        background: $gray;
+        color: $white;
+        max-width: 200px;
+        width: 100%;
+        justify-content: center;
+        margin-right: 12px;
+    }
+
+    .VacationPackageForm__editor .quillWrapper .ql-container.ql-snow .ql-editor {
+        min-height: 400px;
     }
 }

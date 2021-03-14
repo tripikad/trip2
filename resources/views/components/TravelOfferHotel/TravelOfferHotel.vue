@@ -2,42 +2,47 @@
     <div class="TravelOfferHotel">
         <div class="FormTextfield margin-bottom-md TravelOfferHotel__container" v-for="(opt, index) in inputs">
             <div class="TravelOfferHotel__options">
-                <input
-                    class="FormTextfield__input"
-                    :name="'item[]'"
-                    type="text"
-                    placeholder="Nimi (kohustuslik)">
-
-
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-sm-8 col-12">
                         <input
+                            v-model="opt.name"
                             class="FormTextfield__input"
-                            :name="'item2[]'"
-                            type="number"
-                            placeholder="Hind (kohustuslik)">
+                            name="hotel[][name]"
+                            type="text"
+                            placeholder="Nimi (kohustuslik)">
                     </div>
-                    <div class="col-6">
-                        <form-select name="acc"
-                                     :options="stars"
-                                     placeholder="Tärnid"
-                                     isclasses="TravelOfferHotel__select"/>
+                    <div class="col-sm-4 col-12">
+                        <star-rating
+                            v-model="opt.rating"
+                            :show-rating="false"
+                            :star-size="40"
+                            :clearable="true"
+                        />
+                        <input type="hidden" name="hotel[][rating]" :value="opt.rating">
                     </div>
                 </div>
 
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-sm-4 col-12">
                         <input
+                            v-model="opt.price"
                             class="FormTextfield__input"
-                            :name="'item2[]'"
-                            type="text"
-                            placeholder="Link">
+                            name="hotel[][price]"
+                            type="number"
+                            placeholder="Hind (kohustuslik)">
                     </div>
-                    <div class="col-6">
-                        <form-select name="acc"
+                    <div class="col-sm-4 col-12">
+                        <form-select name="hotel[][price]"
                                      :options="accValues"
                                      placeholder="Majutuse tüüp"
                                      isclasses="TravelOfferHotel__select"/>
+                    </div>
+                    <div class="col-sm-4 col-12">
+                        <input
+                            class="FormTextfield__input"
+                            name="hotel[][link]"
+                            type="text"
+                            placeholder="Link">
                     </div>
                 </div>
             </div>
@@ -58,39 +63,21 @@
 </template>
 
 <script>
-import FormSelect from "../FormSelect/FormSelect.vue";
+import FormSelect from "../FormSelect/FormSelect.vue"
+import StarRating from 'vue-star-rating'
 export default {
-    components: {FormSelect},
+    components: {FormSelect, StarRating},
     props: {
         isclasses: { default: '' },
         options: { default: () => [] },
     },
     data() {
         return {
-            selectedValue: 1,
-            stars: [{
-                id: '-1',
-                name: 'Määramata'
-            },
-            {
+            inputs: [{
                 id: 1,
-                name: '1'
-            },
-            {
-                id: 2,
-                name: '2'
-            },
-            {
-                id: 3,
-                name: '3'
-            },
-            {
-                id: 4,
-                name: '4'
-            },
-            {
-                id: 5,
-                name: '5'
+                name: 'name1',
+                rating: 2,
+                price: 12,
             }],
             accValues: [
             {
@@ -117,16 +104,14 @@ export default {
                 id: 5,
                 name: 'Ilma toitlustuseta (BO)'
             }],
-            inputs: [{
-                id: 1,
-                value: 'value1'
-            }]
         }
     },
     methods: {
         addField: function () {
             this.inputs.push({
-                value: ''
+                name: '',
+                rating: 0,
+                price: undefined,
             });
         },
         deleteField: function(index) {
