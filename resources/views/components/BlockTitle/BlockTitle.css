@@ -26,6 +26,15 @@ a .BlockTitle__title:hover {
     color: $yellow-hover;
 }
 
+.BlockTitle--blue .BlockTitle__title {
+    color: $blue;
+}
+
+.BlockTitle--center {
+    text-align: center;
+    justify-content: center;
+}
+
 .BlockTitle--cyan .BlockTitle__title {
     color: $cyan;
 }

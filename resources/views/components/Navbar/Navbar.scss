@@ -1,0 +1,61 @@
+@import "../../../scss/variables";
+
+.Navbar {
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: $height-md;
+
+    &__logo {
+
+        margin-left: calc(#{$spacer} * -1);
+        margin-top: calc(#{$spacer} * 2);
+
+        svg {
+
+            width: 200px;
+            height: 150px;
+            fill: $white;
+        }
+    }
+
+    &__sitename {
+
+        display: none;
+    }
+
+    &__right {
+
+        display: flex;
+        align-items: center;
+    }
+
+    &__search {
+
+        display: block;
+
+        @media (max-width: 768px) {
+
+            display: none;
+        }
+    }
+
+    &__desktop {
+        display: block;
+
+        @media (max-width: 768px) {
+
+            display: none;
+        }
+    }
+
+    &__mobile {
+        display: none;
+
+        @media (max-width: 768px) {
+
+            display: block;
+        }
+    }
+}

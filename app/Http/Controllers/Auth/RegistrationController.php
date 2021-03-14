@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Company;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 use Log;
 use Hash;
 use Mail;
@@ -15,6 +18,50 @@ use App\Http\Controllers\NewsletterController;
 
 class RegistrationController extends Controller
 {
+    public function companyForm(): View
+    {
+        return view('pages.company.register');
+    }
+
+    public function submitCompanyForm(Request $request): RedirectResponse
+    {
+        $this->validate($request, [
+            'name' => 'required|max:64|unique:users',
+            'company_name' => 'required|max:64|unique:companies,name',
+            'email' => 'required|email|max:64|unique:users',
+            'password' => 'required|min:6|required_with:password_confirmation|same:password_confirmation',
+            'password_confirmation' => 'required|min:6',
+            'full_name' => 'honeypot',
+            //'time' => 'required|honeytime:3'
+        ]);
+
+        $userFields = [
+            'name' => $request->post('name'),
+            'email' => $request->post('email'),
+            'password' => Hash::make($request->get('password')),
+            'role' => 'regular'
+        ];
+
+        $company = new Company;
+        $company->name = $request->post('company_name');
+        $company->type = 'travel_offer'; //default at the moment. Needs to come from selection
+        $company->save();
+
+        $userFields['company_id'] = $company->id;
+
+        $user = User::create($userFields);
+        Mail::to($user->email)->queue(new ConfirmRegistration($user));
+
+        Log::info('New company registered', [
+            'name' => $user->name,
+            'link' => route('user.show', [$user])
+        ]);
+
+        return redirect()
+            ->route('login.form')
+            ->with('info', trans('auth.register.sent.info'));
+    }
+
     public function form()
     {
         //return view('pages.auth.register');
@@ -34,6 +81,13 @@ class RegistrationController extends Controller
                             ->with('title', trans('auth.register.title'))
                     )
                     ->push('&nbsp;')
+                    ->push(
+                        component('BlockTitle')
+                            ->with('title', trans('auth.register.business_user.title'))
+                            ->with('route', route('register_company.form'))
+                            ->is('blue')
+                            ->is('center')
+                    )
                     ->push(
                         component('Title')
                             ->is('center')

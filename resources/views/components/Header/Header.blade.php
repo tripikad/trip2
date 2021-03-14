@@ -1,41 +1,19 @@
-@php
+<header {{ $attributes->merge(['class' => 'Header Header--' . $type]) }}
+        style="background-image: linear-gradient(
+        rgba(0, 0, 0, 0.3),
+        rgba(0, 0, 0, 0.1),
+        rgba(0, 0, 0, 0.2),
+        rgba(0, 0, 0, 0.4)
+        ), url({{ $backgroundImage }});
+        ">
+    <div class="container-lg">
 
-$background = $background ?? '';
-$navbar = $navbar ?? '';
-$content = $content ?? [];
-
-@endphp
-
-<div class="Header {{ $isclasses }}" 
-    style="background-image: linear-gradient(
-      rgba(0, 0, 0, 0.3),
-      rgba(0, 0, 0, 0.1),
-      rgba(0, 0, 0, 0.2),
-      rgba(0, 0, 0, 0.4)
-    ), url({{ $background }});
-">
-    <div class="container">
-
-        <div class="Header__navbar">
-
-            {!! $navbar !!}
-            
-        </div>
+        <x-navbar type="{{$navBarType}}"/>
 
         <div class="Header__content">
 
-            @foreach ($content as $content_item)
-        
-            <div class="Header__contentItem">
-
-                {!! $content_item !!}
-                    
-            </div>
-
-            @endforeach
+            {{$slot}}
 
         </div>
-
     </div>
-    
-</div>
+</header>

@@ -1,0 +1,25 @@
+@import "../../../scss/variables";
+
+.FormSubmitButton {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    background: $green;
+    border-radius: $border-radius-md;
+    border: none;
+    color: $white;
+    font: $font-heading-md;
+    line-height: $line-height-xs;
+    justify-content: center;
+    padding: $spacer calc(#{$spacer} * 3);
+    cursor: pointer;
+    min-height: 50px;
+
+    @media (max-width: 576px) {
+        display: block;
+    }
+
+    &:hover {
+        background: $green-hover;
+    }
+}

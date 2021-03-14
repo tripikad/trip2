@@ -6,8 +6,6 @@ class NavbarDesktop
 {
     protected function prepareLinks()
     {
-        $user = auth()->user();
-
         return collect()
             ->put('flight', [
                 'title' => trans('menu.header.flights'),
@@ -25,16 +23,15 @@ class NavbarDesktop
                 'title' => trans('menu.header.news'),
                 'route' => route('news.index')
             ])
-            // @LAUNCH Remove this check
-            ->putWhen($user && $user->hasRole('superuser'), 'offer', [
+            ->put('offer', [
                 'title' => trans('menu.header.offer'),
                 'new' => trans('menu.header.new'),
-                'route' => route('offer.index')
+                'route' => route('travel_offer.index')
             ])
             ->toArray();
     }
 
-    protected function prepareSublinks()
+    /*protected function prepareSublinks()
     {
         $user = auth()->user() ?? false;
 
@@ -77,6 +74,72 @@ class NavbarDesktop
                 'route' => route('login.logout')
             ])
             ->toArray();
+    }*/
+
+    protected function prepareSublinks()
+    {
+        $user = auth()->user();
+
+        if (!$user) {
+            return collect()
+                ->push([
+                    'title' => trans('menu.auth.login'),
+                    'route' => route('login.form')
+                ])
+                ->push([
+                    'title' => trans('menu.auth.register'),
+                    'route' => route('register.form')
+                ])
+                ->toArray();
+        } else {
+            if ($user->company) {
+                return collect()
+                    ->push([
+                        'title' => trans('menu.user.profile'),
+                        'route' => route('company.profile', [$user->company])
+                    ])
+                    ->push([
+                        'title' => $user->company->name,
+                        'route' => route('company.profile.public', ['slug' => $user->company->slug])
+                    ])
+                    ->push([
+                        'title' => trans('menu.auth.logout'),
+                        'route' => route('login.logout')
+                    ])->toArray();
+            } else {
+                return collect()
+                    ->push([
+                        'title' => trans('menu.user.profile'),
+                        'route' => route('user.show', [$user])
+                    ])
+                    ->push([
+                        'title' => trans('menu.user.edit.profile'),
+                        'route' => route('user.edit', [$user])
+                    ])
+                    ->push([
+                        'title' => trans('menu.user.message'),
+                        'route' => route('message.index', [$user]),
+                        'badge' => $user->unreadMessagesCount()
+                    ])
+                    ->pushWhen($user && $user->hasRole('admin'), [
+                        'title' => trans('menu.auth.admin'),
+                        'route' => route('internal.index')
+                    ])
+                    /*->pushWhen($user && $user->company, [
+                        'title' => trans('menu.company.index'),
+                        'route' => route('company.index')
+                    ])*/
+                    /*->pushWhen($user && $user->hasRole('superuser'), [
+                        'title' => trans('menu.company.admin.index'),
+                        'route' => route('company.admin.index')
+                    ])*/
+                    ->push([
+                        'title' => trans('menu.auth.logout'),
+                        'route' => route('login.logout')
+                    ])
+                    ->toArray();
+            }
+        }
     }
 
     public function render($color = '')

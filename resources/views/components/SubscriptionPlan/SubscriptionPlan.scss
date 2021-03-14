@@ -1,0 +1,93 @@
+@import "../../../scss/variables";
+
+.VPSubscriptionPlan {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background: $gray-lighter;
+    padding: 24px;
+    font-family: $font-family-sailec;
+
+    &__title {
+
+        text-transform: uppercase;
+        width: 100%;
+        font-size: 12px;
+        font-weight: bold;
+        color: $gray;
+        margin-bottom: 24px;
+    }
+
+    &__content {
+
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+    }
+
+    &__plan {
+
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        background: $white;
+        margin-top: 6px;
+        padding: 18px 24px;
+        align-content: center;
+        cursor: pointer;
+
+        &:hover {
+            border: 1px solid gray;
+        }
+
+        &__status {
+
+            display: flex;
+            width: 100%;
+            margin-bottom: 12px;
+        }
+
+        &__info {
+
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            align-content: center;
+
+            &__name {
+
+                font-size: 24px;
+                line-height: 24px;
+                color: $gray-dark;
+                justify-content: center;
+                align-items: center;
+                display: flex;
+
+                &__month {
+
+                    margin-left: 12px;
+                    color: $gray;
+                    font-size: 14px;
+                }
+            }
+
+            &__price {
+
+                border: 2px solid $gray-light;
+                border-radius: 30px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 7px 12px;
+
+                span {
+
+                    color: $gray;
+                    font-size: 14px;
+                    line-height: 16px;
+                    font-weight: 600;
+                }
+            }
+        }
+    }
+}

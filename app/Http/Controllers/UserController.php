@@ -16,6 +16,10 @@ class UserController extends Controller
 
         $user = User::findOrFail($id);
 
+        if ($user->company) {
+            return redirect()->route('company.profile.public', ['slug' => $user->company->slug]);
+        }
+
         $loggedUser = request()->user();
 
         $photos = $user

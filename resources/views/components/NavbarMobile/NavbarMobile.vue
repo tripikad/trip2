@@ -1,5 +1,5 @@
 <template>
-    <div class="NavbarMobile" :class="isclasses">
+    <div class="NavbarMobile d-md-none d-lg-none d-xl-none" :class="isclasses">
         <div class="NavbarMobile__menuIcon" v-show="!menuOpen" @click.prevent="menuOpen = true">
             <component :is="'Icon'" v-if="!user" icon="icon-menu" size="lg"> </component>
 
@@ -51,7 +51,6 @@ import Badge from '../Badge/Badge.vue'
 import Icon from '../Icon/Icon.vue'
 import NavbarSearch from '../NavbarSearch/NavbarSearch.vue'
 import UserImage from '../UserImage/UserImage.vue'
-
 export default {
     components: {
         Badge,
@@ -59,20 +58,29 @@ export default {
         NavbarSearch,
         UserImage
     },
-
     props: {
         isclasses: { default: '' },
+        user: { default: '' },
         links: { default: '' },
         sublinks: { default: '' },
-        user: { default: '' }
+        /*links: {
+            type: Object,
+            default: () => {}
+        },
+        sublinks: {
+            type: Array,
+            default: () => []
+        },*/
+        /*user: {
+            type: Object,
+            default: null,
+        }*/
     },
-
     data() {
         return {
             menuOpen: false
         }
     },
-
     methods: {
         toggle: function() {
             this.menuOpen = !this.menuOpen

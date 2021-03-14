@@ -1,0 +1,158 @@
+@import "../../../scss/variables";
+
+.TravelOfferSearch {
+    display: flex;
+    flex-direction: column;
+    margin-top: -50px;
+    justify-content: flex-start;
+    width: 100%;
+    align-items: flex-start;
+    text-align: left;
+    border-radius: $border-radius-lg;
+    font: $font-text-xs;
+    line-height: 100%;
+    //background: rgba(84, 90, 95, .8);
+    //box-shadow: 0 2px 0 rgba(0, 0, 150, 0.025), 2px 4px 0 rgba(0, 0, 150, 0.015);
+
+    @media (max-width: 576px) {
+        //flex-direction: column;
+        //margin-top: -350px;
+    }
+
+    &__tags {
+        display: flex;
+        width: 100%;
+        height: 50px;
+        //flex-wrap: wrap;
+        overflow: auto;
+    }
+
+    &__tag {
+        display: flex;
+        color: $white;
+        white-space: nowrap;
+        padding: 20px;
+        cursor: pointer;
+        font-family: $font-family-sailec;
+        font-size: 16px;
+        justify-content: center;
+        align-items: center;
+        font-weight: bold;
+
+        &:first-child {
+            //border-top-left-radius: $border-radius-lg;
+        }
+
+        &:last-child {
+            //border-top-right-radius: $border-radius-lg;
+        }
+
+        &:hover {
+            background: $white;
+            color: $blue;
+
+            svg {
+                fill: $blue;
+            }
+        }
+
+        svg {
+            margin-left: 10px;
+            width: 30px;
+            height: 30px;
+            fill: $white;
+        }
+    }
+
+    &__last_minute {
+        color: $orange-dark;
+
+        svg {
+            fill: $orange-dark;
+        }
+
+        &:hover {
+            color: $orange-dark;
+
+            svg {
+                fill: $orange-dark;
+            }
+        }
+    }
+
+    &__tag--active {
+        background: $white;
+        font-weight: bold;
+        color: $blue;
+    }
+
+    &__content {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        padding: 30px 0 30px 0;
+        font-family: $font-family-sailec;
+        //color: $white;
+
+        @media (max-width: 576px) {
+            flex-direction: column;
+        }
+    }
+
+    &__field {
+        display: flex;
+        margin-right: 15px;
+        margin-bottom: 10px;
+        //max-width: 200px;
+        width: 100%;
+    }
+
+    &__datepicker {
+        //max-width: 200px;
+        width: 100%;
+    }
+
+    &__datepicker .vd-picker__input-wrapper input {
+        &::placeholder {
+            //color: $white;
+        }
+    }
+
+    &__destination_field {
+        //max-width: 250px;
+        width: 100%;
+    }
+
+    &__destination {
+        width: 100%;
+    }
+
+    &__destination .multiselect__tags {
+        background: none;
+    }
+
+    &__destination .multiselect__input {
+        background: none;
+        //color: $white;
+
+        &::placeholder {
+            //color: $white;
+        }
+    }
+
+    &__price {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        margin-right: 0;
+        max-width: 100%;
+        margin-left: 10px;
+    }
+
+    &__slider .vue-slider-dot-tooltip-inner {
+        min-height: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}

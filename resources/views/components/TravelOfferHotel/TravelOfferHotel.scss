@@ -1,0 +1,43 @@
+@import "../../../scss/variables";
+
+.TravelOfferHotel {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+
+    &__container {
+        display: flex;
+        width: 100%;
+        align-items: center;
+    }
+
+    &__options {
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+
+        input {
+            margin-bottom: 10px;
+        }
+    }
+
+    &__select {
+        input::placeholder {
+            color: $gray-light;
+        }
+    }
+
+    &__new_hotel {
+        align-items: center;
+        background: $green;
+        border-radius: $border-radius-md;
+        border: none;
+        color: $white;
+        display: inline-flex;
+        font: $font-heading-sm;
+        line-height: $line-height-xs;
+        justify-content: center;
+        padding: $padding-sm $padding-lg;
+        width: 200px;
+    }
+}

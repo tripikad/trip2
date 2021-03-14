@@ -1,0 +1,108 @@
+@import "../../../scss/variables";
+
+.Tag {
+    align-items: center;
+    border: 1px solid $gray;
+    border-radius: $border-radius-lg;
+    display: inline-flex;
+    font: $font-text-xs;
+    line-height: 100%;
+    justify-content: center;
+    padding: calc(#{$spacer} / 4) calc(#{$spacer} / 2);
+    transition: all 0.2s;
+
+    &__title {
+        color: $gray;
+        white-space: nowrap;
+    }
+
+    &:hover {
+        .Tag__title {
+            color: $gray-hover;
+        }
+    }
+
+    &--orange {
+        border: 1px solid $orange-dark;
+
+        .Tag__title {
+            color: $orange-dark;
+        }
+
+        &:hover {
+            .Tag__title {
+                color: $orange-hover;
+            }
+        }
+    }
+
+    &--red {
+        border: 1px solid $red;
+
+        .Tag__title {
+            color: $red;
+        }
+
+        &:hover {
+            .Tag__title {
+                color: $red-hover;
+            }
+        }
+    }
+
+    &--green {
+        border: 1px solid $green;
+
+        .Tag__title {
+            color: $green;
+        }
+
+        &:hover {
+            .Tag__title {
+                color: $green-hover;
+            }
+        }
+    }
+
+    &--white {
+        border: 1px solid $white;
+        background: rgba(0, 0, 0, 0.05);
+
+        .Tag__title {
+            color: $white;
+        }
+
+        &:hover {
+            background: rgba(0, 0, 0, 0.1);
+
+            .Tag__title {
+                color: $white-hover;
+            }
+        }
+    }
+
+    &--filled {
+
+        .Tag__title {
+            color: $white;
+        }
+
+        &.Tag--red {
+            background: $red;
+
+            .Tag__title {
+                color: $white;
+            }
+
+            &:hover {
+                background: $red-hover;
+            }
+        }
+    }
+
+    &--large {
+        font: $font-text-md;
+        padding: $padding-xxs $padding-sm;
+        border-radius: $border-radius-xl;
+    }
+}

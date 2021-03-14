@@ -7,12 +7,14 @@
 }
 
 .vd-wrapper {
-
     border: $border-gray-md;
     border-radius: $border-radius-md;
-    color: $gray-dark;
     font: $font-text-md;
     padding: $padding-sm;
+    width: 100%;
+}
+
+.vd-picker__input-wrapper input {
     width: 100%;
 }
 

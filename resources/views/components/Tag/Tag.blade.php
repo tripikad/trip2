@@ -1,27 +1,25 @@
 @php
-
-$title = $title ?? '';
-$route = $route ?? '';
-
+    $title = $title ?? '';
+    $route = $route ?? '';
 @endphp
 
 <div class="Tag {{ $isclasses }}">
 
     @if ($route)
 
-    <a href="{{ $route }}">
+        <a href="{{ $route }}">
 
     @endif
 
-        <div class="Tag__title">
+    <div class="Tag__title">
 
-            {!! $title !!}
+        {!! $title !!}
 
-        </div>
+    </div>
 
     @if ($route)
 
-    </a>
+        </a>
 
     @endif
 

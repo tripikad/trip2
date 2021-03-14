@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div style="width: 100%">
         <div class="FormSliderMultiple" :class="isclasses">
             <vue-slider
                 v-model="values"

@@ -1,0 +1,39 @@
+@import "../../../scss/variables";
+
+.Header {
+
+    padding-top: $padding-md;
+    position: relative;
+    width: 100%;
+
+    @media (max-width: 576px) {
+
+        //padding-bottom: $padding-sm;
+    }
+
+    &__content {
+
+        margin-top: $margin-xl;
+        margin-right: calc(#{$spacer} * 10);
+
+        @media (max-width: 768px) {
+
+            margin-top: $margin-lg;
+            margin-left: 0;
+            margin-right: 0;
+        }
+    }
+
+    &--main {
+
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        //background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)), url(/photos/header3.jpg);
+    }
+
+    &--light {
+
+        background-color: $gray-lighter;
+    }
+}

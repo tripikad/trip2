@@ -1,0 +1,70 @@
+@import "../../variables";
+
+.page-company-profile {
+
+    height: 100%;
+    width: 100%;
+    position: relative;
+
+    &__header {
+
+        background: $gray-lighter;
+        padding-bottom: 20px;
+    }
+
+    &__navigation {
+
+        padding-top: calc(#{$spacer} * 2);
+        margin-bottom: calc(#{$spacer} * 5);
+    }
+
+    &__header-content {
+
+        margin-top: calc(#{$spacer} * 5);
+        font-family: $font-family-sailec;
+
+        &__heading {
+
+            font-weight: bold;
+            font-size: 48px;
+            line-height: 48px;
+            text-align: left;
+            color: $gray-dark;
+            margin-left: $margin-xl;
+            margin-bottom: 72px;
+
+            @media (max-width: 768px) {
+
+                font-size: 24px;
+                line-height: 24px;
+                margin-left: calc(#{$spacer} * 3);
+                margin-top: calc(#{$spacer} * 2);
+                margin-bottom: calc(#{$spacer} * 3);
+            }
+        }
+    }
+
+    &__content {
+        font-family: $font-family-sailec;
+        padding: calc(#{$spacer} * 3) #{$spacer};
+        min-height: 400px;
+        height: 100%;
+    }
+
+    &__new-package-btn {
+        //max-width: 288px;
+        //margin: 0 auto 48px auto;
+    }
+
+    &__new_items {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin: 0 auto;
+        padding-left: 30px;
+    }
+
+    &__plans {
+        padding: 30px 0;
+    }
+}

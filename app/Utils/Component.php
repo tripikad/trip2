@@ -105,13 +105,13 @@ class Component
             ->implode(' ');
 
         $component =
-            '<transition appear name="Fade"><component is="' .
+            '<component is="' .
             $vueComponent .
             '" isclasses="' .
             $this->generateIsClasses() .
             '" ' .
             $props .
-            ' ></component></transition>';
+            ' ></component>';
 
         $height = $this->with->get('height');
 

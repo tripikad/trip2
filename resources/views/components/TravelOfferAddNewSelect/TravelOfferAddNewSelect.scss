@@ -1,0 +1,53 @@
+@import "../../../scss/variables";
+
+.TravelOfferAddNewSelect {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+
+    &__button {
+        cursor: pointer;
+    }
+
+    /*select {
+        min-height: 50px;
+        padding: 10px;
+        font-family: $font-family-sailec;
+        font-size: $font-size-md;
+        border: $border-gray-md;
+        font-weight: bold;
+        text-align: center;
+        color: $white;
+        background: $green-dark;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+    }*/
+}
+
+.TravelOfferAddNewSelect .multiselect__tags {
+    background: $green;
+    border: none!important;
+
+    input {
+        background: $green;
+        color: $white;
+        cursor: pointer;
+        font-weight: bold!important;
+
+        &::placeholder {
+            color: $white;
+            font-weight: bold;
+        }
+    }
+}
+
+.TravelOfferAddNewSelect .multiselect__select {
+    height: 33px;
+
+    &:before {
+        border-color: #fff transparent transparent;
+        color: #fff;
+    }
+
+}

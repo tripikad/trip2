@@ -1,0 +1,45 @@
+@import "../../../scss/variables";
+
+.FormTextEditor {
+
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    .quillWrapper {
+        border-radius: $border-radius-md;
+        border: $border-gray-md;
+        color: $gray-dark;
+        font: $font-text-md;
+        width: 100%;
+
+        .ql-toolbar.ql-snow {
+            border: 0;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .ql-container.ql-snow {
+            border: 0;
+
+            .ql-editor {
+                min-height: 300px;
+            }
+        }
+    }
+
+    &--hidden {
+        display: none;
+    }
+
+    &--error {
+        .FormTextField__label {
+
+            color: $red;
+        }
+
+        .quillWrapper {
+
+            border-color: $red;
+        }
+    }
+}

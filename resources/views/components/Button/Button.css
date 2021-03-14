@@ -9,6 +9,7 @@
     padding: $padding-sm $padding-lg;
     text-align: center;
     transition: $transition-md;
+    cursor: pointer;
 }
 
 .Button:hover {

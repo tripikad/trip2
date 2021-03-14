@@ -5,9 +5,9 @@ namespace App\Console\Commands;
 use Storage;
 use Illuminate\Console\Command;
 
-class MakeComponent extends Command
+class MakeComponentVue extends Command
 {
-    protected $signature = 'make:component { name } {--vue}';
+    protected $signature = 'make:componentVue { name } {--vue}';
 
     public function handle()
     {

@@ -1,6 +1,6 @@
 <template>
     <div class="FormDatepicker" :class="{ 'FormDatepicker--error': isError, [isclasses]: true }">
-        <label :for="name" class="FormDatepicker__label">{{ title }}</label>
+        <label :for="name" class="FormDatepicker__label" v-if="title">{{ title }}</label>
 
         <VueDatePicker
             v-model="date"

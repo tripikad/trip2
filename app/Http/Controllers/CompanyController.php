@@ -2,15 +2,240 @@
 
 namespace App\Http\Controllers;
 
+use App\Company;
+use App\Destination;
 use Hash;
 use Carbon\Carbon;
-
 use App\User;
 use App\Image;
 use App\Offer;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
+use Illuminate\Validation\ValidationException;
 
 class CompanyController extends Controller
 {
+    /**
+     * @param $slug
+     * @param Request $request
+     * @return Application|Factory|View|\Illuminate\View\View
+     */
+    public function profilePublic($slug, Request $request)
+    {
+        $company = Company::whereSlug($slug)->first();
+        if (!$company) {
+            abort(404);
+        }
+
+        //todo: return view and data based on company type
+
+        $company->loadMissing('user');
+        $company->loadMissing('travelOffers');
+        $routeName = $request->route()->getName();
+
+        $items = [
+            [
+                'title' => 'Tutvustus',
+                'route' => route('company.profile.public', ['slug' => $company->slug]),
+                'active' => $routeName !== 'company.profile.public' ? $routeName === 'company.profile.public' : '#',
+                'count' => null
+            ],
+            [
+                'title' => 'Pakkumised',
+                'route' => $routeName !== 'company.offers.public' ? route('company.offers.public', ['slug' => $company->slug]) : '#',
+                'active' => $routeName === 'company.offers.public',
+                'count' => 12
+            ]
+        ];
+
+        return view('pages.company.profile-public', [
+            'company' => $company,
+            'user' => $company->user,
+            'items' => $items
+        ]);
+    }
+
+    /**
+     * @param string $slug
+     * @param Request $request
+     * @return Application|Factory|View|\Illuminate\View\View
+     */
+    public function offersPublic(string $slug, Request $request)
+    {
+        $company = Company::whereSlug($slug)->first();
+        if (!$company) {
+            abort(404);
+        }
+
+        //todo: return view and data based on company type
+
+        $company->loadMissing('user');
+        //$company->loadMissing('activeVacationPackages');
+        $items = [
+            [
+                'title' => 'Tutvustus',
+                'route' => route('company.profile.public', ['slug' => $company->slug]),
+                'active' => false,
+                'count' => null
+            ],
+            [
+                'title' => 'Pakkumised',
+                'route' => '#',
+                'active' => true,
+                'count' => 12
+            ]
+        ];
+
+        return view('pages.company.offers-public', [
+            'company' => $company,
+            'user' => $company->user,
+            //'packages' => $company->activeVacationPackages,
+            'items' => $items
+        ]);
+    }
+
+    /**
+     * @param Company $company
+     * @param Request $request
+     * @return Application|Factory|View|\Illuminate\View\View
+     */
+    public function profile(Company $company, Request $request)
+    {
+        $company->loadMissing('user');
+        $company->loadMissing('travelOffers');
+        $routeName = $request->route()->getName();
+
+        $items = [
+            [
+                'title' => 'Pakkumised',
+                'route' => route('company.profile', ['company' => $company]),
+                'active' => $routeName !== 'company.profile' ? $routeName === 'company.profile' : '#',
+                'count' => 23
+            ],
+            [
+                'title' => 'Minu info',
+                'route' => $routeName !== 'company.edit_profile' ? route('company.edit_profile', ['company' => $company]) : '#',
+                'active' => $routeName === 'company.edit_profile',
+                'count' => null
+            ]
+        ];
+
+        return view('pages.company.profile', [
+            'company' => $company,
+            'user' => $company->user,
+            'items' => $items
+        ]);
+    }
+
+    /**
+     * @param Company $company
+     * @param Request $request
+     * @return Application|Factory|View|\Illuminate\View\View
+     */
+    public function editProfile(Company $company, Request $request)
+    {
+        $company->loadMissing('user');
+        $routeName = $request->route()->getName();
+
+        $items = [
+            [
+                'title' => 'Pakkumised',
+                'route' => route('company.profile', ['company' => $company]),
+                'active' => $routeName !== 'company.profile' ? $routeName === 'company.profile' : '#',
+                'count' => 54
+            ],
+            [
+                'title' => 'Minu info',
+                'route' => $routeName !== 'company.edit_profile' ? route('company.edit_profile', ['company' => $company]) : '#',
+                'active' => $routeName === 'company.edit_profile',
+                'count' => null
+            ]
+        ];
+
+        return view('pages.company.profile-edit', [
+            'company' => $company,
+            'user' => $company->user,
+            'items' => $items
+        ]);
+    }
+
+    /**
+     * @param Company $company
+     * @param Request $request
+     * @return RedirectResponse
+     * @throws ValidationException
+     */
+    public function updateProfile(Company $company, Request $request)
+    {
+        $user = $company->user;
+        $maxFileSize = config('site.maxfilesize') * 1024;
+
+        $rules = [
+            'company_name' => 'required|max:64|unique:companies,name,' . $company->id,
+            'email' => 'required|unique:users,email,' . $user->id,
+            'password' => 'sometimes|confirmed|min:6',
+            'password_confirmation' => 'required_with:password|same:password',
+            'description' => 'min:2',
+            'facebook' => 'url',
+            'homepage' => 'url',
+            'file' => "image|max:$maxFileSize"
+        ];
+
+        $this->validate($request, $rules);
+
+        $data = [
+            'email' => $request->email,
+            'description' => $request->description,
+            'contact_facebook' => $request->facebook,
+            'contact_homepage' => $request->homepage
+        ];
+
+        if ($request->password) {
+            $data['password'] = Hash::make($request->password);
+        }
+
+        $user->update($data);
+
+        $company->slug = null;
+        $company->update([
+            'name' => $request->company_name
+        ]);
+
+        if ($request->hasFile('logo')) {
+            $filename =
+                'company_logo-' .
+                $user->id .
+                '.' .
+                $request
+                    ->file('logo')
+                    ->getClientOriginalExtension();
+
+            $filename = Image::storeImageFile($request->file('logo'), $filename);
+
+            $user->images()->delete();
+            $user->images()->create(['filename' => $filename]);
+        }
+
+        return redirect()
+            ->route('company.profile.public', ['slug' => $company->slug])
+            ->with('info', trans('user.update.info'));
+    }
+
+    public function addTravelOffer(Company $company, Request $request)
+    {
+        $type = $request->get('type');
+        $destinations = Destination::select('id', 'name')->get()->toArray();
+
+        return view('pages.company.travel-package-form', [
+            'company' => $company,
+            'user' => $company->user,
+            'destinations' => $destinations
+        ]);
+    }
+
     public function index()
     {
         $loggedUser = request()->user();

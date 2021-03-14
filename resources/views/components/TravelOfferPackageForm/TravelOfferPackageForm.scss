@@ -1,0 +1,45 @@
+@import "../../../scss/variables";
+
+.VacationPackageForm {
+    background: #fff;
+    max-width: 48em;
+    width: 100%;
+    padding: calc(#{$spacer} * 2);
+
+    &__subtitle {
+        color: $blue;
+        font: $font-heading-lg;
+        margin-bottom: calc(#{$spacer} * 2);
+
+        &--withTop {
+            padding-top: calc(#{$spacer} * 2);
+        }
+
+        @media (max-width: 768px) {
+
+            font: $font-heading-md;
+        }
+    }
+
+    &__field {
+        padding-bottom: calc(#{$spacer} * 2);
+        line-height: 1em;
+    }
+
+    &__hotels {
+        padding-bottom: 30px;
+    }
+
+    &__submit-button {
+
+        padding-top: calc(#{$spacer});
+    }
+
+    &__new_hotel {
+        padding-bottom: 30px;
+    }
+
+    &__field.VacationPackageForm__editor.ql-editor  {
+        min-height: 300px;
+    }
+}

@@ -9,6 +9,7 @@ $value = $value ?? '';
 $size = $size ?? '';
 $placeholder = $placeholder ?? '';
 $disabled = $disabled ?? false;
+$type = $type ?? 'text';
 
 @endphp
 
@@ -43,7 +44,7 @@ $disabled = $disabled ?? false;
 
         @endif
 
-        <input class="FormTextfield__input" id="{{ $name }}" name="{{ $name }}" type="text" size="{{ $size }}"
+        <input class="FormTextfield__input" id="{{ $name }}" name="{{ $name }}" type="{{$type}}" size="{{ $size }}"
             value="{{ $value }}" placeholder="{{ $placeholder }}" dusk="{{ slug($title) }}" @if($disabled) disabled
             @endif>
 

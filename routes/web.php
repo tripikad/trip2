@@ -393,6 +393,18 @@ Route::post('register', [
     'as' => 'register.submit'
 ]);
 
+Route::get('register_company', [
+    'middleware' => 'guest',
+    'uses' => 'Auth\RegistrationController@companyForm',
+    'as' => 'register_company.form'
+]);
+
+Route::post('register_company', [
+    'middleware' => 'guest',
+    'uses' => 'Auth\RegistrationController@submitCompanyForm',
+    'as' => 'register_company.submit'
+]);
+
 Route::get('register/confirm/{token}', [
     'uses' => 'Auth\RegistrationController@confirm',
     'as' => 'register.confirm'
@@ -510,7 +522,29 @@ Route::get('lendude_sooduspakkumised/rss', [
 
 // Companies
 
-Route::get('company', 'CompanyController@index')
+Route::get('firma/{slug}', 'CompanyController@profilePublic')
+    ->name('company.profile.public');
+
+Route::get('firma/{slug}/pakkumised', 'CompanyController@offersPublic')
+    ->name('company.offers.public');
+
+Route::get('company/{company}', 'CompanyController@profile')
+    ->name('company.profile')
+    ->middleware('companyOwner');
+
+Route::get('company/{company}/edit_profile', 'CompanyController@editProfile')
+    ->name('company.edit_profile')
+    ->middleware('companyOwner');
+
+Route::get('company/{company}/add_travel_offer', 'CompanyController@addTravelOffer')
+    ->name('company.add_travel_offer')
+    ->middleware('companyOwner');
+
+Route::post('company/{company}/add_travel_offer', 'CompanyController@storeTravelOffer')
+    ->name('company.store_travel_offer')
+    ->middleware('companyOwner');
+
+/*Route::get('company', 'CompanyController@index')
     ->name('company.index')
     ->middleware('company');
 
@@ -536,13 +570,19 @@ Route::get('company/{id}/edit', 'CompanyController@edit')
 Route::put('company/{id}/update', 'CompanyController@update')
     ->name('company.update')
     ->middleware('role:superuser,userowner')
-    ->middleware('company');
+    ->middleware('company');*/
+
+// Travel offers
+
+Route::get('reisipakkumised', 'TravelOfferController@index')->name('travel_offer.index');
+
+Route::get('reisipakkumised/{slug}', 'TravelOfferController@show')->name('travel_offer.show');
 
 // Offers
 
-Route::get('reisipakkumised', 'OfferController@index')->name('offer.index');
+Route::get('reisipakkumised2', 'OfferController@index')->name('offer.index');
 
-Route::get('reisipakkumised/{id}', 'OfferController@show')->name('offer.show');
+Route::get('reisipakkumised2/{id}', 'OfferController@show')->name('offer.show');
 
 Route::get('offer/json', 'OfferController@indexJson')->name('offer.index.json');
 

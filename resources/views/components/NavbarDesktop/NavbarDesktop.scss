@@ -1,0 +1,116 @@
+@import "../../../scss/variables";
+
+.NavbarDesktop {
+
+    position: relative;
+    z-index: 1000;
+
+    &__links {
+
+        display: flex;
+    }
+
+    &__link {
+
+        padding: $padding-sm;
+        color: $gray;
+        font: $font-heading-sm;
+        white-space: nowrap;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+
+        &:hover {
+
+            color: $gray-hover;
+        }
+    }
+
+    &__linkBadge {
+
+        background: $blue-hover;
+        color: $white;
+        padding: 0 $padding-xs;
+        font: $font-text-xs;
+        margin-left: $margin-xs;
+        border-radius: $border-radius-md;
+    }
+
+    &__userImage {
+
+        margin-left: $margin-sm;
+        display: flex;
+        align-items: center;
+    }
+
+    &__badge {
+
+        margin-right: $margin-xs;
+    }
+
+    &__popover {
+
+        width: $width-xxl;
+        position: absolute;
+        right: 0;
+        top: $height-md;
+    }
+
+    &__arrowWrapper {
+
+        display: flex;
+        justify-content: flex-end;
+        padding-right: $padding-md;
+    }
+
+    &__arrow {
+        width: 0;
+        height: 0;
+        border-left: $width-xxs solid transparent;
+        border-right: $width-xxs solid transparent;
+        border-bottom: $width-xxs solid $green;
+    }
+
+    &__sublinks {
+
+        border-radius: $border-radius-md;
+        background: $green;
+        padding: $padding-xs 0;
+    }
+
+    &__sublinkWrapper {
+
+        padding: $padding-sm $padding-md;
+        display: flex;
+        align-items: center;
+
+        &:hover {
+
+            background: $green-dark;
+        }
+    }
+
+    &__sublinkTitle {
+
+        color: $white;
+        font: $font-heading-sm;
+    }
+
+    &__sublinkBadge {
+
+        margin-left: $margin-sm;
+    }
+
+    &--white {
+
+        .NavbarDesktop__link {
+
+            color: $white;
+
+            &:hover {
+
+                color: $white-hover;
+            }
+        }
+    }
+}

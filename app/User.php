@@ -39,7 +39,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         'description',
         'notify_message',
         'notify_follow',
-        'company'
+        'is_company',
+        'company_id'
     ];
 
     protected $hidden = ['password', 'remember_token'];
@@ -47,7 +48,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     protected $dates = ['created_at', 'updated_at', 'active_at'];
 
     protected $casts = [
-        'company' => 'boolean'
+        'is_company' => 'boolean'
+    ];
+
+    protected $with = [
+        'company'
     ];
 
     /**
@@ -104,6 +109,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function bookings()
     {
         return $this->hasMany('App\Booking');
+    }
+
+    public function company()
+    {
+        return $this->hasOne('App\Company', 'id', 'company_id');
     }
 
     public function update_active_at($force = false, $return = false)
@@ -225,7 +235,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public function isCompany()
     {
-        return $this->company;
+        return $this->is_company;
     }
 
     public function destinationHaveBeen()

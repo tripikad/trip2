@@ -1,0 +1,106 @@
+@import "../../variables";
+
+.page-vp-index {
+    width: 100%;
+
+    &__header {
+        min-height: 300px;
+        height: 100%;
+
+        @media (max-width: 576px) {
+            min-height: 250px;
+        }
+    }
+
+    &__navigation {
+        padding-top: calc(#{$spacer} * 2);
+        margin-bottom: calc(#{$spacer} * 5);
+    }
+
+    &__header-content {
+        margin-top: calc(#{$spacer} * 5);
+        margin-bottom: calc(#{$spacer} * 2);
+        font-family: $font-family-sailec;
+
+        @media (max-width: 768px) {
+            margin-top: calc(#{$spacer} * 2);
+            margin-left: calc(#{$spacer} * 2);
+        }
+
+        &__heading {
+            font-weight: bold;
+            font-size: 48px;
+            line-height: 48px;
+            text-align: center;
+            color: $white;
+            margin-left: $margin-xl;
+            margin-bottom: 60px;
+
+            @media (max-width: 768px) {
+                font-size: 24px;
+                line-height: 24px;
+                margin-left: 0;
+                margin-bottom: 24px;
+            }
+        }
+    }
+
+    &__content {
+        //padding: calc(#{$spacer} * 4) 0;
+        min-height: 500px;
+
+        @media (max-width: 576px) {
+            //padding: calc(#{$spacer} * 2) #{$spacer};
+        }
+
+        &__item {
+            margin-bottom: 36px;
+        }
+    }
+
+    &__filter {
+        display: flex;
+        width: 100%;
+        margin-bottom: 30px;
+        align-items: center;
+    }
+
+    &__filter-label {
+        color: $gray;
+        font-weight: bold;
+    }
+
+    &__select {
+        border: none;
+        background: none;
+        max-width: 250px;
+        width: 100%;
+    }
+
+    &__select .multiselect__select {
+        height: 33px;
+    }
+
+    &__select .multiselect__tags {
+        border: 0!important;
+        padding: 11px 40px 4px 0 !important;
+
+        input {
+            color: $gray;
+        }
+    }
+
+    /*&__select .multiselect__tags {
+        border: none!important;
+        background: none;
+    }
+
+    &__select .multiselect__input {
+        color: $gray;
+        font-size: $font-size-xs;
+    }*/
+
+    &__item {
+        margin-bottom: 12px;
+    }
+}

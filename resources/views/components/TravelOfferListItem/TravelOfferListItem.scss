@@ -1,0 +1,67 @@
+@import "../../../scss/variables";
+
+.TravelOfferListItem {
+    display: flex;
+    justify-content: flex-start;
+    min-height: 50px;
+    width: 100%;
+    align-items: flex-start;
+    text-align: left;
+    font-family: $font-family-sailec;
+    line-height: 28px;
+    font-size: 18px;
+    color: $gray;
+    padding: 12px 0;
+
+    &__image {
+        display: flex;
+        align-self: center;
+        margin-right: 20px;
+
+        svg {
+            width: 40px;
+            height: 40px;
+        }
+    }
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    &__title {
+        display: flex;
+        width: 100%;
+        font-weight: bold;
+        font-size: $font-heading-md;
+        //cursor: pointer;
+
+        span {
+            color: $orange-dark;
+            margin-left: 5px;
+        }
+    }
+
+    &__meta {
+        display: flex;
+        width: 100%;
+        align-items: center;
+    }
+
+    &__days {
+        font-size: $font-size-xs;
+        font-weight: bolder;
+        margin-right: 12px;
+    }
+
+    &__tag {
+        margin-right: 12px;
+    }
+
+    &__dates {
+        font-size: $font-size-xs;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+}

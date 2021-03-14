@@ -1,4 +1,4 @@
-.Header {
+.HeaderMain {
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -7,7 +7,7 @@
     padding-bottom: $padding-sm ?if $mobile;
 }
 
-.Header__content {
+.HeaderMain__content {
     margin-top: $margin-xl;
     margin-top: $margin-lg ?if $tablet;
     margin-left: $margin-xl;
@@ -16,15 +16,15 @@
     margin-right: 0 ?if $tablet;
 }
 
-.Header__contentItem {
+.HeaderMain__contentItem {
     margin-bottom: $margin-md;
 }
 
-.Header__contentItem:last-child {
+.HeaderMain__contentItem:last-child {
     margin-bottom: 0;
 }
 
-.Header--high .Header__content {
+.HeaderMain--high .HeaderMain__content {
     margin-top: $margin-xxxl;
     margin-top: $margin-xl ?if $tablet;
 }
