@@ -14,10 +14,10 @@ use App\Destination;
 
 class FlightController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $currentDestination = Request::get('destination');
-        $currentTopic = Request::get('topic');
+        $currentDestination = $request->get('destination');
+        $currentTopic = $request->get('topic');
 
         $sliceSize = 10;
         $flights = Content::getLatestPagedItems('flight', 2 * $sliceSize, $currentDestination, $currentTopic);
