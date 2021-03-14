@@ -4,23 +4,23 @@ $months = $months ?? [];
 
 @endphp
 
-<div class="FlightCalendar {{ $isclasses }}">
+<div class="FlightTimetable {{ $isclasses }}">
 
     @foreach($months as $month => $dates)
 
-    <div class="FlightCalendar__month">
+    <div class="FlightTimetable__month">
 
-        <div class="FlightCalendar__monthTitle">
+        <div class="FlightTimetable__monthTitle">
         
             {{ $month }}
 
         </div>
 
-        <div class="FlightCalendar__cards">
+        <div class="FlightTimetable__cards">
 
         @foreach($dates as $date)
             
-            <div class="FlightCalendar__card">
+            <div class="FlightTimetable__card">
 
                 {!! $date !!}
 

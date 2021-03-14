@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\FlightCalendarService;
+use Carbon\Carbon;
+use Illuminate\Http\JsonResponse;
 use Log;
-use Request;
+use Illuminate\Http\Request;
 use App\Image;
 use App\Topic;
 use App\Content;
@@ -485,5 +488,55 @@ class FlightController extends Controller
                     'title' => $flight->title
                 ])
             );
+    }
+
+    /**
+     * @param FlightCalendarService $service
+     * @param Request $request
+     * @return JsonResponse|null
+     */
+    public function getMonthData(FlightCalendarService $service, Request $request) : ?JsonResponse
+    {
+        $startMonth = $request->get('startMonth');
+        $endMonth = $request->get('endMonth');
+        $startCode = $request->get('startCode');
+        $endCode = $request->get('endCode');
+
+        if ($startMonth && $endMonth && $startCode && $endCode) {
+            $startMonth = Carbon::createFromFormat('Y-m-d', $startMonth . '-01');
+            $endMonth = Carbon::createFromFormat('Y-m-d', $endMonth . '-01');
+
+            if ($startMonth->isValid() && $endMonth->isValid() && $startMonth <= $endMonth)
+                return $service->getMonthData($startMonth, $endMonth, $startCode, $endCode);
+
+            return null;
+        }
+
+        return null;
+    }
+
+    /**
+     * @param FlightCalendarService $service
+     * @param Request $request
+     * @return JsonResponse|null
+     */
+    public function getLivePrice(FlightCalendarService $service, Request $request) : ?JsonResponse
+    {
+        $startDate = $request->get('startDate');
+        $endDate = $request->get('endDate');
+        $startCode = $request->get('startCode');
+        $endCode = $request->get('endCode');
+
+        if ($startDate && $endDate && $startCode && $endCode) {
+            $startDate = Carbon::createFromFormat('Y-m-d', $startDate);
+            $endDate = Carbon::createFromFormat('Y-m-d', $endDate);
+
+            if ($startDate->isValid() && $endDate->isValid() && $startDate <= $endDate)
+                return $service->getLivePrice($startDate, $endDate, $startCode, $endCode);
+
+            return null;
+        }
+
+        return null;
     }
 }

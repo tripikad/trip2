@@ -1,18 +1,18 @@
-.FlightCalendar {
+.FlightTimetable {
     display: flex;
     width: 100%;
 }
 
-.FlightCalendar__month {
+.FlightTimetable__month {
     margin-right: $margin-xs;
     flex: 1;
 }
 
-.FlightCalendar__month:last-child {
+.FlightTimetable__month:last-child {
     margin-right: 0;
 }
 
-.FlightCalendar__monthTitle {
+.FlightTimetable__monthTitle {
     font: $font-text-xs;
     text-transform: uppercase;
     margin-bottom: $margin-xs;
@@ -20,7 +20,7 @@
     color: $gray-dark;
 }
 
-.FlightCalendar__card {
+.FlightTimetable__card {
     position: relative;
     width: 100%;
     background: $gray-light;
@@ -29,7 +29,7 @@
     height: $height-md;
 }
 
-.FlightCalendar__card a {
+.FlightTimetable__card a {
     position: absolute;
     top: 0;
     right: 0;
@@ -41,18 +41,18 @@
     display: flex;
 }
 
-.FlightCalendar__card,
-.FlightCalendar__card a {
+.FlightTimetable__card,
+.FlightTimetable__card a {
     text-align: center;
     align-items: center;
     justify-content: center;
     display: flex;
 }
 
-.FlightCalendar__card:hover {
+.FlightTimetable__card:hover {
     background: $gray-light-hover;
 }
 
-.FlightCalendar__card:last-child {
+.FlightTimetable__card:last-child {
     margin-bottom: 0;
 }

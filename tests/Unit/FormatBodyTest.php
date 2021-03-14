@@ -122,18 +122,18 @@ class FormatBodyTest extends TestCase
         $cases = [
             [
                 "[[\nJanuary:\n- First\n]]",
-                component('FlightCalendar')
+                component('FlightTimetable')
                     ->with('months', ['January' => [format_body('First')]])
                     ->render(),
                 'Single calendar is formatted'
             ],
             [
                 "[[\nJanuary:\n- First\n]]\n[[\nFebruary:\n- Second\n]]",
-                component('FlightCalendar')
+                component('FlightTimetable')
                     ->with('months', ['January' => [format_body('First')]])
                     ->render() .
                     "\n" .
-                    component('FlightCalendar')
+                    component('FlightTimetable')
                         ->with('months', ['February' => [format_body('Second')]])
                         ->render(),
                 'Multiple calendars are formatted'

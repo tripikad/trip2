@@ -62,6 +62,16 @@ Route::put('flight/{id}/update', 'FlightController@update')
     ->name('flight.update')
     ->middleware('role:admin');
 
+//flightcalendar API
+
+Route::get('flightcalendar/month', 'FlightController@getMonthData')
+    ->name('flightcalendar.month')
+    ->middleware('throttle:60,1');
+
+Route::get('flightcalendar/getLivePrice', 'FlightController@getLivePrice')
+    ->name('flightcalendar.live_price')
+    ->middleware('throttle:60,1');
+
 // Travelmates
 
 Route::get('reisikaaslased', 'TravelmateController@index')->name('travelmate.index');

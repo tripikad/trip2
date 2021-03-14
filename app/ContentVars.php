@@ -94,7 +94,7 @@ class ContentVars
         $cache_key = 'content_' . $activity_id . '_' . ($user ? $user->id : $ip);
 
         if (!Cache::get($cache_key)) {
-            DB::select(
+            DB::insert(
                 "INSERT INTO `$table_name` (`viewable_id`, `viewable_type`, `count`) 
                 VALUES ($activity_id, $activity_type, $value) 
                 ON DUPLICATE KEY UPDATE 
