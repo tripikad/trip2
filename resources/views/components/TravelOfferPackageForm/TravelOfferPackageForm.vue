@@ -2,7 +2,8 @@
     <div class="company-edit-profile__form-container">
         <div class="company-edit-profile__form-container__form">
             <form class="VacationPackageForm"
-                  action=""
+                  ref="VacationPackageForm"
+                  :action="submitRoute"
                   method="POST"
                   autocomplete="off"
             >
@@ -72,7 +73,7 @@
                     <div class="Button Button--large Button--gray VacationPackageForm__back-button">
                         <div class="Button__title">Tagasi</div>
                     </div>
-                    <div class="Button Button--large VacationPackageForm__submit-button">
+                    <div class="Button Button--large VacationPackageForm__submit-button" v-on:click="submitForm()">
                         <div class="Button__title">Salvesta</div>
                     </div>
                 </div>
@@ -170,6 +171,10 @@ export default {
         },
         setActiveTab: function (tab) {
             this.activeTab = tab
+        },
+        submitForm: function () {
+            this.$refs.VacationPackageForm.submit()
+            //console.log('submit')
         }
     },
 }

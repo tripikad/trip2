@@ -13,7 +13,8 @@
                 Lisa uus paketikas
             </h2>
 
-            <travel-offer-package-form/>
+            <travel-offer-package-form
+                    submitRoute="{{route('company.store_travel_offer', ['company' => $company])}}"/>
 
 <!--            <div class="company-edit-profile__form-container">
                 <div class="company-edit-profile__form-container__form">

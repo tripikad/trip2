@@ -236,6 +236,18 @@ class CompanyController extends Controller
         ]);
     }
 
+    public function storeTravelOffer(Company $company, Request $request)
+    {
+        //$destinations = Destination::select('id', 'name')->get()->toArray();
+
+        $a = $request->post();
+
+        return view('pages.company.profile', [
+            'company' => $company,
+            'user' => $company->user,
+        ]);
+    }
+
     public function index()
     {
         $loggedUser = request()->user();
