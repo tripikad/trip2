@@ -1,0 +1,27 @@
+@import "../../../scss/variables";
+
+.TravelOfferListItem2 {
+    display: flex;
+    width: 100%;
+    border-bottom: 1px solid $gray-lighter;
+
+    &__stats {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
+
+    &__inner_stats {
+        display: flex;
+        flex-direction: column;
+        margin: 12px;
+        border-left: 1px solid $gray-lighter;
+        padding-left: 12px;
+    }
+
+    &__meta_row {
+        font-family: $font-family-sailec;
+        font-size: 16px;
+        color: $gray;
+    }
+}

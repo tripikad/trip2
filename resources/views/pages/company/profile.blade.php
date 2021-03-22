@@ -16,7 +16,8 @@
         <div class="container page-company-profile__content">
             <div class="row">
                 <div class="col-md-8 col-12">
-                    List siin
+                    <travel-offer-list
+                            :items="{{json_encode($offers)}}"/>
                 </div>
                 <div class="col-md-4 col-12 mt-5 mt-md-0">
                     <div class="page-company-profile__new-package-btn">

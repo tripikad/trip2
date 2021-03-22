@@ -12,11 +12,11 @@
                 <div class="row VacationPackageForm__field">
                     <div class="col-md-4 col-12">
                         <form-select
-                            v-model="fields.destination"
+                            :value="destinationValue"
                             title="Sihtkoht"
                             name="destination"
-                            :options="destinations"
-                            errors=""/>
+                            :options="destinationOptions"
+                            :errors=Object.keys(errors) />
                     </div>
                     <div class="col-md-4 col-12">
                         <form-datepicker
@@ -25,8 +25,7 @@
                             name="start_date"
                             placeholder="Algus"
                             disable-past-dates="true"
-                            errors="">
-                        </form-datepicker>
+                            :errors=errors.start_date />
                     </div>
 
                     <div class="col-md-4 col-12">
@@ -36,17 +35,19 @@
                             name="end_date"
                             placeholder="lõpp"
                             disable-past-dates="true"
-                            errors="">
-                        </form-datepicker>
+                            :errors=errors.end_date />
                     </div>
                 </div>
 
                 <div class="VacationPackageForm__subtitle">
-                    Hotellid
+                    Hotellid (max 5)
                 </div>
 
                 <div class="VacationPackageForm__hotels">
-                    <travel-offer-hotel />
+                    <travel-offer-hotel
+                        :items="fields.hotels"
+                        :accommodationOptions="accommodationOptions"
+                        :errors="hotelErrors"/>
                 </div>
 
                 <div class="VacationPackageForm__subtitle">
@@ -70,7 +71,7 @@
                 </div>
 
                 <div class="VacationPackageForm__buttons">
-                    <div class="Button Button--large Button--gray VacationPackageForm__back-button">
+                    <div class="Button Button--large Button--gray VacationPackageForm__back-button" v-on:click="goBack()">
                         <div class="Button__title">Tagasi</div>
                     </div>
                     <div class="Button Button--large VacationPackageForm__submit-button" v-on:click="submitForm()">
@@ -91,40 +92,30 @@ export default {
     components: {Loading, FormSelect, FormDatepicker},
     props: {
         isclasses: { default: '' },
-        options: { default: () => [] },
+        destinationOptions: { default: () => [] },
+        accommodationOptions: { default: () => [] },
         add: { default: true },
+        hotels: { default: () => [] },
         destination: { default: null },
         startDate: { default: null },
         endDate: { default: null },
-        description: { default: '' },
+        description: { default: null },
         accommodation: { default: null },
-        included: { default: '' },
-        category: { default: () => [] },
-        link: { default: '' },
-        categoryOptions: { default: () => [] },
-        image: { default: null },
+        included: { default: null },
+        excluded: { default: null },
+        extraFee: { default: null },
+        extraInfo: { default: null },
+        link: { default: null },
         disabled: { default: false },
-        submitRoute: null
+        submitRoute: null,
+        backRoute: null,
+        errors: { default: () => [] },
     },
     data() {
         return {
             csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-            activeTab: 'description',
             loading: false,
-            destinations: [
-                {
-                    id: 1,
-                    name: 'Eesti'
-                },
-                {
-                    id: 2,
-                    name: 'Tai'
-                },
-                {
-                    id: 3,
-                    name: 'Türgi'
-                }
-            ],
+            activeTab: 'description',
             tags: [
                 {
                     name: 'Kirjeldus',
@@ -156,13 +147,16 @@ export default {
                 startDate: this.startDate,
                 endDate: this.endDate,
                 price: this.price,
-                description: this.description,
-                category: this.category,
                 link: this.link,
-                image: null,
-                imageId: null
+                description: this.description,
+                accommodation: this.accommodation,
+                included: this.included,
+                excluded: this.excluded,
+                extraFee: this.extraFee,
+                extraInfo: this.extraInfo,
+                hotels: this.hotels,
             },
-            errors: [],
+            hotelErrors: this.errors.hotels ? JSON.parse(this.errors.hotels) : []
         }
     },
     methods: {
@@ -174,8 +168,15 @@ export default {
         },
         submitForm: function () {
             this.$refs.VacationPackageForm.submit()
-            //console.log('submit')
+        },
+        goBack: function () {
+            window.location.href = this.backRoute
         }
     },
+    computed: {
+        destinationValue: function() {
+            return this.fields.destination ? parseInt(this.fields.destination) : null
+        }
+    }
 }
 </script>

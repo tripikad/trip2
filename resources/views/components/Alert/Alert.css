@@ -13,6 +13,7 @@
     right: $margin-sm ?if $mobile;
     width: calc($spacer * 30);
     width: inherit ?if $mobile;
+    z-index: 9999;
 }
 
 .Alert__title {

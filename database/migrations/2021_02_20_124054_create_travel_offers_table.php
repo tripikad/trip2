@@ -23,7 +23,7 @@ class CreateTravelOffersTable extends Migration
             $table->date('end_date');
             $table->float('price');
             $table->boolean('active')->default(false);
-            $table->string('link');
+            $table->string('link')->nullable();
             $table->text('description')->nullable();
             $table->text('accommodation')->nullable();
             $table->text('included')->nullable();

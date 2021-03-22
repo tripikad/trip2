@@ -1,53 +1,58 @@
 <template>
     <div class="TravelOfferHotel">
-        <div class="FormTextfield margin-bottom-md TravelOfferHotel__container" v-for="(opt, index) in inputs">
+        <div class="FormTextfield margin-bottom-md TravelOfferHotel__container" v-for="(hotel, index) in hotels">
             <div class="TravelOfferHotel__options">
                 <div class="row">
                     <div class="col-sm-8 col-12">
-                        <input
-                            v-model="opt.name"
-                            class="FormTextfield__input"
-                            name="hotel[][name]"
-                            type="text"
-                            placeholder="Nimi (kohustuslik)">
+                        <form-text-field
+                            v-model="hotel.name"
+                            :name="'hotel[' + index + '][name]'"
+                            placeholder="Nimi (kohustuslik)"
+                            :errors="getErrors(index, 'name')"
+                        />
                     </div>
                     <div class="col-sm-4 col-12">
                         <star-rating
-                            v-model="opt.rating"
+                            v-model="hotel.star"
                             :show-rating="false"
                             :star-size="40"
                             :clearable="true"
+                            class="TravelOfferHotel__rating"
                         />
-                        <input type="hidden" name="hotel[][rating]" :value="opt.rating">
+                        <input type="hidden" :name="'hotel[' + index + '][star]'" :value="hotel.star">
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-sm-4 col-12">
-                        <input
-                            v-model="opt.price"
-                            class="FormTextfield__input"
-                            name="hotel[][price]"
+                        <form-text-field
+                            v-model="hotel.price"
+                            :name="'hotel[' + index + '][price]'"
                             type="number"
-                            placeholder="Hind (kohustuslik)">
+                            placeholder="Hind (kohustuslik)"
+                            :errors="getErrors(index, 'price')"
+                        />
                     </div>
                     <div class="col-sm-4 col-12">
-                        <form-select name="hotel[][price]"
-                                     :options="accValues"
-                                     placeholder="Majutuse tüüp"
-                                     isclasses="TravelOfferHotel__select"/>
+                        <form-select
+                             v-model="hotel.accommodation"
+                             :name="'hotel[' + index + '][accommodation]'"
+                             :options="accommodationOptions"
+                             placeholder="Majutuse tüüp"
+                             isclasses="TravelOfferHotel__select"/>
                     </div>
                     <div class="col-sm-4 col-12">
                         <input
+                            v-model="hotel.link"
                             class="FormTextfield__input"
-                            name="hotel[][link]"
+                            :name="'hotel[' + index + '][link]'"
                             type="text"
                             placeholder="Link">
                     </div>
                 </div>
             </div>
             <div>
-                <a class="PollOption__delete" v-on:click="deleteField(index)">
+                <a class="TravelOfferHotel__delete-btn" v-on:click="deleteHotel(index)" v-if="hotels.length > 1">
                     <component
                         is="Icon"
                         isclasses="white"
@@ -56,7 +61,7 @@
                 </a>
             </div>
         </div>
-        <button class="TravelOfferHotel__new_hotel" v-on:click="addField" type="button">
+        <button class="TravelOfferHotel__new_hotel" v-on:click="addHotel" type="button" v-if="this.canAddHotels()">
             Lisa uus hotell
         </button>
     </div>
@@ -65,58 +70,45 @@
 <script>
 import FormSelect from "../FormSelect/FormSelect.vue"
 import StarRating from 'vue-star-rating'
+import FormTextField from "../FormTextfield/FormTextField.vue";
 export default {
-    components: {FormSelect, StarRating},
+    components: {FormTextField, FormSelect, StarRating},
     props: {
         isclasses: { default: '' },
-        options: { default: () => [] },
+        accommodationOptions: { default: () => [] },
+        items: { default: () => [] },
+        maxHotels: { type: Number, default: 5 },
+        errors: { default: () => [] },
     },
     data() {
         return {
-            inputs: [{
-                id: 1,
-                name: 'name1',
-                rating: 2,
-                price: 12,
-            }],
-            accValues: [
-            {
-                id: '-1',
-                name: 'Määramata'
-            },
-            {
-                id: 1,
-                name: 'All inclusive (AI)'
-            },
-            {
-                id: 2,
-                name: 'Täispansion (FB)'
-            },
-            {
-                id: 3,
-                name: 'Poolpansion (HB)'
-            },
-            {
-                id: 4,
-                name: 'Bed & Breakfast (BB)'
-            },
-            {
-                id: 5,
-                name: 'Ilma toitlustuseta (BO)'
-            }],
+            hotels: this.items
         }
     },
     methods: {
-        addField: function () {
-            this.inputs.push({
-                name: '',
-                rating: 0,
-                price: undefined,
-            });
+        addHotel: function () {
+            if (this.canAddHotels()) {
+                this.hotels.push({
+                    name: '',
+                    star: 0,
+                    price: undefined,
+                });
+            }
         },
-        deleteField: function(index) {
-            this.$delete(this.inputs, index);
+        deleteHotel: function(index) {
+            this.$delete(this.hotels, index)
         },
+        canAddHotels: function() {
+            return this.hotels.length < this.maxHotels
+        },
+        getErrors: function (index, name) {
+            return (this.errors && this.errors[index] && this.errors[index][name]) ? this.errors[index][name] : []
+        }
     },
+    mounted() {
+        if (!this.hotels.length) {
+            this.addHotel()
+        }
+    }
 }
 </script>

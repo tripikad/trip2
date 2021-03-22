@@ -1,5 +1,5 @@
 <template>
-    <div class="FormDatepicker" :class="{ 'FormDatepicker--error': isError, [isclasses]: true }">
+    <div class="FormDatepicker" :class="{ 'FormDatepicker--error': errors.length, [isclasses]: true }">
         <label :for="name" class="FormDatepicker__label" v-if="title">{{ title }}</label>
 
         <VueDatePicker
@@ -11,15 +11,15 @@
             :noHeader="true"
             :locale="locale"
             :disabled="disabled"
+            :minDate="this.disablePastDates ? new Date(new Date().setDate(new Date().getDate()-1)) : null"
+            :onChange="this.$emit('input', this.date)"
         />
 
     </div>
 </template>
 
 <script>
-
     import locale from './locale/et';
-
     export default {
         props: {
             isclasses: { default: '' },
@@ -27,8 +27,9 @@
             title: { default: '' },
             value: { default: null },
             placeholder: { default: '' },
-            errors: { default: () => [] },
+            errors: { type: Array, default: () => [] },
             disabled: { default: false },
+            disablePastDates: { default: false }
         },
 
         data: function () {
@@ -38,9 +39,9 @@
             }
         },
         computed: {
-            isError() {
+            /*isError() {
                 return this.errors.includes(this.name)
-            },
+            },*/
             formattedDate() {
                 if (this.value) {
                     if (this.$moment(this.value, 'YYYY-MM-DD', true).isValid()) {

@@ -12,6 +12,7 @@
     font-size: 18px;
     color: $gray;
     padding: 12px 0;
+    flex: 1;
 
     &__image {
         display: flex;
@@ -35,7 +36,7 @@
         width: 100%;
         font-weight: bold;
         font-size: $font-heading-md;
-        //cursor: pointer;
+        cursor: pointer;
 
         span {
             color: $orange-dark;
@@ -62,6 +63,10 @@
     &__dates {
         font-size: $font-size-xs;
         margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    &__button {
         margin-right: 10px;
     }
 }

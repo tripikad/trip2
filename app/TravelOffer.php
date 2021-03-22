@@ -15,7 +15,7 @@ class TravelOffer extends Model
 
     protected $fillable = ['name'];
 
-    protected $dates = ['created_at', 'updated_at'];
+    protected $dates = ['start_date', 'end_date', 'created_at', 'updated_at'];
 
     protected $appends = [
         'status'
@@ -47,6 +47,16 @@ class TravelOffer extends Model
     public function company()
     {
         return $this->hasOne('App\Company', 'id', 'company_id');
+    }
+
+    public function destinations()
+    {
+        return $this->belongsToMany('App\Destination', 'travel_offer_destinations');
+    }
+
+    public function hotels()
+    {
+        return $this->hasMany('App\TravelOfferHotel');
     }
 
     public function images()

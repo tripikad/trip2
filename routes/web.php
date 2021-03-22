@@ -544,6 +544,15 @@ Route::post('company/{company}/add_travel_offer', 'CompanyController@storeTravel
     ->name('company.store_travel_offer')
     ->middleware('companyOwner');
 
+Route::get('company/{company}/travel_offer/{travelOffer}/edit', 'CompanyController@editTravelOffer')
+    ->name('company.edit_travel_offer')
+    ->middleware('companyOwner');
+
+Route::post('company/{company}/travel_offer/{travelOffer}/update', 'CompanyController@updateTravelOffer')
+    ->name('company.update_travel_offer')
+    ->middleware('companyOwner');
+
+
 /*Route::get('company', 'CompanyController@index')
     ->name('company.index')
     ->middleware('company');

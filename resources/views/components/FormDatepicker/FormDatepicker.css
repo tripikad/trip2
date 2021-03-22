@@ -25,3 +25,7 @@
 .FormDatepicker--error .vd-wrapper {
     border-color: $red;
 }
+
+.FormDatepicker--error label {
+    color: $red;
+}

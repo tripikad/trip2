@@ -21,10 +21,21 @@
         }
     }
 
+    &__rating {
+        margin-bottom: 10px;
+    }
+
     &__select {
+        margin-bottom: 10px;
+
         input::placeholder {
             color: $gray-light;
         }
+    }
+
+    &__delete-btn {
+        margin-left: 12px;
+        cursor: pointer;
     }
 
     &__new_hotel {

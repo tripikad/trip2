@@ -10,128 +10,28 @@
             </div>
 
             <h2 class="company-edit-profile__header">
-                Lisa uus paketikas
+                {{$title}}
             </h2>
 
+            {!! component('HeaderError') !!}
+
             <travel-offer-package-form
-                    submitRoute="{{route('company.store_travel_offer', ['company' => $company])}}"/>
-
-<!--            <div class="company-edit-profile__form-container">
-                <div class="company-edit-profile__form-container__form">
-                    <form class="VacationPackageForm"
-                          action="{{route('company.store_travel_offer', ['company' => $company])}}"
-                          method="POST"
-                          autocomplete="off"
-                    >
-                        {{ csrf_field() }}
-
-                        <div class="VacationPackageForm__field">
-                            <form-select
-                                    title="Asukoht"
-                                    name="destination"
-                                    :options="{{json_encode($destinations) }}"
-                                    value="{{ old('destination') }}"/>
-                        </div>
-
-                        <div class="row VacationPackageForm__field">
-                            <div class="col-md-6 col-12">
-                                <form-datepicker
-                                        title="Algus"
-                                        name="start_date"
-                                        placeholder="Algus"
-                                        value="{{ old('start_date') }}"
-                                        disable-past-dates="true"
-                                        errors="{{ $errors->count() ? json_encode($errors->keys()) : null}}">
-                                </form-datepicker>
-                            </div>
-
-                            <div class="col-md-6 col-12">
-                                <form-datepicker
-                                        title="Lõpp"
-                                        name="end_date"
-                                        placeholder="lõpp"
-                                        value="{{ old('end_date') }}"
-                                        disable-past-dates="true"
-                                        errors="{{ $errors->count() ? json_encode($errors->keys()) : null}}">
-                                </form-datepicker>
-                            </div>
-                        </div>
-
-                        <div class="VacationPackageForm__subtitle">
-                            Hotellid
-                        </div>
-
-                        <div class="VacationPackageForm__hotels">
-                            <travel-offer-hotel />
-                        </div>
-
-                        <div class="VacationPackageForm__subtitle">
-                            Info
-                        </div>
-
-                        <div class="VacationPackageForm__field">
-                            <form-text-editor
-                                    title="Kirjeldus"
-                                    name="description"
-                                    class="VacationPackageForm__editor"
-                                    value="{{ old('description') }}"
-                                    errors="{{ $errors->count() ? json_encode($errors->keys()) : null}}">
-                            </form-text-editor>
-                        </div>
-
-                        <div class="VacationPackageForm__field">
-                            <form-text-editor
-                                    title="Majutuse info"
-                                    name="description"
-                                    value="{{ old('description') }}"
-                                    errors="{{ $errors->count() ? json_encode($errors->keys()) : null}}">
-                            </form-text-editor>
-                        </div>
-
-                        <div class="VacationPackageForm__field">
-                            <form-text-editor
-                                    title="Pakkumine sisaldab"
-                                    name="description"
-                                    value="{{ old('description') }}"
-                                    errors="{{ $errors->count() ? json_encode($errors->keys()) : null}}">
-                            </form-text-editor>
-                        </div>
-
-                        <div class="VacationPackageForm__field">
-                            <form-text-editor
-                                    title="Pakkumine ei sisalda"
-                                    name="description"
-                                    value="{{ old('description') }}"
-                                    errors="{{ $errors->count() ? json_encode($errors->keys()) : null}}">
-                            </form-text-editor>
-                        </div>
-
-                        <div class="VacationPackageForm__field">
-                            <form-text-editor
-                                    title="Lisatasu eest"
-                                    name="description"
-                                    value="{{ old('description') }}"
-                                    errors="{{ $errors->count() ? json_encode($errors->keys()) : null}}">
-                            </form-text-editor>
-                        </div>
-
-                        <div class="VacationPackageForm__field">
-                            <form-text-editor
-                                    title="Lisainfo"
-                                    name="description"
-                                    value="{{ old('description') }}"
-                                    errors="{{ $errors->count() ? json_encode($errors->keys()) : null}}">
-                            </form-text-editor>
-                        </div>
-
-                        <div class="VacationPackageForm__submit-button">
-                            <x-form-submit-button
-                                    title="{{ trans('Lisa') }}"/>
-                        </div>
-                    </form>
-
-                </div>
-            </div>-->
+                submit-route="{{$submitRoute}}"
+                add="{{$offer ? false : true}}"
+                back-route="{{route('company.profile', ['company' => $company])}}"
+                :destination-options="{{json_encode($destinationOptions) }}"
+                :accommodation-options="{{json_encode($accommodationOptions) }}"
+                destination="{{old('destination', $offer ? $offer->destination_id : null)}}"
+                start-date="{{old('start_date', $offer ? $offer->start_date->format('Y-m-d') : null)}}"
+                end-date="{{old('end_date', $offer ? $offer->end_date->format('Y-m-d') : null)}}"
+                description="{{old('description', $offer ? $offer->description : null)}}"
+                accommodation="{{old('accommodation', $offer ? $offer->accommodation : null)}}"
+                included="{{old('included', $offer ? $offer->included : null)}}"
+                excluded="{{old('excluded', $offer ? $offer->excluded : null)}}"
+                extra_fee="{{old('extra_fee', $offer ? $offer->extra_fee : null)}}"
+                :hotels="{{json_encode($hotels)}}"
+                :errors="{{$errors ? json_encode($errors->messages(), JSON_HEX_APOS) : []}}"
+            />
         </div>
 
         <x-footer type="light"/>

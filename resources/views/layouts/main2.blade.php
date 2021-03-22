@@ -34,9 +34,8 @@
 @include('utils.svg')
 
 <div id="app">
-    {!! component('HeaderError') !!}
     @yield('content')
-<!--    <alert></alert>-->
+    {!! component('Alert') !!}
 </div>
 
 <script defer src="{{ dist('js') }}"></script>
