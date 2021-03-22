@@ -12,13 +12,15 @@ class XssProtection
             return $next($request);
         }
 
-        $input = $request->except('body');
+        //todo: do not allow with editor
+
+        /*$input = $request->except('body');
 
         array_walk_recursive($input, function (&$input) {
             $input = strip_tags($input);
         });
 
-        $request->merge($input);
+        $request->merge($input);*/
 
         if ($request->has('body') && !is_array($request->input('body'))) {
             $user = auth()->user();
