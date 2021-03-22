@@ -12,13 +12,18 @@ class Destination extends Baum\Node
 
     protected $table = 'destinations';
 
-    public bool $timestamps = false;
+    //public bool $timestamps = false;
 
     protected $parentColumnName = 'parent_id';
     protected $leftColumnName = 'lft';
     protected $rightColumnName = 'rgt';
     protected $depthColumnName = 'depth';
     protected $orderColumnName = 'name';
+
+    public function usesTimestamps()
+    {
+        return false;
+    }
 
     public function content()
     {
