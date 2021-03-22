@@ -8,7 +8,13 @@ class UnreadContent extends Model
 {
     protected $table = 'unread_contents';
 
-    public bool $timestamps = false;
+    //public bool $timestamps = false;
+
+    public function usesTimestamps()
+    {
+        return false;
+    }
+
     protected $dates = ['read_at'];
 
     public function content()

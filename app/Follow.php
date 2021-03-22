@@ -10,7 +10,12 @@ class Follow extends Model
 
     protected $fillable = ['followable_id', 'followable_type'];
 
-    public bool $timestamps = false;
+    //public bool $timestamps = false;
+
+    public function usesTimestamps()
+    {
+        return false;
+    }
 
     public function user()
     {

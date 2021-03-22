@@ -8,7 +8,12 @@ class Topic extends Model
 {
     protected $table = 'topics';
 
-    public bool $timestamps = false;
+    //public bool $timestamps = false;
+
+    public function usesTimestamps()
+    {
+        return false;
+    }
 
     public function content()
     {
