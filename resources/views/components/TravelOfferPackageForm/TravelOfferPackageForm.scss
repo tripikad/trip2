@@ -21,6 +21,18 @@
         }
     }
 
+    &__errors {
+        display: flex;
+        width: 100%;
+        max-width: 60em;
+        padding-bottom: 24px;
+    }
+
+    &__error-block {
+        padding: calc(12px * 2);
+        width: 100%;
+    }
+
     &__field {
         padding-bottom: calc(#{$spacer} * 2);
         line-height: 1em;

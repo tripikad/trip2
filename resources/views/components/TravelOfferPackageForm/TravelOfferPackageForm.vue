@@ -1,5 +1,10 @@
 <template>
     <div class="company-edit-profile__form-container">
+        <div class="VacationPackageForm__errors">
+            <form-error-block
+                :errors="errorBlockErrors"
+                isclasses="VacationPackageForm__error-block"/>
+        </div>
         <div class="company-edit-profile__form-container__form">
             <form class="VacationPackageForm"
                   ref="VacationPackageForm"
@@ -88,8 +93,10 @@
 import FormDatepicker from "../FormDatepicker/FormDatepicker.vue";
 import FormSelect from "../FormSelect/FormSelect.vue";
 import Loading from "../Loading/Loading.vue";
+import FormErrorBlock from "../FormErrorBlock/FormErrorBlock.vue";
+
 export default {
-    components: {Loading, FormSelect, FormDatepicker},
+    components: {FormErrorBlock, Loading, FormSelect, FormDatepicker},
     props: {
         isclasses: { default: '' },
         destinationOptions: { default: () => [] },
@@ -176,6 +183,14 @@ export default {
     computed: {
         destinationValue: function() {
             return this.fields.destination ? parseInt(this.fields.destination) : null
+        },
+        errorBlockErrors: function() {
+            return Object.keys(this.errors).reduce((object, key) => {
+                if (key !== 'hotels') {
+                    object[key] = this.errors[key]
+                }
+                return object
+            }, {})
         }
     }
 }

@@ -18,22 +18,22 @@
         line-height: $line-height-md;
 
         @media (max-width: 768px) {
-
             font: $font-heading-xl;
             line-height: $line-height-lg;
         }
     }
 
     &__form-container {
-
         display: flex;
+        width: 100%;
+        flex-direction: column;
         justify-content: center;
         position: relative;
         padding: calc(#{$spacer} * 2) 0;
         margin-bottom: $spacer;
+        align-items: center;
 
         &__form {
-
             padding: 0 $spacer;
             display: flex;
             justify-content: center;
@@ -44,7 +44,6 @@
     }
 
     &__eula-container {
-
         display: flex;
         justify-content: center;
         max-width: 74em;
@@ -52,7 +51,6 @@
         padding-bottom: calc(#{$spacer} * 3);
 
         &__eula_link {
-
             padding: 0 calc(#{$spacer} * 2);
             font: $font-text-sm;
             color: $gray;

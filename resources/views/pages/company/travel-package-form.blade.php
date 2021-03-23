@@ -13,8 +13,6 @@
                 {{$title}}
             </h2>
 
-            {!! component('HeaderError') !!}
-
             <travel-offer-package-form
                 submit-route="{{$submitRoute}}"
                 add="{{$offer ? false : true}}"
