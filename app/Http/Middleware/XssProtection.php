@@ -12,15 +12,16 @@ class XssProtection
             return $next($request);
         }
 
-        //todo: do not allow with editor
+        //todo: do not escape rich text editor values
+        if (!$request->is('company/*')) {
+            $input = $request->except('body');
 
-        /*$input = $request->except('body');
+            array_walk_recursive($input, function (&$input) {
+                $input = strip_tags($input);
+            });
 
-        array_walk_recursive($input, function (&$input) {
-            $input = strip_tags($input);
-        });
-
-        $request->merge($input);*/
+            $request->merge($input);
+        }
 
         if ($request->has('body') && !is_array($request->input('body'))) {
             $user = auth()->user();
