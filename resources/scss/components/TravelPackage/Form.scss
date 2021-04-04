@@ -1,10 +1,30 @@
-@import "../../../scss/variables";
+@import "../../variables";
 
-.VacationPackageForm {
+.TravelPackageForm {
     background: #fff;
     max-width: 60em;
     width: 100%;
-    padding: calc(#{$spacer} * 2);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    //padding: calc(#{$spacer} * 2) 0;
+    margin-bottom: calc(#{$spacer} * 2);
+    align-items: center;
+    padding-bottom: calc(#{$spacer} * 2);
+
+    &__form_container {
+        padding: 0 $spacer;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+
+        form {
+            width: 100%;
+        }
+    }
 
     &__subtitle {
         color: $blue;
@@ -113,7 +133,7 @@
         margin-right: 12px;
     }
 
-    .VacationPackageForm__editor .quillWrapper .ql-container.ql-snow .ql-editor {
+    .TravelPackageForm__editor .quillWrapper .ql-container.ql-snow .ql-editor {
         min-height: 400px;
     }
 }

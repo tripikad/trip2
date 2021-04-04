@@ -228,18 +228,13 @@ class CompanyController extends Controller
         return $hotels;
     }
 
-    public function addTravelOffer(Company $company, Request $request, TravelOfferService $service)
+    protected function travelPackageForm(Company $company, Request $request)
     {
-        $type = $request->get('type');
-        if (!$type)
-            abort(403);
-
+        $service = new TravelOfferService();
         $destinations = Destination::select('id', 'name')->where('depth', 2)->get()->toArray();
 
-        //return view by type
-
-        return view('pages.company.travel-package-form', [
-            'title' => 'Lisa uus paketikas',
+        return view('pages.travel_offer.travel_package.form', [
+            'title' => 'Lisa uus paketireis',
             'submitRoute' => route('company.store_travel_offer', ['company' => $company]),
             'company' => $company,
             'user' => $company->user,
@@ -248,6 +243,27 @@ class CompanyController extends Controller
             'hotels' => $this->formatHotelRating(old('hotel', [])),
             'offer' => null
         ]);
+    }
+
+    public function addTravelOffer(Company $company, Request $request)
+    {
+        $type = $request->get('type');
+        if (!$type)
+            abort(403);
+
+        //return view by type
+        switch ($type) {
+            case 'package':
+                return $this->travelPackageForm($company, $request);
+            /*case 'ski':
+                return '';
+            case 'round':
+                return '';*/
+            default:
+                abort(403);
+        }
+
+        return false;
     }
 
     public function storeTravelOffer(Company $company, Request $request, TravelOfferService $service)

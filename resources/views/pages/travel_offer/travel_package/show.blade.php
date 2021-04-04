@@ -14,14 +14,14 @@
     <div class="page-vp-show">
         <x-header class="vp-background-image">
             <div class="page-vp-show__header">
-                <h3 class="page-vp-show__header__heading">nimetus</h3>
+                <h3 class="page-vp-show__header__heading">Show page</h3>
             </div>
         </x-header>
 
         <div class="container page-vp-show__content">
             <div class="row">
                 <div>
-                    description
+                    SHOW
                 </div>
             </div>
         </div>

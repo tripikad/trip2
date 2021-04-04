@@ -1,0 +1,25 @@
+@import "../../../variables";
+
+.page-travel-package-form {
+    width: 100%;
+    background-color: $gray-lighter;
+    position: relative;
+
+    &__navigation {
+        padding-top: calc(#{$spacer} * 2);
+        margin-bottom: calc(#{$spacer} * 5);
+    }
+
+    &__header {
+        font: $font-heading-xxl;
+        color: $gray-dark;
+        text-align: center;
+        margin-bottom: calc(#{$spacer} * 3);
+        line-height: $line-height-md;
+
+        @media (max-width: 768px) {
+            font: $font-heading-xl;
+            line-height: $line-height-lg;
+        }
+    }
+}

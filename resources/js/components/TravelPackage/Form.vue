@@ -1,20 +1,19 @@
 <template>
-    <div class="company-edit-profile__form-container">
-        <div class="VacationPackageForm__errors">
+    <div class="TravelPackageForm">
+        <div class="TravelPackageForm__errors">
             <form-error-block
                 :errors="errorBlockErrors"
-                isclasses="VacationPackageForm__error-block"/>
+                isclasses="TravelPackageForm__error-block"/>
         </div>
-        <div class="company-edit-profile__form-container__form">
-            <form class="VacationPackageForm"
-                  ref="VacationPackageForm"
+        <div class="TravelPackageForm__form_container">
+            <form ref="TravelPackageForm"
                   :action="submitRoute"
                   method="POST"
                   autocomplete="off"
             >
                 <input type="hidden" name="_token" :value="csrf">
 
-                <div class="row VacationPackageForm__field">
+                <div class="row TravelPackageForm__field">
                     <div class="col-md-4 col-12">
                         <form-select
                             :value="destinationValue"
@@ -44,56 +43,56 @@
                     </div>
                 </div>
 
-                <div class="VacationPackageForm__subtitle">
+                <div class="TravelPackageForm__subtitle">
                     Hotellid (max 5)
                 </div>
 
-                <div class="VacationPackageForm__hotels">
+                <div class="TravelPackageForm__hotels">
                     <travel-offer-hotel
                         :items="fields.hotels"
                         :accommodationOptions="accommodationOptions"
                         :errors="hotelErrors"/>
                 </div>
 
-                <div class="VacationPackageForm__subtitle">
+                <div class="TravelPackageForm__subtitle">
                     Info
                 </div>
 
-                <div class="VacationPackageForm__tags">
-                    <div class="VacationPackageForm__tag" v-for="(tag, index) in tags"
-                         :class="{['VacationPackageForm__tag--active']: activeTab === tag.value}"
+                <div class="TravelPackageForm__tags">
+                    <div class="TravelPackageForm__tag" v-for="(tag, index) in tags"
+                         :class="{['TravelPackageForm__tag--active']: activeTab === tag.value}"
                          @click="setActiveTab(tag.value)">
                         {{tag.name}}
                     </div>
                 </div>
 
-                <div class="VacationPackageForm__field" v-for="(tag, index) in tags"
-                     :class="{['VacationPackageForm__field--hidden']: activeTab !== tag.value}">
+                <div class="TravelPackageForm__field" v-for="(tag, index) in tags"
+                     :class="{['TravelPackageForm__field--hidden']: activeTab !== tag.value}">
                     <form-text-editor
                         v-model="fields[tag.value]"
                         :name="tag.value"
-                        class="VacationPackageForm__editor"/>
+                        :placeholder="tag.placeholder"
+                        class="TravelPackageForm__editor"/>
                 </div>
 
-                <div class="VacationPackageForm__buttons">
-                    <div class="Button Button--large Button--gray VacationPackageForm__back-button" v-on:click="goBack()">
+                <div class="TravelPackageForm__buttons">
+                    <div class="Button Button--large Button--gray TravelPackageForm__back-button" v-on:click="goBack()">
                         <div class="Button__title">Tagasi</div>
                     </div>
-                    <div class="Button Button--large VacationPackageForm__submit-button" v-on:click="submitForm()">
+                    <div class="Button Button--large TravelPackageForm__submit-button" v-on:click="submitForm()">
                         <div class="Button__title">Salvesta</div>
                     </div>
                 </div>
             </form>
-
         </div>
     </div>
 </template>
 
 <script>
-import FormDatepicker from "../FormDatepicker/FormDatepicker.vue";
-import FormSelect from "../FormSelect/FormSelect.vue";
-import Loading from "../Loading/Loading.vue";
-import FormErrorBlock from "../FormErrorBlock/FormErrorBlock.vue";
+import FormDatepicker from "../../../views/components/FormDatepicker/FormDatepicker.vue";
+import FormSelect from "../../../views/components/FormSelect/FormSelect.vue";
+import Loading from "../../../views/components/Loading/Loading.vue";
+import FormErrorBlock from "../../../views/components/FormErrorBlock/FormErrorBlock.vue";
 
 export default {
     components: {FormErrorBlock, Loading, FormSelect, FormDatepicker},
@@ -122,31 +121,35 @@ export default {
         return {
             csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
             loading: false,
-            activeTab: 'description',
+            activeTab: 'included',
             tags: [
-                {
+                /*{
                     name: 'Kirjeldus',
                     value: 'description'
                 },
                 {
                     name: 'Majutus',
                     value: 'accommodation'
-                },
+                },*/
                 {
                     name: 'Sisaldab',
-                    value: 'included'
+                    value: 'included',
+                    placeholder: 'Pakkumine sisaldab...'
                 },
                 {
                     name: 'Ei sisalda',
-                    value: 'excluded'
+                    value: 'excluded',
+                    placeholder: 'Pakkumine ei sisalda...'
                 },
                 {
                     name: 'Lisatasu eest',
-                    value: 'extra_fee'
+                    value: 'extra_fee',
+                    placeholder: 'Lisatasu eest...'
                 },
                 {
                     name: 'Lisainfo',
-                    value: 'extra_info'
+                    value: 'extra_info',
+                    placeholder: 'Lisainfo...'
                 }
             ],
             fields: {

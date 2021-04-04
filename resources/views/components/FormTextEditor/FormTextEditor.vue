@@ -8,7 +8,8 @@
             v-model="content"
             :id="name"
             @input="$emit('input', $event)"
-            spellcheck="false"/>
+            spellcheck="false"
+            :placeholder="placeholder"/>
 
         <input type="hidden" :name=name :value="content"/>
     </div>
@@ -23,6 +24,7 @@ export default {
         value: { default: '' },
         errors: { default: () => [] },
         disabled: { default: false },
+        placeholder: { default: '' },
     },
     data: function () {
         return {
