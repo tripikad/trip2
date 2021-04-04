@@ -8,13 +8,12 @@
     flex-direction: column;
     justify-content: center;
     position: relative;
-    //padding: calc(#{$spacer} * 2) 0;
     margin-bottom: calc(#{$spacer} * 2);
     align-items: center;
     padding-bottom: calc(#{$spacer} * 2);
 
     &__form_container {
-        padding: 0 $spacer;
+        padding: 0 calc(#{$spacer} * 2);
         display: flex;
         justify-content: center;
         width: 100%;

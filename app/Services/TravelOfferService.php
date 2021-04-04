@@ -82,7 +82,11 @@ class TravelOfferService
     {
         $destinations = Destination::get()->pluck('name', 'id')->toArray();
         $rules = [
-            'destination' => [
+            'start_destination' => [
+                'required',
+                Rule::in(array_keys($destinations)),
+            ],
+            'end_destination' => [
                 'required',
                 Rule::in(array_keys($destinations)),
             ],
@@ -113,11 +117,13 @@ class TravelOfferService
             }
         }
 
-        $selectedDestinationName = $destinations[$request->post('destination')];
+        $endDestinationName = $destinations[$request->post('end_destination')];
 
         $travelOffer = new TravelOffer();
         $travelOffer->company_id = $company->id;
-        $travelOffer->name = $selectedDestinationName . ' ' . $request->post('start_date');
+        $travelOffer->name = $endDestinationName . ' ' . $request->post('start_date');
+        $travelOffer->start_destination_id = $request->post('start_destination');
+        $travelOffer->end_destination_id = $request->post('end_destination');
         $travelOffer->start_date = Carbon::parse($request->post('start_date'));
         $travelOffer->end_date =  Carbon::parse($request->post('end_date'));
         $travelOffer->price = $price;
@@ -128,8 +134,6 @@ class TravelOfferService
         $travelOffer->extra_fee = $request->post('extra_fee');
         $travelOffer->extra_info = $request->post('extra_info');
         $travelOffer->save();
-
-        $travelOffer->destinations()->attach($request->post('destination'));
 
         foreach ($hotels as $hotel) {
             $travelOfferHotel = new TravelOfferHotel();
@@ -149,7 +153,11 @@ class TravelOfferService
     {
         $destinations = Destination::get()->pluck('name', 'id')->toArray();
         $rules = [
-            'destination' => [
+            'start_destination' => [
+                'required',
+                Rule::in(array_keys($destinations)),
+            ],
+            'end_destination' => [
                 'required',
                 Rule::in(array_keys($destinations)),
             ],
@@ -180,8 +188,10 @@ class TravelOfferService
             }
         }
 
-        $selectedDestinationName = $destinations[$request->post('destination')];
-        $travelOffer->name = $selectedDestinationName . ' ' . $request->post('start_date');
+        $endDestinationName = $destinations[$request->post('destination')];
+        $travelOffer->name = $endDestinationName . ' ' . $request->post('start_date');
+        $travelOffer->start_destination_id = $request->post('start_destination');
+        $travelOffer->end_destination_id = $request->post('end_destination');
         $travelOffer->start_date = Carbon::parse($request->post('start_date'));
         $travelOffer->end_date =  Carbon::parse($request->post('end_date'));
         $travelOffer->price = $price;
@@ -192,8 +202,6 @@ class TravelOfferService
         $travelOffer->extra_fee = $request->post('extra_fee');
         $travelOffer->extra_info = $request->post('extra_info');
         $travelOffer->save();
-
-        $travelOffer->destinations()->sync($request->post('destination'));
 
         $travelOffer->hotels()->delete();
         foreach ($hotels as $hotel) {

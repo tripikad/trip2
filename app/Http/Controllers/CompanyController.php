@@ -109,12 +109,13 @@ class CompanyController extends Controller
     {
         $company->loadMissing('user');
         $company->loadMissing('travelOffers');
-        
-        $offers = TravelOffer::where('company_id', $company->id)->with('destinations')->get();
+
+        //todo: return resource
+        $offers = TravelOffer::where('company_id', $company->id)->get();
         foreach ($offers as $offer) {
             $offer->editRoute = route('company.edit_travel_offer', ['company'=> $company, 'travelOffer' => $offer]);
             $offer->days = $offer->end_date->diff($offer->start_date)->days;
-            $offer->destinationName = $offer->destinations->first()->name;
+            $offer->destinationName = $offer->endDestination->name;
         }
 
         return view('pages.company.profile', [
@@ -284,11 +285,11 @@ class CompanyController extends Controller
     public function editTravelOffer(Company $company, TravelOffer $travelOffer, Request $request, TravelOfferService $service)
     {
         $destinations = Destination::select('id', 'name')->where('depth', 2)->get()->toArray();
-        $travelOffer->loadMissing('destinations', 'hotels');
-        $destination = $travelOffer->destinations->first();
-        $travelOffer->destination_id = $destination->id;
+        $travelOffer->loadMissing('hotels');
+        //$destination = $travelOffer->endDestination->first();
+        //$travelOffer->destination_id = $destination->id;
         
-        return view('pages.company.travel-package-form', [
+        return view('pages.travel_offer.travel_package.form', [
             'title' => 'Muuda paketireisi',
             'submitRoute' => route('company.update_travel_offer', ['company' => $company, 'travelOffer' => $travelOffer]),
             'company' => $company,

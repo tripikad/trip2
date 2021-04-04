@@ -14,30 +14,38 @@
                 <input type="hidden" name="_token" :value="csrf">
 
                 <div class="row TravelPackageForm__field">
-                    <div class="col-md-4 col-12">
+                    <div class="col-md-3 col-12">
                         <form-select
-                            :value="destinationValue"
-                            title="Sihtkoht"
-                            name="destination"
+                            :value="startDestinationValue"
+                            title="Algus sihtkoht"
+                            name="start_destination"
                             :options="destinationOptions"
                             :errors=Object.keys(errors) />
                     </div>
-                    <div class="col-md-4 col-12">
+                    <div class="col-md-3 col-12">
+                        <form-select
+                            :value="endDestinationValue"
+                            title="Sihtkoht"
+                            name="end_destination"
+                            :options="destinationOptions"
+                            :errors=Object.keys(errors) />
+                    </div>
+                    <div class="col-md-3 col-12">
                         <form-datepicker
                             v-model="fields.startDate"
-                            title="Algus"
+                            title="Algus kuupäev"
                             name="start_date"
-                            placeholder="Algus"
+                            placeholder="Algus kp"
                             disable-past-dates="true"
                             :errors=errors.start_date />
                     </div>
 
-                    <div class="col-md-4 col-12">
+                    <div class="col-md-3 col-12">
                         <form-datepicker
                             v-model="fields.endDate"
-                            title="Lõpp"
+                            title="Lõpp kuupäev"
                             name="end_date"
-                            placeholder="lõpp"
+                            placeholder="Lõpp kp"
                             disable-past-dates="true"
                             :errors=errors.end_date />
                     </div>
@@ -102,7 +110,8 @@ export default {
         accommodationOptions: { default: () => [] },
         add: { default: true },
         hotels: { default: () => [] },
-        destination: { default: null },
+        startDestination: { default: null },
+        endDestination: { default: null },
         startDate: { default: null },
         endDate: { default: null },
         description: { default: null },
@@ -153,7 +162,8 @@ export default {
                 }
             ],
             fields: {
-                destination: this.destination,
+                startDestination: this.startDestination,
+                endDestination: this.endDestination,
                 startDate: this.startDate,
                 endDate: this.endDate,
                 price: this.price,
@@ -177,15 +187,18 @@ export default {
             this.activeTab = tab
         },
         submitForm: function () {
-            this.$refs.VacationPackageForm.submit()
+            this.$refs.TravelPackageForm.submit()
         },
         goBack: function () {
             window.location.href = this.backRoute
         }
     },
     computed: {
-        destinationValue: function() {
-            return this.fields.destination ? parseInt(this.fields.destination) : null
+        startDestinationValue: function() {
+            return this.fields.startDestination ? parseInt(this.fields.startDestination) : null
+        },
+        endDestinationValue: function() {
+            return this.fields.endDestination ? parseInt(this.fields.endDestination) : null
         },
         errorBlockErrors: function() {
             return Object.keys(this.errors).reduce((object, key) => {

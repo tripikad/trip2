@@ -49,15 +49,14 @@ class TravelOffer extends Model
         return $this->hasOne('App\Company', 'id', 'company_id');
     }
 
-    public function destinations()
+    public function startDestination()
     {
-        return $this->belongsToMany('App\Destination', 'travel_offer_destinations');
+        return $this->hasOne('App\Destination', 'id', 'start_destination_id');
     }
 
-    public function destinationsBy($destinationId)
+    public function endDestination()
     {
-        return $this->belongsToMany('App\Destination', 'travel_offer_destinations')
-            ->where('training_id', $destinationId);
+        return $this->hasOne('App\Destination', 'id', 'end_destination_id');
     }
 
     public function hotels()
