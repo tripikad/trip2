@@ -1,0 +1,67 @@
+@import "../variables";
+
+.TravelOfferSearch {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100%;
+    align-items: flex-start;
+    text-align: left;
+    border-radius: $border-radius-lg;
+    font: $font-text-xs;
+    line-height: 100%;
+
+    &__content {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        font-family: $font-family-sailec;
+
+        @media (max-width: 576px) {
+            flex-direction: column;
+        }
+    }
+
+    &__field {
+        display: flex;
+        margin-right: 15px;
+        margin-bottom: 10px;
+        width: 100%;
+    }
+
+    &__datepicker {
+        width: 100%;
+    }
+
+    &__datepicker .vd-picker__input-wrapper input {
+        &::placeholder {
+            //color: $white;
+        }
+    }
+
+    &__destination_field {
+        width: 100%;
+    }
+
+    &__destination {
+        width: 100%;
+    }
+
+    &__destination .multiselect__tags {
+        background: none;
+    }
+
+    &__destination .multiselect__input {
+        background: none;
+
+        &::placeholder {
+            //color: $white;
+        }
+    }
+
+    &__submit_btn input {
+        @media (max-width: 576px) {
+            width: 100%;
+        }
+    }
+}

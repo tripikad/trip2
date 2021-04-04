@@ -9,7 +9,7 @@ use Illuminate\View\View;
 
 class TravelOfferController extends Controller
 {
-    public function index(Request $request, TravelOfferService $service)
+    public function index(Request $request, TravelOfferService $service): View
     {
         $showList = false;
         if ($request->get('destination')) {

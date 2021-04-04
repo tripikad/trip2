@@ -1,26 +1,7 @@
-@import "../../variables";
+@import '../../variables';
 
 .TravelOffersPage {
     width: 100%;
-
-    &__header {
-        //min-height: 300px;
-        //height: 100%;
-
-        @media (max-width: 576px) {
-            //min-height: 250px;
-        }
-
-        &__tags {
-            padding-left: 0;
-            padding-right: 0;
-        }
-    }
-
-    &__navigation {
-        padding-top: calc(#{$spacer} * 2);
-        margin-bottom: calc(#{$spacer} * 5);
-    }
 
     &__header-content {
         margin-top: calc(#{$spacer} * 5);
@@ -34,18 +15,85 @@
 
         &__heading {
             font-weight: bold;
-            font-size: 48px;
-            line-height: 48px;
+            font-size: calc(#{$spacer} * 4);
+            line-height: calc(#{$spacer} * 4);
             text-align: center;
             color: $white;
-            //margin-left: $margin-xl;
-            margin-bottom: 60px;
+            margin-bottom: calc(#{$spacer} * 5);
 
             @media (max-width: 768px) {
-                font-size: 24px;
-                line-height: 24px;
+                font-size: calc(#{$spacer} * 2);
+                line-height: calc(#{$spacer} * 2);
                 margin-left: 0;
-                margin-bottom: 24px;
+                margin-bottom: calc(#{$spacer} * 2);
+            }
+        }
+    }
+
+    &__tags-container {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    &__tags {
+        display: flex;
+        width: 100%;
+        height: 50px;
+        overflow: auto;
+
+        &__tag {
+            display: flex;
+            color: $white;
+            white-space: nowrap;
+            padding: 20px;
+            cursor: pointer;
+            font-family: $font-family-sailec;
+            font-size: 16px;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+
+            @media (max-width: 576px) {
+                font-size: 14px;
+                padding: calc(#{$spacer});
+            }
+
+            &:hover {
+                background: $white;
+                color: $blue;
+
+                svg {
+                    fill: $blue;
+                }
+            }
+
+            svg {
+                margin-left: 10px;
+                width: 30px;
+                height: 30px;
+                fill: $white;
+            }
+
+            &--active {
+                background: $white;
+                font-weight: bold;
+                color: $blue;
+            }
+
+            &--last_minute {
+                color: $orange-dark;
+
+                svg {
+                    fill: $orange-dark;
+                }
+
+                &:hover {
+                    color: $orange-dark;
+
+                    svg {
+                        fill: $orange-dark;
+                    }
+                }
             }
         }
     }
@@ -53,22 +101,15 @@
     &__content {
         display: flex;
         flex-direction: column;
-        //width: 100%;
         padding: calc(#{$spacer} * 3) 0;
         min-height: 500px;
-
-        @media (max-width: 576px) {
-            //padding: calc(#{$spacer} * 2) #{$spacer};
-        }
-
-        &__item {
-            margin-bottom: 36px;
-        }
     }
 
     &__search {
-        padding-bottom: 20px;
+        padding-bottom: calc(#{$spacer} * 3);
     }
+
+
 
     &__items {
         display: flex;
@@ -128,7 +169,9 @@
     }
 
     &__grid-wrapper {
-        padding-top: 10px;
+        //padding-top: 10px;
+        display: flex;
+        flex-wrap: wrap;
     }
 
     &__filter {

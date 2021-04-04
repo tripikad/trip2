@@ -35,9 +35,9 @@ requireComponent.keys().forEach(filePath => {
     Vue.component(componentName, componentConfig.default || componentConfig)
 })
 
-const jsPages = require.context('../js/pages', true, /\.vue$/)
-jsPages.keys().forEach(filePath => {
-    const componentConfig = jsPages(filePath)
+const jsComponents = require.context('../js/components', true, /\.vue$/)
+jsComponents.keys().forEach(filePath => {
+    const componentConfig = jsComponents(filePath)
     // Get the filename from full file path and strip the .vue extension
     const componentName = filePath.match(/[-_\w]+[.][\w]+$/i)[0].split('.')[0]
     Vue.component(componentName, componentConfig.default || componentConfig)
