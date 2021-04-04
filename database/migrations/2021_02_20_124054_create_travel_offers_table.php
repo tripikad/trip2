@@ -16,6 +16,8 @@ class CreateTravelOffersTable extends Migration
         Schema::create('travel_offers', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('company_id')->index();
+            $table->unsignedInteger('start_destination_id')->index();
+            $table->unsignedInteger('end_destination_id')->index();
             $table->string('type')->default('package');
             $table->string('name');
             $table->string('slug')->index();
@@ -37,6 +39,16 @@ class CreateTravelOffersTable extends Migration
                 ->foreign('company_id')
                 ->references('id')
                 ->on('companies')
+                ->onDelete('cascade');
+
+            $table->foreign('start_destination_id')
+                ->references('id')
+                ->on('destinations')
+                ->onDelete('cascade');
+
+            $table->foreign('end_destination_id')
+                ->references('id')
+                ->on('destinations')
                 ->onDelete('cascade');
 
             $table->unique('slug');

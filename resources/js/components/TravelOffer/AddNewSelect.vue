@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import FormSelect from "../FormSelect/FormSelect.vue";
+import FormSelect from "../../../views/components/FormSelect/FormSelect.vue";
 export default {
     components: {FormSelect},
     props: {
@@ -24,7 +24,7 @@ export default {
             addNewOptions: [
                 {
                     id: 'package',
-                    name: 'Paketikas',
+                    name: 'Paketireis',
                 },
                 {
                     id: 'tour',

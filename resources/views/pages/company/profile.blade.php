@@ -20,10 +20,10 @@
                             :items="{{json_encode($offers)}}"/>
                 </div>
                 <div class="col-md-4 col-12 mt-5 mt-md-0">
-                    <div class="page-company-profile__new-package-btn">
+                    <div>
                         <travel-offer-add-new-select :company-id="{{$company->id}}"/>
                     </div>
-                    <div class="page-company-profile__plans">
+                    <div class="page-company-profile__subscription">
                         <subscription-plan/>
                     </div>
                 </div>

@@ -40,10 +40,10 @@
 </template>
 
 <script>
-import FormDatepicker from "../../views/components/FormDatepicker/FormDatepicker.vue";
-import FormSelect from "../../views/components/FormSelect/FormSelect.vue";
-import FormSliderMultiple from "../../views/components/FormSliderMultiple/FormSliderMultiple.vue";
-import FormButtonProcess from "../../views/components/FormButtonProcess/FormButtonProcess.vue";
+import FormDatepicker from "../../../views/components/FormDatepicker/FormDatepicker.vue";
+import FormSelect from "../../../views/components/FormSelect/FormSelect.vue";
+import FormSliderMultiple from "../../../views/components/FormSliderMultiple/FormSliderMultiple.vue";
+import FormButtonProcess from "../../../views/components/FormButtonProcess/FormButtonProcess.vue";
 export default {
     components: {FormButtonProcess, FormSliderMultiple, FormSelect, FormDatepicker},
     props: {

@@ -1,4 +1,4 @@
-@import "../../../scss/variables";
+@import "../../variables";
 
 .TravelOfferAddNewSelect {
     display: flex;
@@ -8,21 +8,6 @@
     &__button {
         cursor: pointer;
     }
-
-    /*select {
-        min-height: 50px;
-        padding: 10px;
-        font-family: $font-family-sailec;
-        font-size: $font-size-md;
-        border: $border-gray-md;
-        font-weight: bold;
-        text-align: center;
-        color: $white;
-        background: $green-dark;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        appearance: none;
-    }*/
 }
 
 .TravelOfferAddNewSelect .multiselect__tags {
@@ -49,5 +34,4 @@
         border-color: #fff transparent transparent;
         color: #fff;
     }
-
 }
