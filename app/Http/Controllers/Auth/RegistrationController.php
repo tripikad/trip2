@@ -18,7 +18,7 @@ use App\Http\Controllers\NewsletterController;
 
 class RegistrationController extends Controller
 {
-    public function companyForm(): View
+    public function companyForm(Request $request): View
     {
         return view('pages.company.register');
     }
@@ -44,7 +44,7 @@ class RegistrationController extends Controller
 
         $company = new Company;
         $company->name = $request->post('company_name');
-        $company->type = 'travel_offer'; //default at the moment. Needs to come from selection
+        $company->type = 'travel_offer'; //default at the moment.
         $company->save();
 
         $userFields['company_id'] = $company->id;

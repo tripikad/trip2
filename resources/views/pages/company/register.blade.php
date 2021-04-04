@@ -1,29 +1,25 @@
 @extends('layouts.main2')
 
 @section('content')
-
-    <div class="register-business-user">
-
-        <div class="container register-business-user__navigation">
+    <div class="page-company-register">
+        <div class="container page-company-register__navigation">
             <x-navbar/>
         </div>
 
-        <h2 class="register-business-user__header">
+        <h2 class="page-company-register__header">
             {{trans('auth.register.business_user.title')}}
         </h2>
 
-        <h2 class="register-business-user__sub-header">
+        <h2 class="page-company-register__sub-header">
             {{trans('auth.register.subhead.title')}}
         </h2>
 
-        <div class="register-business-user__form-container">
-            <div class="register-business-user__form-container__form">
-                <x-company-register-form />
-            </div>
+        <div class="page-company-register__form">
+            <x-company-register-form />
         </div>
 
-        <div class="register-business-user__eula-container">
-            <div class="register-business-user__eula-container__eula_link">
+        <div class="page-company-register__eula">
+            <div class="register-business-user__eula__link">
                 {!! trans('auth.register.field.eula.title', [
                             'link' => format_link(
                                 route('static.show.id', [25151]),

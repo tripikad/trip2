@@ -1,20 +1,17 @@
-@import '../../../scss/variables';
+@import '../variables';
 
-.RegisterBusinessUserForm {
-
+.CompanyRegisterForm {
     background: #fff;
     max-width: 74em;
-    width: 32em;
+    width: 100%;
     padding: calc(#{$spacer} * 2);
 
     &__field {
-
         margin-bottom: calc(#{$spacer} * 2);
         line-height: 1em;
     }
 
     &__submit-button {
-
         padding-top: calc(#{$spacer});
     }
 }

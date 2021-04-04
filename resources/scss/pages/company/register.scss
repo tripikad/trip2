@@ -1,20 +1,17 @@
 @import "../../variables";
 
-.register-business-user {
-
+.page-company-register {
     height: 100%;
     width: 100%;
     background-color: $gray-lighter;
     position: relative;
 
     &__navigation {
-
         padding-top: calc(#{$spacer} * 2);
         margin-bottom: calc(#{$spacer} * 5);
     }
 
     &__header {
-
         font: $font-heading-xxl;
         color: $gray-dark;
         text-align: center;
@@ -22,60 +19,47 @@
         line-height: $line-height-md;
 
         @media (max-width: 768px) {
-
             font: $font-heading-xl;
             line-height: $line-height-lg;
         }
     }
 
     &__sub-header {
-
         font: $font-heading-lg;
         color: $gray-dark;
         text-align: center;
         padding-bottom: calc(#{$spacer} * 2);
 
         @media (max-width: 768px) {
-
             font: $font-heading-md;
         }
     }
 
-    &__form-container {
-
+    &__form {
         display: flex;
         justify-content: center;
-        position: relative;
-        padding: calc(#{$spacer} * 2) 0;
-        margin-bottom: $spacer;
-
-        &__form {
-
-            padding: 0 $spacer;
-            display: flex;
-            justify-content: center;
-            width: 100%;
-            flex-direction: column;
-            align-items: center;
-        }
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        max-width: 32em;
+        margin: calc(#{$spacer}) auto;
     }
 
-    &__eula-container {
-
+    &__eula {
         display: flex;
         justify-content: center;
         max-width: 74em;
         width: 100%;
-        padding-bottom: calc(#{$spacer} * 3);
+        padding: calc(#{$spacer}) calc(#{$spacer} * 2) calc(#{$spacer} * 3) calc(#{$spacer} * 2);
+        margin: 0 auto;
+        text-align: center;
 
-        &__eula_link {
-
+        &__link {
             padding: 0 calc(#{$spacer} * 2);
             font: $font-text-sm;
             color: $gray;
 
             a {
-
                 color: $blue;
             }
         }
