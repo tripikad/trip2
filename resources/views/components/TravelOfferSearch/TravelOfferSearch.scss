@@ -3,7 +3,6 @@
 .TravelOfferSearch {
     display: flex;
     flex-direction: column;
-    margin-top: -50px;
     justify-content: flex-start;
     width: 100%;
     align-items: flex-start;
@@ -11,8 +10,6 @@
     border-radius: $border-radius-lg;
     font: $font-text-xs;
     line-height: 100%;
-    //background: rgba(84, 90, 95, .8);
-    //box-shadow: 0 2px 0 rgba(0, 0, 150, 0.025), 2px 4px 0 rgba(0, 0, 150, 0.015);
 
     @media (max-width: 576px) {
         //flex-direction: column;
@@ -23,7 +20,6 @@
         display: flex;
         width: 100%;
         height: 50px;
-        //flex-wrap: wrap;
         overflow: auto;
     }
 
@@ -39,12 +35,9 @@
         align-items: center;
         font-weight: bold;
 
-        &:first-child {
-            //border-top-left-radius: $border-radius-lg;
-        }
-
-        &:last-child {
-            //border-top-right-radius: $border-radius-lg;
+        @media (max-width: 576px) {
+            font-size: 14px;
+            padding: 12px;
         }
 
         &:hover {
@@ -90,9 +83,8 @@
         display: flex;
         justify-content: center;
         width: 100%;
-        padding: 30px 0 30px 0;
+        //padding: 30px 0 30px 0;
         font-family: $font-family-sailec;
-        //color: $white;
 
         @media (max-width: 576px) {
             flex-direction: column;
@@ -137,6 +129,12 @@
 
         &::placeholder {
             //color: $white;
+        }
+    }
+
+    &__submit_btn input {
+        @media (max-width: 576px) {
+            width: 100%;
         }
     }
 

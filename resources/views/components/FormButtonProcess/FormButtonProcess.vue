@@ -1,14 +1,12 @@
 <template>
-    <div>
-        <input
-            class="FormButtonProcess"
-            :class="isclasses"
-            type="submit"
-            :value="processing ? processingtitle : title"
-            @click.once="onClick"
-            :disabled="processing"
-        />
-    </div>
+    <input
+        class="FormButtonProcess"
+        :class="isclasses"
+        type="submit"
+        :value="processing ? processingtitle : title"
+        @click.once="onClick"
+        :disabled="processing"
+    />
 </template>
 
 <script>

@@ -1,54 +1,44 @@
 @import "../../../scss/variables";
 
 .NavbarSearch {
-
     display: flex;
     align-items: center;
 
     &__icon {
-
         cursor: pointer;
         margin-right: $margin-sm;
 
         svg {
-
             fill: $gray-light;
         }
     }
 
     &__input {
-
         background: none;
         border: none;
         font: $font-heading-sm;
         padding: $padding-xs;
 
         &:focus {
-
             outline: none;
         }
     }
 
     &--white {
-
         fill: $white;
 
         .NavbarSearch__input {
-
             color: $white;
         }
 
         .NavbarSearch__icon {
-
             svg {
-
                 fill: $white;
             }
         }
     }
 
     &--gray {
-
         fill: $gray-dark;
     }
 }

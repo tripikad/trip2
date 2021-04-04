@@ -6,29 +6,24 @@
     z-index: 10000;
 
     &__menuIcon {
-
         cursor: pointer;
     }
 
     svg {
-
         fill: $gray;
     }
 
     &__userImage {
-
         margin-left: $margin-sm;
         display: flex;
         align-items: center;
     }
 
     &__badge {
-
         margin-right: $margin-xs;
     }
 
     &__menu {
-
         align-items: flex-start;
         background: $green;
         bottom: 0;
@@ -42,34 +37,28 @@
     }
 
     &__header {
-
         display: flex;
         justify-content: space-between;
         align-items: center;
     }
 
     &__search svg {
-
         fill: $white;
     }
 
     &__closeIcon {
-
         cursor: pointer;
 
         svg {
-
             fill: $white;
         }
     }
 
     &__links {
-
         padding: $padding-sm;
     }
 
     &__sublinkWrapper {
-
         padding: $padding-sm;
         display: flex;
         align-items: center;
@@ -77,19 +66,16 @@
     }
 
     &__sublinkTitle {
-
         color: $white;
         font: $font-text-lg;
         text-align: center;
     }
 
     &__sublinkBadge {
-
         margin-left: $margin-sm;
     }
 
     &--white {
-
         .NavbarMobile__menuIcon svg {
             fill: $white;
         }

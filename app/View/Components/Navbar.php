@@ -37,12 +37,6 @@ class Navbar extends Component
                 'route' => route('travel_offer.index'),
                 'new' => trans('menu.header.new'),
             ])
-            // @LAUNCH Remove this check
-            /*->putWhen($user && $user->hasRole('superuser'), 'offer', [
-                'title' => trans('menu.header.offer'),
-                'new' => trans('menu.header.new'),
-                'route' => route('offer.index')
-            ])*/
             ->toArray();
     }
 
@@ -135,7 +129,7 @@ class Navbar extends Component
         return view('components.Navbar', [
             'title' => $title,
             'route' => $route,
-            'svg' => $this->type === 'dark' ? '#tripee_logo_dark' : '#tripee_logo'
+            'logo' => $this->type === 'dark' ? '#tripee_logo_dark' : '#tripee_logo'
         ]);
     }
 }

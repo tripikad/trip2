@@ -1,17 +1,15 @@
-<div class="Navbar Navbar--{{$type}}">
+<div {{ $attributes->merge(['class' => 'Navbar']) }}>
     <div class="Navbar__logo">
         <a href="{{ route('frontpage.index') }}">
             <svg>
-                <use xlink:href="{{$svg}}"></use>
+                <use xlink:href="{{$logo}}"></use>
             </svg>
         </a>
     </div>
 
     <div class="Navbar__right">
         <div class="Navbar__search">
-            <navbar-search
-                    isclasses="NavbarSearch--{{$type}}">
-            </navbar-search>
+            <navbar-search isclasses="NavbarSearch--{{$type}}" />
         </div>
 
         <div class="Navbar__desktop">
@@ -21,8 +19,7 @@
                     :route="{{json_encode($route)}}"
                     :user="{{ $user ? json_encode($user) : 'null' }}"
                     :links='{{ json_encode($menuLinks) }}'
-                    :sublinks='{{ json_encode($userLinks) }}'>
-            </navbar-desktop>
+                    :sublinks='{{ json_encode($userLinks) }}'/>
         </div>
 
         <div class="Navbar__mobile">
@@ -31,8 +28,7 @@
                            :route="{{json_encode($route)}}"
                            :user="{{ $user ? json_encode($user) : 'null' }}"
                            :links='{{ json_encode($menuLinks) }}'
-                           :sublinks='{{ json_encode($userLinks) }}'>
-            </navbar-mobile>
+                           :sublinks='{{ json_encode($userLinks) }}' />
         </div>
     </div>
 </div>

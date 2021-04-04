@@ -1,49 +1,35 @@
 <template>
-    <div class="TravelOfferSearch" :class="isclasses">
-        <div class="TravelOfferSearch__tags">
-            <div class="TravelOfferSearch__tag TravelOfferSearch__tag--active">
-                Kõik
-            </div>
-            <div class="TravelOfferSearch__tag" v-on:click="setLoading()">
-                Puhkusepaketid
-                <svg>
-                    <use xlink:href="#palm-tree"></use>
-                </svg>
-            </div>
-            <div class="TravelOfferSearch__tag">
-                Ringreis
-                <svg>
-                    <use xlink:href="#baggage"></use>
-                </svg>
-            </div>
-            <div class="TravelOfferSearch__tag">
-                Suusareis
-                <svg>
-                    <use xlink:href="#luggage"></use>
-                </svg>
-            </div>
-            <div class="TravelOfferSearch__tag TravelOfferSearch__last_minute">
-                Viimase hetke pakkumised
-                <svg>
-                    <use xlink:href="#palm-tree"></use>
-                </svg>
-            </div>
-        </div>
+    <form class="TravelOfferSearch" :class="isclasses" id="TravelOfferSearch">
         <div class="TravelOfferSearch__content">
             <div class="TravelOfferSearch__field">
-                <FormDatepicker name="startDate" isclasses="TravelOfferSearch__datepicker" placeholder="Algus"/>
+                <FormDatepicker
+                    name="startDate"
+                    isclasses="TravelOfferSearch__datepicker"
+                    placeholder="Algus"
+                    disablePastDates="true"/>
             </div>
             <div class="TravelOfferSearch__field">
-                <FormDatepicker name="endDate" isclasses="TravelOfferSearch__datepicker" placeholder="Lõpp"/>
+                <FormDatepicker
+                    name="endDate"
+                    isclasses="TravelOfferSearch__datepicker"
+                    placeholder="Lõpp"
+                    disablePastDates="true"/>
             </div>
             <div class="TravelOfferSearch__field TravelOfferSearch__destination_field">
-                <FormSelect name="destination" :options="destinations" placeholder="Kõik sihtkohad" isclasses="TravelOfferSearch__destination"/>
+                <FormSelect
+                    name="destination"
+                    :options="destinations"
+                    placeholder="Kõik sihtkohad"
+                    isclasses="TravelOfferSearch__destination"/>
             </div>
-<!--            <div class="TravelOfferSearch__field TravelOfferSearch__price">
-                <FormSliderMultiple isclasses="TravelOfferSearch__slider" :step="step" :max=maxPrice :value2="value2" suffix="€"/>
-            </div>-->
+            <div class="TravelOfferSearch__submit_btn">
+                <form-button-process
+                    title="Otsi"
+                    id="TravelOfferSearch"
+                    processingtitle="Otsin.."/>
+            </div>
         </div>
-    </div>
+    </form>
 </template>
 
 <script>
@@ -51,8 +37,9 @@ import FormDatepicker from "../FormDatepicker/FormDatepicker.vue";
 import FormSelect from "../FormSelect/FormSelect.vue";
 import FormSliderMultiple from "../FormSliderMultiple/FormSliderMultiple.vue";
 import Loading from "../Loading/Loading.vue";
+import FormButtonProcess from "../FormButtonProcess/FormButtonProcess.vue";
 export default {
-    components: {Loading, FormSliderMultiple, FormSelect, FormDatepicker},
+    components: {FormButtonProcess, Loading, FormSliderMultiple, FormSelect, FormDatepicker},
     props: {
         isclasses: { default: '' },
         options: { default: () => [] },
@@ -60,10 +47,6 @@ export default {
     data() {
         return {
             loading: false,
-            maxPrice: 1500,
-            value2: 1500,
-            step: 10,
-            suffix: '€',
             destinations: [
                 {
                     id: 1,

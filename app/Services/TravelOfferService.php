@@ -209,4 +209,46 @@ class TravelOfferService
 
         return $travelOffer;
     }
+
+    public function getGridItemsByType(string $type)
+    {
+        $items = TravelOffer::where('type', $type)
+            ->with('destinations')
+            //->where('active', true)
+            ->get();
+
+        $res = [];
+        foreach ($items as $item) {
+            $destination = $item->destinations->first();
+            $parentDestination = $destination::find($destination->parent_id);
+
+            if (!isset($res[$parentDestination->id])) {
+                $res[$parentDestination->id] = [
+                    'name' => $parentDestination->name,
+                    'price' => $item->price
+                ];
+            } else {
+                if ($item->price < $res[$parentDestination->id]['price']) {
+                    $res[$parentDestination->id]['price'] = $item->price;
+                }
+            }
+        }
+
+        return $res;
+    }
+
+    public function getListItemsByType(string $type, int $destinationId)
+    {
+        $destinationIds = Destination::where('parent_id', $destinationId)->get()->pluck('id')->toArray();
+        $items = TravelOffer::where('type', $type)
+            ->with('destinations')
+            ->join('travel_offer_destinations', 'travel_offers.id', '=', 'travel_offer_destinations.travel_offer_id')
+            ->whereIn('travel_offer_destinations.destination_id', $destinationIds)
+            //->where('active', true)
+            ->get();
+
+        //$res = [];
+
+        return $items;
+    }
 }

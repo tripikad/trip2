@@ -9,21 +9,18 @@ use Illuminate\View\View;
 class Header extends Component
 {
     private ?User $user;
-    public string $type;
     public string $navBarType;
     public string $backgroundImage;
 
     /**
      * Create a new component instance.
      *
-     * @param string $type
      * @param string $navBarType
      * @param string $backgroundImage
      */
-    public function __construct($type = 'main', $navBarType = 'white', $backgroundImage = '/photos/header3.jpg')
+    public function __construct($backgroundImage = '/photos/header3.jpg', $navBarType = 'white')
     {
         $this->user = auth()->user();
-        $this->type = $type;
         $this->navBarType = $navBarType;
         $this->backgroundImage = $backgroundImage;
     }
@@ -35,6 +32,6 @@ class Header extends Component
      */
     public function render()
     {
-        return view('components.Header.Header');
+        return view('components.Header');
     }
 }

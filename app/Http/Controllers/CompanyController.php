@@ -234,7 +234,7 @@ class CompanyController extends Controller
         if (!$type)
             abort(403);
 
-        $destinations = Destination::select('id', 'name')->get()->toArray();
+        $destinations = Destination::select('id', 'name')->where('depth', 2)->get()->toArray();
 
         //return view by type
 
@@ -267,7 +267,7 @@ class CompanyController extends Controller
 
     public function editTravelOffer(Company $company, TravelOffer $travelOffer, Request $request, TravelOfferService $service)
     {
-        $destinations = Destination::select('id', 'name')->get()->toArray();
+        $destinations = Destination::select('id', 'name')->where('depth', 2)->get()->toArray();
         $travelOffer->loadMissing('destinations', 'hotels');
         $destination = $travelOffer->destinations->first();
         $travelOffer->destination_id = $destination->id;

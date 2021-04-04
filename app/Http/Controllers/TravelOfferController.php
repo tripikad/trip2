@@ -2,17 +2,36 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\TravelOfferService;
 use App\TravelOffer;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class TravelOfferController extends Controller
 {
-    public function index(Request $request)
+    public function index(Request $request, TravelOfferService $service)
     {
+        $showList = false;
+        if ($request->get('destination')) {
+            $showList = true;
+            $items = $service->getListItemsByType('package', $request->get('destination'));
+        } else {
+            $items = $service->getGridItemsByType('package');
+        }
+
         return view('pages.travel_offer.index', [
-            'packages' => [],
-            'categories' => [],
+            'items' => $items,
+            'showList' => $showList,
+            'filters' => [
+                [
+                    'id' => 'start',
+                    'name' => 'Sorteeri kuupäeva järgi'
+                ],
+                [
+                    'id' => 'price',
+                    'name' => 'Sorteeri hinna järgi'
+                ],
+            ]
         ]);
     }
 
