@@ -12,6 +12,7 @@
                   autocomplete="off"
             >
                 <input type="hidden" name="_token" :value="csrf">
+                <input type="hidden" name="type" value="package">
 
                 <div class="row TravelPackageForm__field">
                     <div class="col-md-3 col-12">

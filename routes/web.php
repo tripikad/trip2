@@ -540,7 +540,7 @@ Route::get('company/{company}/add_travel_offer', 'CompanyController@addTravelOff
     ->name('company.add_travel_offer')
     ->middleware('companyOwner');
 
-Route::post('company/{company}/add_travel_offer', 'CompanyController@storeTravelOffer')
+Route::post('company/{company}/store_travel_offer', 'CompanyController@storeTravelOffer')
     ->name('company.store_travel_offer')
     ->middleware('companyOwner');
 

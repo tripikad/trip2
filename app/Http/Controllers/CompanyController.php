@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Company;
 use App\Destination;
 use App\Services\TravelOfferService;
+use App\Services\TravelPackageService;
 use App\TravelOffer;
 use Hash;
 use Carbon\Carbon;
@@ -219,7 +220,11 @@ class CompanyController extends Controller
             ->with('info', trans('user.update.info'));
     }
 
-    private function formatHotelRating($hotels)
+    /**
+     * @param array $hotels
+     * @return mixed
+     */
+    private function formatHotelRating($hotels): array
     {
         array_walk($hotels, function(&$hotel, $key) use (&$hotels) {
             if (isset($hotel['star']))
@@ -229,33 +234,46 @@ class CompanyController extends Controller
         return $hotels;
     }
 
-    protected function travelPackageForm(Company $company, Request $request)
+    /**
+     * @param Company $company
+     * @param Request $request
+     * @param TravelOffer|null $travelOffer
+     * @return Application|Factory|\Illuminate\View\View
+     */
+    protected function travelPackageForm(Company $company, Request $request, TravelOffer $travelOffer = null)
     {
         $service = new TravelOfferService();
-        $destinations = Destination::select('id', 'name')->where('depth', 2)->get()->toArray();
+        $destinations = Destination::select('id', 'name')->where('depth', 2)->get()->toArray(); //cities
+
+        $submitRoute = $travelOffer
+            ? route('company.update_travel_offer', ['company' => $company, 'travelOffer' => $travelOffer])
+            : route('company.store_travel_offer', ['company' => $company]);
 
         return view('pages.travel_offer.travel_package.form', [
-            'title' => 'Lisa uus paketireis',
-            'submitRoute' => route('company.store_travel_offer', ['company' => $company]),
+            'title' => $travelOffer ? 'Muuda paketireisi' : 'Lisa uus paketireis',
+            'submitRoute' => $submitRoute,
             'company' => $company,
             'user' => $company->user,
             'destinationOptions' => $destinations,
             'accommodationOptions' => $service->getAccommodationOptions(),
-            'hotels' => $this->formatHotelRating(old('hotel', [])),
-            'offer' => null
+            'hotels' => $this->formatHotelRating(old('hotel', $travelOffer ? $travelOffer->hotels->toArray() : [])),
+            'offer' => $travelOffer
         ]);
     }
 
-    public function addTravelOffer(Company $company, Request $request)
+    /**
+     * @param string $type
+     * @param Company $company
+     * @param Request $request
+     * @param TravelOffer|null $travelOffer
+     * @return Application|Factory|\Illuminate\View\View|int
+     */
+    protected function getTravelOfferFormByType(string $type, Company $company, Request $request, TravelOffer $travelOffer = null)
     {
-        $type = $request->get('type');
-        if (!$type)
-            abort(403);
-
         //return view by type
         switch ($type) {
             case 'package':
-                return $this->travelPackageForm($company, $request);
+                return $this->travelPackageForm($company, $request, $travelOffer);
             /*case 'ski':
                 return '';
             case 'round':
@@ -264,17 +282,50 @@ class CompanyController extends Controller
                 abort(403);
         }
 
-        return false;
+        return 404;
     }
 
-    public function storeTravelOffer(Company $company, Request $request, TravelOfferService $service)
+    /**
+     * @param Company $company
+     * @param Request $request
+     * @return false|Application|Factory|\Illuminate\View\View
+     */
+    public function addTravelOffer(Company $company, Request $request)
     {
-        //$type = $request->post('type');
-        $result = $service->storeTravelPackage($company, $request);
+        $type = $request->get('type');
+        if (!$type)
+            abort(403);
+
+        return $this->getTravelOfferFormByType($type,  $company, $request);
+    }
+
+    /**
+     * @param Company $company
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function storeTravelOffer(Company $company, Request $request): RedirectResponse
+    {
+        $type = $request->post('type');
+        if (!$type)
+            abort(403);
+
+        $result = null;
+        switch ($type) {
+            case 'package':
+                $result = TravelPackageService::storeTravelPackage($company, $request);
+                break;
+            /*case 'ski':
+                return '';
+            case 'round':
+                return '';*/
+            default:
+                abort(403);
+        }
 
         if ($result && $result instanceof TravelOffer) {
             return Redirect::route('company.profile', ['company' => $company])
-                ->with('info', 'Reisipakukumine loodud');
+                ->with('info', 'Reisipakkumine loodud');
         } else {
             return Redirect::back()
                 ->withInput($request->input())
@@ -282,37 +333,54 @@ class CompanyController extends Controller
         }
     }
 
-    public function editTravelOffer(Company $company, TravelOffer $travelOffer, Request $request, TravelOfferService $service)
+    /**
+     * @param Company $company
+     * @param TravelOffer $travelOffer
+     * @param Request $request
+     * @return Application|Factory|\Illuminate\View\View|int
+     */
+    public function editTravelOffer(Company $company, TravelOffer $travelOffer, Request $request)
     {
-        $destinations = Destination::select('id', 'name')->where('depth', 2)->get()->toArray();
         $travelOffer->loadMissing('hotels');
-        //$destination = $travelOffer->endDestination->first();
-        //$travelOffer->destination_id = $destination->id;
-        
-        return view('pages.travel_offer.travel_package.form', [
-            'title' => 'Muuda paketireisi',
-            'submitRoute' => route('company.update_travel_offer', ['company' => $company, 'travelOffer' => $travelOffer]),
-            'company' => $company,
-            'user' => $company->user,
-            'destinationOptions' => $destinations,
-            'accommodationOptions' => $service->getAccommodationOptions(),
-            'hotels' => $this->formatHotelRating(old('hotel', $travelOffer->hotels->toArray())),
-            'offer' => $travelOffer
-        ]);
+        return $this->getTravelOfferFormByType($travelOffer->type,  $company, $request, $travelOffer);
     }
 
-    public function updateTravelOffer(Company $company, TravelOffer $travelOffer, Request $request, TravelOfferService $service)
+    /**
+     * @param Company $company
+     * @param TravelOffer $travelOffer
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function updateTravelOffer(Company $company, TravelOffer $travelOffer, Request $request)
     {
-        $result = $service->updateTravelPackage($travelOffer, $request);
+        $type = $request->post('type');
+        if (!$type)
+            abort(403);
+
+        $result = null;
+        switch ($type) {
+            case 'package':
+                $result = TravelPackageService::updateTravelPackage($company, $request, $travelOffer);
+                break;
+            /*case 'ski':
+                return '';
+            case 'round':
+                return '';*/
+            default:
+                abort(403);
+        }
+
         if ($result && $result instanceof TravelOffer) {
             return Redirect::route('company.profile', ['company' => $company])
-                ->with('info', 'Salvestatud');
+                ->with('info', 'Reisipakkumine muudetud');
         } else {
             return Redirect::back()
                 ->withInput($request->input())
                 ->withErrors($result);
         }
     }
+
+
 
     public function index()
     {
