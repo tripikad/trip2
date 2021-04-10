@@ -74,18 +74,18 @@ class TravelOfferService
         return $errors;
     }
 
-    //todo
+    /*//todo
     public function getGridItemsByType(string $type)
     {
         $items = TravelOffer::where('type', $type)
-            ->with('destinations')
+            ->with('endDestination')
             //->where('active', true)
             ->get();
 
         $res = [];
         foreach ($items as $item) {
-            $destination = $item->destinations->first();
-            $parentDestination = $destination::find($destination->parent_id);
+            $endDestination = $item->endDestination;
+            $parentDestination = Destination::find($endDestination->parent_id);
 
             if (!isset($res[$parentDestination->id])) {
                 $res[$parentDestination->id] = [
@@ -116,5 +116,5 @@ class TravelOfferService
         //$res = [];
 
         return $items;
-    }
+    }*/
 }

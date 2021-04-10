@@ -585,7 +585,17 @@ Route::put('company/{id}/update', 'CompanyController@update')
 
 Route::get('reisipakkumised', 'TravelOfferController@index')->name('travel_offer.index');
 
-Route::get('reisipakkumised/{slug}', 'TravelOfferController@show')->name('travel_offer.show');
+//travel packages
+
+Route::get('reisipakkumised/reisipaketid', 'TravelPackageController@index')->name('travel_offer.travel_package.index');
+
+Route::get('reisipakkumised/reisipaketid/{slug}', 'TravelOfferController@show')->name('travel_offer.travel_package.show');
+
+//ski packages
+
+//Route::get('reisipakkumised/suusareisid', 'SkiTripController@show')->name('travel_offer.ski_package.show');
+//Route::get('reisipakkumised/suusareisid/{slug}', 'TravelSkiTripControllerOfferController@show')->name('travel_offer.ski_package.show');
+
 
 // Offers
 

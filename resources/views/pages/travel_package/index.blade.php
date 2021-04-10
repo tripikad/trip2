@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="TravelOffersPage">
-        <x-header backgroundImage="{{asset('photos/travel_offer_bg.jpg')}}">
+        <x-header backgroundImage="{{$backgroundImage}}">
             <div class="container TravelOffersPage__header-content">
                 <h3 class="TravelOffersPage__header-content__heading">Reisipakkumised</h3>
             </div>
@@ -10,7 +10,7 @@
                 <div class="row">
                     <div class="col-md-10 col-12 mx-auto">
                         <div class="TravelOffersPage__tags">
-                            <div class="TravelOffersPage__tags__tag TravelOffersPage__tags__tag--active">
+                            <div class="TravelOffersPage__tags__tag {{Route::currentRouteName() === 'travel_offer.travel_package.index' ? 'TravelOffersPage__tags__tag--active' : ''}}">
                                 Reisipaketid
                             </div>
                             <div class="TravelOffersPage__tags__tag">
@@ -33,31 +33,14 @@
                 <div class="row">
                     <div class="col-md-10 col-12 mx-auto">
                         <div class="TravelOffersPage__search">
-                            <travel-offer-search/>
+                            <travel-package-search/>
                         </div>
                         <div class="row">
                             <div class="col-md-9 col-12 ml-0 pl-0 mr-0 pr-0">
                                 @if (!$showList)
                                     <div class="TravelOffersPage__grid-wrapper">
                                         @foreach($items as $destinationId => $item)
-                                            <div class="col-xs-6 col-md-6 col-lg-6 col-12 pb-4">
-                                                <a href="{{ request()->fullUrlWithQuery(['destination' => $destinationId]) }}">
-                                                    <div class="TravelOffersPage__item">
-                                                        <div class="TravelOffersPage__item__bg" style="background-image: linear-gradient(
-                                                                rgba(0, 0, 0, 0.3),
-                                                                rgba(0, 0, 0, 0.1),
-                                                                rgba(0, 0, 0, 0.2),
-                                                                rgba(0, 0, 0, 0.4)), url({{asset('photos/destination/greece.jpg')}});">
-                                                        </div>
-                                                        <div class="TravelOffersPage__item__destination">
-                                                            {{$item['name']}}
-                                                        </div>
-                                                        <div class="TravelOffersPage__item__price">
-                                                            al. <span>{{$item['price']}}€</span>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
+                                            <x-travel-offer-card :offer="$item" />
                                         @endforeach
                                     </div>
                                 @else
@@ -94,7 +77,7 @@
                                     <div class="Block__title">
                                         <div class="BlockTitle">
                                             <div>
-                                                <div class="BlockTitle__title">Infoks</div>
+                                                <div class="BlockTitle__title">Info</div>
                                             </div>
                                         </div>
                                     </div>

@@ -2,19 +2,22 @@
 
 namespace App\View\Components;
 
+use App\TravelOffer;
 use Illuminate\View\Component;
 use Illuminate\View\View;
 
 class TravelOfferCard extends Component
 {
+    public TravelOffer $offer;
+
     /**
      * Create a new component instance.
      *
-     * @return void
+     * @param TravelOffer $offer
      */
-    public function __construct()
+    public function __construct(TravelOffer $offer)
     {
-        //
+        $this->offer = $offer;
     }
 
     /**

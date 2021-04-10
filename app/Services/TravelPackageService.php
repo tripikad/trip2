@@ -121,26 +121,26 @@ class TravelPackageService extends TravelOfferService
         return self::saveTravelPackage($company, $request, $travelOffer);
     }
 
-    public function getGridItemsByType(string $type)
+    /**
+     * @return array
+     */
+    public function getCheapestOffersByCountry(): array
     {
-        $items = TravelOffer::where('type', $type)
-            ->with('destinations')
+        $items = TravelOffer::where('type', 'package')
+            ->select('travel_offers.*', 'd2.id as parentDestinationId', 'd2.name as parentDestinationName')
+            ->join('destinations as d1', 'travel_offers.end_destination_id', '=', 'd1.id')
+            ->join('destinations as d2', 'd1.parent_id', '=', 'd2.id')
             //->where('active', true)
             ->get();
 
         $res = [];
         foreach ($items as $item) {
-            $destination = $item->destinations->first();
-            $parentDestination = $destination::find($destination->parent_id);
-
-            if (!isset($res[$parentDestination->id])) {
-                $res[$parentDestination->id] = [
-                    'name' => $parentDestination->name,
-                    'price' => $item->price
-                ];
+            $parentDestinationId = $item->parentDestinationId;
+            if (!isset($res[$parentDestinationId])) {
+                $res[$parentDestinationId] = $item;
             } else {
-                if ($item->price < $res[$parentDestination->id]['price']) {
-                    $res[$parentDestination->id]['price'] = $item->price;
+                if ($item->price < $res[$parentDestinationId]['price']) {
+                    $res[$parentDestinationId] = $item;
                 }
             }
         }
