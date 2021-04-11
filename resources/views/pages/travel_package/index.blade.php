@@ -33,7 +33,7 @@
                 <div class="row">
                     <div class="col-md-10 col-12 mx-auto">
                         <div class="TravelOffersPage__search">
-                            <travel-package-search/>
+                            <travel-package-search :startDestinations="{{json_encode($startDestinations)}}"/>
                         </div>
                         <div class="row">
                             <div class="col-md-9 col-12 ml-0 pl-0 mr-0 pr-0">

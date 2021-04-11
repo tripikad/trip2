@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\TravelOfferService;
 use App\Services\TravelPackageService;
 use App\TravelOffer;
 use Illuminate\Http\Request;
@@ -19,10 +20,15 @@ class TravelPackageController extends Controller
             $items = $service->getCheapestOffersByCountry();
         }
 
+        $startDestinations = TravelOfferService::getAvailableDestinationsByType('package', false);
+        $endDestinations = TravelOfferService::getAvailableDestinationsByType('package');
+
         return view('pages.travel_package.index', [
             'backgroundImage' => asset('photos/travel_offer_bg.jpg'),
             'items' => $items,
             'showList' => $showList,
+            'startDestinations' => $startDestinations,
+            'endDestinations' => $endDestinations,
             'filters' => [
                 [
                     'id' => 'start',

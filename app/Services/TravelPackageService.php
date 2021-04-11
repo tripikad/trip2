@@ -124,12 +124,14 @@ class TravelPackageService extends TravelOfferService
     /**
      * @return array
      */
+    //todo: move to traveloffer service
     public function getCheapestOffersByCountry(): array
     {
         $items = TravelOffer::where('type', 'package')
             ->select('travel_offers.*', 'd2.id as parentDestinationId', 'd2.name as parentDestinationName')
             ->join('destinations as d1', 'travel_offers.end_destination_id', '=', 'd1.id')
             ->join('destinations as d2', 'd1.parent_id', '=', 'd2.id')
+            ->orderBy('parentDestinationName', 'ASC')
             //->where('active', true)
             ->get();
 

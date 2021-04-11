@@ -48,10 +48,11 @@ export default {
     props: {
         isclasses: { default: '' },
         options: { default: () => [] },
+        startDestinations: { default: () => [] },
+        endDestinations: { default: () => [] },
     },
     data() {
         return {
-            loading: false,
             destinations: [
                 {
                     id: 1,
@@ -81,11 +82,6 @@ export default {
                 }
             ],
         }
-    },
-    methods: {
-        setLoading: function () {
-            this.loading = !this.loading
-        },
     },
 }
 </script>

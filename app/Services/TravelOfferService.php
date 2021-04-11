@@ -74,47 +74,44 @@ class TravelOfferService
         return $errors;
     }
 
-    /*//todo
-    public function getGridItemsByType(string $type)
+    /**
+     * @param string $type
+     * @param bool $end
+     * @return array
+     */
+    public static function getAvailableDestinationsByType(string $type, bool $end = true): array
     {
+        $joinField = $end ? 'travel_offers.end_destination_id' : 'travel_offers.start_destination_id';
         $items = TravelOffer::where('type', $type)
-            ->with('endDestination')
+            ->select('travel_offers.*', 'd2.id as parentDestinationId', 'd2.name as parentDestinationName', 'd1.name as destinationName')
+            ->join('destinations as d1', $joinField, '=', 'd1.id')
+            ->join('destinations as d2', 'd1.parent_id', '=', 'd2.id')
+            ->orderBy('parentDestinationName', 'ASC', 'destinationName', 'ASC')
             //->where('active', true)
             ->get();
 
         $res = [];
         foreach ($items as $item) {
-            $endDestination = $item->endDestination;
-            $parentDestination = Destination::find($endDestination->parent_id);
-
-            if (!isset($res[$parentDestination->id])) {
-                $res[$parentDestination->id] = [
-                    'name' => $parentDestination->name,
-                    'price' => $item->price
+            $parentDestinationId = $item->parentDestinationId;
+            if (!isset($res[$parentDestinationId])) {
+                $res[$parentDestinationId] = [
+                    'id' => $parentDestinationId,
+                    'name' => $item->parentDestinationName,
+                    'children' => [
+                        [
+                            'id' => $item->start_destination_id,
+                            'name' => $item->destinationName
+                        ]
+                    ]
                 ];
             } else {
-                if ($item->price < $res[$parentDestination->id]['price']) {
-                    $res[$parentDestination->id]['price'] = $item->price;
-                }
+                $res[$parentDestinationId]['children'][] = [
+                    'id' => $item->start_destination_id,
+                    'name' => $item->destinationName
+                ];
             }
         }
 
         return $res;
     }
-
-    //todo
-    public function getListItemsByType(string $type, int $destinationId)
-    {
-        $destinationIds = Destination::where('parent_id', $destinationId)->get()->pluck('id')->toArray();
-        $items = TravelOffer::where('type', $type)
-            ->with('destinations')
-            ->join('travel_offer_destinations', 'travel_offers.id', '=', 'travel_offer_destinations.travel_offer_id')
-            ->whereIn('travel_offer_destinations.destination_id', $destinationIds)
-            //->where('active', true)
-            ->get();
-
-        //$res = [];
-
-        return $items;
-    }*/
 }
