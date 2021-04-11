@@ -4,16 +4,18 @@
             <div class="TravelOfferSearch__field TravelOfferSearch__destination_field">
                 <FormSelect
                     name="start_destination"
-                    :options="destinations"
+                    :options="startDestinations"
+                    :value="selectedStartDestination"
                     placeholder="Algus sihtkoht"
                     isclasses="TravelOfferSearch__destination"/>
             </div>
             <div class="TravelOfferSearch__field TravelOfferSearch__destination_field">
-                <FormSelect
+                <FormSelectWithGroup
                     name="end_destination"
-                    :options="destinations"
+                    :options="endDestinations"
                     placeholder="Kõik sihtkohad"
-                    isclasses="TravelOfferSearch__destination"/>
+                    isclasses="TravelOfferSearch__destination"
+                />
             </div>
             <div class="TravelOfferSearch__field">
                 <FormDatepicker
@@ -43,13 +45,15 @@
 import FormDatepicker from "../../../views/components/FormDatepicker/FormDatepicker.vue";
 import FormSelect from "../../../views/components/FormSelect/FormSelect.vue";
 import FormButtonProcess from "../../../views/components/FormButtonProcess/FormButtonProcess.vue";
+import FormSelectWithGroup from "../FormSelectWithGroup.vue";
 export default {
-    components: {FormButtonProcess, FormSelect, FormDatepicker},
+    components: {FormSelectWithGroup, FormButtonProcess, FormSelect, FormDatepicker},
     props: {
         isclasses: { default: '' },
         options: { default: () => [] },
         startDestinations: { default: () => [] },
         endDestinations: { default: () => [] },
+        selectedStartDestination: { default: '' },
     },
     data() {
         return {

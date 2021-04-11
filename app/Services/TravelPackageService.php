@@ -122,18 +122,24 @@ class TravelPackageService extends TravelOfferService
     }
 
     /**
+     * @param bool $startWithTallinn
      * @return array
      */
     //todo: move to traveloffer service
-    public function getCheapestOffersByCountry(): array
+    public function getCheapestOffersByCountry($startWithTallinn = true): array
     {
-        $items = TravelOffer::where('type', 'package')
+        $query = TravelOffer::where('type', 'package')
             ->select('travel_offers.*', 'd2.id as parentDestinationId', 'd2.name as parentDestinationName')
             ->join('destinations as d1', 'travel_offers.end_destination_id', '=', 'd1.id')
             ->join('destinations as d2', 'd1.parent_id', '=', 'd2.id')
-            ->orderBy('parentDestinationName', 'ASC')
+            ->orderBy('parentDestinationName', 'ASC');
             //->where('active', true)
-            ->get();
+
+        if ($startWithTallinn) {
+            $query->where('start_destination_id', self::DESTINATION_TALLINN_ID);
+        }
+
+        $items= $query->get();
 
         $res = [];
         foreach ($items as $item) {

@@ -12,6 +12,7 @@
             track-by="name"
             label="name"
             :placeholder="placeholder"
+            selectedLabel=""
             :dusk="slugTitle"
         ></component>
 
@@ -32,7 +33,7 @@ export default {
         title: { default: '' },
         description: { default: '' },
         name: { default: '' },
-        options: { default: '' },
+        options: { default: () => [] },
         placeholder: { default: '' },
         value: { default: '' }
     },

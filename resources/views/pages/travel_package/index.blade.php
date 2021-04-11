@@ -33,7 +33,10 @@
                 <div class="row">
                     <div class="col-md-10 col-12 mx-auto">
                         <div class="TravelOffersPage__search">
-                            <travel-package-search :startDestinations="{{json_encode($startDestinations)}}"/>
+                            <travel-package-search
+                                    :start-destinations="{{json_encode($startDestinations)}}"
+                                    :end-destinations="{{json_encode($endDestinations)}}"
+                                    :selected-start-destination="{{$selectedStartDestination}}"/>
                         </div>
                         <div class="row">
                             <div class="col-md-9 col-12 ml-0 pl-0 mr-0 pr-0">

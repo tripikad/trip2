@@ -20,7 +20,7 @@ class TravelPackageController extends Controller
             $items = $service->getCheapestOffersByCountry();
         }
 
-        $startDestinations = TravelOfferService::getAvailableDestinationsByType('package', false);
+        $startDestinations = TravelOfferService::getDistinctStartDestinationsByType('package');
         $endDestinations = TravelOfferService::getAvailableDestinationsByType('package');
 
         return view('pages.travel_package.index', [
@@ -29,6 +29,7 @@ class TravelPackageController extends Controller
             'showList' => $showList,
             'startDestinations' => $startDestinations,
             'endDestinations' => $endDestinations,
+            'selectedStartDestination' => TravelPackageService::DESTINATION_TALLINN_ID,
             'filters' => [
                 [
                     'id' => 'start',
