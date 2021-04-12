@@ -108,7 +108,7 @@ class TravelOfferService
                     ]
                 ];
             } else {
-                if (!in_array($item->start_destination_id, $usedDestinations)) {
+                if (!in_array($item->$dbField, $usedDestinations)) {
                     $res[$parentDestinationId]['children'][] = [
                         'id' => $item->$dbField,
                         'name' => $item->destinationName
