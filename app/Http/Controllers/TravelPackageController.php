@@ -26,6 +26,11 @@ class TravelPackageController extends Controller
         return false;
     }
 
+    /**
+     * @param Request $request
+     * @param TravelPackageService $service
+     * @return View
+     */
     public function index(Request $request, TravelPackageService $service): View
     {
         $showList = $this->showList($request);
@@ -66,7 +71,10 @@ class TravelPackageController extends Controller
      */
     public function show(string $slug, Request $request): View
     {
-        $offer = TravelOffer::whereSlug($slug)->first();
+        $offer = TravelOffer::whereSlug($slug)
+            ->where('type', 'package')
+            ->first();
+
         if (!$offer) {
             abort(404);
         }

@@ -589,7 +589,7 @@ Route::get('reisipakkumised', 'TravelOfferController@index')->name('travel_offer
 
 Route::get('reisipakkumised/reisipaketid', 'TravelPackageController@index')->name('travel_offer.travel_package.index');
 
-Route::get('reisipakkumised/reisipaketid/{slug}', 'TravelOfferController@show')->name('travel_offer.travel_package.show');
+Route::get('reisipakkumised/reisipaketid/{slug}', 'TravelPackageController@show')->name('travel_offer.travel_package.show');
 
 //ski packages
 
