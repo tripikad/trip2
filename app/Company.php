@@ -17,6 +17,10 @@ class Company extends Model
 
     protected $dates = ['created_at', 'updated_at'];
 
+    protected $appends = [
+        'showRoute'
+    ];
+
     public function sluggable(): array
     {
         return [
@@ -41,5 +45,10 @@ class Company extends Model
         return $this->travelOffers()
             ->where('active', true)
             ->where('end_date', '>=', Carbon::today()->toDateString());
+    }
+
+    public function getShowRouteAttribute()
+    {
+        return route('company.profile.public', ['slug' => $this->slug]);
     }
 }

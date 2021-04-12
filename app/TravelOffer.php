@@ -20,7 +20,8 @@ class TravelOffer extends Model
     protected $appends = [
         'status',
         'days',
-        'nights'
+        'nights',
+        'actionRoutes'
     ];
 
     protected $casts = [
@@ -83,13 +84,21 @@ class TravelOffer extends Model
         }
     }
 
-    public function getDaysAttribute()
+    public function getDaysAttribute(): int
     {
         return $this->end_date->diffInDays($this->start_date);
     }
 
-    public function getNightsAttribute()
+    public function getNightsAttribute(): int
     {
         return $this->days - 1;
+    }
+
+    public function getActionRoutesAttribute(): array
+    {
+        return [
+            'show' => route('travel_offer.travel_package.show', ['slug' => $this->slug]),
+            'edit' => route('company.edit_travel_offer', ['company' => $this->company_id, 'travelOffer' => $this])
+        ];
     }
 }
