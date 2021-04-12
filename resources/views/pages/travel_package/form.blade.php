@@ -17,7 +17,7 @@
                     back-route="{{route('company.profile', ['company' => $company])}}"
                     :destination-options="{{json_encode($destinationOptions) }}"
                     :accommodation-options="{{json_encode($accommodationOptions) }}"
-                    start-destination="{{old('start_destination', $offer ? $offer->startDestination->id : null)}}"
+                    start-destination="{{old('start_destination', $offer ? $offer->startDestination->id : \App\Services\TravelOfferService::DESTINATION_TALLINN_ID)}}"
                     end-destination="{{old('end_destination', $offer ? $offer->endDestination->id : null)}}"
                     start-date="{{old('start_date', $offer ? $offer->start_date->format('Y-m-d') : null)}}"
                     end-date="{{old('end_date', $offer ? $offer->end_date->format('Y-m-d') : null)}}"
