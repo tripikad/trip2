@@ -34,13 +34,32 @@
     &__title {
         display: flex;
         width: 100%;
-        font-weight: bold;
         font-size: $font-heading-md;
         cursor: pointer;
+        font-family: $font-family-sailec;
+        margin-bottom: 4px;
+
+        a {
+            color: $blue;
+            text-decoration: none;
+            font-size: $font-size-xl;
+            line-height: $line-height-md;
+
+            &:hover {
+                color: $blue-hover;
+            }
+
+            span.price {
+                color: $orange-dark;
+            }
+
+            span.from {
+                font-size: $font-size-lg;
+            }
+        }
 
         span {
-            color: $orange-dark;
-            margin-left: 5px;
+            color: $gray;
         }
     }
 
@@ -52,12 +71,21 @@
 
     &__days {
         font-size: $font-size-xs;
-        font-weight: bolder;
         margin-right: 12px;
     }
 
     &__tag {
         margin-right: 12px;
+        cursor: pointer;
+
+        a {
+            color: grey;
+            text-decoration: none;
+        }
+
+        &__company {
+
+        }
     }
 
     &__dates {

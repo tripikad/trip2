@@ -13,12 +13,14 @@ class TravelOffer extends Model
 
     protected $table = 'travel_offers';
 
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'slug'];
 
     protected $dates = ['start_date', 'end_date', 'created_at', 'updated_at'];
 
     protected $appends = [
-        'status'
+        'status',
+        'days',
+        'nights'
     ];
 
     protected $casts = [
@@ -28,13 +30,14 @@ class TravelOffer extends Model
 
     protected $with = [
         'company',
+        'endDestination'
     ];
 
     public function sluggable(): array
     {
         return [
             'slug' => [
-                'source' => 'name'
+                'source' => ['name']
             ]
         ];
     }
@@ -78,5 +81,15 @@ class TravelOffer extends Model
         } else {
             return 'draft';
         }
+    }
+
+    public function getDaysAttribute()
+    {
+        return $this->end_date->diffInDays($this->start_date);
+    }
+
+    public function getNightsAttribute()
+    {
+        return $this->days - 1;
     }
 }

@@ -10,15 +10,28 @@ use Illuminate\View\View;
 
 class TravelPackageController extends Controller
 {
+    /**
+     * @param Request $request
+     * @return bool
+     */
+    private function showList(Request $request): bool
+    {
+        $params = ['start_destination', 'end_destination', 'start_date', 'nights'];
+        foreach ($params as $param) {
+            if ($request->get($param)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public function index(Request $request, TravelPackageService $service): View
     {
-        $showList = false;
-        if ($request->get('destination')) {
-            $showList = true;
-            $items = $service->getListItemsByType('package', $request->get('destination'));
-        } else {
-            $items = $service->getCheapestOffersByCountry();
-        }
+        $showList = $this->showList($request);
+        $items = $showList
+            ? $service->getListItemsByType('package', $request)
+            : $service->getCheapestOffersByCountry();
 
         $startDestinations = TravelOfferService::getDistinctStartDestinationsByType('package');
         $endDestinations = TravelOfferService::getAvailableDestinationsByType('package');
@@ -30,6 +43,9 @@ class TravelPackageController extends Controller
             'startDestinations' => $startDestinations,
             'endDestinations' => $endDestinations,
             'selectedStartDestination' => TravelPackageService::DESTINATION_TALLINN_ID,
+            'selectedEndDestination' => $request->get('end_destination'),
+            'selectedStartDate' => $request->get('start_date'),
+            'selectedNights' => $request->get('nights'),
             'filters' => [
                 [
                     'id' => 'start',

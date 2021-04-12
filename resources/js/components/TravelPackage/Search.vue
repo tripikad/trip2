@@ -13,13 +13,14 @@
                 <FormSelectWithGroup
                     name="end_destination"
                     :options="endDestinations"
+                    :value="selectedEndDestination"
                     placeholder="Kõik sihtkohad"
                     isclasses="TravelOfferSearch__destination"
                 />
             </div>
             <div class="TravelOfferSearch__field">
                 <FormDatepicker
-                    name="startDate"
+                    name="start_date"
                     isclasses="TravelOfferSearch__datepicker"
                     placeholder="Algus kp"
                     disablePastDates="true"/>
@@ -54,23 +55,12 @@ export default {
         startDestinations: { default: () => [] },
         endDestinations: { default: () => [] },
         selectedStartDestination: { default: '' },
+        selectedEndDestination: { default: '' },
+        selectedStartDate2: { default: '' },
+        selectedNights: { default: '' },
     },
     data() {
         return {
-            destinations: [
-                {
-                    id: 1,
-                    name: 'Eesti'
-                },
-                {
-                    id: 2,
-                    name: 'Tai'
-                },
-                {
-                    id: 3,
-                    name: 'Türgi'
-                }
-            ],
             nights: [
                 {
                     id: 1,

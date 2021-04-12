@@ -1,5 +1,5 @@
 <div class="col-xs-6 col-md-6 col-lg-6 col-12 pb-4 TravelOfferCard">
-    <a href="{{ request()->fullUrlWithQuery(['destination' => $offer->parentDestinationId]) }}">
+    <a href="{{ route('travel_offer.travel_package.index', ['end_destination' => $offer->parentDestinationId]) }}">
         <div class="TravelOfferCard__item">
             <div class="TravelOfferCard__item__bg" style="background-image: linear-gradient(
                     rgba(0, 0, 0, 0.3),

@@ -249,7 +249,7 @@ class CompanyController extends Controller
             ? route('company.update_travel_offer', ['company' => $company, 'travelOffer' => $travelOffer])
             : route('company.store_travel_offer', ['company' => $company]);
 
-        return view('pages.travel_offer.travel_package.form', [
+        return view('pages.travel_package.form', [
             'title' => $travelOffer ? 'Muuda paketireisi' : 'Lisa uus paketireis',
             'submitRoute' => $submitRoute,
             'company' => $company,

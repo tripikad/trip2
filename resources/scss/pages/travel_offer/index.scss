@@ -78,6 +78,10 @@
                 background: $white;
                 font-weight: bold;
                 color: $blue;
+
+                a {
+                    color: $blue;
+                }
             }
 
             &--last_minute {
@@ -95,6 +99,12 @@
                     }
                 }
             }
+
+            a {
+                display: block;
+                width: 100%;
+                text-decoration: none;
+            }
         }
     }
 
@@ -106,7 +116,11 @@
     }
 
     &__search {
-        padding-bottom: calc(#{$spacer} * 3);
+        padding-bottom: calc(#{$spacer} * 2);
+
+        &__grid_view {
+            padding-bottom: calc(#{$spacer} * 3);
+        }
     }
 
     &__items {
@@ -123,7 +137,7 @@
     &__filter {
         display: flex;
         width: 100%;
-        margin-bottom: 20px;
+        margin-bottom: calc(#{$spacer});
         align-items: center;
     }
 
@@ -135,7 +149,7 @@
     &__select {
         border: none;
         background: none;
-        max-width: 250px;
+        max-width: 230px;
         width: 100%;
     }
 
@@ -150,5 +164,19 @@
         input {
             color: $gray;
         }
+    }
+
+    &__info_block {
+        a {
+            white-space: nowrap;
+        }
+        //padding: $padding-md;
+    }
+
+    &__list_item {
+        padding: calc(#{$spacer});
+        /*@media (max-width: 768px) {
+           padding: calc(#{$spacer});
+        }*/
     }
 }

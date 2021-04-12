@@ -8,10 +8,10 @@
             </div>
             <div class="container no-gutters TravelOffersPage__tags-container">
                 <div class="row">
-                    <div class="col-md-10 col-12 mx-auto">
+                    <div class="col-md-11 col-12 mx-auto">
                         <div class="TravelOffersPage__tags">
                             <div class="TravelOffersPage__tags__tag {{Route::currentRouteName() === 'travel_offer.travel_package.index' ? 'TravelOffersPage__tags__tag--active' : ''}}">
-                                Reisipaketid
+                                <a href="{{route('travel_offer.travel_package.index')}}">Reisipaketid</a>
                             </div>
                             <div class="TravelOffersPage__tags__tag">
                                 Ringreisid
@@ -31,15 +31,19 @@
         <div class="container">
             <div class="TravelOffersPage__content">
                 <div class="row">
-                    <div class="col-md-10 col-12 mx-auto">
-                        <div class="TravelOffersPage__search">
+                    <div class="col-md-11 col-12 mx-auto">
+                        <div class="TravelOffersPage__search {{!$showList ? 'TravelOffersPage__search__grid_view' : ''}}">
                             <travel-package-search
                                     :start-destinations="{{json_encode($startDestinations)}}"
                                     :end-destinations="{{json_encode($endDestinations)}}"
-                                    :selected-start-destination="{{$selectedStartDestination}}"/>
+                                    :selected-start-destination="{{$selectedStartDestination}}"
+                                    selected-end-destination="{{$selectedEndDestination}}"
+                                    selected-start-date="{{$selectedStartDate}}"
+                                    selected-nights="{{$selectedNights}}"
+                            />
                         </div>
                         <div class="row">
-                            <div class="col-md-9 col-12 ml-0 pl-0 mr-0 pr-0">
+                            <div class="col-md-9 col-12 {{!$showList ? 'ml-0 pl-0' : ''}}">
                                 @if (!$showList)
                                     <div class="TravelOffersPage__grid-wrapper">
                                         @foreach($items as $destinationId => $item)
@@ -56,27 +60,12 @@
                                     </div>
 
                                     @foreach($items as $item)
-                                        <div class="TravelOfferListItem">
-                                            <div class="TravelOfferListItem__content">
-                                                <div class="TravelOfferListItem__title">
-                                                    {{$item->name}} al. <span>{{$item->price}}€</span>
-                                                </div>
-                                                <div class="TravelOfferListItem__meta">
-                                                    <div class="TravelOfferListItem__days">7 päeva</div>
-                                                    <div class="TravelOfferListItem__tag">
-                                                        <tag title="Antalya" isclasses="Tag--orange"/>
-                                                    </div>
-                                                    <div class="TravelOfferListItem__tag">
-                                                        <tag title="TestFirma"/>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <x-travel-offer-list-item :offer="$item" class="TravelOffersPage__list_item"/>
                                     @endforeach
                                 @endif
                             </div>
-                            <div class="col-md-3 col-12">
-                                <div class="Block ">
+                            <div class="col-md-3 col-12 {{$showList ? 'mt-2' : ''}}">
+                                <div class="Block TravelOffersPage__info_block Block--gray">
                                     <div class="Block__title">
                                         <div class="BlockTitle">
                                             <div>
@@ -87,6 +76,24 @@
                                     <div class="Block__content">
                                         <div class="Block__contentItem">
                                             <div class="Body">Trip.ee ei ole reisipakettide edasimüüja, vaid ainult vahendab neid.</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="Block Block--gray TravelOffersPage__info_block">
+                                    <div class="Block__title">
+                                        <div class="BlockTitle">
+                                            <div>
+                                                <div class="BlockTitle__title">Lisa enda kuulutus siia</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="Block__content">
+                                        <div class="Block__contentItem">
+                                            <div class="Body">
+                                                Enda kuulutuse lisamiseks kliki <a href="#">siia</a> või võta ühendust<br>
+                                                <a href="mailto:reisipakkumised@trip.ee">reisipakkumised@trip.ee</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

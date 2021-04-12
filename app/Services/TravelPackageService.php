@@ -67,8 +67,8 @@ class TravelPackageService extends TravelOfferService
             $travelOffer->company_id = $company->id;
         }
 
-        $travelOffer->slug = null;
         $travelOffer->name = $endDestinationName . ' ' . $request->post('start_date');
+        $travelOffer->slug = null;
         $travelOffer->start_destination_id = $request->post('start_destination');
         $travelOffer->end_destination_id = $request->post('end_destination');
         $travelOffer->start_date = Carbon::parse($request->post('start_date'));
@@ -156,17 +156,31 @@ class TravelPackageService extends TravelOfferService
         return $res;
     }
 
-    public function getListItemsByType(string $type, int $destinationId)
+    public function getListItemsByType(string $type, Request $request)
     {
-        $destinationIds = Destination::where('parent_id', $destinationId)->get()->pluck('id')->toArray();
-        $items = TravelOffer::where('type', $type)
-            ->with('destinations')
-            ->join('travel_offer_destinations', 'travel_offers.id', '=', 'travel_offer_destinations.travel_offer_id')
-            ->whereIn('travel_offer_destinations.destination_id', $destinationIds)
+        $query = TravelOffer::where('travel_offers.type', $type)
+            ->select('travel_offers.*', 'd2.id as parentDestinationId', 'd2.name as parentDestinationName')
+            ->join('destinations as d1', 'travel_offers.end_destination_id', '=', 'd1.id')
+            ->join('destinations as d2', 'd1.parent_id', '=', 'd2.id')
+            ->join('companies as c', 'c.id', '=', 'travel_offers.company_id')
+            ->where('start_destination_id', $request->get('start_destination') ?? self::DESTINATION_TALLINN_ID)
+            ->orderBy('parentDestinationName', 'ASC');
             //->where('active', true)
-            ->get();
 
-        //$res = [];
+        if ($request->get('end_destination')) {
+            $query->where('d1.id', $request->get('end_destination'))
+                ->orWhere('d2.id', $request->get('end_destination'));
+        }
+
+        if ($request->get('start_date')) {
+            $query->where('start_date', Carbon::parse($request->get('start_date')->format('Y-m-d')));
+        }
+
+        /*if ($request->get('nights')) {
+            $query->where('start_date', Carbon::parse($request->get('start_date')->format('Y-m-d')));
+        }*/
+
+        $items = $query->get();
 
         return $items;
     }
