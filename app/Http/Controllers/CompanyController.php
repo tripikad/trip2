@@ -109,20 +109,13 @@ class CompanyController extends Controller
     public function profile(Company $company, Request $request)
     {
         $company->loadMissing('user');
-        $company->loadMissing('travelOffers');
-
-        //todo: return resource
-        $offers = TravelOffer::where('company_id', $company->id)->get();
-        foreach ($offers as $offer) {
-            $offer->editRoute = route('company.edit_travel_offer', ['company'=> $company, 'travelOffer' => $offer]);
-            $offer->days = $offer->end_date->diff($offer->start_date)->days;
-            $offer->destinationName = $offer->endDestination->name;
-        }
+        $company->loadMissing(['travelOffers' => function ($query) {
+            $query->orderBy('name', 'ASC');
+        }]);
 
         return view('pages.company.profile', [
             'company' => $company,
-            'user' => $company->user,
-            'offers' => $offers
+            'user' => $company->user
         ]);
     }
 
