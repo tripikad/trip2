@@ -79,7 +79,7 @@ export default {
     },
 
     mounted() {
-        this.$watch('value', value => (this.localValue = this.options.find(option => option.id === parseInt(this.value))), {
+        this.$watch('value', value => (this.localValue = this.groupOptions.find(option => option.id === parseInt(this.value))), {
             immediate: true
         })
         //this.$watch('localValue', localValue => this.$emit('input', this.localValue ? this.localValue.id : ''))
