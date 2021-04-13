@@ -84,14 +84,14 @@ class TravelOffer extends Model
         }
     }
 
-    public function getDaysAttribute(): int
+    public function getNightsAttribute(): int
     {
         return $this->end_date->diffInDays($this->start_date);
     }
 
-    public function getNightsAttribute(): int
+    public function getDaysAttribute(): int
     {
-        return $this->days - 1;
+        return $this->nights + 1;
     }
 
     public function getActionRoutesAttribute(): array
