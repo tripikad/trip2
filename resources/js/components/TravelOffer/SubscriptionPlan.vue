@@ -53,6 +53,18 @@
                     </div>
                 </div>
             </div>
+
+            <div class="VPSubscriptionPlan__plan">
+                <div class="VPSubscriptionPlan__plan__info">
+                    <div class="VPSubscriptionPlan__plan__info__name">
+                        <span>10+</span>
+                        <span class="VPSubscriptionPlan__plan__info__name__month">/kuus</span>
+                    </div>
+                    <div class="VPSubscriptionPlan__plan__info__price">
+                        <span>Võta ühendust</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </template>

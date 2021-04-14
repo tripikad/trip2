@@ -1,5 +1,5 @@
 <template>
-    <div class="row page-company-travel-offers">
+    <div class="row page-company-travel-offers mr-0 ml-0">
         <div class="col-md-8 col-12">
             <TravelOfferList :items="offers"/>
         </div>
