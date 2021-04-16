@@ -84,14 +84,14 @@
                                     <div class="Block__title">
                                         <div class="BlockTitle">
                                             <div>
-                                                <div class="BlockTitle__title">Lisa enda kuulutus siia</div>
+                                                <div class="BlockTitle__title">Lisa enda kuulutus</div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="Block__content">
                                         <div class="Block__contentItem">
                                             <div class="Body">
-                                                Enda kuulutuse lisamiseks kliki <a href="#">siia</a> või võta ühendust<br>
+                                                Enda kuulutuse lisamiseks kliki <a href="{{Auth::user() && Auth::user()->company_id ? route('company.profile', ['company' => Auth::user()->company_id]) : route('register_company.form')}}">siia</a> või võta ühendust<br>
                                                 <a href="mailto:reisipakkumised@trip.ee">reisipakkumised@trip.ee</a>
                                             </div>
                                         </div>
