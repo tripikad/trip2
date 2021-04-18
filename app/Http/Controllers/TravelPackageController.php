@@ -38,8 +38,10 @@ class TravelPackageController extends Controller
             ? $service->getListItemsByType('package', $request)
             : $service->getCheapestOffersByCountry();
 
+        //todo: improve performance - can do it with 1 query and function
         $startDestinations = TravelOfferService::getDistinctStartDestinationsByType('package');
         $endDestinations = TravelOfferService::getAvailableDestinationsByType('package');
+        $nights = TravelOfferService::getAvailableNightsByType('package');
 
         return view('pages.travel_package.index', [
             'backgroundImage' => asset('photos/travel_offer_bg.jpg'),
@@ -47,6 +49,7 @@ class TravelPackageController extends Controller
             'showList' => $showList,
             'startDestinations' => $startDestinations,
             'endDestinations' => $endDestinations,
+            'nights' => $nights,
             'selectedStartDestination' => TravelPackageService::DESTINATION_TALLINN_ID,
             'selectedEndDestination' => $request->get('end_destination'),
             'selectedStartDate' => $request->get('start_date'),

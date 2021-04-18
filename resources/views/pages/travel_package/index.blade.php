@@ -36,6 +36,7 @@
                             <travel-package-search
                                     :start-destinations="{{json_encode($startDestinations)}}"
                                     :end-destinations="{{json_encode($endDestinations)}}"
+                                    :nights="{{json_encode($nights)}}"
                                     :selected-start-destination="{{$selectedStartDestination}}"
                                     selected-end-destination="{{$selectedEndDestination}}"
                                     selected-start-date="{{$selectedStartDate}}"
@@ -51,17 +52,23 @@
                                         @endforeach
                                     </div>
                                 @else
-                                    <div class="TravelOffersPage__filter">
-                                        <form-select
-                                                name="filter"
-                                                :options="{{json_encode($filters)}}"
-                                                isclasses="TravelOffersPage__select"
-                                                value="start"/>
-                                    </div>
+                                    @if ($items && count($items))
+                                        <div class="TravelOffersPage__filter">
+                                            <form-select
+                                                    name="filter"
+                                                    :options="{{json_encode($filters)}}"
+                                                    isclasses="TravelOffersPage__select"
+                                                    value="start"/>
+                                        </div>
 
-                                    @foreach($items as $item)
-                                        <x-travel-offer-list-item :offer="$item" class="TravelOffersPage__list_item"/>
-                                    @endforeach
+                                        @foreach($items as $item)
+                                            <x-travel-offer-list-item :offer="$item" class="TravelOffersPage__list_item"/>
+                                        @endforeach
+                                    @else
+                                        <div>
+                                            Ei leitud ühtegi vastet (TODO)
+                                        </div>
+                                    @endif
                                 @endif
                             </div>
                             <div class="col-md-3 col-12 {{$showList ? 'mt-2' : ''}}">

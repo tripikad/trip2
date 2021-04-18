@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\TravelOffer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
@@ -92,7 +93,10 @@ class TravelOfferService
             //->where('active', true)
             ->get();
 
-        $res = [];
+        $res[] = [
+            'id' => null,
+            'name' => 'Kõik',
+        ];
         $usedDestinations = [];
         foreach ($items as $item) {
             $parentDestinationId = $item->parentDestinationId;
@@ -114,7 +118,6 @@ class TravelOfferService
                         'name' => $item->destinationName
                     ];
                 }
-
             }
 
             $usedDestinations[] = $item->$dbField;
@@ -134,7 +137,8 @@ class TravelOfferService
             ->join('destinations as d1', 'start_destination_id', '=', 'd1.id')
             ->orderBy('destinationName', 'ASC')
             //->where('active', true)
-            ->get()->unique('destinationId')->map(function ($offer) {
+            ->get()
+            ->unique('destinationId')->map(function ($offer) {
                 return [
                     'id' => $offer->start_destination_id,
                     'name' => $offer->destinationName
@@ -142,5 +146,32 @@ class TravelOfferService
             });
 
         return array_values($items->toArray());
+    }
+
+    /**
+     * @param string $type
+     * @return array
+     */
+    public static function getAvailableNightsByType(string $type): array
+    {
+        $items = TravelOffer::where('type', $type)
+            ->select('travel_offers.*', DB::raw('DATEDIFF(end_date,start_date) as nightsNr'))
+            ->orderBy('nightsNr', 'ASC')
+            ->get()
+            ->unique('nightsNr')
+            ->map(function ($offer) {
+                return [
+                    'id' => $offer->nightsNr,
+                    'name' => $offer->nightsNr . ' ööd'
+                ];
+            });
+
+        $values = array_values($items->toArray());
+        array_unshift($values, [
+            'id' => '',
+            'name' => 'Kõik',
+        ]);
+
+        return $values;
     }
 }

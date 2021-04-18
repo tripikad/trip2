@@ -23,12 +23,14 @@
                     name="start_date"
                     isclasses="TravelOfferSearch__datepicker"
                     placeholder="Algus kp"
+                    :value="selectedStartDate"
                     disablePastDates="true"/>
             </div>
             <div class="TravelOfferSearch__field TravelOfferSearch__destination_field">
                 <FormSelect
                     name="nights"
                     :options="nights"
+                    :value="getSelectedNightsValue"
                     placeholder="Ööde arv"
                     isclasses="TravelOfferSearch__destination"/>
             </div>
@@ -54,28 +56,21 @@ export default {
         options: { default: () => [] },
         startDestinations: { default: () => [] },
         endDestinations: { default: () => [] },
+        nights: { default: () => [] },
         selectedStartDestination: { default: '' },
         selectedEndDestination: { default: '' },
-        selectedStartDate2: { default: '' },
-        selectedNights: { default: '' },
+        selectedNights: { default: null },
+        selectedStartDate: { default: null }
     },
     data() {
         return {
-            nights: [
-                {
-                    id: 1,
-                    name: '5 ööd'
-                },
-                {
-                    id: 2,
-                    name: '7 ööd'
-                },
-                {
-                    id: 3,
-                    name: '8 ööd'
-                }
-            ],
+
         }
     },
+    computed: {
+        getSelectedNightsValue: function() {
+            return this.selectedNights ? parseInt(this.selectedNights) : null
+        }
+    }
 }
 </script>

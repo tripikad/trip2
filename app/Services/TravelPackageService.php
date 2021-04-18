@@ -8,6 +8,7 @@ use App\TravelOffer;
 use App\TravelOfferHotel;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\MessageBag;
 use Illuminate\Validation\Rule;
@@ -164,7 +165,7 @@ class TravelPackageService extends TravelOfferService
             ->join('destinations as d2', 'd1.parent_id', '=', 'd2.id')
             ->join('companies as c', 'c.id', '=', 'travel_offers.company_id')
             ->where('start_destination_id', $request->get('start_destination') ?? self::DESTINATION_TALLINN_ID)
-            ->orderBy('parentDestinationName', 'ASC');
+            ->orderBy('travel_offers.start_date', 'ASC', 'parentDestinationName', 'ASC');
             //->where('active', true)
 
         if ($request->get('end_destination')) {
@@ -173,15 +174,13 @@ class TravelPackageService extends TravelOfferService
         }
 
         if ($request->get('start_date')) {
-            $query->where('start_date', Carbon::parse($request->get('start_date')->format('Y-m-d')));
+            $query->where('start_date', Carbon::parse($request->get('start_date'))->format('Y-m-d'));
         }
 
-        /*if ($request->get('nights')) {
-            $query->where('start_date', Carbon::parse($request->get('start_date')->format('Y-m-d')));
-        }*/
+        if ($request->get('nights')) {
+            $query->where(DB::raw('DATEDIFF(travel_offers.end_date,travel_offers.start_date)'), (int)$request->get('nights'));
+        }
 
-        $items = $query->get();
-
-        return $items;
+        return $query->get();
     }
 }
