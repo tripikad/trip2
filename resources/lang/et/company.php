@@ -1,4 +1,5 @@
 <?php
+
 return [
     'admin.index.title' => 'Halda reisifirmasid',
     'admin.index.offer' => 'Kõik reisipakkumised',
@@ -25,5 +26,9 @@ return [
     'edit.facebook.title' => 'Facebooki lehe link',
     'edit.instagram.title' => 'Instagrami link',
     'edit.submit' => 'Uuenda',
-    'edit.info' => 'Firma profiil on uuendatud'
+    'edit.info' => 'Firma profiil on uuendatud',
+    'edit.info.subtitle' => 'Firma info',
+    'edit.logo.subtitle' => 'Firma logo',
+    'description' => 'Tutvustus',
+    'update.info' => 'Firma profiil on uuendatud',
 ];

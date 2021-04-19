@@ -1,0 +1,40 @@
+@import "../../variables";
+
+.CompanyEditProfileForm {
+    background: $white;
+    max-width: 48em;
+    width: 100%;
+    margin: 0 auto;
+    padding-top: calc(#{$spacer} * 1);
+
+    &__error-block {
+        margin-bottom: calc(#{$spacer} * 2);
+    }
+
+    form {
+        width: 100%;
+    }
+
+    &__subtitle {
+        color: $blue;
+        font: $font-heading-lg;
+        margin-bottom: calc(#{$spacer} * 2);
+
+        &--withTop {
+            padding-top: calc(#{$spacer} * 2);
+        }
+
+        @media (max-width: 768px) {
+            font: $font-heading-md;
+        }
+    }
+
+    &__field {
+        margin-bottom: calc(#{$spacer} * 2);
+        line-height: 1em;
+    }
+
+    &__submit-button {
+        padding-top: calc(#{$spacer});
+    }
+}

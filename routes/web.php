@@ -536,6 +536,10 @@ Route::get('company/{company}/edit_profile', 'CompanyController@editProfile')
     ->name('company.edit_profile')
     ->middleware('companyOwner');
 
+Route::post('company/{company}/update_profile', 'CompanyController@updateProfile')
+    ->name('company.update_profile')
+    ->middleware('companyOwner');
+
 Route::get('company/{company}/add_travel_offer', 'CompanyController@addTravelOffer')
     ->name('company.add_travel_offer')
     ->middleware('companyOwner');

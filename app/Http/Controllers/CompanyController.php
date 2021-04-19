@@ -77,7 +77,6 @@ class CompanyController extends Controller
         //todo: return view and data based on company type
 
         $company->loadMissing('user');
-        //$company->loadMissing('activeVacationPackages');
         $items = [
             [
                 'title' => 'Tutvustus',
@@ -127,27 +126,9 @@ class CompanyController extends Controller
     public function editProfile(Company $company, Request $request)
     {
         $company->loadMissing('user');
-        $routeName = $request->route()->getName();
-
-        $items = [
-            [
-                'title' => 'Pakkumised',
-                'route' => route('company.profile', ['company' => $company]),
-                'active' => $routeName !== 'company.profile' ? $routeName === 'company.profile' : '#',
-                'count' => 54
-            ],
-            [
-                'title' => 'Minu info',
-                'route' => $routeName !== 'company.edit_profile' ? route('company.edit_profile', ['company' => $company]) : '#',
-                'active' => $routeName === 'company.edit_profile',
-                'count' => null
-            ]
-        ];
-
         return view('pages.company.profile-edit', [
             'company' => $company,
             'user' => $company->user,
-            'items' => $items
         ]);
     }
 
@@ -157,7 +138,7 @@ class CompanyController extends Controller
      * @return RedirectResponse
      * @throws ValidationException
      */
-    public function updateProfile(Company $company, Request $request)
+    public function updateProfile(Company $company, Request $request): RedirectResponse
     {
         $user = $company->user;
         $maxFileSize = config('site.maxfilesize') * 1024;
@@ -165,12 +146,12 @@ class CompanyController extends Controller
         $rules = [
             'company_name' => 'required|max:64|unique:companies,name,' . $company->id,
             'email' => 'required|unique:users,email,' . $user->id,
-            'password' => 'sometimes|confirmed|min:6',
+            'password' => 'nullable|sometimes|confirmed|min:6',
             'password_confirmation' => 'required_with:password|same:password',
-            'description' => 'min:2',
-            'facebook' => 'url',
-            'homepage' => 'url',
-            'file' => "image|max:$maxFileSize"
+            'description' => 'nullable|min:2',
+            'facebook' => 'nullable|url',
+            'homepage' => 'nullable|url',
+            'file' => "nullable|image|max:$maxFileSize"
         ];
 
         $this->validate($request, $rules);
@@ -209,8 +190,8 @@ class CompanyController extends Controller
         }
 
         return redirect()
-            ->route('company.profile.public', ['slug' => $company->slug])
-            ->with('info', trans('user.update.info'));
+            ->route('company.edit_profile', ['company' => $company])
+            ->with('info', trans('company.update.info'));
     }
 
     /**
