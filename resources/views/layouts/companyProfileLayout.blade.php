@@ -13,12 +13,16 @@
                 <div class="row">
                     <div class="col-md-8 col-12">
                         <div class="page-company-profile__tags">
-                            <div class="page-company-profile__tags__tag {{Route::currentRouteName() === 'company.profile' ? 'page-company-profile__tags__tag--active' : ''}}">
-                                <a href="{{route('company.profile', ['company' => $company])}}">Pakkumised</a>
-                            </div>
-                            <div class="page-company-profile__tags__tag {{Route::currentRouteName() === 'company.edit_profile' ? 'page-company-profile__tags__tag--active' : ''}}">
-                                <a href="{{route('company.edit_profile', ['company' => $company])}}">Minu Profiil</a>
-                            </div>
+                            <a href="{{route('company.profile', ['company' => $company])}}" class="page-company-profile__tags__tag {{Route::currentRouteName() === 'company.profile' ? 'page-company-profile__tags__tag--active' : ''}}">
+                                <span>
+                                    Pakkumised
+                                </span>
+                            </a>
+                            <a href="{{route('company.edit_profile', ['company' => $company])}}" class="page-company-profile__tags__tag {{Route::currentRouteName() === 'company.edit_profile' ? 'page-company-profile__tags__tag--active' : ''}}">
+                                <span>
+                                    Minu Profiil
+                                </span>
+                            </a>
                         </div>
                     </div>
                 </div>

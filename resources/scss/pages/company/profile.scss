@@ -64,27 +64,12 @@
             &:hover {
                 background: $white;
                 color: $blue;
-
-                svg {
-                    fill: $blue;
-                }
             }
 
             &--active {
                 background: $white;
                 font-weight: bold;
                 color: $blue;
-
-                a {
-                    color: $blue;
-                }
-            }
-
-            a {
-                display: block;
-                width: 100%;
-                text-decoration: none;
-                color: inherit;
             }
         }
     }

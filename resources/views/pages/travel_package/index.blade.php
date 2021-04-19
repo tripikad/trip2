@@ -10,18 +10,18 @@
                 <div class="row">
                     <div class="col-md-11 col-12 mx-auto">
                         <div class="TravelOffersPage__tags">
-                            <div class="TravelOffersPage__tags__tag {{Route::currentRouteName() === 'travel_offer.travel_package.index' ? 'TravelOffersPage__tags__tag--active' : ''}}">
-                                <a href="{{route('travel_offer.travel_package.index')}}">Reisipaketid</a>
-                            </div>
-                            <div class="TravelOffersPage__tags__tag">
-                                Ringreisid
-                            </div>
-                            <div class="TravelOffersPage__tags__tag">
-                                Suusareisid
-                            </div>
-                            <div class="TravelOffersPage__tags__tag TravelOffersPage__tags__tag--last_minute">
-                                Viimase hetke pakkumised
-                            </div>
+                            <a href="{{route('travel_offer.travel_package.index')}}" class="TravelOffersPage__tags__tag {{Route::currentRouteName() === 'travel_offer.travel_package.index' ? 'TravelOffersPage__tags__tag--active' : ''}}">
+                                <span>Reisipaketid</span>
+                            </a>
+                            <a href="#" class="TravelOffersPage__tags__tag">
+                                <span>Ringreisid</span>
+                            </a>
+                            <a href="#" class="TravelOffersPage__tags__tag">
+                                <span>Suusareisid</span>
+                            </a>
+                            <a href="#" class="TravelOffersPage__tags__tag TravelOffersPage__tags__tag--last_minute">
+                                <span>Viimase hetke pakkumised</span>
+                            </a>
                         </div>
                     </div>
                 </div>

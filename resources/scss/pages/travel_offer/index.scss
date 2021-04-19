@@ -61,49 +61,20 @@
             &:hover {
                 background: $white;
                 color: $blue;
-
-                svg {
-                    fill: $blue;
-                }
-            }
-
-            svg {
-                margin-left: 10px;
-                width: 30px;
-                height: 30px;
-                fill: $white;
             }
 
             &--active {
                 background: $white;
                 font-weight: bold;
                 color: $blue;
-
-                a {
-                    color: $blue;
-                }
             }
 
             &--last_minute {
                 color: $orange-dark;
 
-                svg {
-                    fill: $orange-dark;
-                }
-
                 &:hover {
                     color: $orange-dark;
-
-                    svg {
-                        fill: $orange-dark;
-                    }
                 }
-            }
-
-            a {
-                display: block;
-                width: 100%;
-                text-decoration: none;
             }
         }
     }
