@@ -4,8 +4,7 @@
     background: $white;
     max-width: 48em;
     width: 100%;
-    margin: 0 auto;
-    padding-top: calc(#{$spacer} * 1);
+    padding: calc(#{$spacer}) calc(#{$spacer} * 2) calc(#{$spacer} * 2) calc(#{$spacer} * 2);
 
     &__error-block {
         margin-bottom: calc(#{$spacer} * 2);
@@ -36,5 +35,12 @@
 
     &__submit-button {
         padding-top: calc(#{$spacer});
+        justify-content: flex-end;
+        display: flex;
+
+        button {
+            max-width: 200px;
+            width: 100%;
+        }
     }
 }
