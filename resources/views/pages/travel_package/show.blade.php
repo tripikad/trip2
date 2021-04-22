@@ -35,8 +35,10 @@
                             </div>
                         </div>
                         <div class="page-travel_package-show__info_block page-travel_package-show__info_block--with_border">
-                            <svg><use xlink:href="#icon-pin"></use></svg>
-                            <span>{{$offer->destinationName . ', ' . $offer->parentDestinationName}}</span>
+                            <a href="https://maps.google.com/?q={{urlencode($offer->destinationName . ',' . $offer->parentDestinationName)}}" target="_blank">
+                                <svg><use xlink:href="#icon-pin"></use></svg>
+                                <span>{{$offer->destinationName . ', ' . $offer->parentDestinationName}}</span>
+                            </a>
                         </div>
                         <div class="page-travel_package-show__info_block">
                             <svg><use xlink:href="#icon-tickets"></use></svg>
@@ -45,7 +47,9 @@
                     </div>
 
                     <div class="page-travel_package-show__hotels">
-
+                        <travel-package-hotel-selection
+                                :offer="{{json_encode($offer)}}"
+                                :hotels="{{json_encode($offer->hotels)}}"/>
                     </div>
 
                 </div>

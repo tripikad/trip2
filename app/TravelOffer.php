@@ -64,7 +64,7 @@ class TravelOffer extends Model
 
     public function hotels()
     {
-        return $this->hasMany('App\TravelOfferHotel');
+        return $this->hasMany('App\TravelOfferHotel')->orderBy('price');
     }
 
     public function images()

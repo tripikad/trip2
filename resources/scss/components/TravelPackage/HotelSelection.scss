@@ -1,0 +1,74 @@
+@import "../../variables";
+
+.TravelPackageHotelSelection {
+    width: 100%;
+    display: flex;
+    font-family: $font-family-sailec;
+    padding: calc(#{$spacer});
+
+    table {
+        width: 100%;
+        display: table;
+        flex-wrap: wrap;
+        border-collapse: collapse;
+        font-size: 16px;
+        font-family: $font-family-sailec;
+
+        thead {
+            border-bottom: 1px solid $gray-light;
+
+            th {
+                text-align: left;
+                line-height: $line-height-xl;
+                padding-bottom: calc(#{$spacer});
+            }
+        }
+
+        tbody {
+            tr {
+                border-bottom: 1px solid $gray-lighter;
+            }
+
+            td {
+                display: table-cell;
+                width: auto;
+                min-height: 65px;
+                padding: calc(#{$spacer} * 2) calc(#{$spacer} * 2) calc(#{$spacer} * 2) 0;
+
+                &:first-child {
+                    min-width: 200px;
+                }
+
+                &:last-child {
+                    text-align: right;
+                    display: flex;
+                    justify-content: flex-end;
+                }
+
+                a {
+                    color: $blue;
+                    text-decoration: none;
+                }
+
+                button {
+                    border: 0;
+                    color: $white;
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+
+    &__rating {
+        left: 6px;
+        position: relative;
+        vertical-align: baseline;
+        letter-spacing: 2px;
+        font-size: 20px;
+    }
+
+    &__price {
+        color: $orange;
+        font-weight: 600;
+    }
+}
