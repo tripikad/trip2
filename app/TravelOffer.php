@@ -2,7 +2,6 @@
 
 namespace App;
 
-use Carbon\Carbon;
 use Cviebrock\EloquentSluggable\Sluggable as Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers as SlugHelper;
 use Illuminate\Database\Eloquent\Model;
@@ -18,7 +17,7 @@ class TravelOffer extends Model
     protected $dates = ['start_date', 'end_date', 'created_at', 'updated_at'];
 
     protected $appends = [
-        'status',
+        //'status',
         'days',
         'nights',
         'actionRoutes'
@@ -43,7 +42,7 @@ class TravelOffer extends Model
         ];
     }
 
-    public function short_description()
+    public function shortDescription()
     {
         return mb_strimwidth(strip_tags($this->description), 0, 100, "...");
     }
@@ -73,7 +72,7 @@ class TravelOffer extends Model
         return $this->morphToMany('App\Image', 'imageable');
     }
 
-    public function getStatusAttribute()
+    /*public function getStatusAttribute()
     {
         if ($this->end_date < Carbon::today()->toDateString()) {
             return 'expired';
@@ -82,7 +81,7 @@ class TravelOffer extends Model
         } else {
             return 'draft';
         }
-    }
+    }*/
 
     public function getNightsAttribute(): int
     {

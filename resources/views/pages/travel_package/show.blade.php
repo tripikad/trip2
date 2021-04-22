@@ -2,26 +2,52 @@
 
 @push('styles')
     <style>
-        .vp-background-image {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)), url({{$offer->background_image}});
-            min-height: 400px;
-            height: 100%;
+        .page-travel_package-show__background-image {
+            background-image: linear-gradient(
+                    rgba(0, 0, 0, 0.2),
+                    rgba(0, 0, 0, 0.2),
+                    rgba(0, 0, 0, 0.4),
+                    rgba(0, 0, 0, 0.2),
+                    rgba(0, 0, 0, 0.1)),
+            url({{$backgroundImage}})!important;
         }
     </style>
 @endpush
 
 @section('content')
-    <div class="page-vp-show">
-        <x-header class="vp-background-image">
-            <div class="page-vp-show__header">
-                <h3 class="page-vp-show__header__heading">{{$offer->name}}</h3>
+    <div class="page-travel_package-show">
+        <x-header class="page-travel_package-show__header page-travel_package-show__background-image">
+            <h3>{{$offer->name}}</h3>
+            <div class="page-travel_package-show__header__tag_container">
+                <tag title="Reisipakett" isclasses="Tag--white page-travel_package-show__header__tag"/>
             </div>
         </x-header>
 
-        <div class="container page-vp-show__content">
-            <div class="row">
-                <div>
-                    TODO
+        <div class="container">
+            <div class="page-travel_package-show__content">
+                <div class="col-md-10 col-12 mx-auto no-gutters pl-0 pr-0">
+                    <div class="page-travel_package-show__info">
+                        <div class="page-travel_package-show__info_block">
+                            <svg class="page-travel_package-show__cal_svg"><use xlink:href="#calendar-alt"></use></svg>
+                            <div class="page-travel_package-show__info_block__time">
+                                <span>{{$offer->start_date->format('m.d')}} - {{$offer->end_date->format('m.d.Y')}}</span>
+<!--                                <span class="page-travel_package-show__info_block__nights">7 ööd</span>-->
+                            </div>
+                        </div>
+                        <div class="page-travel_package-show__info_block page-travel_package-show__info_block--with_border">
+                            <svg><use xlink:href="#icon-pin"></use></svg>
+                            <span>{{$offer->destinationName . ', ' . $offer->parentDestinationName}}</span>
+                        </div>
+                        <div class="page-travel_package-show__info_block">
+                            <svg><use xlink:href="#icon-tickets"></use></svg>
+                            <div>al. <span class="page-travel_package-show__info_block__price">{{$offer->price}}€</span></div>
+                        </div>
+                    </div>
+
+                    <div class="page-travel_package-show__hotels">
+
+                    </div>
+
                 </div>
             </div>
         </div>

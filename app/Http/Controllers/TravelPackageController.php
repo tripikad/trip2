@@ -70,20 +70,19 @@ class TravelPackageController extends Controller
     /**
      * @param string $slug
      * @param Request $request
+     * @param TravelPackageService $service
      * @return View
      */
-    public function show(string $slug, Request $request): View
+    public function show(string $slug, Request $request, TravelPackageService $service): View
     {
-        $offer = TravelOffer::whereSlug($slug)
-            ->where('type', 'package')
-            ->first();
-
+        $offer = $service->getOfferWithDestinationsBySlug($slug);
         if (!$offer) {
             abort(404);
         }
 
         return view('pages.travel_package.show', [
-            'offer' => $offer
+            'offer' => $offer,
+            'backgroundImage' => $service->getBackgroundImageByDestination($offer->endDestination)
         ]);
     }
 }

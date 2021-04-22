@@ -16,6 +16,23 @@ use Illuminate\Validation\Rule;
 class TravelPackageService extends TravelOfferService
 {
     /**
+     * @param Destination $destination
+     * @param string $size
+     * @return string
+     */
+    public function getBackgroundImageByDestination(Destination $destination, $size = 'large'): string
+    {
+        $bgs = config('travel_offer_bg.package');
+        if (isset($bgs[$destination->id])) {
+            return asset('photos/travel_package/' . $size . '/' . $bgs[$destination->id]);
+        } else if (isset($bgs[$destination->parent_id])) {
+            return asset('photos/travel_package/' . $size . '/' . $bgs[$destination->parent_id]);
+        } else {
+            return asset('photos/travel_package/' . $size . '/' . $bgs['default']);
+        }
+    }
+
+    /**
      * @param Company $company
      * @param Request $request
      * @param TravelOffer|null $travelOffer
@@ -182,5 +199,20 @@ class TravelPackageService extends TravelOfferService
         }
 
         return $query->get();
+    }
+
+    /**
+     * @param $slug
+     * @return TravelOffer|null
+     */
+    public function getOfferWithDestinationsBySlug($slug): ?TravelOffer
+    {
+        return TravelOffer::where('travel_offers.type', 'package')
+            ->where('travel_offers.slug', $slug)
+            ->select('travel_offers.*', 'd2.id as parentDestinationId', 'd2.name as parentDestinationName', 'd1.name as destinationName')
+            ->join('destinations as d1', 'travel_offers.end_destination_id', '=', 'd1.id')
+            ->join('destinations as d2', 'd1.parent_id', '=', 'd2.id')
+            //->where('active', true)
+            ->first();
     }
 }

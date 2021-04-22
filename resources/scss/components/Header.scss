@@ -13,10 +13,10 @@
     }
 
     &__content {
-        margin-top: $margin-xl;
+        padding-top: $margin-xl;
 
         @media (max-width: 768px) {
-            margin-top: $margin-lg;
+            padding-top: $margin-lg;
             margin-left: 0;
             margin-right: 0;
         }
