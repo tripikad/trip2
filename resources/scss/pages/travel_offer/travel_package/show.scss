@@ -51,6 +51,7 @@
         height: 100%;
         font-family: $font-family-sailec;
         font-size: 16px;
+        padding-bottom: calc(#{$spacer} * 5);
     }
 
     &__info {
@@ -126,6 +127,26 @@
     &__hotels {
         width: 100%;
         padding-bottom: calc(#{$spacer} * 2);
+    }
+
+    &__section {
+        width: 100%;
+        padding: calc(#{$spacer} * 2) calc(#{$spacer});
+
+        h3 {
+            font-family: $font-family-sailec;
+            color: $blue;
+            font-weight: 600;
+            border-bottom: 1px solid $gray-lighter;
+            padding: calc(#{$spacer}) 0;
+        }
+
+        &__content {
+            font-family: $font-family-sailec;
+            color: $gray;
+            font-size: 16px;
+            padding: calc(#{$spacer} * 2) 0;
+        }
     }
 }
 

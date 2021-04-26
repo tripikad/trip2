@@ -52,6 +52,42 @@
                                 :hotels="{{json_encode($offer->hotels)}}"/>
                     </div>
 
+                    @if ($offer->included)
+                        <div class="page-travel_package-show__section">
+                            <h3>Pakkumine sisaldab:</h3>
+                            <div class="page-travel_package-show__section__content">
+                                {!! $offer->included !!}
+                            </div>
+                        </div>
+                    @endif
+
+                    @if ($offer->excluded)
+                        <div class="page-travel_package-show__section">
+                            <h3>Pakkumine ei sisalda:</h3>
+                            <div class="page-travel_package-show__section__content">
+                                {!! $offer->excluded !!}
+                            </div>
+                        </div>
+                    @endif
+
+                    @if ($offer->extra_fee)
+                        <div class="page-travel_package-show__section">
+                            <h3>Lisatasu eest:</h3>
+                            <div class="page-travel_package-show__section__content">
+                                {!! $offer->extra_fee !!}
+                            </div>
+                        </div>
+                    @endif
+
+                    @if ($offer->extra_info)
+                        <div class="page-travel_package-show__section">
+                            <h3>Lisainfo:</h3>
+                            <div class="page-travel_package-show__section__content">
+                                {!! $offer->extra_info !!}
+                            </div>
+                        </div>
+                    @endif
+
                 </div>
             </div>
         </div>

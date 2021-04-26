@@ -5,7 +5,8 @@
                     rgba(0, 0, 0, 0.3),
                     rgba(0, 0, 0, 0.1),
                     rgba(0, 0, 0, 0.2),
-                    rgba(0, 0, 0, 0.4)), url({{asset('photos/destination/greece.jpg')}});">
+                    rgba(0, 0, 0, 0.3),
+                    rgba(0, 0, 0, 0.5)), url({{$backgroundImage}});">
             </div>
             <div class="TravelOfferCard__item__destination">
                 {{$offer->parentDestinationName}}

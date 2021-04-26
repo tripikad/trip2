@@ -37,9 +37,12 @@
     padding: 11px 40px 4px 14px !important;
 }
 .multiselect__input {
-    ppadding: 4px 0 0 8px !important;
     font: $font-text-md !important;
 }
+.multiselect__input::placeholder {
+    color: $gray-light;
+}
+
 .FormSelect--blue .multiselect__tags {
     background: $blue !important;
     border: 2px solid $white !important;
