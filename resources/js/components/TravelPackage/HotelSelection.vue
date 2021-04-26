@@ -34,7 +34,6 @@
                         <div class="TravelPackageHotelSelection__price_wrapper">
                             al.&nbsp;<span class="TravelPackageHotelSelection__price">{{hotel.price}}€</span>
                         </div>
-
                     </td>
                     <td>
                         <button class="Button Button--orange" @click="sendRequest(hotel)">Päring</button>
@@ -47,6 +46,8 @@
             v-model="showModal"
             title="Küsi pakkumist"
             modal-class="TravelPackageRequestModal"
+            @before-open="beforeOpen"
+            @before-close="beforeClose"
         >
             <RequestForm
                 :offer="offer"
@@ -58,7 +59,8 @@
 </template>
 
 <script>
-import RequestForm from "./RequestForm.vue"
+import RequestForm from './RequestForm.vue'
+import bodyScroll from 'body-scroll-freezer'
 export default {
     components: {RequestForm},
     props: {
@@ -99,7 +101,16 @@ export default {
         closeModal: function () {
             this.showModal = false
             this.selectedHotel = {}
+        },
+        beforeOpen() {
+            bodyScroll.freeze();
+        },
+        beforeClose() {
+            bodyScroll.unfreeze();
         }
-    }
+    },
+    mounted() {
+        bodyScroll.init();
+    },
 }
 </script>
