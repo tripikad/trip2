@@ -14,8 +14,16 @@
         font-size: 16px;
         font-family: $font-family-sailec;
 
+        @media (max-width: 768px) {
+            display: flex;
+        }
+
         thead {
             border-bottom: 1px solid $gray-light;
+
+            @media (max-width: 768px) {
+                display: none;
+            }
 
             th {
                 text-align: left;
@@ -25,8 +33,17 @@
         }
 
         tbody {
+            width: 100%;
+
             tr {
                 border-bottom: 1px solid $gray-lighter;
+
+                @media (max-width: 768px) {
+                    display: flex;
+                    flex-direction: column;
+                    width: 100%;
+                    padding: calc(#{$spacer}) 0;
+                }
             }
 
             td {
@@ -34,6 +51,14 @@
                 width: auto;
                 min-height: 65px;
                 padding: calc(#{$spacer} * 2) calc(#{$spacer} * 2) calc(#{$spacer} * 2) 0;
+
+                @media (max-width: 768px) {
+                    padding: 5px 10px;
+                    text-align: left;
+                    display: flex;
+                    flex-direction: column;
+                    flex: 1;
+                }
 
                 &:first-child {
                     min-width: 200px;
@@ -54,6 +79,20 @@
                     border: 0;
                     color: $white;
                     font-weight: bold;
+
+                    &:focus {
+                        outline:0;
+                    }
+                }
+
+                label {
+                    font-size: 14px;
+                    font-family: $font-family-sailec;
+                    color: $gray-light;
+
+                    @media (min-width: 768px) {
+                        display: none;
+                    }
                 }
             }
         }
@@ -65,6 +104,11 @@
         vertical-align: baseline;
         letter-spacing: 2px;
         font-size: 20px;
+    }
+
+    &__price_wrapper {
+        white-space: nowrap;
+        display: flex;
     }
 
     &__price {

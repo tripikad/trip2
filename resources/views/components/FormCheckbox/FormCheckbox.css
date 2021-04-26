@@ -7,8 +7,10 @@
     color: $gray;
     font: $font-heading-sm;
     margin-left: $margin-sm;
+    cursor: pointer;
 }
 
 .FormCheckbox__checkbox {
     font-size: calc($spacer * 10);
+    cursor: pointer;
 }

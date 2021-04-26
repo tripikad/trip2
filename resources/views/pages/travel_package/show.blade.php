@@ -23,9 +23,9 @@
             </div>
         </x-header>
 
-        <div class="container">
+        <div class="container-lg">
             <div class="page-travel_package-show__content">
-                <div class="col-md-10 col-12 mx-auto no-gutters pl-0 pr-0">
+                <div class="col-lg-10 col-md-12 col-12 mx-auto no-gutters pl-0 pr-0">
                     <div class="page-travel_package-show__info">
                         <div class="page-travel_package-show__info_block">
                             <svg class="page-travel_package-show__cal_svg"><use xlink:href="#calendar-alt"></use></svg>

@@ -53,7 +53,7 @@
     }
 
     &__field {
-        padding-bottom: calc(#{$spacer} * 2);
+        padding-bottom: calc(#{$spacer} * 1.5);
         line-height: 1em;
 
         &--hidden {

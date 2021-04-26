@@ -29,3 +29,7 @@
 .FormDatepicker--error label {
     color: $red;
 }
+
+.vd-menu__content {
+    z-index: 9999!important;
+}

@@ -1,0 +1,86 @@
+@import "../../variables";
+
+.TravelPackageRequestForm {
+    background: $white;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    padding-bottom: calc(#{$spacer} * 1);
+    overflow-y: auto;
+    overflow-x: hidden;
+    flex-grow: 1;
+
+    &__content {
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+        overflow-y: auto;
+        overflow-x: hidden;
+        flex-grow: 1;
+
+        form {
+            width: 100%;
+            align-items: center;
+            position: relative;
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding: calc(#{$spacer}) calc(#{$spacer} * 2) 0 calc(#{$spacer} * 2);
+        }
+    }
+
+    &__errors {
+        display: flex;
+        width: 100%;
+        max-width: 60em;
+        padding-bottom: 24px;
+    }
+
+    &__error-block {
+        padding: calc(12px * 2);
+        width: 100%;
+    }
+
+    &__field {
+        padding-bottom: calc(#{$spacer} * 1.5);
+        line-height: 1em;
+    }
+
+    &__footer {
+        padding: calc(#{$spacer} * 2) calc(#{$spacer} * 1.5) calc(#{$spacer} * 1.5) calc(#{$spacer} * 1.5);
+        border-top: 1px solid #e5e5e5;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    &__buttons {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+    }
+
+    &__submit-button {
+        display: flex;
+        padding-top: calc(#{$spacer});
+        background: $green;
+        color: $white;
+        max-width: 200px;
+        width: 100%;
+        justify-content: center;
+        padding-left: 20px;
+    }
+
+    &__back-button {
+        display: flex;
+        padding-top: calc(#{$spacer});
+        background: $gray;
+        color: $white;
+        max-width: 200px;
+        width: 100%;
+        justify-content: center;
+        margin-right: 12px;
+    }
+}

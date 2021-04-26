@@ -14,6 +14,7 @@
     "data": "./scripts/get_data.sh && ./scripts/generate_data.sh"
   },
   "dependencies": {
+    "@kouts/vue-modal": "^2.0.5",
     "@mathieustan/vue-datepicker": "^0.2.8",
     "@prettier/plugin-php": "^0.11.2",
     "axios": "^0.18.0",

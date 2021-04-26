@@ -13,6 +13,7 @@
             <tbody>
                 <tr v-for="(hotel, index) in hotels">
                     <td>
+                        <label>Hotell</label>
                         <a :href="hotel.link" v-if="hotel.link" target="_blank">
                             {{hotel.name}}<span v-html="getRating(hotel.star)"/>
                         </a>
@@ -20,20 +21,46 @@
                             {{hotel.name}}<span v-html="getRating(hotel.star)"/>
                         </template>
                     </td>
-                    <td>{{hotel.accommodation}}</td>
-                    <td>{{offer.nights}} ööd</td>
-                    <td>al. <span class="TravelPackageHotelSelection__price">{{hotel.price}}€</span></td>
                     <td>
-                        <button class="Button Button--orange">Päring</button>
+                        <label>Toidlustus</label>
+                        {{hotel.accommodation}}
+                    </td>
+                    <td>
+                        <label>Periood</label>
+                        {{offer.nights}} ööd
+                    </td>
+                    <td>
+                        <label>Hind</label>
+                        <div class="TravelPackageHotelSelection__price_wrapper">
+                            al.&nbsp;<span class="TravelPackageHotelSelection__price">{{hotel.price}}€</span>
+                        </div>
+
+                    </td>
+                    <td>
+                        <button class="Button Button--orange" @click="sendRequest(hotel)">Päring</button>
                     </td>
                 </tr>
             </tbody>
         </table>
+
+        <Modal
+            v-model="showModal"
+            title="Küsi pakkumist"
+            modal-class="TravelPackageRequestModal"
+        >
+            <RequestForm
+                :offer="offer"
+                :hotel="selectedHotel"
+                :closeModal="closeModal"/>
+        </Modal>
+
     </div>
 </template>
 
 <script>
+import RequestForm from "./RequestForm.vue"
 export default {
+    components: {RequestForm},
     props: {
         isclasses: { default: '' },
         hotels: {
@@ -44,24 +71,17 @@ export default {
             type: Object,
             required: true
         },
-
-        startDestinations: { default: () => [] },
-        endDestinations: { default: () => [] },
-        nights: { default: () => [] },
-        selectedStartDestination: { default: '' },
-        selectedEndDestination: { default: '' },
-        selectedNights: { default: null },
-        selectedStartDate: { default: null }
     },
     data() {
         return {
-
+            showModal: false,
+            selectedHotel: {}
         }
     },
     computed: {
-        getSelectedNightsValue: function() {
+       /* getSelectedNightsValue: function() {
             return this.selectedNights ? parseInt(this.selectedNights) : null
-        },
+        },*/
     },
     methods: {
         getRating: function(rating) {
@@ -71,6 +91,14 @@ export default {
                 const stars = '*'.repeat(rating)
                 return `<sub class="TravelPackageHotelSelection__rating">${stars}</sub>`
             }
+        },
+        sendRequest: function (hotel) {
+            this.selectedHotel = hotel
+            this.showModal = true
+        },
+        closeModal: function () {
+            this.showModal = false
+            this.selectedHotel = {}
         }
     }
 }

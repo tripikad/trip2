@@ -6,6 +6,8 @@ import VueDatePicker from '@mathieustan/vue-datepicker'
 import '@mathieustan/vue-datepicker/dist/vue-datepicker.min.css'
 import Vue2Editor from "vue2-editor"
 import "vue2-editor/dist/vue2-editor.css"
+import VueModal from '@kouts/vue-modal/dist/vue-modal.umd.min'
+import '@kouts/vue-modal/dist/vue-modal.css'
 
 moment.locale('et')
 
@@ -54,6 +56,7 @@ jsPages.keys().forEach(filePath => {
 
 Vue.use(VueDatePicker)
 Vue.use(Vue2Editor)
+Vue.component('Modal', VueModal);
 
 // Set up cookies
 
