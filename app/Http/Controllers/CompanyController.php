@@ -52,10 +52,12 @@ class CompanyController extends Controller
      */
     public function profile(Company $company, Request $request)
     {
+        //todo: return view and data based on company type
+
         $company->loadMissing('user');
         $company->loadMissing(['travelOffers' => function ($query) {
             $query->orderBy('name', 'ASC');
-        }]);
+        }, 'travelOffers.views']);
 
         return view('pages.company.profile', [
             'company' => $company,

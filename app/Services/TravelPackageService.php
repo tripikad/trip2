@@ -6,8 +6,10 @@ use App\Company;
 use App\Destination;
 use App\TravelOffer;
 use App\TravelOfferHotel;
+use App\Viewable;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\MessageBag;
@@ -214,5 +216,38 @@ class TravelPackageService extends TravelOfferService
             ->join('destinations as d2', 'd1.parent_id', '=', 'd2.id')
             //->where('active', true)
             ->first();
+    }
+
+    /**
+     * @param TravelOffer $offer
+     * @return bool
+     */
+    public function addViewCount(TravelOffer $offer): bool
+    {
+        $user = auth()->user();
+        $viewableId = (int) $offer->id;
+        $viewableType = DB::getPdo()->quote(TravelOffer::class);
+        $ip = request()->ip();
+        $table_name = with(new Viewable())->getTable();
+        $value = 1;
+
+        if (!$ip && !$user) {
+            return false;
+        }
+
+        $cache_key = 'travel_package_' . $viewableId . '_' . ($user ? $user->id : $ip);
+
+        if (!Cache::get($cache_key)) {
+            DB::insert(
+                "INSERT INTO `$table_name` (`viewable_id`, `viewable_type`, `count`) 
+                VALUES ($viewableId, $viewableType, $value) 
+                ON DUPLICATE KEY UPDATE 
+                `count`=`count` + 1"
+            );
+
+            Cache::put($cache_key, 1, config('cache.viewable.travel_package'));
+        }
+
+        return true;
     }
 }

@@ -6,7 +6,7 @@
             </div>
             <div class="CompanyTravelOfferList__stats">
                 <div class="CompanyTravelOfferList__stats__content">
-                    <div class="CompanyTravelOfferList__meta_row">Vaatamisi: 57</div>
+                    <div class="CompanyTravelOfferList__meta_row">Vaatamisi: {{item.views ? item.views.count : 0}}</div>
                     <div class="CompanyTravelOfferList__meta_row">Päringuid: 6</div>
                 </div>
                 <div class="CompanyTravelOfferList__buttons">

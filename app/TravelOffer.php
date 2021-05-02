@@ -72,6 +72,11 @@ class TravelOffer extends Model
         return $this->morphToMany('App\Image', 'imageable');
     }
 
+    public function views()
+    {
+        return $this->hasOne('App\Viewable', 'viewable_id', 'id');
+    }
+
     /*public function getStatusAttribute()
     {
         if ($this->end_date < Carbon::today()->toDateString()) {

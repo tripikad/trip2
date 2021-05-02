@@ -13,8 +13,10 @@ return [
         'atom' => 36000
     ],
 
+    //in seconds
     'viewable' => [
-        'content' => 3600 //seconds
+        'content' => 3600,
+        'travel_package' => 3600,
     ],
 
     /*

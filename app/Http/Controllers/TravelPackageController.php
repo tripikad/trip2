@@ -80,6 +80,7 @@ class TravelPackageController extends Controller
             abort(404);
         }
 
+        $service->addViewCount($offer);
         return view('pages.travel_package.show', [
             'offer' => $offer,
             'backgroundImage' => $service->getBackgroundImageByDestination($offer->endDestination)
