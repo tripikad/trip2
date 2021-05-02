@@ -1,5 +1,15 @@
 @extends('layouts.main2')
 
+@section('head_title')
+    Reisipakkumised
+@endsection
+@section('head_description')
+    Reisipakkumised
+@endsection
+@section('head_image')
+    {{$backgroundImage}}
+@endsection
+
 @section('content')
     <div class="TravelOffersPage">
         <x-header backgroundImage="{{$backgroundImage}}">

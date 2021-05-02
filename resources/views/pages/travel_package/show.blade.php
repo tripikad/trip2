@@ -1,5 +1,11 @@
 @extends('layouts.main2')
 
+@section('head_title')
+    {{$offer->name . ' | Reisipakett'}}
+@endsection
+@section('head_description'){{$offer->name}}@endsection
+@section('head_image'){{$backgroundImage}}@endsection
+
 @push('styles')
     <style>
         .page-travel_package-show__background-image {
