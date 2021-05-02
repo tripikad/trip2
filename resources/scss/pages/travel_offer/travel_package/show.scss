@@ -146,6 +146,10 @@
             color: $gray;
             font-size: 16px;
             padding: calc(#{$spacer} * 2) 0;
+
+            ul, li {
+                list-style: inside;
+            }
         }
     }
 }
