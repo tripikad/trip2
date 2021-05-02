@@ -59,7 +59,7 @@
 </template>
 
 <script>
-import RequestForm from './RequestForm.vue'
+import RequestForm from './TravelPackageRequestForm.vue'
 import bodyScroll from 'body-scroll-freezer'
 export default {
     components: {RequestForm},

@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import FormSelect from "../../../views/components/FormSelect/FormSelect.vue";
+import FormSelect from '../../views/components/FormSelect/FormSelect.vue'
 export default {
     components: {FormSelect},
     props: {

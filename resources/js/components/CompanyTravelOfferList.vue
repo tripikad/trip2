@@ -29,8 +29,8 @@
 </template>
 
 <script>
-import TravelOfferListItem from "../TravelOffer/ListItem.vue";
-import ButtonVue from "../../../views/components/Button/ButtonVue.vue";
+import TravelOfferListItem from './TravelOfferListItem.vue'
+import ButtonVue from '../../views/components/Button/ButtonVue.vue'
 export default {
     components: {ButtonVue, TravelOfferListItem},
     props: {

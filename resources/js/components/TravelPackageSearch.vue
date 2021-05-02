@@ -45,10 +45,10 @@
 </template>
 
 <script>
-import FormDatepicker from "../../../views/components/FormDatepicker/FormDatepicker.vue";
-import FormSelect from "../../../views/components/FormSelect/FormSelect.vue";
-import FormButtonProcess from "../../../views/components/FormButtonProcess/FormButtonProcess.vue";
-import FormSelectWithGroup from "../FormSelectWithGroup.vue";
+import FormDatepicker from '../../views/components/FormDatepicker/FormDatepicker.vue'
+import FormSelect from '../../views/components/FormSelect/FormSelect.vue'
+import FormButtonProcess from '../../views/components/FormButtonProcess/FormButtonProcess.vue'
+import FormSelectWithGroup from './FormSelectWithGroup.vue'
 export default {
     components: {FormSelectWithGroup, FormButtonProcess, FormSelect, FormDatepicker},
     props: {

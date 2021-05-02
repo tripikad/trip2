@@ -98,11 +98,10 @@
 </template>
 
 <script>
-import FormDatepicker from "../../../views/components/FormDatepicker/FormDatepicker.vue";
-import FormSelect from "../../../views/components/FormSelect/FormSelect.vue";
-import Loading from "../../../views/components/Loading/Loading.vue";
-import FormErrorBlock from "../../../views/components/FormErrorBlock/FormErrorBlock.vue";
-
+import FormDatepicker from '../../views/components/FormDatepicker/FormDatepicker.vue'
+import FormSelect from '../../views/components/FormSelect/FormSelect.vue'
+import Loading from '../../views/components/Loading/Loading.vue'
+import FormErrorBlock from '../../views/components/FormErrorBlock/FormErrorBlock.vue'
 export default {
     components: {FormErrorBlock, Loading, FormSelect, FormDatepicker},
     props: {

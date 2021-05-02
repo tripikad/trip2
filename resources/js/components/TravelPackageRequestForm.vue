@@ -6,7 +6,7 @@
                     :errors="errors"
                     isclasses="TravelPackageForm__error-block"/>
             </div>-->
-            <form ref="TravelPackageRequestForm2"
+            <form ref="requestForm"
                   action="#"
                   method="POST"
                   autocomplete="off"
@@ -88,10 +88,10 @@
 </template>
 
 <script>
-import FormErrorBlock from "../../../views/components/FormErrorBlock/FormErrorBlock.vue";
-import FormTextField from "../../../views/components/FormTextfield/FormTextField.vue";
-import FormTextarea from "../../../views/components/FormTextarea/FormTextarea.vue";
-import FormCheckbox from "../../../views/components/FormCheckbox/FormCheckbox.vue";
+import FormErrorBlock from '../../views/components/FormErrorBlock/FormErrorBlock.vue'
+import FormTextField from '../../views/components/FormTextfield/FormTextField.vue'
+import FormTextarea from '../../views/components/FormTextarea/FormTextarea.vue'
+import FormCheckbox from '../../views/components/FormCheckbox/FormCheckbox.vue'
 export default {
     components: {FormCheckbox, FormTextarea, FormTextField, FormErrorBlock},
     props: {

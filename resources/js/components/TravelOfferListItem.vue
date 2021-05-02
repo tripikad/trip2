@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import Tag from "../../../views/components/Tag/Tag.vue";
+import Tag from '../../views/components/Tag/Tag.vue'
 export default {
     components: {Tag},
     props: {

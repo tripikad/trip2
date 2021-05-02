@@ -15,9 +15,9 @@
 </template>
 
 <script>
-import TravelOfferList from "../components/Company/TravelOfferList.vue";
-import AddNewSelect from "../components/TravelOffer/AddNewSelect.vue";
-import SubscriptionPlan from "../components/TravelOffer/SubscriptionPlan.vue";
+import TravelOfferList from '../components/CompanyTravelOfferList.vue'
+import AddNewSelect from '../components/TravelOfferAddNewSelect.vue'
+import SubscriptionPlan from '../components/TravelOfferSubscriptionPlan.vue'
 export default {
     components: {TravelOfferList, AddNewSelect, SubscriptionPlan},
     props: {
