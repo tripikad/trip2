@@ -18,12 +18,12 @@
 
         img {
             width: 100%;
-            transition: 0.5s all ease-in-out;
+            transition: 0.3s all ease-in-out;
         }
 
         &:hover {
             .TravelOfferCard__item__bg {
-                transform: scale(1.1);
+                transform: scale(1.02);
             }
         }
 
@@ -41,7 +41,8 @@
             color: $white;
             text-transform: uppercase;
             font-family: $font-family-sailec;
-            font-size: 24px;
+            font-size: 26px;
+            font-weight: 600;
         }
 
         &__price {
@@ -55,7 +56,7 @@
 
             span {
                 color: $orange;
-                font-size: 24px;
+                font-size: 26px;
             }
         }
     }

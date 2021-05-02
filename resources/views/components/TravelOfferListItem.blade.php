@@ -11,6 +11,9 @@
                 <tag title="{{$offer->endDestination->name}}" isclasses="Tag--orange"/>
             </div>
             <div class="TravelOfferListItem__tag">
+                <tag title="{{$offer->endDestination->parent->name}}" isclasses="Tag--orange"/>
+            </div>
+            <div class="TravelOfferListItem__tag">
                 <tag title="{{$offer->company->name}}" route="{{route('company.profile.public', ['slug' => $offer->company->slug])}}"/>
             </div>
         </div>
