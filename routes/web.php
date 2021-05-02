@@ -525,9 +525,6 @@ Route::get('lendude_sooduspakkumised/rss', [
 Route::get('firma/{slug}', 'CompanyController@profilePublic')
     ->name('company.profile.public');
 
-Route::get('firma/{slug}/pakkumised', 'CompanyController@offersPublic')
-    ->name('company.offers.public');
-
 Route::get('company/{company}', 'CompanyController@profile')
     ->name('company.profile')
     ->middleware('companyOwner');

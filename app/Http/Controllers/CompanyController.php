@@ -38,65 +38,10 @@ class CompanyController extends Controller
 
         $company->loadMissing('user');
         $company->loadMissing('travelOffers');
-        $routeName = $request->route()->getName();
-
-        $items = [
-            [
-                'title' => 'Tutvustus',
-                'route' => route('company.profile.public', ['slug' => $company->slug]),
-                'active' => $routeName !== 'company.profile.public' ? $routeName === 'company.profile.public' : '#',
-                'count' => null
-            ],
-            [
-                'title' => 'Pakkumised',
-                'route' => $routeName !== 'company.offers.public' ? route('company.offers.public', ['slug' => $company->slug]) : '#',
-                'active' => $routeName === 'company.offers.public',
-                'count' => 12
-            ]
-        ];
 
         return view('pages.company.profile-public', [
             'company' => $company,
             'user' => $company->user,
-            'items' => $items
-        ]);
-    }
-
-    /**
-     * @param string $slug
-     * @param Request $request
-     * @return Application|Factory|View|\Illuminate\View\View
-     */
-    public function offersPublic(string $slug, Request $request)
-    {
-        $company = Company::whereSlug($slug)->first();
-        if (!$company) {
-            abort(404);
-        }
-
-        //todo: return view and data based on company type
-
-        $company->loadMissing('user');
-        $items = [
-            [
-                'title' => 'Tutvustus',
-                'route' => route('company.profile.public', ['slug' => $company->slug]),
-                'active' => false,
-                'count' => null
-            ],
-            [
-                'title' => 'Pakkumised',
-                'route' => '#',
-                'active' => true,
-                'count' => 12
-            ]
-        ];
-
-        return view('pages.company.offers-public', [
-            'company' => $company,
-            'user' => $company->user,
-            //'packages' => $company->activeVacationPackages,
-            'items' => $items
         ]);
     }
 

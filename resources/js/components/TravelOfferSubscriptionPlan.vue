@@ -1,66 +1,66 @@
 <template>
-    <div class="VPSubscriptionPlan" :class="isclasses">
-        <div class="VPSubscriptionPlan__title">Sinu pakett</div>
-        <div class="VPSubscriptionPlan__content">
-            <div class="VPSubscriptionPlan__plan">
-                <div class="VPSubscriptionPlan__plan__info">
-                    <div class="VPSubscriptionPlan__plan__info__name">
+    <div class="TravelOfferSubscriptionPlan" :class="isclasses">
+        <div class="TravelOfferSubscriptionPlan__title">Sinu pakett</div>
+        <div class="TravelOfferSubscriptionPlan__content">
+            <div class="TravelOfferSubscriptionPlan__plan">
+                <div class="TravelOfferSubscriptionPlan__plan__info">
+                    <div class="TravelOfferSubscriptionPlan__plan__info__name">
                         <span>1</span>
-                        <span class="VPSubscriptionPlan__plan__info__name__month">/kuus</span>
+                        <span class="TravelOfferSubscriptionPlan__plan__info__name__month">/kuus</span>
                     </div>
-                    <div class="VPSubscriptionPlan__plan__info__price">
+                    <div class="TravelOfferSubscriptionPlan__plan__info__price">
                         <span>15€</span>
                     </div>
                 </div>
             </div>
 
-            <div class="VPSubscriptionPlan__plan">
-                <div class="VPSubscriptionPlan__plan__status">
+            <div class="TravelOfferSubscriptionPlan__plan">
+                <div class="TravelOfferSubscriptionPlan__plan__status">
                     <Tag title="aktiivne"
                          isclasses="Tag--green Tag--large"/>
                 </div>
-                <div class="VPSubscriptionPlan__plan__info">
-                    <div class="VPSubscriptionPlan__plan__info__name">
+                <div class="TravelOfferSubscriptionPlan__plan__info">
+                    <div class="TravelOfferSubscriptionPlan__plan__info__name">
                         <span>3</span>
-                        <span class="VPSubscriptionPlan__plan__info__name__month">/kuus</span>
+                        <span class="TravelOfferSubscriptionPlan__plan__info__name__month">/kuus</span>
                     </div>
-                    <div class="VPSubscriptionPlan__plan__info__price">
+                    <div class="TravelOfferSubscriptionPlan__plan__info__price">
                         <span>35€</span>
                     </div>
                 </div>
             </div>
 
-            <div class="VPSubscriptionPlan__plan">
-                <div class="VPSubscriptionPlan__plan__info">
-                    <div class="VPSubscriptionPlan__plan__info__name">
+            <div class="TravelOfferSubscriptionPlan__plan">
+                <div class="TravelOfferSubscriptionPlan__plan__info">
+                    <div class="TravelOfferSubscriptionPlan__plan__info__name">
                         <span>5</span>
-                        <span class="VPSubscriptionPlan__plan__info__name__month">/kuus</span>
+                        <span class="TravelOfferSubscriptionPlan__plan__info__name__month">/kuus</span>
                     </div>
-                    <div class="VPSubscriptionPlan__plan__info__price">
+                    <div class="TravelOfferSubscriptionPlan__plan__info__price">
                         <span>50€</span>
                     </div>
                 </div>
             </div>
 
-            <div class="VPSubscriptionPlan__plan">
-                <div class="VPSubscriptionPlan__plan__info">
-                    <div class="VPSubscriptionPlan__plan__info__name">
+            <div class="TravelOfferSubscriptionPlan__plan">
+                <div class="TravelOfferSubscriptionPlan__plan__info">
+                    <div class="TravelOfferSubscriptionPlan__plan__info__name">
                         <span>10</span>
-                        <span class="VPSubscriptionPlan__plan__info__name__month">/kuus</span>
+                        <span class="TravelOfferSubscriptionPlan__plan__info__name__month">/kuus</span>
                     </div>
-                    <div class="VPSubscriptionPlan__plan__info__price">
+                    <div class="TravelOfferSubscriptionPlan__plan__info__price">
                         <span>80€</span>
                     </div>
                 </div>
             </div>
 
-            <div class="VPSubscriptionPlan__plan">
-                <div class="VPSubscriptionPlan__plan__info">
-                    <div class="VPSubscriptionPlan__plan__info__name">
+            <div class="TravelOfferSubscriptionPlan__plan">
+                <div class="TravelOfferSubscriptionPlan__plan__info">
+                    <div class="TravelOfferSubscriptionPlan__plan__info__name">
                         <span>10+</span>
-                        <span class="VPSubscriptionPlan__plan__info__name__month">/kuus</span>
+                        <span class="TravelOfferSubscriptionPlan__plan__info__name__month">/kuus</span>
                     </div>
-                    <div class="VPSubscriptionPlan__plan__info__price">
+                    <div class="TravelOfferSubscriptionPlan__plan__info__price">
                         <span>Võta ühendust</span>
                     </div>
                 </div>
