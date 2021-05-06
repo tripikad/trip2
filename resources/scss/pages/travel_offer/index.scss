@@ -4,13 +4,13 @@
     width: 100%;
 
     &__header-content {
-        margin-top: calc(#{$spacer} * 5);
-        margin-bottom: calc(#{$spacer} * 2);
+        padding-top: calc(#{$spacer} * 5);
+        padding-bottom: calc(#{$spacer} * 2);
         font-family: $font-family-sailec;
 
         @media (max-width: 768px) {
-            margin-top: calc(#{$spacer} * 2);
-            margin-left: calc(#{$spacer} * 2);
+            padding-top: calc(#{$spacer} * 2);
+            padding-left: calc(#{$spacer} * 2);
         }
 
         &__heading {
@@ -19,13 +19,13 @@
             line-height: calc(#{$spacer} * 4);
             text-align: center;
             color: $white;
-            margin-bottom: calc(#{$spacer} * 5);
+            padding-bottom: calc(#{$spacer} * 5);
 
             @media (max-width: 768px) {
                 font-size: calc(#{$spacer} * 2);
                 line-height: calc(#{$spacer} * 2);
-                margin-left: 0;
-                margin-bottom: calc(#{$spacer} * 2);
+                padding-left: 0;
+                padding-bottom: calc(#{$spacer} * 2);
             }
         }
     }
@@ -141,13 +141,18 @@
         a {
             white-space: nowrap;
         }
-        //padding: $padding-md;
     }
 
     &__list_item {
         padding: calc(#{$spacer});
-        /*@media (max-width: 768px) {
-           padding: calc(#{$spacer});
-        }*/
+    }
+
+    &__paginator {
+        padding-top: calc(#{$spacer} * 6);
+        padding-bottom: calc(#{$spacer} * 3);
+
+        @media (max-width: 768px) {
+            padding-top: calc(#{$spacer} * 3);
+        }
     }
 }

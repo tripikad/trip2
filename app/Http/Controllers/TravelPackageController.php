@@ -43,9 +43,14 @@ class TravelPackageController extends Controller
         $endDestinations = TravelOfferService::getAvailableDestinationsByType('package');
         $nights = TravelOfferService::getAvailableNightsByType('package');
 
+        $paginator = null;
+        if ($showList)
+            $paginator = $items->links('components.PaginatorExtended.PaginatorExtended');
+
         return view('pages.travel_package.index', [
             'backgroundImage' => asset('photos/travel_offer_bg.jpg'),
             'items' => $items,
+            'paginator' => $paginator,
             'showList' => $showList,
             'startDestinations' => $startDestinations,
             'endDestinations' => $endDestinations,

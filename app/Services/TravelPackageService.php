@@ -200,7 +200,7 @@ class TravelPackageService extends TravelOfferService
             $query->where(DB::raw('DATEDIFF(travel_offers.end_date,travel_offers.start_date)'), (int)$request->get('nights'));
         }
 
-        return $query->get();
+        return $query->paginate(10);
     }
 
     /**

@@ -13,10 +13,10 @@
 @section('content')
     <div class="TravelOffersPage">
         <x-header backgroundImage="{{$backgroundImage}}">
-            <div class="container TravelOffersPage__header-content">
+            <div class="TravelOffersPage__header-content">
                 <h3 class="TravelOffersPage__header-content__heading">Reisipakkumised</h3>
             </div>
-            <div class="container no-gutters TravelOffersPage__tags-container">
+            <div class="TravelOffersPage__tags-container">
                 <div class="row">
                     <div class="col-md-11 col-12 mx-auto">
                         <div class="TravelOffersPage__tags">
@@ -74,6 +74,11 @@
                                         @foreach($items as $item)
                                             <x-travel-offer-list-item :offer="$item" class="TravelOffersPage__list_item"/>
                                         @endforeach
+
+                                        <div class="TravelOffersPage__paginator">
+                                            {!! $paginator !!}
+                                        </div>
+
                                     @else
                                         <div>
                                             Ei leitud ühtegi vastet (TODO)
