@@ -33,6 +33,8 @@ class CreateTravelOffersTable extends Migration
             $table->text('extra_fee')->nullable();
             $table->text('extra_info')->nullable();
             $table->json('data')->nullable();
+            $table->string('ext_id')->nullable();
+            $table->string('ext_name')->nullable();
             $table->timestamps();
 
             $table
