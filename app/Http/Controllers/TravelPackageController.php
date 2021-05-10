@@ -45,7 +45,7 @@ class TravelPackageController extends Controller
 
         $paginator = null;
         if ($showList)
-            $paginator = $items->links('components.PaginatorExtended.PaginatorExtended');
+            $paginator = $items->appends(request()->input())->links('components.PaginatorExtended.PaginatorExtended');
 
         return view('pages.travel_package.index', [
             'backgroundImage' => asset('photos/travel_offer_bg.jpg'),
