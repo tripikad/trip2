@@ -31,12 +31,12 @@
 
         <div class="container-lg">
             <div class="page-travel_package-show__content">
-                <div class="col-lg-10 col-md-12 col-12 mx-auto no-gutters pl-0 pr-0">
+                <div class="col-lg-11 col-md-12 col-12 mx-auto no-gutters pl-0 pr-0">
                     <div class="page-travel_package-show__info">
                         <div class="page-travel_package-show__info_block">
                             <svg class="page-travel_package-show__cal_svg"><use xlink:href="#calendar-alt"></use></svg>
                             <div class="page-travel_package-show__info_block__time">
-                                <span>{{$offer->start_date->format('m.d')}} - {{$offer->end_date->format('m.d.Y')}}</span>
+                                <span>{{$offer->start_date->format('d.m')}} - {{$offer->end_date->format('d.m.Y')}}</span>
 <!--                                <span class="page-travel_package-show__info_block__nights">7 ööd</span>-->
                             </div>
                         </div>

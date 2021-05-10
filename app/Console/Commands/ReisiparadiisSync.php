@@ -21,16 +21,40 @@ class ReisiparadiisSync extends Command
     private $endpoint = 'https://www.reisiparadiis.ee/wp-json/wp/v2/reisid?page=[PAGE]&token=[TOKEN]';
 
     private $cityMapping = [
-        //'Dubai-Jebel Ali' => 'Dubai',
-        //'Dubai-City' => 'Dubai',
-        //'Sharjah' => 'Dubai',
+        'Dubai-Jebel Ali' => 'Dubai',
+        'Dubai-City' => 'Dubai',
+        'Sharjah' => 'Dubai',
         "Tenerife North" => 'Tenerife',
         "Tenerife Sur" => 'Tenerife',
+        'Rhodos-Kallithea/Faliraki' => 'Rhodos',
+        'Rhodos-Ialysos/Rhodos' => 'Rhodos',
+        'Rhodos-Lindos' => 'Rhodos',
+        'Rhodos-Fanes' => 'Rhodos',
+        'Rhodes-Afandou' => 'Rhodos',
+        "Kreeta-Iraklion" => 'Kreeta',
+        "Kreeta-Rethymno" => 'Kreeta',
+        "Sunny Beach" => 'Päikeserannik',
+        'St.Vlas' => 'Päikeserannik',
+        'Nessebar' => 'Päikeserannik',
+        'Golden Sands' => 'Kuldsed liivad',
         "Incekum - Alanya" => 'Alanya',
+        'BELDIBI' => 'Alanya',
+        "KEMER CENTER" => 'Kemer',
+        'OKURCALAR' => 'Alanya',
+        'KIRIS' => 'Kemer',
+        'Side' => 'Antalya',
+        'MANAVGAT' => 'Antalya',
+        'SIDE CITY' => 'Antalya',
+        'CAMYUVA' => 'Kemer',
+        'KONAKLI' => 'Alanya',
+        'MAHMUTLAR' => 'Alanya',
+        'Adjara - Kobuleti' => 'Batumi',
+        'Adjara / Batumi' => 'Batumi',
+
     ];
 
-    protected $startDestination = null;
-
+    protected $destinationTallinn = null;
+    //protected $destinationRiga = null;
     protected $cities = [];
     protected $cityNames = [];
 
@@ -40,7 +64,8 @@ class ReisiparadiisSync extends Command
         $this->company_id = env('REISIPARADIIS_COMPANY_ID');
         $token = env('REISIPARADIIS_TOKEN');
         $this->endpoint = str_replace('[TOKEN]', $token, $this->endpoint);
-        $this->startDestination = Destination::where('name', 'Tallinn')->first();
+        $this->destinationTallinn = Destination::where('name', 'Tallinn')->first();
+        //$this->destinationRiga = Destination::where('name', 'Riia')->first();
         $cities = [];
         $cityNames = [];
         Destination::where('depth', 2)->get()->map(function($destination) use (&$cities, &$cityNames) {
@@ -54,7 +79,6 @@ class ReisiparadiisSync extends Command
 
         $this->cities = $cities;
         $this->cityNames = $cityNames;
-        //print_r($this->cities);
     }
 
     private function getCity($city)
@@ -65,16 +89,6 @@ class ReisiparadiisSync extends Command
 
         return $city;
     }
-
-    /*private function getEndDestinations($data)
-    {
-        $hotels = $data['hotels'];
-        $additionalData = $hotels[0];
-        $city = $this->getCity($additionalData['linn']);
-        $endDestinations[] = Destination::whereIn('name', [$data['destination'], $city])->get()->pluck('id')->toArray();
-
-        return $endDestinations;
-    }*/
 
     private function getEndDestinationByHotelData($data)
     {
@@ -94,15 +108,6 @@ class ReisiparadiisSync extends Command
 
         return $rating ?? '';
     }
-
-    /*private function deleteOfferByExtId($id)
-    {
-        $offer = Offer::where('ext_id', $id)->first();
-        $offer->startDestinations()->detach();
-        $offer->endDestinations()->detach();
-
-        $offer->delete();
-    }*/
 
     private function clearContent($content)
     {
@@ -124,6 +129,19 @@ class ReisiparadiisSync extends Command
         }
 
         return $price;
+    }
+
+    private function getIncluded()
+    {
+        return '
+        <ul>
+            <li>Edasi-tagasi lennupiletid otselennule Tallinnast</li>
+            <li>Majutus valitud hotellis koos toitlustusega vastavalt hotelli konseptsioonile</li>
+            <li>Transfeer lennujaam - hotell - lennujaam</li>
+            <li>Reisiesindaja teenused kohapeal</li>
+            <li>Äraantav pagas + käsipagas</li>
+        </ul>
+        ';
     }
 
     public function handle()
@@ -187,7 +205,7 @@ class ReisiparadiisSync extends Command
 
                             $offer = new TravelOffer();
                             $offer->company_id = $this->company_id;
-                            $offer->start_destination_id = $this->startDestination->id;
+                            $offer->start_destination_id = $this->destinationTallinn->id;
                             $offer->end_destination_id = $destinationId;
                             $offer->type = 'package';
                             $offer->name = $name;
@@ -195,6 +213,7 @@ class ReisiparadiisSync extends Command
                             $offer->end_date = $end;
                             $offer->active = 1;
                             $offer->price = $price;
+                            $offer->included = $this->getIncluded();
                             $offer->ext_id = $extId;
                             $offer->ext_name = 'reisiparadiis';
                             $offer->save();

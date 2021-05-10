@@ -13,5 +13,6 @@ return [
         306 => 'greece.jpg',
         358 => 'cypros.jpg',
         305 => 'portugal.jpg',
+        741 => 'georgia.jpg'
     ]
 ];
