@@ -25,7 +25,16 @@
                 @endif
 
                 <div class="BlockTitle__title page-company-profile__block">Pakkumised</div>
-                <x-company-travel-offer-list :company="$company"/>
+
+                @foreach($offers as $offer)
+                    <x-travel-offer-list-item :offer="$offer"/>
+                @endforeach
+
+                @if ($paginator)
+                    <div class="page-company-profile__paginator">
+                        {!! $paginator !!}
+                    </div>
+                @endif
             </div>
         </div>
 

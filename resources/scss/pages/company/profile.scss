@@ -95,4 +95,8 @@
     &__block {
         padding-bottom: calc(#{$spacer} * 2);
     }
+
+    &__paginator {
+        padding-top: calc(#{$spacer} * 4);
+    }
 }
