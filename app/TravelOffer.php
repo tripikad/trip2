@@ -33,6 +33,15 @@ class TravelOffer extends Model
         'endDestination'
     ];
 
+    public static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function($offer) {
+            $offer->views()->delete();
+        });
+    }
+
     public function sluggable(): array
     {
         return [

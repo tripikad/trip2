@@ -93,5 +93,10 @@
 
     &__button {
         margin-right: 10px;
+
+        a {
+            display: block;
+            color: $white;
+        }
     }
 }

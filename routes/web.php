@@ -553,6 +553,9 @@ Route::post('company/{company}/travel_offer/{travelOffer}/update', 'CompanyContr
     ->name('company.update_travel_offer')
     ->middleware('companyOwner');
 
+Route::post('company/{company}/travel_offer/{travelOffer}/delete', 'CompanyController@deleteTravelOffer')
+    ->name('company.delete_travel_offer')
+    ->middleware('companyOwner');
 
 /*Route::get('company', 'CompanyController@index')
     ->name('company.index')

@@ -11,16 +11,19 @@
                 </div>
                 <div class="CompanyTravelOfferList__buttons">
                     <div class="TravelOfferListItem__button">
-                        <button-vue title="Muuda"
-                                    isclasses="Button--small Button--blue"
-                                    route="#"
-                        />
+                        <a href="{{route('company.edit_travel_offer', ['company' => $company, 'travelOffer' => $offer])}}" class="Button Button--small Button--blue">
+                            Muuda
+                        </a>
                     </div>
                     <div class="TravelOfferListItem__button">
-                        <button-vue title="Kustuta"
-                                    isclasses="Button--small Button--pink"
-                                    route="#"
-                        />
+                        <div class="Button Button--small Button--pink">
+                            <form action="{{route('company.delete_travel_offer', ['company' => $company, 'travelOffer' => $offer])}}" method="POST">
+                                <input type="hidden" name="_token" value="{{csrf_token()}}">
+                                <div class="Form__field">
+                                    <input type="submit" value="Kustuta" class="FormLink FormLink--pink">
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>

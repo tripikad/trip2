@@ -142,6 +142,22 @@ class TravelPackageService extends TravelOfferService
     }
 
     /**
+     * @param Company $company
+     * @param Request $request
+     * @param TravelOffer $travelOffer
+     * @return bool
+     */
+    public static function deleteTravelPackage(Company $company, Request $request, TravelOffer $travelOffer): bool
+    {
+        try {
+            $travelOffer->delete();
+            return true;
+        } catch (\Exception $e) {
+            return false;
+        }
+    }
+
+    /**
      * @param bool $startWithTallinn
      * @return array
      */

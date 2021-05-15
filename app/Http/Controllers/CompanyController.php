@@ -311,7 +311,35 @@ class CompanyController extends Controller
         }
     }
 
+    /**
+     * @param Company $company
+     * @param TravelOffer $travelOffer
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function deleteTravelOffer(Company $company, TravelOffer $travelOffer, Request $request): RedirectResponse
+    {
+        $result = null;
+        switch ($travelOffer->type) {
+            case 'package':
+                $result = TravelPackageService::deleteTravelPackage($company, $request, $travelOffer);
+                break;
+            /*case 'ski':
+                return '';
+            case 'round':
+                return '';*/
+            default:
+                abort(403);
+        }
 
+        if ($result === true) {
+            return Redirect::route('company.profile', ['company' => $company])
+                ->with('info', 'Reisipakkumine kustutatud');
+        } else {
+            return Redirect::back()
+                ->withErrors('Kustutamine ebaõnnestus');
+        }
+    }
 
     public function index()
     {
