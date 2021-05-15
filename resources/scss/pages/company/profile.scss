@@ -75,7 +75,7 @@
 
     &__content {
         font-family: $font-family-sailec;
-        padding: calc(#{$spacer} * 3) #{$spacer};
+        padding: calc(#{$spacer} * 3) #{$spacer} calc(#{$spacer} * 5) #{$spacer};
         min-height: 400px;
         height: 100%;
     }

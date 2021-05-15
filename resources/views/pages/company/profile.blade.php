@@ -3,7 +3,7 @@
 @section('body')
     <div class="row page-company-travel-offers mr-0 ml-0">
         <div class="col-md-8 col-12">
-            <company-travel-offer-list :items="{{json_encode($company->travelOffers)}}"/>
+            <x-company-travel-offer-list :company="$company"/>
         </div>
         <div class="col-md-4 col-12 mt-5 mt-md-0">
             <div>

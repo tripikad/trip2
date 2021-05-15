@@ -55,4 +55,8 @@
         font-size: 16px;
         color: $gray;
     }
+
+    &__paginator {
+        padding-top: calc(#{$spacer} * 5);
+    }
 }

@@ -55,13 +55,23 @@ class CompanyController extends Controller
         //todo: return view and data based on company type
 
         $company->loadMissing('user');
-        $company->loadMissing(['travelOffers' => function ($query) {
-            $query->orderBy('name', 'ASC');
-        }, 'travelOffers.views']);
+
+        $query = TravelOffer::where('travel_offers.type', 'package')
+            ->where('company_id', $company->id)
+            ->with('views')
+            ->select('travel_offers.*', 'd2.id as parentDestinationId', 'd2.name as parentDestinationName')
+            ->join('destinations as d1', 'travel_offers.end_destination_id', '=', 'd1.id')
+            ->join('destinations as d2', 'd1.parent_id', '=', 'd2.id')
+            ->orderBy('travel_offers.start_date', 'ASC', 'parentDestinationName', 'ASC');
+
+        $offers = $query->paginate(10);
+        $paginator = $offers->links('components.PaginatorExtended.PaginatorExtended');
 
         return view('pages.company.profile', [
             'company' => $company,
-            'user' => $company->user
+            'user' => $company->user,
+            'offers' => $offers,
+            'paginator' => $paginator
         ]);
     }
 

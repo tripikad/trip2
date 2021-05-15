@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Services\TravelOfferService;
 use App\Services\TravelPackageService;
-use App\TravelOffer;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
