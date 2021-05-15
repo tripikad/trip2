@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\TravelOffer;
 use App\TravelOfferHotel;
+use App\Viewable;
 use Illuminate\Console\Command;
 use Carbon\Carbon;
 use App\Destination;
@@ -81,6 +82,19 @@ class ReisiparadiisSync extends Command
         $this->cityNames = $cityNames;
     }
 
+    private function deleteOffers()
+    {
+        $viewableIds = TravelOffer::where('ext_name', 'reisiparadiis')
+            ->has('views')
+            ->get()
+            ->pluck('views.viewable_id');
+
+        TravelOffer::where('ext_name', 'reisiparadiis')->delete();
+        if ($viewableIds) {
+            Viewable::whereIn('viewable_id', $viewableIds)->where('viewable_type', TravelOffer::class)->delete();
+        }
+    }
+
     private function getCity($city)
     {
         if (isset($this->cityMapping[$city])) {
@@ -148,12 +162,7 @@ class ReisiparadiisSync extends Command
     {
         $this->info("\nStarting sync\n");
 
-        /*$existingOffers = Offer::whereNotNull('ext_id')
-            ->get()
-            ->mapWithKeys(function ($item) {
-                return [$item['ext_id'] => $item['ext_date_time']->format('Y-m-d H:i:s')];
-            }, collect())
-            ->toArray();*/
+        $this->deleteOffers();
 
         while($this->endpage) {
             $endpoint = str_replace('[PAGE]', $this->endpage, $this->endpoint);
@@ -170,6 +179,11 @@ class ReisiparadiisSync extends Command
                         $hotels = $data['hotels'];
 
                         if (!$hotels) {
+                            continue;
+                        }
+
+                        $start = Carbon::createFromFormat('Ymd', $data['date_from']);
+                        if ($start < Carbon::today()) {
                             continue;
                         }
 
@@ -195,7 +209,6 @@ class ReisiparadiisSync extends Command
                             continue;
                         }
 
-                        $start = Carbon::createFromFormat('Ymd', $data['date_from']);
                         $end = clone $start;
                         $end->addDays($days);
 

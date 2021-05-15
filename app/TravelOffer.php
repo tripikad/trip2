@@ -83,7 +83,7 @@ class TravelOffer extends Model
 
     public function views()
     {
-        return $this->hasOne('App\Viewable', 'viewable_id', 'id');
+        return $this->morphOne('App\Viewable', 'viewable');
     }
 
     /*public function getStatusAttribute()

@@ -100,6 +100,11 @@ class TravelPackageService extends TravelOfferService
         $travelOffer->excluded = $request->post('excluded');
         $travelOffer->extra_fee = $request->post('extra_fee');
         $travelOffer->extra_info = $request->post('extra_info');
+
+        if (!$add) {
+            $travelOffer->active = 1;
+        }
+
         $travelOffer->save();
 
         if (!$add) {
