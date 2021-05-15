@@ -87,4 +87,12 @@
         margin: 0 auto;
         padding-left: 30px;
     }
+
+    &__company_description {
+        padding-bottom: calc(#{$spacer} * 4);
+    }
+
+    &__block {
+        padding-bottom: calc(#{$spacer} * 2);
+    }
 }

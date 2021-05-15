@@ -522,7 +522,7 @@ Route::get('lendude_sooduspakkumised/rss', [
 
 // Companies
 
-Route::get('firma/{slug}', 'CompanyController@profilePublic')
+Route::get('ettevote/{slug}', 'CompanyController@profilePublic')
     ->name('company.profile.public');
 
 Route::get('company/{company}', 'CompanyController@profile')

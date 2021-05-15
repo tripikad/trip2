@@ -4,7 +4,7 @@ return [
     'register.title' => 'Registreeri',
     'register.business_user.title' => 'Registreeri ärikasutaja',
     'register.field.name.title' => 'Kasutajanimi',
-    'register.field.company_name.title' => 'Asutuse nimi',
+    'register.field.company_name.title' => 'Ettevõtte nimi',
     'register.field.email.title' => 'E-post',
     'register.field.password.title' => 'Parool',
     'register.field.password_confirmation.title' => 'Parool uuesti',

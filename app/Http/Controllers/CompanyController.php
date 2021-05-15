@@ -23,6 +23,30 @@ use Illuminate\Validation\ValidationException;
 class CompanyController extends Controller
 {
     /**
+     * @param Company $company
+     * @param Request $request
+     * @return array
+     */
+    private function getProfilePageData(Company $company, Request $request)
+    {
+        $query = TravelOffer::where('travel_offers.type', 'package')
+            ->where('company_id', $company->id)
+            ->with('views')
+            ->select('travel_offers.*', 'd2.id as parentDestinationId', 'd2.name as parentDestinationName')
+            ->join('destinations as d1', 'travel_offers.end_destination_id', '=', 'd1.id')
+            ->join('destinations as d2', 'd1.parent_id', '=', 'd2.id')
+            ->orderBy('travel_offers.start_date', 'ASC', 'parentDestinationName', 'ASC');
+
+        $offers = $query->paginate(10);
+        $paginator = $offers->links('components.PaginatorExtended.PaginatorExtended');
+
+        return [
+            'offers' => $offers,
+            'paginator' => $paginator
+        ];
+    }
+
+    /**
      * @param $slug
      * @param Request $request
      * @return Application|Factory|View|\Illuminate\View\View
@@ -37,12 +61,10 @@ class CompanyController extends Controller
         //todo: return view and data based on company type
 
         $company->loadMissing('user');
-        $company->loadMissing('travelOffers');
-
-        return view('pages.company.profile-public', [
+        return view('pages.company.profile-public', array_merge([
             'company' => $company,
             'user' => $company->user,
-        ]);
+        ], $this->getProfilePageData($company, $request)));
     }
 
     /**
@@ -55,24 +77,10 @@ class CompanyController extends Controller
         //todo: return view and data based on company type
 
         $company->loadMissing('user');
-
-        $query = TravelOffer::where('travel_offers.type', 'package')
-            ->where('company_id', $company->id)
-            ->with('views')
-            ->select('travel_offers.*', 'd2.id as parentDestinationId', 'd2.name as parentDestinationName')
-            ->join('destinations as d1', 'travel_offers.end_destination_id', '=', 'd1.id')
-            ->join('destinations as d2', 'd1.parent_id', '=', 'd2.id')
-            ->orderBy('travel_offers.start_date', 'ASC', 'parentDestinationName', 'ASC');
-
-        $offers = $query->paginate(10);
-        $paginator = $offers->links('components.PaginatorExtended.PaginatorExtended');
-
-        return view('pages.company.profile', [
+        return view('pages.company.profile', array_merge([
             'company' => $company,
             'user' => $company->user,
-            'offers' => $offers,
-            'paginator' => $paginator
-        ]);
+        ], $this->getProfilePageData($company, $request)));
     }
 
     /**
@@ -113,9 +121,10 @@ class CompanyController extends Controller
 
         $this->validate($request, $rules);
 
+        $description = preg_replace('/(<[^>]+) style=".*?"/i', '$1', $request->description);
         $data = [
             'email' => $request->email,
-            'description' => $request->description,
+            'description' => $description,
             'contact_facebook' => $request->facebook,
             'contact_homepage' => $request->homepage
         ];
