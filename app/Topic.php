@@ -8,7 +8,7 @@ class Topic extends Model
 {
     protected $table = 'topics';
 
-    public bool $timestamps = false;
+    public $timestamps = false;
 
     public function content()
     {

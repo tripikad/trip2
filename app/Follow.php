@@ -10,7 +10,7 @@ class Follow extends Model
 
     protected $fillable = ['followable_id', 'followable_type'];
 
-    public bool $timestamps = false;
+    public $timestamps = false;
 
     public function user()
     {

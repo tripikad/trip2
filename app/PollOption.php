@@ -10,7 +10,7 @@ class PollOption extends Model
 
     protected $fillable = ['poll_id', 'name'];
 
-    public bool $timestamps = false;
+    public $timestamps = false;
 
     public function poll()
     {

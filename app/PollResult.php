@@ -8,7 +8,7 @@ class PollResult extends Model
 {
     protected $table = 'poll_results';
 
-    public bool $timestamps = false;
+    public $timestamps = false;
 
     public function poll()
     {

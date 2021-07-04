@@ -8,7 +8,7 @@ class NewsletterSent extends Model
 {
     protected $table = 'newsletter_sents';
 
-    public bool $timestamps = false;
+    public $timestamps = false;
     protected $dates = ['started_at', 'ended_at'];
 
     protected $appends = ['newsletter_type_num', 'sent_num', 'sending_num', 'subscriptions_num'];
