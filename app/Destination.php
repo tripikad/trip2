@@ -12,7 +12,7 @@ class Destination extends Baum\Node
 
     protected $table = 'destinations';
 
-    public bool $timestamps = false;
+    public $timestamps = false;
 
     protected $parentColumnName = 'parent_id';
     protected $leftColumnName = 'lft';
