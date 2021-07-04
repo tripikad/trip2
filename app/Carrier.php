@@ -8,5 +8,5 @@ class Carrier extends Model
 {
     protected $table = 'carriers';
 
-    public $timestamps = false;
+    public bool $timestamps = false;
 }

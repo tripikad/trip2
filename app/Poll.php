@@ -10,7 +10,7 @@ class Poll extends Model
 
     protected $dates = ['start_date', 'end_date'];
 
-    public $timestamps = true;
+    public bool $timestamps = true;
 
     protected $appends = [
         'start_date_formatted',

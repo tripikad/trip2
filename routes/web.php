@@ -604,6 +604,11 @@ Route::post('poll/{poll}/delete', 'PollController@delete')
     ->name('poll.delete')
     ->middleware('role:admin');
 
+//campaigns
+
+Route::get('kampaania/airbaltic', 'CampaignController@airBaltic')
+    ->name('campaign.airbaltic');
+
 // Legacy user paths
 
 Route::get('user/{id}/forum', 'RedirectController@redirectUser');

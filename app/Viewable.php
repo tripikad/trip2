@@ -10,5 +10,5 @@ class Viewable extends Model
 
     protected $fillable = ['viewable_id', 'viewable_type', 'count'];
 
-    public $timestamps = false;
+    public bool $timestamps = false;
 }
