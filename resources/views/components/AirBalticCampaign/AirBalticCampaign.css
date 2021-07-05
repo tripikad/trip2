@@ -1,0 +1,66 @@
+.AirBaltic {
+    font-family: $font-family-sailec;
+    list-style: initial;
+}
+
+.AirBaltic__title {
+    color: $gray-dark;
+    font: $font-heading-xl;
+    text-align: center;
+    padding: calc($spacer * 3) 0;
+}
+
+.AirBaltic__body {
+    padding: calc($spacer * 3) 0;
+}
+
+.AirBaltic__body h2 {
+    font: $font-text-xl;
+    color: $gray-dark;
+    margin: calc($spacer * 2) 0;
+}
+
+.AirBaltic__list ul {
+    font: $font-text-md;
+    display: inline-block;
+    list-style-position: inside;
+    padding-left: 3em;
+    margin-bottom: calc($spacer * 2);
+}
+
+.AirBaltic__list li {
+    font: $font-text-md;
+    line-height: $line-height-xl;
+    list-style: disc;
+}
+
+.AirBaltic__list ol li {
+    font: $font-text-md;
+    line-height: $line-height-xl;
+    list-style: none;
+    padding-left: 2em;
+}
+
+.AirBaltic__listCounter {
+    font-weight: bold;
+    margin-right: .5em;
+}
+
+.AirBaltic__requirements {
+    color: $green-dark;
+}
+
+.AirBaltic__action {
+    display: flex;
+    justify-content: center;
+    margin: calc($spacer * 4) 0;
+}
+
+.AirBaltic__link {
+    color: $blue;
+}
+
+.AirBaltic__campaignLink {
+    text-decoration: underline;
+    color: $blue;
+}
