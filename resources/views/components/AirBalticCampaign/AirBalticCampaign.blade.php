@@ -27,10 +27,10 @@
                         Auhinnaks on airBalticu edasi-tagasi lennupiletid algusega Tallinnast kahele koos äraantava pagasiga (kuni 23kg).
                     </li>
                     <li>
-                        Auhinnamängus osalevad kõik perioodil 06.07-16.07.2021 Trip Facebooki lehel www.facebook.com/tripeeee loosimängus osalenud isikud. Osalemise tingimused:
+                        Auhinnamängus osalevad kõik perioodil 06.07-16.07.2021 <a href="https://www.facebook.com/tripeeee" target="_blank" class="AirBaltic__link">Trip.ee Facebooki lehel</a> loosimängus osalenud isikud. Osalemise tingimused:
                         <ol>
                             <li>
-                                <span class="AirBaltic__listCounter">1.</span><span class="AirBaltic__requirements">Märgi kampaaniapakkumise kommentaaridesse airBalticu lennusihtkoht Green Sale kampaania sihkohavalikust.</span>
+                                <span class="AirBaltic__listCounter">1.</span><span class="AirBaltic__requirements">Märgi <a href="https://www.facebook.com/tripeeee" target="_blank" class="AirBaltic__campaignLink">kampaaniapakkumise</a> kommentaaridesse airBalticu lennusihtkoht Green Sale kampaania sihkohavalikust.</span>
                             </li>
                             <li>
                                 <span class="AirBaltic__listCounter">2.</span><span class="AirBaltic__requirements">Märgi kellega koos sa sinna puhkama soovid lennata.</span>
@@ -41,7 +41,7 @@
                         </ol>
                     </li>
                     <li>
-                        Võitja nimi avaldatakse Trip.ee Facebooki lehel 16.07.2021 ning võitja peab võtma Tripiga ühendust kas siis läbi Facebooki sõnumite või e-meilitsi aadressil abi@trip.ee hiljemalt 25.07.2021.
+                        Võitja nimi avaldatakse <a href="https://www.facebook.com/tripeeee" target="_blank" class="AirBaltic__link">Trip.ee Facebooki lehel</a> 16.07.2021 ning võitja peab võtma Tripiga ühendust kas siis läbi Facebooki sõnumite või e-meilitsi aadressil turundus@trip.ee hiljemalt 25.07.2021.
                     </li>
                     <li>
                         Kui võitjaga ei õnnestu ühendust saada hiljemalt 25.07.2021, ei ole Trip.ee kohustatud auhinda väljastama.
@@ -57,13 +57,10 @@
                             Auhinnaks on kinkevautšer, mis sisaldab 1×2 edasi-tagasi lennupiletit koos äraantava pagasiga Tallinnast airBalticu lennule.
                         </li>
                         <li>
-                            Lennupiletid tuleb ära kasutada perioodil 21.07??.–31.12.2021. Sellesse perioodi peavad jääma lennud mõlemas suunas. Lennupiletid tuleb ära kasutada ühe tervikuna, st reisides kahekesi koos. Vähemalt üks kahest reisijast peab olema täiskasvanu.
+                            Lennupiletid tuleb ära kasutada perioodil 26.07.2021 - 20.06.2022. Sellesse perioodi peavad jääma lennud mõlemas suunas. Lennupiletid tuleb ära kasutada ühe tervikuna, st reisides kahekesi koos. Vähemalt üks kahest reisijast peab olema täiskasvanu.
                         </li>
                         <li>
                             Soovitud kuupäevade kinnitamise võimalus sõltub vabade kohtade olemasolust.
-                        </li>
-                        <li>
-                            Auhinnaks saadud lennupiletit ei ole tühistatavad / nime muudatused ei ole lubatud / lennukuupäeva või kellaaja muudatuse tasu on 70 €/suuna kohta.
                         </li>
                         <li>
                             Auhinnaks saadud lennud toimuvad airBalticu poolt opereeritud lendudel vastavalt airBalticu kehtivale lennuplaanile.
@@ -91,7 +88,7 @@
             </div>
 
             <div class="AirBaltic__action">
-                <a href="https://www.facebook.com/" target="__blank">
+                <a href="https://www.facebook.com/tripeeee" target="__blank">
                     <div class="Button Button--large">
                         <div class="Button__title">
                             Osalemiseks klikka siia

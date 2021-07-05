@@ -55,3 +55,12 @@
     justify-content: center;
     margin: calc($spacer * 4) 0;
 }
+
+.AirBaltic__link {
+    color: $blue;
+}
+
+.AirBaltic__campaignLink {
+    text-decoration: underline;
+    color: $blue;
+}
