@@ -30,7 +30,7 @@
                         Auhinnamängus osalevad kõik perioodil 06.07 - 16.07.2021 Trip.ee Facebooki lehel loosimängus osalenud isikud. Osalemise tingimused:
                         <ol>
                             <li>
-                                <span class="AirBaltic__listCounter">1.</span><span class="AirBaltic__requirements">Märgi <a href="https://www.facebook.com/tripeeee" target="_blank" class="AirBaltic__campaignLink">kampaaniapakkumise</a> kommentaaridesse airBalticu lennusihtkoht <a href="https://www.airbaltic.com/et-LV/campaign/green-sale?utm_source=tripee&utm_medium=banner&utm_term=ee&utm_content=lottery&utm_campaign=20210706greensale&sref=BTB" target="_blank" class="AirBaltic__link">Green Sale kampaania</a> sihkohavalikust.</span>
+                                <span class="AirBaltic__listCounter">1.</span><span class="AirBaltic__requirements">Märgi <a href="https://www.facebook.com/tripeeee/posts/5704245002979203" target="_blank" class="AirBaltic__campaignLink">kampaaniapakkumise</a> kommentaaridesse airBalticu lennusihtkoht <a href="https://www.airbaltic.com/et-LV/campaign/green-sale?utm_source=tripee&utm_medium=banner&utm_term=ee&utm_content=lottery&utm_campaign=20210706greensale&sref=BTB" target="_blank" class="AirBaltic__link">Green Sale kampaania</a> sihkohavalikust.</span>
                             </li>
                             <li>
                                 <span class="AirBaltic__listCounter">2.</span><span class="AirBaltic__requirements">Märgi kellega koos sa sinna puhkama soovid lennata.</span>
@@ -88,7 +88,7 @@
             </div>
 
             <div class="AirBaltic__action">
-                <a href="https://www.facebook.com/tripeeee" target="__blank">
+                <a href="https://www.facebook.com/tripeeee/posts/5704245002979203" target="__blank">
                     <div class="Button Button--large">
                         <div class="Button__title">
                             Osalemiseks klikka siia
