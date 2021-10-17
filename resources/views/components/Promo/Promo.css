@@ -10,3 +10,26 @@
     float: left;
     width: 100%;
 }
+
+.Promo--hidden {
+    display: none;
+}
+
+.Promo--desktop-only {
+    display: block;
+}
+
+.Promo--mobile-only {
+    display: none;
+}
+
+@media only screen and (max-width: 480px) {
+    .Promo--mobile-only {
+        display: flex;
+        justify-content: center;
+    }
+
+    .Promo--desktop-only {
+        display: none;
+    }
+}

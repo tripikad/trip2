@@ -153,14 +153,15 @@ class DestinationController extends Controller
                                 })
                             )
                     )
-                    ->push(component('Promo')->with('promo', 'body'))
+                    ->push(component('Promo')->with('promo', 'body')->is('desktop-only'))
+                    ->push(component('Promo')->with('promo', 'mobile_small')->is('mobile-only'))
             )
 
             ->with(
                 'sidebar',
                 collect()
                     ->push(component('Promo')->with('promo', 'sidebar_small'))
-                    ->push(component('Promo')->with('promo', 'sidebar_large'))
+                    ->push(component('Promo')->with('promo', 'sidebar_large')->is('desktop-only'))
             )
 
             ->with(

@@ -36,5 +36,17 @@ return [
         'id2' => env('PROMO_FLIGHTOFFER_LIST_SIDEBAR_ID2'),
         'width' => 384,
         'height' => 195
-    ]
+    ],
+    'mobile_small' => [
+        'id1' => env('PROMO_MOBILE_SMALL_ID1'),
+        'id2' => env('PROMO_MOBILE_SMALL_ID2'),
+        'width' => 320,
+        'height' => 50
+    ],
+    'mobile_big' => [
+        'id1' => env('PROMO_MOBILE_BIG_ID1'),
+        'id2' => env('PROMO_MOBILE_BIG_ID2'),
+        'width' => 300,
+        'height' => 250
+    ],
 ];

@@ -72,7 +72,9 @@ class FlightController extends Controller
                             return region('FlightRow', $flight);
                         })
                     )
-                    ->push(component('Promo')->with('promo', 'body'))
+                    //->push(component('Promo')->with('promo', 'body'))
+                    ->push(component('Promo')->with('promo', 'body')->is('desktop-only'))
+                    ->push(component('Promo')->with('promo', 'mobile_small')->is('mobile-only'))
                     ->merge(
                         $flights->slice($sliceSize)->map(function ($flight) {
                             return region('FlightRow', $flight);
@@ -88,7 +90,9 @@ class FlightController extends Controller
                     ->push(region('FlightNewsletterSubscribe'))
                     ->push(component('Promo')->with('promo', 'flightoffer_list_sidebar'))
                     ->push(component('Promo')->with('promo', 'sidebar_small'))
-                    ->push(component('Promo')->with('promo', 'sidebar_large'))
+                    //->push(component('Promo')->with('promo', 'sidebar_large'))
+                    ->push(component('Promo')->with('promo', 'sidebar_large')->is('desktop-only'))
+                    ->push(component('Promo')->with('promo', 'mobile_big')->is('mobile-only'))
                     ->push(component('AffHotelscombined'))
             )
 
@@ -97,6 +101,7 @@ class FlightController extends Controller
                 collect()
                     ->push(region('FlightBottom', $forums, $travelmates, $news))
                     ->push(component('Promo')->with('promo', 'footer'))
+                    ->push(component('Promo')->with('promo', 'mobile_small')->is('mobile-only'))
             )
 
             ->with(
@@ -211,7 +216,9 @@ class FlightController extends Controller
             ->with(
                 'content',
                 collect()
-                    ->push(component('Promo')->with('promo', 'body'))
+                    //->push(component('Promo')->with('promo', 'body'))
+                    ->push(component('Promo')->with('promo', 'body')->is('desktop-only'))
+                    ->push(component('Promo')->with('promo', 'mobile_small')->is('mobile-only'))
                     ->push(
                         component('Body')
                             ->is('responsive')
@@ -224,7 +231,9 @@ class FlightController extends Controller
                         })
                     )
                     ->pushWhen($loggedUser && $loggedUser->hasRole('regular'), region('CommentCreateForm', $flight))
-                    ->push(component('Promo')->with('promo', 'body'))
+                    //->push(component('Promo')->with('promo', 'body'))
+                    ->push(component('Promo')->with('promo', 'body')->is('desktop-only'))
+                    ->push(component('Promo')->with('promo', 'mobile_small')->is('mobile-only'))
                     ->push(
                         component('Block')
                             ->with('title', trans('frontpage.index.flight.title'))
@@ -243,7 +252,9 @@ class FlightController extends Controller
                     ->push(region('FlightAbout'))
                     ->push(region('FlightNewsletterSubscribe'))
                     ->push(component('Promo')->with('promo', 'sidebar_small'))
-                    ->push(component('Promo')->with('promo', 'sidebar_large'))
+                    //->push(component('Promo')->with('promo', 'sidebar_large'))
+                    ->push(component('Promo')->with('promo', 'sidebar_large')->is('desktop-only'))
+                    ->push(component('Promo')->with('promo', 'mobile_big')->is('mobile-only'))
                     ->push(component('AffiliateSearch'))
                     ->push(component('AffRentalcars'))
                     ->push(component('AffBookingSearch'))
