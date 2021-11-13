@@ -66,7 +66,8 @@ class FlightController extends Controller
             ->with(
                 'content',
                 collect()
-                    ->push(component('Promo')->with('promo', 'flightoffer_list_top'))
+                    ->push(component('Promo')->with('promo', 'flightoffer_list_top')->is('mobile-only'))
+                    ->push(component('Promo')->with('promo', 'mobile_small')->is('mobile-only'))
                     ->merge(
                         $flights->slice(0, $sliceSize)->map(function ($flight) {
                             return region('FlightRow', $flight);
@@ -74,7 +75,6 @@ class FlightController extends Controller
                     )
                     //->push(component('Promo')->with('promo', 'body'))
                     ->push(component('Promo')->with('promo', 'body')->is('desktop-only'))
-                    ->push(component('Promo')->with('promo', 'mobile_small')->is('mobile-only'))
                     ->merge(
                         $flights->slice($sliceSize)->map(function ($flight) {
                             return region('FlightRow', $flight);

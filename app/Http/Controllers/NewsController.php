@@ -67,6 +67,7 @@ class NewsController extends Controller
             ->with(
                 'content',
                 collect()
+                    ->push(component('Promo')->with('promo', 'mobile_small')->is('mobile-only'))
                     ->push(
                         component('Grid3')
                             ->with('gutter', true)

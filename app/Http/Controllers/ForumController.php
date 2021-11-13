@@ -89,6 +89,7 @@ class ForumController extends Controller
             ->with(
                 'content',
                 collect()
+                    ->push(component('Promo')->with('promo', 'mobile_small')->is('mobile-only'))
                     ->merge(
                         $forums->map(function ($forum) {
                             return region('ForumRow', $forum);
@@ -265,6 +266,7 @@ class ForumController extends Controller
             ->with(
                 'content',
                 collect()
+                    ->push(component('Promo')->with('promo', 'mobile_small')->is('mobile-only'))
                     ->push(region('ForumPost', $forum, 'forum.edit'))
                     ->push(component('CommentInset')->with('content', region('PaginatorExtended', $comments)))
                     ->pushWhen(
