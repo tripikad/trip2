@@ -1,0 +1,26 @@
+.Infobar {
+    display: flex;
+    width: 100%;
+    background: $blue;
+    text-align: center;
+    padding: 8px;
+    justify-content: center;
+}
+
+.Infobar__title {
+    color: $white;
+    font: $font-text-md;
+    font-weight: 600;
+}
+
+.Infobar__title a {
+    color: $white;
+}
+
+.Infobar__title a:hover {
+    color: $gray-dark;
+}
+
+.Infobar__title span {
+    font-weight: 800;
+}
