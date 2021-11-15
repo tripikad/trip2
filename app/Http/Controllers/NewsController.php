@@ -153,7 +153,7 @@ class NewsController extends Controller
                 'sidebar',
                 collect()
                     ->push(component('Promo')->with('promo', 'sidebar_small'))
-                    ->push(component('Promo')->with('promo', 'sidebar_large')->is('desktop-only'))
+                    ->push(component('Promo')->with('promo', 'sidebar_large'))
             )
 
             ->with(

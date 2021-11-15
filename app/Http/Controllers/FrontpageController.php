@@ -68,7 +68,7 @@ class FrontpageController extends Controller
                             return region('ForumRow', $forum);
                         })
                     )
-                    ->push(component('Promo')->with('promo', 'body')->is('desktop-only'))
+                    ->push(component('Promo')->with('promo', 'body'))
                     ->merge(
                         $forums->slice($forums->count() / 2)->map(function ($forum) {
                             return region('ForumRow', $forum);
