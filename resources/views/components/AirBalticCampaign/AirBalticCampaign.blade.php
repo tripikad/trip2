@@ -12,7 +12,7 @@
                         2 lennupiletit koos äraantava pagasiga airBalticu edasi-tagasi lennule algusega Tallinnast võitja poolt valitud sihtkohta.
                     </li>
                     <li>
-                        Valida saab kõikide nende sihtkohtade vahel, mis airBalticu <a href="https://www.airbaltic.com/et-LV/campaign/green-sale?utm_source=tripee&utm_medium=banner&utm_term=ee&utm_content=lottery&utm_campaign=20210706greensale&sref=BTB" target="_blank" class="AirBaltic__link">Green Sale kampaania</a> raames esindatud.
+                        Valida saab kõikide airBalticu otselendude vahel, mis algavad Tallinnast
                     </li>
                 </ul>
             </div>
@@ -21,16 +21,16 @@
             <div class="AirBaltic__list">
                 <ul>
                     <li>
-                        Auhinnamängu, mis kestab 06.07 - 16.07.2021 (kuni auhinna loosimiseni), korraldab reisiportaal Trip.ee koostöös airBalticuga.
+                        Auhinnamängu, mis kestab 16.11 - 21.11.2021, korraldab reisiportaal Trip.ee koostöös airBalticuga.
                     </li>
                     <li>
-                        Auhinnaks on airBalticu edasi-tagasi lennupiletid algusega Tallinnast kahele koos äraantava pagasiga (kuni 23kg).
+                        Auhinnaks on airBalticu edasi-tagasi lennupiletid otselendudele algusega Tallinnast kahele koos äraantava pagasiga (kuni 23kg).
                     </li>
                     <li>
-                        Auhinnamängus osalevad kõik perioodil 06.07 - 16.07.2021 Trip.ee Facebooki lehel loosimängus osalenud isikud. Osalemise tingimused:
+                        Auhinnamängus osalevad kõik perioodil 16.11-21.11.2021 Trip.ee Facebooki lehel loosimängus osalenud isikud. Osalemise tingimused:
                         <ol>
                             <li>
-                                <span class="AirBaltic__listCounter">1.</span><span class="AirBaltic__requirements">Märgi <a href="https://www.facebook.com/tripeeee/posts/5704245002979203" target="_blank" class="AirBaltic__campaignLink">kampaaniapakkumise</a> kommentaaridesse airBalticu lennusihtkoht <a href="https://www.airbaltic.com/et-LV/campaign/green-sale?utm_source=tripee&utm_medium=banner&utm_term=ee&utm_content=lottery&utm_campaign=20210706greensale&sref=BTB" target="_blank" class="AirBaltic__link">Green Sale kampaania</a> sihkohavalikust.</span>
+                                <span class="AirBaltic__listCounter">1.</span><span class="AirBaltic__requirements">Märgi <a href="https://www.facebook.com/tripeeee/posts/5704245002979203" target="_blank" class="AirBaltic__campaignLink">kampaaniapakkumise</a> kommentaaridesse airBalticu otselennu sihtkoht Tallinnast kuhu lennata soovid.</span>
                             </li>
                             <li>
                                 <span class="AirBaltic__listCounter">2.</span><span class="AirBaltic__requirements">Märgi kellega koos sa sinna puhkama soovid lennata.</span>
@@ -41,10 +41,10 @@
                         </ol>
                     </li>
                     <li>
-                        Võitja nimi avaldatakse <a href="https://www.facebook.com/tripeeee" target="_blank" class="AirBaltic__link">Trip.ee Facebooki lehel</a> 16.07.2021 ning võitja peab võtma Tripiga ühendust kas siis läbi Facebooki sõnumite või e-meilitsi aadressil turundus@trip.ee hiljemalt 25.07.2021.
+                        Võitja nimi avaldatakse <a href="https://www.facebook.com/tripeeee" target="_blank" class="AirBaltic__link">Trip.ee Facebooki lehel</a> 22.11.2021 ning võitja peab võtma Tripiga ühendust kas siis läbi Facebooki sõnumite või e-meilitsi aadressil turundus@trip.ee hiljemalt 30.11.2021.
                     </li>
                     <li>
-                        Kui võitjaga ei õnnestu ühendust saada hiljemalt 25.07.2021, ei ole Trip.ee kohustatud auhinda väljastama.
+                        Kui võitjaga ei õnnestu ühendust saada hiljemalt 30.11.2021, ei ole Trip.ee kohustatud auhinda väljastama.
                     </li>
                 </ul>
             </div>
@@ -57,13 +57,13 @@
                             Auhinnaks on kinkevautšer, mis sisaldab 1×2 edasi-tagasi lennupiletit koos äraantava pagasiga Tallinnast airBalticu lennule.
                         </li>
                         <li>
-                            Lennupiletid tuleb ära kasutada perioodil 26.07.2021 - 30.06.2022. Sellesse perioodi peavad jääma lennud mõlemas suunas. Lennupiletid tuleb ära kasutada ühe tervikuna, st reisides kahekesi koos. Vähemalt üks kahest reisijast peab olema täiskasvanu.
+                            Lennupiletid tuleb ära kasutada perioodil 01.12.2021 - 31.12.2022. Sellesse perioodi peavad jääma lennud mõlemas suunas. Lennupiletid tuleb ära kasutada ühe tervikuna, st reisides kahekesi koos. Vähemalt üks kahest reisijast peab olema täiskasvanu.
                         </li>
                         <li>
                             Soovitud kuupäevade kinnitamise võimalus sõltub vabade kohtade olemasolust.
                         </li>
                         <li>
-                            Auhinnaks saadud lennud toimuvad airBalticu poolt opereeritud lendudel vastavalt airBalticu kehtivale lennuplaanile.
+                            Auhinnaks saadud lennud toimuvad airBalticu poolt opereeritud otselendudel Tallinnast vastavalt airBalticu kehtivale lennuplaanile.
                         </li>
                         <li>
                             Auhinnaks saadud lennupileteid ei või edasi müüa ning auhinna väärtust ei maksta välja rahas.

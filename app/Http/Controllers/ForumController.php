@@ -89,6 +89,7 @@ class ForumController extends Controller
             ->with(
                 'content',
                 collect()
+                    //->push(component('Promo')->with('promo', 'mobile_small')->is('mobile-only'))
                     ->merge(
                         $forums->map(function ($forum) {
                             return region('ForumRow', $forum);
@@ -102,7 +103,9 @@ class ForumController extends Controller
                 collect()
                     ->push(region('ForumAbout', $type))
                     ->push(component('Promo')->with('promo', 'sidebar_small'))
+                    //->push(component('Promo')->with('promo', 'sidebar_large'))
                     ->push(component('Promo')->with('promo', 'sidebar_large'))
+                    //->push(component('Promo')->with('promo', 'mobile_big')->is('mobile-only'))
             )
 
             ->with(
@@ -165,7 +168,9 @@ class ForumController extends Controller
                 'sidebar',
                 collect()
                     ->push(component('Promo')->with('promo', 'sidebar_small'))
+                    //->push(component('Promo')->with('promo', 'sidebar_large'))
                     ->push(component('Promo')->with('promo', 'sidebar_large'))
+                    //->push(component('Promo')->with('promo', 'mobile_big')->is('mobile-only'))
             )
 
             ->with(
@@ -261,6 +266,7 @@ class ForumController extends Controller
             ->with(
                 'content',
                 collect()
+                    //->push(component('Promo')->with('promo', 'mobile_small')->is('mobile-only'))
                     ->push(region('ForumPost', $forum, 'forum.edit'))
                     ->push(component('CommentInset')->with('content', region('PaginatorExtended', $comments)))
                     ->pushWhen(
@@ -283,7 +289,9 @@ class ForumController extends Controller
                     )
                     ->push(component('CommentInset')->with('content', region('PaginatorExtended', $comments)))
                     ->pushWhen($user && $user->hasRole('regular'), region('CommentCreateForm', $forum, 'inset'))
+                    //->push(component('Promo')->with('promo', 'body'))
                     ->push(component('Promo')->with('promo', 'body'))
+                    //->push(component('Promo')->with('promo', 'mobile_small')->is('mobile-only'))
             )
 
             ->with(
@@ -291,7 +299,9 @@ class ForumController extends Controller
                 collect()
                     ->push(region('ForumAbout', $type))
                     ->push(component('Promo')->with('promo', 'sidebar_small'))
+                    //->push(component('Promo')->with('promo', 'sidebar_large'))
                     ->push(component('Promo')->with('promo', 'sidebar_large'))
+                    //->push(component('Promo')->with('promo', 'mobile_big')->is('mobile-only'))
             )
 
             ->with(

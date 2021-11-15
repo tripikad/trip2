@@ -48,6 +48,7 @@ class FrontpageController extends Controller
                                         ->with('title', trans('frontpage.index.all.offers'))
                                         ->with('route', route('flight.index'))
                                 )
+                                //->push(component('Promo')->with('promo', 'mobile_small')->is('mobile-only'))
                             )
                     )
                     ->pushWhen(!$loggedUser, '&nbsp;')
@@ -67,7 +68,7 @@ class FrontpageController extends Controller
                             return region('ForumRow', $forum);
                         })
                     )
-                    ->push(component('Promo')->with('promo', 'body'))
+                    ->push(component('Promo')->with('promo', 'body')->is('desktop-only'))
                     ->merge(
                         $forums->slice($forums->count() / 2)->map(function ($forum) {
                             return region('ForumRow', $forum);
@@ -129,6 +130,7 @@ class FrontpageController extends Controller
                     )
                     ->push(component('Promo')->with('promo', 'sidebar_small'))
                     ->push(component('Promo')->with('promo', 'sidebar_large'))
+                    //->push(component('Promo')->with('promo', 'mobile_big')->is('mobile-only'))
                     ->push(component('AffHotelscombined'))
             )
 

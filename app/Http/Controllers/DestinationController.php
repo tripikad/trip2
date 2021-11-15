@@ -154,6 +154,7 @@ class DestinationController extends Controller
                             )
                     )
                     ->push(component('Promo')->with('promo', 'body'))
+                    //->push(component('Promo')->with('promo', 'mobile_small')->is('mobile-only'))
             )
 
             ->with(

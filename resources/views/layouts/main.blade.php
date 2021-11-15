@@ -40,7 +40,10 @@
           style="position: relative; min-height: 100vh;"
         >
             @yield('background')
-            @yield('promobar')
+            {{--@yield('promobar')--}}
+
+            {{--{!! component('Infobar')  !!}--}}
+
             {!! component('PhotoFullscreen') !!}
             @yield('header')
             {!! component('HeaderError') !!}
