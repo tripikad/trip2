@@ -62,7 +62,7 @@ class TravelmateController extends Controller
             ->with(
                 'content',
                 collect()
-                    ->push(component('Promo')->with('promo', 'mobile_small')->is('mobile-only'))
+                    //->push(component('Promo')->with('promo', 'mobile_small')->is('mobile-only'))
                     ->push(
                         component('Grid2')
                             ->with('gutter', true)
@@ -82,8 +82,8 @@ class TravelmateController extends Controller
                     ->push(region('TravelmateAbout'))
                     ->push(component('Promo')->with('promo', 'sidebar_small'))
                     //->push(component('Promo')->with('promo', 'sidebar_large'))
-                    ->push(component('Promo')->with('promo', 'sidebar_large')->is('desktop-only'))
-                    ->push(component('Promo')->with('promo', 'mobile_big')->is('mobile-only'))
+                    ->push(component('Promo')->with('promo', 'sidebar_large'))
+                    //->push(component('Promo')->with('promo', 'mobile_big')->is('mobile-only'))
             )
 
             ->with(
@@ -222,8 +222,8 @@ class TravelmateController extends Controller
                     ->push(region('UserCard', $travelmate->user))
                     ->push(component('Promo')->with('promo', 'sidebar_small'))
                     //->push(component('Promo')->with('promo', 'sidebar_large'))
-                    ->push(component('Promo')->with('promo', 'sidebar_large')->is('desktop-only'))
-                    ->push(component('Promo')->with('promo', 'mobile_big')->is('mobile-only'))
+                    ->push(component('Promo')->with('promo', 'sidebar_large'))
+                    //->push(component('Promo')->with('promo', 'mobile_big')->is('mobile-only'))
             )
 
             ->with(

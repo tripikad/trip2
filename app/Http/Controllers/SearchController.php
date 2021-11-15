@@ -233,8 +233,8 @@ class SearchController extends Controller
                     ->push(component('Search')->with('items', $search_results))
                     ->push(region('Paginator', $data['paginate']))
                     //->push(component('Promo')->with('promo', 'body'))
-                    ->push(component('Promo')->with('promo', 'body')->is('desktop-only'))
-                    ->push(component('Promo')->with('promo', 'mobile_small')->is('mobile-only'))
+                    ->push(component('Promo')->with('promo', 'body'))
+                    //->push(component('Promo')->with('promo', 'mobile_small')->is('mobile-only'))
             )
             ->with('footer', region('Footer'))
             ->render();

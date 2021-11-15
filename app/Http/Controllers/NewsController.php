@@ -67,7 +67,7 @@ class NewsController extends Controller
             ->with(
                 'content',
                 collect()
-                    ->push(component('Promo')->with('promo', 'mobile_small')->is('mobile-only'))
+                    //->push(component('Promo')->with('promo', 'mobile_small')->is('mobile-only'))
                     ->push(
                         component('Grid3')
                             ->with('gutter', true)
@@ -87,8 +87,8 @@ class NewsController extends Controller
                     ->push(region('NewsAbout'))
                     ->push(component('Promo')->with('promo', 'sidebar_small'))
                     //->push(component('Promo')->with('promo', 'sidebar_large'))
-                    ->push(component('Promo')->with('promo', 'sidebar_large')->is('desktop-only'))
-                    ->push(component('Promo')->with('promo', 'mobile_big')->is('mobile-only'))
+                    ->push(component('Promo')->with('promo', 'sidebar_large'))
+                    //->push(component('Promo')->with('promo', 'mobile_big')->is('mobile-only'))
             )
 
             ->with(
@@ -134,9 +134,8 @@ class NewsController extends Controller
             ->with(
                 'content',
                 collect()
-                    //->push(component('Promo')->with('promo', 'body'))
-                    ->push(component('Promo')->with('promo', 'body')->is('desktop-only'))
-                    ->push(component('Promo')->with('promo', 'mobile_small')->is('mobile-only'))
+                    ->push(component('Promo')->with('promo', 'body'))
+                    //->push(component('Promo')->with('promo', 'mobile_small')->is('mobile-only'))
                     ->push(
                         component('Body')
                             ->is('responsive')

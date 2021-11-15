@@ -56,8 +56,8 @@ class BlogController extends Controller
                     )
                     ->push(component('Promo')->with('promo', 'sidebar_small'))
                     //->push(component('Promo')->with('promo', 'sidebar_large'))
-                    ->push(component('Promo')->with('promo', 'sidebar_large')->is('desktop-only'))
-                    ->push(component('Promo')->with('promo', 'mobile_big')->is('mobile-only'))
+                    ->push(component('Promo')->with('promo', 'sidebar_large'))
+                    //->push(component('Promo')->with('promo', 'mobile_big')->is('mobile-only'))
             )
 
             ->with('bottom', collect()->push(component('Promo')->with('promo', 'footer')))
@@ -125,8 +125,8 @@ class BlogController extends Controller
                 collect()
                     ->push(component('Promo')->with('promo', 'sidebar_small'))
                     //->push(component('Promo')->with('promo', 'sidebar_large'))
-                    ->push(component('Promo')->with('promo', 'sidebar_large')->is('desktop-only'))
-                    ->push(component('Promo')->with('promo', 'mobile_big')->is('mobile-only'))
+                    ->push(component('Promo')->with('promo', 'sidebar_large'))
+                    //->push(component('Promo')->with('promo', 'mobile_big')->is('mobile-only'))
             )
 
             ->with('bottom', collect()->push(component('Promo')->with('promo', 'footer')))
