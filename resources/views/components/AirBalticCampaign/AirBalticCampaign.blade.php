@@ -30,7 +30,7 @@
                         Auhinnamängus osalevad kõik perioodil 16.11-21.11.2021 Trip.ee Facebooki lehel loosimängus osalenud isikud. Osalemise tingimused:
                         <ol>
                             <li>
-                                <span class="AirBaltic__listCounter">1.</span><span class="AirBaltic__requirements">Märgi <a href="https://www.facebook.com/tripeeee/posts/5704245002979203" target="_blank" class="AirBaltic__campaignLink">kampaaniapakkumise</a> kommentaaridesse airBalticu otselennu sihtkoht Tallinnast kuhu lennata soovid.</span>
+                                <span class="AirBaltic__listCounter">1.</span><span class="AirBaltic__requirements">Märgi <a href="https://www.facebook.com/tripeeee/posts/6404423406294689" target="_blank" class="AirBaltic__campaignLink">kampaaniapakkumise</a> kommentaaridesse airBalticu otselennu sihtkoht Tallinnast kuhu lennata soovid.</span>
                             </li>
                             <li>
                                 <span class="AirBaltic__listCounter">2.</span><span class="AirBaltic__requirements">Märgi kellega koos sa sinna puhkama soovid lennata.</span>
@@ -88,7 +88,7 @@
             </div>
 
             <div class="AirBaltic__action">
-                <a href="https://www.facebook.com/tripeeee/posts/5704245002979203" target="__blank">
+                <a href="https://www.facebook.com/tripeeee/posts/6404423406294689" target="__blank">
                     <div class="Button Button--large">
                         <div class="Button__title">
                             Osalemiseks klikka siia
