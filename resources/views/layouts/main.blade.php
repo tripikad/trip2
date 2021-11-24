@@ -42,7 +42,7 @@
             @yield('background')
             {{--@yield('promobar')--}}
 
-            {{--{!! component('Infobar')  !!}--}}
+            {!! component('Infobar') !!}
 
             {!! component('PhotoFullscreen') !!}
             @yield('header')
