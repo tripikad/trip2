@@ -29,6 +29,7 @@
         "laravelcollective/html": "^6.0",
         "laravelium/feed": "7.0.1",
         "laravelium/sitemap": "7.0.1",
+        "league/flysystem-aws-s3-v3": "1.0.29",
         "msurguy/honeypot": "^1.1",
         "nesbot/carbon": "^2.40",
         "nikic/php-parser": "^4.10",
