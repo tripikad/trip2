@@ -39,48 +39,89 @@ class ImportImagesToSpaces extends Command
      */
     public function handle()
     {
-        $images = DB::table('images')
+        $idFrom = 1;
+        $idTo = 100;
+        $imagesData = DB::table('images')
             ->selectRaw('id, filename, imageables.imageable_id, imageables.imageable_type')
             ->leftjoin('imageables','imageables.image_id','=','images.id')
             ->groupBy('images.id')
-            ->orderBy('id', 'DESC')
-            ->take(5)
-            ->get();
+            ->orderBy('id', 'ASC')
+            ->where('id', '>=', $idFrom)
+            ->where('id', '<=', $idTo);
 
-        foreach ($images as $image) {
-            if (Storage::disk('local')->exists('/images/original/' . $image->filename)) {
-                $SpacesStoragePath = 'internal';
-                $imagePath = storage_path('app') . '/images/original/' . $image->filename;
-                if ($image->imageable_type === 'App\Content') {
-                    $SpacesStoragePath = 'content';
+        $presets = [
+            'xsmall' => 180,
+            'small' => 300,
+            'medium' => 700,
+            'large' => 1024,
+            'background' => 1920
+        ];
 
-                    /*foreach (['small'] as $preset) {
-                        if (!config("imagepresets.presets.$preset.on_the_fly")) {
-                            \Intervention\Image\Facades\Image::make($path . $filename)
-                                ->{config("imagepresets.presets.$preset.operation")}(
-                                    config("imagepresets.presets.$preset.width"),
-                                    config("imagepresets.presets.$preset.height"),
-                                    function ($constraint) {
-                                        $constraint->aspectRatio();
-                                    }
-                                )
-                                ->save(
-                                    config("imagepresets.presets.$preset.path") . $filename,
-                                    config("imagepresets.presets.$preset.quality")
-                                );
+        $allowedImageFormats = ['png', 'jpg', 'jpeg'];
+
+        $imagesData->chunk(50, function($images) use ($presets, $allowedImageFormats) {
+            foreach ($images as $image) {
+                try {
+                    if (Storage::disk('local')->exists('/images/original/' . $image->filename)) {
+                        $fileExtension = \File::extension($image->filename);
+                        if (!in_array($fileExtension, $allowedImageFormats)) {
+                            continue;
                         }
-                    }*/
 
-                } else if ($image->imageable_type === 'App\User') {
-                    $SpacesStoragePath = 'user_profile';
+                        $originalPath = storage_path('app') . '/images/original/' . $image->filename;
+                        $this->line($originalPath);
+
+                        if ($image->imageable_type === 'App\Content') {
+                            Storage::disk('do_spaces')->putFileAs('images/content/original/', $originalPath, $image->filename, 'public');
+                            foreach (['xsmall', 'small', 'medium', 'large', 'background'] as $preset) {
+                                $spacesSavePath = 'images/content/' . $preset . '/';
+                                if ($preset === 'small' || $preset === 'medium') {
+                                    $imagePath = storage_path('app') . '/images/' . $preset . '/' . $image->filename;
+                                    Storage::disk('do_spaces')->putFileAs($spacesSavePath, $imagePath, $image->filename, 'public');
+                                } else {
+                                    $resizedImage = \Intervention\Image\Facades\Image::make($originalPath)->resize($presets[$preset], null,
+                                        function ($constraint) {
+                                            $constraint->aspectRatio();
+                                        }
+                                    )->encode();
+
+                                    Storage::disk('do_spaces')->put($spacesSavePath . $image->filename, (string) $resizedImage, 'public');
+                                }
+                            }
+                        } else if ($image->imageable_type === 'App\User') {
+                            Storage::disk('do_spaces')->putFileAs('images/user_profile/original/', $originalPath, $image->filename, 'public');
+                            foreach (['xsmall_square', 'small_square'] as $preset) {
+                                $spacesSavePath = 'images/user_profile/' . $preset . '/';
+                                $imagePath = storage_path('app') . '/images/' . $preset . '/' . $image->filename;
+                                Storage::disk('do_spaces')->putFileAs($spacesSavePath, $imagePath, $image->filename, 'public');
+                            }
+                        } else {
+                            Storage::disk('do_spaces')->putFileAs('images/internal/original/', $originalPath, $image->filename, 'public');
+                            foreach (['xsmall', 'small', 'medium', 'large'] as $preset) {
+                                $spacesSavePath = 'images/internal/' . $preset . '/';
+                                if ($preset === 'small' || $preset === 'medium') {
+                                    $imagePath = storage_path('app') . '/images/' . $preset . '/' . $image->filename;
+                                    Storage::disk('do_spaces')->putFileAs($spacesSavePath, $imagePath, $image->filename, 'public');
+                                } else {
+                                    $resizedImage = \Intervention\Image\Facades\Image::make($originalPath)->resize($presets[$preset], null,
+                                        function ($constraint) {
+                                            $constraint->aspectRatio();
+                                        }
+                                    )->encode();
+
+                                    Storage::disk('do_spaces')->put($spacesSavePath . $image->filename, (string) $resizedImage, 'public');
+                                }
+                            }
+                        }
+                    }
+                } catch (\Exception $e) {
+                    print_r($image);
+                    $this->error($e->getMessage());
                 }
-
-                Storage::disk('do_spaces')->putFileAs('images/' . $SpacesStoragePath, $imagePath, $image->filename, 'public');
             }
-        }
-
-        //print_r($images);
+        });
 
         $this->info("\nDone");
+        return true;
     }
 }
