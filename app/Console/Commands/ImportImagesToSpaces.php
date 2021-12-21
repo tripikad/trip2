@@ -39,14 +39,14 @@ class ImportImagesToSpaces extends Command
      */
     public function handle()
     {
-        $idFrom = 1;
-        $idTo = 100;
+        $idFrom = 51000;
+        $idTo = 51292; //last one imported at the moment 21.12.2021
         $imagesData = DB::table('images')
             ->selectRaw('id, filename, imageables.imageable_id, imageables.imageable_type')
             ->leftjoin('imageables','imageables.image_id','=','images.id')
             ->groupBy('images.id')
             ->orderBy('id', 'ASC')
-            ->where('id', '>=', $idFrom)
+            ->where('id', '>', $idFrom)
             ->where('id', '<=', $idTo);
 
         $presets = [
@@ -121,7 +121,7 @@ class ImportImagesToSpaces extends Command
             }
         });
 
-        $this->info("\nDone");
+        $this->info("\nDone " . $idFrom . ' - ' . $idTo);
         return true;
     }
 }
