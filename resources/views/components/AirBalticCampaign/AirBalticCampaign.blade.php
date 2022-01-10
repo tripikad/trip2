@@ -2,18 +2,18 @@
 
     <div class="container-lg">
         <div class="AirBaltic__title">
-            Osale AirBaltic kampaanias ja võida 2 piletit valitud sihtkohta
+            Osale AirBaltic kampaanias ja võida 2 piletit Dubaisse
         </div>
         <div class="AirBaltic__body">
             <h2>Auhind:</h2>
             <div class="AirBaltic__list">
                 <ul>
                     <li>
-                        2 lennupiletit koos äraantava pagasiga airBalticu edasi-tagasi lennule algusega Tallinnast võitja poolt valitud sihtkohta.
+                        2 lennupiletit koos äraantava pagasiga airBalticu edasi-tagasi lennule algusega Tallinnast Dubaisse.
                     </li>
-                    <li>
+<!--                    <li>
                         Valida saab kõikide airBalticu otselendude vahel, mis algavad Tallinnast
-                    </li>
+                    </li>-->
                 </ul>
             </div>
 
@@ -21,19 +21,22 @@
             <div class="AirBaltic__list">
                 <ul>
                     <li>
-                        Auhinnamängu, mis kestab 16.11 - 21.11.2021, korraldab reisiportaal Trip.ee koostöös airBalticuga.
+                        Auhinnamängu, mis kestab 11.01 - 17.01.2022, korraldab reisiportaal Trip.ee koostöös airBalticuga.
                     </li>
                     <li>
-                        Auhinnaks on airBalticu edasi-tagasi lennupiletid otselendudele algusega Tallinnast kahele koos äraantava pagasiga (kuni 23kg).
+                        Auhinnaks on airBalticu edasi-tagasi lennupiletid algusega Tallinnast Dubaisse kahele koos äraantava pagasiga (kuni 23kg).
                     </li>
                     <li>
-                        Auhinnamängus osalevad kõik perioodil 16.11-21.11.2021 Trip.ee Facebooki lehel loosimängus osalenud isikud. Osalemise tingimused:
+                        Auhinnamängus osalevad kõik perioodil 11.01 - 17.01.2022 Trip.ee Facebooki lehel loosimängus osalenud isikud. Osalemise tingimused:
                         <ol>
-                            <li>
+<!--                            <li>
                                 <span class="AirBaltic__listCounter">1.</span><span class="AirBaltic__requirements">Märgi <a href="https://www.facebook.com/tripeeee/posts/6404423406294689" target="_blank" class="AirBaltic__campaignLink">kampaaniapakkumise</a> kommentaaridesse airBalticu otselennu sihtkoht Tallinnast kuhu lennata soovid.</span>
+                            </li>-->
+                            <li>
+                                <span class="AirBaltic__listCounter">1.</span><span class="AirBaltic__requirements">Märgi <a href="https://www.facebook.com/tripeeee/posts/6404423406294689" target="_blank" class="AirBaltic__campaignLink">kampaaniapakkumise</a> kommentaaridesse kellega koos sa sinna puhkama soovid lennata.</span>
                             </li>
                             <li>
-                                <span class="AirBaltic__listCounter">2.</span><span class="AirBaltic__requirements">Märgi kellega koos sa sinna puhkama soovid lennata.</span>
+                                <span class="AirBaltic__listCounter">2.</span><span class="AirBaltic__requirements">Pane "Like" Trip.ee Facebook lehele.</span>
                             </li>
                             <li>
                                 <span class="AirBaltic__listCounter">3.</span><span class="AirBaltic__requirements">Jaga kampaaniapakkumist ka avalikult oma sõpradele.</span>
@@ -41,10 +44,10 @@
                         </ol>
                     </li>
                     <li>
-                        Võitja nimi avaldatakse <a href="https://www.facebook.com/tripeeee" target="_blank" class="AirBaltic__link">Trip.ee Facebooki lehel</a> 22.11.2021 ning võitja peab võtma Tripiga ühendust kas siis läbi Facebooki sõnumite või e-meilitsi aadressil turundus@trip.ee hiljemalt 30.11.2021.
+                        Võitja nimi avaldatakse <a href="https://www.facebook.com/tripeeee" target="_blank" class="AirBaltic__link">Trip.ee Facebooki lehel</a> 18.01.2022 ning võitja peab võtma Tripiga ühendust kas siis läbi Facebooki sõnumite või e-meilitsi aadressil turundus@trip.ee hiljemalt 30.01.2022.
                     </li>
                     <li>
-                        Kui võitjaga ei õnnestu ühendust saada hiljemalt 30.11.2021, ei ole Trip.ee kohustatud auhinda väljastama.
+                        Kui võitjaga ei õnnestu ühendust saada hiljemalt 30.01.2022, ei ole Trip.ee kohustatud auhinda väljastama.
                     </li>
                 </ul>
             </div>
@@ -54,16 +57,16 @@
                 <div class="AirBaltic__list">
                     <ul>
                         <li>
-                            Auhinnaks on kinkevautšer, mis sisaldab 1×2 edasi-tagasi lennupiletit koos äraantava pagasiga Tallinnast airBalticu lennule.
+                            Auhinnaks on kinkevautšer, mis sisaldab 1×2 edasi-tagasi lennupiletit koos äraantava pagasiga Tallinnast airBalticu lennule Dubaisse, ümberistumisega Riias.
                         </li>
                         <li>
-                            Lennupiletid tuleb ära kasutada perioodil 01.12.2021 - 31.12.2022. Sellesse perioodi peavad jääma lennud mõlemas suunas. Lennupiletid tuleb ära kasutada ühe tervikuna, st reisides kahekesi koos. Vähemalt üks kahest reisijast peab olema täiskasvanu.
+                            Lennupiletid tuleb ära kasutada perioodil 01.02.2022 - 31.08.2022. Sellesse perioodi peavad jääma lennud mõlemas suunas. Lennupiletid tuleb ära kasutada ühe tervikuna, st reisides kahekesi koos. Vähemalt üks kahest reisijast peab olema täiskasvanu.
                         </li>
                         <li>
                             Soovitud kuupäevade kinnitamise võimalus sõltub vabade kohtade olemasolust.
                         </li>
                         <li>
-                            Auhinnaks saadud lennud toimuvad airBalticu poolt opereeritud otselendudel Tallinnast vastavalt airBalticu kehtivale lennuplaanile.
+                            Auhinnaks saadud lennud toimuvad airBalticu poolt opereeritud lendudele Tallinnast Dubaisse vastavalt airBalticu kehtivale lennuplaanile.
                         </li>
                         <li>
                             Auhinnaks saadud lennupileteid ei või edasi müüa ning auhinna väärtust ei maksta välja rahas.
