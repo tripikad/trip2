@@ -33,7 +33,7 @@
                                 <span class="AirBaltic__listCounter">1.</span><span class="AirBaltic__requirements">Märgi <a href="https://www.facebook.com/tripeeee/posts/6404423406294689" target="_blank" class="AirBaltic__campaignLink">kampaaniapakkumise</a> kommentaaridesse airBalticu otselennu sihtkoht Tallinnast kuhu lennata soovid.</span>
                             </li>-->
                             <li>
-                                <span class="AirBaltic__listCounter">1.</span><span class="AirBaltic__requirements">Märgi <a href="https://www.facebook.com/tripeeee/posts/6404423406294689" target="_blank" class="AirBaltic__campaignLink">kampaaniapakkumise</a> kommentaaridesse kellega koos sa sinna puhkama soovid lennata.</span>
+                                <span class="AirBaltic__listCounter">1.</span><span class="AirBaltic__requirements">Märgi <a href="https://www.facebook.com/tripeeee/posts/6748675615202798" target="_blank" class="AirBaltic__campaignLink">kampaaniapakkumise</a> kommentaaridesse kellega koos sa sinna puhkama soovid lennata.</span>
                             </li>
                             <li>
                                 <span class="AirBaltic__listCounter">2.</span><span class="AirBaltic__requirements">Pane "Like" Trip.ee Facebook lehele.</span>
@@ -91,7 +91,7 @@
             </div>
 
             <div class="AirBaltic__action">
-                <a href="https://www.facebook.com/tripeeee/posts/6404423406294689" target="__blank">
+                <a href="https://www.facebook.com/tripeeee/posts/6748675615202798" target="__blank">
                     <div class="Button Button--large">
                         <div class="Button__title">
                             Osalemiseks klikka siia
