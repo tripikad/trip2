@@ -57,7 +57,7 @@ class ImportImagesToSpaces extends Command
             'background' => 1920
         ];
 
-        $allowedImageFormats = ['png', 'jpg', 'jpeg'];
+        $allowedImageFormats = ['png', 'jpg', 'jpeg', 'PNG', 'JPG', 'JPEG'];
 
         $imagesData->chunk(50, function($images) use ($presets, $allowedImageFormats) {
             foreach ($images as $image) {
