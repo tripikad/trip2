@@ -30,7 +30,7 @@
                         Auhinnamängus osalevad kõik perioodil 01.02 - 09.02.2022 Trip.ee Facebooki lehel loosimängus osalenud isikud. Osalemise tingimused:
                         <ol>
                             <li>
-                                <span class="AirBaltic__listCounter">1.</span><span class="AirBaltic__requirements">Märgi <a href="https://www.facebook.com/tripeeee/posts/6748675615202798" target="_blank" class="AirBaltic__campaignLink">kampaaniapakkumise</a> kommentaaridesse airBalticu otselennu sihtkoht Tallinnast kuhu lennata soovid.</span>
+                                <span class="AirBaltic__listCounter">1.</span><span class="AirBaltic__requirements">Märgi <a href="https://www.facebook.com/tripeeee/posts/6905903886146636" target="_blank" class="AirBaltic__campaignLink">kampaaniapakkumise</a> kommentaaridesse airBalticu otselennu sihtkoht Tallinnast kuhu lennata soovid.</span>
                             </li>
 <!--                            <li>
                                 <span class="AirBaltic__listCounter">1.</span><span class="AirBaltic__requirements">Märgi <a href="https://www.facebook.com/tripeeee/posts/6748675615202798" target="_blank" class="AirBaltic__campaignLink">kampaaniapakkumise</a> kommentaaridesse kellega koos sa sinna puhkama soovid lennata.</span>
@@ -94,7 +94,7 @@
             </div>
 
             <div class="AirBaltic__action">
-                <a href="https://www.facebook.com/tripeeee/posts/6748675615202798" target="__blank">
+                <a href="https://www.facebook.com/tripeeee/posts/6905903886146636" target="__blank">
                     <div class="Button Button--large">
                         <div class="Button__title">
                             Osalemiseks klikka siia
