@@ -11,7 +11,7 @@ class NavbarDark
             ->with(
                 'logo',
                 component('Icon')
-                    ->with('icon', 'tripee_logo_dark')
+                    ->with('icon', 'trip-ukraine-dark')
                     ->with('width', 180)
                     ->with('height', 120)
             )

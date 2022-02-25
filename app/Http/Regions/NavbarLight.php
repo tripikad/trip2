@@ -11,7 +11,7 @@ class NavbarLight
             ->with(
                 'logo',
                 component('Icon')
-                    ->with('icon', 'tripee_logo')
+                    ->with('icon', 'trip-ukraine')
                     ->with('width', 180)
                     ->with('height', 120)
             )
