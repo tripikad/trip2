@@ -88,7 +88,7 @@ class UserHeader
                     ->with(
                         'logo',
                         component('Icon')
-                            ->with('icon', 'tripee_logo')
+                            ->with('icon', 'trip-ukraine')
                             ->with('width', 200)
                             ->with('height', 150)
                     )

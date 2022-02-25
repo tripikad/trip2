@@ -39,9 +39,8 @@ class ImportImagesToSpaces extends Command
      */
     public function handle()
     {
-        $idFrom = 0;
-        $idTo = 1000;
-        $idToLAST = 51292; //last one imported at the moment 21.12.2021
+        $idFrom = 50000;
+        $idTo = 51292;
         $imagesData = DB::table('images')
             ->selectRaw('id, filename, imageables.imageable_id, imageables.imageable_type')
             ->leftjoin('imageables','imageables.image_id','=','images.id')
@@ -52,7 +51,6 @@ class ImportImagesToSpaces extends Command
 
         $presets = [
             'small_square' => 180,
-            'xsmall' => 180,
             'small' => 300,
             'medium' => 700,
             'large' => 1024,
@@ -74,8 +72,7 @@ class ImportImagesToSpaces extends Command
 
                         if ($image->imageable_type === 'App\Content') {
                             Storage::disk('do_spaces')->putFileAs('images/content/original/', $originalPath, $image->filename, 'public');
-                            //foreach (['xsmall', 'small', 'medium', 'large', 'background'] as $preset) {
-                            foreach (['small_square'] as $preset) {
+                            foreach (['small_square', 'small', 'medium', 'large', 'background'] as $preset) {
                                 $spacesSavePath = 'images/content/' . $preset . '/';
                                 if ($preset === 'small' || $preset === 'medium') {
                                     $imagePath = storage_path('app') . '/images/' . $preset . '/' . $image->filename;
@@ -86,30 +83,28 @@ class ImportImagesToSpaces extends Command
                                             function ($constraint) {
                                                 $constraint->aspectRatio();
                                             }
-                                        )->encode();
+                                        )->encode(null, 75);
                                     } else {
                                         $resizedImage = \Intervention\Image\Facades\Image::make($originalPath)->resize($presets[$preset], null,
                                             function ($constraint) {
                                                 $constraint->aspectRatio();
                                             }
-                                        )->encode();
+                                        )->encode(null, 75);
                                     }
 
                                     Storage::disk('do_spaces')->put($spacesSavePath . $image->filename, (string) $resizedImage, 'public');
                                 }
                             }
                         } else if ($image->imageable_type === 'App\User') {
-                            continue;
-                            /*Storage::disk('do_spaces')->putFileAs('images/user_profile/original/', $originalPath, $image->filename, 'public');
+                            Storage::disk('do_spaces')->putFileAs('images/user_profile/original/', $originalPath, $image->filename, 'public');
                             foreach (['xsmall_square', 'small_square'] as $preset) {
                                 $spacesSavePath = 'images/user_profile/' . $preset . '/';
                                 $imagePath = storage_path('app') . '/images/' . $preset . '/' . $image->filename;
                                 Storage::disk('do_spaces')->putFileAs($spacesSavePath, $imagePath, $image->filename, 'public');
-                            }*/
+                            }
                         } else {
                             Storage::disk('do_spaces')->putFileAs('images/internal/original/', $originalPath, $image->filename, 'public');
-                            //foreach (['xsmall', 'small', 'medium', 'large'] as $preset) {
-                            foreach (['small_square'] as $preset) {
+                            foreach (['small_square', 'small', 'medium', 'large'] as $preset) {
                                 $spacesSavePath = 'images/internal/' . $preset . '/';
                                 if ($preset === 'small' || $preset === 'medium') {
                                     $imagePath = storage_path('app') . '/images/' . $preset . '/' . $image->filename;
@@ -120,13 +115,13 @@ class ImportImagesToSpaces extends Command
                                             function ($constraint) {
                                                 $constraint->aspectRatio();
                                             }
-                                        )->encode();
+                                        )->encode(null, 75);
                                     } else {
                                         $resizedImage = \Intervention\Image\Facades\Image::make($originalPath)->resize($presets[$preset], null,
                                             function ($constraint) {
                                                 $constraint->aspectRatio();
                                             }
-                                        )->encode();
+                                        )->encode(null, 75);
                                     }
 
                                     Storage::disk('do_spaces')->put($spacesSavePath . $image->filename, (string) $resizedImage, 'public');

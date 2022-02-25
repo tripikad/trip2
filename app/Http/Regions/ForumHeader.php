@@ -15,7 +15,7 @@ class ForumHeader
                     ->with(
                         'logo',
                         component('Icon')
-                            ->with('icon', 'tripee_logo_dark')
+                            ->with('icon', 'trip-ukraine-dark')
                             ->with('width', 200)
                             ->with('height', 150)
                     )
