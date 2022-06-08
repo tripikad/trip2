@@ -108,6 +108,11 @@ class TravelmateController extends Controller
     {
         $user = auth()->user();
         $travelmate = Content::getItemBySlug($slug, $user);
+
+        if (!$travelmate) {
+            abort(404);
+        }
+
         $travelmate->vars()->add_view;
 
         $travelmates = Content::getLatestItems('travelmate', 3);
