@@ -100,14 +100,16 @@ class SearchController extends Controller
             );
         }
 
-        Log::info('User searched', [
+        /*Log::info('User searched', [
             'search' => $q,
             'sort_order' => $sort_order,
             'user' => auth()->check() ? 'logged' : 'unlogged'
-        ]);
+        ]);*/
 
-        $data['paginate']->withPath(env('FULL_BASE_URL') . 'search/' . $active_search);
-        $data['paginate']->appends(['q' => $q, 'sort_order' => $sort_order]);
+        if ($data['paginate']) {
+            $data['paginate']->withPath(env('FULL_BASE_URL') . 'search/' . $active_search);
+            $data['paginate']->appends(['q' => $q, 'sort_order' => $sort_order]);
+        }
 
         $search_results = collect();
 

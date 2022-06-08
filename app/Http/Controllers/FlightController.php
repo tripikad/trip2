@@ -120,6 +120,11 @@ class FlightController extends Controller
         $loggedUser = auth()->user();
 
         $flight = Content::getItemBySlug($slug, $loggedUser);
+
+        if (!$flight) {
+            abort(404);
+        }
+
         $flight->vars()->add_view;
 
         $flights = Content::getLatestItems('flight', 4);
