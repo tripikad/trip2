@@ -1,5 +1,5 @@
 <div class="Infobar {{ $isclasses }}">
     <div class="Infobar__title">
-        <a href="https://trip.ee/odavad-lennupiletid/trip-ee-uelevaade-black-friday-kampaaniapakkumistest">Vaata kõiki <span>Black Friday</span> pakkumisi SIIT</a>
+        Laupäeval 27.08 toimuvad tripis tehnilised uuendused, mistõttu esineb tõrkeid lehe töös. Vabandame ebamugavuste pärast!
     </div>
 </div>
